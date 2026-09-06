@@ -1,0 +1,1178 @@
+{
+  "schema": "etb-independent-source-review/1",
+  "reviewer": "skills_audit agent; independent of source discovery and proposed-IR authorship",
+  "reviewedAt": "2026-09-06T20:48:35.080Z",
+  "sourceResearchHash": "d8153712246ada7e098413d5c2ce7919f97251f2cda6d75da72bb277fa628dd4",
+  "bindingResearchHash": "eeb6ada5f7ebbb973831965bc629d0ad9c23a9b8e0f217a05fa4dc4c0e7ba306",
+  "scenarioDraftHash": "eed7f8602b7258de2b18906f3970e9b42a93e7fbbec3e80b11c774c424829e32",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "archiveAuthentication": {
+    "path": ".commander/semantic-audit/etb-records-authenticated.json",
+    "sha256": "3b2a1addecd8160dedf9bb899b823a145b45b1091c0deb379417a91a1a48a9f8",
+    "archiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+    "sourceOrdinalsChecked": 60,
+    "normalizedRecordHashesChecked": 60,
+    "tupleErrors": 0
+  },
+  "reviewedScope": [
+    "All sixty complete Oracle bodies, normal single-face types, plain fixed costs, fixed integer stats and existing keyword/mana clauses.",
+    "Twenty-three mandatory draw-one and thirty-seven mandatory life-gain programs preserve the printed effect and use the trigger controller, not source ownership or later control.",
+    "All forty research rule spans and every scenario rule span match the pinned rulebook bytes; all thirty-four scenario drafts remain unexecuted.",
+    "Current imported rulings table contains zero rows for these sixty identities; no ruling coverage beyond that query is claimed."
+  ],
+  "ruleClausesReviewed": [
+    "101.4",
+    "101.4b",
+    "109.5",
+    "113.7",
+    "113.7a",
+    "113.8",
+    "113.9",
+    "117.2a",
+    "117.2e",
+    "117.3b",
+    "117.4",
+    "117.5",
+    "119.3",
+    "121.1",
+    "121.2",
+    "121.4",
+    "302.6",
+    "400.7",
+    "603.1",
+    "603.2",
+    "603.2c",
+    "603.2g",
+    "603.3",
+    "603.3a",
+    "603.3b",
+    "603.3d",
+    "603.4",
+    "603.5",
+    "603.6a",
+    "603.6b",
+    "603.6d",
+    "603.10",
+    "605.1a",
+    "605.3a",
+    "608.2h",
+    "608.2n",
+    "704.4",
+    "704.5b",
+    "800.4a",
+    "800.4d",
+    "800.4j"
+  ],
+  "corrections": [
+    {
+      "scenarioId": "ETB26",
+      "status": "corrected-before-implementation",
+      "finding": "Exact accepted-command retries must return the original receipt; stale unrelated commands reject. The first draft's phrase stale receipts could contradict durable idempotency."
+    },
+    {
+      "artifact": "docs/commander/source-etb-trigger-design.md",
+      "status": "clarified-before-implementation",
+      "finding": "Ability resolution must preserve departed-active-player continuation under CR800.4j; never grant priority to the departed seat."
+    }
+  ],
+  "exclusionsConfirmed": [
+    "No optional, combined-effect, other-object, intervening-if, variable-value, reminder-bearing or hybrid-cost body is accepted by this sixty-record proposal.",
+    "Baleful Strix keeps flying/deathtouch; Wall of Omens and Wall of Blossoms keep defender; Llanowar Visionary keeps its separately constrained green tap-mana ability.",
+    "Artifact/enchantment creature types remain exact source characteristics; none of these sixty is a proposed commander."
+  ],
+  "runtimeRequirementsNotProven": [
+    "Committed event capture, post-event effective ability lookup, independent source-generation instances and captured controller.",
+    "State-based fixed points, APNAP cohorts and controller permutation choices before appropriate priority, plus distinct noncard stack objects.",
+    "Source-independent ability resolution, player-departure removal, preserved waiting/ordering/stack contexts, exact replay/import/retry and resolver equivalence."
+  ],
+  "records": [
+    {
+      "identity": "fc8ee6e1-a2e1-4033-a164-7968fc79dd27",
+      "name": "Amateur Hero",
+      "sourceVersion": "e2098ea0a03ee369d427d661cdf34cb554eab8df38c6bafa690279e7cf1bef25",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 38109,
+      "completeBodyHash": "b969a1047e21e43d4b469ad3c1c5e8e309fa16fc40f0b319198654f9c9b4a3ac",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "a2daaf32-dbfe-4618-892e-0da24f63a44a",
+      "name": "Angel of Mercy",
+      "sourceVersion": "0ccade960ef13c9a8bda669d71dc0da39e5eb92a3108e02452b6af9f28ab91d6",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 24485,
+      "completeBodyHash": "af66438f6ec095fc88eb74144acc04b6dcda4d525751fd34abb137519b9415a0",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+      "name": "Arashin Cleric",
+      "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 15896,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "a3f35e0f-bf7a-42bf-b612-ac3af3a33727",
+      "name": "Arborback Stomper",
+      "sourceVersion": "cc35d7b6dc41413fe1e3129b68d19007802144aeae5dc82f945b196c4f1a17ad",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 24679,
+      "completeBodyHash": "524b00c46f19a86d7e7a91ef201c759b951966343461552c3575b9419fe931c3",
+      "proposedProgramHash": "6e9d685df614b1d7747bc12edc37e0772f7284c8e55e60c496ddb04a2fe1c63d",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "e8291185-9d87-4aa2-b7ba-d4946e5a082f",
+      "name": "Aven of Enduring Hope",
+      "sourceVersion": "6ab3319ecc04f5989b8e7767a7bf0384ca5a535a70e9ab69287e31a1c92792a5",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 34960,
+      "completeBodyHash": "af66438f6ec095fc88eb74144acc04b6dcda4d525751fd34abb137519b9415a0",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "37688720-03de-4eca-a82d-a0afe8d58adc",
+      "name": "Baleful Strix",
+      "sourceVersion": "6cd3b9b2c2331fc83db65f8bc7e2d715405015efc2e438b9da58d95acc0e70da",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 8262,
+      "completeBodyHash": "0e48090e78c0cdb01a3f9f9f5cbdad8b61936ec2db058e3016d6cf6751a63873",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "f606bd15-b380-447f-b147-72f811266593",
+      "name": "Bulwark Giant",
+      "sourceVersion": "06ef211abf6111225b0f28319381386ed7176fb4839ed75d12c7cf5f04bf65b1",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 37116,
+      "completeBodyHash": "c21c1d980439c1f6165962979fd75e5507c79f7fbf793a10f79d6225b5e224ce",
+      "proposedProgramHash": "6e9d685df614b1d7747bc12edc37e0772f7284c8e55e60c496ddb04a2fe1c63d",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "1050f029-60d4-4769-b39f-9100c949a822",
+      "name": "Cathedral Sanctifier",
+      "sourceVersion": "54b82d5e38c8c9fe28a605795fb92c2387ca05111d4a6e8f14749b894e250ef2",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 2483,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "ff435f84-73ab-4a16-8af6-6576af4e4edb",
+      "name": "Centaur Healer",
+      "sourceVersion": "e1d57d2dc595f86e1bce0e2ab82c02817c86fde438d5fdc8552a7f35904922fd",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 38521,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "09bd4e1c-9861-481f-80dc-4de955c8d3af",
+      "name": "Cloudkin Seer",
+      "sourceVersion": "a2c443e59bcc949ca2f0da47610387738da5a3b8b1d3dfe5ee3e9202eaa25d4b",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 1484,
+      "completeBodyHash": "ff9686afaa1513fa9860047df494055d869d5fd770737003c87df60197ed5f7f",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "ff427657-173a-4845-89af-6f0a93467130",
+      "name": "Council of Advisors",
+      "sourceVersion": "1804eb7a42f7caf7d34d247bbe19d41b9fc9d188a4c3dfc5c2e477cf2d3a60bf",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 38519,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "2bb0a5e3-ccb0-4f87-b021-e60ebfa35b2b",
+      "name": "Courier Griffin",
+      "sourceVersion": "7bbffdce90faed6dd5cc9376742823d97d2a973aa98cfbaf518f7cca30bf3483",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 6507,
+      "completeBodyHash": "64ef850c8d0bf418471531c709ff5221d7ad58ad2d357856f0d58f9b3473240c",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "a7d88510-d2ce-4dd6-938c-964cc74ff7d7",
+      "name": "Dawning Angel",
+      "sourceVersion": "ab1e697856994056dbb6ef7d3f8d2dbcdb9eebbc28a6f388455a0799aea3b179",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 25235,
+      "completeBodyHash": "106e9c2a61180863ed8c7d5255c689140894a0f2b0d89b7b999e0659b65329bc",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "8a0f4e8e-b541-4327-80fe-4fecc23e0df3",
+      "name": "Devout Monk",
+      "sourceVersion": "d36db57b05f3d9bc0633649132e5ff94e218c5fca6fc7bff61a6d431848a3c2d",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 20750,
+      "completeBodyHash": "8d44202452e979f213c62e259b438530e9ccb71ca0bfe9ca6c3604a2ed7d3278",
+      "proposedProgramHash": "f31f6547fbe2390343fadd75c70cc8d0182cb18a422ecc964f7d9d44330f2f4f",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+      "name": "Elvish Visionary",
+      "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 29861,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "5722a13f-7d70-438c-94ba-97a3f53fbc5c",
+      "name": "Generous Stray",
+      "sourceVersion": "8d4e60b530025f138a4b12dac499dbe8457dd432aa136bbc9e726f266a6ec0e4",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 13057,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "3bcdf832-4ce2-4043-b46a-0c5fd7019fcd",
+      "name": "Gryff Vanguard",
+      "sourceVersion": "d62d34dc92550a8b19fac61731685eb98b04d57672982fa91cb7cbbf4f0520aa",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 8969,
+      "completeBodyHash": "ff9686afaa1513fa9860047df494055d869d5fd770737003c87df60197ed5f7f",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "2701b912-b672-4764-97f7-51c444f754f2",
+      "name": "Healer of the Glade",
+      "sourceVersion": "aad54fbee27221aaf17c04fb21a18caf454d677b51787fa283f501bc43521d2b",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 5853,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "c0864adb-e9aa-40b6-91ff-a0646193e887",
+      "name": "Helpful Hunter",
+      "sourceVersion": "c5a5a2383c6d3f4a1c28aefce1750a8ce4a6c17ed88e68b4d6fd29f9ee1ad75a",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 28948,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "05c5752a-6ccb-45ff-bb85-5f89efd5944b",
+      "name": "Hill Giant Herdgorger",
+      "sourceVersion": "b0316b11a5cfe3ca9dbd0dab873dbd6056781e9eb9a4f4e6fa46cc1f2558ac66",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 911,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "41da0e8c-ba86-446d-9719-667695c7f1cc",
+      "name": "Honey Mammoth",
+      "sourceVersion": "0fcf777369367864f139fe49e2632f9066242b4dad9705bc33c1c655e6322cae",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 9877,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "65e19aec-e8ea-412f-a239-bd8d1b78249c",
+      "name": "Inspiring Cleric",
+      "sourceVersion": "fabad7f32b455cc34e58749c9e73081dd9d4cf003c0822f3bcf98fdc7849e115",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 15291,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "3f6df152-a0b9-441a-a8aa-8bb77f70d491",
+      "name": "Jedit's Dragoons",
+      "sourceVersion": "9e145724bc4ed97119fd00ada8bcc50f3498284673a55cc03d235f9c5f7bfe25",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 9538,
+      "completeBodyHash": "646f903b0d523d8723bddc1c70e088bf520135b9ef95a48a1b50443aae9a4331",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "7854f475-5470-4f2b-99df-af9026895595",
+      "name": "Joraga Visionary",
+      "sourceVersion": "afe830aaaa6f3aaa9726112683956b486433ceade50cb4e3a8ae25dadced64bc",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 18087,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "91320afd-1d42-4cb5-ae40-4eed2fa91dfe",
+      "name": "Kavu Climber",
+      "sourceVersion": "3d9d538b00ab131bb7353a170fcd18b7c796522c9a342d1b6055bf65231530a1",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 21803,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "4c8167af-2eb0-4f0a-a1b9-b61b65bac261",
+      "name": "Kemba's Skyguard",
+      "sourceVersion": "3e8102053a668de682eba5c1b4c537d1ad87675bccbb276383772b6fcbf9ad35",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 11493,
+      "completeBodyHash": "64ef850c8d0bf418471531c709ff5221d7ad58ad2d357856f0d58f9b3473240c",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "3faab84f-7055-4554-b948-181928d8d4e2",
+      "name": "Kindly Customer",
+      "sourceVersion": "0a0581dd7bbc96a4953cd52fb48ae94ba413207e986cbfd56077842830817069",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 9572,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "2e0226eb-20a3-488c-8f2b-f99a5b4d0cf4",
+      "name": "Koala-Sheep",
+      "sourceVersion": "bea97e0929ecd9c945786651fdc091070d5a46f972f20f9447b07c6f8e412a25",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 6820,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "f75ed312-3a23-4624-80c5-03980aa22d0b",
+      "name": "Llanowar Visionary",
+      "sourceVersion": "3477af0876060f2e8e7c42743757c4deeecf80ba4303436e53073820e85e3e31",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 37337,
+      "completeBodyHash": "6e79f26560f4df6a2e38c1d3e82fbad15595ba046c867e17995e7a710d3275e0",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "626f1dc3-3b14-4873-902f-ffec5487a97d",
+      "name": "Lone Missionary",
+      "sourceVersion": "abf0811b55adc2fab65b3ab0dbb8d1724840d2947269b9250bd049263a06b761",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 14758,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "95ab1529-0de0-416a-82b4-c5ed9276a9b4",
+      "name": "Mandroid Squadron",
+      "sourceVersion": "a5f94ac95a232329e8d15b8ceb24781bd07c0f8d8443412c482fc8ac9384e277",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 22531,
+      "completeBodyHash": "b969a1047e21e43d4b469ad3c1c5e8e309fa16fc40f0b319198654f9c9b4a3ac",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "f6aebd42-0150-4741-84c2-4c85893640e9",
+      "name": "Merchant of Secrets",
+      "sourceVersion": "ed440ba0ff483c80adf2c7c2b3f4ca976f6c787152ea9a2c1c1b46ebd16f7920",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 37218,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "898763f8-a333-43f5-9f66-52e2adbe5758",
+      "name": "Mesa Cavalier",
+      "sourceVersion": "c6af61b9118ed4d06e494af74511ea248f8382d6d14bb039824c00cef2b97acd",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 20685,
+      "completeBodyHash": "64ef850c8d0bf418471531c709ff5221d7ad58ad2d357856f0d58f9b3473240c",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "26afc8c1-c23f-4212-a2aa-386c71c4a7f9",
+      "name": "Mossbeard Ancient",
+      "sourceVersion": "a41c2f2859c8955a7a3c507d399e8d60f9e3d9b5c6b003cc0e068ac95e7bd17a",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 5808,
+      "completeBodyHash": "524b00c46f19a86d7e7a91ef201c759b951966343461552c3575b9419fe931c3",
+      "proposedProgramHash": "6e9d685df614b1d7747bc12edc37e0772f7284c8e55e60c496ddb04a2fe1c63d",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "04c9b3d7-83ba-400e-9837-2ba0119e9445",
+      "name": "Muse Drake",
+      "sourceVersion": "bba85a2c7b6a2aa5ad4f528105499c1e042292b2829dbda548cdc6c457d26673",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 760,
+      "completeBodyHash": "ff9686afaa1513fa9860047df494055d869d5fd770737003c87df60197ed5f7f",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "30929713-47dc-40f0-883c-4bd41aa399d5",
+      "name": "Nimble Innovator",
+      "sourceVersion": "100be4f0cc31d4de3d82907c40920976b3f61b5b9f497d053a5baef03eb4e37e",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 7245,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "b0e96742-77c0-4de5-84b0-0d59a8bee3e0",
+      "name": "Peace Strider",
+      "sourceVersion": "a5c73f9fcb7e996f329bc52689460ff44d8ade344e7b4cde9d71407a66709b23",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 26600,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "5ebdc1a5-e678-444b-abb8-8753558a39de",
+      "name": "Primordial Pachyderm",
+      "sourceVersion": "b70f1989f5e781c7a7b59544788a6f48ba39e9c5a27b61a98b93ea0833c132d9",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 14200,
+      "completeBodyHash": "f31daca99f5632a6eb82f90b78962efd5561b22bc63866205f3f320b532f1f03",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "3583ec24-4f26-45ea-8fb4-a45bdd7bfc79",
+      "name": "Ravenous Lindwurm",
+      "sourceVersion": "70fc3cf078e2c93bdd32adc332ee6b03dfc554f2301fcb27174b93b32080077a",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 7975,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "d26d1cce-3bcf-48d4-abce-8b12ca7b7432",
+      "name": "Rhox Oracle",
+      "sourceVersion": "77d674a3c46fb2e84094627b2c240845934526432e6f66fcbcf6b8b5171e1398",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 31669,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "6474f6b3-4e8e-4056-a01c-2f5e5e59c8de",
+      "name": "Roving Harper",
+      "sourceVersion": "0a2df1914a5f9ff79f99bea4bd6b98ef7e956e071df539d689006d3ab3ba5b8b",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 15057,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "7e6cfec7-3b54-43db-853a-27c164776a5f",
+      "name": "Savannah Sage",
+      "sourceVersion": "dfd47e59b765d1970bea0b2622e325641320697384de6b775f5cfb033d96b133",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 19024,
+      "completeBodyHash": "b969a1047e21e43d4b469ad3c1c5e8e309fa16fc40f0b319198654f9c9b4a3ac",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "b1ee0250-83ea-45a9-b5e5-3fa74bc7f26b",
+      "name": "Shaman of Spring",
+      "sourceVersion": "ebce9ec18c12e32eee8f4e6db4077e1363bad65d6e23f48afc1be852b8a9e1d3",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 26738,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "587e9f15-1d79-458f-a073-229b828b2393",
+      "name": "Shu Grain Caravan",
+      "sourceVersion": "f42b1fab34add379660e9273b369a273a3e792d9b0768a13ce115daad9119944",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 13257,
+      "completeBodyHash": "b969a1047e21e43d4b469ad3c1c5e8e309fa16fc40f0b319198654f9c9b4a3ac",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "174cf7cd-3e8c-4f90-abc1-a78a0ce832d2",
+      "name": "Shu Soldier-Farmers",
+      "sourceVersion": "b01576105595a95791d0e9c684e4c8cde72b68cb19e1c707254a8d113ee0d26a",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 3553,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "974f788a-039f-4310-a2fe-16b14a1e2d35",
+      "name": "Skyscanner",
+      "sourceVersion": "fa63db86444185129dc99a5dcbf55e361bc929203232a5a8c140be9a84a862a8",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 22748,
+      "completeBodyHash": "ff9686afaa1513fa9860047df494055d869d5fd770737003c87df60197ed5f7f",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "9c5f0d91-9d86-4e66-94fd-4af93ad01838",
+      "name": "Spirited Companion",
+      "sourceVersion": "3379905abd8a6d99d3ded0323ab28c904ae0f5953ed3262d9a9adeb3ce636652",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 23535,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "d03860b4-c663-4230-9200-6b89fa849ae7",
+      "name": "Spiritual Guardian",
+      "sourceVersion": "136af63bb2fe8580e264626f5644a9950b7765f06a2c08d9436767b26ec90719",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 31325,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "4e964f31-c764-4af5-8c27-a46fd721fab4",
+      "name": "Springmane Cervin",
+      "sourceVersion": "cefce093dc5e8c30a6cee9e8a0753be822dd513a6d8eb9b7286badbb9d3fb6a8",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 11770,
+      "completeBodyHash": "b969a1047e21e43d4b469ad3c1c5e8e309fa16fc40f0b319198654f9c9b4a3ac",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "ec8bf245-4b2c-432b-9b2a-8d7b9224258c",
+      "name": "Staunch Defenders",
+      "sourceVersion": "c7f08837744453ce89f8b32f0b04be431e4ae306523aead4158fc8a840b6f5ff",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 35660,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "ac856e91-1b88-464b-9420-dc311ce814ea",
+      "name": "Striped Bears",
+      "sourceVersion": "6b117771f271a3d14e052a5d05f845e510998b7321670ab48124cb25b767fe61",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 25909,
+      "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "67a494dc-deac-43ee-9e47-20fae9788a9f",
+      "name": "Sylvan Brushstrider",
+      "sourceVersion": "23a9001f31e1ca20a5408392b7c20c6f50375ae7873b7bc7dc71839368ec2104",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 15553,
+      "completeBodyHash": "b969a1047e21e43d4b469ad3c1c5e8e309fa16fc40f0b319198654f9c9b4a3ac",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "17e4085e-af44-4ba8-af05-ccfe4b35f96a",
+      "name": "Temple Acolyte",
+      "sourceVersion": "60647d008dccbfced1247815c80ca96459f56e60ba371f5adb8c7249a06832ec",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 3644,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "875c96ce-f6e4-438b-929d-de53afdd99a1",
+      "name": "Teroh's Faithful",
+      "sourceVersion": "9a8ab2feb86496c88fc288c186a680b2450470416d7128b598bcb5b968bc7dbe",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 20350,
+      "completeBodyHash": "9550f27713fa605af8f3189781623937d6e5f4db3fbd46fad1facc8bad7e2ede",
+      "proposedProgramHash": "956dc8ed2685f04f9814a706406dd611751b274e67f94a73501b6f51ffc4ac01",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "a730e699-834a-4aac-9b3b-29d6917fc9b3",
+      "name": "Tireless Missionaries",
+      "sourceVersion": "5d67d64ed2692dc55db5cfd8359417878976ca0adc08c2daaf3dcc52dc41c3d7",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 25138,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "ecd9aa9a-06b2-4d8d-9264-fda2036ff142",
+      "name": "Tome Raider",
+      "sourceVersion": "388aebf9140071e660dc5370ac01a2a1d38c1a84b1fcd6e6a4d9176e303f39e2",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 35706,
+      "completeBodyHash": "ff9686afaa1513fa9860047df494055d869d5fd770737003c87df60197ed5f7f",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "90b16d52-4cf4-4788-a0d7-264d1bcd17f0",
+      "name": "Turntimber Ascetic",
+      "sourceVersion": "7f29607a19a16bddc0f884b33c0ba914e25a91db2b0b4ec9392bb3811e61d574",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 21731,
+      "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+      "proposedProgramHash": "9cd96f735c734c65cb934576688b2edd6cbe120f91d6f5383dadc621ab6ab879",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "5c5cfa6d-857f-44a9-80f7-46f016ef71e4",
+      "name": "Venerable Monk",
+      "sourceVersion": "4f872a245e9950b15a0ffe4de465020599f16f39c4513e981d71021f5c132f64",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 13870,
+      "completeBodyHash": "b969a1047e21e43d4b469ad3c1c5e8e309fa16fc40f0b319198654f9c9b4a3ac",
+      "proposedProgramHash": "e886373e14a968c329a299fcbec2037a3cc8ed4ef9abc7831f264cce38bbd280",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "ef4d5fb3-70a3-433d-a9d3-18b2beb8d79f",
+      "name": "Wall of Blossoms",
+      "sourceVersion": "603429c30128e0487a6a1c779dbb11afe7dfab0976a1b340d34b734bfde01aa0",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 36121,
+      "completeBodyHash": "2e081e6e66865a42547c194d6d9f78320cae2edfec76eccac308d8c6cc3c53a0",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    },
+    {
+      "identity": "5f601f48-d24b-4883-9fde-b3f620e7c9ea",
+      "name": "Wall of Omens",
+      "sourceVersion": "f484fb9057a720d026ba57cac40ec0b9aa60e6aa872ae12f536f7a6f0feca0e2",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 14294,
+      "completeBodyHash": "2e081e6e66865a42547c194d6d9f78320cae2edfec76eccac308d8c6cc3c53a0",
+      "proposedProgramHash": "f203eac61f78ed59c9d73de117b7aa4c21658c90ed8aef42009a00821bae9b30",
+      "checks": {
+        "archivedTuple": "matched",
+        "fullBodyAndExistingAbilities": "independently-reviewed",
+        "fixedCharacteristics": "independently-reviewed",
+        "constantEffectRecipientAndAmount": "independently-reviewed"
+      },
+      "reviewStatus": "bounded-source-to-proposed-program-approved",
+      "runtimeImplemented": false,
+      "executedCardGames": 0
+    }
+  ],
+  "sourceBindingsApproved": 60,
+  "executedTests": 0,
+  "executedGames": 0,
+  "fullSemanticCoverage": false,
+  "sourceObligationsMarkedComplete": 0,
+  "limitation": "This review approves the bounded source-to-proposed-IR mapping and scenario expectations. It introduces no executable trigger release, certifies no card as supported, and does not turn source inspection into runtime or full-game evidence.",
+  "hash": "8e1295c7868d0c74898198161fa9e439a4169a909ff5e45a81353e0b0071a9e6"
+}

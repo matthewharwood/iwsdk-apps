@@ -18,7 +18,7 @@ import { type Browser, chromium, expect, type Page } from "@playwright/test";
 import { DRIVER_VERSION, type GameRun, runGame } from "../../simulation/src/index";
 import { Coordinator, type Repository, replayMatch } from "../src/index";
 import { openNativeRepository } from "../src/native";
-import { executionEvidence, spellEvidence } from "./spell-evidence";
+import { executionEvidence, setupEvidence, spellEvidence } from "./spell-evidence";
 
 type Snapshot = {
   revision: number;
@@ -29,6 +29,7 @@ type Snapshot = {
   outcome: unknown;
   spells: ReturnType<typeof spellEvidence>;
   execution: ReturnType<typeof executionEvidence>;
+  setup: ReturnType<typeof setupEvidence>;
   storage?: { secureContext: boolean; opfs: boolean; locks: boolean };
 };
 type RpcResult<T> =
@@ -72,7 +73,9 @@ function parseResolver(value: string): MatchManifest["resolver"] {
   }
 }
 const resolver = parseResolver(options.resolver);
-const stageKinds = requireSpells ? (["target", "payment"] as const) : (["payment"] as const);
+const stageKinds = requireSpells
+  ? (["starting-player", "target", "payment"] as const)
+  : (["starting-player", "payment"] as const);
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -246,13 +249,18 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     outcome: state.outcome,
     spells: spellEvidence(archive, release),
     execution: executionEvidence(release, coordinator.executionInfo()),
+    setup: setupEvidence(coordinator, archive),
   };
 }
 function requireCompleted(run: GameRun) {
   if (run.status !== "completed")
     throw new Error(`Match ${run.matchId} did not complete: ${JSON.stringify(run)}`);
 }
-type NativeStage = { kind: "target" | "payment"; run: GameRun; snapshot: Snapshot };
+type NativeStage = {
+  kind: "starting-player" | "target" | "payment";
+  run: GameRun;
+  snapshot: Snapshot;
+};
 type NativeCase = {
   manifest: MatchManifest;
   stages: NativeStage[];
@@ -268,35 +276,84 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
     (!requireRemoval || final.spells.removalEvents.destroy + final.spells.removalEvents.exile > 0)
   );
 }
+function assertUndealt(snapshot: Snapshot, seatCount: number): void {
+  expect(snapshot.revision).toBe(0);
+  expect(snapshot.setup).toMatchObject({
+    starter: null,
+    activePlayer: null,
+    priorityPlayer: null,
+    objectCount: 0,
+    acceptedChoices: 0,
+    firstChoice: null,
+  });
+  expect(snapshot.decision).toMatchObject({
+    kind: "starting-player",
+    actor: snapshot.setup.chooser,
+  });
+  expect(snapshot.setup.zones).toHaveLength(seatCount);
+  const seats = snapshot.setup.zones.map((seat) => seat.player);
+  expect(snapshot.setup.choiceViews.map((view) => view.player)).toEqual(seats);
+  for (const seat of snapshot.setup.zones)
+    expect(seat).toMatchObject({ hand: 0, library: 0, graveyard: 0 });
+  for (const view of snapshot.setup.choiceViews) {
+    expect(view.objectCount).toBe(0);
+    if (view.player === snapshot.setup.chooser)
+      expect(view.decision).toMatchObject({
+        kind: "starting-player",
+        actor: snapshot.setup.chooser,
+        players: seats,
+      });
+    else expect(view.decision).toBeNull();
+  }
+}
+function assertSingleChoice(snapshot: Snapshot): void {
+  expect(snapshot.setup.acceptedChoices).toBe(1);
+  const choice = snapshot.setup.firstChoice;
+  if (!choice || choice.command.response.kind !== "starting-player")
+    throw new Error("Missing durable starting-player choice");
+  expect(choice.command.actor).toBe(snapshot.setup.chooser);
+  expect(choice.command.revision).toBe(0);
+  expect(choice.receipt.revision).toBe(1);
+  expect(choice.command.response.player).toBe(snapshot.setup.starter);
+}
+async function verifyDurableRetry(page: Page, operation: "retryLast" | "retryStartingChoice") {
+  const retry = await call<{ expected: unknown; result: unknown }>(page, { operation });
+  expect(retry.result).toEqual({ status: "accepted", receipt: retry.expected });
+}
+async function prepareCase(seatCount: 2 | 4, attempt: number) {
+  const gameSeed = (seatCount === 2 ? 1901 : 2901) + attempt;
+  const manifest: MatchManifest = {
+    schema: "commander-match/1",
+    id: `browser-parity-${seatCount}-seat-attempt-${attempt}`,
+    releaseHash: release.hash,
+    engineVersion: ENGINE_VERSION,
+    serializer: SERIALIZER_VERSION,
+    chance: CHANCE_VERSION,
+    gameSeed,
+    driverSeed: gameSeed + 17,
+    driverVersion: DRIVER_VERSION,
+    mode: seatCount === 2 ? "two-seat" : "four-seat",
+    seats: Array.from({ length: seatCount }, (_, index) => {
+      const deck = selectedDecks[(index * deckStride) % selectedDecks.length];
+      if (!deck) throw new Error("Missing selected development deck");
+      return { id: `P${index + 1}`, deck };
+    }),
+    resolver,
+  };
+  const artifact =
+    resolver === "full-scan"
+      ? null
+      : await createPreparedMatchArtifact(
+          release,
+          manifest.seats.map((seat) => seat.deck),
+        );
+  if (artifact) manifest.preparedArtifactHash = artifact.hash;
+  return { manifest, artifact };
+}
 async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
   for (let attempt = 0; attempt < seedAttempts; attempt++) {
-    const gameSeed = (seatCount === 2 ? 1901 : 2901) + attempt;
-    const manifest: MatchManifest = {
-      schema: "commander-match/1",
-      id: `browser-parity-${seatCount}-seat-attempt-${attempt}`,
-      releaseHash: release.hash,
-      engineVersion: ENGINE_VERSION,
-      serializer: SERIALIZER_VERSION,
-      chance: CHANCE_VERSION,
-      gameSeed,
-      driverSeed: gameSeed + 17,
-      driverVersion: DRIVER_VERSION,
-      mode: seatCount === 2 ? "two-seat" : "four-seat",
-      seats: Array.from({ length: seatCount }, (_, index) => {
-        const deck = selectedDecks[(index * deckStride) % selectedDecks.length];
-        if (!deck) throw new Error("Missing selected development deck");
-        return { id: `P${index + 1}`, deck };
-      }),
-      resolver,
-    };
-    const artifact =
-      resolver === "full-scan"
-        ? null
-        : await createPreparedMatchArtifact(
-            release,
-            manifest.seats.map((seat) => seat.deck),
-          );
-    if (artifact) manifest.preparedArtifactHash = artifact.hash;
+    const { manifest, artifact } = await prepareCase(seatCount, attempt);
+    const gameSeed = manifest.gameSeed;
     const prefix = `${seatCount}-seat-attempt-${attempt}`;
     if (artifact)
       await Bun.write(join(output, `${prefix}-artifact.json`), JSON.stringify(artifact, null, 2));
@@ -337,6 +394,7 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
         });
         const snapshot = await nativeSnapshot(repo, coordinator);
         stages.push({ kind, run, snapshot });
+        if (kind === "starting-player") assertUndealt(snapshot, seatCount);
         if (run.status !== "paused") {
           requireCompleted(run); // Actual engine/driver/budget failures are not discarded as seed misses.
           break;
@@ -350,6 +408,7 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
       });
       requireCompleted(nativeRun);
       const nativeFinal = await nativeSnapshot(repo, coordinator);
+      assertSingleChoice(nativeFinal);
       const exercised = qualifies(stages, nativeFinal);
       Object.assign(attemptEvidence, {
         nativeRun,
@@ -406,6 +465,7 @@ try {
       artifact: baseline.artifact,
     });
     expect(created.execution).toEqual(baseline.nativeFinal.execution);
+    assertUndealt(created, seatCount);
     expect(created.storage).toEqual({ secureContext: true, opfs: true, locks: true });
     const rival = await context.newPage();
     try {
@@ -440,17 +500,25 @@ try {
         matchId: manifest.id,
       });
       expect(reopened).toEqual(pending);
-      const retry = await call<{ expected: unknown; result: unknown }>(page, {
-        operation: "retryLast",
-      });
-      expect(retry.result).toEqual({ status: "accepted", receipt: retry.expected });
+      if (pending.revision > 0) {
+        await verifyDurableRetry(page, "retryLast");
+        await verifyDurableRetry(page, "retryStartingChoice");
+        expect(await call<Snapshot>(page, { operation: "snapshot" })).toEqual(pending);
+      }
       const stageSave = await call<string>(page, { operation: "export" });
       await Bun.write(join(output, `${seatCount}-seat-${stage.kind}-save.json`), stageSave);
       if (!saved) {
         saved = stageSave;
         importedExpected = pending;
       }
-      browserStages.push({ kind: stage.kind, paused, pending, reopened, exactRetry: true });
+      browserStages.push({
+        kind: stage.kind,
+        paused,
+        pending,
+        reopened,
+        exactRetry: pending.revision > 0,
+        startingChoiceRetry: pending.revision > 0,
+      });
     }
     const resumed = await call<GameRun>(page, {
       operation: "run",
@@ -464,6 +532,8 @@ try {
     expect(completed.boundaryHashes).toEqual(baseline.nativeFinal.boundaryHashes);
     expect(completed.spells).toEqual(baseline.nativeFinal.spells);
     expect(completed.execution).toEqual(baseline.nativeFinal.execution);
+    assertSingleChoice(completed);
+    expect(completed.setup.firstChoice).toEqual(baseline.nativeFinal.setup.firstChoice);
     if (requireRemoval)
       expect(
         completed.spells.removalEvents.destroy + completed.spells.removalEvents.exile,
@@ -488,6 +558,8 @@ try {
     expect(importedFinal.boundaryHashes).toEqual(completed.boundaryHashes);
     expect(importedFinal.stateHash).toBe(completed.stateHash);
     expect(importedFinal.execution).toEqual(completed.execution);
+    assertSingleChoice(importedFinal);
+    expect(importedFinal.setup.firstChoice).toEqual(completed.setup.firstChoice);
     caseEvidence.browser = {
       stages: browserStages,
       resumed,

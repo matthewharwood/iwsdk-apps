@@ -8,10 +8,10 @@ import {
 import { activateMana, answerTarget, beginCast, payForCast, playLand } from "./casting";
 import { answerCommanderZone } from "./checkpoints";
 import { answerAttack, answerBlock, answerDamage, applyCombatDamage } from "./combat";
-import { assertRegistryPin, definition, emit, RulesError } from "./common";
+import { assertRegistryPin, definition, emit, RulesError, requireActivePlayer } from "./common";
 import { assertInvariants } from "./invariants";
 import { orderedObjects } from "./object-order";
-import { bottom, mulligan } from "./setup";
+import { bottom, chooseStartingPlayer, mulligan } from "./setup";
 import { answerDiscard, givePriority, passPriority, startTurn } from "./turns";
 
 export { RulesError } from "./common";
@@ -53,6 +53,9 @@ function answer(
   response: Response,
 ): void {
   switch (kind) {
+    case "starting-player":
+      chooseStartingPlayer(state, actor, response);
+      return;
     case "mulligan":
       if (mulligan(state, actor, response)) startTurn(state, release, true);
       return;
@@ -79,20 +82,20 @@ function answer(
       if (response.kind !== "attack")
         throw new RulesError("IllegalCommand", "Expected attack declaration");
       answerAttack(state, release, actor, response);
-      givePriority(state, release, state.activePlayer);
+      givePriority(state, release, requireActivePlayer(state));
       return;
     case "block":
       if (response.kind !== "block")
         throw new RulesError("IllegalCommand", "Expected block declaration");
       if (answerBlock(state, release, actor, response))
-        givePriority(state, release, state.activePlayer);
+        givePriority(state, release, requireActivePlayer(state));
       return;
     case "damage":
       if (response.kind !== "damage")
         throw new RulesError("IllegalCommand", "Expected damage allocation");
       if (answerDamage(state, release, actor, response)) {
         applyCombatDamage(state, release);
-        givePriority(state, release, state.activePlayer);
+        givePriority(state, release, requireActivePlayer(state));
       }
       return;
   }
@@ -175,6 +178,8 @@ export function observe(
     revision: state.revision,
     turn: state.turn,
     step: state.step,
+    startingPlayerChooser: state.startingPlayerChooser,
+    startingPlayer: state.startingPlayer,
     activePlayer: state.activePlayer,
     outcome: structuredClone(state.outcome),
     players: state.players.map((seat) => ({

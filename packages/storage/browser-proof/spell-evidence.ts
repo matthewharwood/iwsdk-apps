@@ -64,3 +64,33 @@ export function executionEvidence(
     excludedDefinitionCount: fullDefinitionCount - info.definitionCount,
   };
 }
+
+/** Public setup projections prove the pending choice exists before any physical cards are dealt. */
+export function setupEvidence(coordinator: Coordinator, archive: MatchArchive) {
+  const state = coordinator.current();
+  const choices = archive.records.filter(
+    (record) => record.command.response.kind === "starting-player",
+  );
+  return {
+    chooser: state.startingPlayerChooser,
+    starter: state.startingPlayer,
+    activePlayer: state.activePlayer,
+    priorityPlayer: state.priorityPlayer,
+    objectCount: Object.keys(state.objects).length,
+    zones: state.players.map((seat) => ({
+      player: seat.id,
+      hand: seat.hand.length,
+      library: seat.library.length,
+      graveyard: seat.graveyard.length,
+    })),
+    choiceViews:
+      state.startingPlayer === null
+        ? state.players.map((seat) => {
+            const view = coordinator.view(seat.id);
+            return { player: seat.id, decision: view.decision, objectCount: view.objects.length };
+          })
+        : [],
+    acceptedChoices: choices.length,
+    firstChoice: choices[0] ? { command: choices[0].command, receipt: choices[0].receipt } : null,
+  };
+}

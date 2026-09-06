@@ -1,0 +1,2451 @@
+{
+  "schema": "commander-executed-scenario-snapshot/1",
+  "createdAt": "2026-09-06T20:46:07.212660+00:00",
+  "purpose": "Separate engine 0.6 execution inventory and bounded new setup mappings. Historical 0.3 mapping remains unchanged and is not promoted by matching a test name.",
+  "engineVersion": "commander-engine/0.6.0",
+  "sources": {
+    "rules": {
+      "url": "https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt",
+      "effectiveDate": "2026-08-07",
+      "archivePath": ".commander/sources/archives/4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f.txt",
+      "sha256": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f"
+    },
+    "preImplementationExpectations": {
+      "path": "docs/commander/setup-observation-audit.md",
+      "gitRevision": "db05a729",
+      "sha256": "3ea59fbfc3bdf448ef6c6b563610367e90aaf652d9f2628129fb533c4b3703af"
+    },
+    "currentReview": {
+      "path": "docs/commander/setup-observation-audit.md",
+      "sha256": "19ebafae37c06e2f9742314d67c73c0cbb2df323f7402e46254b3a477180508f"
+    }
+  },
+  "execution": {
+    "command": "bun test packages/engine/src packages/simulation/src apps/engine-cli/src/terminal.test.ts --reporter=junit --reporter-outfile=.commander/evidence/setup-choice-0.6.junit.xml",
+    "runtime": "1.3.11",
+    "reportPath": ".commander/evidence/setup-choice-0.6.junit.xml",
+    "reportSha256": "014e554c5d78f9a2fc3d9a78afcc71cb29a09dcb5ddf7ca650c4017a77fbb49d",
+    "passed": 84,
+    "failures": 0,
+    "skipped": 0,
+    "assertions": 1641,
+    "testHashPolicy": "File hashes recorded after the passing run; no test file changed before this snapshot. This focused run is distinct from the subsequent frozen full corpus/browser runs."
+  },
+  "guardrails": {
+    "fullScenarioGroupsCompleted": 0,
+    "eligibleCardsCertified": 0,
+    "highRiskDraftsCountedAsExecuted": 0,
+    "wholeRule103Supported": false,
+    "historicalSuccessReused": false,
+    "sourceBackedFullGamesProvenByThisReport": 0
+  },
+  "tests": [
+    {
+      "id": "v06-test-001",
+      "test": {
+        "path": "apps/engine-cli/src/terminal.test.ts",
+        "name": "malformed and illegal inputs reprompt unchanged; Enter commits once and quit preserves the next decision",
+        "suite": "human terminal over the durable player command boundary",
+        "line": 138,
+        "sha256": "f08674cab69b8dd6398cce97a7a9881deff0c0884b7f12501f8c6ebe9e991474"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 582
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-002",
+      "test": {
+        "path": "apps/engine-cli/src/terminal.test.ts",
+        "name": "a JSON override commits its own response and EOF preserves that pending mulligan round",
+        "suite": "human terminal over the durable player command boundary",
+        "line": 191,
+        "sha256": "f08674cab69b8dd6398cce97a7a9881deff0c0884b7f12501f8c6ebe9e991474"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-003",
+      "test": {
+        "path": "apps/engine-cli/src/terminal.test.ts",
+        "name": "reader failure closes the coordinator without inventing or committing a response",
+        "suite": "human terminal over the durable player command boundary",
+        "line": 207,
+        "sha256": "f08674cab69b8dd6398cce97a7a9881deff0c0884b7f12501f8c6ebe9e991474"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-004",
+      "test": {
+        "path": "apps/engine-cli/src/terminal.test.ts",
+        "name": "accepting proposals completes a real synthetic game and persists its terminal state",
+        "suite": "human terminal over the durable player command boundary",
+        "line": 221,
+        "sha256": "f08674cab69b8dd6398cce97a7a9881deff0c0884b7f12501f8c6ebe9e991474"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-005",
+      "test": {
+        "path": "apps/engine-cli/src/terminal.test.ts",
+        "name": "native piped readline buffers Enter and quit then exits without a live input handle",
+        "suite": "human terminal over the durable player command boundary",
+        "line": 247,
+        "sha256": "f08674cab69b8dd6398cce97a7a9881deff0c0884b7f12501f8c6ebe9e991474"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-006",
+      "test": {
+        "path": "apps/engine-cli/src/terminal.test.ts",
+        "name": "the frozen CLI launcher persists piped Enter, pauses on quit, then resumes and replays after EOF",
+        "suite": "human terminal over the durable player command boundary",
+        "line": 289,
+        "sha256": "f08674cab69b8dd6398cce97a7a9881deff0c0884b7f12501f8c6ebe9e991474"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 13
+      },
+      "reviewStatus": "bounded-application-contract-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "The actual frozen CLI wrapper accepts piped Enter once, pauses on quit, resumes unchanged on EOF, and replays the committed first choice."
+      ],
+      "limitations": [
+        "Synthetic release and isolated native SQLite; no browser, archived-card or full-game claim."
+      ],
+      "applicationContractAssertions": [
+        "native-stdin-lifetime",
+        "starting-choice-persistence",
+        "reopen-and-replay"
+      ]
+    },
+    {
+      "id": "v06-test-007",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "starting-player proposal chooses the owned seat through an explicit ordinary response",
+        "suite": "observation-only driver",
+        "line": 52,
+        "sha256": "b99009ea925c57ba855f4da33a721513ba3c77b818a19ab662ba74c41aef2cb0"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "bounded-application-contract-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": ["103.1"],
+      "assertions": [
+        "The heuristic returns an explicit starting-player response naming its owned seat.",
+        "A malformed decision omitting that seat fails rather than inventing a selection."
+      ],
+      "limitations": [
+        "Heuristic preference is application policy; the rules allow every listed seat."
+      ]
+    },
+    {
+      "id": "v06-test-008",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "script lookup is revision-bound and deterministic after retries or reconstruction",
+        "suite": "observation-only driver",
+        "line": 70,
+        "sha256": "b99009ea925c57ba855f4da33a721513ba3c77b818a19ab662ba74c41aef2cb0"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-001",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-009",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "colored payment reassigns flexible source instead of consuming the sole green source",
+        "suite": "observation-only driver",
+        "line": 86,
+        "sha256": "b99009ea925c57ba855f4da33a721513ba3c77b818a19ab662ba74c41aef2cb0"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-002",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-010",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "uses floating mana once and rejects insufficient colorless or generic resources",
+        "suite": "observation-only driver",
+        "line": 100,
+        "sha256": "b99009ea925c57ba855f4da33a721513ba3c77b818a19ab662ba74c41aef2cb0"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-003",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-011",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "combines excess nontrample damage into one source-target allocation (first real-game regression)",
+        "suite": "observation-only driver",
+        "line": 113,
+        "sha256": "b99009ea925c57ba855f4da33a721513ba3c77b818a19ab662ba74c41aef2cb0"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-004",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-012",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "trample distributes lethal first, then remaining power to the defender",
+        "suite": "observation-only driver",
+        "line": 120,
+        "sha256": "b99009ea925c57ba855f4da33a721513ba3c77b818a19ab662ba74c41aef2cb0"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-005",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-013",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "unowned decision is a driver failure rather than an invented pass",
+        "suite": "observation-only driver",
+        "line": 132,
+        "sha256": "b99009ea925c57ba855f4da33a721513ba3c77b818a19ab662ba74c41aef2cb0"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-006",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-014",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "SET-04 2 seats see mulligan declarations and history while hands and bottom choices stay private",
+        "suite": "",
+        "line": 125,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-04"],
+      "sourceRules": ["103.5", "103.5c", "402.3"],
+      "assertions": [
+        "Previous round declarations are visible to later players and every entitled observer before any redraw.",
+        "Every hand stays unchanged until the declaration round completes.",
+        "Free multiplayer redraws and paid redraws retain public counts; finished keepers cannot rejoin.",
+        "Bottom decisions are private to their owner; others never see hand identities.",
+        "Completed rounds clear public declarations, and returned observations do not alias authoritative state."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "Root source/code review of CR103.5 and the setup observation implementation; no full SET-04 completion."
+      }
+    },
+    {
+      "id": "v06-test-015",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "SET-04 4 seats see mulligan declarations and history while hands and bottom choices stay private",
+        "suite": "",
+        "line": 125,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 58
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-04"],
+      "sourceRules": ["103.5", "103.5c", "402.3"],
+      "assertions": [
+        "Previous round declarations are visible to later players and every entitled observer before any redraw.",
+        "Every hand stays unchanged until the declaration round completes.",
+        "Free multiplayer redraws and paid redraws retain public counts; finished keepers cannot rejoin.",
+        "Bottom decisions are private to their owner; others never see hand identities.",
+        "Completed rounds clear public declarations, and returned observations do not alias authoritative state."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "Root source/code review of CR103.5 and the setup observation implementation; no full SET-04 completion."
+      }
+    },
+    {
+      "id": "v06-test-016",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 2 seats have a deterministic owned choice with no active player, priority, cards or hands before selection",
+        "suite": "",
+        "line": 239,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 31
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": ["103.1", "103.2c", "103.3", "101.4e"],
+      "assertions": [
+        "The manifest seed reproducibly selects the chooser only, consuming one chance operation.",
+        "Before selection, starter/active/priority are null, no live card objects exist, no hand or library is exposed, and only the chooser owns the full-seat decision.",
+        "Wrong actor, stale revision, wrong decision, absent seat and premature mulligan leave complete state and RNG unchanged.",
+        "The undealt-inventory exception does not permit missing physical cards after selection."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "applicationContractAssertions": [
+        "reject-invalid-command-without-state-or-RNG-mutation",
+        "owned-decision-projection",
+        "physical-card-inventory-invariant"
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "Source and setup/index/invariants review for ordinary single-game CR103.1 choice; 40 life exists before choice only as initialized profile metadata."
+      }
+    },
+    {
+      "id": "v06-test-017",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 2 seats can select A; setup order and first-draw behavior follow that choice",
+        "suite": "",
+        "line": 293,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-01", "SET-02", "SET-04"],
+      "sourceRules": [
+        "103.1",
+        "101.4e",
+        "103.2c",
+        "103.3",
+        "103.5",
+        "103.8a",
+        "103.8c",
+        "903.6",
+        "903.7"
+      ],
+      "assertions": [
+        "The explicitly selected seat is stored, becomes the first mulligan declarer and may be any seat, including someone other than the chooser.",
+        "Selection yields 100 live cards per seat: one commander in command, seven cards in hand, 92 in library, 40 life.",
+        "All commanders are placed before any library shuffle; all shuffles finish before any opening draw.",
+        "Mulligan declarations follow the seat order rotated from the selected starter, with priority absent until the first upkeep.",
+        "The selected seat receives first upkeep priority and skips the first draw only in the ordinary two-seat game; it draws to eight cards in four seats.",
+        "Starting-player metadata remains after setup, and attempting another selection cannot mutate the started game."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "CR103.1/103.2c/103.3/103.5/103.8a/c/101.4e/903.6/903.7 against setup/index/invariants/driver in ordinary two/four-seat single games."
+      }
+    },
+    {
+      "id": "v06-test-018",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 2 seats can select B; setup order and first-draw behavior follow that choice",
+        "suite": "",
+        "line": 293,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-01", "SET-02", "SET-04"],
+      "sourceRules": [
+        "103.1",
+        "101.4e",
+        "103.2c",
+        "103.3",
+        "103.5",
+        "103.8a",
+        "103.8c",
+        "903.6",
+        "903.7"
+      ],
+      "assertions": [
+        "The explicitly selected seat is stored, becomes the first mulligan declarer and may be any seat, including someone other than the chooser.",
+        "Selection yields 100 live cards per seat: one commander in command, seven cards in hand, 92 in library, 40 life.",
+        "All commanders are placed before any library shuffle; all shuffles finish before any opening draw.",
+        "Mulligan declarations follow the seat order rotated from the selected starter, with priority absent until the first upkeep.",
+        "The selected seat receives first upkeep priority and skips the first draw only in the ordinary two-seat game; it draws to eight cards in four seats.",
+        "Starting-player metadata remains after setup, and attempting another selection cannot mutate the started game."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "CR103.1/103.2c/103.3/103.5/103.8a/c/101.4e/903.6/903.7 against setup/index/invariants/driver in ordinary two/four-seat single games."
+      }
+    },
+    {
+      "id": "v06-test-019",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 4 seats have a deterministic owned choice with no active player, priority, cards or hands before selection",
+        "suite": "",
+        "line": 239,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 43
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": ["103.1", "103.2c", "103.3", "101.4e"],
+      "assertions": [
+        "The manifest seed reproducibly selects the chooser only, consuming one chance operation.",
+        "Before selection, starter/active/priority are null, no live card objects exist, no hand or library is exposed, and only the chooser owns the full-seat decision.",
+        "Wrong actor, stale revision, wrong decision, absent seat and premature mulligan leave complete state and RNG unchanged.",
+        "The undealt-inventory exception does not permit missing physical cards after selection."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "applicationContractAssertions": [
+        "reject-invalid-command-without-state-or-RNG-mutation",
+        "owned-decision-projection",
+        "physical-card-inventory-invariant"
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "Source and setup/index/invariants review for ordinary single-game CR103.1 choice; 40 life exists before choice only as initialized profile metadata."
+      }
+    },
+    {
+      "id": "v06-test-020",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 4 seats can select A; setup order and first-draw behavior follow that choice",
+        "suite": "",
+        "line": 293,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 34
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-01", "SET-02", "SET-04"],
+      "sourceRules": [
+        "103.1",
+        "101.4e",
+        "103.2c",
+        "103.3",
+        "103.5",
+        "103.8a",
+        "103.8c",
+        "903.6",
+        "903.7"
+      ],
+      "assertions": [
+        "The explicitly selected seat is stored, becomes the first mulligan declarer and may be any seat, including someone other than the chooser.",
+        "Selection yields 100 live cards per seat: one commander in command, seven cards in hand, 92 in library, 40 life.",
+        "All commanders are placed before any library shuffle; all shuffles finish before any opening draw.",
+        "Mulligan declarations follow the seat order rotated from the selected starter, with priority absent until the first upkeep.",
+        "The selected seat receives first upkeep priority and skips the first draw only in the ordinary two-seat game; it draws to eight cards in four seats.",
+        "Starting-player metadata remains after setup, and attempting another selection cannot mutate the started game."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "CR103.1/103.2c/103.3/103.5/103.8a/c/101.4e/903.6/903.7 against setup/index/invariants/driver in ordinary two/four-seat single games."
+      }
+    },
+    {
+      "id": "v06-test-021",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 4 seats can select B; setup order and first-draw behavior follow that choice",
+        "suite": "",
+        "line": 293,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 34
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-01", "SET-02", "SET-04"],
+      "sourceRules": [
+        "103.1",
+        "101.4e",
+        "103.2c",
+        "103.3",
+        "103.5",
+        "103.8a",
+        "103.8c",
+        "903.6",
+        "903.7"
+      ],
+      "assertions": [
+        "The explicitly selected seat is stored, becomes the first mulligan declarer and may be any seat, including someone other than the chooser.",
+        "Selection yields 100 live cards per seat: one commander in command, seven cards in hand, 92 in library, 40 life.",
+        "All commanders are placed before any library shuffle; all shuffles finish before any opening draw.",
+        "Mulligan declarations follow the seat order rotated from the selected starter, with priority absent until the first upkeep.",
+        "The selected seat receives first upkeep priority and skips the first draw only in the ordinary two-seat game; it draws to eight cards in four seats.",
+        "Starting-player metadata remains after setup, and attempting another selection cannot mutate the started game."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "CR103.1/103.2c/103.3/103.5/103.8a/c/101.4e/903.6/903.7 against setup/index/invariants/driver in ordinary two/four-seat single games."
+      }
+    },
+    {
+      "id": "v06-test-022",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 4 seats can select C; setup order and first-draw behavior follow that choice",
+        "suite": "",
+        "line": 293,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 34
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-01", "SET-02", "SET-04"],
+      "sourceRules": [
+        "103.1",
+        "101.4e",
+        "103.2c",
+        "103.3",
+        "103.5",
+        "103.8a",
+        "103.8c",
+        "903.6",
+        "903.7"
+      ],
+      "assertions": [
+        "The explicitly selected seat is stored, becomes the first mulligan declarer and may be any seat, including someone other than the chooser.",
+        "Selection yields 100 live cards per seat: one commander in command, seven cards in hand, 92 in library, 40 life.",
+        "All commanders are placed before any library shuffle; all shuffles finish before any opening draw.",
+        "Mulligan declarations follow the seat order rotated from the selected starter, with priority absent until the first upkeep.",
+        "The selected seat receives first upkeep priority and skips the first draw only in the ordinary two-seat game; it draws to eight cards in four seats.",
+        "Starting-player metadata remains after setup, and attempting another selection cannot mutate the started game."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "CR103.1/103.2c/103.3/103.5/103.8a/c/101.4e/903.6/903.7 against setup/index/invariants/driver in ordinary two/four-seat single games."
+      }
+    },
+    {
+      "id": "v06-test-023",
+      "test": {
+        "path": "packages/engine/src/audit-scenarios.test.ts",
+        "name": "CR103.1 4 seats can select D; setup order and first-draw behavior follow that choice",
+        "suite": "",
+        "line": 293,
+        "sha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 34
+      },
+      "reviewStatus": "bounded-source-assertions-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-01", "SET-02", "SET-04"],
+      "sourceRules": [
+        "103.1",
+        "101.4e",
+        "103.2c",
+        "103.3",
+        "103.5",
+        "103.8a",
+        "103.8c",
+        "903.6",
+        "903.7"
+      ],
+      "assertions": [
+        "The explicitly selected seat is stored, becomes the first mulligan declarer and may be any seat, including someone other than the chooser.",
+        "Selection yields 100 live cards per seat: one commander in command, seven cards in hand, 92 in library, 40 life.",
+        "All commanders are placed before any library shuffle; all shuffles finish before any opening draw.",
+        "Mulligan declarations follow the seat order rotated from the selected starter, with priority absent until the first upkeep.",
+        "The selected seat receives first upkeep priority and skips the first draw only in the ordinary two-seat game; it draws to eight cards in four seats.",
+        "Starting-player metadata remains after setup, and attempting another selection cannot mutate the started game."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks isolate ordinary two/four-seat single-game setup; no eligible source-card, full-game, match-series or variant certification.",
+        "Storage fault/import and browser parity are separately executed evidence, not inferred from these pure transitions."
+      ],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "bounded-setup-semantics-approved",
+        "scope": "CR103.1/103.2c/103.3/103.5/103.8a/c/101.4e/903.6/903.7 against setup/index/invariants/driver in ordinary two/four-seat single games."
+      }
+    },
+    {
+      "id": "v06-test-024",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "same pinned setup repeats physical cards and chance state; observations never expose any library or another hand",
+        "suite": "normal setup and command invariants",
+        "line": 160,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 20
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-020",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-025",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "2 seats collect mulligan declarations before redraw and enforce the correct first bottom count",
+        "suite": "normal setup and command invariants",
+        "line": 176,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-021",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-026",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "2 seats bottom every paid redraw before another mulligan declaration and keepers cannot rejoin",
+        "suite": "normal setup and command invariants",
+        "line": 195,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 28
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-022",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-027",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "2 seats apply the proper starting-player draw rule",
+        "suite": "normal setup and command invariants",
+        "line": 241,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-023",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-028",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "4 seats collect mulligan declarations before redraw and enforce the correct first bottom count",
+        "suite": "normal setup and command invariants",
+        "line": 176,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-024",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-029",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "4 seats bottom every paid redraw before another mulligan declaration and keepers cannot rejoin",
+        "suite": "normal setup and command invariants",
+        "line": 195,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 24
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-025",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-030",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "4 seats apply the proper starting-player draw rule",
+        "suite": "normal setup and command invariants",
+        "line": 241,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-026",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-031",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "four-seat paid redraws finish every bottom choice before the next declaration round",
+        "suite": "normal setup and command invariants",
+        "line": 250,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 10
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-027",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-032",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "bad owner, malformed payload and illegal move leave state and chance untouched",
+        "suite": "normal setup and command invariants",
+        "line": 281,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-028",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-033",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "all three resolver modes preserve exact setup, decisions, staged casts, reversal, and transitions",
+        "suite": "normal setup and command invariants",
+        "line": 290,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-029",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-034",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "core entry points reject a wrong source or prepared registry pin without advancing state",
+        "suite": "normal setup and command invariants",
+        "line": 315,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-035",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "resolver candidates track control, tap state, zone generations, and active timing exactly",
+        "suite": "normal setup and command invariants",
+        "line": 338,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-030",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-036",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "canonical checkpoint round trips preserve candidate, observation, and transition ordering",
+        "suite": "normal setup and command invariants",
+        "line": 373,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 78
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-031",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-037",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "announcement moves to stack before payment; cancellation restores exact object identity and command zone",
+        "suite": "casting checkpoints and player departure",
+        "line": 411,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-032",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-038",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "caster retains priority, all players pass, permanent resolves, then active player gets priority",
+        "suite": "casting checkpoints and player departure",
+        "line": 422,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 8
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-033",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-039",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "commander declines one graveyard SBA offer and receives another only after changing zones",
+        "suite": "casting checkpoints and player departure",
+        "line": 446,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-034",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-040",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "active player's loss does not begin another turn or give a dead player priority",
+        "suite": "casting checkpoints and player departure",
+        "line": 466,
+        "sha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-035",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-041",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "attack permissions, haste, vigilance, defender, and whole-declaration rollback",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 207,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-036",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-042",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "one attacker cannot attack twice or attack its controller",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 242,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-037",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-043",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "four-seat blocking obeys defender ownership and APNAP with flying/reach",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 264,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 9
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-038",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-044",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "menace rejects a single block, accepts two, and repeated blockers are invalid",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 292,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-039",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-045",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "four-seat damage choices start at the actual active player and retain defender order",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 317,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-040",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-046",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "a first-strike blocker remains in combat after its attacker leaves",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 348,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-041",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-047",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "5/5 may divide 2/3 between two 3/3 blockers, with simultaneous damage",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 362,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 10
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-042",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-048",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "trample allows lethal-plus-excess or all damage to blocker, not an underassignment",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 398,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-043",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-049",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "trample lethal accounts for marked damage and deathtouch",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 428,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-044",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-050",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "leaving blocker preserves blocked status; trample can then reach defender",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 453,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-045",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-051",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "first-strike snapshot prevents dealing again after losing first strike",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 469,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-046",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-052",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "double strike applies two separate steps with a surviving blocker",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 491,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-047",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-053",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "zero-power first striker still establishes the first-strike step",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 508,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-048",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-054",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "wrong owner, foreign target, partial power, duplicate and fractional amounts cannot mutate state",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 521,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-049",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-055",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "lifelink and incoming damage combine simultaneously; commander damage uses lineage",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 544,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-050",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-056",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "pending compound damage choices survive schema serialization",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 580,
+        "sha256": "4464c419409b08154854b38347a54046b5d97c785232d2bc1579d21ddd23cfeb"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-051",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-057",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "COM-11 first-strike damage kills the blocker before normal damage and gives intervening priority",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 229,
+        "sha256": "55b51719f7c7c6ed3a6bc2c16a10263659d5faaf6d9b979bd514d0022dd69a8c"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 30
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-052",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-058",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "END-01 simultaneous lifelink and combat damage leave the defender alive at the real SBA checkpoint",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 260,
+        "sha256": "55b51719f7c7c6ed3a6bc2c16a10263659d5faaf6d9b979bd514d0022dd69a8c"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 17
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-053",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-059",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "COM-05 a blocker killed by a resolved spell leaves its nontrampling attacker blocked",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 305,
+        "sha256": "55b51719f7c7c6ed3a6bc2c16a10263659d5faaf6d9b979bd514d0022dd69a8c"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-054",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-060",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "COM-05 a blocker killed by a resolved spell leaves its trampling attacker blocked",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 305,
+        "sha256": "55b51719f7c7c6ed3a6bc2c16a10263659d5faaf6d9b979bd514d0022dd69a8c"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-055",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-061",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "PRI-04 immediate mana activation resets prior passes before stack resolution",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 348,
+        "sha256": "55b51719f7c7c6ed3a6bc2c16a10263659d5faaf6d9b979bd514d0022dd69a8c"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 25
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-056",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-062",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "END-05 active player loses from a resolved draw and the turn finishes cleanup before the next living turn",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 378,
+        "sha256": "55b51719f7c7c6ed3a6bc2c16a10263659d5faaf6d9b979bd514d0022dd69a8c"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 51
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ],
+      "historicalMappingReference": {
+        "path": "docs/commander/executed-scenario-map.json",
+        "testId": "core-test-057",
+        "scopeTransferred": false,
+        "independentReviewTransferred": false
+      }
+    },
+    {
+      "id": "v06-test-063",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "typed programs reject an unused/missing target and creature draw/gain recipients",
+        "suite": "source-reviewed spell instructions and casting",
+        "line": 390,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-064",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Divination pays {2}{U}, waits for passes, draws two separate cards and finishes in its graveyard",
+        "suite": "source-reviewed spell instructions and casting",
+        "line": 413,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 10
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-065",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Inspiration casts at nonactive upkeep priority; target and payment decisions serialize with public chosen targets",
+        "suite": "source-reviewed spell instructions and casting",
+        "line": 437,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 15
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-066",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "sorcery timing and missing creature targets reject before changing the stack",
+        "suite": "source-reviewed spell instructions and casting",
+        "line": 474,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-067",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "cancelling at target choice restores original identity and hand order",
+        "suite": "source-reviewed spell instructions and casting",
+        "line": 492,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-068",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "cancelling after target selection restores original identity and hand order",
+        "suite": "source-reviewed spell instructions and casting",
+        "line": 492,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-069",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "creature targets exclude shroud and opponents' hexproof while allowing own hexproof",
+        "suite": "legal target revalidation and uninterrupted resolution",
+        "line": 510,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-070",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Flame Slash marks four damage; indestructible survives while an ordinary 2/2 dies at the next checkpoint",
+        "suite": "legal target revalidation and uninterrupted resolution",
+        "line": 533,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 9
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-071",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Sorin's Thirst completes life gain before lethal-damage SBAs; a response killing its sole target cancels all lower effects (CR608.2b example)",
+        "suite": "legal target revalidation and uninterrupted resolution",
+        "line": 551,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-072",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "a target leaving and returning is a new object and does not receive the old spell's damage",
+        "suite": "legal target revalidation and uninterrupted resolution",
+        "line": 569,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-073",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Healing Hands does not draw for its controller after its target player leaves a four-seat game",
+        "suite": "legal target revalidation and uninterrupted resolution",
+        "line": 586,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-074",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Sacred Nectar and Revitalize change the controller's life by printed amounts; Revitalize then draws one",
+        "suite": "legal target revalidation and uninterrupted resolution",
+        "line": 601,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-075",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Divination attempts the second draw from an empty library, finishes resolving, then its controller loses",
+        "suite": "legal target revalidation and uninterrupted resolution",
+        "line": 616,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-076",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "removal programs reject player/no targets and unimplemented post-move references",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 634,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 8
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-077",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Murder destroys without damage, creates a new graveyard object, and records the battlefield last-known state",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 657,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 9
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-078",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "indestructible stops Murder's destruction but it remains a legal target and the spell resolves",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 696,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-079",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Final Reward exiles an indestructible creature; exile is neither destruction nor dying",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 710,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 8
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-080",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "murder visits its destination and finishes resolving before the commander owner declines the SBA move",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 733,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 12
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-081",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "murder visits its destination and finishes resolving before the commander owner accepts the SBA move",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 733,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 12
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-082",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "reward visits its destination and finishes resolving before the commander owner declines the SBA move",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 733,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 12
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-083",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "reward visits its destination and finishes resolving before the commander owner accepts the SBA move",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 733,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 12
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    },
+    {
+      "id": "v06-test-084",
+      "test": {
+        "path": "packages/engine/src/effects.test.ts",
+        "name": "Final Reward responding to Murder exiles the target and the original Murder does not resolve",
+        "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+        "line": 770,
+        "sha256": "80cae4e46c1c4500aa3f18d228fed2822ebe26446ac6494dd7c83d587f622a10"
+      },
+      "execution": {
+        "report": ".commander/evidence/setup-choice-0.6.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "executed-unmapped-in-this-snapshot",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [],
+      "limitations": [
+        "Execution proves this test passed; an assertion-level source mapping is not implied."
+      ]
+    }
+  ],
+  "separateVerification": {
+    "documentation": "docs/commander/setup-browser-proof-0.6.md",
+    "browserReport": ".commander/browser-proof/2026-09-06T20-45-06-454Z-2ff24a73/evidence.json",
+    "sourceSnapshotHash": "06ded1e3ae386febfd08f593c0b9384ddccd47c75e332ab8b846eed66b1278fe",
+    "nativeStorageJUnit": ".commander/browser-proof/2026-09-06T20-45-06-454Z-2ff24a73/storage-unit.junit.xml",
+    "includedInThisReportTotals": false
+  }
+}

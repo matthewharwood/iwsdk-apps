@@ -3,7 +3,7 @@ import { CONTRACT_VERSION, type PlayerObservation, Response } from "@iwsdk-apps/
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/1";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/2";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;
@@ -44,6 +44,8 @@ function present(observation: PlayerObservation, write: (line: string) => void):
       revision: observation.revision,
       turn: observation.turn,
       step: observation.step,
+      startingPlayerChooser: observation.startingPlayerChooser,
+      startingPlayer: observation.startingPlayer,
       activePlayer: observation.activePlayer,
       players: observation.players,
       combat: observation.combat,

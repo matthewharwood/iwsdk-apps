@@ -1,0 +1,147 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.6.0",
+  "sourceReleaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+  "definitions": 697,
+  "unsupportedPaperCandidates": 31132,
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "fullRepositoryGate": {
+    "command": "bun run check",
+    "exitCode": 0,
+    "date": "2026-09-06",
+    "log": ".commander/evidence/check-full-0.6.log",
+    "logSha256": "8f49ffa852520289b0601ca38409731d9131194125147e388ad4e7198e654cd2",
+    "includes": [
+      "boundaries",
+      "Biome/Stylelint/SonarJS",
+      "strict types",
+      "223 unit tests",
+      "production build",
+      "12 Playwright tests",
+      "emulated Quest development smoke",
+      "fresh workspace and generated application install/check/build"
+    ]
+  },
+  "resolverComparisons": [
+    {
+      "status": "passed",
+      "buildHash": "8544e48149bae061e9fbcd1af7ec24634e3b57908cc91d6bb59bfddc2b88b639",
+      "revision": 516,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "replays": [
+        {
+          "mode": "full-scan",
+          "revision": 516,
+          "hash": "053d3542f8da3acb68118f7746fbfcce601fbb499b16a1e876ee09fdcbce6101",
+          "semanticHash": "5403f9489bc7e5892f4b21fd3880bc99995db5aa558fb62f99de33cc1bff3010",
+          "executionRegistry": {
+            "sourceReleaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+            "preparedArtifactHash": null,
+            "definitionCount": 697
+          }
+        },
+        {
+          "mode": "prepared-scan",
+          "revision": 516,
+          "hash": "b6b6da45770a18ac6b690cb5f1c47d7b9c4ff4fd823d0f5394d1efe6c89232c2",
+          "semanticHash": "5403f9489bc7e5892f4b21fd3880bc99995db5aa558fb62f99de33cc1bff3010",
+          "executionRegistry": {
+            "sourceReleaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+            "preparedArtifactHash": "204995dfb28145fc782d819a850ab878ee70c0dc6a0aed4260e3e7b1df71efe3",
+            "definitionCount": 124
+          }
+        },
+        {
+          "mode": "prepared-indexed",
+          "revision": 516,
+          "hash": "1400b1a00a15c203814866efed1f831ce3f941894fc46091eaca685f57a019e1",
+          "semanticHash": "5403f9489bc7e5892f4b21fd3880bc99995db5aa558fb62f99de33cc1bff3010",
+          "executionRegistry": {
+            "sourceReleaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+            "preparedArtifactHash": "204995dfb28145fc782d819a850ab878ee70c0dc6a0aed4260e3e7b1df71efe3",
+            "definitionCount": 124
+          }
+        }
+      ],
+      "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding.",
+      "path": ".commander/resolver-comparisons/c8ab61f5-07bb-4129-95fd-3e87696705b8/report.json",
+      "comparedBoundaries": 517,
+      "comparedActingObservations": 516
+    },
+    {
+      "status": "passed",
+      "buildHash": "8544e48149bae061e9fbcd1af7ec24634e3b57908cc91d6bb59bfddc2b88b639",
+      "revision": 1930,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "replays": [
+        {
+          "mode": "full-scan",
+          "revision": 1930,
+          "hash": "b65f5f07e44f91d9f4775d52de7b67ef16a2b3e72bd028d27749761428b73713",
+          "semanticHash": "51ce7dcb00a96d37138c2eb9c91fe2b45e4a8f94ee6a2500b0fab56fdb41a034",
+          "executionRegistry": {
+            "sourceReleaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+            "preparedArtifactHash": null,
+            "definitionCount": 697
+          }
+        },
+        {
+          "mode": "prepared-scan",
+          "revision": 1930,
+          "hash": "849852e939d6ec4a597a023c3e76b7b3cd6ae9647000d06ff995d3aa47a440f2",
+          "semanticHash": "51ce7dcb00a96d37138c2eb9c91fe2b45e4a8f94ee6a2500b0fab56fdb41a034",
+          "executionRegistry": {
+            "sourceReleaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+            "preparedArtifactHash": "ae33a388378535f6674d92b526e377f7be8c9762a4236f4dc596764cdf840ccc",
+            "definitionCount": 188
+          }
+        },
+        {
+          "mode": "prepared-indexed",
+          "revision": 1930,
+          "hash": "b659f0da6a4f4997c35c09776a4e837256b9b31bd9e9115b732d2311146466cc",
+          "semanticHash": "51ce7dcb00a96d37138c2eb9c91fe2b45e4a8f94ee6a2500b0fab56fdb41a034",
+          "executionRegistry": {
+            "sourceReleaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+            "preparedArtifactHash": "ae33a388378535f6674d92b526e377f7be8c9762a4236f4dc596764cdf840ccc",
+            "definitionCount": 188
+          }
+        }
+      ],
+      "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding.",
+      "path": ".commander/resolver-comparisons/69742fdc-d817-4efe-9ed0-2a21b68f863f/report.json",
+      "comparedBoundaries": 1931,
+      "comparedActingObservations": 1930
+    }
+  ],
+  "browserEvidence": "setup-browser-proof-0.6.md",
+  "independentSetupEvidence": "executed-scenario-map-v0.6.json",
+  "regression": {
+    "corpusHash": "8afa8a1c5ac3ce774fddecab88b5131ef66a7b37d053af590b876da28e763ba8",
+    "path": ".commander/regressions/regression-0.6-fixed64",
+    "observedAt": "2026-09-06T20:54:16.714458+00:00",
+    "progress": {
+      "assigned": 64,
+      "accounted": 13,
+      "completed": 13,
+      "pending": 51
+    },
+    "status": "running",
+    "historicalOutcomesReused": false
+  },
+  "remaining": [
+    "Full-snapshot card/rule obligations remain unclosed.",
+    "The 1024-assignment exploration cohort remains on its frozen historical 0.3 executor and is not yet fully accounted.",
+    "The fixed 64-case regression corpus is still executing; this checkpoint does not claim it completed.",
+    "Trigger research and the isolated0.7 prototype are not supported-card or game evidence for this0.6 release."
+  ]
+}

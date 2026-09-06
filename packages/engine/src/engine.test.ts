@@ -14,7 +14,7 @@ import {
   SERIALIZER_VERSION,
 } from "@iwsdk-apps/contracts";
 import { manaSources, priorityCards } from "./casting";
-import { creatures, move, player } from "./common";
+import { creatures, move, player, requireActivePlayer } from "./common";
 import { assertInvariants, createMatch, observe, transition } from "./index";
 import { battlefieldCreatures, selectObjectCandidates } from "./selection";
 import { givePriority } from "./turns";
@@ -107,7 +107,9 @@ function fixture(count: 2 | 4 = 2) {
       },
     })),
   };
-  return { release, manifest, state: createMatch(manifest, release) };
+  const f = { release, manifest, state: createMatch(manifest, release) };
+  selectStartingPlayer(f);
+  return f;
 }
 type Fixture = ReturnType<typeof fixture>;
 function command(state: RulesState, response: Response) {
@@ -127,7 +129,12 @@ function answer(f: Fixture, response: Response): void {
   if (result.status !== "accepted") throw new Error(`${result.code}: ${result.message}`);
   f.state = result.state;
 }
+function selectStartingPlayer(f: Fixture): void {
+  if (f.state.decision?.kind === "starting-player")
+    answer(f, { kind: "starting-player", player: f.state.decision.actor });
+}
 function keep(f: Fixture): void {
+  selectStartingPlayer(f);
   while (f.state.decision?.kind === "mulligan") answer(f, { kind: "mulligan", keep: true });
 }
 function main(f: Fixture): void {
@@ -137,7 +144,7 @@ function main(f: Fixture): void {
 }
 function announce(f: Fixture): string {
   main(f);
-  const active = f.state.activePlayer;
+  const active = requireActivePlayer(f.state);
   const heldLand = player(f.state, active).hand[0];
   if (!heldLand) throw new Error("No unit land");
   answer(f, { kind: "land", card: heldLand });
@@ -152,7 +159,7 @@ function announce(f: Fixture): string {
 describe("normal setup and command invariants", () => {
   test("same pinned setup repeats physical cards and chance state; observations never expose any library or another hand", () => {
     const f = fixture(4);
-    expect(createMatch(f.manifest, f.release)).toEqual(f.state);
+    expect(fixture(4).state).toEqual(f.state);
     for (const seat of f.state.players) {
       expect([seat.life, seat.hand.length, seat.library.length]).toEqual([40, 7, 92]);
       const view = observe(f.state, f.release, seat.id);
@@ -161,14 +168,14 @@ describe("normal setup and command invariants", () => {
         view.objects.filter((object) => object.zone === "hand" && object.owner !== seat.id),
       ).toHaveLength(0);
       expect(view.objects.filter((object) => object.zone === "command")).toHaveLength(4);
-      if (seat.id !== f.state.activePlayer) expect(view.decision).toBeNull();
+      if (seat.id !== requireActivePlayer(f.state)) expect(view.decision).toBeNull();
     }
     assertInvariants(f.state, f.release);
   });
   for (const count of [2, 4] as const) {
     test(`${count} seats collect mulligan declarations before redraw and enforce the correct first bottom count`, () => {
       const f = fixture(count);
-      const actor = f.state.activePlayer;
+      const actor = requireActivePlayer(f.state);
       const original = [...player(f.state, actor).hand];
       answer(f, { kind: "mulligan", keep: false });
       expect(player(f.state, actor).hand).toEqual(original);
@@ -190,7 +197,7 @@ describe("normal setup and command invariants", () => {
       // includes bottoming before the declaration process repeats; 103.5c
       // makes only the first multiplayer mulligan free.
       const f = fixture(count);
-      const actor = f.state.activePlayer;
+      const actor = requireActivePlayer(f.state);
       answer(f, { kind: "mulligan", keep: false });
       for (let n = 1; n < count; n++) answer(f, { kind: "mulligan", keep: true });
       const keepers = f.state.players.filter((seat) => seat.id !== actor);
@@ -234,7 +241,7 @@ describe("normal setup and command invariants", () => {
     test(`${count} seats apply the proper starting-player draw rule`, () => {
       const f = fixture(count);
       keep(f);
-      const active = f.state.activePlayer;
+      const active = requireActivePlayer(f.state);
       for (let n = 0; n < count; n++) answer(f, { kind: "pass" });
       expect(f.state.step).toBe(count === 2 ? "main1" : "draw");
       expect(player(f.state, active).hand).toHaveLength(count === 2 ? 7 : 8);
@@ -311,7 +318,9 @@ describe("normal setup and command invariants", () => {
     const wrongSource = { ...f.release, sourceReleaseHash: "c".repeat(64) };
     const input = command(f.state, { kind: "mulligan", keep: true });
     expect(transition(f.state, input, wrongSource).status).toBe("rejected");
-    expect(() => observe(f.state, wrongSource, f.state.activePlayer)).toThrow("Source release pin");
+    expect(() => observe(f.state, wrongSource, requireActivePlayer(f.state))).toThrow(
+      "Source release pin",
+    );
     expect(() => assertInvariants(f.state, wrongSource)).toThrow("Source release pin");
     expect(() => createMatch({ ...f.manifest, resolver: "prepared-scan" }, f.release)).toThrow(
       "matching full or prepared",
@@ -356,7 +365,7 @@ describe("normal setup and command invariants", () => {
       expect(manaSources(state, f.release, "B")).toEqual([]);
       move(state, creature.id, "graveyard", "selector unit movement");
       expect(creatures(state, f.release)).toEqual([]);
-      snapshots.push(priorityCards(state, f.release, state.activePlayer));
+      snapshots.push(priorityCards(state, f.release, requireActivePlayer(state)));
     }
     expect(snapshots[1]).toEqual(snapshots[0]);
     expect(snapshots[2]).toEqual(snapshots[0]);
@@ -375,8 +384,10 @@ describe("normal setup and command invariants", () => {
         ...original,
         state: RulesState.parse(JSON.parse(canonicalJson(original.state))),
       };
-      expect(priorityCards(restored.state, restored.release, restored.state.activePlayer)).toEqual(
-        priorityCards(original.state, original.release, original.state.activePlayer),
+      expect(
+        priorityCards(restored.state, restored.release, requireActivePlayer(restored.state)),
+      ).toEqual(
+        priorityCards(original.state, original.release, requireActivePlayer(original.state)),
       );
       for (const seat of original.state.players)
         expect(observe(restored.state, restored.release, seat.id)).toEqual(
@@ -406,12 +417,12 @@ describe("casting checkpoints and player departure", () => {
     answer(f, { kind: "cancel-cast" });
     expect(f.state.objects[original]?.zone).toBe("command");
     expect(f.state.stack).toHaveLength(0);
-    expect(player(f.state, f.state.activePlayer).commanderCasts).toEqual({});
+    expect(player(f.state, requireActivePlayer(f.state)).commanderCasts).toEqual({});
   });
   test("caster retains priority, all players pass, permanent resolves, then active player gets priority", () => {
     const f = fixture();
     announce(f);
-    const active = f.state.activePlayer;
+    const active = requireActivePlayer(f.state);
     const source = f.state.decision?.manaSources[0];
     if (!source) throw new Error("No mana source");
     answer(f, {
@@ -435,7 +446,7 @@ describe("casting checkpoints and player departure", () => {
   test("commander declines one graveyard SBA offer and receives another only after changing zones", () => {
     const f = fixture();
     keep(f);
-    const active = f.state.activePlayer;
+    const active = requireActivePlayer(f.state);
     const commander = Object.values(f.state.objects).find(
       (object) => object.owner === active && object.commander,
     );
@@ -455,11 +466,11 @@ describe("casting checkpoints and player departure", () => {
   test("active player's loss does not begin another turn or give a dead player priority", () => {
     const f = fixture(4);
     keep(f);
-    const active = f.state.activePlayer;
+    const active = requireActivePlayer(f.state);
     const step = f.state.step;
     player(f.state, active).life = 0; // Isolated SBA precondition, not a gameplay command.
     givePriority(f.state, f.release, active);
-    expect(f.state.activePlayer).toBe(active);
+    expect(requireActivePlayer(f.state)).toBe(active);
     expect(f.state.turn).toBe(1);
     expect(f.state.step).toBe(step);
     expect(player(f.state, active).lost).toBe(true);

@@ -4,6 +4,7 @@ import {
   authorHighRiskScenarios,
   buildObligationLedger,
   fetchSources,
+  fetchTabletopEligibilityEvidence,
   importSources,
   readInventory,
   selectRiskSample,
@@ -35,6 +36,7 @@ import { compareResolvers } from "./compare";
 import { reportCoverage } from "./coverage";
 import { selectDriver } from "./drivers";
 import { archiveBuild, EXECUTOR_OPTION } from "./evidence";
+import { runRegression } from "./regress";
 import { runScenarios } from "./scenarios";
 import { runTerminal, TERMINAL_DRIVER_VERSION } from "./terminal";
 
@@ -214,7 +216,7 @@ async function inspectSaved(command: string): Promise<void> {
   }
 }
 async function runExecutionCommand(command: string | undefined): Promise<boolean> {
-  if (!["simulate", "play", "batch", "compare"].includes(command ?? "")) return false;
+  if (!["simulate", "play", "batch", "compare", "regress"].includes(command ?? "")) return false;
   const buildHash = await archiveBuild(directory);
   if (!option(EXECUTOR_OPTION)) {
     // Execute the captured bytes even if this checkout changes during a long game.
@@ -231,7 +233,17 @@ async function runExecutionCommand(command: string | undefined): Promise<boolean
     process.exitCode = await executor.exited;
     return true;
   }
-  if (command === "compare") {
+  if (command === "regress") {
+    await runRegression(directory, {
+      id: z
+        .string()
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,100}$/)
+        .parse(option("id", `regression-${crypto.randomUUID()}`)),
+      corpusPath: resolve(option("corpus", "docs/commander/regression-corpus-v1.json") ?? ""),
+      contentPath: releasePath,
+      maxCommands: integer("max-commands", 20000),
+    });
+  } else if (command === "compare") {
     const content = await release();
     await compareResolvers(
       directory,
@@ -241,16 +253,21 @@ async function runExecutionCommand(command: string | undefined): Promise<boolean
     );
   } else if (command === "batch") {
     await mkdir(resolve(directory, "batches"), { recursive: true });
-    await runBatch(directory, {
-      id: z
-        .string()
-        .regex(/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,100}$/)
-        .parse(option("id", `discovery-${crypto.randomUUID()}`)),
-      two: integer("two", 16),
-      four: integer("four", 48),
-      seed: integer("seed", 10000),
-      maxCommands: integer("max-commands", 20000),
-    });
+    await runBatch(
+      directory,
+      {
+        id: z
+          .string()
+          .regex(/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,100}$/)
+          .parse(option("id", `discovery-${crypto.randomUUID()}`)),
+        two: integer("two", 16),
+        four: integer("four", 48),
+        seed: integer("seed", 10000),
+        maxCommands: integer("max-commands", 20000),
+      },
+      releasePath,
+      decksPath,
+    );
   } else await simulate(command === "play");
   return true;
 }
@@ -286,6 +303,19 @@ async function compileCatalog(): Promise<void> {
     ),
   );
 }
+async function runSourceCommand(): Promise<void> {
+  if (args[1] === "fetch") {
+    console.log(JSON.stringify(await fetchSources(resolve(directory, "sources")), null, 2));
+    return;
+  }
+  const path = option("manifest");
+  if (!path) throw new Error("--manifest is required");
+  if (args[1] === "supplement-tabletop") {
+    console.log(JSON.stringify(await fetchTabletopEligibilityEvidence(path), null, 2));
+  } else if (args[1] === "import") {
+    console.log(JSON.stringify(await importSources(path, catalogPath), null, 2));
+  } else throw new Error("Use sources fetch, supplement-tabletop, or import");
+}
 async function main(): Promise<void> {
   await mkdir(directory, { recursive: true });
   const command = args[0];
@@ -317,16 +347,7 @@ async function main(): Promise<void> {
     }
     return;
   }
-  if (command === "sources" && args[1] === "fetch") {
-    console.log(JSON.stringify(await fetchSources(resolve(directory, "sources")), null, 2));
-    return;
-  }
-  if (command === "sources" && args[1] === "import") {
-    const path = option("manifest");
-    if (!path) throw new Error("--manifest is required");
-    console.log(JSON.stringify(await importSources(path, catalogPath), null, 2));
-    return;
-  }
+  if (command === "sources") return runSourceCommand();
   if (command === "investigate" && args[1] === "inventory") {
     console.log(JSON.stringify(readInventory(catalogPath), null, 2));
     return;
@@ -346,7 +367,7 @@ async function main(): Promise<void> {
   }
   if (command === "compile") return compileCatalog();
   throw new Error(
-    "Use sources fetch|import, investigate inventory|obligations|sample|scenarios, compile, simulate, play, batch, compare, scenarios, replay, export, import, coverage, or verify. Run data is retained under --data (default .commander).",
+    "Use sources fetch|supplement-tabletop|import, investigate inventory|obligations|sample|scenarios, compile, simulate, play, batch, regress, cohort, compare, scenarios, replay, export, import, coverage, or verify. Run data is retained under --data (default .commander).",
   );
 }
 await main().catch((error: unknown) => {

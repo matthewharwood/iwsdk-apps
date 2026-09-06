@@ -16,6 +16,7 @@ import {
   player,
   power,
   request,
+  requireActivePlayer,
   requireRule,
   toughness,
 } from "./common";
@@ -132,9 +133,9 @@ function combatants(state: RulesState, release: ExecutionRegistry): string[] {
 
 export function startAttackDeclaration(state: RulesState, release: ExecutionRegistry): void {
   state.combat = emptyCombat();
-  request(state, "attack", state.activePlayer, {
+  request(state, "attack", requireActivePlayer(state), {
     context: "Declare all attackers and the player each attacks.",
-    cards: attackCandidates(state, release, state.activePlayer).map((entry) => entry.id),
+    cards: attackCandidates(state, release, requireActivePlayer(state)).map((entry) => entry.id),
     players: apnap(state).filter((id) => id !== state.activePlayer),
   });
 }

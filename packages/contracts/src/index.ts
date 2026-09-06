@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.5.0";
+export const ENGINE_VERSION = "commander-engine/0.6.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -235,6 +235,7 @@ export const PaymentSource = z.strictObject({ object: Id, color: ManaColor });
 export const Attack = z.strictObject({ attacker: Id, defender: Id });
 export const Block = z.strictObject({ blocker: Id, attacker: Id });
 export const Response = z.discriminatedUnion("kind", [
+  z.strictObject({ kind: z.literal("starting-player"), player: Id }),
   z.strictObject({ kind: z.literal("mulligan"), keep: z.boolean() }),
   z.strictObject({ kind: z.literal("bottom"), cards: z.array(Id).max(7) }),
   z.strictObject({ kind: z.literal("pass") }),
@@ -273,6 +274,7 @@ export const Decision = z.strictObject({
   actor: Id,
   revision: Natural,
   kind: z.enum([
+    "starting-player",
     "mulligan",
     "bottom",
     "priority",
@@ -343,8 +345,10 @@ export const RulesState = z.strictObject({
   revision: Natural,
   epoch: Natural,
   turn: Natural,
-  activePlayer: Id,
-  priorityPlayer: Id,
+  startingPlayerChooser: Id,
+  startingPlayer: Id.nullable(),
+  activePlayer: Id.nullable(),
+  priorityPlayer: Id.nullable(),
   eventSequence: Natural,
   setupChoices: z.record(Id, z.boolean()),
   step: Step,
@@ -384,7 +388,9 @@ export type PlayerObservation = {
   revision: number;
   turn: number;
   step: Step;
-  activePlayer: string;
+  startingPlayerChooser: string;
+  startingPlayer: string | null;
+  activePlayer: string | null;
   outcome: RulesState["outcome"];
   players: {
     id: string;

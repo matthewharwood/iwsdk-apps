@@ -19,13 +19,14 @@ import {
   nextLiving,
   player,
   request,
+  requireActivePlayer,
   requireRule,
 } from "./common";
 
 export function givePriority(
   state: RulesState,
   release: ExecutionRegistry,
-  actor = state.priorityPlayer,
+  actor: string = state.priorityPlayer ?? requireActivePlayer(state),
 ): void {
   if (state.outcome.kind !== "ongoing") return;
   state.priorityPlayer = player(state, actor).lost ? nextLiving(state, actor) : actor;
@@ -54,9 +55,9 @@ function step(state: RulesState, next: Step): void {
   emit(state, "StepStarted", { turn: state.turn, activePlayer: state.activePlayer, step: next });
 }
 export function startTurn(state: RulesState, release: ExecutionRegistry, initial = false): void {
-  if (!initial) state.activePlayer = nextLiving(state, state.activePlayer);
+  if (!initial) state.activePlayer = nextLiving(state, requireActivePlayer(state));
   state.turn++;
-  const active = player(state, state.activePlayer);
+  const active = player(state, requireActivePlayer(state));
   active.landsPlayed = 0;
   active.lastTurnStarted = state.turn;
   state.combat = emptyCombat();
@@ -65,7 +66,7 @@ export function startTurn(state: RulesState, release: ExecutionRegistry, initial
   emit(state, "UntapPerformed", { player: active.id, turn: state.turn });
   hit(state, "rule:502");
   step(state, "upkeep");
-  givePriority(state, release, state.activePlayer);
+  givePriority(state, release, requireActivePlayer(state));
 }
 function drawStep(state: RulesState, release: ExecutionRegistry): void {
   if (state.turn === 1 && state.manifest.mode === "two-seat") {
@@ -73,16 +74,16 @@ function drawStep(state: RulesState, release: ExecutionRegistry): void {
     step(state, "main1");
   } else {
     step(state, "draw");
-    if (!player(state, state.activePlayer).lost) draw(state, state.activePlayer, 1);
+    if (!player(state, requireActivePlayer(state)).lost) draw(state, requireActivePlayer(state), 1);
     hit(state, "rule:504.1");
   }
-  givePriority(state, release, state.activePlayer);
+  givePriority(state, release, requireActivePlayer(state));
 }
 function beginDamage(state: RulesState, release: ExecutionRegistry, first: boolean): void {
   step(state, first ? "first-strike-damage" : "combat-damage");
   if (!startCombatDamage(state, release, first)) {
     applyCombatDamage(state, release);
-    givePriority(state, release, state.activePlayer);
+    givePriority(state, release, requireActivePlayer(state));
   }
 }
 export function finishCleanup(state: RulesState, release: ExecutionRegistry): void {
@@ -98,13 +99,13 @@ export function finishCleanup(state: RulesState, release: ExecutionRegistry): vo
   if (checked.waiting || checked.changed) {
     state.cleanupPriority = true;
     state.priorityPlayer = state.activePlayer;
-    if (!checked.waiting) givePriority(state, release, state.activePlayer);
+    if (!checked.waiting) givePriority(state, release, requireActivePlayer(state));
   } else startTurn(state, release);
 }
 function beginCleanup(state: RulesState, release: ExecutionRegistry): void {
   step(state, "cleanup");
   state.cleanupPriority = false;
-  const active = player(state, state.activePlayer);
+  const active = player(state, requireActivePlayer(state));
   const count = Math.max(0, active.hand.length - 7);
   if (!active.lost && count)
     request(state, "discard", active.id, {
@@ -148,7 +149,8 @@ export function advanceStep(state: RulesState, release: ExecutionRegistry): void
       break;
     case "begin-combat":
       step(state, "attackers");
-      if (player(state, state.activePlayer).lost) givePriority(state, release, state.activePlayer);
+      if (player(state, requireActivePlayer(state)).lost)
+        givePriority(state, release, requireActivePlayer(state));
       else startAttackDeclaration(state, release);
       return;
     case "attackers":
@@ -182,7 +184,7 @@ export function advanceStep(state: RulesState, release: ExecutionRegistry): void
     case "setup":
       throw new Error("Setup cannot advance by passing priority.");
   }
-  givePriority(state, release, state.activePlayer);
+  givePriority(state, release, requireActivePlayer(state));
 }
 export function passPriority(state: RulesState, release: ExecutionRegistry, actor: string): void {
   state.consecutivePasses++;
@@ -195,6 +197,6 @@ export function passPriority(state: RulesState, release: ExecutionRegistry, acto
   state.consecutivePasses = 0;
   if (state.stack.length) {
     resolveTop(state, release);
-    givePriority(state, release, state.activePlayer);
+    givePriority(state, release, requireActivePlayer(state));
   } else advanceStep(state, release);
 }

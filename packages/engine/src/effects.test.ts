@@ -14,7 +14,7 @@ import {
   SERIALIZER_VERSION,
   SpellProgram,
 } from "@iwsdk-apps/contracts";
-import { move, player } from "./common";
+import { move, player, requireActivePlayer } from "./common";
 import { legalSpellTargets } from "./effects";
 import { createMatch, observe, transition } from "./index";
 import { givePriority } from "./turns";
@@ -316,6 +316,7 @@ function fixture(count: 2 | 4 = 2) {
     })),
   };
   const f = { release, state: createMatch(manifest, release) };
+  answer(f, { kind: "starting-player", player: f.state.startingPlayerChooser });
   while (f.state.decision?.kind === "mulligan") answer(f, { kind: "mulligan", keep: true });
   return f;
 }
@@ -412,7 +413,7 @@ describe("source-reviewed spell instructions and casting", () => {
   test("Divination pays {2}{U}, waits for passes, draws two separate cards and finishes in its graveyard", () => {
     const f = fixture();
     main(f);
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     const spell = announce(f, actor, "divination");
     const before = player(f.state, actor).hand.length;
     const invalid = command(f, { kind: "payment", sources: [], spend: { ...emptyMana(), U: 1 } });
@@ -435,9 +436,9 @@ describe("source-reviewed spell instructions and casting", () => {
   });
   test("Inspiration casts at nonactive upkeep priority; target and payment decisions serialize with public chosen targets", () => {
     const f = fixture(4);
-    const caster = f.state.players.find((seat) => seat.id !== f.state.activePlayer)?.id;
+    const caster = f.state.players.find((seat) => seat.id !== requireActivePlayer(f.state))?.id;
     if (!caster) throw new Error("Missing opponent");
-    const target = f.state.activePlayer;
+    const target = requireActivePlayer(f.state);
     const spell = announce(f, caster, "inspiration");
     expect(f.state.step).toBe("upkeep");
     expect(f.state.decision).toMatchObject({ kind: "target", actor: caster, count: 1 });
@@ -472,7 +473,7 @@ describe("source-reviewed spell instructions and casting", () => {
   });
   test("sorcery timing and missing creature targets reject before changing the stack", () => {
     const f = fixture();
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     const divination = hold(f, actor, "divination");
     givePriority(f.state, f.release, actor);
     expect(
@@ -490,7 +491,7 @@ describe("source-reviewed spell instructions and casting", () => {
   for (const afterTarget of [false, true]) {
     test(`cancelling ${afterTarget ? "after target selection" : "at target choice"} restores original identity and hand order`, () => {
       const f = fixture();
-      const actor = f.state.activePlayer;
+      const actor = requireActivePlayer(f.state);
       const original = hold(f, actor, "inspiration");
       const hand = [...player(f.state, actor).hand];
       const before = structuredClone(f.state.objects[original]);
@@ -509,7 +510,7 @@ describe("legal target revalidation and uninterrupted resolution", () => {
   test("creature targets exclude shroud and opponents' hexproof while allowing own hexproof", () => {
     const f = fixture();
     main(f);
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     const other = f.state.players.find((seat) => seat.id !== actor)?.id;
     if (!other) throw new Error("Missing opponent");
     const ownHex = body(f, actor, "unit-hexproof");
@@ -533,7 +534,7 @@ describe("legal target revalidation and uninterrupted resolution", () => {
     for (const indestructible of [false, true]) {
       const f = fixture();
       main(f);
-      const actor = f.state.activePlayer;
+      const actor = requireActivePlayer(f.state);
       const target = body(f, actor, indestructible ? "unit-indestructible" : "unit-body");
       cast(f, actor, "slash", target);
       resolveOne(f);
@@ -549,7 +550,7 @@ describe("legal target revalidation and uninterrupted resolution", () => {
   });
   test("Sorin's Thirst completes life gain before lethal-damage SBAs; a response killing its sole target cancels all lower effects (CR608.2b example)", () => {
     const f = fixture();
-    const caster = f.state.activePlayer;
+    const caster = requireActivePlayer(f.state);
     const opponent = f.state.players.find((seat) => seat.id !== caster)?.id;
     if (!opponent) throw new Error("Missing opponent");
     const target = body(f, opponent);
@@ -568,7 +569,7 @@ describe("legal target revalidation and uninterrupted resolution", () => {
   test("a target leaving and returning is a new object and does not receive the old spell's damage", () => {
     const f = fixture();
     main(f);
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     const target = body(f, actor);
     cast(f, actor, "slash", target);
     const departed = move(f.state, target, "exile", "isolated revalidation precondition");
@@ -585,7 +586,7 @@ describe("legal target revalidation and uninterrupted resolution", () => {
   test("Healing Hands does not draw for its controller after its target player leaves a four-seat game", () => {
     const f = fixture(4);
     main(f);
-    const caster = f.state.activePlayer;
+    const caster = requireActivePlayer(f.state);
     const target = f.state.players.find((seat) => seat.id !== caster)?.id;
     if (!target) throw new Error("Missing target");
     cast(f, caster, "hands", target);
@@ -600,7 +601,7 @@ describe("legal target revalidation and uninterrupted resolution", () => {
   test("Sacred Nectar and Revitalize change the controller's life by printed amounts; Revitalize then draws one", () => {
     const f = fixture();
     main(f);
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     cast(f, actor, "nectar");
     resolveOne(f);
     expect(player(f.state, actor).life).toBe(44);
@@ -615,7 +616,7 @@ describe("legal target revalidation and uninterrupted resolution", () => {
   test("Divination attempts the second draw from an empty library, finishes resolving, then its controller loses", () => {
     const f = fixture();
     main(f);
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     cast(f, actor, "divination");
     for (const id of [...player(f.state, actor).library].slice(1))
       move(f.state, id, "graveyard", "isolated one-card-library precondition");
@@ -655,7 +656,7 @@ describe("destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)", () 
   });
   test("Murder destroys without damage, creates a new graveyard object, and records the battlefield last-known state", () => {
     const f = fixture();
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     const owner = f.state.players.find((seat) => seat.id !== actor)?.id;
     if (!owner) throw new Error("Missing opponent");
     const target = body(f, owner);
@@ -694,7 +695,7 @@ describe("destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)", () 
   });
   test("indestructible stops Murder's destruction but it remains a legal target and the spell resolves", () => {
     const f = fixture();
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     const target = body(f, actor, "unit-indestructible");
     const before = structuredClone(f.state.objects[target]);
     cast(f, actor, "murder", target);
@@ -708,7 +709,7 @@ describe("destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)", () 
   });
   test("Final Reward exiles an indestructible creature; exile is neither destruction nor dying", () => {
     const f = fixture();
-    const actor = f.state.activePlayer;
+    const actor = requireActivePlayer(f.state);
     const target = body(f, actor, "unit-indestructible");
     const original = f.state.objects[target];
     if (!original) throw new Error("Missing creature");
@@ -731,7 +732,7 @@ describe("destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)", () 
     for (const returnToCommand of [false, true]) {
       test(`${key} visits its destination and finishes resolving before the commander owner ${returnToCommand ? "accepts" : "declines"} the SBA move`, () => {
         const f = fixture(4);
-        const caster = f.state.activePlayer;
+        const caster = requireActivePlayer(f.state);
         const owner = f.state.players.find((seat) => seat.id !== caster)?.id;
         if (!owner) throw new Error("Missing commander owner");
         const target = body(f, owner, "unit-commander");
@@ -768,7 +769,7 @@ describe("destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)", () 
   }
   test("Final Reward responding to Murder exiles the target and the original Murder does not resolve", () => {
     const f = fixture();
-    const caster = f.state.activePlayer;
+    const caster = requireActivePlayer(f.state);
     const opponent = f.state.players.find((seat) => seat.id !== caster)?.id;
     if (!opponent) throw new Error("Missing opponent");
     const target = body(f, opponent);

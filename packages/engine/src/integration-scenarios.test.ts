@@ -159,6 +159,7 @@ function fixture(count: 2 | 4 = 2, changes: Record<string, Partial<CardDefinitio
     })),
   };
   const f = { release, state: createMatch(manifest, release), events: [] as GameEvent[] };
+  answer(f, { kind: "starting-player", player: f.state.startingPlayerChooser });
   while (f.state.decision?.kind === "mulligan") answer(f, { kind: "mulligan", keep: true });
   while (f.state.step !== "main1") answer(f, { kind: "pass" });
   expect(f.state.activePlayer).toBe("A");

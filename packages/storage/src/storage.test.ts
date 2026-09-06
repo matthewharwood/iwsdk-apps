@@ -49,7 +49,7 @@ function open(path = location()): Repository {
   cleanup.push(() => repo.close());
   return repo;
 }
-async function fixtures(id = "fixture-match") {
+async function fixtures(id = "fixture-match", count: 2 | 4 = 2) {
   const base: CardDefinition = {
     id: "fixture-commander",
     oracleId: "fixture-commander",
@@ -131,8 +131,8 @@ async function fixtures(id = "fixture-match") {
     gameSeed: 7,
     driverSeed: 11,
     driverVersion: "storage-test/1",
-    mode: "two-seat",
-    seats: ["A", "B"].map((seat) => ({ id: seat, deck })),
+    mode: count === 2 ? "two-seat" : "four-seat",
+    seats: ["A", "B", "C", "D"].slice(0, count).map((seat) => ({ id: seat, deck })),
     resolver: "full-scan",
   };
   return { release, manifest };
@@ -149,7 +149,11 @@ function command(coordinator: Coordinator, response?: Response): GameCommand {
     decisionId: state.decision.id,
     response:
       response ??
-      (state.decision.kind === "mulligan" ? { kind: "mulligan", keep: true } : { kind: "pass" }),
+      (state.decision.kind === "starting-player"
+        ? { kind: "starting-player", player: state.decision.players[0] ?? state.decision.actor }
+        : state.decision.kind === "mulligan"
+          ? { kind: "mulligan", keep: true }
+          : { kind: "pass" }),
   };
 }
 async function accepted(coordinator: Coordinator, input = command(coordinator)) {
@@ -266,7 +270,7 @@ describe("SQLite ownership and durable coordinator", () => {
     const { release, manifest } = await fixtures();
     const first = await Coordinator.create(firstRepo, release, manifest);
     const second = await Coordinator.open(open(path), release, manifest.id);
-    const old = command(second, { kind: "mulligan", keep: false });
+    const old = command(second);
     old.commandId = "other-writer";
     await accepted(first);
     expect(await second.submit(old.actor, old)).toMatchObject({
@@ -582,4 +586,107 @@ describe("persisted prepared execution registries", () => {
     expect(migrated.load(manifest.id)?.preparedArtifact).toBeNull();
     expect((await Coordinator.open(migrated, release, manifest.id)).current().revision).toBe(1);
   });
+});
+
+describe("durable chooser-owned pre-deal setup", () => {
+  for (const count of [2, 4] as const) {
+    for (const resolver of ["full-scan", "prepared-indexed"] as const) {
+      test(`${count} seats ${resolver}: initial choice survives reopen/import and selecting another seat deals only once`, async () => {
+        const path = location();
+        const repo = open(path);
+        const { release, manifest } = await fixtures(`starting-${count}-${resolver}`, count);
+        const artifact =
+          resolver === "full-scan"
+            ? undefined
+            : await createPreparedMatchArtifact(
+                release,
+                manifest.seats.map((seat) => seat.deck),
+              );
+        manifest.resolver = resolver;
+        if (artifact) manifest.preparedArtifactHash = artifact.hash;
+        const initial = await Coordinator.create(repo, release, manifest, artifact);
+        const undealt = initial.current();
+        const chooser = undealt.startingPlayerChooser;
+        const selected = undealt.players.find((seat) => seat.id !== chooser)?.id;
+        if (!selected) throw new Error("Missing alternative starting player");
+        expect(undealt).toMatchObject({
+          revision: 0,
+          startingPlayer: null,
+          activePlayer: null,
+          priorityPlayer: null,
+          objects: {},
+        });
+        for (const seat of undealt.players) {
+          expect([seat.hand.length, seat.library.length, seat.graveyard.length]).toEqual([0, 0, 0]);
+          const view = initial.view(seat.id);
+          expect(view.objects).toEqual([]);
+          expect(view.startingPlayerChooser).toBe(chooser);
+          expect(view.startingPlayer).toBeNull();
+          if (seat.id === chooser)
+            expect(view.decision).toMatchObject({
+              kind: "starting-player",
+              actor: chooser,
+              players: undealt.players.map((entry) => entry.id),
+            });
+          else expect(view.decision).toBeNull();
+        }
+        const choose = command(initial, { kind: "starting-player", player: selected });
+        expect(await initial.submit(selected, { ...choose, actor: selected })).toMatchObject({
+          status: "rejected",
+          code: "WrongDecisionOwner",
+        });
+        expect(await initial.submit(chooser, { ...choose, revision: 1 })).toMatchObject({
+          status: "rejected",
+          code: "StaleRevision",
+        });
+        expect(
+          await initial.submit(chooser, {
+            ...choose,
+            response: { kind: "starting-player", player: "unknown" },
+          }),
+        ).toMatchObject({ status: "rejected" });
+        expect(initial.current()).toEqual(undealt);
+        const saved = await exportMatch(repo, release, manifest.id);
+        await initial.close();
+        const reopenedRepo = open(path);
+        const restored = await Coordinator.open(reopenedRepo, release, manifest.id);
+        expect(restored.current()).toEqual(undealt);
+        const importedRepo = open();
+        expect(await importMatch(importedRepo, release, saved)).toEqual(undealt);
+        const imported = await Coordinator.open(importedRepo, release, manifest.id);
+        const receipt = await accepted(restored, choose);
+        expect(await imported.submit(chooser, choose)).toEqual({ status: "accepted", receipt });
+        const dealt = restored.current();
+        expect(dealt).toMatchObject({
+          revision: 1,
+          startingPlayer: selected,
+          activePlayer: selected,
+          priorityPlayer: null,
+        });
+        expect(dealt.decision).toMatchObject({ kind: "mulligan", actor: selected });
+        expect(Object.keys(dealt.objects)).toHaveLength(count * 100);
+        for (const seat of dealt.players)
+          expect([seat.hand.length, seat.library.length]).toEqual([7, 92]);
+        expect(dealt.events.filter((event) => event.type === "StartingPlayerChosen")).toHaveLength(
+          1,
+        );
+        const chanceAfterDeal = dealt.chanceState;
+        await restored.close();
+        const secondRepo = open(path);
+        const second = await Coordinator.open(secondRepo, release, manifest.id);
+        expect(await second.submit(chooser, choose)).toEqual({ status: "accepted", receipt });
+        expect(second.current().chanceState).toBe(chanceAfterDeal);
+        expect(second.current()).toEqual(dealt);
+        while (second.current().decision?.kind === "mulligan") {
+          const input = command(second);
+          expect(await second.submit(input.actor, input)).toEqual(
+            await imported.submit(input.actor, input),
+          );
+        }
+        expect(second.current().decision).toMatchObject({ kind: "priority", actor: selected });
+        expect(second.current()).toEqual(imported.current());
+        expect(await replayMatch(secondRepo, release, manifest.id)).toEqual(second.current());
+      });
+    }
+  }
 });

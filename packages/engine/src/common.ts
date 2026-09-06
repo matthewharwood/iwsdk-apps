@@ -29,6 +29,11 @@ export function player(state: RulesState, id: string): PlayerState {
   if (!found) throw new RulesError("Invariant", `Unknown player ${id}`);
   return found;
 }
+/** Setup has no active player until the chooser selects the starting seat. */
+export function requireActivePlayer(state: RulesState): string {
+  requireRule(state.activePlayer !== null, "The starting player has not been chosen.");
+  return state.activePlayer;
+}
 export function object(state: RulesState, id: string): GameObject {
   const found = state.objects[id];
   if (!found) throw new RulesError("IllegalCommand", "The referenced object no longer exists.");

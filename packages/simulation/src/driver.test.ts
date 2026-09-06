@@ -9,6 +9,8 @@ function damageObservation(): PlayerObservation {
     revision: 4,
     turn: 3,
     step: "combat-damage",
+    startingPlayerChooser: "A",
+    startingPlayer: "A",
     activePlayer: "A",
     outcome: { kind: "ongoing" },
     players: [],
@@ -47,6 +49,24 @@ function damageObservation(): PlayerObservation {
   };
 }
 describe("observation-only driver", () => {
+  test("starting-player proposal chooses the owned seat through an explicit ordinary response", async () => {
+    const observation = damageObservation();
+    observation.revision = 0;
+    observation.turn = 0;
+    observation.step = "setup";
+    observation.activePlayer = null;
+    observation.startingPlayer = null;
+    if (!observation.decision) throw new Error("Missing fixture decision");
+    observation.decision.kind = "starting-player";
+    observation.decision.players = ["A", "B"];
+    observation.decision.damageDomain = [];
+    expect(await heuristicDriver(observation, 123)).toEqual({
+      kind: "starting-player",
+      player: "A",
+    });
+    observation.decision.players = ["B"];
+    expect(() => heuristicDriver(observation, 123)).toThrow("omits the chooser");
+  });
   test("script lookup is revision-bound and deterministic after retries or reconstruction", () => {
     const observation = damageObservation();
     const response: Response = { kind: "damage", allocations: [] };

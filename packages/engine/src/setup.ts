@@ -19,6 +19,7 @@ import {
   RulesError,
   randomBelow,
   request,
+  requireActivePlayer,
   requireRule,
   shuffleLibrary,
 } from "./common";
@@ -96,8 +97,10 @@ export function createMatch(input: unknown, release: ExecutionRegistry): RulesSt
     eventSequence: 0,
     setupChoices: {},
     turn: 0,
-    activePlayer: first.id,
-    priorityPlayer: first.id,
+    startingPlayerChooser: first.id,
+    startingPlayer: null,
+    activePlayer: null,
+    priorityPlayer: null,
     step: "setup",
     consecutivePasses: 0,
     cleanupPriority: false,
@@ -130,9 +133,34 @@ export function createMatch(input: unknown, release: ExecutionRegistry): RulesSt
     outcome: { kind: "ongoing" },
     coverage: {},
   };
-  state.activePlayer = manifest.seats[randomBelow(state, manifest.seats.length)]?.id ?? first.id;
-  state.priorityPlayer = state.activePlayer;
-  for (const seat of manifest.seats) {
+  state.startingPlayerChooser =
+    manifest.seats[randomBelow(state, manifest.seats.length)]?.id ?? first.id;
+  emit(state, "StartingPlayerChooserDetermined", { player: state.startingPlayerChooser });
+  request(state, "starting-player", state.startingPlayerChooser, {
+    players: state.players.map((seat) => seat.id),
+    count: 1,
+    context: "Choose the player who will take the first turn, before any hands are dealt.",
+  });
+  return state;
+}
+
+export function chooseStartingPlayer(state: RulesState, actor: string, response: Response): void {
+  requireRule(response.kind === "starting-player", "Expected a starting-player selection");
+  requireRule(
+    state.startingPlayer === null &&
+      state.startingPlayerChooser === actor &&
+      state.step === "setup",
+    "Only the setup chooser may select the starting player.",
+  );
+  requireRule(
+    state.players.some((seat) => seat.id === response.player && !seat.lost),
+    "Choose a seat in this match.",
+  );
+  state.startingPlayer = response.player;
+  state.activePlayer = response.player;
+  emit(state, "StartingPlayerChosen", { chooser: actor, startingPlayer: response.player });
+  hit(state, "rule:103.1");
+  for (const seat of state.manifest.seats) {
     let ordinal = 0;
     for (const entry of seat.deck.entries)
       for (let copy = 0; copy < entry.count; copy++) {
@@ -156,24 +184,27 @@ export function createMatch(input: unknown, release: ExecutionRegistry): RulesSt
           commanderMoveOffered: false,
         };
         if (!commander) player(state, seat.id).library.push(id);
+        else emit(state, "CommanderPlaced", { player: seat.id, object: id });
       }
-    shuffleLibrary(state, seat.id);
-    draw(state, seat.id, 7);
   }
+  for (const seat of state.manifest.seats) shuffleLibrary(state, seat.id);
+  for (const seat of state.manifest.seats) draw(state, seat.id, 7);
+  hit(state, "rule:103.2c");
+  hit(state, "rule:103.3");
+  hit(state, "rule:903.6");
   emit(state, "MatchStarted", {
-    mode: manifest.mode,
+    mode: state.manifest.mode,
     startingPlayer: state.activePlayer,
     life: 40,
   });
   hit(state, "rule:903.7");
-  request(state, "mulligan", state.activePlayer, {
+  request(state, "mulligan", requireActivePlayer(state), {
     context: "Keep seven or take a London mulligan.",
   });
-  return state;
 }
 
 function orderedSeats(state: RulesState): string[] {
-  const start = state.players.findIndex((seat) => seat.id === state.activePlayer);
+  const start = state.players.findIndex((seat) => seat.id === requireActivePlayer(state));
   return [...state.players.slice(start), ...state.players.slice(0, start)].map((seat) => seat.id);
 }
 export function bottomCount(state: RulesState, actor: string): number {

@@ -118,9 +118,26 @@ async function fixture() {
   return { coordinator, release, manifest, path, directory, reopen };
 }
 
+async function selectFixtureStartingPlayer(f: Awaited<ReturnType<typeof fixture>>) {
+  const state = f.coordinator.current();
+  const pending = state.decision;
+  if (pending?.kind !== "starting-player") throw new Error("Missing initial setup choice");
+  const selected = await f.coordinator.submit(pending.actor, {
+    schema: CONTRACT_VERSION,
+    matchId: state.manifest.id,
+    commandId: "terminal-fixture-start",
+    actor: pending.actor,
+    revision: state.revision,
+    decisionId: pending.id,
+    response: { kind: "starting-player", player: pending.actor },
+  });
+  if (selected.status !== "accepted") throw new Error(JSON.stringify(selected));
+}
+
 describe("human terminal over the durable player command boundary", () => {
   test("malformed and illegal inputs reprompt unchanged; Enter commits once and quit preserves the next decision", async () => {
     const f = await fixture();
+    await selectFixtureStartingPlayer(f);
     const original = f.coordinator.current();
     const actor = f.coordinator.pendingActor;
     if (!actor) throw new Error("Missing fixture actor");
@@ -156,7 +173,7 @@ describe("human terminal over the durable player command boundary", () => {
     expect(output.some((line) => line.startsWith("Input rejected."))).toBe(true);
     expect(output.some((line) => line.startsWith("Command rejected:"))).toBe(true);
     const saved = f.coordinator.current();
-    expect(saved.revision).toBe(1);
+    expect(saved.revision).toBe(original.revision + 1);
     expect((await f.reopen()).current()).toEqual(saved);
     expect(
       await f.coordinator.submit(actor, {
@@ -173,6 +190,7 @@ describe("human terminal over the durable player command boundary", () => {
 
   test("a JSON override commits its own response and EOF preserves that pending mulligan round", async () => {
     const f = await fixture();
+    await selectFixtureStartingPlayer(f);
     let reads = 0;
     expect(
       await runTerminal(f.coordinator, 11, {
@@ -181,7 +199,7 @@ describe("human terminal over the durable player command boundary", () => {
       }),
     ).toEqual({ status: "paused", acceptedCommands: 1 });
     const saved = (await f.reopen()).current();
-    expect(saved.revision).toBe(1);
+    expect(saved.revision).toBe(2);
     expect(saved.setupChoices).toEqual({ A: false });
     expect(saved.decision).toMatchObject({ actor: "B", kind: "mulligan" });
   });

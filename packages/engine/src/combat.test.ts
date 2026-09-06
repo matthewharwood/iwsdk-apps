@@ -75,6 +75,8 @@ function fixture(seats: 2 | 4 = 2) {
     revision: 0,
     epoch: 0,
     turn: 5,
+    startingPlayerChooser: "A",
+    startingPlayer: "A",
     activePlayer: "A",
     priorityPlayer: "A",
     eventSequence: 0,

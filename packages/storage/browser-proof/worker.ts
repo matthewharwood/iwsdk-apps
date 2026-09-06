@@ -16,7 +16,7 @@ import {
   replayMatch,
   StorageError,
 } from "../src/index";
-import { executionEvidence, spellEvidence } from "./spell-evidence";
+import { executionEvidence, setupEvidence, spellEvidence } from "./spell-evidence";
 
 const Request = z.discriminatedUnion("operation", [
   z.strictObject({
@@ -29,12 +29,13 @@ const Request = z.discriminatedUnion("operation", [
   z.strictObject({ operation: z.literal("import"), namespace: z.string(), text: z.string() }),
   z.strictObject({
     operation: z.literal("run"),
-    stopAt: z.enum(["payment", "target"]).nullable(),
+    stopAt: z.enum(["starting-player", "payment", "target"]).nullable(),
     maxCommands: z.number().int().positive().max(20_000),
   }),
   z.strictObject({ operation: z.literal("snapshot") }),
   z.strictObject({ operation: z.literal("export") }),
   z.strictObject({ operation: z.literal("retryLast") }),
+  z.strictObject({ operation: z.literal("retryStartingChoice") }),
   z.strictObject({ operation: z.literal("close") }),
 ]);
 let repo: Repository | null = null;
@@ -69,6 +70,7 @@ async function snapshot() {
     outcome: state.outcome,
     spells: spellEvidence(archive, session.release),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
+    setup: setupEvidence(session.coordinator, archive),
     storage: {
       secureContext: globalThis.isSecureContext,
       opfs: !!navigator.storage?.getDirectory,
@@ -117,10 +119,14 @@ async function handle(input: unknown): Promise<unknown> {
       const session = requireOpen();
       return exportMatch(session.repo, session.release, session.coordinator.current().manifest.id);
     }
-    case "retryLast": {
+    case "retryLast":
+    case "retryStartingChoice": {
       const session = requireOpen();
       const archive = session.repo.load(session.coordinator.current().manifest.id);
-      const record = archive?.records.at(-1);
+      const record =
+        request.operation === "retryLast"
+          ? archive?.records.at(-1)
+          : archive?.records.find((entry) => entry.command.response.kind === "starting-player");
       if (!record) throw new Error("No durable command to retry");
       return {
         expected: record.receipt,

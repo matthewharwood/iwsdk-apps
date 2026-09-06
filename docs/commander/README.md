@@ -25,7 +25,7 @@ bun run commander coverage --fail-on-unresolved
 
 `sources fetch` prints the exact manifest path. Compilation binds reviewed syntax recipes to immutable Oracle versions. Unsupported text stays unsupported; the executable never interprets English at runtime. Coverage and verification intentionally return failure while release obligations remain open. `--data <directory>` chooses a separate local data store; do not point it at the token example's saves.
 
-`simulate` starts with legal 100-card fixtures, seeded shuffling, ordinary opening hands and mulligans. The observation-only driver issues the same validated commands as other clients. It plays lands, pays for spells, passes priority, declares attacks and blocks, and assigns combat damage. Outcomes come from the engine. Budget exhaustion and driver/engine failures are retained as separate dispositions.
+`simulate` starts with legal 100-card fixtures and a seeded choice of which player selects the starting player. That player's command precedes commander placement, shuffling, opening hands and mulligans. The observation-only driver issues the same validated commands as other clients. It plays lands, pays for spells, passes priority, declares attacks and blocks, and assigns combat damage. Outcomes come from the engine. Budget exhaustion and driver/engine failures are retained as separate dispositions.
 
 `play` runs a local hot-seat terminal using the same coordinator and each acting player's entitled observation. Enter accepts the displayed heuristic proposal, a JSON `Response` supplies your own choice, and `quit` or end-of-input saves the pending decision. Resume with `play`; the saved manifest pins the terminal driver separately from autonomous simulations. `simulate --script <path>` instead accepts a versioned `commander-driver-script/1` document containing a `startingRevision` and ordered `{ actor, kind, response }` steps. Reusing the exact script is required when resuming it.
 
@@ -35,12 +35,20 @@ The catalog lives in `.commander/catalog.sqlite`; ordinary matches use `.command
 
 ```sh
 bun run commander batch --id discovery-example --two 16 --four 48 --seed 10000
+bun run commander regress --id regression-example
+bun run commander compare --mode two-seat --seed 4001 --deck-offset 15 --deck-stride 1
 bun run --cwd packages/storage test:browser-parity
 bun run check:fast
 ```
+
+`regress` uses the checked-in [fixed corpus](regression-corpus-v1.json): 16 two-seat and 48 four-seat inputs, with 14 decks and 424 exact card source pins. Its historical terminating baselines were authenticated independently; a new run must complete and replay each assignment again. It admits a fresh prepared registry against the current release, preserves every input seed and seat/deck tuple, and retains assignments, artifacts, databases, dispositions and replay hashes under `.commander/regressions/<id>`. A budget failure remains a failure. No old outcome is reused as a new result. `--corpus <path>` selects another validated corpus; `--release <path>` selects an explicit matching release. Source or rules drift fails admission rather than silently changing a regression input.
+
+`compare` executes all three resolver modes independently and compares semantic boundaries and driver choices. The current comparator also checks each acting player's observation explicitly; historical reports describe which checks their preserved executor performed. Full-scan uses the complete compiled development registry, while prepared modes admit the authenticated dependency subset for the selected decks. `batch` is exploratory and accepts explicit `--release` and `--decks` paths. `cohort --plan <path>` accounts each predeclared exploratory assignment exactly once and returns failure while any remain pending, invalid, or failed; a replay never counts as an additional game.
+
+To extend an existing pinned source bundle with the reviewed primary evidence for tabletop versus online-only eligibility, run `bun run commander sources supplement-tabletop --manifest <existing-manifest>`, then import the returned manifest into the intended catalog. This creates a new source bundle identity while retaining the old archives. Historical releases and saves keep their old bundle pins; see the [eligibility evidence](source-tabletop-eligibility.md).
 
 The browser parity harness loads the same pure engine in a real browser worker with SQLite WASM `opfs-sahpool`. It compares native/browser state hashes at every command boundary, reloads during payment, tests durable retry and lock contention, imports a logical save, and finishes both seat modes. This is distinct from physical headset qualification.
 
 The studio's card design now lives in `packages/card-design`: shared schemas, typography, mana symbols, annotations, multi-face composition, hidden cards and scoped CSS. `apps/web/app` consumes it at `/cards`; the original studio remains a reference. Display fixtures and semantic engine support have separate provenance and coverage.
 
-See [baseline](baseline.md), [reuse assessment](reuse-assessment.md), [independent scenario expectations](scenario-expectations.md), [card design audit](card-design-audit.md), and the reconstructed [goal contract](goal-contract.json). The [engine 0.5 checkpoint](development-0.5-evidence.json) includes 697 bindings, real registry pruning, terminating games, and [browser persistence parity](prepared-browser-proof-0.5.md). These milestones do not satisfy the unresolved full-universe obligations.
+See [baseline](baseline.md), [reuse assessment](reuse-assessment.md), [independent scenario expectations](scenario-expectations.md), [card design audit](card-design-audit.md), and the reconstructed [goal contract](goal-contract.json). The [engine 0.6 checkpoint](development-0.6-evidence.json) includes 697 bindings, real registry pruning, terminating games, and [browser persistence parity including setup choices](setup-browser-proof-0.6.md). These milestones do not satisfy the unresolved full-universe obligations.

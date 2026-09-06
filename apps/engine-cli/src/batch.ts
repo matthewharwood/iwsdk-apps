@@ -5,7 +5,8 @@ import {
   ContentRelease,
   DeckRevision,
   ENGINE_VERSION,
-  type MatchManifest,
+  MatchManifest,
+  type PreparedMatchArtifact,
   SERIALIZER_VERSION,
   semanticHash,
 } from "@iwsdk-apps/contracts";
@@ -19,14 +20,14 @@ import { archiveBuild, writeEvidence } from "./evidence";
 export async function runBatch(
   directory: string,
   options: { id: string; two: number; four: number; seed: number; maxCommands: number },
+  contentPath = resolve(directory, "development-release.json"),
+  decksPath = resolve(directory, "development-decks.json"),
 ): Promise<void> {
-  const content = ContentRelease.parse(
-    await Bun.file(resolve(directory, "development-release.json")).json(),
-  );
+  const content = ContentRelease.parse(await Bun.file(contentPath).json());
   const decks = z
     .array(DeckRevision)
     .min(12)
-    .parse(await Bun.file(resolve(directory, "development-decks.json")).json());
+    .parse(await Bun.file(decksPath).json());
   const root = resolve(directory, "batches", options.id);
   await mkdir(root, { recursive: false });
   const buildHash = await archiveBuild(directory);
@@ -34,7 +35,7 @@ export async function runBatch(
   for (let index = 0; index < options.two + options.four; index++) {
     const two = index < options.two;
     const deckOffset = index % decks.length;
-    const manifest: MatchManifest = {
+    const manifest = MatchManifest.parse({
       schema: "commander-match/1",
       id: `${options.id}:${index}`,
       releaseHash: content.hash,
@@ -51,7 +52,7 @@ export async function runBatch(
         if (!deck) throw new Error("Missing declared deck");
         return { id: `seat-${seat + 1}`, deck };
       }),
-    };
+    });
     assignments.push(manifest);
   }
   await writeEvidence(resolve(root, "assignments.json"), {
@@ -63,16 +64,32 @@ export async function runBatch(
     assignments,
   });
   await writeEvidence(resolve(root, "release.json"), content);
+  await executeAssignedGames(root, buildHash, content, assignments, options.maxCommands);
+}
+
+/** Execute already-retained assignments; a replay verifies a game rather than counting as another. */
+export async function executeAssignedGames(
+  root: string,
+  buildHash: string,
+  content: ContentRelease,
+  assignments: MatchManifest[],
+  maxCommands: number,
+  artifacts: Readonly<Record<string, PreparedMatchArtifact>> = {},
+): Promise<void> {
   const dispositions: unknown[] = [];
   let completed = 0;
   for (const [index, manifest] of assignments.entries()) {
-    const repo = openNativeRepository(resolve(root, `${index}.sqlite`));
+    let repo: ReturnType<typeof openNativeRepository> | undefined;
     let coordinator: Coordinator | undefined;
     try {
-      coordinator = await Coordinator.create(repo, content, manifest);
+      repo = openNativeRepository(resolve(root, `${index}.sqlite`));
+      const artifact = manifest.preparedArtifactHash
+        ? artifacts[manifest.preparedArtifactHash]
+        : undefined;
+      coordinator = await Coordinator.create(repo, content, manifest, artifact);
       const result = await runGame(coordinator, {
         seed: manifest.driverSeed,
-        maxCommands: options.maxCommands,
+        maxCommands,
       });
       const replay = await replayMatch(repo, content, manifest.id);
       const replayHash = await semanticHash(replay);
@@ -103,7 +120,7 @@ export async function runBatch(
       console.error(`${index + 1}/${assignments.length}: ${disposition.message}`);
     } finally {
       if (coordinator) await coordinator.close();
-      else repo.close();
+      else repo?.close();
     }
     await writeEvidence(resolve(root, "progress.json"), {
       assigned: assignments.length,

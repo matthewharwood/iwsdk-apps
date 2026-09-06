@@ -8,7 +8,7 @@ import {
   type Response,
 } from "@iwsdk-apps/contracts";
 
-export const DRIVER_VERSION = "observed-combat/3";
+export const DRIVER_VERSION = "observed-combat/4";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -151,6 +151,10 @@ export const heuristicDriver: Driver = (observation, seed) => {
   if (!decision || decision.actor !== observation.player)
     throw new Error("Driver has no owned decision");
   switch (decision.kind) {
+    case "starting-player":
+      if (!decision.players.includes(observation.player))
+        throw new Error("Starting-player decision omits the chooser's own seat");
+      return { kind: "starting-player", player: observation.player };
     case "mulligan":
       return { kind: "mulligan", keep: true };
     case "bottom":

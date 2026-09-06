@@ -1,0 +1,1634 @@
+{
+  "schema": "etb-scenario-draft/1",
+  "sourceResearchHash": "d8153712246ada7e098413d5c2ce7919f97251f2cda6d75da72bb277fa628dd4",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "scenarioCount": 34,
+  "scenarios": [
+    {
+      "id": "ETB01",
+      "group": "capture",
+      "setup": "A resolves Elvish Visionary with cards in library.",
+      "expected": "Entry commits and one pending trigger is captured; hand does not increase until that separate ability resolves.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2",
+          "text_hash": "7ed2ab3c0c0f193ef1e7eb5bcf569ea1a5311fce60b089f491ea6c7d6cd49f0b",
+          "start_line": 2565,
+          "end_line": 2566,
+          "byte_start": 313112,
+          "byte_end": 313291
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2a",
+          "text_hash": "76033b576d42ee859efa405656fe68bddf05c45f049758913042d12abca9ff1f",
+          "start_line": 938,
+          "end_line": 939,
+          "byte_start": 94658,
+          "byte_end": 95089
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3",
+          "text_hash": "c5604cb8b1e99a7dd6c80a93ecbfc8c50189efb1c221d9dcdcba109c1116370c",
+          "start_line": 2586,
+          "end_line": 2587,
+          "byte_start": 316017,
+          "byte_end": 316487
+        }
+      ],
+      "fixtureKind": "source-bound integration",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB02",
+      "group": "capture",
+      "setup": "A creature spell is countered before it can enter.",
+      "expected": "No battlefield entry occurrence and no self-entry trigger are recorded.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2g",
+          "text_hash": "7eb344df7b9e3b23e28c01be3d05e77c85f09f00a9201a794602a827eb343f7a",
+          "start_line": 2581,
+          "end_line": 2583,
+          "byte_start": 315566,
+          "byte_end": 315810
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.6a",
+          "text_hash": "b9285ad0c7e314ba29b26d9e902d0a36de950cf50285a66da9d3c67e66850787",
+          "start_line": 2603,
+          "end_line": 2604,
+          "byte_start": 321053,
+          "byte_end": 321448
+        }
+      ],
+      "fixtureKind": "future counter operation fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB03",
+      "group": "capture",
+      "setup": "Two distinct instances of the same self-entry definition enter in one event.",
+      "expected": "Exactly two trigger instances, each bound to its own source generation; index deduplication cannot merge them.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2c",
+          "text_hash": "169c8f8b402efec0e46ca899cf2c95418f80699efe44d1bdc7174fe284ba928b",
+          "start_line": 2571,
+          "end_line": 2573,
+          "byte_start": 313634,
+          "byte_end": 314083
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.6a",
+          "text_hash": "b9285ad0c7e314ba29b26d9e902d0a36de950cf50285a66da9d3c67e66850787",
+          "start_line": 2603,
+          "end_line": 2604,
+          "byte_start": 321053,
+          "byte_end": 321448
+        }
+      ],
+      "fixtureKind": "synthetic simultaneous-entry event",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB04",
+      "group": "history",
+      "setup": "A self-entry trigger is on the stack; its creature is destroyed before resolution.",
+      "expected": "The trigger still resolves for its captured controller and has no dependency on a current source object lookup.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        }
+      ],
+      "fixtureKind": "source-bound integration with removal",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB05",
+      "group": "history",
+      "setup": "One resolving instruction puts the creature onto the battlefield and then removes it before any priority window.",
+      "expected": "The captured self-entry trigger survives in the waiting queue and is placed after the enclosing resolution finishes.",
+      "sourceCards": [
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2",
+          "text_hash": "7ed2ab3c0c0f193ef1e7eb5bcf569ea1a5311fce60b089f491ea6c7d6cd49f0b",
+          "start_line": 2565,
+          "end_line": 2566,
+          "byte_start": 313112,
+          "byte_end": 313291
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2a",
+          "text_hash": "76033b576d42ee859efa405656fe68bddf05c45f049758913042d12abca9ff1f",
+          "start_line": 938,
+          "end_line": 939,
+          "byte_start": 94658,
+          "byte_end": 95089
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3",
+          "text_hash": "c5604cb8b1e99a7dd6c80a93ecbfc8c50189efb1c221d9dcdcba109c1116370c",
+          "start_line": 2586,
+          "end_line": 2587,
+          "byte_start": 316017,
+          "byte_end": 316487
+        }
+      ],
+      "fixtureKind": "synthetic sequential event fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB06",
+      "group": "history",
+      "setup": "The same card leaves and reenters after its first entry trigger has been captured.",
+      "expected": "Two generations and two occurrences produce independent trigger IDs; both can resolve, without rebinding the old trigger to the new object.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "400.7",
+          "text_hash": "c0fc0a0a0dd24001defe3916c085e1df582b6ac8bc7019f6ba27a5693946fbdb",
+          "start_line": 1954,
+          "end_line": 1955,
+          "byte_start": 228304,
+          "byte_end": 228480
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2c",
+          "text_hash": "169c8f8b402efec0e46ca899cf2c95418f80699efe44d1bdc7174fe284ba928b",
+          "start_line": 2571,
+          "end_line": 2573,
+          "byte_start": 313634,
+          "byte_end": 314083
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        }
+      ],
+      "fixtureKind": "future blink operation fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB07",
+      "group": "controller",
+      "setup": "A controls a creature when it enters; B gains control of the source before its trigger resolves.",
+      "expected": "A retains control of the trigger and receives its life gain or draw.",
+      "sourceCards": [
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "109.5",
+          "text_hash": "3dc856c9f1cc75eefd4292df1d73be1d5fff0384d667c22c4b9279a555c06145",
+          "start_line": 610,
+          "end_line": 611,
+          "byte_start": 52326,
+          "byte_end": 52908
+        }
+      ],
+      "fixtureKind": "synthetic control-change fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB08",
+      "group": "controller",
+      "setup": "A owns a card that enters under B control.",
+      "expected": "B controls the self-entry trigger and is its self-effect recipient; ownership is not substituted.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "109.5",
+          "text_hash": "3dc856c9f1cc75eefd4292df1d73be1d5fff0384d667c22c4b9279a555c06145",
+          "start_line": 610,
+          "end_line": 611,
+          "byte_start": 52326,
+          "byte_end": 52908
+        }
+      ],
+      "fixtureKind": "synthetic entry-controller fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB09",
+      "group": "effective-view",
+      "setup": "A creature enters while an already-applying continuous effect removes its abilities.",
+      "expected": "Post-event effective ability lookup finds no entry trigger; printed Oracle text alone cannot create it.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.6b",
+          "text_hash": "c2f5178c01a7d149cac50b6c9b8e0b5deda06052f1a43f479054ee6b325b28cd",
+          "start_line": 2605,
+          "end_line": 2607,
+          "byte_start": 321448,
+          "byte_end": 322337
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.10",
+          "text_hash": "82df5d202a1c05c72e7b5c5be808df00d6149e83fbaa932a0d60824eb31ddec7",
+          "start_line": 2640,
+          "end_line": 2641,
+          "byte_start": 328840,
+          "byte_end": 329403
+        }
+      ],
+      "fixtureKind": "future continuous-effect fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB10",
+      "group": "checkpoint",
+      "setup": "A fixture creature with the same self-entry ability enters with effective toughness zero.",
+      "expected": "Entry captures the trigger; state-based death occurs before placement; the waiting ability can still be placed and resolved.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.6a",
+          "text_hash": "b9285ad0c7e314ba29b26d9e902d0a36de950cf50285a66da9d3c67e66850787",
+          "start_line": 2603,
+          "end_line": 2604,
+          "byte_start": 321053,
+          "byte_end": 321448
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.5",
+          "text_hash": "388983a2d56290c8a37678d9819c1d3db9a11b74f93558fbe472b6d071041dec",
+          "start_line": 960,
+          "end_line": 961,
+          "byte_start": 97252,
+          "byte_end": 97752
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        }
+      ],
+      "fixtureKind": "synthetic characteristics fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB11",
+      "group": "ordering",
+      "setup": "A controls simultaneous draw-one and gain-three entry triggers.",
+      "expected": "A chooses their exact bottom-to-top order; both permutations are legal and recorded, even if a resulting total could coincide.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        },
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "101.4",
+          "text_hash": "c00c4bbb2f7f77c17953afe99ae7c6646e5f077c84ec6cb7677807ef2b27ae90",
+          "start_line": 235,
+          "end_line": 237,
+          "byte_start": 9190,
+          "byte_end": 9941
+        }
+      ],
+      "fixtureKind": "synthetic simultaneous-entry event",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB12",
+      "group": "ordering",
+      "setup": "Active A and nonactive B each have one waiting ordinary entry trigger.",
+      "expected": "Place A then B; B is topmost and resolves first after all players pass.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        },
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "101.4",
+          "text_hash": "c00c4bbb2f7f77c17953afe99ae7c6646e5f077c84ec6cb7677807ef2b27ae90",
+          "start_line": 235,
+          "end_line": 237,
+          "byte_start": 9190,
+          "byte_end": 9941
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.4",
+          "text_hash": "d70b5063ae68019dd9d49cce3a3af10c98eda570ca096d6d7460d1d70a140e24",
+          "start_line": 958,
+          "end_line": 959,
+          "byte_start": 97029,
+          "byte_end": 97252
+        }
+      ],
+      "fixtureKind": "synthetic simultaneous-entry event",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB13",
+      "group": "ordering",
+      "setup": "Seats A,B,C,D remain; active player is C; all have one waiting ordinary trigger.",
+      "expected": "Placement is C,D,A,B and initial resolution order is B,A,D,C; do not start APNAP from seat-array index zero.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "101.4",
+          "text_hash": "c00c4bbb2f7f77c17953afe99ae7c6646e5f077c84ec6cb7677807ef2b27ae90",
+          "start_line": 235,
+          "end_line": 237,
+          "byte_start": 9190,
+          "byte_end": 9941
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.4",
+          "text_hash": "d70b5063ae68019dd9d49cce3a3af10c98eda570ca096d6d7460d1d70a140e24",
+          "start_line": 958,
+          "end_line": 959,
+          "byte_start": 97029,
+          "byte_end": 97252
+        }
+      ],
+      "fixtureKind": "synthetic four-seat event",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB14",
+      "group": "ordering",
+      "setup": "Several triggers arise at different points within one spell resolution without intervening priority.",
+      "expected": "All pending ordinary triggers participate in the next applicable APNAP placement process; global capture timestamp does not override controller choices.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        },
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2a",
+          "text_hash": "76033b576d42ee859efa405656fe68bddf05c45f049758913042d12abca9ff1f",
+          "start_line": 938,
+          "end_line": 939,
+          "byte_start": 94658,
+          "byte_end": 95089
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        }
+      ],
+      "fixtureKind": "synthetic enclosing-resolution fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB15",
+      "group": "ordering",
+      "setup": "A future trigger-on-trigger ability waits alongside ordinary triggers.",
+      "expected": "The current narrow release rejects the unavailable program; a future implementation must honor the separate second APNAP pass.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        }
+      ],
+      "fixtureKind": "negative admission and future meta-trigger fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB16",
+      "group": "capture",
+      "setup": "A creature remains on the battlefield across several priority/checkpoint calls.",
+      "expected": "Its self-entry trigger is not rediscovered from persistent state or by replaying the same event ID.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2",
+          "text_hash": "7ed2ab3c0c0f193ef1e7eb5bcf569ea1a5311fce60b089f491ea6c7d6cd49f0b",
+          "start_line": 2565,
+          "end_line": 2566,
+          "byte_start": 313112,
+          "byte_end": 313291
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2c",
+          "text_hash": "169c8f8b402efec0e46ca899cf2c95418f80699efe44d1bdc7174fe284ba928b",
+          "start_line": 2571,
+          "end_line": 2573,
+          "byte_start": 313634,
+          "byte_end": 314083
+        }
+      ],
+      "fixtureKind": "source-bound integration",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB17",
+      "group": "optionality",
+      "setup": "An optional self-entry draw fixture triggers and its controller intends to decline.",
+      "expected": "The ability is still placed on the stack; a resolution-time decision permits decline and draws zero cards. No early suppression or forced draw.",
+      "sourceCards": [
+        {
+          "identity": "6b9194dd-2296-4879-ac5e-f89b18431df6",
+          "name": "Soul of the Harvest",
+          "sourceVersion": "4958052e8aeeea26a43ae9ba20ae7e2dc3236b72a994b0b460b62d25aa1fac67",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 16163,
+          "faceOrdinal": 0,
+          "completeBodyHash": "423c9f51f1c7fb6be719f6c4b29b688ef3d03e9f97b653d09e86ad469cb18e3d",
+          "disposition": "outside-initial-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2e",
+          "text_hash": "6ef3554aed30e8095ab71f3ff18ee1114ceb6590ff8b8f4f2714255261b27656",
+          "start_line": 946,
+          "end_line": 947,
+          "byte_start": 95763,
+          "byte_end": 96051
+        }
+      ],
+      "fixtureKind": "synthetic optional-self fixture; referenced real card also has unsupported other-object condition",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB18",
+      "group": "optionality",
+      "setup": "The same optional fixture reaches resolution and its controller accepts.",
+      "expected": "The captured controller draws one; the accept/decline decision and chosen branch are durable.",
+      "sourceCards": [
+        {
+          "identity": "6b9194dd-2296-4879-ac5e-f89b18431df6",
+          "name": "Soul of the Harvest",
+          "sourceVersion": "4958052e8aeeea26a43ae9ba20ae7e2dc3236b72a994b0b460b62d25aa1fac67",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 16163,
+          "faceOrdinal": 0,
+          "completeBodyHash": "423c9f51f1c7fb6be719f6c4b29b688ef3d03e9f97b653d09e86ad469cb18e3d",
+          "disposition": "outside-initial-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "109.5",
+          "text_hash": "3dc856c9f1cc75eefd4292df1d73be1d5fff0384d667c22c4b9279a555c06145",
+          "start_line": 610,
+          "end_line": 611,
+          "byte_start": 52326,
+          "byte_end": 52908
+        }
+      ],
+      "fixtureKind": "synthetic optional-self fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB19",
+      "group": "optionality",
+      "setup": "A mandatory Arashin Cleric entry trigger resolves.",
+      "expected": "No fabricated decline decision exists; gain exactly three life for the captured controller.",
+      "sourceCards": [
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.1",
+          "text_hash": "a37d42273cec7d8814f3966b7f050a7ab8497a85b62f860579dfc92a2f4685e2",
+          "start_line": 2559,
+          "end_line": 2560,
+          "byte_start": 312334,
+          "byte_end": 312514
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "109.5",
+          "text_hash": "3dc856c9f1cc75eefd4292df1d73be1d5fff0384d667c22c4b9279a555c06145",
+          "start_line": 610,
+          "end_line": 611,
+          "byte_start": 52326,
+          "byte_end": 52908
+        }
+      ],
+      "fixtureKind": "source-bound integration",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB20",
+      "group": "resolution",
+      "setup": "The source and every other creature are gone before a targetless entry ability resolves.",
+      "expected": "It still resolves; a targetless ability is not rejected for lacking creature targets.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3",
+          "text_hash": "c5604cb8b1e99a7dd6c80a93ecbfc8c50189efb1c221d9dcdcba109c1116370c",
+          "start_line": 2586,
+          "end_line": 2587,
+          "byte_start": 316017,
+          "byte_end": 316487
+        }
+      ],
+      "fixtureKind": "source-bound integration with removal",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB21",
+      "group": "departure",
+      "setup": "A controller leaves after capture but before placement.",
+      "expected": "Its waiting trigger is not placed on the stack.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "800.4d",
+          "text_hash": "597c6e4207ae4f48e1e8d39d1f4d0186f63d1896787b8b19eebaada1d2e80b04",
+          "start_line": 6436,
+          "end_line": 6438,
+          "byte_start": 775834,
+          "byte_end": 776728
+        }
+      ],
+      "fixtureKind": "synthetic multiplayer departure fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB22",
+      "group": "departure",
+      "setup": "A controller leaves while its entry trigger is already on the stack.",
+      "expected": "That noncard stack object ceases to exist; it does not become a card in a graveyard and cannot later resolve.",
+      "sourceCards": [
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "800.4a",
+          "text_hash": "61b30c2459f46a832f0f764a8461fbdd80bd41660070ea8fb2786b200112e7c9",
+          "start_line": 6426,
+          "end_line": 6431,
+          "byte_start": 772969,
+          "byte_end": 775033
+        }
+      ],
+      "fixtureKind": "synthetic multiplayer departure fixture",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB23",
+      "group": "resolution",
+      "setup": "An entry draw-one trigger resolves for a player with an empty library.",
+      "expected": "Record the failed draw, finish ability resolution and remove it, then apply the loss checkpoint before granting priority.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.4",
+          "text_hash": "462fdd51b25f0e092b5604ba5da36cf9e08dff90f477c55c67c6f084068f6a38",
+          "start_line": 1158,
+          "end_line": 1159,
+          "byte_start": 124414,
+          "byte_end": 124604
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.5b",
+          "text_hash": "41c136ad4ae8881b71b8471fa6b7cf67f60823eb82b60c2fdd97dcbc98e9c66f",
+          "start_line": 5510,
+          "end_line": 5511,
+          "byte_start": 649689,
+          "byte_end": 649853
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.5",
+          "text_hash": "388983a2d56290c8a37678d9819c1d3db9a11b74f93558fbe472b6d071041dec",
+          "start_line": 960,
+          "end_line": 961,
+          "byte_start": 97252,
+          "byte_end": 97752
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.4",
+          "text_hash": "74a59f2aa685d6b37f6e7b063c5a80f4ba141a247ad4dbf26827195bebe6ab19",
+          "start_line": 5503,
+          "end_line": 5505,
+          "byte_start": 648818,
+          "byte_end": 649569
+        }
+      ],
+      "fixtureKind": "source-bound integration plus existing draw-loss rules",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB24",
+      "group": "priority",
+      "setup": "The top entry trigger resolves while another remains underneath.",
+      "expected": "Remove only the resolved ability, process the checkpoint and give the active player priority; do not drain the whole stack automatically.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        },
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.3b",
+          "text_hash": "5d6f44de340bb16cac53b247ffb30add0e6764e244377ddf2ab06a9f9e0cbc90",
+          "start_line": 952,
+          "end_line": 953,
+          "byte_start": 96548,
+          "byte_end": 96657
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.4",
+          "text_hash": "d70b5063ae68019dd9d49cce3a3af10c98eda570ca096d6d7460d1d70a140e24",
+          "start_line": 958,
+          "end_line": 959,
+          "byte_start": 97029,
+          "byte_end": 97252
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "source-bound integration",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB25",
+      "group": "persistence",
+      "setup": "Save after trigger capture and before placement, then reopen twice.",
+      "expected": "Waiting IDs, captured controller, source generation, program digest and occurrence IDs are identical; exactly one placement occurs.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2",
+          "text_hash": "7ed2ab3c0c0f193ef1e7eb5bcf569ea1a5311fce60b089f491ea6c7d6cd49f0b",
+          "start_line": 2565,
+          "end_line": 2566,
+          "byte_start": 313112,
+          "byte_end": 313291
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3",
+          "text_hash": "c5604cb8b1e99a7dd6c80a93ecbfc8c50189efb1c221d9dcdcba109c1116370c",
+          "start_line": 2586,
+          "end_line": 2587,
+          "byte_start": 316017,
+          "byte_end": 316487
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        }
+      ],
+      "fixtureKind": "durability requirement; no new game-rule claim",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB26",
+      "group": "persistence",
+      "setup": "Save while a controller must order two triggers.",
+      "expected": "Restore the identical choice domain, decision ID and cohort; reject duplicates, omissions, foreign IDs, newly submitted stale or unrelated commands, and attempts by another player. Exact retries of an accepted command ID return its stored receipt without repeating placement.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        },
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "101.4",
+          "text_hash": "c00c4bbb2f7f77c17953afe99ae7c6646e5f077c84ec6cb7677807ef2b27ae90",
+          "start_line": 235,
+          "end_line": 237,
+          "byte_start": 9190,
+          "byte_end": 9941
+        }
+      ],
+      "fixtureKind": "durability and command-validation requirement",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB27",
+      "group": "persistence",
+      "setup": "Save with an ability on the stack after its source left the battlefield.",
+      "expected": "Reopen and resolve using captured ability/controller context; current object lookup cannot erase or rebind it.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "400.7",
+          "text_hash": "c0fc0a0a0dd24001defe3916c085e1df582b6ac8bc7019f6ba27a5693946fbdb",
+          "start_line": 1954,
+          "end_line": 1955,
+          "byte_start": 228304,
+          "byte_end": 228480
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        }
+      ],
+      "fixtureKind": "durability requirement",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB28",
+      "group": "persistence",
+      "setup": "Export/import while an optional resolution decision is pending.",
+      "expected": "Preserve the optional continuation and effect cursor; neither autoaccept nor repeat already completed effects.",
+      "sourceCards": [
+        {
+          "identity": "6b9194dd-2296-4879-ac5e-f89b18431df6",
+          "name": "Soul of the Harvest",
+          "sourceVersion": "4958052e8aeeea26a43ae9ba20ae7e2dc3236b72a994b0b460b62d25aa1fac67",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 16163,
+          "faceOrdinal": 0,
+          "completeBodyHash": "423c9f51f1c7fb6be719f6c4b29b688ef3d03e9f97b653d09e86ad469cb18e3d",
+          "disposition": "outside-initial-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2e",
+          "text_hash": "6ef3554aed30e8095ab71f3ff18ee1114ceb6590ff8b8f4f2714255261b27656",
+          "start_line": 946,
+          "end_line": 947,
+          "byte_start": 95763,
+          "byte_end": 96051
+        }
+      ],
+      "fixtureKind": "future optional fixture and durability requirement",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB29",
+      "group": "admission",
+      "setup": "Source body contains draw-two plus evoke, combined gain/draw, or hybrid costs.",
+      "expected": "Keep each definition unsupported until every additional behavior and cost is explicitly implemented.",
+      "sourceCards": [
+        {
+          "identity": "24d0f5e7-0d9e-4b76-900e-a7274e80312d",
+          "name": "Mulldrifter",
+          "sourceVersion": "02c70f0189f3e28a6d7067994178f47fcb4a718917fcf8fd6dd868d1136cd783",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 5534,
+          "faceOrdinal": 0,
+          "completeBodyHash": "1a4287c1f096f3298eedade0142efdcc38e3e84e5d61d6a42bcf68cf61553b1a",
+          "disposition": "outside-initial-scope"
+        },
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "faceOrdinal": 0,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "outside-initial-scope"
+        },
+        {
+          "identity": "4503d0fb-842d-49f1-9769-8509ff0f2ce1",
+          "name": "Wistful Selkie",
+          "sourceVersion": "e26a2130dc3a2ac252e27c86b6a2e4124ae559830bc3a46e19685ac049629188",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 10353,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "outside-initial-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.1",
+          "text_hash": "a37d42273cec7d8814f3966b7f050a7ab8497a85b62f860579dfc92a2f4685e2",
+          "start_line": 2559,
+          "end_line": 2560,
+          "byte_start": 312334,
+          "byte_end": 312514
+        }
+      ],
+      "fixtureKind": "negative source-binding expectation",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB30",
+      "group": "admission",
+      "setup": "A body says another creature enters or contains an intervening-if, optional other-object trigger, or reminder-bearing unsupported clause.",
+      "expected": "Do not rewrite its condition or strip remaining text to fit a mandatory self-entry recipe.",
+      "sourceCards": [
+        {
+          "identity": "f3fad295-1af2-4ecc-8546-b121ad6be27b",
+          "name": "Soul Warden",
+          "sourceVersion": "64b2ad144dfbf7d22db5dfc53aa703939e23b1d8bc8348462c5834b5b0f3d832",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 36818,
+          "faceOrdinal": 0,
+          "completeBodyHash": "d3938d0dcd6ceea3318c5d87220a4842f86a1b30fc1aff0908e41caaeabf828d",
+          "disposition": "outside-initial-scope"
+        },
+        {
+          "identity": "6b9194dd-2296-4879-ac5e-f89b18431df6",
+          "name": "Soul of the Harvest",
+          "sourceVersion": "4958052e8aeeea26a43ae9ba20ae7e2dc3236b72a994b0b460b62d25aa1fac67",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 16163,
+          "faceOrdinal": 0,
+          "completeBodyHash": "423c9f51f1c7fb6be719f6c4b29b688ef3d03e9f97b653d09e86ad469cb18e3d",
+          "disposition": "outside-initial-scope"
+        },
+        {
+          "identity": "696fb1fa-5535-4f73-8235-ad4416dcfdd0",
+          "name": "Aven Battle Priest",
+          "sourceVersion": "34cb02f8ddcda2a2d56632b6b66da055db20f0b13cb85c0ed98fba87280a488d",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15838,
+          "faceOrdinal": 0,
+          "completeBodyHash": "812f638da6d95e0a3e4cb0ed966044e30189ad8399b0c52bdea72adf85166370",
+          "disposition": "outside-initial-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.6a",
+          "text_hash": "b9285ad0c7e314ba29b26d9e902d0a36de950cf50285a66da9d3c67e66850787",
+          "start_line": 2603,
+          "end_line": 2604,
+          "byte_start": 321053,
+          "byte_end": 321448
+        }
+      ],
+      "fixtureKind": "negative source-binding expectation",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB31",
+      "group": "prepared",
+      "setup": "A match plan reaches a new trigger definition while its trigger core capability is unavailable.",
+      "expected": "Reject prepared execution explicitly; do not prune trigger processors as unrelated to creature roots.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3",
+          "text_hash": "c5604cb8b1e99a7dd6c80a93ecbfc8c50189efb1c221d9dcdcba109c1116370c",
+          "start_line": 2586,
+          "end_line": 2587,
+          "byte_start": 316017,
+          "byte_end": 316487
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.5",
+          "text_hash": "388983a2d56290c8a37678d9819c1d3db9a11b74f93558fbe472b6d071041dec",
+          "start_line": 960,
+          "end_line": 961,
+          "byte_start": 97252,
+          "byte_end": 97752
+        }
+      ],
+      "fixtureKind": "prepared dependency requirement",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB32",
+      "group": "equivalence",
+      "setup": "Run the same source-bound event/choice transcript in full-scan, prepared-scan and prepared-indexed modes.",
+      "expected": "Compare captured instance IDs, cohorts, exact ordering choices, public observations, event transcript and final state; only explicit configuration pins may differ.",
+      "sourceCards": [
+        {
+          "identity": "c6a3a882-a127-4590-93d7-679ef4313efe",
+          "name": "Elvish Visionary",
+          "sourceVersion": "fe8078e85c7554fc675f850df9cb426a683761a0cc3b1fa874e77dec414975cb",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 29861,
+          "faceOrdinal": 0,
+          "completeBodyHash": "954aa7dc40bb1cfe288d1c50e2bed4168dc38f089005949ad05df397a1145308",
+          "disposition": "mandatory-research-candidate"
+        },
+        {
+          "identity": "69bcdb42-c170-4848-b95b-f4621867d084",
+          "name": "Arashin Cleric",
+          "sourceVersion": "01794fe77e2b66ced40bd8c067585fd5efcedaac93ad39f84559cce08d71ecf3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 15896,
+          "faceOrdinal": 0,
+          "completeBodyHash": "69c1363a134867cbac189bbd2af4adb0724d290d164488dc6de8723a7ff84b4b",
+          "disposition": "mandatory-research-candidate"
+        },
+        {
+          "identity": "37688720-03de-4eca-a82d-a0afe8d58adc",
+          "name": "Baleful Strix",
+          "sourceVersion": "6cd3b9b2c2331fc83db65f8bc7e2d715405015efc2e438b9da58d95acc0e70da",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 8262,
+          "faceOrdinal": 0,
+          "completeBodyHash": "0e48090e78c0cdb01a3f9f9f5cbdad8b61936ec2db058e3016d6cf6751a63873",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2c",
+          "text_hash": "169c8f8b402efec0e46ca899cf2c95418f80699efe44d1bdc7174fe284ba928b",
+          "start_line": 2571,
+          "end_line": 2573,
+          "byte_start": 313634,
+          "byte_end": 314083
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        }
+      ],
+      "fixtureKind": "future differential execution requirement",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB33",
+      "group": "mana",
+      "setup": "Llanowar Visionary enters and its draw trigger waits; later a legal mana-ability window occurs.",
+      "expected": "Its green tap-mana ability remains distinct from its stack-using entry trigger and obeys existing tap/summoning restrictions.",
+      "sourceCards": [
+        {
+          "identity": "f75ed312-3a23-4624-80c5-03980aa22d0b",
+          "name": "Llanowar Visionary",
+          "sourceVersion": "3477af0876060f2e8e7c42743757c4deeecf80ba4303436e53073820e85e3e31",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37337,
+          "faceOrdinal": 0,
+          "completeBodyHash": "6e79f26560f4df6a2e38c1d3e82fbad15595ba046c867e17995e7a710d3275e0",
+          "disposition": "mandatory-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "302.6",
+          "text_hash": "8c925aaf849ab3f8bb694a72be6e34648f7748a2000c7f816b3d94a3ec64b426",
+          "start_line": 1632,
+          "end_line": 1633,
+          "byte_start": 193632,
+          "byte_end": 194063
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "605.1a",
+          "text_hash": "8fc432a97f0c7767424a36798023a29e9fc796e3e8d7824d5c256e1c868dcf90",
+          "start_line": 2687,
+          "end_line": 2688,
+          "byte_start": 335890,
+          "byte_end": 336360
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "605.3a",
+          "text_hash": "0d0471c24a6f9349797fba77703d89012056f744bd75396ece9b9205fc85f424",
+          "start_line": 2696,
+          "end_line": 2697,
+          "byte_start": 337180,
+          "byte_end": 337510
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2a",
+          "text_hash": "76033b576d42ee859efa405656fe68bddf05c45f049758913042d12abca9ff1f",
+          "start_line": 938,
+          "end_line": 939,
+          "byte_start": 94658,
+          "byte_end": 95089
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3",
+          "text_hash": "c5604cb8b1e99a7dd6c80a93ecbfc8c50189efb1c221d9dcdcba109c1116370c",
+          "start_line": 2586,
+          "end_line": 2587,
+          "byte_start": 316017,
+          "byte_end": 316487
+        }
+      ],
+      "fixtureKind": "source-bound integration plus existing mana/creature rules",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "ETB34",
+      "group": "history",
+      "setup": "A future variable-source effect needs source information after the source leaves.",
+      "expected": "Use the rules-required last-known information; the initial constant-effect recipe must reject this broader body rather than freezing a guessed value.",
+      "sourceCards": [
+        {
+          "identity": "311e9368-696a-47e7-aa2f-3ef1b1a92e2b",
+          "name": "Prime Speaker Zegana",
+          "sourceVersion": "8d9856881ad83620bbf93b97a64c703281fd3fffd0573fd4c9e040a493655114",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 7326,
+          "faceOrdinal": 0,
+          "completeBodyHash": "6944e1a84f2328d65e1f1113739d907dfc399162eaee0baa3d2ab7306c5fdf3c",
+          "disposition": "outside-initial-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2h",
+          "text_hash": "b27c6d8f40313ba3a4cb2faec1358b58c7011c8ff0d66dd438f61c0764d75c0a",
+          "start_line": 2810,
+          "end_line": 2811,
+          "byte_start": 358996,
+          "byte_end": 359707
+        }
+      ],
+      "fixtureKind": "source-pinned variable-effect exclusion; not implemented",
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    }
+  ],
+  "executedTests": 0,
+  "executedGames": 0,
+  "fullSemanticCoverage": false,
+  "hash": "eed7f8602b7258de2b18906f3970e9b42a93e7fbbec3e80b11c774c424829e32"
+}

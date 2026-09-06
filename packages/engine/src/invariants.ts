@@ -4,8 +4,54 @@ import { assertRegistryPin, definition, RulesError } from "./common";
 function invariant(condition: unknown, message: string): asserts condition {
   if (!condition) throw new RulesError("Invariant", message);
 }
+function assertUndealtSetup(state: RulesState, seats: ReadonlySet<string>): void {
+  invariant(
+    state.revision === 0 && state.turn === 0 && state.step === "setup",
+    "Undealt state escaped initial setup",
+  );
+  invariant(
+    state.activePlayer === null && state.priorityPlayer === null,
+    "Undealt setup has an active or priority player",
+  );
+  invariant(
+    Object.keys(state.objects).length === 0 &&
+      state.stack.length === 0 &&
+      state.frames.length === 0,
+    "Cards or continuations exist before starting-player selection",
+  );
+  invariant(
+    state.players.every(
+      (seat) => seat.hand.length === 0 && seat.library.length === 0 && seat.graveyard.length === 0,
+    ),
+    "A zone was populated before starting-player selection",
+  );
+  invariant(
+    state.outcome.kind === "ongoing" &&
+      state.decision?.kind === "starting-player" &&
+      state.decision.actor === state.startingPlayerChooser &&
+      state.decision.revision === state.revision,
+    "Initial setup lacks its owned starting-player decision",
+  );
+  invariant(
+    state.decision.players.length === seats.size &&
+      new Set(state.decision.players).size === seats.size &&
+      state.decision.players.every((id) => seats.has(id)),
+    "Starting-player decision does not contain every seat exactly once",
+  );
+}
 export function assertInvariants(state: RulesState, release: ExecutionRegistry): void {
   assertRegistryPin(state.manifest, release);
+  const seats = new Set(state.players.map((seat) => seat.id));
+  invariant(seats.has(state.startingPlayerChooser), "Starting-player chooser is not a match seat");
+  if (state.startingPlayer === null) {
+    assertUndealtSetup(state, seats);
+    return;
+  }
+  invariant(
+    seats.has(state.startingPlayer) && state.activePlayer !== null && seats.has(state.activePlayer),
+    "Selected starting or active player is absent",
+  );
+  invariant(state.turn !== 0 || state.priorityPlayer === null, "Pregame setup exposes priority");
   const listed = new Set<string>();
   for (const seat of state.players) {
     for (const zone of ["library", "hand", "graveyard"] as const)
