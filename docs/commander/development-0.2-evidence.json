@@ -1,0 +1,36 @@
+{
+  "schema": "commander-milestone-evidence/1",
+  "status": "development-milestone",
+  "fullSnapshotSupported": false,
+  "engineVersion": "commander-engine/0.2.0",
+  "releaseHash": "dae785ff973957ea421b3d8fb0c480fb02d863caed9c136349c78ca36ea521b9",
+  "buildHash": "f574dfb39a3172adfc2f11d67d826bda8462882c0041854cf64698bd2ac6c21d",
+  "batch": {
+    "artifact": ".commander/batches/development-0.2-discovery64/report.json",
+    "assigned": 64,
+    "completed": 64,
+    "twoSeat": 16,
+    "fourSeat": 48,
+    "distinctDecks": 12,
+    "commands": 85407,
+    "spellCasts": 1857,
+    "combatDamageBatches": 1711,
+    "allReplayed": true,
+    "counting": "Discovery cohort; these passing assignments provide a future known-terminating regression corpus. Replays are not extra assignments."
+  },
+  "browserParity": {
+    "artifact": ".commander/browser-proof/2026-09-06T19-54-41-631Z-e262e98f/evidence.json",
+    "twoSeatBoundaries": 407,
+    "fourSeatBoundaries": 1646,
+    "reloadAtPayment": true,
+    "logicalImport": true,
+    "realSqliteWasmOpfs": true
+  },
+  "coverage": {
+    "compiledDefinitions": 642,
+    "paperCandidateDenominator": 31829,
+    "unsupportedPaperCandidates": 31187,
+    "unresolvedResearchObligations": 111254
+  },
+  "subsequentBuild": "0.3 adds spell programs and stable selector ordering. Its evidence must be recorded separately; this report does not certify later builds."
+}

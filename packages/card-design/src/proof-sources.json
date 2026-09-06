@@ -1,0 +1,105 @@
+{
+  "studio-proof-0": {
+    "sources": [
+      "https://scryfall.com/card/iko/216/winota-joiner-of-forces",
+      "https://magic.wizards.com/en/news/feature/final-fantasy-release-notes"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-1": {
+    "sources": [
+      "https://scryfall.com/card/msh/148/quicksilver-brash-blur",
+      "https://magic.wizards.com/en/news/feature/marvel-super-heroes-release-notes"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-2": {
+    "sources": ["https://scryfall.com/card/tmt/166/raph-&-leo-sibling-rivals"],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-3": {
+    "sources": ["https://scryfall.com/card/neo/26/lion-sash"],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-4": {
+    "sources": ["https://scryfall.com/card/one/254/mirrex"],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-5": {
+    "sources": ["https://scryfall.com/card/neo/40/touch-the-spirit-realm"],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-6": {
+    "sources": ["https://scryfall.com/card/mh3/212/vexing-bauble"],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-7": {
+    "sources": ["https://scryfall.com/card/neo/268/eiganjo-seat-of-the-empire"],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-8": {
+    "sources": ["https://scryfall.com/card/one/33/skrelv-defector-mite"],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-9": {
+    "sources": [
+      "https://mtg.wtf/card/hob/6a/Bofur-Reliable-Guardian",
+      "https://mtg.wtf/card/hob/6b/Concerted-Care",
+      "https://magic.wizards.com/en/news/feature/the-hobbit-release-notes"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-10": {
+    "sources": [
+      "https://scryfall.com/card/bot/6/slicer-hired-muscle-slicer-high-speed-antagonist",
+      "https://media.wizards.com/2022/downloads/BRO_Release_Notes/EN_MTGBRO_ReleaseNotes_20221014_2Bg2YEfIsE.pdf"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-11": {
+    "sources": [
+      "https://scryfall.com/card/mh3/239/witch-enchanter-witch-blessed-meadow",
+      "https://magic.wizards.com/en/news/feature/modern-horizons-3-release-notes"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-12": {
+    "sources": [
+      "https://scryfall.com/card/tsoc/28/thopter",
+      "https://scryfall.com/card/tdc/222/loyal-apprentice"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-13": {
+    "sources": [
+      "https://scryfall.com/card/tmsc/1/copy",
+      "https://scryfall.com/card/soc/258/twinflame",
+      "https://magic.wizards.com/en/news/feature/release-notes-2014-04-23",
+      "https://media.wizards.com/2025/downloads/FIN_Release_Notes_3O87RLY5EO/EN_FIN_Release_Notes_2025_1_15.pdf"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  },
+  "studio-proof-14": {
+    "sources": [
+      "https://scryfall.com/card/tltr/H13/the-ring-the-ring-tempts-you",
+      "https://magic.wizards.com/en/news/feature/the-lord-of-the-rings-tales-of-middle-earth-release-notes",
+      "https://magic.wizards.com/en/news/feature/the-lord-of-the-rings-tales-of-middle-earth-mechanics"
+    ],
+    "researchedOn": "2026-09-06",
+    "wording": "Mechanically faithful researched rules summaries, without flavor text."
+  }
+}

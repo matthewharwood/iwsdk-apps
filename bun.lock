@@ -17,11 +17,28 @@
         "typescript-eslint": "8.64.0",
       },
     },
+    "apps/engine-cli": {
+      "name": "@iwsdk-apps/engine-cli",
+      "version": "0.0.0",
+      "dependencies": {
+        "@iwsdk-apps/catalog": "workspace:*",
+        "@iwsdk-apps/compiler": "workspace:*",
+        "@iwsdk-apps/contracts": "workspace:*",
+        "@iwsdk-apps/engine": "workspace:*",
+        "@iwsdk-apps/simulation": "workspace:*",
+        "@iwsdk-apps/storage": "workspace:*",
+        "zod": "4.4.3",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
     "apps/web": {
       "name": "@iwsdk-apps/web",
       "version": "0.0.0",
       "dependencies": {
         "@iwsdk-apps/ai": "workspace:*",
+        "@iwsdk-apps/card-design": "workspace:*",
         "@iwsdk-apps/game-core": "workspace:*",
         "@iwsdk-apps/schemas": "workspace:*",
         "@iwsdk-apps/storage-sqlite": "workspace:*",
@@ -74,11 +91,96 @@
         "@iwsdk-apps/tsconfig": "workspace:*",
       },
     },
+    "packages/card-design": {
+      "name": "@iwsdk-apps/card-design",
+      "version": "0.0.0",
+      "dependencies": {
+        "zod": "4.4.3",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+        "@playwright/test": "1.61.1",
+        "@storybook/react-vite": "10.5.2",
+        "@types/react": "19.2.17",
+        "@types/react-dom": "19.2.3",
+        "react": "19.2.7",
+        "react-dom": "19.2.7",
+        "vite": "7.3.6",
+      },
+      "peerDependencies": {
+        "react": "19.2.7",
+      },
+    },
+    "packages/card-programs": {
+      "name": "@iwsdk-apps/card-programs",
+      "version": "0.0.0",
+      "dependencies": {
+        "@iwsdk-apps/catalog": "workspace:*",
+        "@iwsdk-apps/contracts": "workspace:*",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
+    "packages/catalog": {
+      "name": "@iwsdk-apps/catalog",
+      "version": "0.0.0",
+      "dependencies": {
+        "zod": "4.4.3",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
+    "packages/compiler": {
+      "name": "@iwsdk-apps/compiler",
+      "version": "0.0.0",
+      "dependencies": {
+        "@iwsdk-apps/card-programs": "workspace:*",
+        "@iwsdk-apps/catalog": "workspace:*",
+        "@iwsdk-apps/contracts": "workspace:*",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/engine": "workspace:*",
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
+    "packages/contracts": {
+      "name": "@iwsdk-apps/contracts",
+      "version": "0.0.0",
+      "dependencies": {
+        "zod": "4.4.3",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
+    "packages/engine": {
+      "name": "@iwsdk-apps/engine",
+      "version": "0.0.0",
+      "dependencies": {
+        "@iwsdk-apps/contracts": "workspace:*",
+        "@iwsdk-apps/rule-selection": "workspace:*",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
     "packages/game-core": {
       "name": "@iwsdk-apps/game-core",
       "version": "0.0.0",
       "dependencies": {
         "@iwsdk-apps/schemas": "workspace:*",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
+    "packages/rule-selection": {
+      "name": "@iwsdk-apps/rule-selection",
+      "version": "0.0.0",
+      "dependencies": {
+        "zod": "4.4.3",
       },
       "devDependencies": {
         "@iwsdk-apps/tsconfig": "workspace:*",
@@ -92,6 +194,32 @@
       },
       "devDependencies": {
         "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
+    "packages/simulation": {
+      "name": "@iwsdk-apps/simulation",
+      "version": "0.0.0",
+      "dependencies": {
+        "@iwsdk-apps/contracts": "workspace:*",
+        "@iwsdk-apps/storage": "workspace:*",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+      },
+    },
+    "packages/storage": {
+      "name": "@iwsdk-apps/storage",
+      "version": "0.0.0",
+      "dependencies": {
+        "@iwsdk-apps/compiler": "workspace:*",
+        "@iwsdk-apps/contracts": "workspace:*",
+        "@iwsdk-apps/engine": "workspace:*",
+        "@sqlite.org/sqlite-wasm": "3.53.0-build1",
+        "zod": "4.4.3",
+      },
+      "devDependencies": {
+        "@iwsdk-apps/tsconfig": "workspace:*",
+        "@playwright/test": "1.61.1",
       },
     },
     "packages/storage-sqlite": {
@@ -374,9 +502,29 @@
 
     "@iwsdk-apps/ai": ["@iwsdk-apps/ai@workspace:packages/ai"],
 
+    "@iwsdk-apps/card-design": ["@iwsdk-apps/card-design@workspace:packages/card-design"],
+
+    "@iwsdk-apps/card-programs": ["@iwsdk-apps/card-programs@workspace:packages/card-programs"],
+
+    "@iwsdk-apps/catalog": ["@iwsdk-apps/catalog@workspace:packages/catalog"],
+
+    "@iwsdk-apps/compiler": ["@iwsdk-apps/compiler@workspace:packages/compiler"],
+
+    "@iwsdk-apps/contracts": ["@iwsdk-apps/contracts@workspace:packages/contracts"],
+
+    "@iwsdk-apps/engine": ["@iwsdk-apps/engine@workspace:packages/engine"],
+
+    "@iwsdk-apps/engine-cli": ["@iwsdk-apps/engine-cli@workspace:apps/engine-cli"],
+
     "@iwsdk-apps/game-core": ["@iwsdk-apps/game-core@workspace:packages/game-core"],
 
+    "@iwsdk-apps/rule-selection": ["@iwsdk-apps/rule-selection@workspace:packages/rule-selection"],
+
     "@iwsdk-apps/schemas": ["@iwsdk-apps/schemas@workspace:packages/schemas"],
+
+    "@iwsdk-apps/simulation": ["@iwsdk-apps/simulation@workspace:packages/simulation"],
+
+    "@iwsdk-apps/storage": ["@iwsdk-apps/storage@workspace:packages/storage"],
 
     "@iwsdk-apps/storage-sqlite": ["@iwsdk-apps/storage-sqlite@workspace:packages/storage-sqlite"],
 

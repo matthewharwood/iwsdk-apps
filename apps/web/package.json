@@ -16,6 +16,7 @@
     "sync:xr": "bun scripts/sync-xr-assets.ts"
   },
   "dependencies": {
+    "@iwsdk-apps/card-design": "workspace:*",
     "@iwsdk-apps/schemas": "workspace:*",
     "@iwsdk-apps/game-core": "workspace:*",
     "@iwsdk-apps/storage-sqlite": "workspace:*",

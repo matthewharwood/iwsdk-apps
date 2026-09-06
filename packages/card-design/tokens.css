@@ -1,0 +1,31 @@
+.card-design {
+  --card-white: #fff;
+  --card-ink: #000;
+  --card-bg: #fff;
+  --card-fg: #000;
+  --card-font-sans: "Card Sans", sans-serif;
+  --card-font-mono: "Card Mono", monospace;
+  --card-trigger: #2e655e;
+  --card-activation: #2d6093;
+  --card-activation-weight: 400;
+  --card-activation-structure: #999;
+  --card-table: #6e5269;
+  --card-rarity-common: #fff;
+  --card-rarity-uncommon: #aaa;
+  --card-rarity-rare: #bda259;
+  --card-rarity-mythic: #bd7c52;
+  --card-rarity-outline: #555;
+  --card-cut: #b8b8b8;
+  --card-line: #b0b0b0;
+  --card-secondary: #555;
+  --card-highlight: #e0e0e0;
+  --card-pip-white: #ebe3c7;
+  --card-pip-blue: #96b8c8;
+  --card-pip-black: #b0b0b0;
+  --card-pip-red: #ce8978;
+  --card-pip-green: #9bb49a;
+  --card-pip-neutral: #f2f2f2;
+  --card-symbol-ink: #000;
+  --card-text-outline-width: 0.055em;
+  --card-text-outline-fill: #fff;
+}

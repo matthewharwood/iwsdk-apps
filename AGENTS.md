@@ -1,6 +1,14 @@
 # Local XR application starter
 
-This workspace is a reusable Bun/Turborepo starter derived from a read-only audit of Snapmatch, commit `ea33cd75c83a94e6bf2888b7ac5f9b9405fc6f9a`. The user selected a generic working example and reusable generator, not implementation of the attached Commander product specification. That brief informs the architecture; it is not an instruction to implement all its milestones here.
+This workspace is a Bun/Turborepo starter derived from a read-only audit of Snapmatch, commit `ea33cd75c83a94e6bf2888b7ac5f9b9405fc6f9a`. The original token example remains an infrastructure fixture. The current user mandate additionally implements the Commander engine specified in `docs/_temp/COMPLETE_SPEC.md`, `IMPLEMENTATION_PROMPT.md`, and `DESIGN_AND_ARCHITECTURE.md`.
+
+## Commander implementation mandate
+
+Work on `codex/commander-engine`. Produce a pinned full-source catalog, executable definitions, pure portable rules engine, headless two/four-seat games, native/browser persistence and reproducible replay. Full-snapshot card/rule support remains the final target; early development games never certify the entire corpus. Track source presence, implementation, executed assertions, and independent review separately. Unsupported semantics and operational limits remain explicit incomplete results, never invented draws.
+
+Use `packages/contracts`, `catalog`, `card-programs`, `compiler`, `engine`, `storage`, and `simulation` as needed; `apps/engine-cli` hosts commands. The Commander core must not import SQL, filesystem, network, wall clocks, UI, or ML. Native SQLite belongs behind the host adapter; browser parity must execute the same core. Use `.commander/` for local archives/databases/evidence, isolated from token saves. Retain exact sources and failed attempts. The supplied companion acceptance/source text is embedded in COMPLETE_SPEC; missing companion files are not passing evidence.
+
+The user's explicit presentation extension requires extracting the studio's design, typography and card information architecture into `packages/card-design`, consumed by `apps/web/app`. `apps/printable-card-studio` is an unchanged design reference, excluded from workspace tools; do not import its CLI or infer Magic semantics from its text heuristics. The shared package and consuming app remain subject to all quality gates.
 
 ## Architecture
 

@@ -1,0 +1,36 @@
+{
+  "name": "@iwsdk-apps/card-design",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./react": "./src/react.tsx",
+    "./fixtures": "./src/fixtures.ts",
+    "./styles.css": "./styles.css",
+    "./fonts.css": "./fonts.css",
+    "./tokens.css": "./tokens.css",
+    "./assets/*": "./assets/*"
+  },
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "test:unit": "bun test src",
+    "test:browser": "node --experimental-strip-types scripts/check-browser.ts"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
+  },
+  "peerDependencies": {
+    "react": "19.2.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@iwsdk-apps/tsconfig": "workspace:*",
+    "@storybook/react-vite": "10.5.2",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "vite": "7.3.6"
+  }
+}

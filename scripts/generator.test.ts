@@ -204,6 +204,21 @@ describe("application generator", () => {
 });
 
 describe("independent workspace generator", () => {
+  test("includes the optional headless CLI with the new scope and excludes source catalogs and reference studio", async () => {
+    await put("apps/engine-cli/package.json", '{"name":"@fixture-stack/engine-cli"}');
+    await put("apps/engine-cli/src/index.ts", 'import "@fixture-stack/domain";');
+    await put(".commander/catalog.sqlite", "private catalog");
+    await put("apps/printable-card-studio/reference.html", "reference");
+    const destination = await createWorkspace({
+      sourceRoot: source,
+      destination: join(temporaryRoot, "engine-starter"),
+    });
+    expect(await readFile(join(destination, "apps/engine-cli/src/index.ts"), "utf8")).toContain(
+      "@engine-starter/domain",
+    );
+    expect(await exists(join(destination, ".commander"))).toBe(false);
+    expect(await exists(join(destination, "apps/printable-card-studio"))).toBe(false);
+  });
   test("creates a named standalone Turborepo with skills and only the canonical app", async () => {
     await put("apps/other/package.json", '{"name":"@fixture-stack/other"}');
     await put("firebase.json", '{"hosting":{}}');

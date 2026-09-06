@@ -1,0 +1,5 @@
+{
+  "extends": "@iwsdk-apps/tsconfig/base.json",
+  "compilerOptions": { "types": ["bun", "react", "react-dom"] },
+  "include": ["src", "browser", "scripts"]
+}

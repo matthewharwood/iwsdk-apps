@@ -1,0 +1,2029 @@
+{
+  "schema": "commander-executed-scenario-map/1",
+  "createdAt": "2026-09-06T20:10:53.022857+00:00",
+  "purpose": "Join observed test executions to bounded source assertions; never promote a test name, hit count or draft into a complete rule/card/scenario certification.",
+  "sources": {
+    "rules": {
+      "url": "https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt",
+      "effectiveDate": "2026-08-07",
+      "archivePath": ".commander/sources/archives/4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f.txt",
+      "sha256": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f"
+    },
+    "expectations": {
+      "path": "docs/commander/scenario-expectations.md",
+      "sha256": "e6291b8814447be6989a38f2583e1ff8d21f3dd61b9db1951f8f511cf86ea6d0",
+      "derivationStatus": "independent-of-engine-per-source-document",
+      "mappingReviewStatus": "post-implementation-source-and-test-assertion-review",
+      "reviewer": "skills_audit agent authored mapping, mulligan correction and integration tests; separate root post-implementation signoff is recorded for five bounded integration assertions. Whole scenario completion remains unclaimed."
+    }
+  },
+  "execution": {
+    "command": "bun test packages/engine/src/engine.test.ts packages/engine/src/combat.test.ts packages/engine/src/integration-scenarios.test.ts packages/simulation/src/driver.test.ts packages/compiler/src/index.test.ts packages/storage/src/storage.test.ts --reporter=junit --reporter-outfile=.commander/evidence/core-scenario-map.junit.xml",
+    "runtime": "bun 1.3.11 (af24e281)",
+    "engineVersion": "commander-engine/0.3.0",
+    "reportPath": ".commander/evidence/core-scenario-map.junit.xml",
+    "reportSha256": "4094565510eed6e8d697f33c0b56f9c56f9ebb1227161c0a3130247302ba6f9a",
+    "passed": 60,
+    "failures": 0,
+    "skipped": 0,
+    "assertions": 647,
+    "evidencePolicy": "Historical execution. Revalidate test-file hashes and run the current implementation before applying this mapping to a later report. .commander evidence is local and ignored by Git."
+  },
+  "guardrails": {
+    "fullScenarioGroupsCompleted": 0,
+    "eligibleCardsCertified": 0,
+    "fullGamesProvenByThisReport": 0,
+    "highRiskDraftsCountedAsExecuted": 0,
+    "highRiskDraftsPath": ".commander/high-risk-scenarios.json",
+    "statement": "All 24 separately authored high-risk drafts remain not run; application-contract checks are separated from CR rule assertions. No Bun/browser parity or physical headset claim is derived from this native test report."
+  },
+  "discoveredCorrection": {
+    "rule": "103.5",
+    "file": "packages/engine/src/setup.ts",
+    "before": "Bottom selections were delayed until every player kept.",
+    "after": "Every paid redraw bottoms before the next declaration round; all declarations precede redraw and all bottom decisions precede the next round.",
+    "regressions": ["core-test-022", "core-test-025", "core-test-027"]
+  },
+  "scenarioCoverage": [
+    {
+      "scenarioId": "SET-01",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-020"],
+      "completed": false
+    },
+    {
+      "scenarioId": "SET-02",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-023", "core-test-026"],
+      "completed": false
+    },
+    {
+      "scenarioId": "SET-03",
+      "status": "partially-linked-executed-assertions",
+      "testIds": [
+        "core-test-021",
+        "core-test-022",
+        "core-test-024",
+        "core-test-025",
+        "core-test-027"
+      ],
+      "completed": false
+    },
+    {
+      "scenarioId": "SET-04",
+      "status": "partially-linked-executed-assertions",
+      "testIds": [
+        "core-test-020",
+        "core-test-021",
+        "core-test-022",
+        "core-test-024",
+        "core-test-025",
+        "core-test-027"
+      ],
+      "completed": false
+    },
+    {
+      "scenarioId": "SET-05",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-058", "core-test-059"],
+      "completed": false
+    },
+    {
+      "scenarioId": "SET-06",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "SET-07",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-01",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-033", "core-test-056"],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-02",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-033", "core-test-056"],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-03",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-04",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-056"],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-05",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-06",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-057"],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-07",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-056"],
+      "completed": false
+    },
+    {
+      "scenarioId": "PRI-08",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "CAST-01",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "CAST-02",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-002", "core-test-003"],
+      "completed": false
+    },
+    {
+      "scenarioId": "CAST-03",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "CAST-04",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-033", "core-test-056"],
+      "completed": false
+    },
+    {
+      "scenarioId": "CAST-05",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-013", "core-test-032"],
+      "completed": false
+    },
+    {
+      "scenarioId": "CAST-06",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "CAST-07",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "CMD-01",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-033"],
+      "completed": false
+    },
+    {
+      "scenarioId": "CMD-02",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "CMD-03",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-034"],
+      "completed": false
+    },
+    {
+      "scenarioId": "CMD-04",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-034"],
+      "completed": false
+    },
+    {
+      "scenarioId": "CMD-05",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "CMD-06",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-050"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-01",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-036", "core-test-037", "core-test-052"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-02",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-052", "core-test-054", "core-test-055"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-03",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-038", "core-test-040"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-04",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-038"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-05",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-045", "core-test-054", "core-test-055"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-06",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-040", "core-test-042", "core-test-053"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-07",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-004", "core-test-042", "core-test-049"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-08",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-005", "core-test-043", "core-test-051"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-09",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-044"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-10",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-044"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-11",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-041", "core-test-046", "core-test-048", "core-test-052"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-12",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-047"],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-13",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "COM-14",
+      "status": "partially-linked-executed-assertions",
+      "testIds": [
+        "core-test-041",
+        "core-test-042",
+        "core-test-048",
+        "core-test-054",
+        "core-test-055"
+      ],
+      "completed": false
+    },
+    {
+      "scenarioId": "END-01",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-050", "core-test-053"],
+      "completed": false
+    },
+    {
+      "scenarioId": "END-02",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-057"],
+      "completed": false
+    },
+    {
+      "scenarioId": "END-03",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-035", "core-test-057"],
+      "completed": false
+    },
+    {
+      "scenarioId": "END-04",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "END-05",
+      "status": "partially-linked-executed-assertions",
+      "testIds": ["core-test-035", "core-test-057"],
+      "completed": false
+    },
+    {
+      "scenarioId": "END-06",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    },
+    {
+      "scenarioId": "END-07",
+      "status": "no-linked-execution-in-this-report",
+      "testIds": [],
+      "completed": false
+    }
+  ],
+  "tests": [
+    {
+      "id": "core-test-001",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "script lookup is revision-bound and deterministic after retries or reconstruction",
+        "suite": "observation-only driver",
+        "line": 50,
+        "sha256": "44f4d0f41b9793a16ff31d5171437f04f326353bbcb8dc92cde0205579f6fe3a"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Script driver returns the same response when asked twice at one revision or reconstructed at that revision.",
+        "A revision outside the script produces explicit divergence."
+      ],
+      "limitations": ["One decision helper; not a full resumed game."],
+      "applicationContractAssertions": ["driver-replay-determinism"]
+    },
+    {
+      "id": "core-test-002",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "colored payment reassigns flexible source instead of consuming the sole green source",
+        "suite": "observation-only driver",
+        "line": 65,
+        "sha256": "44f4d0f41b9793a16ff31d5171437f04f326353bbcb8dc92cde0205579f6fe3a"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["CAST-02"],
+      "sourceRules": ["107.4a", "107.4b", "601.2h"],
+      "assertions": [
+        "Driver matches W/G cost to flexible W/G and white-only sources without consuming the flexible source incorrectly."
+      ],
+      "limitations": [
+        "Synthetic driver helper; does not submit a spell payment to the rules engine."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-003",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "uses floating mana once and rejects insufficient colorless or generic resources",
+        "suite": "observation-only driver",
+        "line": 79,
+        "sha256": "44f4d0f41b9793a16ff31d5171437f04f326353bbcb8dc92cde0205579f6fe3a"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["CAST-02"],
+      "sourceRules": ["107.4a", "107.4b", "601.2h"],
+      "assertions": [
+        "Driver spends three floating W for W plus two generic exactly once.",
+        "White mana cannot satisfy C; one W source cannot satisfy 2W plus generic."
+      ],
+      "limitations": ["No engine-side invalid-payment rollback or exact G/U/U scenario."],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-004",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "combines excess nontrample damage into one source-target allocation (first real-game regression)",
+        "suite": "observation-only driver",
+        "line": 92,
+        "sha256": "44f4d0f41b9793a16ff31d5171437f04f326353bbcb8dc92cde0205579f6fe3a"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-07"],
+      "sourceRules": ["510.1c"],
+      "assertions": ["Driver emits a single five-damage allocation to its only blocker."],
+      "limitations": [
+        "Regression helper, not proof of a completed real-source game despite the test name."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-005",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "trample distributes lethal first, then remaining power to the defender",
+        "suite": "observation-only driver",
+        "line": 99,
+        "sha256": "44f4d0f41b9793a16ff31d5171437f04f326353bbcb8dc92cde0205579f6fe3a"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-08"],
+      "sourceRules": ["702.19b"],
+      "assertions": [
+        "Driver emits two to blocker and three to defender from a five-power trample domain."
+      ],
+      "limitations": [
+        "Driver output only; no submitted damage command or source-state legality proof."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-006",
+      "test": {
+        "path": "packages/simulation/src/driver.test.ts",
+        "name": "unowned decision is a driver failure rather than an invented pass",
+        "suite": "observation-only driver",
+        "line": 111,
+        "sha256": "44f4d0f41b9793a16ff31d5171437f04f326353bbcb8dc92cde0205579f6fe3a"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": ["A missing owned decision causes driver failure."],
+      "limitations": ["Does not itself prove hidden state is unavailable to the driver."],
+      "applicationContractAssertions": ["driver-owned-decision"]
+    },
+    {
+      "id": "core-test-007",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "durable exact retry survives close/reopen and a conflicting payload fails",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 153,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Exact accepted command retry after native SQLite reopen returns original receipt and revision one.",
+        "Changed response under same command ID conflicts; one durable record remains and replay equals state."
+      ],
+      "limitations": ["Setup keep command only, not every decision type or browser OPFS."],
+      "applicationContractAssertions": ["durable-command-idempotence"]
+    },
+    {
+      "id": "core-test-008",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "serialized submissions deduplicate concurrent retries and reject stale/foreign actor without RNG advancement",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 174,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 8
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Concurrent retries return same receipt once; stale revision and mismatched authenticated actor reject.",
+        "Current state/chance remains unchanged; projected library/opponent hand are absent.",
+        "Mutating returned current snapshot cannot mutate coordinator state."
+      ],
+      "limitations": ["Synthetic setup boundary in native SQLite."],
+      "applicationContractAssertions": [
+        "durable-command-idempotence",
+        "command-rejection-without-mutation",
+        "private-projection"
+      ]
+    },
+    {
+      "id": "core-test-009",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "real SQLite rollback at INSERT INTO commander_boundaries preserves state, receipt, events and retryability",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 212,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Injected failure at INSERT INTO commander_boundaries returns PersistenceFailed and preserves prior in-memory and database state.",
+        "No receipt exists, one initial boundary remains; identical retry commits and replays to revision one."
+      ],
+      "limitations": ["Native SQLite adapter injection, not device-level disk loss or OPFS."],
+      "applicationContractAssertions": ["atomic-commit-publication"]
+    },
+    {
+      "id": "core-test-010",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "real SQLite rollback at UPDATE commander_matches preserves state, receipt, events and retryability",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 212,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Injected failure at UPDATE commander_matches returns PersistenceFailed and preserves prior in-memory and database state.",
+        "No receipt exists, one initial boundary remains; identical retry commits and replays to revision one."
+      ],
+      "limitations": ["Native SQLite adapter injection, not device-level disk loss or OPFS."],
+      "applicationContractAssertions": ["atomic-commit-publication"]
+    },
+    {
+      "id": "core-test-011",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "real SQLite rollback at COMMIT preserves state, receipt, events and retryability",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 212,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Injected failure at COMMIT returns PersistenceFailed and preserves prior in-memory and database state.",
+        "No receipt exists, one initial boundary remains; identical retry commits and replays to revision one."
+      ],
+      "limitations": ["Native SQLite adapter injection, not device-level disk loss or OPFS."],
+      "applicationContractAssertions": ["atomic-commit-publication"]
+    },
+    {
+      "id": "core-test-012",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "two native coordinators cannot overwrite a newer committed revision",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 253,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Second writer with an old revision receives ConcurrentWrite; it keeps its old local snapshot and cannot append a second durable record."
+      ],
+      "limitations": [
+        "Native SQLite optimistic writer conflict, not same-document OPFS ownership."
+      ],
+      "applicationContractAssertions": ["atomic-commit-publication"]
+    },
+    {
+      "id": "core-test-013",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "a pending casting/payment frame resumes and logical import replays before insertion",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 270,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 14
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["CAST-05"],
+      "sourceRules": ["601.2a", "601.2h"],
+      "assertions": [
+        "Payment continuation persists through native SQLite close/reopen and replay-validated logical import.",
+        "Resumed and imported payment commands yield identical receipts and states; importing over existing match rejects."
+      ],
+      "limitations": [
+        "Zero-cost synthetic commander; not SET-03 bottom, PRI-03 response stack, CMD-03 owner choice or COM-07 durable distribution."
+      ],
+      "applicationContractAssertions": ["pending-decision-serialization", "replay-validated-import"]
+    },
+    {
+      "id": "core-test-014",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "recomputed checkpoint checksum cannot hide a non-replayed state modification",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 305,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "A checkpoint tamper with a recomputed checksum is rejected by replay verification."
+      ],
+      "limitations": ["Single tamper case, not proof against arbitrary corrupted archives."],
+      "applicationContractAssertions": ["replay-validated-import"]
+    },
+    {
+      "id": "core-test-015",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "missing event boundary and altered request hash are detected",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 328,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Missing event boundary and mismatched command request hash fail integrity verification."
+      ],
+      "limitations": ["Native SQLite corruption fixtures."],
+      "applicationContractAssertions": ["replay-validated-import"]
+    },
+    {
+      "id": "core-test-016",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "a durable retry refuses a receipt whose boundary was damaged while the coordinator was open",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 350,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Receipt retry does not blindly return accepted after its durable boundary has been corrupted."
+      ],
+      "limitations": ["Native SQLite corruption fixture."],
+      "applicationContractAssertions": ["durable-command-idempotence"]
+    },
+    {
+      "id": "core-test-017",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "queued input is captured before the caller can mutate it",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 371,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Submission captures caller input before subsequent mutation can alter queued command semantics."
+      ],
+      "limitations": ["One in-process queue case."],
+      "applicationContractAssertions": ["command-input-isolation"]
+    },
+    {
+      "id": "core-test-018",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "bad logical checksum, engine version and content/deck pins fail without importing",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 384,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Logical checksum, incompatible engine and content/deck hash mismatch reject without inserting the match."
+      ],
+      "limitations": ["Native SQLite import rejection fixtures."],
+      "applicationContractAssertions": ["replay-validated-import", "content-pins"]
+    },
+    {
+      "id": "core-test-019",
+      "test": {
+        "path": "packages/storage/src/storage.test.ts",
+        "name": "unrelated and future-version databases are refused without overwriting contents",
+        "suite": "SQLite ownership and durable coordinator",
+        "line": 410,
+        "sha256": "3c80e3d340c2ee151d988541dfbcbfa37764c5e1f0c099e9e54ff507ea21b651"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Unrelated and newer-schema databases refuse initialization while preserving their contents."
+      ],
+      "limitations": ["Native SQLite schema guard only."],
+      "applicationContractAssertions": ["schema-version-refusal"]
+    },
+    {
+      "id": "core-test-020",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "same pinned setup repeats physical cards and chance state; observations never expose any library or another hand",
+        "suite": "normal setup and command invariants",
+        "line": 147,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 20
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-01", "SET-04"],
+      "sourceRules": ["103.2c", "103.3", "103.5", "402.3", "903.6", "903.7"],
+      "assertions": [
+        "Repeated pinned four-seat setup produces equal state and chance cursor.",
+        "Every seat starts at 40 life, 7 hand and 92 library; each projection shows four commanders.",
+        "No observation includes a library object, another hand, or an unowned decision."
+      ],
+      "limitations": [
+        "Synthetic 100-card decks, not a real-source deck or shuffle uniformity proof.",
+        "No post-mulligan privacy assertion or rules-authorized reveal case."
+      ],
+      "applicationContractAssertions": ["private-projection"]
+    },
+    {
+      "id": "core-test-021",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "2 seats collect mulligan declarations before redraw and enforce the correct first bottom count",
+        "suite": "normal setup and command invariants",
+        "line": 163,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-03", "SET-04"],
+      "sourceRules": ["103.5", "103.5c"],
+      "assertions": [
+        "No redraw occurs before all declarations in the first round.",
+        "First mulligan has 1 required bottom cards; next keep reaches upkeep."
+      ],
+      "limitations": [
+        "One player redraws; broader multi-player and repeated rounds have separate tests."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-022",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "2 seats bottom every paid redraw before another mulligan declaration and keepers cannot rejoin",
+        "suite": "normal setup and command invariants",
+        "line": 182,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 28
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-03", "SET-04"],
+      "sourceRules": ["103.5", "103.5c"],
+      "assertions": [
+        "Three successive redraws bottom the required count before a next declaration.",
+        "Ordered selected card lineages become the ordered library tail; hand/library counts reflect each bottom.",
+        "Keep/mulligan during a required bottom is rejected with no state mutation.",
+        "Keepers retain their hands and cannot answer a later round; final keep starts upkeep."
+      ],
+      "limitations": [
+        "Synthetic ordinary commands; does not reach the zero-card maximum or test pregame card effects."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-023",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "2 seats apply the proper starting-player draw rule",
+        "suite": "normal setup and command invariants",
+        "line": 228,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-02"],
+      "sourceRules": ["103.8a", "103.8c"],
+      "assertions": ["After all upkeep passes, first turn is main1 with seven cards."],
+      "limitations": [
+        "Does not follow the second seat into their first draw or check the first-draw library count."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-024",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "4 seats collect mulligan declarations before redraw and enforce the correct first bottom count",
+        "suite": "normal setup and command invariants",
+        "line": 163,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-03", "SET-04"],
+      "sourceRules": ["103.5", "103.5c"],
+      "assertions": [
+        "No redraw occurs before all declarations in the first round.",
+        "First mulligan has 0 required bottom cards; next keep reaches upkeep."
+      ],
+      "limitations": [
+        "One player redraws; broader multi-player and repeated rounds have separate tests."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-025",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "4 seats bottom every paid redraw before another mulligan declaration and keepers cannot rejoin",
+        "suite": "normal setup and command invariants",
+        "line": 182,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 24
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-03", "SET-04"],
+      "sourceRules": ["103.5", "103.5c"],
+      "assertions": [
+        "Three successive redraws bottom the required count before a next declaration.",
+        "Ordered selected card lineages become the ordered library tail; hand/library counts reflect each bottom.",
+        "Keep/mulligan during a required bottom is rejected with no state mutation.",
+        "Keepers retain their hands and cannot answer a later round; final keep starts upkeep."
+      ],
+      "limitations": [
+        "Synthetic ordinary commands; does not reach the zero-card maximum or test pregame card effects."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-026",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "4 seats apply the proper starting-player draw rule",
+        "suite": "normal setup and command invariants",
+        "line": 228,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-02"],
+      "sourceRules": ["103.8a", "103.8c"],
+      "assertions": ["After all upkeep passes, first turn is draw with eight cards."],
+      "limitations": [
+        "Does not follow the second seat into their first draw or check the first-draw library count."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-027",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "four-seat paid redraws finish every bottom choice before the next declaration round",
+        "suite": "normal setup and command invariants",
+        "line": 237,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 10
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-03", "SET-04"],
+      "sourceRules": ["103.5", "103.5c"],
+      "assertions": [
+        "Two players take a free first mulligan and a paid second one.",
+        "Neither redraws before the second declaration round completes.",
+        "Both receive and answer a one-card bottom decision before either receives the next mulligan decision.",
+        "Both then keep six and setup reaches upkeep."
+      ],
+      "limitations": [
+        "No simultaneous pregame abilities, zero-card boundary or post-redraw privacy assertions."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-028",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "bad owner, malformed payload and illegal move leave state and chance untouched",
+        "suite": "normal setup and command invariants",
+        "line": 268,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Wrong actor, unknown command property and pass during mulligan are rejected.",
+        "Whole original state including chance remains equal."
+      ],
+      "limitations": ["Not every invalid response class is exercised here."],
+      "applicationContractAssertions": ["command-rejection-without-mutation"]
+    },
+    {
+      "id": "core-test-029",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "all three resolver modes preserve exact setup, decisions, staged casts, reversal, and transitions",
+        "suite": "normal setup and command invariants",
+        "line": 277,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Full scan, prepared scan and prepared indexed modes finish setup, stage/cancel a cast and advance 16 actions to equal normalized state."
+      ],
+      "limitations": [
+        "Synthetic four-seat run; not full-source/all-query optimization certification."
+      ],
+      "applicationContractAssertions": ["resolver-equivalence"]
+    },
+    {
+      "id": "core-test-030",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "resolver candidates track control, tap state, zone generations, and active timing exactly",
+        "suite": "normal setup and command invariants",
+        "line": 297,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "All three modes discover the same creature and mana source.",
+        "Direct control, tap and zone mutations immediately change candidates even without an epoch advance.",
+        "Prepared modes run fewer exact checks than their finite universe in the fixture."
+      ],
+      "limitations": [
+        "Constructed mutations test fresh views, not executable control-changing card programs."
+      ],
+      "applicationContractAssertions": ["resolver-equivalence"]
+    },
+    {
+      "id": "core-test-031",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "canonical checkpoint round trips preserve candidate, observation, and transition ordering",
+        "suite": "normal setup and command invariants",
+        "line": 332,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 78
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "All three modes preserve priority candidate and every seat observation ordering across canonical JSON round trip.",
+        "Twenty subsequent transitions equal uninterrupted state after repeated checkpoint restoration."
+      ],
+      "limitations": [
+        "Synthetic passing/empty attack sequence; not Bun/browser or all-game replay parity."
+      ],
+      "applicationContractAssertions": ["pending-decision-serialization", "resolver-equivalence"]
+    },
+    {
+      "id": "core-test-032",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "announcement moves to stack before payment; cancellation restores exact object identity and command zone",
+        "suite": "casting checkpoints and player departure",
+        "line": 364,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 7
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["CAST-05"],
+      "sourceRules": ["601.2a", "601.2h", "733.1"],
+      "assertions": [
+        "Announcing a commander removes its original object and creates one stack object before the payment decision.",
+        "Cancellation restores original identity in command zone, clears stack and leaves commander cast count empty."
+      ],
+      "limitations": [
+        "No modes, target multiplicity, division, trigger ordering or nonmana costs."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-033",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "caster retains priority, all players pass, permanent resolves, then active player gets priority",
+        "suite": "casting checkpoints and player departure",
+        "line": 375,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 8
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["PRI-01", "PRI-02", "CMD-01", "CAST-04"],
+      "sourceRules": ["117.3b", "117.3c", "117.4", "601.2i", "605.3b", "903.8"],
+      "assertions": [
+        "A one-green commander is paid by the offered source; caster receives priority while the spell remains on stack.",
+        "One pass does not resolve; both seats passing resolves the permanent and active player gets priority.",
+        "Commander command-zone cast history increments to one."
+      ],
+      "limitations": [
+        "Two seats and one creature only; no response spell, cast triggers, second/third commander tax or mana-ability negative assertion."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-034",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "commander declines one graveyard SBA offer and receives another only after changing zones",
+        "suite": "casting checkpoints and player departure",
+        "line": 399,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["CMD-03", "CMD-04"],
+      "sourceRules": ["903.9a", "704.6d"],
+      "assertions": [
+        "Constructed graveyard entry produces an owner commander-zone decision.",
+        "Declining retains the graveyard object and ordinary passes do not repeat the offer.",
+        "A subsequent exile zone change produces a new offer."
+      ],
+      "limitations": [
+        "Direct move establishes setup; no actual creature-death SBA, accepted move, dies trigger, or full simultaneous choice batch."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-035",
+      "test": {
+        "path": "packages/engine/src/engine.test.ts",
+        "name": "active player's loss does not begin another turn or give a dead player priority",
+        "suite": "casting checkpoints and player departure",
+        "line": 419,
+        "sha256": "f210c3584efe82a7393d0397660df6faf6e0176203ae5e138a736fb02480efc2"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["END-03", "END-05"],
+      "sourceRules": ["800.4a", "800.4j"],
+      "assertions": [
+        "A constructed active-player life total of zero is checked in a four-seat game.",
+        "Active identifier, turn and current step persist; departed player is lost, receives no decision, and game stays ongoing.",
+        "Object/seat invariants hold after removal."
+      ],
+      "limitations": [
+        "Does not finish the departed player's turn, assert exact next seat, exercise foreign control history or stack-owner departure."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-036",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "attack permissions, haste, vigilance, defender, and whole-declaration rollback",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 199,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-01"],
+      "sourceRules": ["302.6", "508.1a", "508.1c", "508.1f", "702.3", "702.10", "702.20"],
+      "assertions": [
+        "Eligible candidates include old untapped, vigilant and newly hasty creatures only.",
+        "Tapped vigilance, newly controlled nonhaste, defender, creature-battle and opponent creature are excluded.",
+        "Invalid mixed declaration does not tap any creature; accepted ordinary/vigilant attacks tap only the ordinary creature."
+      ],
+      "limitations": [
+        "Direct combat functions on a constructed board; no full transition or priority/trigger continuation."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-037",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "one attacker cannot attack twice or attack its controller",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 234,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-01"],
+      "sourceRules": ["508.1a", "508.1b"],
+      "assertions": [
+        "Duplicate attacker and self-defender choices throw; creature remains untapped."
+      ],
+      "limitations": ["Additional declaration restriction; not the complete COM-01 scenario."],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-038",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "four-seat blocking obeys defender ownership and APNAP with flying/reach",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 256,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 9
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-03", "COM-04"],
+      "sourceRules": ["802.3", "802.4", "509.1a", "702.9b", "702.17b", "302.6"],
+      "assertions": [
+        "B then C own block decisions for attacks directed at each of them.",
+        "Out-of-order actor, ground-versus-flying and wrong defender assignments throw.",
+        "Newly controlled reach blocker may block without tapping, followed by C's block."
+      ],
+      "limitations": [
+        "No planeswalker/battle protection, flying blocker against ground attacker, or post-declaration priority/trigger assertions."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-039",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "menace rejects a single block, accepts two, and repeated blockers are invalid",
+        "suite": "combat declarations (independent COM-01 through COM-04)",
+        "line": 284,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": ["509.1a", "702.111b"],
+      "assertions": [
+        "One menace blocker is rejected without mutation; duplicate blocker is rejected; two distinct blockers accepted."
+      ],
+      "limitations": [
+        "Supplementary source assertion beyond current COM-01..14 rows; does not cover general blocking requirements."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-040",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "four-seat damage choices start at the actual active player and retain defender order",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 309,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 3
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-03", "COM-06"],
+      "sourceRules": ["802.3", "802.4", "510.1", "510.2"],
+      "assertions": [
+        "With C active, block and damage ownership follows C/D/B turn order as appropriate.",
+        "All four involved creatures receive two marked damage after completed assignments."
+      ],
+      "limitations": [
+        "Constructed 2/2 combat variant, not COM-06's exact 3/3 fixture; does not run creature-death SBAs."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-041",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "a first-strike blocker remains in combat after its attacker leaves",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 340,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-11", "COM-14"],
+      "sourceRules": ["506.4", "510.4", "702.7b"],
+      "assertions": [
+        "Removing the attacker does not remove its surviving first-strike blocker from combat.",
+        "First-strike participation remains present even though neither step has a target for damage."
+      ],
+      "limitations": [
+        "A related boundary case; not COM-11's lethal blocker case or normal COM-14 no-extra-priority proof."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-042",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "5/5 may divide 2/3 between two 3/3 blockers, with simultaneous damage",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 354,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 10
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-06", "COM-07", "COM-14"],
+      "sourceRules": ["510.1c", "510.1d", "510.1e", "510.2", "510.4"],
+      "assertions": [
+        "Nontrample 5/5 can assign 2 and 3 to two 3/3 blockers without old damage ordering.",
+        "Damage cannot be applied until every owner assigns; before that no damage is marked.",
+        "Completed assignments mark 6/2/3 simultaneously; repeated apply does not apply damage twice.",
+        "No first-strike participant is detected."
+      ],
+      "limitations": [
+        "Does not execute creature-death SBAs, full turn step advancement or intervening priority; COM-06 fixture differs."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-043",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "trample allows lethal-plus-excess or all damage to blocker, not an underassignment",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 390,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 5
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-08"],
+      "sourceRules": ["702.19a", "702.19b", "510.2"],
+      "assertions": [
+        "1-to-blocker/4-to-player is rejected without mutation.",
+        "2/3 assignment deals three player damage.",
+        "All five to blocker is legal and leaves player life unchanged."
+      ],
+      "limitations": ["Does not assert subsequent blocker death or attacker damage."],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-044",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "trample lethal accounts for marked damage and deathtouch",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 420,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-09", "COM-10"],
+      "sourceRules": ["702.19b", "702.2b", "702.2c"],
+      "assertions": [
+        "One prior damage on a 2-toughness blocker reduces lethal assignment to one.",
+        "Deathtouch likewise makes one assigned to a 4-toughness blocker lethal.",
+        "Both 1/4 assignments deal four player damage; only deathtouch case marks that flag."
+      ],
+      "limitations": [
+        "Does not execute deathtouch destruction/SBAs or assert indestructibility/prevention excess calculation."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-045",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "leaving blocker preserves blocked status; trample can then reach defender",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 445,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-05"],
+      "sourceRules": ["509.1h", "510.1c", "702.19d"],
+      "assertions": [
+        "After direct blocker removal the attacker remains blocked.",
+        "Nontrample assigns/deals no player damage; trample may deal all two damage to player."
+      ],
+      "limitations": ["Removal is a fixture move, not an intervening cast/resolution."],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-046",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "first-strike snapshot prevents dealing again after losing first strike",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 461,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-11"],
+      "sourceRules": ["510.4", "702.7b"],
+      "assertions": [
+        "Only first striker assigns first-step damage; attacker takes none then.",
+        "After constructed blocker removal and removal of first strike, historical participation prevents normal-step damage."
+      ],
+      "limitations": [
+        "Blocker death and keyword change are direct fixture edits; no checkpoint or intervening priority is executed."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-047",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "double strike applies two separate steps with a surviving blocker",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 483,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-12"],
+      "sourceRules": ["510.4", "702.4b"],
+      "assertions": [
+        "First step marks two on blocker and zero on attacker.",
+        "Second step has both owners assign; cumulative marks are three on attacker and four on blocker."
+      ],
+      "limitations": ["Does not run death SBAs or actual priority between steps."],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-048",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "zero-power first striker still establishes the first-strike step",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 500,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 4
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-11", "COM-14"],
+      "sourceRules": ["510.4", "702.7b"],
+      "assertions": [
+        "A zero-power first striker establishes first-strike step even with no positive assignment.",
+        "Only the ordinary blocker receives a later normal damage decision."
+      ],
+      "limitations": ["Related edge case, not full normal/first-strike turn orchestration."],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-049",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "wrong owner, foreign target, partial power, duplicate and fractional amounts cannot mutate state",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 513,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-07"],
+      "sourceRules": ["510.1a", "510.1c", "510.1e"],
+      "assertions": [
+        "Wrong owner, foreign target, partial power, fractional amount and duplicate pair are rejected.",
+        "Whole constructed state remains unchanged."
+      ],
+      "limitations": ["Direct function rejection; ordinary GameCommand validation is separate."],
+      "applicationContractAssertions": ["command-rejection-without-mutation"]
+    },
+    {
+      "id": "core-test-050",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "lifelink and incoming damage combine simultaneously; commander damage uses lineage",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 536,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 6
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["CMD-06", "END-01"],
+      "sourceRules": ["702.15", "510.2", "903.10a", "704.4"],
+      "assertions": [
+        "Lifelink and incoming damage combine before any SBA; defending life ends at two rather than temporarily losing.",
+        "Commander combat tally advances from 16 to 21 using physical lineage.",
+        "Deathtouch flag and damage on indestructible creature are marked."
+      ],
+      "limitations": [
+        "Test explicitly stops before SBA: does not establish commander-damage elimination, noncombat exclusion or history across recasting."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-051",
+      "test": {
+        "path": "packages/engine/src/combat.test.ts",
+        "name": "pending compound damage choices survive schema serialization",
+        "suite": "combat damage assignments (COM-05 through COM-14)",
+        "line": 572,
+        "sha256": "2c79a3d601dd5c214ce9dce4e7227c789e3a20ee89eba731cd202e284092e98f"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 1
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-08"],
+      "sourceRules": ["702.19b", "510.1"],
+      "assertions": [
+        "Serialized RulesState with pending trample distribution resumes and applies identical assignments to equal final state."
+      ],
+      "limitations": [
+        "JSON schema round trip only, not durable SQLite save/reload or Bun/browser parity."
+      ],
+      "applicationContractAssertions": ["pending-decision-serialization"]
+    },
+    {
+      "id": "core-test-052",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "COM-11 first-strike damage kills the blocker before normal damage and gives intervening priority",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 222,
+        "sha256": "593f85b93a1a4fb7a04e88527992a208ae9f4b651911a9e86c86557906612f99"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 30
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-01", "COM-02", "COM-11"],
+      "sourceRules": ["508.2", "117.4", "117.5", "510.3", "510.4", "702.7b", "704.5g"],
+      "assertions": [
+        "Ordinary attack/block commands expose intervening priority before advancing.",
+        "First-strike assignment through transition kills the 2/2 blocker at the real checkpoint; its new object is in graveyard and attacker has zero damage.",
+        "A then B receive priority during first-strike step; normal damage begins only after both pass.",
+        "Normal step deals no further damage; defender life remains 40 and only one combat damage event occurred."
+      ],
+      "limitations": [
+        "Synthetic board and no triggers or abilities changing characteristics between steps."
+      ],
+      "applicationContractAssertions": [],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "approved-bounded-assertions",
+        "reviewType": "post-implementation-source-and-test-review",
+        "approvedAssertions": [
+          "Ordinary attack/block commands expose intervening priority before advancing.",
+          "First-strike assignment through transition kills the 2/2 blocker at the real checkpoint; its new object is in graveyard and attacker has zero damage.",
+          "A then B receive priority during first-strike step; normal damage begins only after both pass.",
+          "Normal step deals no further damage; defender life remains 40 and only one combat damage event occurred."
+        ],
+        "limitationsRemain": true,
+        "wholeScenarioCompletion": false
+      }
+    },
+    {
+      "id": "core-test-053",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "END-01 simultaneous lifelink and combat damage leave the defender alive at the real SBA checkpoint",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 253,
+        "sha256": "593f85b93a1a4fb7a04e88527992a208ae9f4b651911a9e86c86557906612f99"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 17
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["END-01", "COM-06"],
+      "sourceRules": ["510.2", "702.15b", "704.3", "704.4", "704.5g"],
+      "assertions": [
+        "Defender at four takes five unblocked damage while its blocker simultaneously deals three with lifelink.",
+        "First owner assignment changes no life; completed assignments plus checkpoint leave defender alive at two.",
+        "The 2/2 attacker dies through actual SBA, 3/3 blocker survives with two marked, and active player gets priority.",
+        "No player-loss event occurs."
+      ],
+      "limitations": [
+        "Combat damage variant of END-01; does not exercise a spell lowering then restoring life during one resolution."
+      ],
+      "applicationContractAssertions": [],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "approved-bounded-assertions",
+        "reviewType": "post-implementation-source-and-test-review",
+        "approvedAssertions": [
+          "Defender at four takes five unblocked damage while its blocker simultaneously deals three with lifelink.",
+          "First owner assignment changes no life; completed assignments plus checkpoint leave defender alive at two.",
+          "The 2/2 attacker dies through actual SBA, 3/3 blocker survives with two marked, and active player gets priority.",
+          "No player-loss event occurs."
+        ],
+        "limitationsRemain": true,
+        "wholeScenarioCompletion": false
+      }
+    },
+    {
+      "id": "core-test-054",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "COM-05 a blocker killed by a resolved spell leaves its nontrampling attacker blocked",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 298,
+        "sha256": "593f85b93a1a4fb7a04e88527992a208ae9f4b651911a9e86c86557906612f99"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-02", "COM-05", "COM-14"],
+      "sourceRules": ["508.2", "509.1h", "510.1c", "510.3", "510.4", "702.19d", "704.5g"],
+      "assertions": [
+        "Real cast/target/payment/pass commands resolve Sorin's Thirst during blocker priority and the real checkpoint moves the blocker to graveyard.",
+        "Attacker remains blocked; another full pass cycle advances directly to ordinary combat damage.",
+        "Nontrample deals no defender damage; trample may assign all two damage to defender, followed by active priority.",
+        "No first-strike StepStarted event occurs."
+      ],
+      "limitations": [
+        "Each row runs the named trample variant; no prevention/replacement or attack triggers."
+      ],
+      "applicationContractAssertions": [],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "approved-bounded-assertions",
+        "reviewType": "post-implementation-source-and-test-review",
+        "approvedAssertions": [
+          "Real cast/target/payment/pass commands resolve Sorin's Thirst during blocker priority and the real checkpoint moves the blocker to graveyard.",
+          "Attacker remains blocked; another full pass cycle advances directly to ordinary combat damage.",
+          "Nontrample deals no defender damage; trample may assign all two damage to defender, followed by active priority.",
+          "No first-strike StepStarted event occurs."
+        ],
+        "limitationsRemain": true,
+        "wholeScenarioCompletion": false
+      }
+    },
+    {
+      "id": "core-test-055",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "COM-05 a blocker killed by a resolved spell leaves its trampling attacker blocked",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 298,
+        "sha256": "593f85b93a1a4fb7a04e88527992a208ae9f4b651911a9e86c86557906612f99"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 26
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["COM-02", "COM-05", "COM-14"],
+      "sourceRules": ["508.2", "509.1h", "510.1c", "510.3", "510.4", "702.19d", "704.5g"],
+      "assertions": [
+        "Real cast/target/payment/pass commands resolve Sorin's Thirst during blocker priority and the real checkpoint moves the blocker to graveyard.",
+        "Attacker remains blocked; another full pass cycle advances directly to ordinary combat damage.",
+        "Nontrample deals no defender damage; trample may assign all two damage to defender, followed by active priority.",
+        "No first-strike StepStarted event occurs."
+      ],
+      "limitations": [
+        "Each row runs the named trample variant; no prevention/replacement or attack triggers."
+      ],
+      "applicationContractAssertions": [],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "approved-bounded-assertions",
+        "reviewType": "post-implementation-source-and-test-review",
+        "approvedAssertions": [
+          "Real cast/target/payment/pass commands resolve Sorin's Thirst during blocker priority and the real checkpoint moves the blocker to graveyard.",
+          "Attacker remains blocked; another full pass cycle advances directly to ordinary combat damage.",
+          "Nontrample deals no defender damage; trample may assign all two damage to defender, followed by active priority.",
+          "No first-strike StepStarted event occurs."
+        ],
+        "limitationsRemain": true,
+        "wholeScenarioCompletion": false
+      }
+    },
+    {
+      "id": "core-test-056",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "PRI-04 immediate mana activation resets prior passes before stack resolution",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 341,
+        "sha256": "593f85b93a1a4fb7a04e88527992a208ae9f4b651911a9e86c86557906612f99"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 25
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["PRI-01", "PRI-02", "PRI-04", "PRI-07", "CAST-04"],
+      "sourceRules": ["117.3c", "117.4", "106.4", "106.4b", "605.3b"],
+      "assertions": [
+        "With a spell pending after A and B passed, C activates a Swamp and retains priority with one floating black mana.",
+        "C,D,A passes leave the spell pending; only B completing the fresh four-seat cycle resolves it.",
+        "Floating mana survives passes and resolution, then clears when the next phase begins."
+      ],
+      "limitations": ["One immediate intrinsic land mana ability; no triggered/restricted mana."],
+      "applicationContractAssertions": [],
+      "independentReview": {
+        "reviewer": "root agent",
+        "status": "approved-bounded-assertions",
+        "reviewType": "post-implementation-source-and-test-review",
+        "approvedAssertions": [
+          "With a spell pending after A and B passed, C activates a Swamp and retains priority with one floating black mana.",
+          "C,D,A passes leave the spell pending; only B completing the fresh four-seat cycle resolves it.",
+          "Floating mana survives passes and resolution, then clears when the next phase begins."
+        ],
+        "limitationsRemain": true,
+        "wholeScenarioCompletion": false
+      }
+    },
+    {
+      "id": "core-test-057",
+      "test": {
+        "path": "packages/engine/src/integration-scenarios.test.ts",
+        "name": "END-05 active player loses from a resolved draw and the turn finishes cleanup before the next living turn",
+        "suite": "transition and checkpoint scenario integration",
+        "line": 371,
+        "sha256": "593f85b93a1a4fb7a04e88527992a208ae9f4b651911a9e86c86557906612f99"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 51
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["END-02", "END-03", "END-05", "PRI-06"],
+      "sourceRules": ["104.3c", "704.5b", "800.4a", "800.4j", "514.2", "514.3"],
+      "assertions": [
+        "Empty library alone leaves A alive; casting and resolving Inspiration targeting A causes the real failed-draw SBA loss.",
+        "All A-owned objects leave, while active identifier A, main phase and turn five continue with priority B.",
+        "All subsequent decisions before turn end belong to survivors; cleanup event for turn five precedes B untapping for turn six.",
+        "Next stable decision is B upkeep priority, not a skipped immediate new turn at the moment of loss."
+      ],
+      "limitations": [
+        "No foreign control history, dead-player resolution choice, departed-seat skip on a later complete rotation, or exceptional cleanup trigger."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-058",
+      "test": {
+        "path": "packages/compiler/src/index.test.ts",
+        "name": "twelve deterministic composition fixtures preserve count, singleton, color and source-release hashes",
+        "suite": "",
+        "line": 104,
+        "sha256": "cd08871b8d61b5b061f4ad3f00bdd7c1ce9c0b0f16928b5976c3f61766ba9f7d"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 51
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-05"],
+      "sourceRules": ["903.5a", "903.5b", "903.5c"],
+      "assertions": [
+        "Twelve synthetic deck fixtures are distinct and deterministic.",
+        "Each has 100 cards, 61 singleton entry rows, correct computed deck hash and successful engine admission."
+      ],
+      "limitations": [
+        "No negative 99/101, duplicate-name or color-identity fixture; no basic-land production restriction assertion.",
+        "Synthetic release: not source-card certification or twelve completed games."
+      ],
+      "applicationContractAssertions": []
+    },
+    {
+      "id": "core-test-059",
+      "test": {
+        "path": "packages/compiler/src/index.test.ts",
+        "name": "spell deck profiles retain seven pinned programs, legal 100-card composition, and 39 basics",
+        "suite": "",
+        "line": 119,
+        "sha256": "cd08871b8d61b5b061f4ad3f00bdd7c1ce9c0b0f16928b5976c3f61766ba9f7d"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 18
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": ["SET-05"],
+      "sourceRules": ["903.5a", "903.5b", "903.5c"],
+      "assertions": [
+        "Two additional deck fixtures total 100, have 19 plus 20 basic lands, unique definition entry rows and successful admission.",
+        "Together they include all seven reviewed spell names with expected source version hashes.",
+        "Removing Divination rejects the dependent fixture."
+      ],
+      "limitations": [
+        "Filler creatures are synthetic; not all-card semantic certification or a completed full game."
+      ],
+      "applicationContractAssertions": ["content-pins"]
+    },
+    {
+      "id": "core-test-060",
+      "test": {
+        "path": "packages/compiler/src/index.test.ts",
+        "name": "tampered releases and missing composition dependencies fail explicitly",
+        "suite": "",
+        "line": 221,
+        "sha256": "cd08871b8d61b5b061f4ad3f00bdd7c1ce9c0b0f16928b5976c3f61766ba9f7d"
+      },
+      "execution": {
+        "report": ".commander/evidence/core-scenario-map.junit.xml",
+        "result": "passed",
+        "assertionCount": 2
+      },
+      "reviewStatus": "post-implementation-assertion-scope-reviewed",
+      "scenarioCompletionClaim": false,
+      "scenarioIds": [],
+      "sourceRules": [],
+      "assertions": [
+        "Tampered release hash and missing required basic land definition reject fixture generation."
+      ],
+      "limitations": ["Does not validate all source legality or recipe semantics."],
+      "applicationContractAssertions": ["content-pins"]
+    }
+  ],
+  "postImplementationReviews": [
+    {
+      "reviewer": "root agent",
+      "recordedAt": "2026-09-06T20:15:05.400352+00:00",
+      "testIds": [
+        "core-test-052",
+        "core-test-053",
+        "core-test-054",
+        "core-test-055",
+        "core-test-056"
+      ],
+      "status": "bounded-source-assertions-approved",
+      "scope": "COM-11 plain first-strike death and intervening priority; COM-05 resolved removal with/without trample; END-01 simultaneous combat lifelink survival; PRI-04 immediate mana action resets passes. This does not certify entire scenarios, groups, or cards.",
+      "wholeScenarioGroupsCompleted": 0
+    }
+  ]
+}

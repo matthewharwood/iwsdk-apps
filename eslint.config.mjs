@@ -3,6 +3,9 @@ import tseslint from "typescript-eslint";
 export default [
   {
     ignores: [
+      "apps/printable-card-studio/**",
+      ".commander/**",
+      ".idea/**",
       "**/node_modules/**",
       "**/dist/**",
       "**/.tanstack/**",

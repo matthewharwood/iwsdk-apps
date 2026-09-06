@@ -3,6 +3,9 @@
   "files": {
     "includes": [
       "**",
+      "!apps/printable-card-studio",
+      "!.commander",
+      "!.idea",
       "!**/routeTree.gen.ts",
       "!**/dist",
       "!**/node_modules",

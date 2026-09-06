@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { atom, Provider, useAtomValue, useSetAtom } from "jotai";
 import { ArrowDownToLine, ArrowUpFromLine, Box, Check, Glasses, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -184,10 +185,15 @@ function Workbench() {
           <span>{env.VITE_APP_TITLE || appConfig.title}</span>
           <span className="version">01</span>
         </a>
-        <span className="local-label">
-          <i />
-          LOCAL SESSION
-        </span>
+        <nav className="workspace-navigation" aria-label="Workspace navigation">
+          <Link to="/cards" search={{ q: "", kind: "all", outline: false }}>
+            Card library
+          </Link>
+          <span className="local-label">
+            <i />
+            LOCAL SESSION
+          </span>
+        </nav>
       </header>
       <main className="workspace">
         <section className="stage" aria-label="Interactive table">

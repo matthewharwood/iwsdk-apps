@@ -1,0 +1,20 @@
+{
+  "name": "@iwsdk-apps/simulation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "test:unit": "bun test src"
+  },
+  "dependencies": {
+    "@iwsdk-apps/contracts": "workspace:*",
+    "@iwsdk-apps/storage": "workspace:*"
+  },
+  "devDependencies": {
+    "@iwsdk-apps/tsconfig": "workspace:*"
+  }
+}

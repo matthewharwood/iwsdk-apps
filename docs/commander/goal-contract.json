@@ -1,0 +1,26 @@
+{
+  "schema": "commander-goal-contract/1",
+  "provenance": "Reconstructed from the user's three supplied specifications. The referenced companion goal-contract.json was not supplied.",
+  "specification": "docs/_temp/COMPLETE_SPEC.md",
+  "finalTarget": "full-snapshot-simulations",
+  "scope": "Ordinary tabletop Commander, two seats and four-seat free-for-all; shared card presentation in apps/web is the user's explicit extension.",
+  "gates": {
+    "G1": "Reconcile all frozen sources and reviewed role-aware eligibility and dependencies.",
+    "G2": "Execute independently reviewed high-risk semantic assertions through real engine and persistence.",
+    "G3": "Complete ordinary two-seat and four-seat games and verify durable resume/replay.",
+    "G4": "Run the declared decks, scenarios, regression/exploration batches, resolver comparisons and browser parity.",
+    "G5": "Cover every applicable rule/card/decision/dependency obligation; no unresolved semantics or eligible omissions.",
+    "G6": "Provide reproducible release and usable player-facing session contract."
+  },
+  "floors": {
+    "riskSampleIdentities": 300,
+    "initialHighRiskScenarios": 24,
+    "riskFamilies": 12,
+    "distinctDeckRevisions": 12,
+    "knownTerminatingRegression": { "twoSeat": 16, "fourSeat": 48 },
+    "accountedExploration": { "twoSeat": 256, "fourSeat": 768 }
+  },
+  "counting": "Floors supplement full semantic coverage. Authored scenarios, compiled bindings, runtime hits, replays and completed game assignments are distinct evidence. No assigned-but-unrun job or retry is a new completed game.",
+  "status": "in-progress",
+  "fullSnapshotSupported": false
+}

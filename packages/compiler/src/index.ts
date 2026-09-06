@@ -1,0 +1,357 @@
+import { Database } from "bun:sqlite";
+
+export { buildDevelopmentMatchPlan, computeDependencyClosure, MATCH_PLAN_VERSION } from "./plan";
+export { compileSpellFamilyDraft } from "./spell-expansion";
+
+import {
+  bindDevelopmentCard,
+  bindExactSpellFamily,
+  RECIPE_REGISTRY,
+  RECIPE_VERSION,
+  REVIEWED_SPELLS,
+  SPELL_FAMILY_REGISTRY,
+  SPELL_FAMILY_VERSION,
+} from "@iwsdk-apps/card-programs";
+import { type CatalogInventory, readCandidateCards, readInventory } from "@iwsdk-apps/catalog";
+import {
+  type CardDefinition,
+  ContentRelease,
+  canonicalJson,
+  DeckRevision,
+  ENGINE_VERSION,
+  type Keyword,
+  semanticHash,
+} from "@iwsdk-apps/contracts";
+
+export const COMPILER_VERSION = "commander-development-compiler/2";
+export const REVIEWED_RULES_HASH =
+  "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f";
+
+export interface CompilationReport {
+  assurance: "development-subset-bindings-not-semantic-certification";
+  sourceInventory: CatalogInventory;
+  recipeRegistry: typeof RECIPE_REGISTRY;
+  rulesHash: string;
+  bindings: {
+    definitionId: string;
+    sourceVersion: string;
+    sourceArchiveHash: string;
+    sourceOrdinal: number;
+    recipes: string[];
+  }[];
+  unsupported: { identity: string; name: string; reason: string }[];
+  unresolvedEligibility: { identity: string; name: string; role: string; reason: string }[];
+  executedAssertions: 0;
+  spellFamilies: { enabled: boolean; version: string; registry: typeof SPELL_FAMILY_REGISTRY };
+}
+
+/** Compile only the declared development recipes; retain the full unsupported candidate universe. */
+export async function compileDevelopmentRelease(
+  dbPath: string,
+  options: { spellFamilies?: boolean } = {},
+): Promise<{ release: ContentRelease; report: CompilationReport }> {
+  const inventory = readInventory(dbPath);
+  if (!inventory || inventory.status !== "complete")
+    throw new Error("A complete active source inventory is required");
+  using db = new Database(dbPath, { readonly: true, strict: true });
+  const rulesHash = db
+    .query<{ hash: string }, [string]>(
+      "SELECT hash FROM source_archives WHERE import_id=? AND kind='comprehensive-rules'",
+    )
+    .get(inventory.importId)?.hash;
+  if (rulesHash !== REVIEWED_RULES_HASH)
+    throw new Error("UnreviewedRulesVersion: review recipe source obligations before compilation");
+  const report: CompilationReport = {
+    assurance: "development-subset-bindings-not-semantic-certification",
+    sourceInventory: inventory,
+    recipeRegistry: RECIPE_REGISTRY,
+    rulesHash,
+    bindings: [],
+    unsupported: [],
+    unresolvedEligibility: db
+      .query<{ identity: string; name: string; role: string; reason: string }, [string]>(
+        "SELECT e.identity,c.name,e.role,e.reason FROM eligibility e JOIN card_versions c ON c.import_id=e.import_id AND c.identity=e.identity WHERE e.import_id=? AND e.role='main-deck' AND e.status='unresolved' ORDER BY c.name",
+      )
+      .all(inventory.importId),
+    executedAssertions: 0,
+    spellFamilies: {
+      enabled: options.spellFamilies === true,
+      version: SPELL_FAMILY_VERSION,
+      registry: SPELL_FAMILY_REGISTRY,
+    },
+  };
+  const definitions: Record<string, CardDefinition> = {};
+  const candidates = readCandidateCards(dbPath);
+  for (const card of candidates) {
+    const result = bindDevelopmentCard(card, options);
+    if (result.kind === "unsupported") {
+      report.unsupported.push({
+        identity: card.identity,
+        name: card.oracle.name,
+        reason: result.reason,
+      });
+      continue;
+    }
+    if ((await semanticHash(card.oracle)) !== card.versionHash)
+      throw new Error(`Catalog source version mismatch: ${card.identity}`);
+    definitions[result.definition.id] = result.definition;
+    report.bindings.push({
+      definitionId: result.definition.id,
+      sourceVersion: card.versionHash,
+      sourceArchiveHash: card.sourceArchiveHash,
+      sourceOrdinal: card.sourceOrdinal,
+      recipes: result.recipes,
+    });
+  }
+  const expectedCount = inventory.eligibility.find(
+    (row) => row.role === "main-deck" && row.status === "candidate",
+  )?.count;
+  if (
+    candidates.length !== expectedCount ||
+    report.bindings.length + report.unsupported.length !== candidates.length
+  )
+    throw new Error("Compiler candidate denominator mismatch");
+  const base = {
+    schema: "commander-content/1" as const,
+    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}`,
+    sourceBundle: inventory.bundleHash,
+    rulesHash,
+    profile: "tabletop-commander" as const,
+    assurance: "development-subset" as const,
+    definitions,
+    unsupportedOracleIds: report.unsupported.map((card) => card.identity),
+    eligibleDenominator: candidates.length,
+    compilerVersion: options.spellFamilies
+      ? `${COMPILER_VERSION}+spell-families/1`
+      : COMPILER_VERSION,
+    processorAbi: ENGINE_VERSION,
+  };
+  return { release: ContentRelease.parse({ ...base, hash: await semanticHash(base) }), report };
+}
+
+interface DeckProfile {
+  commander: string;
+  focus: "vanilla" | "mana" | Keyword;
+  code: string;
+  commanderSourceVersion?: string;
+  spells?: readonly string[];
+  familyLibrary?: boolean;
+}
+const DECK_PROFILES: DeckProfile[] = [
+  { commander: "Jasmine Boreal", focus: "vanilla", code: "gw-vanilla" },
+  { commander: "Jasmine Boreal", focus: "flying", code: "gw-flying" },
+  { commander: "Jasmine Boreal", focus: "vigilance", code: "gw-vigilance" },
+  { commander: "Jasmine Boreal", focus: "first-strike", code: "gw-first-strike" },
+  { commander: "Jasmine Boreal", focus: "lifelink", code: "gw-lifelink" },
+  { commander: "Jasmine Boreal", focus: "mana", code: "gw-mana" },
+  { commander: "The Lady of the Mountain", focus: "vanilla", code: "rg-vanilla" },
+  { commander: "The Lady of the Mountain", focus: "trample", code: "rg-trample" },
+  { commander: "The Lady of the Mountain", focus: "haste", code: "rg-haste" },
+  { commander: "The Lady of the Mountain", focus: "menace", code: "rg-menace" },
+  { commander: "The Lady of the Mountain", focus: "reach", code: "rg-reach" },
+  { commander: "The Lady of the Mountain", focus: "mana", code: "rg-mana" },
+];
+export const SPELL_DECK_PROFILES: readonly DeckProfile[] = [
+  {
+    commander: "Tobias Andrion",
+    commanderSourceVersion: "155d17db86833acd61d834269e09d90b88c99604cc3c9404c75e22ae72dc9758",
+    focus: "vanilla",
+    code: "wu-spell-sequences",
+    spells: ["Divination", "Inspiration", "Sacred Nectar", "Revitalize", "Healing Hands"],
+  },
+  {
+    commander: "Lady Orca",
+    commanderSourceVersion: "9037ef0194812c2ef8a154d3a7e96b150d2b8d93f976df3bab2f39458a0cd56d",
+    focus: "vanilla",
+    code: "br-targeted-damage",
+    spells: ["Flame Slash", "Sorin's Thirst"],
+  },
+];
+export const FAMILY_DECK_PROFILES: readonly DeckProfile[] = [
+  {
+    commander: "Tobias Andrion",
+    commanderSourceVersion: "155d17db86833acd61d834269e09d90b88c99604cc3c9404c75e22ae72dc9758",
+    focus: "vanilla",
+    code: "wu-family-library",
+    familyLibrary: true,
+  },
+  {
+    commander: "Lady Orca",
+    commanderSourceVersion: "9037ef0194812c2ef8a154d3a7e96b150d2b8d93f976df3bab2f39458a0cd56d",
+    focus: "vanilla",
+    code: "br-family-removal",
+    familyLibrary: true,
+  },
+  {
+    commander: "Jasmine Boreal",
+    commanderSourceVersion: "715ac4501a52d881b939d5793a333b1e407382c7aec56be50a2e2f2b4159d7b5",
+    focus: "vanilla",
+    code: "gw-family-life",
+    familyLibrary: true,
+  },
+];
+
+function reviewedFamilyProgram(definition: CardDefinition): boolean {
+  if (definition.implementationRevision === SPELL_FAMILY_VERSION) {
+    const binding = bindExactSpellFamily(definition.name, definition.oracleText);
+    return (
+      binding !== null && canonicalJson(binding.program) === canonicalJson(definition.spellProgram)
+    );
+  }
+  const recipe = REVIEWED_SPELLS.find((row) => row.identity === definition.oracleId);
+  return (
+    recipe !== undefined &&
+    recipe.sourceVersion === definition.sourceVersion &&
+    recipe.name === definition.name &&
+    recipe.text === definition.oracleText &&
+    canonicalJson(recipe.program) === canonicalJson(definition.spellProgram)
+  );
+}
+function deckSpells(
+  release: ContentRelease,
+  commander: CardDefinition,
+  profile: DeckProfile,
+): CardDefinition[] {
+  if (profile.familyLibrary) {
+    const spells = Object.values(release.definitions)
+      .filter(
+        (definition) =>
+          definition.spellProgram &&
+          definition.colorIdentity.every((color) => commander.colorIdentity.includes(color)),
+      )
+      .sort((a, b) => compare(a.id, b.id));
+    if (spells.length === 0 || spells.length > 60)
+      throw new Error(
+        `Family fixture needs between 1 and 60 compatible spells: ${profile.commander}`,
+      );
+    for (const spell of spells)
+      if (!reviewedFamilyProgram(spell))
+        throw new Error(`Unreviewed or altered spell family definition: ${spell.name}`);
+    return spells;
+  }
+  return (profile.spells ?? []).map((name) => {
+    const recipe = REVIEWED_SPELLS.find((row) => row.name === name);
+    const definition = Object.values(release.definitions).find((row) => row.name === name);
+    if (
+      !recipe ||
+      !definition?.spellProgram ||
+      definition.sourceVersion !== recipe.sourceVersion ||
+      !definition.colorIdentity.every((color) => commander.colorIdentity.includes(color))
+    )
+      throw new Error(`Missing source-bound spell ${name}`);
+    return definition;
+  });
+}
+
+function focusMatch(card: CardDefinition, focus: "vanilla" | "mana" | Keyword): boolean {
+  if (focus === "vanilla") return card.keywords.length === 0 && card.manaAbilities.length === 0;
+  if (focus === "mana") return card.manaAbilities.length > 0;
+  return card.keywords.includes(focus);
+}
+
+function compare(a: string, b: string): number {
+  return a < b ? -1 : a > b ? 1 : 0;
+}
+
+function deckCreatures(
+  release: ContentRelease,
+  commander: CardDefinition,
+  focus: "vanilla" | "mana" | Keyword,
+  variant: number,
+): CardDefinition[] {
+  const candidates = Object.values(release.definitions).filter(
+    (card) =>
+      card.types.includes("Creature") &&
+      card.id !== commander.id &&
+      card.colorIdentity.every((color) => commander.colorIdentity.includes(color)) &&
+      (card.power ?? 0) > 0 &&
+      !card.keywords.includes("defender"),
+  );
+  const matching = candidates.filter((card) => focusMatch(card, focus));
+  if (matching.length === 0)
+    throw new Error(`No source-bound ${focus} creatures for ${commander.name}`);
+  const scored = candidates.map((card) => ({
+    card,
+    focus: Number(focusMatch(card, focus)),
+    curve: Math.abs(card.manaValue - (2 + (variant % 4))),
+    tie: card.id.slice((variant % 4) + 7),
+  }));
+  scored.sort((a, b) => b.focus - a.focus || a.curve - b.curve || compare(a.tie, b.tie));
+  const selected = scored.slice(0, 60).map((row) => row.card);
+  if (selected.length !== 60 || new Set(selected.map((card) => card.name)).size !== 60)
+    throw new Error("Development deck requires 60 distinct source-bound creatures");
+  return selected;
+}
+
+/** Twelve creature fixtures plus two spell fixtures; existence is not completed-game evidence. */
+export async function makeDevelopmentDecks(
+  releaseInput: ContentRelease,
+  options: { includeSpellDecks?: boolean; includeFamilyDecks?: boolean } = {},
+): Promise<DeckRevision[]> {
+  const release = ContentRelease.parse(releaseInput);
+  const { hash: releaseHash, ...releaseBody } = release;
+  if ((await semanticHash(releaseBody)) !== releaseHash)
+    throw new Error("Content release hash mismatch");
+  const decks: DeckRevision[] = [];
+  const profiles = options.includeFamilyDecks
+    ? [...DECK_PROFILES, ...SPELL_DECK_PROFILES, ...FAMILY_DECK_PROFILES]
+    : options.includeSpellDecks === false
+      ? DECK_PROFILES
+      : [...DECK_PROFILES, ...SPELL_DECK_PROFILES];
+  for (const [index, profile] of profiles.entries()) {
+    const commander = Object.values(release.definitions).find(
+      (card) => card.name === profile.commander,
+    );
+    if (!commander?.commanderEligible)
+      throw new Error(`Missing supported commander ${profile.commander}`);
+    if (
+      profile.commanderSourceVersion &&
+      commander.sourceVersion !== profile.commanderSourceVersion
+    )
+      throw new Error(`Commander source changed: ${profile.commander}`);
+    const spells = deckSpells(release, commander, profile);
+    const creatures = deckCreatures(release, commander, profile.focus, index).slice(
+      0,
+      60 - spells.length,
+    );
+    const lands = commander.colorIdentity.map((color) =>
+      Object.values(release.definitions).find(
+        (card) =>
+          card.supertypes.includes("Basic") &&
+          card.types.includes("Land") &&
+          card.manaAbilities.length === 1 &&
+          card.manaAbilities[0] === color,
+      ),
+    );
+    if (lands.length !== 2 || lands.some((land) => !land))
+      throw new Error("Expected two matching basic lands for development commander");
+    const entries = [
+      { definition: commander.id, count: 1 },
+      ...creatures.map((card) => ({ definition: card.id, count: 1 })),
+      ...spells.map((card) => ({ definition: card.id, count: 1 })),
+      ...lands.map((land, ordinal) => ({
+        definition: (land as CardDefinition).id,
+        count: ordinal === 0 ? 20 : 19,
+      })),
+    ].sort((a, b) => compare(a.definition, b.definition));
+    const base = {
+      id: `development:${profile.code}:${release.hash.slice(0, 16)}`,
+      commander: commander.id,
+      entries,
+    };
+    decks.push(DeckRevision.parse({ ...base, hash: await semanticHash(base) }));
+  }
+  if (options.includeFamilyDecks) {
+    const included = new Set(
+      decks.slice(-3).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
+    );
+    const missing = Object.values(release.definitions).filter(
+      (definition) => definition.spellProgram && !included.has(definition.id),
+    );
+    if (missing.length > 0)
+      throw new Error(
+        `Family fixtures do not cover all admitted spell programs: ${missing.map((card) => card.name).join(", ")}`,
+      );
+  }
+  return decks;
+}

@@ -1,4 +1,6 @@
 node_modules/
+.idea/
+.commander/
 .turbo/
 .tanstack/
 dist/

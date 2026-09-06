@@ -1,0 +1,384 @@
+[
+  {
+    "id": "studio-proof-0",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-0-front",
+        "name": "Winota, Joiner of Forces",
+        "manaCost": "{2}{R}{W}",
+        "typeLine": "Legendary Creature - Human Warrior",
+        "oracleText": "Each time a non-Human creature you control attacks, look at your library's top six cards.\nYou may put a Human creature card from them onto the battlefield tapped and attacking. It gains indestructible until end of turn.\nPut the rest on the bottom of your library in random order.",
+        "rarity": "mythic",
+        "power": "4",
+        "toughness": "4",
+        "annotations": {
+          "highlights": ["non-Human", "tapped and attacking"],
+          "timing": {
+            "caption": "DECLARE ATTACKERS",
+            "phases": ["COMBAT"]
+          }
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-1",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-1-front",
+        "name": "Quicksilver, Brash Blur",
+        "manaCost": "{R}",
+        "typeLine": "Legendary Creature - Mutant Hero",
+        "oracleText": "If your opening hand includes Quicksilver, you may put him onto the battlefield before the game begins.\nHaste\nPower-up - {4}{R}: Give Quicksilver one +1/+1 counter and one double strike counter.",
+        "rarity": "rare",
+        "power": "1",
+        "toughness": "1",
+        "annotations": {
+          "highlights": ["opening hand", "only once"],
+          "reminder": "Each power-up ability can be activated only once. If Quicksilver entered this turn, reduce this cost by his mana cost."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-2",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-2-front",
+        "name": "Raph & Leo, Sibling Rivals",
+        "manaCost": "{1}{R/W}{R/W}",
+        "typeLine": "Legendary Creature - Mutant Ninja Turtle",
+        "oracleText": "Whenever Raph & Leo attack during the turn's first combat phase, untap one or two target attacking creatures.\nAdd another combat phase immediately after this one.",
+        "rarity": "rare",
+        "power": "2",
+        "toughness": "4",
+        "annotations": {
+          "highlights": ["turn's first combat phase", "one or two target attacking creatures"],
+          "timing": {
+            "caption": "ATTACK / FIRST COMBAT",
+            "phases": ["COMBAT"]
+          }
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-3",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-3-front",
+        "name": "Lion Sash",
+        "manaCost": "{1}{W}",
+        "typeLine": "Artifact Creature - Equipment Cat",
+        "oracleText": "{W}: Exile one target card in any graveyard. If it was a permanent card, give this permanent a +1/+1 counter.\nFor every +1/+1 counter on this Equipment, the equipped creature gets +1/+1.\nReconfigure {2}",
+        "rarity": "rare",
+        "power": "1",
+        "toughness": "1",
+        "annotations": {
+          "highlights": ["permanent card", "only at sorcery speed"],
+          "timing": {
+            "caption": "RECONFIGURE ONLY",
+            "phases": ["MAIN"]
+          },
+          "reminder": "Reconfigure: Pay {2} to attach to a target creature you control or detach from a creature, only at sorcery speed. While attached, this is not a creature."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-4",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-4-front",
+        "name": "Mirrex",
+        "manaCost": null,
+        "typeLine": "Land - Sphere",
+        "oracleText": "{T}: Add {C}.\n{T}: Produce one mana in a color of your choice. Use this ability only during the turn this land entered.\n{3}, {T}: Make a colorless 1/1 Phyrexian Mite artifact creature token with toxic 1 that cannot block.",
+        "rarity": "rare",
+        "annotations": {
+          "highlights": ["only during the turn this land entered"],
+          "tokens": ["PHYREXIAN MITE - 1/1 colorless artifact creature - Toxic 1; cannot block."],
+          "reminder": "Toxic 1: A player dealt combat damage by this token also gets one poison counter."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-5",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-5-front",
+        "name": "Touch the Spirit Realm",
+        "manaCost": "{2}{W}",
+        "typeLine": "Enchantment",
+        "oracleText": "When this enters, exile up to one targeted artifact or creature until this enchantment leaves the battlefield.\nChannel - {1}{W}, discard this card: Exile an artifact or creature chosen as a target. When the next end step begins, return it under its owner's control.",
+        "rarity": "uncommon",
+        "annotations": {
+          "highlights": ["up to one", "until this enchantment leaves the battlefield"],
+          "timing": {
+            "caption": "CHANNEL / NEXT END STEP",
+            "phases": ["END"]
+          }
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-6",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-6-front",
+        "name": "Vexing Bauble",
+        "manaCost": "{1}",
+        "typeLine": "Artifact",
+        "oracleText": "Whenever any player casts a spell without spending mana to cast it, counter that spell.\n{1}, {T}, sacrifice this artifact: Draw one card.",
+        "rarity": "uncommon",
+        "annotations": {
+          "highlights": ["without spending mana"],
+          "table": "ALL PLAYERS: Counter spells cast with no mana spent."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-7",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-7-front",
+        "name": "Eiganjo, Seat of the Empire",
+        "manaCost": null,
+        "typeLine": "Legendary Land",
+        "oracleText": "{T}: Add {W}.\nChannel - {2}{W}, discard this card: It deals 4 damage to one target creature that is attacking or blocking.\nReduce this Channel cost by {1} for each legendary creature you control.",
+        "rarity": "rare",
+        "annotations": {
+          "highlights": ["attacking or blocking", "for each legendary creature you control"]
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-8",
+    "layout": "normal",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-8-front",
+        "name": "Skrelv, Defector Mite",
+        "manaCost": "{W}",
+        "typeLine": "Legendary Artifact Creature - Phyrexian Mite",
+        "oracleText": "Toxic 1; this creature cannot block.\n{W/P}, {T}: Choose a color. Give another target creature you control toxic 1 and hexproof from that color until end of turn. Creatures of that color can't block it this turn.",
+        "rarity": "rare",
+        "power": "1",
+        "toughness": "1",
+        "annotations": {
+          "highlights": ["cannot block", "another target creature you control"],
+          "reminder": "Toxic 1: A player dealt combat damage also gets 1 poison counter. Pay {W/P} with {W} or 2 life."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-9",
+    "layout": "adventure",
+    "kind": "card",
+    "faceTreatment": "combined",
+    "faces": [
+      {
+        "id": "studio-proof-9-front",
+        "name": "Bofur, Reliable Guardian",
+        "manaCost": "{W}",
+        "typeLine": "Legendary Creature - Dwarf Scout",
+        "oracleText": "Lifelink",
+        "rarity": "uncommon",
+        "power": "1",
+        "toughness": "1"
+      },
+      {
+        "id": "studio-proof-9-adventure",
+        "name": "Concerted Care",
+        "manaCost": "{1}{W}",
+        "typeLine": "Instant - Adventure",
+        "oracleText": "Give an artifact or creature you control, chosen as a target, hexproof and indestructible until end of turn.",
+        "rarity": "uncommon",
+        "annotations": {
+          "reminder": "As this Adventure resolves, exile the card. You may later cast Bofur from there."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-10",
+    "layout": "transform",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-10-front",
+        "name": "Slicer, Hired Muscle",
+        "manaCost": "{4}{R}",
+        "typeLine": "Legendary Artifact Creature - Robot",
+        "oracleText": "Double strike, haste\nMore Than Meets the Eye {2}{R}: You may cast this card on its Vehicle face for {2}{R}.\nAt the start of each opponent's upkeep, you may give that player control of Slicer until end of turn. If you do, untap and goad Slicer; it cannot be sacrificed this turn. Otherwise, convert it.",
+        "rarity": "mythic",
+        "power": "3",
+        "toughness": "4",
+        "annotations": {
+          "highlights": ["each opponent's upkeep", "cannot be sacrificed", "Otherwise, convert it"],
+          "timing": {
+            "caption": "OPPONENT UPKEEP",
+            "phases": ["UPKEEP"]
+          },
+          "reminder": "Goad: Until your next turn, it must attack each combat if able, and attack someone other than you if able. Convert: Turn over to the other face."
+        }
+      },
+      {
+        "id": "studio-proof-10-reverse",
+        "name": "Slicer, High-Speed Antagonist",
+        "manaCost": null,
+        "typeLine": "Legendary Artifact - Vehicle",
+        "oracleText": "Living metal: During your turn, this Vehicle is also a creature.\nFirst strike, haste\nWhen Slicer deals combat damage to a player, convert it at the end of that combat.",
+        "colorIndicator": ["R"],
+        "rarity": "mythic",
+        "power": "3",
+        "toughness": "2",
+        "annotations": {
+          "highlights": ["During your turn", "end of that combat"],
+          "timing": {
+            "caption": "COMBAT DAMAGE / END COMBAT",
+            "phases": ["COMBAT"]
+          },
+          "reminder": "Convert: Turn over to Slicer, Hired Muscle."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-11",
+    "layout": "transform",
+    "kind": "card",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-11-front",
+        "name": "Witch Enchanter",
+        "manaCost": "{3}{W}",
+        "typeLine": "Creature - Human Warlock",
+        "oracleText": "When this enters, destroy an artifact or enchantment an opponent controls, chosen as a target.",
+        "rarity": "uncommon",
+        "power": "2",
+        "toughness": "2",
+        "annotations": {
+          "highlights": ["an opponent controls"],
+          "reminder": "You may play the other face as Witch-Blessed Meadow instead."
+        }
+      },
+      {
+        "id": "studio-proof-11-reverse",
+        "name": "Witch-Blessed Meadow",
+        "manaCost": null,
+        "typeLine": "Land",
+        "oracleText": "As this land enters, you may pay 3 life; otherwise, it enters tapped.\n{T}: Add {W}.",
+        "rarity": "uncommon",
+        "annotations": {
+          "highlights": ["pay 3 life", "enters tapped"],
+          "reminder": "Other face: Witch Enchanter. Choose a face when playing the card."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-12",
+    "layout": "normal",
+    "kind": "token",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-12-front",
+        "name": "Thopter",
+        "manaCost": null,
+        "typeLine": "Token Artifact Creature - Thopter",
+        "oracleText": "Flying",
+        "power": "1",
+        "toughness": "1",
+        "annotations": {
+          "reminder": "Colorless. Loyal Apprentice grants this haste until end of turn."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-13",
+    "layout": "normal",
+    "kind": "token",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-13-front",
+        "name": "Copy - Twinflame",
+        "manaCost": null,
+        "typeLine": "Token",
+        "oracleText": "TYPES / COLOR / MANA COST: ____________________\nUse that permanent's copiable characteristics, plus haste.\nExile this token when the next end step begins.",
+        "annotations": {
+          "reminder": "For a Slicer copy, pair with the other-face helper. Both faces belong to one token; conversion does not cancel Twinflame's exile. A copy keeps the original name and types, not this template's heading."
+        }
+      }
+    ],
+    "colorIdentity": []
+  },
+  {
+    "id": "studio-proof-14",
+    "layout": "normal",
+    "kind": "reference",
+    "faceTreatment": "separate",
+    "faces": [
+      {
+        "id": "studio-proof-14-front",
+        "name": "The Ring",
+        "manaCost": null,
+        "typeLine": "Emblem",
+        "oracleText": "1. Your Ring-bearer is legendary; creatures with greater power cannot block it.\n2. When your Ring-bearer attacks, draw one card, then discard one.\n3. When your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices that creature at end of combat.\n4. When your Ring-bearer deals combat damage to a player, each opponent loses 3 life.",
+        "annotations": {
+          "reminder": "Abilities stay unlocked and accumulate. LEVEL: 1 / 2 / 3 / 4. BEARER: __________"
+        }
+      }
+    ],
+    "colorIdentity": []
+  }
+]

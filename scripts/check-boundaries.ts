@@ -1,7 +1,41 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import tseslint from "typescript-eslint";
 
 const failures: string[] = [];
+function hasImpureRules(text: string): boolean {
+  const { ast } = tseslint.parser.parseForESLint(text);
+  function visit(value: unknown): boolean {
+    if (!value || typeof value !== "object") return false;
+    if (Array.isArray(value)) return value.some(visit);
+    const node = value as Record<string, unknown>;
+    if (
+      node.type === "Identifier" &&
+      ["document", "window", "navigator"].includes(String(node.name))
+    )
+      return true;
+    if (node.type === "CallExpression" || node.type === "NewExpression") {
+      const callee = node.callee as Record<string, unknown>;
+      if (
+        callee.type === "Identifier" &&
+        ["fetch", "eval", "Function", "Date"].includes(String(callee.name))
+      )
+        return true;
+    }
+    if (node.type === "MemberExpression") {
+      const object = node.object as Record<string, unknown>;
+      const property = node.property as Record<string, unknown>;
+      const key = property.name ?? property.value;
+      if (
+        object.type === "Identifier" &&
+        ((object.name === "Date" && key === "now") || (object.name === "Math" && key === "random"))
+      )
+        return true;
+    }
+    return Object.values(node).some(visit);
+  }
+  return visit(ast);
+}
 async function files(path: string): Promise<string[]> {
   const result: string[] = [];
   for (const entry of await readdir(path, { withFileTypes: true })) {
@@ -14,6 +48,7 @@ async function files(path: string): Promise<string[]> {
         "storybook-static",
         "test-results",
         "playwright-report",
+        "printable-card-studio",
       ].includes(entry.name)
     )
       continue;
@@ -32,6 +67,26 @@ for (const path of paths) {
     (match) => match[1] ?? "",
   );
   for (const source of imports) {
+    if (
+      path.startsWith("packages/engine/src/") &&
+      !source.startsWith(".") &&
+      !["@iwsdk-apps/contracts", "@iwsdk-apps/rule-selection"].includes(source)
+    )
+      failures.push(
+        `${path}: Commander rules may import only local modules, contracts and the pure selector, found ${source}`,
+      );
+    if (path.startsWith("packages/contracts/src/") && !source.startsWith(".") && source !== "zod")
+      failures.push(`${path}: protocol may import only local modules and Zod, found ${source}`);
+    if (
+      path.startsWith("packages/rule-selection/src/") &&
+      !source.startsWith(".") &&
+      source !== "zod"
+    )
+      failures.push(`${path}: selector must remain portable and pure, found ${source}`);
+    if (path.endsWith("packages/simulation/src/driver.ts") && /storage|engine/.test(source))
+      failures.push(
+        `${path}: driver may not read the privileged engine or persistence state ${source}`,
+      );
     if (/^(firebase|@firebase|idb|pixi\.js|animejs)(\/|$)/.test(source))
       failures.push(`${path}: retired runtime import ${source}`);
     if (
@@ -55,8 +110,10 @@ for (const path of paths) {
     }
   }
   if (
-    path.startsWith("packages/game-core/src/") &&
-    /\b(Date\.now|Math\.random|document\.|window\.|navigator\.)/.test(text)
+    (path.startsWith("packages/game-core/src/") ||
+      path.startsWith("packages/engine/src/") ||
+      path.startsWith("packages/rule-selection/src/")) &&
+    hasImpureRules(text)
   )
     failures.push(`${path}: nondeterministic or browser-global rules`);
 }

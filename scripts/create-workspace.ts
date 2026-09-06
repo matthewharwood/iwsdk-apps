@@ -26,6 +26,7 @@ export const workspaceFiles = [
 
 export const workspaceDirectories = [
   "apps/web",
+  "apps/engine-cli",
   "packages",
   "scripts",
   "turbo",
@@ -268,7 +269,7 @@ export async function createWorkspace(options: CreateWorkspaceOptions): Promise<
       };
       if (lock.workspaces?.[""]) lock.workspaces[""].name = name;
       for (const [path, entry] of Object.entries(lock.workspaces ?? {})) {
-        if (path.startsWith("apps/") && path !== "apps/web") {
+        if (path.startsWith("apps/") && path !== "apps/web" && path !== "apps/engine-cli") {
           delete lock.workspaces?.[path];
           if (entry.name) delete lock.packages?.[entry.name];
         }

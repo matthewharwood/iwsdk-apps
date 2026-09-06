@@ -1,0 +1,27 @@
+{
+  "name": "@iwsdk-apps/storage",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./native": "./src/native.ts",
+    "./browser": "./src/browser.ts"
+  },
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "test:unit": "bun test src",
+    "test:browser-parity": "bun browser-proof/check.ts"
+  },
+  "dependencies": {
+    "@iwsdk-apps/compiler": "workspace:*",
+    "@iwsdk-apps/contracts": "workspace:*",
+    "@iwsdk-apps/engine": "workspace:*",
+    "@sqlite.org/sqlite-wasm": "3.53.0-build1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@iwsdk-apps/tsconfig": "workspace:*",
+    "@playwright/test": "1.61.1"
+  }
+}

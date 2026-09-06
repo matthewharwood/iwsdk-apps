@@ -1,0 +1,157 @@
+import {
+  ContentRelease,
+  MatchManifest,
+  PreparedMatchArtifact,
+  semanticHash,
+} from "@iwsdk-apps/contracts";
+import { z } from "zod";
+// Test-only relative import avoids adding a storage -> simulation workspace cycle.
+import { runGame } from "../../simulation/src/index";
+import { openBrowserRepository } from "../src/browser";
+import {
+  Coordinator,
+  exportMatch,
+  importMatch,
+  type Repository,
+  replayMatch,
+  StorageError,
+} from "../src/index";
+import { executionEvidence, spellEvidence } from "./spell-evidence";
+
+const Request = z.discriminatedUnion("operation", [
+  z.strictObject({
+    operation: z.literal("create"),
+    namespace: z.string(),
+    manifest: MatchManifest,
+    artifact: PreparedMatchArtifact.nullable(),
+  }),
+  z.strictObject({ operation: z.literal("open"), namespace: z.string(), matchId: z.string() }),
+  z.strictObject({ operation: z.literal("import"), namespace: z.string(), text: z.string() }),
+  z.strictObject({
+    operation: z.literal("run"),
+    stopAt: z.enum(["payment", "target"]).nullable(),
+    maxCommands: z.number().int().positive().max(20_000),
+  }),
+  z.strictObject({ operation: z.literal("snapshot") }),
+  z.strictObject({ operation: z.literal("export") }),
+  z.strictObject({ operation: z.literal("retryLast") }),
+  z.strictObject({ operation: z.literal("close") }),
+]);
+let repo: Repository | null = null;
+let coordinator: Coordinator | null = null;
+let release: ContentRelease | null = null;
+
+function requireOpen() {
+  if (!repo || !coordinator || !release) throw new Error("No match is open in this test worker");
+  return { repo, coordinator, release };
+}
+async function connect(namespace: string) {
+  if (repo) throw new Error("Close the existing test connection first");
+  release = ContentRelease.parse(await (await fetch("/release.json")).json());
+  repo = await openBrowserRepository(namespace, new URL("/sqlite3.wasm", self.location.href).href);
+  return { repo, release };
+}
+async function snapshot() {
+  const session = requireOpen();
+  const state = session.coordinator.current();
+  const archive = session.repo.load(state.manifest.id);
+  if (!archive) throw new Error("Stored match vanished");
+  const replayed = await replayMatch(session.repo, session.release, state.manifest.id);
+  return {
+    revision: state.revision,
+    stateHash: await semanticHash(state),
+    replayHash: await semanticHash(replayed),
+    boundaryHashes: [
+      archive.initialHash,
+      ...archive.records.map((record) => record.receipt.stateHash),
+    ],
+    decision: state.decision,
+    outcome: state.outcome,
+    spells: spellEvidence(archive, session.release),
+    execution: executionEvidence(session.release, session.coordinator.executionInfo()),
+    storage: {
+      secureContext: globalThis.isSecureContext,
+      opfs: !!navigator.storage?.getDirectory,
+      locks: !!navigator.locks,
+    },
+  };
+}
+async function handle(input: unknown): Promise<unknown> {
+  const request = Request.parse(input);
+  switch (request.operation) {
+    case "create": {
+      const session = await connect(request.namespace);
+      coordinator = await Coordinator.create(
+        session.repo,
+        session.release,
+        request.manifest,
+        request.artifact ?? undefined,
+      );
+      return snapshot();
+    }
+    case "open": {
+      const session = await connect(request.namespace);
+      coordinator = await Coordinator.open(session.repo, session.release, request.matchId);
+      return snapshot();
+    }
+    case "import": {
+      const session = await connect(request.namespace);
+      const state = await importMatch(session.repo, session.release, request.text);
+      coordinator = await Coordinator.open(session.repo, session.release, state.manifest.id);
+      return snapshot();
+    }
+    case "run": {
+      const session = requireOpen();
+      return runGame(session.coordinator, {
+        seed: session.coordinator.current().manifest.driverSeed,
+        maxCommands: request.maxCommands,
+        ...(request.stopAt
+          ? { stopAt: (observation) => observation.decision?.kind === request.stopAt }
+          : {}),
+        onProgress: (revision) => self.postMessage({ progress: revision }),
+      });
+    }
+    case "snapshot":
+      return snapshot();
+    case "export": {
+      const session = requireOpen();
+      return exportMatch(session.repo, session.release, session.coordinator.current().manifest.id);
+    }
+    case "retryLast": {
+      const session = requireOpen();
+      const archive = session.repo.load(session.coordinator.current().manifest.id);
+      const record = archive?.records.at(-1);
+      if (!record) throw new Error("No durable command to retry");
+      return {
+        expected: record.receipt,
+        result: await session.coordinator.submit(record.command.actor, record.command),
+      };
+    }
+    case "close": {
+      if (coordinator) await coordinator.close();
+      else repo?.close();
+      coordinator = null;
+      repo = null;
+      return { closed: true };
+    }
+  }
+}
+
+let queue = Promise.resolve();
+self.onmessage = (event: MessageEvent<unknown>) => {
+  const envelope = z.strictObject({ id: z.number().int(), request: z.unknown() }).parse(event.data);
+  queue = queue.then(async () => {
+    try {
+      self.postMessage({ id: envelope.id, ok: true, value: await handle(envelope.request) });
+    } catch (error) {
+      self.postMessage({
+        id: envelope.id,
+        ok: false,
+        error: {
+          code: error instanceof StorageError ? error.code : "TestWorkerFailure",
+          message: error instanceof Error ? error.message : String(error),
+        },
+      });
+    }
+  });
+};

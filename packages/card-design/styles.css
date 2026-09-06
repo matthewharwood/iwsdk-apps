@@ -1,0 +1,526 @@
+@import url("./fonts.css");
+@import url("./tokens.css");
+
+.card-design .print-card {
+  --card-rules-base: 9.5pt;
+  --card-fit: 1;
+  --card-rule-gap: 4.5pt;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  width: var(--card-width);
+  min-height: var(--card-height);
+  padding: 7pt 10pt 9pt;
+  border: 0.35pt solid var(--card-cut);
+  background: var(--card-bg);
+  color: var(--card-fg);
+  break-inside: avoid;
+  max-width: 100%;
+}
+
+.card-design .highlight-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: visible;
+  fill: var(--card-highlight);
+}
+
+.card-design .card-header {
+  padding: 6pt 0 4pt;
+}
+
+.card-design .card-title-slot {
+  block-size: 43.8pt;
+}
+
+.card-design .card-name {
+  box-sizing: content-box;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  block-size: 37.8pt;
+  padding-bottom: 4pt;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  font-size: 18pt;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.card-design .header-meta {
+  height: 16pt;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4pt;
+}
+
+.card-design .mana-cost {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2pt;
+  min-height: 0;
+  align-items: center;
+}
+
+.card-design .mana-cost:empty {
+  display: none;
+}
+
+.card-design .pip-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.14em;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: -0.2em;
+}
+
+.card-design .pip {
+  font-style: normal;
+  font-synthesis: none;
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 1.13em;
+  height: 1.13em;
+  margin: 0;
+  vertical-align: -0.2em;
+}
+
+.card-design .pip > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.card-design .mana-cost .pip-group {
+  gap: 2pt;
+  vertical-align: baseline;
+}
+
+.card-design .mana-cost .pip {
+  width: 11pt;
+  height: 11pt;
+  margin: 0;
+}
+
+.card-design .role-badge {
+  margin-left: auto;
+  text-align: right;
+  font-family: var(--card-font-mono);
+  font-size: 7pt;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.card-design .card-type-row {
+  display: flex;
+  align-items: center;
+  gap: 3pt;
+  padding: 4pt 0;
+  border-top: 0.75pt solid var(--card-ink);
+}
+
+.card-design .card-type {
+  flex: 1;
+  margin: 0;
+  font-size: 7pt;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.card-design .indicator {
+  display: inline-flex;
+  gap: 1pt;
+  margin-left: auto;
+  font-size: 8pt;
+}
+
+.card-design .card-rules {
+  font-size: clamp(7pt, calc(var(--card-rules-base) * var(--card-fit)), var(--card-rules-base));
+  line-height: 1.2;
+}
+
+.card-design .card-rules p {
+  margin: 0 0 var(--card-rule-gap);
+}
+
+.card-design .card-rules :where(p:last-child) {
+  margin-bottom: 0;
+}
+
+.card-design .trigger-label {
+  display: block;
+  margin-bottom: 1.5pt;
+  font-family: var(--card-font-mono);
+  font-size: 7pt;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.015em;
+  color: var(--card-trigger);
+}
+
+.card-design .trigger-label[data-label-kind="replacement"],
+.card-design .trigger-label[data-label-kind="neutral"] {
+  color: var(--card-secondary);
+}
+
+.card-design mark {
+  padding: 0 0.05em;
+  background: transparent;
+  color: inherit;
+  box-decoration-break: clone;
+}
+
+.card-design .ability-cost {
+  display: block;
+  margin-bottom: 2pt;
+  font-weight: var(--card-activation-weight, 400);
+  color: var(--card-activation);
+}
+
+.card-design .ability-punctuation {
+  color: var(--card-activation-structure);
+}
+
+.card-design .ability-effect {
+  display: block;
+  position: relative;
+  padding-left: 9pt;
+}
+
+.card-design .ability-effect::before {
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  width: 6pt;
+  height: 5pt;
+  content: "";
+  border-left: 0.6pt solid var(--card-activation-structure);
+  border-bottom: 0.6pt solid var(--card-activation-structure);
+}
+
+.card-design .card-rules .reminder {
+  font-size: clamp(7pt, calc(8pt * var(--card-fit)), 8pt);
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.card-design .adventure {
+  margin-top: 7pt;
+  padding-top: 6pt;
+  border-top: 0.5pt solid var(--card-line);
+}
+
+.card-design .adventure-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5pt;
+}
+
+.card-design .adventure-name {
+  margin: 0;
+  font-size: 12pt;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-design .adventure .card-type-row {
+  border: 0;
+  padding: 4pt 0;
+}
+
+.card-design .adventure .mana-cost .pip {
+  width: 9pt;
+  height: 9pt;
+}
+
+.card-design .adventure-utilities {
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+  margin-top: 5pt;
+}
+
+.card-design .card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+  margin-top: auto;
+  padding-top: 4pt;
+}
+
+.card-design .utility-row {
+  display: grid;
+  grid-template-columns: 8pt 1fr;
+  gap: 5pt;
+  align-items: center;
+  padding: 4pt 0 0;
+  border-top: 0.5pt solid var(--card-line);
+}
+
+.card-design .micro-label {
+  font-family: var(--card-font-mono);
+  font-size: 7pt;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.card-design .vertical-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  justify-self: start;
+}
+
+.card-design .utility-row p {
+  margin: 0;
+  font-size: clamp(7pt, calc(7.5pt * var(--card-fit)), 7.5pt);
+  line-height: 1.16;
+}
+
+.card-design .table-row {
+  border-top-color: var(--card-table);
+}
+
+.card-design .table-row .micro-label {
+  color: var(--card-table);
+}
+
+.card-design .table-row p {
+  font-weight: 700;
+}
+
+.card-design .phase-timeline {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5pt;
+  padding: 4pt 0 0;
+}
+
+.card-design .phase-caption {
+  font-size: 7pt;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.card-design .phase-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: last baseline;
+  gap: 2pt;
+}
+
+.card-design .phase-rail {
+  position: absolute;
+  inset-inline: 0;
+  top: -2.75pt;
+  width: 100%;
+  height: 6pt;
+  overflow: visible;
+}
+
+.card-design .phase-rail line {
+  stroke: var(--card-line);
+  stroke-width: 0.6667;
+}
+
+.card-design .phase {
+  position: relative;
+  padding-top: 4pt;
+  color: var(--card-secondary);
+  font-size: 7pt;
+  line-height: 1;
+}
+
+.card-design .phase-dot {
+  fill: var(--card-bg);
+  stroke: var(--card-line);
+  stroke-width: 0.6667;
+}
+
+.card-design .phase.active {
+  color: var(--card-trigger);
+  font-weight: 700;
+}
+
+.card-design .phase-dot.active {
+  fill: var(--card-trigger);
+  stroke: var(--card-trigger);
+}
+
+.card-design .footer-bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: last baseline;
+  gap: 8pt;
+}
+
+.card-design .footer-bottom:empty {
+  display: none;
+}
+
+.card-design .face-reference {
+  display: block;
+  font-size: 7pt;
+  line-height: 1.1;
+}
+
+.card-design .card-stats {
+  font-family: var(--card-font-mono);
+  font-size: 17pt;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.card-design .stats-slash {
+  font-weight: 100;
+}
+
+.card-design :is(.card-header, .card-type-row, .card-content, .card-footer) {
+  flex-shrink: 0;
+}
+
+.card-design .pip svg text {
+  font-style: normal;
+  font-synthesis: none;
+}
+
+.card-design .print-kind {
+  font: 700 7pt / 1 var(--card-font-mono);
+}
+
+.card-design .token-tracker,
+.card-design .copy-tracker {
+  flex: 1;
+  font: 400 7pt / 1.5 var(--card-font-mono);
+}
+
+.card-design .write-line {
+  display: inline-block;
+  min-width: 45pt;
+  border-bottom: 0.5pt solid var(--card-line);
+}
+
+.card-design .copy-tracker .write-line {
+  min-width: 95pt;
+}
+
+.card-design .rarity-mark {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  width: 9pt;
+}
+
+.card-design .rarity-mark svg {
+  display: block;
+  width: 9pt;
+  height: 6.5pt;
+  overflow: visible;
+  fill: var(--card-rarity-common);
+  stroke: var(--card-rarity-outline);
+  stroke-width: 0.9;
+  stroke-linejoin: round;
+}
+
+.card-design .rarity-mark[data-rarity="uncommon"] svg {
+  fill: var(--card-rarity-uncommon);
+}
+
+.card-design .rarity-mark[data-rarity="rare"] svg {
+  fill: var(--card-rarity-rare);
+}
+
+.card-design .rarity-mark[data-rarity="mythic"] svg {
+  fill: var(--card-rarity-mythic);
+}
+
+.card-design .rarity-mark[data-rarity="special"] svg,
+.card-design .rarity-mark[data-rarity="bonus"] svg {
+  fill: var(--card-highlight);
+}
+
+.card-design {
+  --card-width: 240px;
+  --card-height: 336px;
+
+  font-family: var(--card-font-sans);
+  font-synthesis: none;
+  color: var(--card-fg);
+}
+
+.card-design,
+.card-design * {
+  box-sizing: border-box;
+}
+
+.card-design .card-fixed {
+  height: var(--card-height);
+}
+
+.card-design .card-fixed[data-fit="expanded"] {
+  height: auto;
+}
+
+.card-design.card-faces {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.card-design .card-stats:empty {
+  display: none;
+}
+
+.card-design .symbol-unknown {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.card-design mark.pip {
+  padding: 0;
+}
+
+.card-design .text-outline .card-name {
+  -webkit-text-stroke: var(--card-text-outline-width) currentcolor;
+  -webkit-text-fill-color: var(--card-text-outline-fill);
+}
+
+.card-design .card-back {
+  display: grid;
+  place-items: center;
+  width: var(--card-width);
+  min-height: var(--card-height);
+  padding: 16px;
+  border: 0.35pt solid var(--card-cut);
+  background: var(--card-bg);
+  font-family: var(--card-font-mono);
+  font-size: 12px;
+}
+
+.card-design.card-color-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+}

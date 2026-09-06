@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Card Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/RobotoCondensed.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Card Sans";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/RobotoCondensed-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Card Mono";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("./assets/fonts/JetBrainsMono-Thin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Card Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Card Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./assets/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+}

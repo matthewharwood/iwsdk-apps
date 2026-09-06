@@ -1,0 +1,1111 @@
+{
+  "schema": "commander-spell-binding-review/1",
+  "reviewer": "root agent, independent of the delegated compiler implementation",
+  "sourceReleaseHash": "0d3f463389fe52f0c29bac05a63d240760303375a5fd75fd3ef15fbb7c436ef0",
+  "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "reviewedRecords": 55,
+  "scope": "Reviewed all 55 complete Oracle bodies against explicit recipient, quantity, targeting and instruction-order expectations. This is a text-to-program binding review, not per-card gameplay certification or full rule support. Costs and type lines were inspected alongside the programs.",
+  "ruleClausesRead": [
+    "109.5",
+    "119.3",
+    "120.3e",
+    "120.4a",
+    "120.4b",
+    "120.4c",
+    "120.4d",
+    "121.1",
+    "121.2",
+    "121.4",
+    "201.5",
+    "601.2c",
+    "608.2b",
+    "608.2c",
+    "608.2n",
+    "701.8a",
+    "701.8b",
+    "701.8c",
+    "701.13a",
+    "702.12b",
+    "704.4",
+    "903.9a"
+  ],
+  "limits": [
+    "No regeneration, replacement/prevention, protection, triggers or characteristic-changing interactions certified.",
+    "Later text that modifies earlier instructions is excluded by complete-body binding.",
+    "Full integration assertions and source/ruling obligations remain separate."
+  ],
+  "records": [
+    {
+      "identity": "oracle:6b232bb7-d372-4174-a049-5f8d620810e6",
+      "name": "Angel's Mercy",
+      "sourceVersion": "e9051dab92e05133ec1783822d6ad14de2c64799e1e6d9d5e5417544034034e7",
+      "wholeOracleText": "You gain 7 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 7,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:72d793e8-1d19-4ca1-894c-8851a2ebecde",
+      "name": "Bathe in Dragonfire",
+      "sourceVersion": "b9eac00cc3d479cdaa61b8166acd090b342a3405baa67ff583cb1a5b9dface3c",
+      "wholeOracleText": "Bathe in Dragonfire deals 4 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 4
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:4c054431-3667-4e28-9d68-03b43447c35b",
+      "name": "Bilbo's Deadly Slice",
+      "sourceVersion": "dc5951318007e063a08a72ca6da63cee88d4c6fa133fc2dd7fa872b9b7f18610",
+      "wholeOracleText": "Destroy target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "destroy"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:c0899c12-5462-4ff1-a9e5-d99cffa7c6cc",
+      "name": "Bombard",
+      "sourceVersion": "53b62d3db475f3fbb5f0026c3239919d9756ac1e84d76518489b498da4656669",
+      "wholeOracleText": "Bombard deals 4 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 4
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:046923d6-2d58-42ce-afb8-886f4932e76c",
+      "name": "Breath of Fire",
+      "sourceVersion": "e0d43529cdeec2a889c76f35ebb4b2fb91dc37073e7f6dd2820c1434185ba5b7",
+      "wholeOracleText": "Breath of Fire deals 2 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 2
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:d83e1a42-11d1-412a-b66c-850c7a528777",
+      "name": "Brilliant Plan",
+      "sourceVersion": "d7a999f4a60b067cf8d3dbee7da14e0db5473de80a5ccdc106a3f98fb673ac5d",
+      "wholeOracleText": "Draw three cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 3,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:195837b4-e5e4-479d-8dab-6ac77f9fcd83",
+      "name": "Chaplain's Blessing",
+      "sourceVersion": "02a58866e43919ede64cf0e80ed531c6fc4a5693565f8022801b6a973b0e9a84",
+      "wholeOracleText": "You gain 5 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 5,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:1dc816b5-8918-4a0c-bb10-74abe579a98c",
+      "name": "Command the Storm",
+      "sourceVersion": "3735b85b31577600be401dad4bd31fc5ff10bf654a13b21da0dc0c5624e1564f",
+      "wholeOracleText": "Command the Storm deals 5 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 5
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:a3d287ec-1a39-4f91-acf1-7c1d2c00ed89",
+      "name": "Concentrate",
+      "sourceVersion": "3aa08ec5ca4c947fd97bc3d019e3cff1d3c203ff70d40698b8abde8717814c1c",
+      "wholeOracleText": "Draw three cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 3,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:2fcb2342-202d-4baa-82ad-66d782142264",
+      "name": "Concentrated Fire",
+      "sourceVersion": "bcdf96578a17013b4b6031dac0b3c9965bec1e266fe88a689c3efcb27c1d846c",
+      "wholeOracleText": "Concentrated Fire deals 5 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 5
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:62ddc5ae-ced9-4319-854c-1a114c6afc3f",
+      "name": "Counsel of the Soratami",
+      "sourceVersion": "8ba38c005af5a9de334a56ad7607f6653e29864a7ab72412fde7ebaa0b9e2d22",
+      "wholeOracleText": "Draw two cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:273b339c-964b-4a18-8eb5-ceb8abcdfd9e",
+      "name": "Divination",
+      "sourceVersion": "00d836618ec785082d7ed41e79f928fd91f7d0d4533f8364856c9349b6271111",
+      "wholeOracleText": "Draw two cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:59aeeb18-d263-426f-aebc-0f687b09801b",
+      "name": "Dosan's Oldest Chant",
+      "sourceVersion": "098deba7e540ba0f9fcb7c8c7adee60c5a3c48087b1f401f5f81cf69064fbc8f",
+      "wholeOracleText": "You gain 6 life.\nDraw a card.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 6,
+            "recipient": "controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:1fd754fd-c053-4638-b379-46d903357b01",
+      "name": "Douse in Gloom",
+      "sourceVersion": "6369c1a0385d67478d27f2780c45df037b1d3a2dd55bfce0ba1478b96cd151f5",
+      "wholeOracleText": "Douse in Gloom deals 2 damage to target creature and you gain 2 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 2
+          },
+          {
+            "kind": "gain-life",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:da952213-9a3c-4e13-bc5a-55d1e5dbaa5b",
+      "name": "Electrify",
+      "sourceVersion": "1fadb16c4629398429c8adfabc1eb6af6dfda13ff6d93e22f3bdd49e8de90251",
+      "wholeOracleText": "Electrify deals 4 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 4
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:27b4fee0-ae46-4d15-96cd-aff8f3009de8",
+      "name": "Engulfing Eruption",
+      "sourceVersion": "8a066c7aa3ea6f8f97154d6e6b576f1c3f7d89c2f9b841026f04e51eba928328",
+      "wholeOracleText": "Engulfing Eruption deals 5 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 5
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:14363df6-ac0f-476a-bbd8-ce351de0babf",
+      "name": "Essence Extraction",
+      "sourceVersion": "794346356dc379ecedfa3f36394aa7c5d9f681e168bbd6a7dd4c39fe5d1174e7",
+      "wholeOracleText": "Essence Extraction deals 3 damage to target creature and you gain 3 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 3
+          },
+          {
+            "kind": "gain-life",
+            "amount": 3,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:c3a89c67-1931-4d42-98c8-94a40cfd046e",
+      "name": "Eviscerate",
+      "sourceVersion": "e64afe7b539c45491edbcca292b74823203bae9dee3f4989cf3978ef249f59a8",
+      "wholeOracleText": "Destroy target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "destroy"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:a6081d17-599b-4fd2-bd68-55eca939213a",
+      "name": "Explosive Shot",
+      "sourceVersion": "a88fcc4005068dadc78129d06cb5b4ee3afb7dcc0ad1a5f9da973aaa8e0c24ef",
+      "wholeOracleText": "Explosive Shot deals 4 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 4
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:8f968470-ce00-43a3-95f5-2e3fe987be19",
+      "name": "Fell",
+      "sourceVersion": "ab06988ecd1fd5dd3e2b04b2080729d321b84a9f44116ed8240e473a32b760cb",
+      "wholeOracleText": "Destroy target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "destroy"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:afa3eb61-624c-4abe-bf1e-58fa3b4c14a6",
+      "name": "Fiery Finish",
+      "sourceVersion": "1295aab616fdf164b587bdff5bc548aee785cdf2381140a181ae4ebb3c90fdc4",
+      "wholeOracleText": "Fiery Finish deals 7 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 7
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:1be3eea4-eaff-469c-9689-abadac1e848c",
+      "name": "Final Death",
+      "sourceVersion": "0d8a7d29292bdeef4538fa81ac5200c500b3872f6f240952ae22007546468699",
+      "wholeOracleText": "Exile target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "exile"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:e654242f-c7c5-4713-bbd0-26d41de8e2e7",
+      "name": "Final Reward",
+      "sourceVersion": "2298f0dc5a690e0ce2de86f5be07426182f881cbd7e73f9f5d6031879ff60a9d",
+      "wholeOracleText": "Exile target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "exile"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:8d98d674-6811-4d45-b22a-63792e272a2b",
+      "name": "Flame Slash",
+      "sourceVersion": "b721f5cd16dd0022b25263d63370733655604485b0171cfadb049cbfd30b3b7a",
+      "wholeOracleText": "Flame Slash deals 4 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 4
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:7eff84f1-f772-497a-b350-bbc93d0230f7",
+      "name": "Harmonize",
+      "sourceVersion": "1e1632b7777adfedeca6e586c980754139cd3eda74840935edee2580df90862e",
+      "wholeOracleText": "Draw three cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 3,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:3cc48835-3ac0-4774-b380-f9b21d2dc974",
+      "name": "Healing Hands",
+      "sourceVersion": "af2404a81f140ec8ce239547591f32c21ca0f35a98f598d680e4820d9764da29",
+      "wholeOracleText": "Target player gains 4 life.\nDraw a card.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "player",
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 4,
+            "recipient": "target"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:beab66e0-2b6c-478f-ba42-8c0c216a527e",
+      "name": "Heroes' Reunion",
+      "sourceVersion": "8e72e94c84b8cd652a49637ed5e5643bf074f1b1c9d8a891c8e5afff2e7820f9",
+      "wholeOracleText": "Target player gains 7 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "player",
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 7,
+            "recipient": "target"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:dcdf40a9-5a7e-45b1-aee4-36dda598baaf",
+      "name": "Impale",
+      "sourceVersion": "adde556669b9f2b74169e20ff0cff9e7648089040bed92d455267cd2ed20a9a8",
+      "wholeOracleText": "Destroy target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "destroy"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:8f32ceb2-92c2-4dde-bf73-40bb79c3fcef",
+      "name": "Inspiration",
+      "sourceVersion": "5027154446951c932a29f443e58f0c460fddb2e8cfdde09b794d952886515e7b",
+      "wholeOracleText": "Target player draws two cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "player",
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 2,
+            "recipient": "target"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:ce588fd3-642e-4df9-8061-6fcfc6e81270",
+      "name": "Jace's Ingenuity",
+      "sourceVersion": "705c67b4d507fb896cd69e8f80379d058cf1c9e74fec4cd01f30a9f5a4bb28ba",
+      "wholeOracleText": "Draw three cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 3,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:bc59bf58-373d-4562-9a67-0721fcf2f098",
+      "name": "Last Kiss",
+      "sourceVersion": "8b9539f1c798cf150b20fac136c2a070e96964c84ff576b6ccfb45b5ddb7c322",
+      "wholeOracleText": "Last Kiss deals 2 damage to target creature and you gain 2 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 2
+          },
+          {
+            "kind": "gain-life",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:938b4e2c-88d9-4637-bc00-e228920c9a78",
+      "name": "Murder",
+      "sourceVersion": "e4cf556c8fd67d94dbca7e263d4478955e7e9bfc66b0383fbc57a21b05fdd53c",
+      "wholeOracleText": "Destroy target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "destroy"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:f7571a2e-aaf3-4148-ab76-2a2e35273c70",
+      "name": "Natural Spring",
+      "sourceVersion": "33919e1b77ee872bc775808d57f6c479b462dbba11104e2f2949ad844c5d01a7",
+      "wholeOracleText": "Target player gains 8 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "player",
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 8,
+            "recipient": "target"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:9d5e82d3-79ac-4dbe-80e8-1db6dd6c8767",
+      "name": "Nourish",
+      "sourceVersion": "9d1c4f1970ee835b2bbe2dcaaf0fc88d052adc40946ad681e9fe2d5805e9b9e7",
+      "wholeOracleText": "You gain 6 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 6,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:1f544a9f-c238-4858-be19-d6cd7d023dcc",
+      "name": "Opportunity",
+      "sourceVersion": "30f15e6593a0bcebe9edbfe3a304e9299905ad9593e22560f0fb6e2dd253fdd8",
+      "wholeOracleText": "Target player draws four cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "player",
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 4,
+            "recipient": "target"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:ff03a063-9634-4746-a208-9dbcde5c6bdb",
+      "name": "Overflowing Insight",
+      "sourceVersion": "26db79a902ef9044fd18369e7f94eac23e33a9bd4e92c76b8997910c470bbae4",
+      "wholeOracleText": "Target player draws seven cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "player",
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 7,
+            "recipient": "target"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:06d77149-52b6-4d2c-bfb9-1c25f6b1b0bb",
+      "name": "Pharika's Cure",
+      "sourceVersion": "c43f8957eb3ad16cc28395e4daac320f9e11ef9ef4701d50830b1816d9185879",
+      "wholeOracleText": "Pharika's Cure deals 2 damage to target creature and you gain 2 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 2
+          },
+          {
+            "kind": "gain-life",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:7bff8d4a-1c7d-48b8-b3e3-737dd6f01823",
+      "name": "Quick Study",
+      "sourceVersion": "e073aa24b5adf3fc8187dd530f920aa1abadb55e1015fe1ddb5ee9328b7341b8",
+      "wholeOracleText": "Draw two cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:91b8c0bc-2599-4423-a23f-5dc95b23cf25",
+      "name": "Ragefire",
+      "sourceVersion": "1638b56fc0c60cc1a7037fceec37f47009c6d3f4e96ffb4a18573b2d757a4476",
+      "wholeOracleText": "Ragefire deals 3 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 3
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:053a90b8-61b1-4390-afc0-c5eaef0138a9",
+      "name": "Repulsor Rays",
+      "sourceVersion": "d641c418b5a3652535f7af815f8b073cefe2339a15879829d63e41729b480bfe",
+      "wholeOracleText": "Repulsor Rays deals 3 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 3
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:129ec223-e76d-491d-b299-07ac91168d31",
+      "name": "Resupply",
+      "sourceVersion": "e8770d724f2bf8a2bd10953f234aa8694dee33dc3f6b0b4e361f1eae5c5a05b1",
+      "wholeOracleText": "You gain 6 life.\nDraw a card.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 6,
+            "recipient": "controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:b1385b03-cb4b-4812-857f-7421f1df39af",
+      "name": "Revitalize",
+      "sourceVersion": "fb337595e5e3fe9197aed80a12cd72f5589c2db771395a9c332463d67e54b608",
+      "wholeOracleText": "You gain 3 life.\nDraw a card.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 3,
+            "recipient": "controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:ad470afc-d1a5-4e64-8192-fb6308ed9bfe",
+      "name": "Reviving Dose",
+      "sourceVersion": "98a0ef644f3c7c9ba7287dadbcc323504817cbf55f92dfafaaf1dd7bf0b9b3fc",
+      "wholeOracleText": "You gain 3 life.\nDraw a card.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 3,
+            "recipient": "controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:7c9d8065-9ab0-4468-a11c-383bd036029f",
+      "name": "Ritual of Rejuvenation",
+      "sourceVersion": "cbe18e1e5627632c3f9891c71bd28a8e7fbb2148739b59359eafc1b4c9852302",
+      "wholeOracleText": "You gain 4 life.\nDraw a card.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 4,
+            "recipient": "controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:30870ee5-6ad7-48a9-983e-d3b018f2344f",
+      "name": "Sacred Nectar",
+      "sourceVersion": "bb5769a40aeefe2133158550beb137a5eb3f6336cec08803fde46c700d9f6af7",
+      "wholeOracleText": "You gain 4 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 4,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:e13113ba-1923-493c-a48d-ca320b7adbde",
+      "name": "Scorching Shot",
+      "sourceVersion": "1fc370e6b0d6c430a0b70a3bbb631cf2bc0301ed498b2a0aa45be30567db393c",
+      "wholeOracleText": "Scorching Shot deals 5 damage to target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 5
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:1f493e26-a556-4ca0-bb44-5408800ccf82",
+      "name": "Soothing Balm",
+      "sourceVersion": "a736c66d092b98e9d90fa482fd87407554ad379218cb66baac150f1d48f9be78",
+      "wholeOracleText": "Target player gains 5 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "player",
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 5,
+            "recipient": "target"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:ff27ff37-96c0-41af-8881-a078e884e67b",
+      "name": "Sorin's Thirst",
+      "sourceVersion": "54ce92b3ffdee84710e229293608d9ee2c474fdaeb277a1bc17934363c2e309d",
+      "wholeOracleText": "Sorin's Thirst deals 2 damage to target creature and you gain 2 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 2
+          },
+          {
+            "kind": "gain-life",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:6fcdb870-a1b6-49fe-8b5c-cdde074a7f7d",
+      "name": "Spring of Eternal Peace",
+      "sourceVersion": "b157193fc841c4bec05180da02a9364e057dd0209b844f8e493dfca9b2cd7cab",
+      "wholeOracleText": "You gain 8 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 8,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:72897780-094d-4a21-8b1c-419a9defd2fb",
+      "name": "Tidings",
+      "sourceVersion": "12b35d1e6dffb7159971255dab5fcccb2d9cd446048dd0da264df70d90c5971b",
+      "wholeOracleText": "Draw four cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 4,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:6365aba1-78d3-416c-89cd-9449578eedbf",
+      "name": "Touch of Brilliance",
+      "sourceVersion": "faf964788e4ab6356b7e320590801897f08f1e5763397c4b37a0201922d0ef24",
+      "wholeOracleText": "Draw two cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:38ea22cd-2c5d-4f66-a111-207aca4c67c3",
+      "name": "Vicious Hunger",
+      "sourceVersion": "130dbcbdb76f19333e36ecc6fa32219cd0dead23034d6400c3aa1a0a0ad4ca5d",
+      "wholeOracleText": "Vicious Hunger deals 2 damage to target creature and you gain 2 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 2
+          },
+          {
+            "kind": "gain-life",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:b14d3226-adc2-4bdd-9e69-fefdc946ac04",
+      "name": "Wander Off",
+      "sourceVersion": "ae11095b558e6a3f2cfd6ac3cef8e7a554a8d894ed5e56874a02883d2d32fd52",
+      "wholeOracleText": "Exile target creature.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "exile"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:ff568a29-e31a-4bc3-b8a3-8fa56f91d52d",
+      "name": "Weave Fate",
+      "sourceVersion": "8167c84896eca2ab71d1753c8265ef9106f4c975995a979f980a690f56530c0d",
+      "wholeOracleText": "Draw two cards.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "amount": 2,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    },
+    {
+      "identity": "oracle:df702285-3577-47cc-aa1e-868921cdf6f2",
+      "name": "Whitesun's Passage",
+      "sourceVersion": "307fea5df1a4da15e1763d6d5a62f8579e87ab5ead5bbb5ef6e210b2c376f4f7",
+      "wholeOracleText": "You gain 5 life.",
+      "expectedProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 5,
+            "recipient": "controller"
+          }
+        ]
+      },
+      "bindingReview": "accepted-within-declared-primitives",
+      "perRecordExecutionCertified": false
+    }
+  ],
+  "fullSnapshotSupported": false
+}

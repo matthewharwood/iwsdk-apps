@@ -2,7 +2,9 @@
 
 A reusable **application starter kit**: Bun + Turborepo, React/TanStack Start, IWSDK/Three.js, SQLite Wasm and an optional LiteRT.js adapter. Start in a browser, use the same table in VR, and save locally without accounts or a backend.
 
-This is the reusable starter and working example selected for delivery. The attached MTG brief informed the boundaries; **this is not a Commander implementation**. The neutral example starts with fifteen tokens: take one, two or three, and take the last to win. The opponent uses a local heuristic. No trained model is shipped.
+The neutral XR example starts with fifteen tokens: take one, two or three, and take the last to win. The opponent uses a local heuristic. No trained model is shipped. The workspace also contains an in-progress Commander engine with source-bound development cards, real two/four-seat headless games, SQLite save/replay and browser parity. **Full-snapshot Commander support remains incomplete.** See the [Commander commands and coverage contract](docs/commander/README.md).
+
+The shared [card design system](packages/card-design/README.md) extracts the printable studio's typography, symbols and information architecture. Open `/cards` in the web app to explore its display fixtures.
 
 ## Run it
 
@@ -37,7 +39,7 @@ bun install --frozen-lockfile
 bun run dev
 ```
 
-“Blank” means a neutral, runnable starting point with the small integration example and no product content, accounts or existing saves. The generator copies the canonical `apps/web`, shared packages, checks and project skills, assigns a new workspace scope/app identity, and keeps working inside each generated workspace. Replace the example rules/UI with your product; the infrastructure remains ready. It refuses all existing output directories and never copies `.git`, environment secrets, node_modules, caches, or local database files. It does not install dependencies or initialize Git without your own command.
+The generator copies the current canonical `apps/web`, headless CLI, shared packages, checks and project skills, assigns a new workspace scope/app identity, and keeps working inside each generated workspace. The token game and card library are replaceable examples. Bulk card sources, match databases, accounts and existing saves are absent from generated workspaces. It refuses existing output directories and never copies `.git`, environment secrets, node_modules, caches, or local databases. It does not install dependencies or initialize Git without your own command.
 
 Turbo's interactive entry point is also available: `bunx turbo gen app`. App dev servers default to the same port, so stop one before running another or pass a different Vite port. App IDs isolate local databases; browser origin changes still produce separate storage.
 
