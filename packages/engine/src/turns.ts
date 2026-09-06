@@ -22,6 +22,7 @@ import {
   requireActivePlayer,
   requireRule,
 } from "./common";
+import { expireTurnEffects } from "./continuous";
 
 export function givePriority(
   state: RulesState,
@@ -91,6 +92,7 @@ export function finishCleanup(state: RulesState, release: ExecutionRegistry): vo
     entry.damage = 0;
     entry.deathtouchDamage = false;
   }
+  expireTurnEffects(state);
   clearMana(state);
   emit(state, "CleanupPerformed", { turn: state.turn });
   hit(state, "rule:514.2");

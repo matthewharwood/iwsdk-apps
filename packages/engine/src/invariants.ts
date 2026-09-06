@@ -19,7 +19,8 @@ function assertUndealtSetup(state: RulesState, seats: ReadonlySet<string>): void
       Object.keys(state.abilities).length === 0 &&
       state.pendingTriggers.length === 0 &&
       state.triggerPlacement === null &&
-      state.frames.length === 0,
+      state.frames.length === 0 &&
+      state.continuousEffects.length === 0,
     "Cards or continuations exist before starting-player selection",
   );
   invariant(
@@ -126,8 +127,49 @@ function assertTriggers(state: RulesState, release: ExecutionRegistry): void {
       "Trigger ordering decision has no continuation",
     );
 }
+function assertContinuousEffects(state: RulesState, release: ExecutionRegistry): void {
+  invariant(
+    new Set(state.continuousEffects.map((effect) => effect.id)).size ===
+      state.continuousEffects.length,
+    "Duplicate continuous effect identity",
+  );
+  for (const effect of state.continuousEffects) {
+    const source = definition(release, effect.source.definition);
+    invariant(
+      effect.id === `${state.manifest.id}:continuous:${effect.eventIndex}:${effect.programIndex}` &&
+        effect.eventIndex < state.eventSequence,
+      "Continuous effect occurrence mismatch",
+    );
+    invariant(
+      effect.source.zone === "stack" &&
+        effect.source.id === `${effect.source.lineage}@${effect.source.generation}`,
+      "Continuous effect source incarnation mismatch",
+    );
+    invariant(
+      effect.controller === effect.source.controller &&
+        state.players.some((seat) => seat.id === effect.controller),
+      "Continuous effect controller differs from its source snapshot",
+    );
+    invariant(
+      effect.affectedObject === effect.source.spellState?.target,
+      "Continuous effect changed its fixed affected incarnation",
+    );
+    invariant(
+      effect.expiresAfterTurn === state.turn && state.turn > 0,
+      "Continuous effect escaped its duration",
+    );
+    invariant(
+      source.sourceVersion === effect.sourceVersion &&
+        source.spellProgram?.effects[effect.programIndex]?.kind === "modify-creature" &&
+        canonicalJson(source.spellProgram.effects[effect.programIndex]) ===
+          canonicalJson(effect.modifier),
+      "Continuous effect differs from its pinned program",
+    );
+  }
+}
 export function assertInvariants(state: RulesState, release: ExecutionRegistry): void {
   assertRegistryPin(state.manifest, release);
+  assertContinuousEffects(state, release);
   const seats = new Set(state.players.map((seat) => seat.id));
   invariant(seats.has(state.startingPlayerChooser), "Starting-player chooser is not a match seat");
   if (state.startingPlayer === null) {

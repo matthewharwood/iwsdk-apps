@@ -8,6 +8,11 @@ import {
   type ManaColor,
   selfEntryEffects,
 } from "@iwsdk-apps/contracts";
+import {
+  exactKeywordReminder,
+  KEYWORD_REMINDER_RECIPE_VERSION,
+  KEYWORD_REMINDER_RULES,
+} from "./keyword-reminders";
 import { proposeSelfEntryBody, SELF_ENTRY_RECIPE_VERSION, SELF_ENTRY_RULES } from "./self-entry";
 import {
   bindSelfEntrySequence,
@@ -24,7 +29,27 @@ export {
 } from "./self-entry-sequence";
 
 import { bindExactSpellFamily, SPELL_FAMILY_VERSION } from "./spell-families";
+import { bindTemporaryCreatureSpell, TEMPORARY_CREATURE_VERSION } from "./temporary-creature";
+
+export {
+  bindTemporaryCreatureSpell,
+  reviewedTemporaryCreatureDefinition,
+  TEMPORARY_CREATURE_ARCHIVE,
+  TEMPORARY_CREATURE_BODIES,
+  TEMPORARY_CREATURE_RULES,
+  TEMPORARY_CREATURE_SOURCE_BUNDLE,
+  TEMPORARY_CREATURE_SPELLS,
+  TEMPORARY_CREATURE_VERSION,
+} from "./temporary-creature";
+
 import { REVIEWED_SPELLS, SPELL_RECIPE_VERSION } from "./spells";
+
+export {
+  exactKeywordReminder,
+  KEYWORD_REMINDER_RECIPE_VERSION,
+  KEYWORD_REMINDER_REGISTRY,
+  KEYWORD_REMINDER_RULES,
+} from "./keyword-reminders";
 
 export {
   proposeSelfEntryBody,
@@ -141,11 +166,19 @@ function characteristics(
   };
 }
 
-function textProgram(text: string): { keywords: Keyword[]; manaAbilities: ManaColor[] } | null {
+function textProgram(
+  text: string,
+  keywordReminders = false,
+): { keywords: Keyword[]; manaAbilities: ManaColor[] } | null {
   const keywords: Keyword[] = [],
     manaAbilities: ManaColor[] = [];
   if (!text) return { keywords, manaAbilities };
   for (const line of text.split("\n")) {
+    const annotated = keywordReminders ? exactKeywordReminder(line) : null;
+    if (annotated) {
+      keywords.push(annotated);
+      continue;
+    }
     const mana = /^\{T\}: Add \{([WUBRGC])\}\.$/.exec(line);
     if (mana?.[1]) {
       manaAbilities.push(mana[1] as ManaColor);
@@ -202,6 +235,53 @@ export function reviewedSelfEntryDefinition(definition: CardDefinition): boolean
     canonicalJson(definition.triggerPrograms) === canonicalJson([entry.program]) &&
     canonicalJson(definition.keywords) === canonicalJson(remainder.keywords) &&
     canonicalJson(definition.manaAbilities) === canonicalJson(remainder.manaAbilities)
+  );
+}
+
+/** Shared ordinary characteristic proof used only by reviewed creature constructors. */
+function ordinaryDefinition(definition: CardDefinition): boolean {
+  const typeParts = definition.typeLine.split(" — ");
+  const typeTokens = typeParts[0]?.split(" ") ?? [];
+  if (
+    !definition.types.includes("Creature") ||
+    definition.types.some((type) => !ORDINARY_TYPES.has(type)) ||
+    definition.supertypes.some((type) => !SUPERTYPES.has(type)) ||
+    typeParts.length > 2 ||
+    canonicalJson(definition.types) !==
+      canonicalJson(typeTokens.filter((type) => !SUPERTYPES.has(type))) ||
+    canonicalJson(definition.supertypes) !==
+      canonicalJson(typeTokens.filter((type) => SUPERTYPES.has(type))) ||
+    canonicalJson(definition.subtypes) !== canonicalJson(typeParts[1]?.split(" ") ?? []) ||
+    !Number.isSafeInteger(definition.power) ||
+    !Number.isSafeInteger(definition.toughness) ||
+    definition.manaCost === null ||
+    definition.manaValue !==
+      Object.values(definition.manaCost).reduce((sum, amount) => sum + amount, 0) ||
+    definition.spellProgram !== undefined
+  )
+    return false;
+  return true;
+}
+/** Source annotations do not change the rule programs. Unknown or altered complete bodies fail closed. */
+export function reviewedKeywordReminderDefinition(definition: CardDefinition): boolean {
+  if (
+    definition.implementationRevision !== KEYWORD_REMINDER_RECIPE_VERSION ||
+    !ordinaryDefinition(definition) ||
+    definition.id !== `oracle:${definition.oracleId}` ||
+    definition.deckLimit !== 1 ||
+    definition.commanderEligible !== definition.supertypes.includes("Legendary") ||
+    !definition.oracleText.split("\n").some((line) => exactKeywordReminder(line) !== null)
+  )
+    return false;
+  const entry = proposeSelfEntryBody(definition.oracleText);
+  const program = textProgram(entry?.remainder ?? definition.oracleText, true);
+  return (
+    program !== null &&
+    canonicalJson(definition.keywords) === canonicalJson(program.keywords) &&
+    canonicalJson(definition.manaAbilities) === canonicalJson(program.manaAbilities) &&
+    (entry
+      ? canonicalJson(definition.triggerPrograms) === canonicalJson([entry.program])
+      : definition.triggerPrograms === undefined)
   );
 }
 
@@ -335,14 +415,46 @@ function familySpell(
   return { kind: "bound", definition, recipes: [SPELL_FAMILY_VERSION, match.family] };
 }
 
+function consistentReminderMetadata(
+  input: CatalogCard,
+  program: ReturnType<typeof textProgram>,
+): boolean {
+  if (input.identity !== input.oracle.oracle_id || program === null) return false;
+  const declared = [
+    ...new Set(input.oracle.keywords.map((word) => word.toLowerCase().replaceAll(" ", "-"))),
+  ].sort();
+  return canonicalJson(declared) === canonicalJson([...program.keywords].sort());
+}
+
+interface BindingOptions {
+  spellFamilies?: boolean;
+  selfEntryTriggers?: boolean;
+  selfEntrySequences?: boolean;
+  temporaryCreatureSpells?: boolean;
+  keywordReminders?: boolean;
+}
+function bindSpell(
+  input: CatalogCard,
+  parts: NonNullable<ReturnType<typeof characteristics>>,
+  options: BindingOptions,
+): BindingResult {
+  if (options.temporaryCreatureSpells) {
+    const definition = bindTemporaryCreatureSpell(input);
+    if (definition) return { kind: "bound", definition, recipes: [TEMPORARY_CREATURE_VERSION] };
+  }
+  if (REVIEWED_SPELLS.some((recipe) => recipe.identity === input.identity))
+    return reviewedSpell(input, parts);
+  if (
+    options.spellFamilies &&
+    (input.oracle.type_line === "Instant" || input.oracle.type_line === "Sorcery")
+  )
+    return familySpell(input, parts);
+  return reviewedSpell(input, parts);
+}
 /** Binds only explicitly reviewed data recipes. No unknown English clause can become a no-op. */
 export function bindDevelopmentCard(
   input: CatalogCard,
-  options: {
-    spellFamilies?: boolean;
-    selfEntryTriggers?: boolean;
-    selfEntrySequences?: boolean;
-  } = {},
+  options: BindingOptions = {},
 ): BindingResult {
   if (!input.eligibility.some((row) => row.role === "main-deck" && row.status === "candidate"))
     return { kind: "unsupported", reason: "not-observed-main-deck-candidate" };
@@ -352,13 +464,16 @@ export function bindDevelopmentCard(
   const parts = characteristics(input);
   if (!parts) return { kind: "unsupported", reason: "type-characteristics-not-established" };
   if (parts.types.includes("Land")) return basicLand(input, parts);
-  if (parts.types.length === 1 && (parts.types[0] === "Instant" || parts.types[0] === "Sorcery")) {
-    if (REVIEWED_SPELLS.some((recipe) => recipe.identity === input.identity))
-      return reviewedSpell(input, parts);
-    if (options.spellFamilies && (card.type_line === "Instant" || card.type_line === "Sorcery"))
-      return familySpell(input, parts);
-    return reviewedSpell(input, parts);
-  }
+  if (parts.types.length === 1 && (parts.types[0] === "Instant" || parts.types[0] === "Sorcery"))
+    return bindSpell(input, parts, options);
+  return bindOrdinaryCreature(input, parts, options);
+}
+function bindOrdinaryCreature(
+  input: CatalogCard,
+  parts: NonNullable<ReturnType<typeof characteristics>>,
+  options: BindingOptions,
+): BindingResult {
+  const card = input.oracle;
   if (!parts.types.includes("Creature") || parts.types.some((type) => !ORDINARY_TYPES.has(type)))
     return { kind: "unsupported", reason: "card-type-requires-specialized-definition" };
   const manaCost = parsePlainManaCost(card.mana_cost ?? ""),
@@ -383,7 +498,18 @@ export function bindDevelopmentCard(
       card.keywords.some((keyword) => !KEYWORDS.has(keyword.toLowerCase())))
   )
     return { kind: "unsupported", reason: "self-entry-source-identity-or-keyword-discrepancy" };
-  const program = textProgram(entry?.remainder ?? card.oracle_text);
+  const body = entry?.remainder ?? card.oracle_text;
+  const hasReminder =
+    options.keywordReminders === true &&
+    body.split("\n").some((line) => exactKeywordReminder(line) !== null);
+  if (hasReminder && sequence)
+    return { kind: "unsupported", reason: "keyword-reminder-sequence-composition-not-reviewed" };
+  const program = textProgram(body, hasReminder);
+  if (hasReminder && !consistentReminderMetadata(input, program))
+    return {
+      kind: "unsupported",
+      reason: "keyword-reminder-source-identity-or-keyword-discrepancy",
+    };
   if (!program)
     return {
       kind: "unsupported",
@@ -391,6 +517,7 @@ export function bindDevelopmentCard(
     };
   const recipes = ["ordinary-creature/1"];
   if (entry) recipes.push(entryRecipe);
+  if (hasReminder) recipes.push(KEYWORD_REMINDER_RECIPE_VERSION);
   if (program.keywords.length) recipes.push("keyword-creature/1");
   if (program.manaAbilities.length) recipes.push("mana-creature/1");
   const obligations = [
@@ -399,6 +526,7 @@ export function bindDevelopmentCard(
     "rule:903.5",
     ...program.keywords.map((keyword) => `rule:${KEYWORD_RULES[keyword]}`),
   ];
+  if (hasReminder) obligations.push(...KEYWORD_REMINDER_RULES.map((rule) => `rule:${rule}`));
   if (program.manaAbilities.length) obligations.push("rule:605.1a", "rule:302.6");
   if (entry)
     obligations.push(
@@ -417,9 +545,84 @@ export function bindDevelopmentCard(
     toughness,
     ...program,
     ...(entry ? { triggerPrograms: [entry.program], implementationRevision: entryRecipe } : {}),
+    ...(hasReminder ? { implementationRevision: KEYWORD_REMINDER_RECIPE_VERSION } : {}),
     commanderEligible: parts.supertypes.includes("Legendary"),
     deckLimit: 1,
     obligations,
   });
   return { kind: "bound", definition, recipes };
+}
+
+/** Reconstruct old bounded declarations instead of trusting a familiar revision label. */
+export function reviewedLegacyDefinition(definition: CardDefinition): boolean {
+  if (definition.triggerPrograms !== undefined) return false;
+  if (definition.implementationRevision === RECIPE_VERSION) {
+    if (definition.spellProgram !== undefined) return false;
+    const color = BASIC_TYPES[definition.name];
+    if (definition.types.includes("Land"))
+      return (
+        color !== undefined &&
+        definition.typeLine === `Basic Land — ${definition.name}` &&
+        canonicalJson(definition.types) === canonicalJson(["Land"]) &&
+        canonicalJson(definition.supertypes) === canonicalJson(["Basic"]) &&
+        canonicalJson(definition.subtypes) === canonicalJson([definition.name]) &&
+        (definition.oracleText === "" || definition.oracleText === `({T}: Add {${color}}.)`) &&
+        definition.manaCost === null &&
+        definition.manaValue === 0 &&
+        definition.power === null &&
+        definition.toughness === null &&
+        definition.keywords.length === 0 &&
+        canonicalJson(definition.manaAbilities) === canonicalJson([color]) &&
+        definition.deckLimit === null &&
+        !definition.commanderEligible
+      );
+    if (
+      !ordinaryDefinition(definition) ||
+      definition.deckLimit !== 1 ||
+      definition.commanderEligible !== definition.supertypes.includes("Legendary")
+    )
+      return false;
+    const program = textProgram(definition.oracleText);
+    return (
+      program !== null &&
+      canonicalJson(program.keywords) === canonicalJson(definition.keywords) &&
+      canonicalJson(program.manaAbilities) === canonicalJson(definition.manaAbilities)
+    );
+  }
+  return reviewedLegacySpell(definition);
+}
+function reviewedLegacySpell(definition: CardDefinition): boolean {
+  if (definition.typeLine !== "Instant" && definition.typeLine !== "Sorcery") return false;
+  if (
+    canonicalJson(definition.types) !== canonicalJson([definition.typeLine]) ||
+    definition.subtypes.length ||
+    definition.supertypes.length ||
+    definition.keywords.length ||
+    definition.manaAbilities.length ||
+    definition.power !== null ||
+    definition.toughness !== null ||
+    definition.commanderEligible ||
+    definition.deckLimit !== 1 ||
+    definition.manaCost === null ||
+    definition.manaValue !==
+      Object.values(definition.manaCost).reduce((sum, value) => sum + value, 0)
+  )
+    return false;
+  if (definition.implementationRevision === SPELL_FAMILY_VERSION) {
+    const match = bindExactSpellFamily(definition.name, definition.oracleText);
+    return (
+      match !== null && canonicalJson(match.program) === canonicalJson(definition.spellProgram)
+    );
+  }
+  if (definition.implementationRevision !== SPELL_RECIPE_VERSION) return false;
+  const recipe = REVIEWED_SPELLS.find((row) => row.identity === definition.oracleId);
+  return (
+    recipe !== undefined &&
+    definition.sourceVersion === recipe.sourceVersion &&
+    definition.name === recipe.name &&
+    definition.typeLine === recipe.type &&
+    definition.oracleText === recipe.text &&
+    canonicalJson(definition.manaCost) === canonicalJson(parsePlainManaCost(recipe.cost)) &&
+    canonicalJson(definition.spellProgram) === canonicalJson(recipe.program)
+  );
 }

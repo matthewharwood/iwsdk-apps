@@ -11,9 +11,11 @@ import {
 } from "@iwsdk-apps/catalog";
 import {
   compileDevelopmentRelease,
+  compileKeywordReminderDraft,
   compileSelfEntryDraft,
   compileSpellFamilyDraft,
   makeDevelopmentDecks,
+  makeKeywordReminderDecks,
 } from "@iwsdk-apps/compiler";
 import { createPreparedMatchArtifact } from "@iwsdk-apps/compiler/prepared";
 import {
@@ -273,17 +275,36 @@ async function runExecutionCommand(command: string | undefined): Promise<boolean
   return true;
 }
 async function compileCatalog(): Promise<void> {
-  const triggers = args.includes("--self-entry-triggers");
-  const families = args.includes("--spell-families");
-  const compiled = triggers
-    ? await compileSelfEntryDraft(catalogPath)
-    : families
-      ? await compileSpellFamilyDraft(catalogPath)
-      : await compileDevelopmentRelease(catalogPath);
-  const decks = await makeDevelopmentDecks(compiled.release, {
+  const allReviewed = args.includes("--all-reviewed");
+  const triggers = allReviewed || args.includes("--self-entry-triggers");
+  const families = allReviewed || args.includes("--spell-families");
+  const compiled = allReviewed
+    ? await compileKeywordReminderDraft(catalogPath)
+    : triggers
+      ? await compileSelfEntryDraft(catalogPath)
+      : families
+        ? await compileSpellFamilyDraft(catalogPath)
+        : await compileDevelopmentRelease(catalogPath);
+  // Preserve the original 24 fixture identities while adding reminder-card decks.
+  const fixtureRelease = allReviewed
+    ? (
+        await compileDevelopmentRelease(catalogPath, {
+          spellFamilies: true,
+          selfEntryTriggers: true,
+          selfEntrySequences: true,
+          temporaryCreatureSpells: true,
+        })
+      ).release
+    : compiled.release;
+  const priorDecks = await makeDevelopmentDecks(fixtureRelease, {
     includeFamilyDecks: families,
     includeTriggerDecks: triggers,
+    includeTemporaryDecks: allReviewed,
   });
+  const reminders = allReviewed
+    ? await makeKeywordReminderDecks(compiled.release, priorDecks)
+    : null;
+  const decks = reminders?.decks ?? priorDecks;
   const retained = resolve(directory, "compilations", compiled.release.hash);
   await mkdir(retained, { recursive: true });
   await write(resolve(retained, "release.json"), compiled.release);
@@ -291,9 +312,17 @@ async function compileCatalog(): Promise<void> {
   await write(resolve(retained, "decks.json"), decks);
   if ("expansion" in compiled)
     await write(
-      resolve(retained, triggers ? "self-entry-expansion.json" : "spell-family-expansion.json"),
+      resolve(
+        retained,
+        allReviewed
+          ? "keyword-reminder-expansion.json"
+          : triggers
+            ? "self-entry-expansion.json"
+            : "spell-family-expansion.json",
+      ),
       compiled.expansion,
     );
+  if (reminders) await write(resolve(retained, "keyword-reminder-decks.json"), reminders.report);
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))
     await write(resolve(directory, "development-compilation.json"), compiled.report);

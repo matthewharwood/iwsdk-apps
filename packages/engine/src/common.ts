@@ -10,7 +10,11 @@ import {
   type RulesState,
   type Zone,
 } from "@iwsdk-apps/contracts";
+import { characteristics } from "./characteristics";
 import { orderedObjects } from "./object-order";
+
+export { characteristics } from "./characteristics";
+
 import { battlefieldCreatures, selectedObjects } from "./selection";
 
 export class RulesError extends Error {
@@ -57,24 +61,22 @@ export function creatures(state: RulesState, release: ExecutionRegistry): GameOb
   return selectedObjects(state, release, battlefieldCreatures);
 }
 export function power(state: RulesState, release: ExecutionRegistry, id: string): number {
-  const current = object(state, id);
-  const base = card(state, release, id).power;
+  const base = characteristics(state, release, id).power;
   if (base === null)
     throw new RulesError(
       "UnsupportedMechanic",
       "Dynamic creature power is not implemented in this release.",
     );
-  return base + (current.counters["+1/+1"] ?? 0) - (current.counters["-1/-1"] ?? 0);
+  return base;
 }
 export function toughness(state: RulesState, release: ExecutionRegistry, id: string): number {
-  const current = object(state, id);
-  const base = card(state, release, id).toughness;
+  const base = characteristics(state, release, id).toughness;
   if (base === null)
     throw new RulesError(
       "UnsupportedMechanic",
       "Dynamic creature toughness is not implemented in this release.",
     );
-  return base + (current.counters["+1/+1"] ?? 0) - (current.counters["-1/-1"] ?? 0);
+  return base;
 }
 export function hit(state: RulesState, obligation: string): void {
   state.coverage[obligation] = (state.coverage[obligation] ?? 0) + 1;

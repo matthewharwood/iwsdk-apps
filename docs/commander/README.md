@@ -12,7 +12,7 @@ bun run commander investigate inventory
 bun run commander investigate obligations
 bun run commander investigate sample --size 300
 bun run commander investigate scenarios
-bun run commander compile --self-entry-triggers
+bun run commander compile --all-reviewed
 bun run commander simulate --mode two-seat --seed 1901 --id example-two
 bun run commander simulate --mode four-seat --seed 2901 --id example-four --pause-at payment
 bun run commander simulate --resume example-four
@@ -24,6 +24,8 @@ bun run commander coverage --fail-on-unresolved
 ```
 
 `sources fetch` prints the exact manifest path. Compilation binds reviewed syntax recipes to immutable Oracle versions. Unsupported text stays unsupported; the executable never interprets English at runtime. Coverage and verification intentionally return failure while release obligations remain open. `--data <directory>` chooses a separate local data store; do not point it at the token example's saves.
+
+`--all-reviewed` compiles all 1,090 currently reviewed definitions and 31 legal development decks, including 97 temporary creature modifiers and 232 exact keyword-reminder bodies. Source admission verifies every definition against the closed authenticated registry. Earlier constructor flags remain available for their narrower development subsets.
 
 `--self-entry-triggers` includes the reviewed spell families and complete creature bodies with mandatory self-entry draw or life-gain abilities. These abilities capture their controller and source incarnation, wait until state-based actions finish, and enter the stack separately from the physical card. Their resolution survives source removal. Multiple abilities controlled by one player require that player's explicit ordering choice. Other trigger families remain unsupported.
 
@@ -55,4 +57,6 @@ The browser parity harness loads the same pure engine in a real browser worker w
 
 The studio's card design now lives in `packages/card-design`: shared schemas, typography, mana symbols, annotations, multi-face composition, hidden cards and scoped CSS. `apps/web/app` consumes it at `/cards`; the original studio remains a reference. Display fixtures and semantic engine support have separate provenance and coverage.
 
-See [baseline](baseline.md), [reuse assessment](reuse-assessment.md), [independent scenario expectations](scenario-expectations.md), [card design audit](card-design-audit.md), and the reconstructed [goal contract](goal-contract.json). The [engine 0.8 checkpoint](development-0.8-evidence.json) has 761 source bindings and 20 legal development decks. Its [ordered-trigger evidence](ordered-self-entry-0.8.md) records complete native/browser games separately from constructed source-card scenarios. The [G2 audit](g2-scenario-audit-0.7.md) maps the substantial remaining scenario gaps. The [0.6 fixed regression](fixed-regression-0.6-evidence.json) completed and replayed all 64 declared games; the [0.7 checkpoint](development-0.7-evidence.json) and earlier frozen executors retain their own source versions. These milestones do not satisfy the unresolved full-universe obligations.
+See [baseline](baseline.md), [reuse assessment](reuse-assessment.md), [independent scenario expectations](scenario-expectations.md), [card design audit](card-design-audit.md), and the reconstructed [goal contract](goal-contract.json). The [engine 0.9 checkpoint](development-0.9-evidence.json) has 1,090 source bindings and 31 legal development decks. Its [temporary-effect evidence](continuous-effects-0.9.md) separates source review, constructed assertions and complete native/browser games. The [source authentication](source-authentication-v0.9.md) documents closed production admission. The [G2 audit](g2-scenario-audit-0.7.md) records the remaining difficult-scenario gaps.
+
+The [0.9 fixed regression](fixed-regression-0.9-evidence.json) completed and replayed all 64 declared games. The historical [0.3 exploration](exploration-0.3-evidence.json) completed all 1,024 assignments (256 two-seat, 768 four-seat); those games retain the 0.3 source/runtime pins and do not certify later additions. The [0.6](fixed-regression-0.6-evidence.json), [0.7](fixed-regression-0.7-evidence.json), and [0.8 checkpoint](development-0.8-evidence.json) retain their separate provenance. These milestones leave full-universe implementation and qualification outstanding.

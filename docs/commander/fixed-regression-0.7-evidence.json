@@ -1,0 +1,603 @@
+{
+  "schema": "commander-completed-fixed-regression/1",
+  "engine": "commander-engine/0.7.0",
+  "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+  "buildHash": "98dc44e5e8c048a1a5a6a88869e7d3de0c72d3a08c1f15de152c7d8b486e2fc1",
+  "observedAt": "2026-09-06T22:38:16.623218+00:00",
+  "assigned": 64,
+  "completed": 64,
+  "replayed": 64,
+  "pending": 0,
+  "twoSeat": 16,
+  "fourSeat": 48,
+  "acceptedCommands": 89784,
+  "minimumCommands": 347,
+  "maximumCommands": 2576,
+  "report": {
+    "path": ".commander/regressions/regression-0.7-fixed64/report.json",
+    "sha256": "fbeed87de40768b63b3d1e504a161486fa17317a4dd0aa828c80456ddec76b8d"
+  },
+  "assignments": {
+    "path": ".commander/regressions/regression-0.7-fixed64/assignments.json",
+    "sha256": "941bdd62ea9e867f252d4d7d27cdb6e1e8f5d18cac4f2349e9769436e95c67b2"
+  },
+  "dispositions": [
+    {
+      "index": 0,
+      "matchId": "regression-0.7-fixed64:0",
+      "status": "completed",
+      "commands": 550,
+      "stateHash": "3ecc27596ed772e5b181ef53b4e536507fc388180de204afe38f718ac2e8bd1a",
+      "replayHash": "3ecc27596ed772e5b181ef53b4e536507fc388180de204afe38f718ac2e8bd1a",
+      "resultSha256": "3e846df5ee8400b8cf30bf048e54ded073083b3780e2a5a78695c314175e8ef0"
+    },
+    {
+      "index": 1,
+      "matchId": "regression-0.7-fixed64:1",
+      "status": "completed",
+      "commands": 895,
+      "stateHash": "b7a2ea63ec6a48025d126e4e16c7394b27337ac400ca699c423b39f5a6f968e2",
+      "replayHash": "b7a2ea63ec6a48025d126e4e16c7394b27337ac400ca699c423b39f5a6f968e2",
+      "resultSha256": "0f3cb1d87d953e278e51a5a39878d4533bd5339183e4f29612eee73c84c8db2e"
+    },
+    {
+      "index": 2,
+      "matchId": "regression-0.7-fixed64:2",
+      "status": "completed",
+      "commands": 347,
+      "stateHash": "678126547540252b00b84616e62d5099510c7684e573c251411778638f234b8f",
+      "replayHash": "678126547540252b00b84616e62d5099510c7684e573c251411778638f234b8f",
+      "resultSha256": "6056803fc6f8ae2ada1544567a9739e64bffa6abcfa0ebd87f2b843cfab1f1eb"
+    },
+    {
+      "index": 3,
+      "matchId": "regression-0.7-fixed64:3",
+      "status": "completed",
+      "commands": 1011,
+      "stateHash": "9cf7c92790b32bd3790741ffe6fa133e57fdc0e0b06be4faf98d32d7f42e4a3d",
+      "replayHash": "9cf7c92790b32bd3790741ffe6fa133e57fdc0e0b06be4faf98d32d7f42e4a3d",
+      "resultSha256": "6a644a129162112f88705028899242af2f66faa12dd89809db9f2c72aa924af2"
+    },
+    {
+      "index": 4,
+      "matchId": "regression-0.7-fixed64:4",
+      "status": "completed",
+      "commands": 1937,
+      "stateHash": "a926685f2e6909c3dfedb760758f275a1998e945ddad576477870fe2b141c7fe",
+      "replayHash": "a926685f2e6909c3dfedb760758f275a1998e945ddad576477870fe2b141c7fe",
+      "resultSha256": "2363e82865af9993dfd4e7cf5d02b406794b8ed23425c5f7720446b27556ca55"
+    },
+    {
+      "index": 5,
+      "matchId": "regression-0.7-fixed64:5",
+      "status": "completed",
+      "commands": 1805,
+      "stateHash": "7ce3b825c2c2f99486764e8ef183b59794ccd21fff4a220ad0ea9555bfe5330a",
+      "replayHash": "7ce3b825c2c2f99486764e8ef183b59794ccd21fff4a220ad0ea9555bfe5330a",
+      "resultSha256": "8e6fe1ef79f67e73b795cd5dc0889f9d7a497c01649aee98fa6d12b1036f1618"
+    },
+    {
+      "index": 6,
+      "matchId": "regression-0.7-fixed64:6",
+      "status": "completed",
+      "commands": 2432,
+      "stateHash": "5d29f83eec2fb39a451b80523bd9b8f2224af2d3a6520ad5926d90de30d0eb18",
+      "replayHash": "5d29f83eec2fb39a451b80523bd9b8f2224af2d3a6520ad5926d90de30d0eb18",
+      "resultSha256": "b7db234f9009a7af3d96aa6241f9cc0d32870f546b6697cc37a26f6dc033601b"
+    },
+    {
+      "index": 7,
+      "matchId": "regression-0.7-fixed64:7",
+      "status": "completed",
+      "commands": 2576,
+      "stateHash": "f3f1c4ad6ed4c6a813c23c9b0fe866552ef80c975ff9c0f3a53d8fe515ef5b0d",
+      "replayHash": "f3f1c4ad6ed4c6a813c23c9b0fe866552ef80c975ff9c0f3a53d8fe515ef5b0d",
+      "resultSha256": "241dbf6f5485458c3be5d67af02914a9c4e3466c4187c8bee1b7471efe7a822c"
+    },
+    {
+      "index": 8,
+      "matchId": "regression-0.7-fixed64:8",
+      "status": "completed",
+      "commands": 1982,
+      "stateHash": "52d5b854e6e8c5f3df25db6e90bee8d2be8d71cfad63469453fb96e98709da5b",
+      "replayHash": "52d5b854e6e8c5f3df25db6e90bee8d2be8d71cfad63469453fb96e98709da5b",
+      "resultSha256": "2d291972e53e170bbc695c53e8155e47057f5b8d8d5787e225b746ef10c5d619"
+    },
+    {
+      "index": 9,
+      "matchId": "regression-0.7-fixed64:9",
+      "status": "completed",
+      "commands": 1386,
+      "stateHash": "cfa7bde414273ad6017a58f2375930088a9be70685d2f1d40f0ff2f040ec62df",
+      "replayHash": "cfa7bde414273ad6017a58f2375930088a9be70685d2f1d40f0ff2f040ec62df",
+      "resultSha256": "13d1294dffdb4894e5ed15cb8d9e21ca933c3f946b33523f93c6cabf771966af"
+    },
+    {
+      "index": 10,
+      "matchId": "regression-0.7-fixed64:10",
+      "status": "completed",
+      "commands": 1700,
+      "stateHash": "1c1ea08ec93a74032535e109c5e5bf69a06375ab5115fbc6b89dfeea9f02bad3",
+      "replayHash": "1c1ea08ec93a74032535e109c5e5bf69a06375ab5115fbc6b89dfeea9f02bad3",
+      "resultSha256": "146225451513716289c9acdea74b76336546d84c6430b249956236030babc535"
+    },
+    {
+      "index": 11,
+      "matchId": "regression-0.7-fixed64:11",
+      "status": "completed",
+      "commands": 1591,
+      "stateHash": "1bd32d5e473904db1ff2acf9f5e661fba1398db08b7aae84101f75bea5a6e94b",
+      "replayHash": "1bd32d5e473904db1ff2acf9f5e661fba1398db08b7aae84101f75bea5a6e94b",
+      "resultSha256": "46ec39c01bc57b506b93446d0ef8e8e0e8a5fb4c46bf9d47a9285e7314244d8c"
+    },
+    {
+      "index": 12,
+      "matchId": "regression-0.7-fixed64:12",
+      "status": "completed",
+      "commands": 1624,
+      "stateHash": "fc47b5ce5c72b9e0327a727ed7e2709a3bab77b816030249fa8ba7280d29c65e",
+      "replayHash": "fc47b5ce5c72b9e0327a727ed7e2709a3bab77b816030249fa8ba7280d29c65e",
+      "resultSha256": "34ac6ca5214abd75d58472f47e7074170b3d05468b90a74f4ea42baef4a84338"
+    },
+    {
+      "index": 13,
+      "matchId": "regression-0.7-fixed64:13",
+      "status": "completed",
+      "commands": 1385,
+      "stateHash": "6edb4bec47799f2910381f99aa6f61a5b52c2c2dfcc55f3372bb3acfe3342054",
+      "replayHash": "6edb4bec47799f2910381f99aa6f61a5b52c2c2dfcc55f3372bb3acfe3342054",
+      "resultSha256": "ca947e5b583f635a86c571acfe6906c5c5331627818e9f7be7061ea700f2c708"
+    },
+    {
+      "index": 14,
+      "matchId": "regression-0.7-fixed64:14",
+      "status": "completed",
+      "commands": 1941,
+      "stateHash": "3a105129eb96db106676ffc890a4647405d35bb48ea4a742352d675bb6841b4e",
+      "replayHash": "3a105129eb96db106676ffc890a4647405d35bb48ea4a742352d675bb6841b4e",
+      "resultSha256": "5b6b828c41b00fbb0a50cdab75e604bffe4d87c98ae508d3e4e3a8f80ab7f46b"
+    },
+    {
+      "index": 15,
+      "matchId": "regression-0.7-fixed64:15",
+      "status": "completed",
+      "commands": 1860,
+      "stateHash": "c5378b12b6522e2a4b1b1997c97123cba2c525a20a62c0c60f22e283cccd81e8",
+      "replayHash": "c5378b12b6522e2a4b1b1997c97123cba2c525a20a62c0c60f22e283cccd81e8",
+      "resultSha256": "c967af273203756d129c1d62a31c100e5e82db869cffbef2a41c665c27634261"
+    },
+    {
+      "index": 16,
+      "matchId": "regression-0.7-fixed64:16",
+      "status": "completed",
+      "commands": 655,
+      "stateHash": "c678c6151311908fc14c6d9acb00f34d37d1b9219fcc48d41f2c87e32164318e",
+      "replayHash": "c678c6151311908fc14c6d9acb00f34d37d1b9219fcc48d41f2c87e32164318e",
+      "resultSha256": "a1ccbf751964d0eda4115654eeb596b862ae4ade4cadfd34190804f49c78ae34"
+    },
+    {
+      "index": 17,
+      "matchId": "regression-0.7-fixed64:17",
+      "status": "completed",
+      "commands": 606,
+      "stateHash": "f2626d96f568f2c047e7458e927fb5da63087e90a51d8ee9fa56cd8f233be856",
+      "replayHash": "f2626d96f568f2c047e7458e927fb5da63087e90a51d8ee9fa56cd8f233be856",
+      "resultSha256": "a023c3e21b24a8a12f9161dd8934d493f9fffd2c5d28f27cc14b6532373bce2d"
+    },
+    {
+      "index": 18,
+      "matchId": "regression-0.7-fixed64:18",
+      "status": "completed",
+      "commands": 504,
+      "stateHash": "514adbb188c1afd16693e3c057387f0107d1888f1273d2bf0e1d8d756741ba5d",
+      "replayHash": "514adbb188c1afd16693e3c057387f0107d1888f1273d2bf0e1d8d756741ba5d",
+      "resultSha256": "d1ded89229180ef1021b3c0d4d08c52df2c36cbc85a19305ae1fcf08f0babeed"
+    },
+    {
+      "index": 19,
+      "matchId": "regression-0.7-fixed64:19",
+      "status": "completed",
+      "commands": 351,
+      "stateHash": "a54a836328a2c0e375ac7c80913b548b3dda2cc4f26b991465da44fd9689759b",
+      "replayHash": "a54a836328a2c0e375ac7c80913b548b3dda2cc4f26b991465da44fd9689759b",
+      "resultSha256": "5d2b8ac64e83db5e711e848d511d4219287b2cd4ed62331d4818ef5a95aab004"
+    },
+    {
+      "index": 20,
+      "matchId": "regression-0.7-fixed64:20",
+      "status": "completed",
+      "commands": 1423,
+      "stateHash": "5da317c3a3c8a71654fb699821dcedff1cad6d1729d61dd71bcadd7dc45e0c23",
+      "replayHash": "5da317c3a3c8a71654fb699821dcedff1cad6d1729d61dd71bcadd7dc45e0c23",
+      "resultSha256": "cd6bc98f128f51d160f77497fa4926c939ac7ba0606e2332afc968b6bf727991"
+    },
+    {
+      "index": 21,
+      "matchId": "regression-0.7-fixed64:21",
+      "status": "completed",
+      "commands": 1337,
+      "stateHash": "e6d0c310771aba46d7d5f45e578587e7d3c40d8cc3bffb5e32f13ae052acf892",
+      "replayHash": "e6d0c310771aba46d7d5f45e578587e7d3c40d8cc3bffb5e32f13ae052acf892",
+      "resultSha256": "30bb0416c66011c2a658e95f2447554b4a9f8c79a571efda5724e900b3e95ae2"
+    },
+    {
+      "index": 22,
+      "matchId": "regression-0.7-fixed64:22",
+      "status": "completed",
+      "commands": 1467,
+      "stateHash": "280640432cdf5750ccda1477224cead865edacf49d6a4ad5f525b117f96ae168",
+      "replayHash": "280640432cdf5750ccda1477224cead865edacf49d6a4ad5f525b117f96ae168",
+      "resultSha256": "f2effead6fc07d1f8e1a40288e79140a628603fa6507e5088408dd04ae264116"
+    },
+    {
+      "index": 23,
+      "matchId": "regression-0.7-fixed64:23",
+      "status": "completed",
+      "commands": 2175,
+      "stateHash": "4bf7dd644d8c43bbdfa97b3518bc5d76a76729053200180816c671b2c94a2893",
+      "replayHash": "4bf7dd644d8c43bbdfa97b3518bc5d76a76729053200180816c671b2c94a2893",
+      "resultSha256": "47e64eea3edfa4bdb1eb0787d1c464d8fd4911db17ba118cd6c8f8314369902a"
+    },
+    {
+      "index": 24,
+      "matchId": "regression-0.7-fixed64:24",
+      "status": "completed",
+      "commands": 1681,
+      "stateHash": "ad6013978b9e8102590f1fc2c6df863a4e4a782d564089905c8bcbdadb9b8d2c",
+      "replayHash": "ad6013978b9e8102590f1fc2c6df863a4e4a782d564089905c8bcbdadb9b8d2c",
+      "resultSha256": "e95136432e6f2630904255a4515bd4ae1498c475a99b63859c2e38bd1f4fba85"
+    },
+    {
+      "index": 25,
+      "matchId": "regression-0.7-fixed64:25",
+      "status": "completed",
+      "commands": 1559,
+      "stateHash": "1bb4a3f3e905813d53aec5d4c4f313d1b038b04950cf6a31dd3e45ce07d13f88",
+      "replayHash": "1bb4a3f3e905813d53aec5d4c4f313d1b038b04950cf6a31dd3e45ce07d13f88",
+      "resultSha256": "952a9f0494fac2db1b08d568918c05a98498f4aabbf153539a02e35de31beb11"
+    },
+    {
+      "index": 26,
+      "matchId": "regression-0.7-fixed64:26",
+      "status": "completed",
+      "commands": 1406,
+      "stateHash": "d851bb8d7679a6b55b1b0e9592919275c9af5edded39340926e505da55689cd1",
+      "replayHash": "d851bb8d7679a6b55b1b0e9592919275c9af5edded39340926e505da55689cd1",
+      "resultSha256": "76273d057cea44890c955aa351d7cd761a5e30ab6d515a1f0c04b2b850e1e904"
+    },
+    {
+      "index": 27,
+      "matchId": "regression-0.7-fixed64:27",
+      "status": "completed",
+      "commands": 1496,
+      "stateHash": "cdaaa1d7ed7a7b274947bcb135fb4d68785626bb53bb1e62f63b756e09c9ad61",
+      "replayHash": "cdaaa1d7ed7a7b274947bcb135fb4d68785626bb53bb1e62f63b756e09c9ad61",
+      "resultSha256": "fc9493574d9309151a4166016ec46b0e96e669721d243039724bdbad030ab9cc"
+    },
+    {
+      "index": 28,
+      "matchId": "regression-0.7-fixed64:28",
+      "status": "completed",
+      "commands": 1743,
+      "stateHash": "042b8eb669cbac5771eef07b7d9d276961c225765d1e03ce011a2b9a96e219d7",
+      "replayHash": "042b8eb669cbac5771eef07b7d9d276961c225765d1e03ce011a2b9a96e219d7",
+      "resultSha256": "bcf0cfb361a76a1017610663d0197b112a3fbe7f4129b3d708a7064941777f6d"
+    },
+    {
+      "index": 29,
+      "matchId": "regression-0.7-fixed64:29",
+      "status": "completed",
+      "commands": 1631,
+      "stateHash": "89fef77ca17de7e1b401af2ed644678b438e2e273e3ce60a4de0ae75fd730811",
+      "replayHash": "89fef77ca17de7e1b401af2ed644678b438e2e273e3ce60a4de0ae75fd730811",
+      "resultSha256": "c401117f254e0c701a9444d0bab36e2dcb4e57f5ee38c19ba5e821c30afb491d"
+    },
+    {
+      "index": 30,
+      "matchId": "regression-0.7-fixed64:30",
+      "status": "completed",
+      "commands": 1668,
+      "stateHash": "f71b9e841b21db668b25ad0fe4fd43fc87aeeba4d97000be60481574b8b8387a",
+      "replayHash": "f71b9e841b21db668b25ad0fe4fd43fc87aeeba4d97000be60481574b8b8387a",
+      "resultSha256": "bb9c483547246c4ea8da569a53a95575544bb19ce5fa827d7568add870a67551"
+    },
+    {
+      "index": 31,
+      "matchId": "regression-0.7-fixed64:31",
+      "status": "completed",
+      "commands": 1392,
+      "stateHash": "e3817aa0683453ae5d018b97eb3a00b851acb6c13ef2916f16550f1a36a66543",
+      "replayHash": "e3817aa0683453ae5d018b97eb3a00b851acb6c13ef2916f16550f1a36a66543",
+      "resultSha256": "8a96634df8515c6031e3e235d766a09ad28bbd926fe83de023d73d8473ab094c"
+    },
+    {
+      "index": 32,
+      "matchId": "regression-0.7-fixed64:32",
+      "status": "completed",
+      "commands": 358,
+      "stateHash": "b3857436effe4e983b219d4a7ad37dc03d523313d800afd6c6f38332f88b22de",
+      "replayHash": "b3857436effe4e983b219d4a7ad37dc03d523313d800afd6c6f38332f88b22de",
+      "resultSha256": "c96f0192e938df3ee49e850242eeee81c694baf90f27c38147c7d11991dd85f8"
+    },
+    {
+      "index": 33,
+      "matchId": "regression-0.7-fixed64:33",
+      "status": "completed",
+      "commands": 587,
+      "stateHash": "cf9d71e6c382228022e6b467509424740edea5b0396ed656919a226ac62aa67e",
+      "replayHash": "cf9d71e6c382228022e6b467509424740edea5b0396ed656919a226ac62aa67e",
+      "resultSha256": "1b63888c69baf4c65bbb928bc8238a66aaaaf1404d7f1fa5df9b0f53c3c3a51b"
+    },
+    {
+      "index": 34,
+      "matchId": "regression-0.7-fixed64:34",
+      "status": "completed",
+      "commands": 737,
+      "stateHash": "9df2f1ebb3f2351d4390f97cdb9e204dd1884044faf643de4653b3440f0c321e",
+      "replayHash": "9df2f1ebb3f2351d4390f97cdb9e204dd1884044faf643de4653b3440f0c321e",
+      "resultSha256": "f9b485f3795950352d17408f34edc0a72dc12b65fc41288f76adff6aba516e3a"
+    },
+    {
+      "index": 35,
+      "matchId": "regression-0.7-fixed64:35",
+      "status": "completed",
+      "commands": 498,
+      "stateHash": "f846c0d5bdd74fa78e382d0356c7540af6cb9e0f8294487f0d38a49450294d3f",
+      "replayHash": "f846c0d5bdd74fa78e382d0356c7540af6cb9e0f8294487f0d38a49450294d3f",
+      "resultSha256": "4ef51e44d5c07ff63fe520dff779c97b084968b4395c9cf5969cac29dee81210"
+    },
+    {
+      "index": 36,
+      "matchId": "regression-0.7-fixed64:36",
+      "status": "completed",
+      "commands": 1586,
+      "stateHash": "76ab3b1f4a5dd654ce12578c53b14341dea580342ebd3ab680b772ca520d98c9",
+      "replayHash": "76ab3b1f4a5dd654ce12578c53b14341dea580342ebd3ab680b772ca520d98c9",
+      "resultSha256": "8b1a97337d66a833cdb2a60c69ed27670ea84aa875fe25cf9aea399939d3c233"
+    },
+    {
+      "index": 37,
+      "matchId": "regression-0.7-fixed64:37",
+      "status": "completed",
+      "commands": 1528,
+      "stateHash": "9a6b24f74cf85b4d35fece1e7de5346b7e9aae5944fe03ce0c94ff6a5c0f84dd",
+      "replayHash": "9a6b24f74cf85b4d35fece1e7de5346b7e9aae5944fe03ce0c94ff6a5c0f84dd",
+      "resultSha256": "0530984df26f41d8103879586e94669ae2a600e199f7e4446956b58e2f1e8fc3"
+    },
+    {
+      "index": 38,
+      "matchId": "regression-0.7-fixed64:38",
+      "status": "completed",
+      "commands": 1379,
+      "stateHash": "62305883c38574e3a1869be86993aabf841492024d27652ef8a664a27584b16e",
+      "replayHash": "62305883c38574e3a1869be86993aabf841492024d27652ef8a664a27584b16e",
+      "resultSha256": "70a36fe34befdc23a5a97978ffb2bd7e06c5fda079c71ed431840bb95cbc0a3f"
+    },
+    {
+      "index": 39,
+      "matchId": "regression-0.7-fixed64:39",
+      "status": "completed",
+      "commands": 1413,
+      "stateHash": "d12513a91276702cf05b82fba2f04c1f2286ea5a859374f448f99522a83f4c3c",
+      "replayHash": "d12513a91276702cf05b82fba2f04c1f2286ea5a859374f448f99522a83f4c3c",
+      "resultSha256": "a958cec1f34ea9d3d74d0792001ad24d99070dd870ec0a8fdd17e704f862623a"
+    },
+    {
+      "index": 40,
+      "matchId": "regression-0.7-fixed64:40",
+      "status": "completed",
+      "commands": 1551,
+      "stateHash": "227ec4bbd8dc7275ad11e76f465b9e85d45de50e8764da3e535830e42854b499",
+      "replayHash": "227ec4bbd8dc7275ad11e76f465b9e85d45de50e8764da3e535830e42854b499",
+      "resultSha256": "67241701bee669c9200ac0150e172ad5a1e6ad4632c9fd229c5c803ea655d15f"
+    },
+    {
+      "index": 41,
+      "matchId": "regression-0.7-fixed64:41",
+      "status": "completed",
+      "commands": 1549,
+      "stateHash": "d39931942aefd9742a286b8ccff0a99788d61a6f84bbe5164ba6422026b4822b",
+      "replayHash": "d39931942aefd9742a286b8ccff0a99788d61a6f84bbe5164ba6422026b4822b",
+      "resultSha256": "6f4b110aa89d27e937853ae74aee2ad8d91df6185e760c6e462d1ef1b2e2c13f"
+    },
+    {
+      "index": 42,
+      "matchId": "regression-0.7-fixed64:42",
+      "status": "completed",
+      "commands": 1403,
+      "stateHash": "12c8f8f47eaea38630ff2258e6fc3c1e974bd4647fa0fc15fd4f4701bf47db05",
+      "replayHash": "12c8f8f47eaea38630ff2258e6fc3c1e974bd4647fa0fc15fd4f4701bf47db05",
+      "resultSha256": "819811f43fef7e2596a7e52dfe48f20e8a731f69299f4daed01a4e9f09b068a6"
+    },
+    {
+      "index": 43,
+      "matchId": "regression-0.7-fixed64:43",
+      "status": "completed",
+      "commands": 1755,
+      "stateHash": "a75c2cab10af289250dc14e40054b5691535a262e085fab626eee7c2120d45d7",
+      "replayHash": "a75c2cab10af289250dc14e40054b5691535a262e085fab626eee7c2120d45d7",
+      "resultSha256": "5e9bacb55cab3ee51b1cfc62ec287070732514429cafb9b9f88abd48424e1682"
+    },
+    {
+      "index": 44,
+      "matchId": "regression-0.7-fixed64:44",
+      "status": "completed",
+      "commands": 1739,
+      "stateHash": "c8a9d41473ee37320628691313e527bf7a5e40f3222f3aca58537b91665d720a",
+      "replayHash": "c8a9d41473ee37320628691313e527bf7a5e40f3222f3aca58537b91665d720a",
+      "resultSha256": "b215caa716debc030d6282feef9aa5212624445c49602062d5b15ec078b65543"
+    },
+    {
+      "index": 45,
+      "matchId": "regression-0.7-fixed64:45",
+      "status": "completed",
+      "commands": 1457,
+      "stateHash": "f50249f89db22abbe357e096dbde48cf763011c6d49738b1c715e9b21b250d08",
+      "replayHash": "f50249f89db22abbe357e096dbde48cf763011c6d49738b1c715e9b21b250d08",
+      "resultSha256": "257213e6bec60c08a11a7bc39935f2fb1c859875b1a19f6f501aad7c32a5a276"
+    },
+    {
+      "index": 46,
+      "matchId": "regression-0.7-fixed64:46",
+      "status": "completed",
+      "commands": 1456,
+      "stateHash": "09ae4e7ed98cb56860bcf79addbb6001ad85a1f6686ef7f8959f5c70c9a67a37",
+      "replayHash": "09ae4e7ed98cb56860bcf79addbb6001ad85a1f6686ef7f8959f5c70c9a67a37",
+      "resultSha256": "57dc198d90038ff179449f23e70a1b7c4c560e6cd2b78035bbdeb4d566f45535"
+    },
+    {
+      "index": 47,
+      "matchId": "regression-0.7-fixed64:47",
+      "status": "completed",
+      "commands": 1422,
+      "stateHash": "90ed473259dc432c3787ccbceb1c96965951bc8c2d194f57865744a569ba6b25",
+      "replayHash": "90ed473259dc432c3787ccbceb1c96965951bc8c2d194f57865744a569ba6b25",
+      "resultSha256": "eaa39fe521a61e6232e36d82a63425560633827c7ac6ad61249aed273a433d15"
+    },
+    {
+      "index": 48,
+      "matchId": "regression-0.7-fixed64:48",
+      "status": "completed",
+      "commands": 520,
+      "stateHash": "b111ed259f97718e929cfa8ae34f6f6ccdfb80a499a51fc1cfe117178b9913d4",
+      "replayHash": "b111ed259f97718e929cfa8ae34f6f6ccdfb80a499a51fc1cfe117178b9913d4",
+      "resultSha256": "10690bedd4d0a95ce8d495626234bf36897bb98956eba399fa68a01b0965b3ab"
+    },
+    {
+      "index": 49,
+      "matchId": "regression-0.7-fixed64:49",
+      "status": "completed",
+      "commands": 351,
+      "stateHash": "4d4127efebda7112cae04cd1877ff5e2432321b1ca5d4ed8f81f55e7b0934c0a",
+      "replayHash": "4d4127efebda7112cae04cd1877ff5e2432321b1ca5d4ed8f81f55e7b0934c0a",
+      "resultSha256": "25843ef13bbbad8290bf6877be0508d69bf0a774579105089a826c17d5c1317f"
+    },
+    {
+      "index": 50,
+      "matchId": "regression-0.7-fixed64:50",
+      "status": "completed",
+      "commands": 822,
+      "stateHash": "81571a8a085fa126d79e857fd4e80e88c0c30364d9031ab89dbcf386e59e341f",
+      "replayHash": "81571a8a085fa126d79e857fd4e80e88c0c30364d9031ab89dbcf386e59e341f",
+      "resultSha256": "7478fe2afcfc0fed79c7a30be0238dd53410eefa5289b6d5bb7e018bf1a40308"
+    },
+    {
+      "index": 51,
+      "matchId": "regression-0.7-fixed64:51",
+      "status": "completed",
+      "commands": 642,
+      "stateHash": "7be5cc801eae3e43086947dfdbad68b4d26fdf0008d91e5ea62ce94f2ee1a688",
+      "replayHash": "7be5cc801eae3e43086947dfdbad68b4d26fdf0008d91e5ea62ce94f2ee1a688",
+      "resultSha256": "1f11daabe2374bdd035d8ab67c937770018ed171ef8a5b0b5c3f0a64f2a8ffc1"
+    },
+    {
+      "index": 52,
+      "matchId": "regression-0.7-fixed64:52",
+      "status": "completed",
+      "commands": 1577,
+      "stateHash": "60bacb38d7cf67d6d158891123c203aa7600789d5e55856d6e10e467b6b6659e",
+      "replayHash": "60bacb38d7cf67d6d158891123c203aa7600789d5e55856d6e10e467b6b6659e",
+      "resultSha256": "0c9f91511b2b724717c31a6f62378e4b0d6f57f4d063e173a64e6fb37bab7f71"
+    },
+    {
+      "index": 53,
+      "matchId": "regression-0.7-fixed64:53",
+      "status": "completed",
+      "commands": 1944,
+      "stateHash": "f1662d39e611d96fb5bd5c3b586c36972a2b35e033d8d4057ecd3c76ab8ad3dc",
+      "replayHash": "f1662d39e611d96fb5bd5c3b586c36972a2b35e033d8d4057ecd3c76ab8ad3dc",
+      "resultSha256": "b32028615c25074a228c8b1783c271e249b65a255a452a74c9ab2636dbfb0f0c"
+    },
+    {
+      "index": 54,
+      "matchId": "regression-0.7-fixed64:54",
+      "status": "completed",
+      "commands": 1635,
+      "stateHash": "90c4ec68dd8514e6086604defa5a8b47b1b45041733a6163c5e0a96a4b9b8d28",
+      "replayHash": "90c4ec68dd8514e6086604defa5a8b47b1b45041733a6163c5e0a96a4b9b8d28",
+      "resultSha256": "9aab54ba6ce1bdd98640349e1d6a94ffe8fd0f334dc06dc867b5090a24d13f44"
+    },
+    {
+      "index": 55,
+      "matchId": "regression-0.7-fixed64:55",
+      "status": "completed",
+      "commands": 1805,
+      "stateHash": "fc031e34f5e5f673dbdf60ae29b9c2fa0707b5cba97ec5134bf245434222bf26",
+      "replayHash": "fc031e34f5e5f673dbdf60ae29b9c2fa0707b5cba97ec5134bf245434222bf26",
+      "resultSha256": "b521514c319a1e6906423695ca856081fd6bee0575368ee0f2c67ed207d12171"
+    },
+    {
+      "index": 56,
+      "matchId": "regression-0.7-fixed64:56",
+      "status": "completed",
+      "commands": 1561,
+      "stateHash": "49684b9bad9cb42f4f5175546bd17d600370c23e272864b1c68f4eea6182422c",
+      "replayHash": "49684b9bad9cb42f4f5175546bd17d600370c23e272864b1c68f4eea6182422c",
+      "resultSha256": "ef230a37d8a38b7cfcc8b574334a63c272700953fc962a4218b275b1e702bb76"
+    },
+    {
+      "index": 57,
+      "matchId": "regression-0.7-fixed64:57",
+      "status": "completed",
+      "commands": 2052,
+      "stateHash": "82e73f8162a479ca1bdaf33eb721e0e42c4f8ebe5a3390d0688cea6c343d7264",
+      "replayHash": "82e73f8162a479ca1bdaf33eb721e0e42c4f8ebe5a3390d0688cea6c343d7264",
+      "resultSha256": "ff94261255574139eb9d363dc7cc691719190ade847f51f34142c6f3c45ba31a"
+    },
+    {
+      "index": 58,
+      "matchId": "regression-0.7-fixed64:58",
+      "status": "completed",
+      "commands": 1612,
+      "stateHash": "094268074c35ec3bbb9819d66f1cf44d00e0f0b00828f71225ed225c7e60fabf",
+      "replayHash": "094268074c35ec3bbb9819d66f1cf44d00e0f0b00828f71225ed225c7e60fabf",
+      "resultSha256": "60ceefc7f5503f3da9c5393f3236a19586d697e4498b1519a54f5b50db2fc402"
+    },
+    {
+      "index": 59,
+      "matchId": "regression-0.7-fixed64:59",
+      "status": "completed",
+      "commands": 1700,
+      "stateHash": "53bc0eff582d0bd5d9d4aee1a61a72e60f2b191fdb6c9dcb4ee22c3d42e35c66",
+      "replayHash": "53bc0eff582d0bd5d9d4aee1a61a72e60f2b191fdb6c9dcb4ee22c3d42e35c66",
+      "resultSha256": "143b8a543789666e4a95949b5fa17a003544c5f14ca34cd573d282d38d659eb0"
+    },
+    {
+      "index": 60,
+      "matchId": "regression-0.7-fixed64:60",
+      "status": "completed",
+      "commands": 1473,
+      "stateHash": "10559695cef77ce268aa90ee94aa34cc3e3b885a587659d61220bc0ec64335aa",
+      "replayHash": "10559695cef77ce268aa90ee94aa34cc3e3b885a587659d61220bc0ec64335aa",
+      "resultSha256": "23e6ccca795707529ac3b7a5df121e4ed7e977a43f8f06d1980452c2423eb474"
+    },
+    {
+      "index": 61,
+      "matchId": "regression-0.7-fixed64:61",
+      "status": "completed",
+      "commands": 1627,
+      "stateHash": "87dbe09b49d264e2915a6c96036eb891c5c1b141394008299c8f1154db624606",
+      "replayHash": "87dbe09b49d264e2915a6c96036eb891c5c1b141394008299c8f1154db624606",
+      "resultSha256": "955052ed5914583c14ffd1d1e5698067a115702949ea4540c2a743eba9f2d4bf"
+    },
+    {
+      "index": 62,
+      "matchId": "regression-0.7-fixed64:62",
+      "status": "completed",
+      "commands": 2260,
+      "stateHash": "c18ebb10e53e5bf56948e2654aa761219a1cf21c8af8734db2673d9337329670",
+      "replayHash": "c18ebb10e53e5bf56948e2654aa761219a1cf21c8af8734db2673d9337329670",
+      "resultSha256": "0a654b408ed2843f99d75aa0331e6fa4240410785157453c37ed0986701fca70"
+    },
+    {
+      "index": 63,
+      "matchId": "regression-0.7-fixed64:63",
+      "status": "completed",
+      "commands": 1669,
+      "stateHash": "ecc79a8cf64a3426220f6db94645ee5a8c01249cfec67cf898c24fc7c8daaa65",
+      "replayHash": "ecc79a8cf64a3426220f6db94645ee5a8c01249cfec67cf898c24fc7c8daaa65",
+      "resultSha256": "cd05371d27ec7f87dae4ac549b78cc32465906c59b55e1427709f8865133cf74"
+    }
+  ],
+  "scope": "Fixed historical0.7 executor only. These are actual64 executions, not transferred0.6 outcomes; equal commands acrossversions do not turn replays into additional games. Per-game telemetry was not captured by this historical executor."
+}

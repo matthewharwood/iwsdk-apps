@@ -10,7 +10,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.8.0";
+export const ENGINE_VERSION = "commander-engine/0.9.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -51,7 +51,25 @@ export const Keyword = z.enum([
   "flash",
 ]);
 export type Keyword = z.infer<typeof Keyword>;
+export const CreatureModifier = z.strictObject({
+  kind: z.literal("modify-creature"),
+  powerDelta: z.number().int().min(-100_000).max(100_000),
+  toughnessDelta: z.number().int().min(-100_000).max(100_000),
+  keywords: z
+    .array(Keyword)
+    .max(15)
+    .refine((values) => new Set(values).size === values.length),
+  duration: z.literal("until-end-of-turn"),
+});
+export type CreatureModifier = z.infer<typeof CreatureModifier>;
+export const DerivedCharacteristics = z.strictObject({
+  power: z.number().int().nullable(),
+  toughness: z.number().int().nullable(),
+  keywords: z.array(Keyword),
+});
+export type DerivedCharacteristics = z.infer<typeof DerivedCharacteristics>;
 export const SpellEffect = z.discriminatedUnion("kind", [
+  CreatureModifier,
   z.strictObject({
     kind: z.literal("draw"),
     recipient: z.enum(["controller", "target"]),
@@ -87,6 +105,14 @@ export const SpellProgram = z
       context.addIssue({
         code: "custom",
         message: "A creature cannot be the recipient of drawing cards or gaining life.",
+      });
+    if (
+      program.effects.some((effect) => effect.kind === "modify-creature") &&
+      program.target !== "creature"
+    )
+      context.addIssue({
+        code: "custom",
+        message: "Temporary creature modifiers require a creature target.",
       });
     const removalIndex = program.effects.findIndex(
       (effect) => effect.kind === "destroy" || effect.kind === "exile",
@@ -373,6 +399,18 @@ export const Frame = z.discriminatedUnion("kind", [
     resume: z.literal("checkpoint"),
   }),
 ]);
+export const ContinuousEffect = z.strictObject({
+  id: Id,
+  source: GameObject,
+  sourceVersion: Digest,
+  controller: Id,
+  programIndex: Natural.max(15),
+  eventIndex: Natural,
+  affectedObject: Id,
+  expiresAfterTurn: Natural.min(1),
+  modifier: CreatureModifier,
+});
+export type ContinuousEffect = z.infer<typeof ContinuousEffect>;
 export const RulesState = z.strictObject({
   schema: z.literal("commander-state/1"),
   manifest: MatchManifest,
@@ -392,6 +430,7 @@ export const RulesState = z.strictObject({
   objects: z.record(Id, GameObject),
   stack: z.array(StackEntry),
   abilities: z.record(Id, TriggeredAbility),
+  continuousEffects: z.array(ContinuousEffect),
   pendingTriggers: z.array(Id),
   triggerPlacement: TriggerPlacement.nullable(),
   chanceState: z.number().int().min(1).max(0xffffffff),
@@ -443,7 +482,7 @@ export type PlayerObservation = {
     mana: Mana;
     commanderDamage: Record<string, number>;
   }[];
-  objects: (GameObject & { card: CardDefinition })[];
+  objects: (GameObject & { card: CardDefinition; characteristics: DerivedCharacteristics })[];
   decision: Decision | null;
   combat: RulesState["combat"];
   stack: StackEntry[];

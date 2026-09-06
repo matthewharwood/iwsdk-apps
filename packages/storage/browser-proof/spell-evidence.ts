@@ -120,13 +120,72 @@ export function triggerEvidence(archive: MatchArchive) {
     placement: archive.current.triggerPlacement,
   };
 }
+/** Durable resolved modifiers, independently distinguished from announced spell effects. */
+export function continuousEvidence(archive: MatchArchive, coordinator: Coordinator) {
+  const created: Record<string, number> = {};
+  const expired: string[] = [];
+  for (const record of archive.records) {
+    const sources = new Map(
+      record.events
+        .filter((event) => event.type === "SpellResolved")
+        .map((event) => [event.data.source, event.data.definition]),
+    );
+    for (const event of record.events) {
+      if (event.type === "ContinuousEffectCreated") {
+        const definition = sources.get(event.data.source);
+        if (typeof definition !== "string") throw new Error("Modifier lacks a resolved source");
+        created[definition] = (created[definition] ?? 0) + 1;
+      }
+      if (event.type === "ContinuousEffectsExpired" && Array.isArray(event.data.effects))
+        for (const id of event.data.effects) if (typeof id === "string") expired.push(id);
+    }
+  }
+  const state = coordinator.current();
+  const viewer = state.players[0]?.id;
+  if (!viewer) throw new Error("Missing proof viewer");
+  const objects = coordinator.view(viewer).objects;
+  return {
+    created,
+    expired,
+    active: state.continuousEffects,
+    absentSources: state.continuousEffects
+      .filter((effect) => !state.objects[effect.source.id])
+      .map((effect) => effect.source.id),
+    affectedObjects: state.continuousEffects.map((effect) => {
+      const target = objects.find((object) => object.id === effect.affectedObject);
+      return {
+        id: effect.affectedObject,
+        zone: target?.zone ?? null,
+        characteristics: target?.characteristics ?? null,
+      };
+    }),
+  };
+}
 export type ProofStage =
   | "starting-player"
   | "target"
   | "payment"
   | "pending-trigger"
-  | "pending-ordered-trigger";
+  | "pending-ordered-trigger"
+  | "active-modifier";
 export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean {
+  if (kind === "active-modifier")
+    return (
+      view.decision?.kind === "priority" &&
+      view.objects.some((object) => {
+        if (object.zone !== "battlefield") return false;
+        const counters = (object.counters["+1/+1"] ?? 0) - (object.counters["-1/-1"] ?? 0);
+        return (
+          object.characteristics.keywords.some(
+            (keyword) => !object.card.keywords.includes(keyword),
+          ) ||
+          (object.card.power !== null &&
+            object.characteristics.power !== object.card.power + counters) ||
+          (object.card.toughness !== null &&
+            object.characteristics.toughness !== object.card.toughness + counters)
+        );
+      })
+    );
   if (kind === "pending-ordered-trigger")
     return (
       view.decision?.kind === "priority" &&

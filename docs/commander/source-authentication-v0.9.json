@@ -1,0 +1,149 @@
+{
+  "schema": "source-authentication-summary/1",
+  "sourceReleaseHash": "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "bindingRegistryHash": "cd651570d557df8ebc49c9e8919fe43408237ae870be7542f8a503c532fffdd5",
+  "dataAuthenticationHash": "7f07f6eb0a8728afa56596dbe1e743afd7d4ce7a6b22bf5ffe5d94d2745fe822",
+  "rawProofFileSha256": "b8c6c10144d9e7e849837a3faf45e6db16235719f2117ffd176dc15e84e8d832",
+  "sourceRecordsAuthenticated": 1090,
+  "retainedRulingsAuthenticated": 44,
+  "manifestArchives": [
+    {
+      "kind": "bulk-metadata",
+      "hash": "546307ee4551cf62bdfb8348e22520745981055b440805b12ab64f470767fac2",
+      "bytes": 3472,
+      "url": "https://api.scryfall.com/bulk-data"
+    },
+    {
+      "kind": "oracle_cards",
+      "hash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "bytes": 24535746,
+      "url": "https://data.scryfall.io/oracle-cards/oracle-cards-20260906090154.jsonl.gz"
+    },
+    {
+      "kind": "default_cards",
+      "hash": "fae54f27ad4dcbf3e5c235ed42478c7f1e4685e1f7889d909062dc75c0935341",
+      "bytes": 78057181,
+      "url": "https://data.scryfall.io/default-cards/default-cards-20260906090527.jsonl.gz"
+    },
+    {
+      "kind": "rulings",
+      "hash": "c2ea9267fdb0118a771e27e0d2f53ecbc1c8e497cbca985c1977026afaf77ef7",
+      "bytes": 5366171,
+      "url": "https://data.scryfall.io/rulings/rulings-20260906090036.jsonl.gz"
+    },
+    {
+      "kind": "rules-landing",
+      "hash": "22cb4ab87c9699dc0b8734d6df1583983df86b114403a2907c99eb633805f05b",
+      "bytes": 150421,
+      "url": "https://magic.wizards.com/en/rules"
+    },
+    {
+      "kind": "comprehensive-rules",
+      "hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+      "bytes": 977822,
+      "url": "https://media.wizards.com/2026/downloads/MagicCompRules%2020260819.txt"
+    },
+    {
+      "kind": "commander-policy",
+      "hash": "47ed2929f6dfea23709063144a4e08d9f8e086481be45415e6ea98eedb41d94f",
+      "bytes": 421491,
+      "url": "https://magic.wizards.com/en/formats/commander"
+    },
+    {
+      "kind": "banned-restricted",
+      "hash": "b73b56706841130a60604ad1777b27ee62b1af04661d8424353cf2f9449a12a6",
+      "bytes": 220113,
+      "url": "https://magic.wizards.com/en/banned-restricted-list"
+    },
+    {
+      "kind": "policy-evidence",
+      "hash": "3c54e418156101453cf006d15278f72c1323da98f50b5bea0e97c5ce5f84ca0b",
+      "bytes": 166020,
+      "url": "https://magic.wizards.com/en/articles/archive/news/depictions-racism-magic-2020-06-10"
+    },
+    {
+      "kind": "policy-evidence",
+      "hash": "69d04e876c0eab9bb96ee9988347a94fd7fbfd33cee97e7f45f434008386b7c6",
+      "bytes": 200700,
+      "url": "https://magic.wizards.com/en/news/announcements/commander-banned-and-restricted-february-9-2026"
+    },
+    {
+      "kind": "policy-evidence",
+      "hash": "221c0a663308a794e6093b2afc584a145ecad4c45efc9b58266c48b550160314",
+      "bytes": 208932,
+      "url": "https://www.mtgo.com/news/june-2024-vintage-cube-update"
+    },
+    {
+      "kind": "policy-evidence",
+      "hash": "cfcea3d046199ae6fbeac7f66e7114246fcb8eeebef22a13a682855028688927",
+      "bytes": 66670,
+      "url": "https://www.mtgo.com/news/mtgo-blog-05142024"
+    }
+  ],
+  "independentFactoryMutations": [
+    {
+      "kind": "changed-body",
+      "rejected": true
+    },
+    {
+      "kind": "changed-program",
+      "rejected": true
+    },
+    {
+      "kind": "unknown-unused-card",
+      "rejected": true
+    },
+    {
+      "kind": "fully-fabricated-tuple",
+      "rejected": true
+    },
+    {
+      "kind": "wrong-bundle",
+      "rejected": true
+    },
+    {
+      "kind": "wrong-rules",
+      "rejected": true
+    },
+    {
+      "kind": "wrong-dictionary-key",
+      "rejected": true
+    }
+  ],
+  "validation": {
+    "compilerCardProgramTests": {
+      "tests": 50,
+      "assertions": 1715,
+      "status": "passed"
+    },
+    "cliRegressionTests": {
+      "tests": 17,
+      "assertions": 546,
+      "status": "passed",
+      "fixtures": "369 exact authenticated definitions; twelve legal frozen source-backed decks; baseline results are synthetic accounting only"
+    },
+    "sourceTypesLint": "compiler and CLI strict types, owned package/file Biome and ESLint passed"
+  },
+  "sourceFiles": {
+    "packages/compiler/src/reviewed-source-bindings.ts": "f5caf3cedd7302ea1afeff57d98f8eeca51ae2f1c19c6b003a82b2fa1588fa57",
+    "packages/compiler/src/prepared.ts": "1ec53d605e48c87d2adfd4072036c21bd2675031b079aa676c9390631ae7abdc",
+    "packages/compiler/src/plan.ts": "baa51b3fcca25a0f17e09ba9eeea3e881089467f8e2de296d834ecbf73da3b31",
+    "packages/compiler/src/source-bindings.test.ts": "dd13de8d03c9b5c48ddcd683178d79ff2bf622ce20825e3943bf0d955b854679",
+    "apps/engine-cli/src/regress.test.ts": "c30a78cbdbc1dd9e101903f60fe2731f8ed421332c9a4ab46b7c966ef44ca6db",
+    "apps/engine-cli/test-fixtures/regression-source.json": "ced2a708a05fed7d345be1046cfc64d9818fa250afc73a5c9c6c4fcae89a6281",
+    ".draft-artifacts/authenticate-reviewed-source.py": "931f5b137ebd6588afdc35b94a0df25931646a1fb57e311428e6376a200a06a3",
+    ".draft-artifacts/authenticate-reviewed-source.ts": "758765ecd33525b27600dde3021de563ea72e85aec2a441aaacdb81ecfce607c",
+    ".draft-artifacts/independent-closed-source-review.json": "f13402dbcd75326a380594e55b778859e079b3cbebc041700028868b72a4c1e7"
+  },
+  "semanticCertification": false,
+  "executedGameScenarios": 0,
+  "limitations": [
+    "Fixed authenticated source-definition membership only",
+    "No full-snapshot support or rules-coverage certification",
+    "No automatic trust of future compiler output",
+    "Raw source proof and detailed data audit retained in local .draft-artifacts"
+  ],
+  "hash": "f98715f9c32d480ff7fcc58a12384ad693460a4250c906e14265b3cf4e0c110a"
+}

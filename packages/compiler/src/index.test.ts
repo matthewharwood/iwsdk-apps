@@ -13,8 +13,10 @@ import {
   semanticHash,
 } from "@iwsdk-apps/contracts";
 import { admitDeck } from "@iwsdk-apps/engine";
+import reminderFixture from "../test-fixtures/reminder-deck.json";
 import {
   makeDevelopmentDecks,
+  makeKeywordReminderDecks,
   REVIEWED_RULES_HASH,
   SPELL_DECK_PROFILES,
   TRIGGER_DECK_PROFILES,
@@ -387,4 +389,59 @@ test("tampered releases and missing composition dependencies fail explicitly", a
   const { hash: _hash, ...body } = release;
   release.hash = await semanticHash(body);
   await expect(makeDevelopmentDecks(release)).rejects.toThrow("Expected two matching basic lands");
+});
+
+test("explicit reminder fixtures preserve authenticated frozen revisions and account for incompatible identities", async () => {
+  const body = {
+    schema: "commander-content/1" as const,
+    id: "authenticated-reminder-composition-fixture",
+    sourceBundle: reminderFixture.sourceBundle,
+    rulesHash: reminderFixture.rulesHash,
+    profile: "tabletop-commander" as const,
+    assurance: "development-subset" as const,
+    definitions: reminderFixture.definitions,
+    unsupportedOracleIds: [],
+    eligibleDenominator: Object.keys(reminderFixture.definitions).length,
+    compilerVersion: "fixture",
+    processorAbi: reminderFixture.processorAbi,
+  };
+  const release = ContentRelease.parse({ ...body, hash: await semanticHash(body) });
+  const frozen = [reminderFixture.deck];
+  const before = JSON.stringify(frozen);
+  const result = await makeKeywordReminderDecks(release, frozen);
+  expect(JSON.stringify(result.decks.slice(0, 1))).toBe(before);
+  expect(JSON.stringify(frozen)).toBe(before);
+  expect(result.decks).toHaveLength(3);
+  expect(result.report.coveredBindings).toBe(49);
+  expect(result.report.coveredDefinitionIds).toEqual(
+    [...reminderFixture.coveredAnnotationIds].sort(),
+  );
+  expect(result.report.excluded).toMatchObject([
+    { name: "Jungle Barrier", reason: "no-compatible-implemented-commander-in-release" },
+  ]);
+  expect(result.report.executedGames).toBe(0);
+  for (const deck of result.decks.slice(1)) {
+    expect(() => admitDeck(deck, release)).not.toThrow();
+    expect(
+      deck.entries
+        .filter((entry) => release.definitions[entry.definition]?.supertypes.includes("Basic"))
+        .reduce((sum, row) => sum + row.count, 0),
+    ).toBe(39);
+  }
+  const corrupt = structuredClone(frozen);
+  const first = corrupt[0];
+  if (!first) throw Error("Missing deck");
+  first.hash = "f".repeat(64);
+  await expect(makeKeywordReminderDecks(release, corrupt)).rejects.toThrow(
+    "Frozen deck hash mismatch",
+  );
+  const changed = structuredClone(release);
+  const card = changed.definitions[reminderFixture.coveredAnnotationIds[0] ?? ""];
+  if (!card) throw Error("Missing annotation");
+  card.oracleText += "\nThis creature can't block.";
+  const { hash: _hash, ...rest } = changed;
+  changed.hash = await semanticHash(rest);
+  await expect(makeKeywordReminderDecks(changed, frozen)).rejects.toThrow(
+    "Unauthenticated definition",
+  );
 });

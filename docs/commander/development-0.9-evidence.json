@@ -1,0 +1,131 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.9.0",
+  "driver": "observed-combat/6",
+  "sourceReleaseHash": "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
+  "definitions": 1090,
+  "legalDevelopmentDecks": 31,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "unsupportedPaperCandidates": 30739,
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "delta": {
+    "preservedDefinitions": 761,
+    "temporaryCreatureModifierDefinitions": 97,
+    "exactKeywordReminderDefinitions": 232
+  },
+  "sourceAuthentication": {
+    "path": "docs/commander/source-authentication-v0.9.json",
+    "sha256": "240b07d767b99198f7a912705f500c381ddfc8ce7918d8d8337d058e3362cabf"
+  },
+  "browser": {
+    "path": ".commander/prototypes/engine-0.9/.commander/browser-proof/2026-09-06T21-40-32-169Z-e3c2a762/evidence.json",
+    "sha256": "c38bec743e8ce100f3cf07776347a3196e11a72989f6125d184f8ef2001348b5",
+    "status": "passed",
+    "sourceHash": "852d8a3d507d1c3f39365b03e26533fe01f83fb27b84317ac0a1ab8f80996860",
+    "workerBundleHash": "eb942a2008480c720d51fc6af4401b04931282184dcad995cb8eac394122ee48",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 9301,
+        "driverSeed": 9318,
+        "commands": 559,
+        "boundaries": 560,
+        "finalStateHash": "8793e00b7d3fa7110f2161600a3c43ab101601195995e866b6d34ec62deb969b",
+        "replayHash": "8793e00b7d3fa7110f2161600a3c43ab101601195995e866b6d34ec62deb969b",
+        "allBrowserBoundaryHashesEqual": true,
+        "lockContention": "AlreadyOpen",
+        "stages": ["starting-player", "target", "payment", "active-modifier"]
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 9501,
+        "driverSeed": 9518,
+        "commands": 1896,
+        "boundaries": 1897,
+        "finalStateHash": "abeeadf987cfadc0ca99559472f4b2bc5bcb1e6ca6dfe685295234a3032c6a4c",
+        "replayHash": "abeeadf987cfadc0ca99559472f4b2bc5bcb1e6ca6dfe685295234a3032c6a4c",
+        "allBrowserBoundaryHashesEqual": true,
+        "lockContention": "AlreadyOpen",
+        "stages": ["starting-player", "target", "payment", "active-modifier"]
+      }
+    ]
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.9/.draft-runs/resolver-comparisons/2d083ce6-bff1-4314-9844-bd8842ddc618/report.json",
+      "sha256": "4f38710abba028288d396e39af7492fddeb1d8055fab85c130967e6e89304c15",
+      "status": "passed",
+      "buildHash": "75198b8f742eee2bc6d74e5d4c2aed1bdb70d407200f177dfd73005beedc990b",
+      "commands": 355,
+      "boundaries": 356,
+      "actingObservations": 355,
+      "independentReplays": 3
+    },
+    {
+      "path": ".commander/prototypes/engine-0.9/.draft-runs/resolver-comparisons/37cf7a80-a977-4ca3-95d1-fe170ca65371/report.json",
+      "sha256": "021546222c5cab5f471fe99ad83e84435d6fb0d1861e2662323e996549f49b08",
+      "status": "passed",
+      "buildHash": "75198b8f742eee2bc6d74e5d4c2aed1bdb70d407200f177dfd73005beedc990b",
+      "commands": 1777,
+      "boundaries": 1778,
+      "actingObservations": 1777,
+      "independentReplays": 3
+    }
+  ],
+  "hostAndConstructedSourceEvidence": {
+    "path": ".commander/prototypes/engine-0.9/.draft-artifacts/host-and-source-execution-evidence-v0.9.json",
+    "sha256": "5c7e9290ca9990772c04a4f55b6201f877c1d0dca5926abafae68963c5d04b35"
+  },
+  "observedUniqueGames": {
+    "path": ".commander/evidence/observed-game-coverage-0.9.json",
+    "sha256": "388634046adc41fdf9a7feabb413ef23efb15bfcd7afc1d6e14210bfde01204b"
+  },
+  "fixedRegression": {
+    "path": "docs/commander/fixed-regression-0.9-evidence.json",
+    "sha256": "7e12d61e7c1f1739f18ca0be2ec7f91508f2ab44f263062b3205d1c8760afa49"
+  },
+  "historicalExploration": {
+    "path": "docs/commander/exploration-0.3-evidence.json",
+    "sha256": "a803007fa0f8e2ef9e277712ff7d67183a2310ceb4d185e4966d27697db489c6"
+  },
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.9/promotion.json",
+    "sha256": "49577e8e9f681b7503341b2a8872a5224609eb2ee5522b729dc6a6071607722c"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.9/archive-inventory.json",
+    "sha256": "456a03bbefb8f167c31e746019bd75733801447b40f8baccb6c9ee54b92379b6"
+  },
+  "repositoryGate": {
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "path": ".commander/evidence/check-full-0.9-host-retry.log",
+    "sha256": "2066d809e2749e3ad573fb7e1516531fc45c85feaba422b1b965eaf8c0c5623b",
+    "unitTests": 465,
+    "unitAssertions": 70756,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true,
+    "earlierAttempt": {
+      "path": ".commander/evidence/check-full-0.9-host.log",
+      "sha256": "1c8ae1ffdf643143d634be1e2195f5a98e8a6b6e0b329a844abf87feb89d3991"
+    }
+  },
+  "sourceScope": "Runtime and browser harness were frozen for recorded proof. Later changes migrated terminal test fixtures to real source cards and formatted temporary-source JSON; the full main and generated-workspace gates cover those final test changes.",
+  "remaining": [
+    "Full frozen-snapshot card and rule support: 30,739 paper candidates remain unsupported.",
+    "The independent G2 audit has not qualified the 24 complete difficult-scenario manifests.",
+    "General continuous layers, replacement ordering, suspended resolutions, complex costs, stack targets, copies and other semantics remain outstanding.",
+    "Historical 0.3 exploration establishes those assignments only; current additions do not inherit its coverage.",
+    "Three external approaches have not been executed against a common acceptance suite.",
+    "Physical headset Commander gameplay and performance are not qualified."
+  ],
+  "observedAt": "2026-09-06T22:43:04.360579+00:00"
+}

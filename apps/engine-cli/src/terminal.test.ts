@@ -3,19 +3,19 @@ import { mkdtempSync, realpathSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
-  type CardDefinition,
+  CardDefinition,
   CHANCE_VERSION,
   CONTRACT_VERSION,
   type ContentRelease,
   type DeckRevision,
   ENGINE_VERSION,
-  emptyMana,
   type MatchManifest,
   SERIALIZER_VERSION,
   semanticHash,
 } from "@iwsdk-apps/contracts";
 import { Coordinator } from "@iwsdk-apps/storage";
 import { openNativeRepository } from "@iwsdk-apps/storage/native";
+import SOURCE from "../test-fixtures/terminal-source.json";
 import { runTerminal, TERMINAL_DRIVER_VERSION } from "./terminal";
 
 const cleanups: (() => void | Promise<void>)[] = [];
@@ -27,58 +27,17 @@ async function fixture() {
   const directory = realpathSync(mkdtempSync(join(tmpdir(), "commander-terminal-")));
   cleanups.push(() => rmSync(directory, { recursive: true, force: true }));
   const path = join(directory, "game.sqlite");
-  // A synthetic large hasty commander makes an actual terminal-driven game
-  // finish quickly; this is an input/persistence fixture, not a real deck proof.
-  const commander: CardDefinition = {
-    id: "commander",
-    oracleId: "synthetic-terminal-commander",
-    sourceVersion: "a".repeat(64),
-    name: "Terminal fixture commander",
-    typeLine: "Legendary Creature",
-    types: ["Creature"],
-    subtypes: [],
-    supertypes: ["Legendary"],
-    colors: ["G"],
-    colorIdentity: ["G"],
-    manaCost: { ...emptyMana(), generic: 0 },
-    manaValue: 0,
-    power: 40,
-    toughness: 40,
-    keywords: ["haste"],
-    manaAbilities: [],
-    oracleText: "Haste",
-    commanderEligible: true,
-    deckLimit: 1,
-    obligations: [],
-    implementationRevision: "terminal-fixture/1",
-  };
-  const land: CardDefinition = {
-    ...commander,
-    id: "land",
-    oracleId: "synthetic-terminal-land",
-    name: "Terminal fixture Forest",
-    typeLine: "Basic Land — Forest",
-    types: ["Land"],
-    subtypes: ["Forest"],
-    supertypes: ["Basic"],
-    colors: [],
-    manaCost: null,
-    power: null,
-    toughness: null,
-    keywords: [],
-    oracleText: "",
-    manaAbilities: ["G"],
-    commanderEligible: false,
-    deckLimit: null,
-  };
+  // Exact source cards with ordinary 100-card compositions. No invented release bypass.
+  const commander = CardDefinition.parse(SOURCE.cards["Rorix Bladewing"]);
+  const land = CardDefinition.parse(SOURCE.cards.Mountain);
   const releaseBody = {
     schema: "commander-content/1" as const,
     id: "terminal-fixtures",
-    sourceBundle: "synthetic-terminal-fixture",
-    rulesHash: "a".repeat(64),
+    sourceBundle: SOURCE.sourceBundle,
+    rulesHash: SOURCE.rulesHash,
     profile: "tabletop-commander" as const,
     assurance: "development-subset" as const,
-    definitions: { commander, land },
+    definitions: { [commander.id]: commander, [land.id]: land },
     unsupportedOracleIds: [],
     eligibleDenominator: 0,
     compilerVersion: "terminal-fixture/1",
@@ -87,10 +46,10 @@ async function fixture() {
   const release: ContentRelease = { ...releaseBody, hash: await semanticHash(releaseBody) };
   const deckBody = {
     id: "terminal-fixture-deck",
-    commander: "commander",
+    commander: commander.id,
     entries: [
-      { definition: "commander", count: 1 },
-      { definition: "land", count: 99 },
+      { definition: commander.id, count: 1 },
+      { definition: land.id, count: 99 },
     ],
   };
   const deck: DeckRevision = { ...deckBody, hash: await semanticHash(deckBody) };
@@ -218,13 +177,13 @@ describe("human terminal over the durable player command boundary", () => {
     expect((await f.reopen()).current()).toEqual(before);
   });
 
-  test("accepting proposals completes a real synthetic game and persists its terminal state", async () => {
+  test("accepting proposals completes an authenticated commander duel and persists its terminal state", async () => {
     const f = await fixture();
     let reads = 0;
     const result = await runTerminal(f.coordinator, 11, {
       write: () => {},
       readLine: () => {
-        if (++reads > 100) throw new Error("Fixture did not finish in 100 decisions");
+        if (++reads > 1000) throw new Error("Fixture did not finish in 1000 decisions");
         return "";
       },
     });
@@ -242,7 +201,7 @@ describe("human terminal over the durable player command boundary", () => {
         },
       }),
     ).toEqual({ status: "completed", acceptedCommands: 0 });
-  });
+  }, 30000);
 
   test("native piped readline buffers Enter and quit then exits without a live input handle", async () => {
     const f = await fixture();

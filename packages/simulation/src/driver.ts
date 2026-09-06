@@ -8,7 +8,7 @@ import {
   type Response,
 } from "@iwsdk-apps/contracts";
 
-export const DRIVER_VERSION = "observed-combat/5";
+export const DRIVER_VERSION = "observed-combat/6";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -75,10 +75,7 @@ function rank(seed: number, revision: number, id: string): number {
   return value;
 }
 function strength(object: VisibleObject): number {
-  return Math.max(
-    0,
-    (object.card.power ?? 0) + (object.counters["+1/+1"] ?? 0) - (object.counters["-1/-1"] ?? 0),
-  );
+  return Math.max(0, object.characteristics.power ?? 0);
 }
 function blockers(observation: PlayerObservation, decision: Decision): Response {
   const available = observation.objects.filter((object) => decision.cards.includes(object.id));
@@ -89,12 +86,12 @@ function blockers(observation: PlayerObservation, decision: Decision): Response 
   for (const attack of attacks) {
     const attacker = observation.objects.find((object) => object.id === attack.attacker);
     if (!attacker) throw new Error("Attacker absent from public observation");
-    const count = attacker.card.keywords.includes("menace") ? 2 : 1;
+    const count = attacker.characteristics.keywords.includes("menace") ? 2 : 1;
     const eligible = available.filter(
       (object) =>
-        !attacker.card.keywords.includes("flying") ||
-        object.card.keywords.includes("flying") ||
-        object.card.keywords.includes("reach"),
+        !attacker.characteristics.keywords.includes("flying") ||
+        object.characteristics.keywords.includes("flying") ||
+        object.characteristics.keywords.includes("reach"),
     );
     // Trading is deliberately simple, but it uses only entitled public characteristics.
     eligible.sort((a, b) => strength(b) - strength(a) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
@@ -175,8 +172,11 @@ export const heuristicDriver: Driver = (observation, seed) => {
           : undefined;
       if (!spell?.card.spellProgram || spell.controller !== observation.player)
         throw new Error("Target decision lacks its public announced spell");
-      const harmful = spell.card.spellProgram.effects.some((effect) =>
-        ["damage", "destroy", "exile"].includes(effect.kind),
+      const harmful = spell.card.spellProgram.effects.some(
+        (effect) =>
+          ["damage", "destroy", "exile"].includes(effect.kind) ||
+          (effect.kind === "modify-creature" &&
+            (effect.powerDelta < 0 || effect.toughnessDelta < 0)),
       );
       const players = observation.players.filter((player) => decision.players.includes(player.id));
       players.sort(
@@ -187,8 +187,9 @@ export const heuristicDriver: Driver = (observation, seed) => {
       const cards = observation.objects.filter((object) => decision.cards.includes(object.id));
       cards.sort(
         (a, b) =>
-          Number(a.controller === observation.player) -
-            Number(b.controller === observation.player) || strength(b) - strength(a),
+          (Number(a.controller === observation.player) -
+            Number(b.controller === observation.player)) *
+            (harmful ? 1 : -1) || strength(b) - strength(a),
       );
       const target = players[0]?.id ?? cards[0]?.id;
       if (!target) throw new Error("Target decision has no legal visible candidate");

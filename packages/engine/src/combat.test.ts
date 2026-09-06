@@ -105,6 +105,7 @@ function fixture(seats: 2 | 4 = 2) {
     objects: {},
     stack: [],
     abilities: {},
+    continuousEffects: [],
     pendingTriggers: [],
     triggerPlacement: null,
     chanceState: 1,

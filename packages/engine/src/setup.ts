@@ -140,6 +140,7 @@ export function createMatch(input: unknown, release: ExecutionRegistry): RulesSt
     objects: {},
     stack: [],
     abilities: {},
+    continuousEffects: [],
     pendingTriggers: [],
     triggerPlacement: null,
     chanceState: manifest.gameSeed,

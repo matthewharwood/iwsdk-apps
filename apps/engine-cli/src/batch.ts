@@ -1,4 +1,4 @@
-import { mkdir } from "node:fs/promises";
+import { mkdir, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { verifySourceRelease } from "@iwsdk-apps/compiler/prepared";
 import {
@@ -18,6 +18,12 @@ import { Coordinator, replayMatch } from "@iwsdk-apps/storage";
 import { openNativeRepository } from "@iwsdk-apps/storage/native";
 import { z } from "zod";
 import { archiveBuild, writeEvidence } from "./evidence";
+import {
+  AttemptTelemetry,
+  HOST_TELEMETRY_VERSION,
+  hostRuntimeDeclaration,
+  writeNewTelemetry,
+} from "./host-telemetry";
 
 /** Diversity accounting only; preserve original IDs and row order in execution/replay pins. */
 export function deckCompositionKey(deck: DeckRevision): string {
@@ -89,7 +95,125 @@ export async function runBatch(
   await executeAssignedGames(root, buildHash, content, assignments, options.maxCommands);
 }
 
-/** Execute already-retained assignments; a replay verifies a game rather than counting as another. */
+async function runAssignedAttempt(
+  root: string,
+  index: number,
+  buildHash: string,
+  content: ContentRelease,
+  manifest: MatchManifest,
+  maxCommands: number,
+  artifacts: Readonly<Record<string, PreparedMatchArtifact>>,
+): Promise<Record<string, unknown>> {
+  const telemetry = new AttemptTelemetry({ index, matchId: manifest.id, buildHash });
+  let repo: ReturnType<typeof openNativeRepository> | undefined;
+  let coordinator: Coordinator | undefined;
+  let gameStatus = "not-started",
+    acceptedCommands: number | null = 0,
+    resultReportedCommands: number | null = null;
+  let replayVerified = false,
+    hostError: string | null = null;
+  let disposition: Record<string, unknown>;
+  try {
+    const session = await telemetry.measure("create", async () => {
+      repo = openNativeRepository(resolve(root, `${index}.sqlite`));
+      const artifact = manifest.preparedArtifactHash
+        ? artifacts[manifest.preparedArtifactHash]
+        : undefined;
+      coordinator = await Coordinator.create(repo, content, manifest, artifact);
+      return { repo, coordinator };
+    });
+    gameStatus = "no-game-result";
+    const result = await telemetry.measure("game", () =>
+      runGame(session.coordinator, {
+        seed: manifest.driverSeed,
+        maxCommands,
+        onProgress: (revision) => telemetry.sample("progress", revision),
+      }),
+    );
+    gameStatus = result.status;
+    resultReportedCommands = result.commands;
+    const replayHash = await telemetry.measure("replay", async () => {
+      const replay = await replayMatch(session.repo, content, manifest.id);
+      const hash = await semanticHash(replay);
+      if (hash !== result.stateHash) throw new Error("Replay did not reproduce final boundary");
+      return hash;
+    });
+    replayVerified = true;
+    disposition = {
+      index,
+      ...result,
+      replay: { verified: true, stateHash: replayHash },
+      buildHash,
+    };
+  } catch (error) {
+    hostError = error instanceof Error ? error.message : String(error);
+    disposition = {
+      index,
+      matchId: manifest.id,
+      status: "host-failed",
+      message: hostError,
+      buildHash,
+    };
+  } finally {
+    if (repo) {
+      try {
+        acceptedCommands = repo.load(manifest.id)?.records.length ?? 0;
+      } catch (error) {
+        acceptedCommands = null;
+        hostError = [
+          hostError,
+          `Could not read accepted-command receipts: ${error instanceof Error ? error.message : String(error)}`,
+        ]
+          .filter(Boolean)
+          .join("; ");
+      }
+    }
+    try {
+      await telemetry.measure("close", async () => {
+        if (coordinator) await coordinator.close();
+        else repo?.close();
+      });
+    } catch (error) {
+      hostError = [
+        hostError,
+        `Close failed: ${error instanceof Error ? error.message : String(error)}`,
+      ]
+        .filter(Boolean)
+        .join("; ");
+    }
+  }
+  if (hostError) disposition = { ...disposition, status: "host-failed", message: hostError };
+  const telemetryFile = `${index}.telemetry.json`;
+  const report = telemetry.finish({
+    gameStatus,
+    acceptedCommands,
+    resultReportedCommands,
+    replayVerified,
+    hostError,
+  });
+  await writeNewTelemetry(resolve(root, telemetryFile), report);
+  return {
+    ...disposition,
+    telemetry: { schema: HOST_TELEMETRY_VERSION, path: telemetryFile, acceptedCommands },
+  };
+}
+
+async function startBatchTelemetry(root: string): Promise<void> {
+  const existing = await readdir(root);
+  if (
+    existing.some(
+      (name) =>
+        ["report.json", "progress.json", "host-runtime.json"].includes(name) ||
+        /^\d+\.(?:result\.json|telemetry\.json|sqlite(?:-wal|-shm)?)$/.test(name),
+    )
+  )
+    throw new Error(
+      "Batch execution output already exists; refusing to replace historical results or telemetry",
+    );
+  await writeNewTelemetry(resolve(root, "host-runtime.json"), hostRuntimeDeclaration());
+}
+
+/** Execute retained assignments; new host metrics never alter canonical game inputs or count replay as play. */
 export async function executeAssignedGames(
   root: string,
   buildHash: string,
@@ -98,52 +222,25 @@ export async function executeAssignedGames(
   maxCommands: number,
   artifacts: Readonly<Record<string, PreparedMatchArtifact>> = {},
 ): Promise<void> {
-  const dispositions: unknown[] = [];
+  await startBatchTelemetry(root);
+  const dispositions: Record<string, unknown>[] = [];
   let completed = 0;
   for (const [index, manifest] of assignments.entries()) {
-    let repo: ReturnType<typeof openNativeRepository> | undefined;
-    let coordinator: Coordinator | undefined;
-    try {
-      repo = openNativeRepository(resolve(root, `${index}.sqlite`));
-      const artifact = manifest.preparedArtifactHash
-        ? artifacts[manifest.preparedArtifactHash]
-        : undefined;
-      coordinator = await Coordinator.create(repo, content, manifest, artifact);
-      const result = await runGame(coordinator, {
-        seed: manifest.driverSeed,
-        maxCommands,
-      });
-      const replay = await replayMatch(repo, content, manifest.id);
-      const replayHash = await semanticHash(replay);
-      if (replayHash !== result.stateHash)
-        throw new Error("Replay did not reproduce final boundary");
-      const disposition = {
-        index,
-        ...result,
-        replay: { verified: true, stateHash: replayHash },
-        buildHash,
-      };
-      dispositions.push(disposition);
-      await writeEvidence(resolve(root, `${index}.result.json`), disposition);
-      if (result.status === "completed") completed++;
-      console.log(
-        `${index + 1}/${assignments.length} ${manifest.mode}: ${result.status}, ${result.commands} commands, turn ${result.turn}, replay verified`,
-      );
-    } catch (error) {
-      const disposition = {
-        index,
-        matchId: manifest.id,
-        status: "host-failed",
-        message: error instanceof Error ? error.message : String(error),
-        buildHash,
-      };
-      dispositions.push(disposition);
-      await writeEvidence(resolve(root, `${index}.result.json`), disposition);
-      console.error(`${index + 1}/${assignments.length}: ${disposition.message}`);
-    } finally {
-      if (coordinator) await coordinator.close();
-      else repo?.close();
-    }
+    const disposition = await runAssignedAttempt(
+      root,
+      index,
+      buildHash,
+      content,
+      manifest,
+      maxCommands,
+      artifacts,
+    );
+    dispositions.push(disposition);
+    await writeEvidence(resolve(root, `${index}.result.json`), disposition);
+    if (disposition.status === "completed") completed++;
+    console.log(
+      `${index + 1}/${assignments.length} ${manifest.mode}: ${disposition.status}, telemetry retained`,
+    );
     await writeEvidence(resolve(root, "progress.json"), {
       assigned: assignments.length,
       accounted: dispositions.length,
@@ -162,6 +259,13 @@ export async function executeAssignedGames(
     dispositions,
     assurance: "development-subset",
     fullSnapshotSupported: false,
+    hostTelemetry: {
+      schema: HOST_TELEMETRY_VERSION,
+      runtime: "host-runtime.json",
+      attempts: assignments.map((_, index) => `${index}.telemetry.json`),
+      scope:
+        "Measurements collected during this invocation only; process-wide CPU/memory, separate create/game/replay/close phases.",
+    },
   });
   console.log(`Retained batch: ${root}`);
   if (completed !== assignments.length) process.exitCode = 1;

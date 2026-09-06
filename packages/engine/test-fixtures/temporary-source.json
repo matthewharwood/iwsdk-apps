@@ -1,0 +1,6379 @@
+{
+  "schema": "temporary-source-scenario-definitions/1",
+  "sourceReleaseHash": "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "scope": "97 unmodified authenticated card definitions; constructed scenario boards and unit deck inventory are separate and not full source-backed games.",
+  "cards": [
+    {
+      "definitionHash": "0d28aa974f55c0d5c9701ce89f80b1e34904df0fa5ee192c301681f564086666",
+      "definition": {
+        "id": "oracle:79189464-9645-4411-8886-68fd40a588ed",
+        "oracleId": "79189464-9645-4411-8886-68fd40a588ed",
+        "sourceVersion": "6c945d21066507354ac1effad1ce7dddfff9dcc1e8751e75750da29f45fadd1f",
+        "name": "Accelerate",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains haste until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.10",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["haste"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "6f629d4c4a2ad55eaec5bc113a206c315a184cb557d49b97fee4b1470689cad9",
+      "definition": {
+        "id": "oracle:f8e1b38a-2a77-4cf1-8bef-31acb61ede10",
+        "oracleId": "f8e1b38a-2a77-4cf1-8bef-31acb61ede10",
+        "sourceVersion": "961e1fe3f581d79b98b57b2cb33811eb6d2481ae666b64e19f9ddb627db79cdd",
+        "name": "Aegis of the Heavens",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+7 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 7,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "7ab5e1b5aa1bc58cb918dc02ecda498fb2bc5969a966f14b2140b996b40c4638",
+      "definition": {
+        "id": "oracle:d4ccc319-db23-4ef4-8129-317426f3a794",
+        "oracleId": "d4ccc319-db23-4ef4-8129-317426f3a794",
+        "sourceVersion": "137eccb8e2a7d630ca598f9f05e96ce03e48249470b829b295ac58f9d253ca00",
+        "name": "Aerial Maneuver",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+1 and gains flying and first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.9",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 1,
+              "keywords": ["flying", "first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "5b8a8f6b6672f97b1399d5aa9c236bfeaf432b4e464fb468eb7981f1cabcdf1f",
+      "definition": {
+        "id": "oracle:471f6ad3-cf01-42dd-a519-ea8e13039fea",
+        "oracleId": "471f6ad3-cf01-42dd-a519-ea8e13039fea",
+        "sourceVersion": "db15f4130934f12824c71c0af4449607873782c8ffb5e3f513c9ef45b905880b",
+        "name": "Afflict",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -1/-1 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -1,
+              "toughnessDelta": -1,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "99f23767d816795d9f0289532d069847d692e1ec37b730392f30cb6db9412e7a",
+      "definition": {
+        "id": "oracle:43f5a93b-0f8d-48d2-ab9d-275d44cf88b5",
+        "oracleId": "43f5a93b-0f8d-48d2-ab9d-275d44cf88b5",
+        "sourceVersion": "b00445ba22cd22ccb36680a6dfcd901893189c45284669f57262b6d40be01926",
+        "name": "Aggressive Urge",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+1 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 1,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "a58e0b21da1b16d447893108de653d6fc0b7e1aba7a3b072a70a63e5156a5c71",
+      "definition": {
+        "id": "oracle:f4e860f1-e637-4640-b257-57c2e42793ce",
+        "oracleId": "f4e860f1-e637-4640-b257-57c2e42793ce",
+        "sourceVersion": "25de7ee9e2971bf98563ff67a7d4589f923891d5dcda01d53f3249cfe82e2a08",
+        "name": "Antagonize",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+3 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "e9d42bd6030cb0d240c8d05ace4c10e49d381dd64658307960ced87dcfb693c4",
+      "definition": {
+        "id": "oracle:c0c96c7a-02d8-40cb-a08b-4a2a3b631eef",
+        "oracleId": "c0c96c7a-02d8-40cb-a08b-4a2a3b631eef",
+        "sourceVersion": "d5a5e185bcc1191326bc96864cd5f70c20dd7733b3e72cf0db2dad12559f6355",
+        "name": "Auger Spree",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B", "R"],
+        "colorIdentity": ["B", "R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/-4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": -4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "610df111a2eda344fca651a61afd0b8d89d8917674b29bde6786cc165b7ddbd6",
+      "definition": {
+        "id": "oracle:53dc9795-d26a-4821-afad-8d77d279ffe3",
+        "oracleId": "53dc9795-d26a-4821-afad-8d77d279ffe3",
+        "sourceVersion": "605cd0e2d8c10a65a87caf8ef587ae3b0b041e52f7a0795d6d07ed6b9b84611a",
+        "name": "Awaken the Bear",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "c7094d2746193b587cfd89f5add8dab8eef4bfeaffa6c1fb65e7c0ae93fcca94",
+      "definition": {
+        "id": "oracle:664c1219-acfa-41da-b811-503a63fc8d84",
+        "oracleId": "664c1219-acfa-41da-b811-503a63fc8d84",
+        "sourceVersion": "56157d7db7d70505a96d751f8ba6242996a7a91d132f85539417d5aa5ac0d690",
+        "name": "Befuddle",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -4/-0 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -4,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "fc2e3069ef01b6cb898d28443df7e0cb6feffd66b4e1d9c9c88fe897b1c13116",
+      "definition": {
+        "id": "oracle:58a17110-b2a7-4dbc-bba5-5ed3728ad261",
+        "oracleId": "58a17110-b2a7-4dbc-bba5-5ed3728ad261",
+        "sourceVersion": "c84e0563c11b2daded2cfe2771de5fdaed85339b55dd94ce6c23261b447ae564",
+        "name": "Bestow Greatness",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+4 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 4,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "bfe9669183cb4b1cf5bc7b90d1d3be25279d63703e815a97cc1c5c1567839d63",
+      "definition": {
+        "id": "oracle:7cc945ed-d0aa-4b1a-a94d-656e03b6b5d3",
+        "oracleId": "7cc945ed-d0aa-4b1a-a94d-656e03b6b5d3",
+        "sourceVersion": "05c0bdb3b9a38c9ae1d751c1a8672d99bc2cf003329e76b57928fd81b930692a",
+        "name": "Bewilder",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -3/-0 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -3,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "0441116dee499690467b2fba0d0198c8e23253254381de2f94291a4b5f30364c",
+      "definition": {
+        "id": "oracle:b9cf9f1e-0280-43b6-9d58-262052dcb8a8",
+        "oracleId": "b9cf9f1e-0280-43b6-9d58-262052dcb8a8",
+        "sourceVersion": "a91bd8bc6e5889b547a99526993072e0624f667a1b6578501831cad182ea9516",
+        "name": "Bladebrand",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains deathtouch until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["deathtouch"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "8d6501524bdcdce6c5e9b11beae718438ef94c05a1d512bf6d4a306c7c1ccba3",
+      "definition": {
+        "id": "oracle:c99779b7-a271-416e-bdc2-0f9ba6ceb144",
+        "oracleId": "c99779b7-a271-416e-bdc2-0f9ba6ceb144",
+        "sourceVersion": "08c62a3cba56efac6df1b232bd64a49e6d185a3a5879d11ac8259ce09ad26e71",
+        "name": "Blitzball Shot",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "06e47e2eb7867ac123a6329653f46d2a215f32d819eace272f2fb4156a0187db",
+      "definition": {
+        "id": "oracle:9880ba09-d5b8-4675-bfb4-2161d86d2d41",
+        "oracleId": "9880ba09-d5b8-4675-bfb4-2161d86d2d41",
+        "sourceVersion": "e732c3dc70e8ae545eb3833c2fa70d2e9172bde83f341c15f806bf297966877c",
+        "name": "Brute Force",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "ea622cfc3936cfeeb0f88ab5b67d4a1a65893384831c71d5508e597d8a0802e4",
+      "definition": {
+        "id": "oracle:0140cf53-71ef-4d37-9197-48aab35ca4a2",
+        "oracleId": "0140cf53-71ef-4d37-9197-48aab35ca4a2",
+        "sourceVersion": "d51a66c4efdd7e4e0892e3b09ad63394595d12a9a64fd19d7f40eeac98f07c7f",
+        "name": "Bull Rush",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+0 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "278683a1bbf5dcd11c4ed579e867a44328e2d07ead80d00b641b0f1a39d274dd",
+      "definition": {
+        "id": "oracle:7e24b4da-9728-43a0-8af4-f513a3e1104b",
+        "oracleId": "7e24b4da-9728-43a0-8af4-f513a3e1104b",
+        "sourceVersion": "d727d2404ce486b59c7d280f3037991a6fd2a2b4cb924c9cd79606c7d9de1109",
+        "name": "Charge Through",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains trample until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "c31e36371d52486903f0f63db78f980a407b412951f145e2fec16baefb7441fd",
+      "definition": {
+        "id": "oracle:cb4baf53-51ed-468b-a468-5d7d45a6dc26",
+        "oracleId": "cb4baf53-51ed-468b-a468-5d7d45a6dc26",
+        "sourceVersion": "f6f90b325d9c0df377ef0e7a500df3e7f51a8ad982084dd3e5591091c9222284",
+        "name": "Cloak of Feathers",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains flying until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.9",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["flying"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "7ade1e5c3bee1451dc5f06e2127f749451a629c4ffa24a66823e93a6ca12245c",
+      "definition": {
+        "id": "oracle:1d8e39c9-e04d-4328-af66-db6e1241ac06",
+        "oracleId": "1d8e39c9-e04d-4328-af66-db6e1241ac06",
+        "sourceVersion": "b38e600b0dbe88012b8b8e9926171e39aaff4ab2e21677885dc732487cb964c6",
+        "name": "Colossal Might",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G", "R"],
+        "colorIdentity": ["G", "R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 1,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+2 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 2,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "e0ef3c211d544082a719d5faf36c890deae08718fe8127abe70e119d09234899",
+      "definition": {
+        "id": "oracle:8832b76b-58b7-41b2-b2f6-842563b55b36",
+        "oracleId": "8832b76b-58b7-41b2-b2f6-842563b55b36",
+        "sourceVersion": "997876d7c783fa1f1a98eb78f946d521616c1c06732f1a4587f9ddc1e6d39043",
+        "name": "Crash the Ramparts",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "a8235d31f2ec92c2203c73a6f81ab672ae71b88abbda9a5f0d1f2609d818d700",
+      "definition": {
+        "id": "oracle:10bc00f7-d501-46e3-9f23-af1ddc3f6c4c",
+        "oracleId": "10bc00f7-d501-46e3-9f23-af1ddc3f6c4c",
+        "sourceVersion": "c4946856460f8957a763a53da8d547b6ba0f27acc1b475a21c6c82a15d57e783",
+        "name": "Daring Leap",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U", "W"],
+        "colorIdentity": ["U", "W"],
+        "manaCost": {
+          "W": 1,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+1 and gains flying and first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.9",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 1,
+              "keywords": ["flying", "first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "8d7796bf0356a798d95f30f71a911573a404420fa2ff3f353cf265a71fa3708f",
+      "definition": {
+        "id": "oracle:e98cd00c-b812-4c6a-81d4-e3f94b64fc58",
+        "oracleId": "e98cd00c-b812-4c6a-81d4-e3f94b64fc58",
+        "sourceVersion": "75f5559fab2ed6361b68b57ef1568cae8cefa75ca22e78a8e25144c31c507a35",
+        "name": "Dark Deed",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -4/-4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -4,
+              "toughnessDelta": -4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "434497250398014dd8c0e5e1dd11201aa630a98edacdf55a94a04f7804156fbe",
+      "definition": {
+        "id": "oracle:d7cc744b-2fbd-40e6-8a59-392535c17454",
+        "oracleId": "d7cc744b-2fbd-40e6-8a59-392535c17454",
+        "sourceVersion": "168dbe5e2507bb72ba7a17da9c188e4cfb86520aa12af4e11b43d69c8646f9a8",
+        "name": "Dark Remedy",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+3 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "3069cb8fde52129e408355919fc66100eb339bdad599145fd78dc1a4877a7ad3",
+      "definition": {
+        "id": "oracle:f8c2d9c5-6fe6-4698-9972-83cdd625d94b",
+        "oracleId": "f8c2d9c5-6fe6-4698-9972-83cdd625d94b",
+        "sourceVersion": "c75d46cbd8c69d9356c320cbbe4043e2ce3147ebc4c08b21fe2657d565958be1",
+        "name": "Defiant Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+0 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "42338f2148e67b5a9ad89bb569e610dcff5a5a1474cd8aa393d7ba75b8fd6b20",
+      "definition": {
+        "id": "oracle:13228a22-d63a-4952-a482-4f84da696e88",
+        "oracleId": "13228a22-d63a-4952-a482-4f84da696e88",
+        "sourceVersion": "cbf73fde43f4c7cc5f287f3d2340d59d90a18d66d797456366378c01b16df31a",
+        "name": "Demon's Grasp",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 4
+        },
+        "manaValue": 5,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -5/-5 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -5,
+              "toughnessDelta": -5,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "3235238a3678422c618a928b22dcbcd30b0377e963ec3f607e8526ab52269e7e",
+      "definition": {
+        "id": "oracle:77eafe49-b9c5-461d-89c5-cec217dd2974",
+        "oracleId": "77eafe49-b9c5-461d-89c5-cec217dd2974",
+        "sourceVersion": "af12d08236477251dc771a70459a946b6147492712ce74717191fe6e9959b746",
+        "name": "Disfigure",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -2/-2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -2,
+              "toughnessDelta": -2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "72057aa31b1788bde04d2a496732c6f0cc658800a5931ecc928c762ff995771d",
+      "definition": {
+        "id": "oracle:33be346b-a232-4680-9b1b-a5eee57d2e75",
+        "oracleId": "33be346b-a232-4680-9b1b-a5eee57d2e75",
+        "sourceVersion": "ea32c0756865e23066163e34b0fba4d7884e174f68d34b87b7be0b462b24ea42",
+        "name": "Disorient",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -7/-0 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -7,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "9d56b1b0236621fea02d7fec00e6bfa200ef5572337fec9836c9a42f29df25be",
+      "definition": {
+        "id": "oracle:3501a839-eef5-44e4-8637-b5754780454e",
+        "oracleId": "3501a839-eef5-44e4-8637-b5754780454e",
+        "sourceVersion": "ca4e89d6d59c734741a0f4c45a8ffc73658123bcd2c67b73f50100ebe539f0c4",
+        "name": "Expedite",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains haste until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.10",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["haste"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "51ba528213eb13d364224b52296c0e22351763a22ef3b019da8043103856cfc2",
+      "definition": {
+        "id": "oracle:0fae0474-25ec-474f-8c7f-9e9061835030",
+        "oracleId": "0fae0474-25ec-474f-8c7f-9e9061835030",
+        "sourceVersion": "488547269dcd22956e602ca190eb9ed5059a3ccb7eb5ccb0f8c03d9992fe9b95",
+        "name": "Eyes of the Beholder",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 2,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 4
+        },
+        "manaValue": 6,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -11/-11 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -11,
+              "toughnessDelta": -11,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "3129b7fca9b87308af3b91163b49d877205a5be5268dcda454c79512d08aaa09",
+      "definition": {
+        "id": "oracle:f1231def-96fb-4408-a0c9-25d6932d7ead",
+        "oracleId": "f1231def-96fb-4408-a0c9-25d6932d7ead",
+        "sourceVersion": "9818e2a38fc63ad0950cf9dec950a9ba3c344d2fe095eb8bbdd4cdc9fcc35e8f",
+        "name": "Fanatical Fever",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 2,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+0 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 0,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "c4fbf7c6dd43d147e2a078676cac70cc50c97e6a61556db4e7ea6e7a33721d80",
+      "definition": {
+        "id": "oracle:b92e97f5-a307-471f-be06-afa4fcdab757",
+        "oracleId": "b92e97f5-a307-471f-be06-afa4fcdab757",
+        "sourceVersion": "e6c7c9bae84b17d63f9464333dbffc4d0535e31aae6f679c78385ef132675d9d",
+        "name": "Fanatical Strength",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "3ac4b225ebb61ddc1d40f17081899c84976e8cb977e91534907b474d45fc351d",
+      "definition": {
+        "id": "oracle:359ceca4-7063-4089-8088-ba54bc6fb7cf",
+        "oracleId": "359ceca4-7063-4089-8088-ba54bc6fb7cf",
+        "sourceVersion": "cca05c774b348b0d236e028b10ea144141957694949eef24f04c0cf58a9c5b2a",
+        "name": "Fatal Fumes",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -4/-2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -4,
+              "toughnessDelta": -2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "7e9f2c1abdc4899edc74a79b897ab2d8dd155164166279e378091a22ab6d7584",
+      "definition": {
+        "id": "oracle:5e968bf3-8d83-480b-81a4-98883cafd04f",
+        "oracleId": "5e968bf3-8d83-480b-81a4-98883cafd04f",
+        "sourceVersion": "cfdec777a1b7ec438fc84e262f36f26e4f3d463f74b82cbb6ece1ec3d0fa6934",
+        "name": "Feral Ferocity",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "fc6955f4c76e32fdf7e9728c77a688ec18a5c8a0a9f32dc87f29e8697497f10d",
+      "definition": {
+        "id": "oracle:35efb1e6-6be2-4a38-969a-199524d48e02",
+        "oracleId": "35efb1e6-6be2-4a38-969a-199524d48e02",
+        "sourceVersion": "d67a9097732dca7746299cc650267f3e6842ab7139a8258d0642f0e05858b902",
+        "name": "Fervent Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+0 and gains first strike and haste until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:702.10",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 0,
+              "keywords": ["first-strike", "haste"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "43a67220488a213139a10434553bf1ad625b3d68709e68daae9d9db2348c026d",
+      "definition": {
+        "id": "oracle:fc05e582-e760-4fe2-ba43-e9d8e63f3f85",
+        "oracleId": "fc05e582-e760-4fe2-ba43-e9d8e63f3f85",
+        "sourceVersion": "636a710146d00b86c6a1d5a7c2d9bd6d9dd964fc99b296e6faa310e3fafa368f",
+        "name": "Fists of the Anvil",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+0 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "2d30866e4a414d96b9026cb84aa8cbcd993a65f91fdccca6c5dd56556981ce55",
+      "definition": {
+        "id": "oracle:69d08521-74e1-4215-9ed4-3f12137332a4",
+        "oracleId": "69d08521-74e1-4215-9ed4-3f12137332a4",
+        "sourceVersion": "97f1a5820d22a25d0707ec02cb91fbe299029ba7fc16e6456a294980ce18ac63",
+        "name": "Fit of Rage",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "99b1be23d12ce48c46759ced89b2e24aadff4e3435912cee1a16cdb44bffdfb2",
+      "definition": {
+        "id": "oracle:bc5d5084-77de-4dc5-8769-300eafcbfee7",
+        "oracleId": "bc5d5084-77de-4dc5-8769-300eafcbfee7",
+        "sourceVersion": "5f39df7e52eda26ddf4c902fe6c664ed63fe750f0ded60e15e1b13c77a721e00",
+        "name": "Flatten",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -4/-4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -4,
+              "toughnessDelta": -4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "76b4fa2b37b95753a498b1b09a777350c29c99e0c6ecab22a7bf11c28747fb95",
+      "definition": {
+        "id": "oracle:b36271cb-cda2-434a-a580-6050dc460409",
+        "oracleId": "b36271cb-cda2-434a-a580-6050dc460409",
+        "sourceVersion": "f22215e5834a51d8c94cfbc79a6df273f98769cc0a9fd5a33892e338e55ebd97",
+        "name": "Fleeting Distraction",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -1/-0 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -1,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "71fc0655966376c52530742b50c47139170f9fbc5513b3c6863b76c1e2b34e76",
+      "definition": {
+        "id": "oracle:6c75b92a-4fc1-4f26-95be-1b92f462c111",
+        "oracleId": "6c75b92a-4fc1-4f26-95be-1b92f462c111",
+        "sourceVersion": "8840ba8c9cf31151b1f4610b7de47a11fafe0b49f14cd71943f0cceda5672feb",
+        "name": "Flowstone Infusion",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/-2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": -2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "62eda54bef69fc1032f3fb90f95afb5547ba7d852a18186bddc6e47586ee42fa",
+      "definition": {
+        "id": "oracle:d67048eb-eaf1-4b5b-a8e3-a004bab438f3",
+        "oracleId": "d67048eb-eaf1-4b5b-a8e3-a004bab438f3",
+        "sourceVersion": "f27abc7703403bdacc5b36706d2f7a7ad0750f7a63a873004fc46c835404b471",
+        "name": "Flowstone Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/-1 and gains haste until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.10",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": -1,
+              "keywords": ["haste"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "fb0beb85162f0d285320af960e74d7a31923e901485f113b463d4d4bf47ed8a6",
+      "definition": {
+        "id": "oracle:5748ebf1-24e3-499d-ab7c-c2cebd462a24",
+        "oracleId": "5748ebf1-24e3-499d-ab7c-c2cebd462a24",
+        "sourceVersion": "001d87aec9722deb59e9497c39cf0e362482317c4be7ed65db4ef6b18a734f3e",
+        "name": "Giant Growth",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "042abf1abdadad4746217da08a136662f94842fc9ec411d737e1149123b4b5ad",
+      "definition": {
+        "id": "oracle:fe971240-268a-47d4-a14e-3d6352656091",
+        "oracleId": "fe971240-268a-47d4-a14e-3d6352656091",
+        "sourceVersion": "d2667931f19ab36b2d7a1d808f46bdb1a2ec3b9767b890f84ed8325bba7b7cbb",
+        "name": "Gift of Strength",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains reach until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.17",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["reach"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "87056e9360fa37d95c4f9440aaf453a4d14f9ebadb79bad1d8abfb119efd1cde",
+      "definition": {
+        "id": "oracle:2bf4811f-3462-4542-acb0-101e772bfec9",
+        "oracleId": "2bf4811f-3462-4542-acb0-101e772bfec9",
+        "sourceVersion": "ee134f1f1be62ece73d40a894c314e7d72924543796d1daecfe3f6bbc5b4ab06",
+        "name": "Give In to Violence",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 and gains lifelink until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.15",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": ["lifelink"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "342107e7cbf3f5b1a319685686d9bce7b9be2688f0cb37d266b3ce948ee7669e",
+      "definition": {
+        "id": "oracle:494c819d-7d73-432b-8c96-4cb9dcd31094",
+        "oracleId": "494c819d-7d73-432b-8c96-4cb9dcd31094",
+        "sourceVersion": "c173f9796e61a224bc09d58e12c52e55bd8131a64f48176b064e906ffb652730",
+        "name": "Grasp of Darkness",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 2,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -4/-4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -4,
+              "toughnessDelta": -4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "d9af56ef8c9e189d39f890e362bffa684a7b338f9c4f06151d7948b5e32bdb01",
+      "definition": {
+        "id": "oracle:a215e813-df7e-4f21-9718-eb264eb62813",
+        "oracleId": "a215e813-df7e-4f21-9718-eb264eb62813",
+        "sourceVersion": "1cabbe6e6fae5271df36472a82d7ecf8eda3443c71a9d90b80dc7e79512c224c",
+        "name": "Guided Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+0 and gains first strike until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 0,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "eb2b208ceb895fb154cdb2a7bfaf71ee6ef91edf533914ead98f5f57364e78c1",
+      "definition": {
+        "id": "oracle:bef3f0a9-4d5c-4469-81df-adbeedeed768",
+        "oracleId": "bef3f0a9-4d5c-4469-81df-adbeedeed768",
+        "sourceVersion": "7bdf3b18ce5a8c26a12c166449bdbc56ace7a970184ed0b49d89307b15634cdf",
+        "name": "Horrid Vigor",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains deathtouch and indestructible until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.2",
+          "rule:702.12",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["deathtouch", "indestructible"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "526c89a727705b8e2dbea134bc8c87ed1fe819b8e0a1aa54d5c1313c73858ffd",
+      "definition": {
+        "id": "oracle:eda60752-d225-4fd0-9f0f-9b99e321b8fa",
+        "oracleId": "eda60752-d225-4fd0-9f0f-9b99e321b8fa",
+        "sourceVersion": "be2016c49022694a63debfc7a332cbd14c89f6a108281896b6327d9059137b66",
+        "name": "Howling Fury",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+0 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "f09b8b5c35d8f617189a5a35eaec25119753ebbed505810fab25bceeda61f7f8",
+      "definition": {
+        "id": "oracle:4c2059d5-9a2e-4b89-a617-9125eb0cd570",
+        "oracleId": "4c2059d5-9a2e-4b89-a617-9125eb0cd570",
+        "sourceVersion": "13f3ab2deac06937fdcb7264953f258dd6f44e8515bdc76d2d10810599002079",
+        "name": "Hydrosurge",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -5/-0 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -5,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "edb72e228a6888bd4c7e541a6537d1f14622fb3f9a4dbae0cd788a9d6db48c27",
+      "definition": {
+        "id": "oracle:b77764fe-bc79-410a-995a-ac392f5b46b8",
+        "oracleId": "b77764fe-bc79-410a-995a-ac392f5b46b8",
+        "sourceVersion": "0555d76bceaf72e9c34b3bb3d94dfd53f6642ab25242f6b341f1cdc94f53e3e7",
+        "name": "Impolite Entrance",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains trample and haste until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:702.10",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["trample", "haste"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "615be54a6904c745a69c0790cb171894c6cb6cd27eab3d7ed3a1b474670b04f6",
+      "definition": {
+        "id": "oracle:d23119ca-73d1-4a48-a8d0-dab8919d891f",
+        "oracleId": "d23119ca-73d1-4a48-a8d0-dab8919d891f",
+        "sourceVersion": "a7ae88e61e74b1ba3c494539c3bc8d61acc0256c8b6a7e790ccbe0077661017a",
+        "name": "Infuriate",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "78712bab42fe2368c93de075cb1510902c325ec33bba791a7bea1c4b361bb8e6",
+      "definition": {
+        "id": "oracle:47bbadcf-11c6-4a4d-9575-1eb8284a174c",
+        "oracleId": "47bbadcf-11c6-4a4d-9575-1eb8284a174c",
+        "sourceVersion": "a773e2e191b20bbaf4876d928bd3fd34e8f21c387f601486053df8afb057049b",
+        "name": "Interjection",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 and gains first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "3333e1d7620bce67c19851d38a9d69132f7125b2bb9b34371a3cec9a77ee52b2",
+      "definition": {
+        "id": "oracle:f7518456-45ed-41d4-bd3c-5aacea28eb35",
+        "oracleId": "f7518456-45ed-41d4-bd3c-5aacea28eb35",
+        "sourceVersion": "876a577e8d3a8dc7c04aa69c82e11d5ee4e829aec96796f9c38e9fa0916b6f4f",
+        "name": "Jump",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains flying until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.9",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["flying"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "8dad464705db19236b40bf76ec0e0d366aef7babcd391dfed84b87c0bd07880f",
+      "definition": {
+        "id": "oracle:96e8210a-a547-431d-8146-7399ec20c591",
+        "oracleId": "96e8210a-a547-431d-8146-7399ec20c591",
+        "sourceVersion": "e8d5141d20d2977d8ae0accb9e71ba4c0a9ff04b1701fd8c2fac7b1efab6a7e2",
+        "name": "Larger Than Life",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+4 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 4,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "4b745714898f75e34b8e0c01b1c65ae3eddf6bcd8100ff42eb1f33a32fa00c6c",
+      "definition": {
+        "id": "oracle:fc3d2a9c-08a5-4aea-9fb8-42466b9152a2",
+        "oracleId": "fc3d2a9c-08a5-4aea-9fb8-42466b9152a2",
+        "sourceVersion": "d173511369fea59c8095a3ad955df517e8fbe5ef6ec947240f270ee3fbc8cdd7",
+        "name": "Lash of Malice",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/-2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": -2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "930a126a57067cd775665581aa633b67f63364284c52dbf1532e63bd46cbfddc",
+      "definition": {
+        "id": "oracle:e2ac369a-f6d4-4b58-8695-a7c5b906e999",
+        "oracleId": "e2ac369a-f6d4-4b58-8695-a7c5b906e999",
+        "sourceVersion": "9d4c914d7650520d64c20adf8acd14e2d0980008047a0dd9f5ea709646369e03",
+        "name": "Lash of the Whip",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 4
+        },
+        "manaValue": 5,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -4/-4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -4,
+              "toughnessDelta": -4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "90c8c16a6a170c3698c0df054c8a2daa2dd58da1c427183ccf8d5a59e3b0e915",
+      "definition": {
+        "id": "oracle:642d3494-7a6a-4aec-ba64-7c0c467ada99",
+        "oracleId": "642d3494-7a6a-4aec-ba64-7c0c467ada99",
+        "sourceVersion": "890dff7f97d41cf212908a960cc1beec4a4fce2940d996b12ad4a0440e1822df",
+        "name": "Lash of Thorns",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+1 and gains deathtouch until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 1,
+              "keywords": ["deathtouch"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "eecf8fd0435f92d72f0e9d737c5c709e5bb1dcf5cbbffb159f686131ae4abb0a",
+      "definition": {
+        "id": "oracle:a82c3860-4dd6-4ffd-aa8f-ab8df687db6c",
+        "oracleId": "a82c3860-4dd6-4ffd-aa8f-ab8df687db6c",
+        "sourceVersion": "15c832f619bb6a820a9505f00a665650aa47404b2a72e55c237cccef9e5701be",
+        "name": "Last Gasp",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -3/-3 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -3,
+              "toughnessDelta": -3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "a701db42acd1617f89f155698b5233c7be5dd2962839764064c53976f9950dea",
+      "definition": {
+        "id": "oracle:e89a3ce0-6b38-4326-a7af-8575af371baa",
+        "oracleId": "e89a3ce0-6b38-4326-a7af-8575af371baa",
+        "sourceVersion": "ddfc23bbaf7451b23c962f577f0a5d6815831882d5e7c96bf0c711c54f94bf32",
+        "name": "Leap",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains flying until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.9",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["flying"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "f40181bed954cb6181b4b6eee4150b355cea3e681c742a26b7ffa2cf219e0ae3",
+      "definition": {
+        "id": "oracle:4f0ec90b-e5a0-49bd-8fa0-9be6ba259a62",
+        "oracleId": "4f0ec90b-e5a0-49bd-8fa0-9be6ba259a62",
+        "sourceVersion": "3cb779d8c0b1f02608ea1d18cdfa4c98928b2877b283ad08a0ddb8a8fa4d50c6",
+        "name": "Massive Might",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "506716584e07c50229ea21dda4d33b517ab99869d9c33a6a260a1b5b55b5a4fb",
+      "definition": {
+        "id": "oracle:8331f281-819b-4a0b-bad7-bd86dbedb877",
+        "oracleId": "8331f281-819b-4a0b-bad7-bd86dbedb877",
+        "sourceVersion": "f5fbb0a0f860a7ccf99a776656b5fcbe2947604c2668a79e60eaf2d761f70afb",
+        "name": "Might of Oaks",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +7/+7 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 7,
+              "toughnessDelta": 7,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "4cdcc3a62c9e121ff8c61228bd1a5f99bb69b438f668bdb18082c845c8b68f1b",
+      "definition": {
+        "id": "oracle:593caa15-e1d1-477f-bbb4-124d7a7b81f3",
+        "oracleId": "593caa15-e1d1-477f-bbb4-124d7a7b81f3",
+        "sourceVersion": "d784d88574fa13215946eaa518f44828aa367f96de4af13ddf918d8f5de7bc32",
+        "name": "Mighty Leap",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 and gains flying until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.9",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": ["flying"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "ab5276392f2a5f221b6f6d8ccaa436bcdee2e1864b03eaac0b1198a18d51d3f8",
+      "definition": {
+        "id": "oracle:257f81fb-b3c9-4ebe-9889-dd0ef960bba3",
+        "oracleId": "257f81fb-b3c9-4ebe-9889-dd0ef960bba3",
+        "sourceVersion": "e08a7ac126b67243aa24f2c8382f94fd221d654354ab0b34912f011d84630a33",
+        "name": "Moment of Defiance",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+1 and gains lifelink until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.15",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 1,
+              "keywords": ["lifelink"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "ab8fb77095b06b1551fbb2653448ff016f005a3311b9662f434969256dc186f5",
+      "definition": {
+        "id": "oracle:35a05836-38d7-45c7-ac9a-996a682c2129",
+        "oracleId": "35a05836-38d7-45c7-ac9a-996a682c2129",
+        "sourceVersion": "827330c22ec0c4bfac8d7c07157783ca68fe057aa21b8c5a452c9a25e42d19fd",
+        "name": "Monstrous Growth",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "7ce3b3ddee1839e189d294e248759f43a397712e63c753f9d07dacaf39efd5e7",
+      "definition": {
+        "id": "oracle:571cb4b6-b4e5-40a2-a970-42c1ab65c8a9",
+        "oracleId": "571cb4b6-b4e5-40a2-a970-42c1ab65c8a9",
+        "sourceVersion": "5f9dbad3077a24d8a7cc515e48a584393ad02e2263e7be1fc642d32c34d93626",
+        "name": "Overkill",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -0/-9999 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": -9999,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "bc7c2dc0993b86c5e79b5b4ac5d025713e47b672a4ac5829c96f876ed0bfc33a",
+      "definition": {
+        "id": "oracle:d68d175f-f59c-4995-84d4-fc593280194b",
+        "oracleId": "d68d175f-f59c-4995-84d4-fc593280194b",
+        "sourceVersion": "ecc54050d4783d964b5a6cfb6fca21b3e3a179aa6f6b673c0d6aab497c6bb6a8",
+        "name": "Phytoburst",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +5/+5 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 5,
+              "toughnessDelta": 5,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "9537801eb51616a558b83637dad251761ff7a64f114f1128d77c9495df45430b",
+      "definition": {
+        "id": "oracle:8af22295-0d6b-4cdc-b815-eb81ade241ec",
+        "oracleId": "8af22295-0d6b-4cdc-b815-eb81ade241ec",
+        "sourceVersion": "22b45a2e292b4df0db6edf62fa03b5c7ccf87e3f8329b96c8384ed4b913d725b",
+        "name": "Poison the Blade",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gains deathtouch until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 0,
+              "toughnessDelta": 0,
+              "keywords": ["deathtouch"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "6221eecbfb5abb8acf5c2861efd590c83d8fc06e376cc0f7c6948874227c5617",
+      "definition": {
+        "id": "oracle:bfd2138b-1883-4900-a5f1-373884965c34",
+        "oracleId": "bfd2138b-1883-4900-a5f1-373884965c34",
+        "sourceVersion": "9695b74fad32867872594806f5e469db65a58ce4a03dcbc74cac0d43a4e71edb",
+        "name": "Precise Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+0 and gains first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 0,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "3921fc501ab037470e477c5636bb9f084868300ab9e751c5fe2b490af3b96945",
+      "definition": {
+        "id": "oracle:31585036-cdc3-47f5-9fc7-913212826f2a",
+        "oracleId": "31585036-cdc3-47f5-9fc7-913212826f2a",
+        "sourceVersion": "51cabe91e8e4a910ecf6b1f303e6ef70d5987da2bbd5e04545440a65b57af683",
+        "name": "Qilin's Blessing",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "d89f31ac56ac88c0fdea6514ddf4657644fae6f6fd8dbd63e00cd053a036bb1e",
+      "definition": {
+        "id": "oracle:4f3d7102-f8ce-42d4-94eb-f69b695773d1",
+        "oracleId": "4f3d7102-f8ce-42d4-94eb-f69b695773d1",
+        "sourceVersion": "4b274f2789d8f88555b121b996ac5fa8d9eeed76c29d669828a629d3f7574426",
+        "name": "Rebellious Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+0 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "700adbf8997a668ab1b198593751d5aceaf21f138250b0090864444498919741",
+      "definition": {
+        "id": "oracle:05bbd557-e2c0-4855-8fe6-00527fa39878",
+        "oracleId": "05bbd557-e2c0-4855-8fe6-00527fa39878",
+        "sourceVersion": "c7fde6571066a4a83aeb8bcd2d6239bbe436658e31eb8b444091e34a363393ae",
+        "name": "Rig for War",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+0 and gains reach and first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.17",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 0,
+              "keywords": ["reach", "first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "0312346f5099e1d34da4f41d919b6e018840f589a976608da90f6bc609a1f4a1",
+      "definition": {
+        "id": "oracle:7f3095fb-ffc0-48ed-8792-4157897a9ce7",
+        "oracleId": "7f3095fb-ffc0-48ed-8792-4157897a9ce7",
+        "sourceVersion": "0f3bf6da52f8ff8194da410d7d5cf36001b6c0f5ddda987bfd10d784226f4da8",
+        "name": "Rise to the Challenge",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+0 and gains first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 0,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "44714b83beab5c12a8d89ef5f577e0ed2f0017262f88547a5d05c034405112d0",
+      "definition": {
+        "id": "oracle:ec9975f4-dfff-4b72-9da8-8f2025f0524a",
+        "oracleId": "ec9975f4-dfff-4b72-9da8-8f2025f0524a",
+        "sourceVersion": "b41e78ae8b08af7bc3063753bb2b15310e25327f63ea4d16f782b2ceb5436c0b",
+        "name": "Rush of Adrenaline",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+1 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 1,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "9c3eb8865806939d6385815f2fbab441c8ffa71e894ff1da3228bf9a406244cd",
+      "definition": {
+        "id": "oracle:d8053319-b2a0-4df3-9787-3591d12cf1b9",
+        "oracleId": "d8053319-b2a0-4df3-9787-3591d12cf1b9",
+        "sourceVersion": "279b0b4059febb962da623d7dcf2be4958b64e4df090e998a5faa9faac1440fc",
+        "name": "Sangrite Surge",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G", "R"],
+        "colorIdentity": ["G", "R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 1,
+          "C": 0,
+          "generic": 4
+        },
+        "manaValue": 6,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains double strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.4",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["double-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "d3520fb18daa8112af67d1274b24af03c9ebb4db05a7a169b3bc00adfaf56080",
+      "definition": {
+        "id": "oracle:7f5e5aa8-3f15-45c9-bfc8-1f4b98d2be38",
+        "oracleId": "7f5e5aa8-3f15-45c9-bfc8-1f4b98d2be38",
+        "sourceVersion": "aac0c7ddfc032cddc2c0b0f183367fccaceb9556e35110516f056335c93bc774",
+        "name": "Scorpion's Sting",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -3/-3 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -3,
+              "toughnessDelta": -3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "8ce004d80fdf594c51522069cd21a16830231491ff2a573f642631e26b42aa46",
+      "definition": {
+        "id": "oracle:eaded717-e0e2-4def-be7e-6bfb137628c2",
+        "oracleId": "eaded717-e0e2-4def-be7e-6bfb137628c2",
+        "sourceVersion": "2f7e2f8800e9c6a9816c6a32da82d6745f7bc950101ac1ab313bc7afa75f480f",
+        "name": "Screaming Fury",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +5/+0 and gains haste until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.10",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 5,
+              "toughnessDelta": 0,
+              "keywords": ["haste"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "5d9bed6df9540b23be06f7fa3e6dcb6b872f53fbf5678c7f0adfcda7381bcfde",
+      "definition": {
+        "id": "oracle:f6653d90-cd30-4b2b-9592-97d5769dc3d8",
+        "oracleId": "f6653d90-cd30-4b2b-9592-97d5769dc3d8",
+        "sourceVersion": "1e1a325c62ab8bce5a064e6577cb5b257803f90ceb5b2ffabc1c3256b5cf7330",
+        "name": "Seize the Initiative",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+1 and gains first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 1,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "6bc0f2e07947a242d21459476d41fdf22d554e14a3e9fe48fddc3841d6b63c39",
+      "definition": {
+        "id": "oracle:2ebe4c68-87eb-474d-a4c4-0468835b4900",
+        "oracleId": "2ebe4c68-87eb-474d-a4c4-0468835b4900",
+        "sourceVersion": "6c6a27d12b15da83fcb99a95dce1329804c45882d776e70823c5641571b5fc74",
+        "name": "Shocking Grasp",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -2/-0 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -2,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "716c9ba804ac0345e168f4e2721473ffd23e67112387b397bc980df1ea5ba4ba",
+      "definition": {
+        "id": "oracle:9645c1cb-2305-4bc0-89d0-a50815e91573",
+        "oracleId": "9645c1cb-2305-4bc0-89d0-a50815e91573",
+        "sourceVersion": "b1e1335d5dc503b30ad1e6aa50a05960afd9c44607be36ff9883b7eb4f4d61c2",
+        "name": "Show of Valor",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "ed6891378ee861ce3c3f36ccd0304981abc6970d84ccebc06f0de3351916f16f",
+      "definition": {
+        "id": "oracle:252330b1-67cf-4d9e-a413-917ba61e731f",
+        "oracleId": "252330b1-67cf-4d9e-a413-917ba61e731f",
+        "sourceVersion": "e22632a9f2c20c36f42c269928f79269e6e8907d5b7d15f426c5b99915a9896b",
+        "name": "Shrink",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -5/-0 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -5,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "e8be2808dae4bde5fa72013aab38ce0a4c98b41cef1c51af6af75e0382675c9f",
+      "definition": {
+        "id": "oracle:bc730e60-b9c2-4c49-b97b-2878be105b04",
+        "oracleId": "bc730e60-b9c2-4c49-b97b-2878be105b04",
+        "sourceVersion": "2eae7e05cb13f629d182ceb009cb079f3e41f1ffd09805fe3cede64e3af20470",
+        "name": "Skillful Lunge",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+0 and gains first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 0,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "a289c3a00792b0d2bd3abdef21f351a57aa7dde45f690ff96684092aa26dc31b",
+      "definition": {
+        "id": "oracle:5c034266-8e63-4b43-8f9e-564e6fff6ec1",
+        "oracleId": "5c034266-8e63-4b43-8f9e-564e6fff6ec1",
+        "sourceVersion": "12776c21f86d6cf4150f906e13e5c16a5c875245e9d666dfa1c60b8b68dbaf54",
+        "name": "Smaug's Fury",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+0 and gains reach and first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.17",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 0,
+              "keywords": ["reach", "first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "2f35e5f823dc9519c4b0a3ee95fa2d4cd38ca5f532ed5319587bf25e32d87d08",
+      "definition": {
+        "id": "oracle:b4ee6843-bb79-4665-9763-83f656863dc5",
+        "oracleId": "b4ee6843-bb79-4665-9763-83f656863dc5",
+        "sourceVersion": "f2081696084595437538bbb510dbf5dd559c25092d0f9418939ac55f2c85e1bd",
+        "name": "Stab",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -2/-2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -2,
+              "toughnessDelta": -2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "e2f2413765d05ee7e726b339e2d949db08fb2ec0f0fa3cd5706caf65f143b444",
+      "definition": {
+        "id": "oracle:57bda813-ad4b-40ab-aa35-3f8343ff8668",
+        "oracleId": "57bda813-ad4b-40ab-aa35-3f8343ff8668",
+        "sourceVersion": "26d48176ca300badda85fc93d494863c85e1645bfdb519130484bd775bea6ef8",
+        "name": "Staggering Size",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "1fe85dd5c4702155551cc59c57107f29c578128fbc20e6591dd3178697c0e866",
+      "definition": {
+        "id": "oracle:444493a6-0f90-4847-9619-4ea8fbf7cf6f",
+        "oracleId": "444493a6-0f90-4847-9619-4ea8fbf7cf6f",
+        "sourceVersion": "1f959fd900463e6f74ab2ff2955da021bc7456dae8a8b39bbcf3f75e8c2e2b41",
+        "name": "Strangling Spores",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -3/-3 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -3,
+              "toughnessDelta": -3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "60440b947696a7acbe6ae9b621f41d10a482871d6ef6da930254054df9d42fba",
+      "definition": {
+        "id": "oracle:8df51012-b334-475f-b70d-af4f2b3840a0",
+        "oracleId": "8df51012-b334-475f-b70d-af4f2b3840a0",
+        "sourceVersion": "156afea466dacce84c9aa396b8ae3323016847f057c8313ee547c58bc0151836",
+        "name": "Sudden Strength",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+3 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 3,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "3c2229bbf7831b80f3169fd0d8871e5d4ff22ebef57ffe30f3814435d63516a0",
+      "definition": {
+        "id": "oracle:57085b8e-a85e-4d50-a7d2-9bddfdaf411c",
+        "oracleId": "57085b8e-a85e-4d50-a7d2-9bddfdaf411c",
+        "sourceVersion": "6c9daed8790eb2ecaeaa1f8c9a7d143b801ac21b6e92a0e720e19437c6005183",
+        "name": "Sugar Rush",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+0 until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 0,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "6aa2e0a9d49479fe2567e09d0a72df7f0f9664ff69c03785254ab536959259ce",
+      "definition": {
+        "id": "oracle:3621bd8c-c883-462f-ad56-c01deecb2720",
+        "oracleId": "3621bd8c-c883-462f-ad56-c01deecb2720",
+        "sourceVersion": "79304dbe91a29a46516484f166dd165a5e1532340f713894ce0e5ad2a5d8d234",
+        "name": "Tar Snare",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -3/-2 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -3,
+              "toughnessDelta": -2,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "51447084cd99a2a0e8b6373e854d123763bf3061d5a3652f134b745a600373e9",
+      "definition": {
+        "id": "oracle:01823ab7-b9f6-48bc-b45c-9b0fabc6f657",
+        "oracleId": "01823ab7-b9f6-48bc-b45c-9b0fabc6f657",
+        "sourceVersion": "07f98d656c6a38d371ee2bc413d0188be521c3a80d594ada310bef9c3dd9efa5",
+        "name": "Throttle",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 4
+        },
+        "manaValue": 5,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -4/-4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -4,
+              "toughnessDelta": -4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "cca69819c7b5d5366bb144b1cb779c0b5b6d49f7d7c6882e4fb95720f2740db8",
+      "definition": {
+        "id": "oracle:61e09dd9-7870-48c2-9177-d6abc3162692",
+        "oracleId": "61e09dd9-7870-48c2-9177-d6abc3162692",
+        "sourceVersion": "1439bb12441702da4168d19cb5dcba5fa1d7d35384884b238592dee8348e0ee7",
+        "name": "Titanic Growth",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "f3014b220eca9bcb4ea33517d6ffc37d1c75f4f6fd56c7cdec385c0b064577e0",
+      "definition": {
+        "id": "oracle:0b3bdbc6-cde7-4187-b13c-82fd02ae4037",
+        "oracleId": "0b3bdbc6-cde7-4187-b13c-82fd02ae4037",
+        "sourceVersion": "78bd2d2598199e0706ef97eb0829de17e4c1224ca949eea76604a00a99115956",
+        "name": "Tread Upon",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "38ea4df51c2c4cd04ecdd7af0f9b160701888d192d0dfddaf54f47a960e7a2f9",
+      "definition": {
+        "id": "oracle:7aac51ef-ae03-4a9e-9a48-46223787f291",
+        "oracleId": "7aac51ef-ae03-4a9e-9a48-46223787f291",
+        "sourceVersion": "545dfe1273a65826a205b86c6414c930a3f08cfdeae8036e1452f1fe97506ebd",
+        "name": "Uncaged Fury",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+1 and gains double strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.4",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 1,
+              "keywords": ["double-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "1d6b42c70581c5af447ccd99cf0cac8cfaac56a3ebcd9518945cf983f466bdda",
+      "definition": {
+        "id": "oracle:85b0a2ea-dbdc-456e-9ce1-faa8c13f84d0",
+        "oracleId": "85b0a2ea-dbdc-456e-9ce1-faa8c13f84d0",
+        "sourceVersion": "21ab165d893f35d3c352f15343793599af6f2657a26ef6399555e2d63de27365",
+        "name": "Uncanny Speed",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +3/+0 and gains haste until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.10",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 3,
+              "toughnessDelta": 0,
+              "keywords": ["haste"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "323392f5624bc6cd8b69dc2e061b1e6fe9e9520ae885e274771d40dca1a72b89",
+      "definition": {
+        "id": "oracle:120446cc-f55b-40db-915d-2669c1083e56",
+        "oracleId": "120446cc-f55b-40db-915d-2669c1083e56",
+        "sourceVersion": "dafdea630d54d537c972f32d3edcfa91e45499811f699226ddea506a6d19ed1c",
+        "name": "Unnatural Predation",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +1/+1 and gains trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 1,
+              "toughnessDelta": 1,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "6e4377d174d1bec9e1a1f2a3de97126a2ace5c620db45baab9ae5c34497e7c91",
+      "definition": {
+        "id": "oracle:6b37b0ef-7e89-447f-a189-b3ea7b42143f",
+        "oracleId": "6b37b0ef-7e89-447f-a189-b3ea7b42143f",
+        "sourceVersion": "5b1df88e1b784493ec312bf3431d9976bab962ce0e763f375cafefc03519e075",
+        "name": "Whirling Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["R"],
+        "colorIdentity": ["R"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 1,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+0 and gains first strike and trample until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 0,
+              "keywords": ["first-strike", "trample"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "bf489eb423e76cba5e0aaef5734d35f048110abcbf0b93ffcd1a9df72ddeb88c",
+      "definition": {
+        "id": "oracle:22fa9020-783e-4292-857e-9d45a3458d71",
+        "oracleId": "22fa9020-783e-4292-857e-9d45a3458d71",
+        "sourceVersion": "ab05f9811cc61690f5e3175d5ff32b93b8affe65af2f24ba07289c4e2d9ab4ae",
+        "name": "Wielding the Green Dragon",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +4/+4 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:307.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 4,
+              "toughnessDelta": 4,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "f35d64065cdc9bb75f5b3336a2624891b23ad4281cdfbf3bf4c3dc28f58d9578",
+      "definition": {
+        "id": "oracle:e1f439c7-217f-4b20-a77d-b9014c5de8c0",
+        "oracleId": "e1f439c7-217f-4b20-a77d-b9014c5de8c0",
+        "sourceVersion": "30f493ce21f2b6f06e548239dd1ae90c0d73a87cfca30de66157a304ad041812",
+        "name": "Wildsize",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["G"],
+        "colorIdentity": ["G"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 1,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 and gains trample until end of turn.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.19",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": ["trample"],
+              "duration": "until-end-of-turn"
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "a7443c728a844059e10e30774024c535e4f1408b63cee96354a19c88c5ca0a1d",
+      "definition": {
+        "id": "oracle:45bb536c-c173-4b6e-a5a8-354c74fd93a1",
+        "oracleId": "45bb536c-c173-4b6e-a5a8-354c74fd93a1",
+        "sourceVersion": "c18785e5e390ba7520c33a00ea588daf5283d04d57ed8d92e2f2da96ba4763c5",
+        "name": "Wring Flesh",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["B"],
+        "colorIdentity": ["B"],
+        "manaCost": {
+          "W": 0,
+          "U": 0,
+          "B": 1,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets -3/-1 until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": -3,
+              "toughnessDelta": -1,
+              "keywords": [],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "definitionHash": "5b4f6f7186d6579465d6f8f5a99d8020b3a36cfd75cdf326e157ea9056f050a4",
+      "definition": {
+        "id": "oracle:d820ddf4-315d-470a-8d66-663a76a240c6",
+        "oracleId": "d820ddf4-315d-470a-8d66-663a76a240c6",
+        "sourceVersion": "dcd6baa4cf2e86f793aaa07dfd3395fffb00468c675b69281b5763cbbdb5d8ff",
+        "name": "Zealous Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target creature gets +2/+2 and gains first strike until end of turn.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:611.2a",
+          "rule:611.2c",
+          "rule:613.1f",
+          "rule:613.1g",
+          "rule:613.4c",
+          "rule:514.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:601.2c",
+          "rule:704.4",
+          "rule:704.5f",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:702.7",
+          "rule:601.2",
+          "rule:608.2n",
+          "rule:304.1"
+        ],
+        "implementationRevision": "temporary-creature-spells/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature",
+          "effects": [
+            {
+              "kind": "modify-creature",
+              "powerDelta": 2,
+              "toughnessDelta": 2,
+              "keywords": ["first-strike"],
+              "duration": "until-end-of-turn"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "hash": "45dd1d4ee1c812026917546426d0d52e0e46b118ad0a174b2548e8d6946343ae"
+}

@@ -1,138 +1,53 @@
 import { createFullExecutionRegistry } from "@iwsdk-apps/compiler/prepared";
 import {
-  type CardDefinition,
   CHANCE_VERSION,
   CONTRACT_VERSION,
-  type ContentRelease,
-  type DeckRevision,
   ENGINE_VERSION,
-  emptyMana,
   type GameCommand,
   type MatchManifest,
   type Response,
   type RulesState,
   SERIALIZER_VERSION,
-  type SelfEntryProgram,
-  semanticHash,
 } from "@iwsdk-apps/contracts";
 import { createMatch, transition } from "../../engine/src/index";
+import { fixtureCard, fixtureDeck, fixtureRelease } from "./authenticated";
 
-// Synthetic programs isolate persistence from acquisition. They are not Oracle records
-// or evidence of any source card's compilation; all ordinary commands remain real.
-export function entryProgram(kind: "draw" | "gain-life", amount: number): SelfEntryProgram {
-  return {
-    schema: "commander-trigger/1",
-    id: `fixture-entry-${kind}`,
-    trigger: {
-      kind: "self-enters-battlefield",
-      view: "post-committed-event",
-      placementClass: "ordinary",
-    },
-    choice: { kind: "mandatory" },
-    effect: { kind, recipient: "trigger-controller", amount },
-  };
-}
-export async function triggerFixtures(id: string) {
-  const base: CardDefinition = {
-    id: "synthetic-entry-commander",
-    oracleId: "synthetic-entry-commander",
-    sourceVersion: "0".repeat(64),
-    name: "Synthetic entry storage commander",
-    typeLine: "Legendary Creature",
-    types: ["Creature"],
-    subtypes: [],
-    supertypes: ["Legendary"],
-    colors: ["G"],
-    colorIdentity: ["G"],
-    manaCost: { ...emptyMana(), generic: 0 },
-    manaValue: 0,
-    power: 2,
-    toughness: 2,
-    keywords: [],
-    manaAbilities: [],
-    oracleText: "Synthetic mandatory entry life program",
-    commanderEligible: true,
-    deckLimit: 1,
-    obligations: [],
-    implementationRevision: "self-entry-creature/1",
-    triggerPrograms: [entryProgram("gain-life", 3)],
-  };
-  const { triggerPrograms: _programs, ...plain } = base;
-  const land: CardDefinition = {
-    ...plain,
-    id: "synthetic-forest",
-    oracleId: "synthetic-forest",
-    name: "Synthetic Forest",
-    typeLine: "Basic Land — Forest",
-    types: ["Land"],
-    subtypes: ["Forest"],
-    supertypes: ["Basic"],
-    manaCost: null,
-    power: null,
-    toughness: null,
-    manaAbilities: ["G"],
-    commanderEligible: false,
-    deckLimit: null,
-    oracleText: "",
-    implementationRevision: "commander-development-recipes/1",
-  };
-  const removal: CardDefinition = {
-    ...plain,
-    id: "synthetic-removal",
-    oracleId: "synthetic-removal",
-    name: "Synthetic free removal",
-    typeLine: "Instant",
-    types: ["Instant"],
-    supertypes: [],
-    power: null,
-    toughness: null,
-    commanderEligible: false,
-    oracleText: "Synthetic target creature destruction",
-    implementationRevision: "spell-text-families/1",
-    spellProgram: {
-      schema: "commander-spell/1",
-      target: "creature",
-      effects: [{ kind: "destroy" }],
-    },
-  };
-  const draw: CardDefinition = {
-    ...base,
-    id: "synthetic-entry-draw",
-    oracleId: "synthetic-entry-draw",
-    name: "Synthetic entry draw",
-    typeLine: "Creature",
-    supertypes: [],
-    commanderEligible: false,
-    oracleText: "Synthetic mandatory entry draw program",
-    triggerPrograms: [entryProgram("draw", 1)],
-  };
-  const payload = {
-    schema: "commander-content/1" as const,
-    id: "synthetic-trigger-storage/1",
-    sourceBundle: "0".repeat(64),
-    rulesHash: "0".repeat(64),
-    profile: "tabletop-commander" as const,
-    assurance: "development-subset" as const,
-    definitions: Object.fromEntries(
-      [base, land, removal, draw].map((definition) => [definition.id, definition]),
-    ),
-    unsupportedOracleIds: [],
-    eligibleDenominator: 0,
-    compilerVersion: "synthetic-trigger-storage/1",
-    processorAbi: ENGINE_VERSION,
-  };
-  const release: ContentRelease = { ...payload, hash: await semanticHash(payload) };
-  const deckPayload = {
-    id: "synthetic-trigger-storage-deck",
-    commander: base.id,
-    entries: [
-      { definition: base.id, count: 1 },
-      { definition: land.id, count: 97 },
-      { definition: removal.id, count: 1 },
-      { definition: draw.id, count: 1 },
-    ],
-  };
-  const deck: DeckRevision = { ...deckPayload, hash: await semanticHash(deckPayload) };
+export const TRIGGER_CARDS = {
+  life: fixtureCard("Centaur Healer").id,
+  draw: fixtureCard("Elvish Visionary").id,
+  removal: fixtureCard("Murder").id,
+  plains: fixtureCard("Plains").id,
+  forest: fixtureCard("Forest").id,
+};
+export async function triggerFixtures(id: string, commanderScenario = false) {
+  const release = await fixtureRelease([
+    "Jasmine Boreal",
+    "Lady Orca",
+    "Centaur Healer",
+    "Elvish Visionary",
+    "Murder",
+    "Plains",
+    "Forest",
+    "Swamp",
+    "Isamaru, Hound of Konda",
+  ]);
+  const aDeck = commanderScenario
+    ? await fixtureDeck("authenticated-commander-storage", "Isamaru, Hound of Konda", [
+        ["Isamaru, Hound of Konda", 1],
+        ["Plains", 99],
+      ])
+    : await fixtureDeck("authenticated-entry-storage", "Jasmine Boreal", [
+        ["Jasmine Boreal", 1],
+        ["Centaur Healer", 1],
+        ["Elvish Visionary", 1],
+        ["Plains", 48],
+        ["Forest", 49],
+      ]);
+  const bDeck = await fixtureDeck("authenticated-removal-storage", "Lady Orca", [
+    ["Lady Orca", 1],
+    ["Murder", 1],
+    ["Swamp", 98],
+  ]);
   const manifest: MatchManifest = {
     schema: "commander-match/1",
     id,
@@ -142,10 +57,13 @@ export async function triggerFixtures(id: string) {
     chance: CHANCE_VERSION,
     gameSeed: 1,
     driverSeed: 1,
-    driverVersion: "synthetic-trigger-storage/1",
+    driverVersion: "authenticated-trigger-storage/1",
     mode: "two-seat",
     resolver: "full-scan",
-    seats: ["A", "B"].map((seat) => ({ id: seat, deck })),
+    seats: [
+      { id: "A", deck: aDeck },
+      { id: "B", deck: bDeck },
+    ],
   };
   return { release, manifest, registry: await createFullExecutionRegistry(release) };
 }
@@ -165,7 +83,11 @@ export function triggerCommand(state: RulesState, response?: Response): GameComm
         ? { kind: "starting-player", player: "A" }
         : decision.kind === "mulligan"
           ? { kind: "mulligan", keep: true }
-          : { kind: "pass" }),
+          : decision.kind === "attack"
+            ? { kind: "attack", attacks: [] }
+            : decision.kind === "discard"
+              ? { kind: "discard", cards: decision.cards.slice(-decision.count) }
+              : { kind: "pass" }),
   };
 }
 export function reachFirstMain(

@@ -1,6 +1,6 @@
 # Commander engine reuse assessment
 
-Inspected on 2026-09-06. This is a source inspection and architecture decision input, **not an executed engine comparison or a complete-card-pool certification**. No external engine was built, no external fixture was run, and no external implementation was copied into this repository during this assessment.
+Initial source inspection on 2026-09-06 informed the architecture decision below. A later execution built Phase and passed two upstream constructed Commander tests; its exact scope and failed attempts are recorded below. This remains an incomplete comparison: no common acceptance suite has been run across three external approaches, and no external implementation was copied into this repository.
 
 The current requirement is one pure TypeScript rules core, run unchanged under Bun and in a browser worker, with serializable decisions/continuations and SQLite outside the core. Retain that boundary. Use Auteur as a publication/provenance reference and XMage as an attributable rules/test reference. Phase is a credible native/WASM alternative if the language requirement is deliberately changed; it should not be described as a TypeScript engine or as complete Commander support.
 
@@ -62,7 +62,23 @@ Phase's [README](https://github.com/phase-rs/phase/blob/2874e52d69d89adf32b64405
 | Commander and elimination | Forge has Commander game/deck formats; XMage includes ordinary multiplayer Commander test bases and FFA tests; Phase has Commander configuration and multiplayer fixtures. | No inspected candidate has passed this project's ordinary two-seat/four-seat, legal 100-card, substantive full-game acceptance suite here. |
 | Portable compound decisions and resume | Phase interaction records include selections, sequences, relations, allocations, stale/unauthorized rejection and persistent semantic owners. Forge/XMage expose real choices but primarily through host-language objects. | Durable receipt replay, imported-state integrity, decision-generation invalidation and native/browser parity need direct fixture execution under the chosen adapter. |
 
-The reference-only fixture paths above are starting points for later execution. None count toward this project's 24 difficult scenarios, 64 terminating games, 1,024 exploratory assignments, 300-identity research floor or full-pool support gate. No benchmark ranking is asserted.
+Except for the two explicitly recorded Phase tests below, these fixture paths remain source-inspection references. They do not count toward this project's 24 difficult scenarios, 64 terminating games, 1,024 exploratory assignments, 300-identity research floor or full-pool support gate. No benchmark ranking is asserted.
+
+## Executed Phase fixture
+
+At the inspected Phase commit, two upstream `issue_2863_commander_aura_zone_change` integration tests passed: commander death does not duplicate the commander in the graveyard, and an Aura stays in the graveyard when an exiled commander returns through the command zone and is recast. These are constructed upstream fixtures, including privileged Aura placement and zone changes. They are not ordinary legal 100-card games, a cross-engine oracle or this project's native/browser persistence proof.
+
+The retained result is `.commander/reuse-execution/phase/result.json` (SHA-256 `bc186646fbb4be10d51166d5be828702bbf7c21df295d5f391b40ea1a63bfb3d`). It records toolchain `rustc 1.99.0-nightly (da86f4d07 2026-07-24)`, source file digests, every attempt, and the generated Cargo lock. The inspected upstream revision had no lockfile; the retained generated lock has SHA-256 `abb062ab52b6656a1090026b34137038324e4e0957ca8840b3411661a38f9ec6`.
+
+The successful command in the isolated upstream checkout was:
+
+```sh
+RUST_MIN_STACK=16777216 CARGO_TARGET_DIR=/private/tmp/commander-reuse-execution/phase/target \
+  cargo +nightly-2026-07-25 test --locked -j 2 -p phase-engine \
+  --test integration issue_2863_commander_aura_zone_change -- --nocapture
+```
+
+The preceding retained failures were a missing offline dependency, a missing lockfile, fixture files omitted by the initial sparse checkout, and a test-thread stack overflow. Fetching the actual fixture/generated interaction files and setting the test stack resolved those specific problems. The final run exited zero with two tests passed and 6,529 filtered out. No benchmark ranking or claim about the filtered tests follows from this run.
 
 ## Decision for this implementation
 

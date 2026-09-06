@@ -19,6 +19,7 @@ import {
 } from "../src/index";
 import {
   atProofStage,
+  continuousEvidence,
   executionEvidence,
   setupEvidence,
   spellEvidence,
@@ -37,7 +38,14 @@ const Request = z.discriminatedUnion("operation", [
   z.strictObject({
     operation: z.literal("run"),
     stopAt: z
-      .enum(["starting-player", "payment", "target", "pending-trigger", "pending-ordered-trigger"])
+      .enum([
+        "starting-player",
+        "payment",
+        "target",
+        "pending-trigger",
+        "pending-ordered-trigger",
+        "active-modifier",
+      ])
       .nullable(),
     maxCommands: z.number().int().positive().max(20_000),
   }),
@@ -80,6 +88,7 @@ async function snapshot() {
     outcome: state.outcome,
     spells: spellEvidence(archive, session.release),
     triggers: triggerEvidence(archive),
+    continuous: continuousEvidence(archive, session.coordinator),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
     setup: setupEvidence(session.coordinator, archive),
     storage: {

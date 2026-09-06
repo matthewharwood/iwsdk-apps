@@ -1,8 +1,8 @@
 import type { ExecutionRegistry, Response, RulesState } from "@iwsdk-apps/contracts";
+import { characteristics } from "./characteristics";
 import {
   card,
   creatures,
-  definition,
   emit,
   hit,
   move,
@@ -107,11 +107,10 @@ function stateBasedActions(
   let changed = false;
   for (let iteration = 0; iteration < 1000; iteration++) {
     const dead = creatures(state, release).filter((entry) => {
-      const current = definition(release, entry.definition);
       const health = toughness(state, release, entry.id);
       return (
         health <= 0 ||
-        (!current.keywords.includes("indestructible") &&
+        (!characteristics(state, release, entry.id).keywords.includes("indestructible") &&
           (entry.damage >= health || entry.deathtouchDamage))
       );
     });

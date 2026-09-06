@@ -1,5 +1,7 @@
 import { Database } from "bun:sqlite";
 
+export { makeKeywordReminderDecks } from "./keyword-reminder-decks";
+export { compileKeywordReminderDraft } from "./keyword-reminder-expansion";
 export { buildDevelopmentMatchPlan, computeDependencyClosure, MATCH_PLAN_VERSION } from "./plan";
 export { compileSelfEntryDraft } from "./self-entry-expansion";
 export { compileSpellFamilyDraft } from "./spell-expansion";
@@ -7,16 +9,22 @@ export { compileSpellFamilyDraft } from "./spell-expansion";
 import {
   bindDevelopmentCard,
   bindExactSpellFamily,
+  KEYWORD_REMINDER_RECIPE_VERSION,
+  KEYWORD_REMINDER_REGISTRY,
   RECIPE_REGISTRY,
   RECIPE_VERSION,
   REVIEWED_SPELLS,
   reviewedSelfEntryDefinition,
+  reviewedTemporaryCreatureDefinition,
   SELF_ENTRY_RECIPE_VERSION,
   SELF_ENTRY_REGISTRY,
   SELF_ENTRY_SEQUENCE_VERSION,
   SELF_ENTRY_SEQUENCES,
   SPELL_FAMILY_REGISTRY,
   SPELL_FAMILY_VERSION,
+  TEMPORARY_CREATURE_BODIES,
+  TEMPORARY_CREATURE_SPELLS,
+  TEMPORARY_CREATURE_VERSION,
 } from "@iwsdk-apps/card-programs";
 import { type CatalogInventory, readCandidateCards, readInventory } from "@iwsdk-apps/catalog";
 import {
@@ -29,7 +37,7 @@ import {
   semanticHash,
 } from "@iwsdk-apps/contracts";
 
-export const COMPILER_VERSION = "commander-development-compiler/3";
+export const COMPILER_VERSION = "commander-development-compiler/4";
 export const REVIEWED_RULES_HASH =
   "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f";
 
@@ -49,8 +57,19 @@ export interface CompilationReport {
   unresolvedEligibility: { identity: string; name: string; role: string; reason: string }[];
   executedAssertions: 0;
   spellFamilies: { enabled: boolean; version: string; registry: typeof SPELL_FAMILY_REGISTRY };
+  keywordReminders: {
+    enabled: boolean;
+    version: string;
+    registry: typeof KEYWORD_REMINDER_REGISTRY;
+  };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  temporaryCreatureSpells: {
+    enabled: boolean;
+    version: string;
+    registry: typeof TEMPORARY_CREATURE_SPELLS;
+    bodies: typeof TEMPORARY_CREATURE_BODIES;
+  };
 }
 
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
@@ -60,6 +79,8 @@ export async function compileDevelopmentRelease(
     spellFamilies?: boolean;
     selfEntryTriggers?: boolean;
     selfEntrySequences?: boolean;
+    temporaryCreatureSpells?: boolean;
+    keywordReminders?: boolean;
   } = {},
 ): Promise<{ release: ContentRelease; report: CompilationReport }> {
   const inventory = readInventory(dbPath);
@@ -86,6 +107,17 @@ export async function compileDevelopmentRelease(
       )
       .all(inventory.importId),
     executedAssertions: 0,
+    keywordReminders: {
+      enabled: options.keywordReminders === true,
+      version: KEYWORD_REMINDER_RECIPE_VERSION,
+      registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    temporaryCreatureSpells: {
+      enabled: options.temporaryCreatureSpells === true,
+      version: TEMPORARY_CREATURE_VERSION,
+      registry: TEMPORARY_CREATURE_SPELLS,
+      bodies: TEMPORARY_CREATURE_BODIES,
+    },
     selfEntrySequences: {
       enabled: options.selfEntrySequences === true,
       version: SELF_ENTRY_SEQUENCE_VERSION,
@@ -135,7 +167,7 @@ export async function compileDevelopmentRelease(
     throw new Error("Compiler candidate denominator mismatch");
   const base = {
     schema: "commander-content/1" as const,
-    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}`,
+    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}`,
     sourceBundle: inventory.bundleHash,
     rulesHash,
     profile: "tabletop-commander" as const,
@@ -143,7 +175,7 @@ export async function compileDevelopmentRelease(
     definitions,
     unsupportedOracleIds: report.unsupported.map((card) => card.identity),
     eligibleDenominator: candidates.length,
-    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}`,
+    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}`,
     processorAbi: ENGINE_VERSION,
   };
   return { release: ContentRelease.parse({ ...base, hash: await semanticHash(base) }), report };
@@ -157,6 +189,7 @@ interface DeckProfile {
   spells?: readonly string[];
   familyLibrary?: boolean;
   triggerLibrary?: boolean;
+  temporaryLibrary?: boolean;
 }
 const DECK_PROFILES: DeckProfile[] = [
   { commander: "Jasmine Boreal", focus: "vanilla", code: "gw-vanilla" },
@@ -239,6 +272,7 @@ function deckTriggers(
     .filter(
       (definition) =>
         definition.triggerPrograms &&
+        definition.implementationRevision !== KEYWORD_REMINDER_RECIPE_VERSION &&
         definition.id !== commander.id &&
         definition.colorIdentity.every((color) => commander.colorIdentity.includes(color)),
     )
@@ -254,6 +288,8 @@ function deckTriggers(
 }
 
 function reviewedFamilyProgram(definition: CardDefinition): boolean {
+  if (definition.implementationRevision === TEMPORARY_CREATURE_VERSION)
+    return reviewedTemporaryCreatureDefinition(definition);
   if (definition.implementationRevision === SPELL_FAMILY_VERSION) {
     const binding = bindExactSpellFamily(definition.name, definition.oracleText);
     return (
@@ -274,11 +310,14 @@ function deckSpells(
   commander: CardDefinition,
   profile: DeckProfile,
 ): CardDefinition[] {
-  if (profile.familyLibrary) {
+  if (profile.familyLibrary || profile.temporaryLibrary) {
     const spells = Object.values(release.definitions)
       .filter(
         (definition) =>
           definition.spellProgram &&
+          (profile.temporaryLibrary
+            ? definition.implementationRevision === TEMPORARY_CREATURE_VERSION
+            : definition.implementationRevision !== TEMPORARY_CREATURE_VERSION) &&
           definition.colorIdentity.every((color) => commander.colorIdentity.includes(color)),
       )
       .sort((a, b) => compare(a.id, b.id));
@@ -324,6 +363,7 @@ function deckCreatures(
   const candidates = Object.values(release.definitions).filter(
     (card) =>
       card.types.includes("Creature") &&
+      card.implementationRevision !== KEYWORD_REMINDER_RECIPE_VERSION &&
       card.triggerPrograms === undefined &&
       card.id !== commander.id &&
       card.colorIdentity.every((color) => commander.colorIdentity.includes(color)) &&
@@ -346,7 +386,7 @@ function deckCreatures(
   return selected;
 }
 
-/** Twelve creature fixtures plus two spell fixtures; existence is not completed-game evidence. */
+/** Historical profiles retain their constructor pool; reminder fixtures use makeKeywordReminderDecks explicitly. */
 export async function makeDevelopmentDecks(
   releaseInput: ContentRelease,
   options: {
@@ -354,6 +394,7 @@ export async function makeDevelopmentDecks(
     includeFamilyDecks?: boolean;
     includeTriggerDecks?: boolean;
     includeSequenceDecks?: boolean;
+    includeTemporaryDecks?: boolean;
   } = {},
 ): Promise<DeckRevision[]> {
   const release = ContentRelease.parse(releaseInput);
@@ -361,7 +402,8 @@ export async function makeDevelopmentDecks(
   if ((await semanticHash(releaseBody)) !== releaseHash)
     throw new Error("Content release hash mismatch");
   const decks: DeckRevision[] = [];
-  const includeTriggers = options.includeTriggerDecks || options.includeSequenceDecks;
+  const includeTriggers =
+    options.includeTriggerDecks || options.includeSequenceDecks || options.includeTemporaryDecks;
   const profiles = includeTriggers
     ? [...DECK_PROFILES, ...SPELL_DECK_PROFILES, ...FAMILY_DECK_PROFILES, ...TRIGGER_DECK_PROFILES]
     : options.includeFamilyDecks
@@ -369,7 +411,7 @@ export async function makeDevelopmentDecks(
       : options.includeSpellDecks === false
         ? DECK_PROFILES
         : [...DECK_PROFILES, ...SPELL_DECK_PROFILES];
-  if (options.includeSequenceDecks)
+  if (options.includeSequenceDecks || options.includeTemporaryDecks)
     profiles.push({
       commander: "Tobias Andrion",
       commanderSourceVersion: "155d17db86833acd61d834269e09d90b88c99604cc3c9404c75e22ae72dc9758",
@@ -377,6 +419,33 @@ export async function makeDevelopmentDecks(
       code: "wu-ordered-entry-library",
       triggerLibrary: true,
     });
+  if (options.includeTemporaryDecks)
+    profiles.push(
+      {
+        commander: "Jasmine Boreal",
+        focus: "vanilla",
+        code: "gw-temporary-creature",
+        temporaryLibrary: true,
+      },
+      {
+        commander: "The Lady of the Mountain",
+        focus: "vanilla",
+        code: "rg-temporary-creature",
+        temporaryLibrary: true,
+      },
+      {
+        commander: "Lady Orca",
+        focus: "vanilla",
+        code: "br-temporary-creature",
+        temporaryLibrary: true,
+      },
+      {
+        commander: "Tobias Andrion",
+        focus: "vanilla",
+        code: "wu-temporary-creature",
+        temporaryLibrary: true,
+      },
+    );
   for (const [index, profile] of profiles.entries()) {
     const commander = Object.values(release.definitions).find(
       (card) => card.name === profile.commander,
@@ -427,7 +496,10 @@ export async function makeDevelopmentDecks(
       decks.slice(14, 17).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
     );
     const missing = Object.values(release.definitions).filter(
-      (definition) => definition.spellProgram && !included.has(definition.id),
+      (definition) =>
+        definition.spellProgram &&
+        definition.implementationRevision !== TEMPORARY_CREATURE_VERSION &&
+        !included.has(definition.id),
     );
     if (missing.length > 0)
       throw new Error(
@@ -439,12 +511,27 @@ export async function makeDevelopmentDecks(
       decks.slice(17).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
     );
     const missing = Object.values(release.definitions).filter(
-      (definition) => definition.triggerPrograms && !included.has(definition.id),
+      (definition) =>
+        definition.triggerPrograms &&
+        definition.implementationRevision !== KEYWORD_REMINDER_RECIPE_VERSION &&
+        !included.has(definition.id),
     );
     if (missing.length > 0)
       throw new Error(
         `Trigger fixtures do not cover all admitted trigger programs: ${missing.map((card) => card.name).join(", ")}`,
       );
+  }
+  if (options.includeTemporaryDecks) {
+    const included = new Set(
+      decks.slice(20).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
+    );
+    const missing = Object.values(release.definitions).filter(
+      (definition) =>
+        definition.implementationRevision === TEMPORARY_CREATURE_VERSION &&
+        !included.has(definition.id),
+    );
+    if (missing.length)
+      throw new Error(`Temporary fixtures lack: ${missing.map((card) => card.name).join(", ")}`);
   }
   return decks;
 }

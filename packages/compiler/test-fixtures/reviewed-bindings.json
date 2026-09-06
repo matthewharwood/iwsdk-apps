@@ -1,0 +1,401 @@
+{
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "releaseHash": "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
+  "definitions": {
+    "Canopy Spider": {
+      "id": "oracle:37f3733e-cc4e-4d84-b29b-d474f6e254a2",
+      "oracleId": "37f3733e-cc4e-4d84-b29b-d474f6e254a2",
+      "sourceVersion": "e97b2952a54a59b53c87a424abeb84c4279030e918991985395434b8a650a4e4",
+      "name": "Canopy Spider",
+      "typeLine": "Creature \u2014 Spider",
+      "types": ["Creature"],
+      "subtypes": ["Spider"],
+      "supertypes": [],
+      "colors": ["G"],
+      "colorIdentity": ["G"],
+      "manaCost": {
+        "W": 0,
+        "U": 0,
+        "B": 0,
+        "R": 0,
+        "G": 1,
+        "C": 0,
+        "generic": 1
+      },
+      "manaValue": 2,
+      "power": 1,
+      "toughness": 3,
+      "keywords": ["reach"],
+      "manaAbilities": [],
+      "oracleText": "Reach (This creature can block creatures with flying.)",
+      "commanderEligible": false,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:302",
+        "rule:601.2",
+        "rule:903.5",
+        "rule:702.17",
+        "rule:207.2",
+        "rule:207.2a"
+      ],
+      "implementationRevision": "keyword-reminder-creature/1"
+    },
+    "Cloudblazer": {
+      "id": "oracle:f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+      "oracleId": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+      "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+      "name": "Cloudblazer",
+      "typeLine": "Creature \u2014 Human Scout",
+      "types": ["Creature"],
+      "subtypes": ["Human", "Scout"],
+      "supertypes": [],
+      "colors": ["U", "W"],
+      "colorIdentity": ["U", "W"],
+      "manaCost": {
+        "W": 1,
+        "U": 1,
+        "B": 0,
+        "R": 0,
+        "G": 0,
+        "C": 0,
+        "generic": 3
+      },
+      "manaValue": 5,
+      "power": 2,
+      "toughness": 2,
+      "keywords": ["flying"],
+      "manaAbilities": [],
+      "oracleText": "Flying\nWhen this creature enters, you gain 2 life and draw two cards.",
+      "commanderEligible": false,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:302",
+        "rule:601.2",
+        "rule:903.5",
+        "rule:702.9",
+        "rule:603.2",
+        "rule:603.2c",
+        "rule:603.3",
+        "rule:603.3a",
+        "rule:603.3b",
+        "rule:603.6a",
+        "rule:603.6b",
+        "rule:603.10",
+        "rule:109.5",
+        "rule:113.7a",
+        "rule:117.2a",
+        "rule:117.5",
+        "rule:101.4",
+        "rule:608.2n",
+        "rule:800.4a",
+        "rule:800.4d",
+        "rule:119.3",
+        "rule:121.1",
+        "rule:608.2c",
+        "rule:117.2e",
+        "rule:121.1",
+        "rule:121.2",
+        "rule:121.4",
+        "rule:119.3",
+        "rule:704.4",
+        "rule:704.5b"
+      ],
+      "implementationRevision": "self-entry-sequence-four/1",
+      "triggerPrograms": [
+        {
+          "schema": "commander-trigger/2",
+          "id": "self-entry-0",
+          "trigger": {
+            "kind": "self-enters-battlefield",
+            "view": "post-committed-event",
+            "placementClass": "ordinary"
+          },
+          "choice": {
+            "kind": "mandatory"
+          },
+          "effects": [
+            {
+              "kind": "gain-life",
+              "recipient": "trigger-controller",
+              "amount": 2
+            },
+            {
+              "kind": "draw",
+              "recipient": "trigger-controller",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    "Divination": {
+      "id": "oracle:273b339c-964b-4a18-8eb5-ceb8abcdfd9e",
+      "oracleId": "273b339c-964b-4a18-8eb5-ceb8abcdfd9e",
+      "sourceVersion": "00d836618ec785082d7ed41e79f928fd91f7d0d4533f8364856c9349b6271111",
+      "name": "Divination",
+      "typeLine": "Sorcery",
+      "types": ["Sorcery"],
+      "subtypes": [],
+      "supertypes": [],
+      "colors": ["U"],
+      "colorIdentity": ["U"],
+      "manaCost": {
+        "W": 0,
+        "U": 1,
+        "B": 0,
+        "R": 0,
+        "G": 0,
+        "C": 0,
+        "generic": 2
+      },
+      "manaValue": 3,
+      "power": null,
+      "toughness": null,
+      "keywords": [],
+      "manaAbilities": [],
+      "oracleText": "Draw two cards.",
+      "commanderEligible": false,
+      "deckLimit": 1,
+      "obligations": ["rule:601.2", "rule:608.2b", "rule:608.2c", "rule:307.1", "rule:121.1"],
+      "implementationRevision": "reviewed-spell/1",
+      "spellProgram": {
+        "schema": "commander-spell/1",
+        "target": null,
+        "effects": [
+          {
+            "kind": "draw",
+            "recipient": "controller",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    "Forest": {
+      "id": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+      "oracleId": "b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+      "sourceVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+      "name": "Forest",
+      "typeLine": "Basic Land \u2014 Forest",
+      "types": ["Land"],
+      "subtypes": ["Forest"],
+      "supertypes": ["Basic"],
+      "colors": [],
+      "colorIdentity": ["G"],
+      "manaCost": null,
+      "manaValue": 0,
+      "power": null,
+      "toughness": null,
+      "keywords": [],
+      "manaAbilities": ["G"],
+      "oracleText": "({T}: Add {G}.)",
+      "commanderEligible": false,
+      "deckLimit": null,
+      "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+      "implementationRevision": "commander-development-recipes/1"
+    },
+    "Giant Growth": {
+      "id": "oracle:5748ebf1-24e3-499d-ab7c-c2cebd462a24",
+      "oracleId": "5748ebf1-24e3-499d-ab7c-c2cebd462a24",
+      "sourceVersion": "001d87aec9722deb59e9497c39cf0e362482317c4be7ed65db4ef6b18a734f3e",
+      "name": "Giant Growth",
+      "typeLine": "Instant",
+      "types": ["Instant"],
+      "subtypes": [],
+      "supertypes": [],
+      "colors": ["G"],
+      "colorIdentity": ["G"],
+      "manaCost": {
+        "W": 0,
+        "U": 0,
+        "B": 0,
+        "R": 0,
+        "G": 1,
+        "C": 0,
+        "generic": 0
+      },
+      "manaValue": 1,
+      "power": null,
+      "toughness": null,
+      "keywords": [],
+      "manaAbilities": [],
+      "oracleText": "Target creature gets +3/+3 until end of turn.",
+      "commanderEligible": false,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:611.2a",
+        "rule:611.2c",
+        "rule:613.1f",
+        "rule:613.1g",
+        "rule:613.4c",
+        "rule:514.2",
+        "rule:608.2b",
+        "rule:608.2c",
+        "rule:601.2c",
+        "rule:704.4",
+        "rule:704.5f",
+        "rule:121.1",
+        "rule:121.2",
+        "rule:601.2",
+        "rule:608.2n",
+        "rule:304.1"
+      ],
+      "implementationRevision": "temporary-creature-spells/1",
+      "spellProgram": {
+        "schema": "commander-spell/1",
+        "target": "creature",
+        "effects": [
+          {
+            "kind": "modify-creature",
+            "powerDelta": 3,
+            "toughnessDelta": 3,
+            "keywords": [],
+            "duration": "until-end-of-turn"
+          }
+        ]
+      }
+    },
+    "Jasmine Boreal": {
+      "id": "oracle:942407bf-862a-4a0b-b19d-b9f8ee833026",
+      "oracleId": "942407bf-862a-4a0b-b19d-b9f8ee833026",
+      "sourceVersion": "715ac4501a52d881b939d5793a333b1e407382c7aec56be50a2e2f2b4159d7b5",
+      "name": "Jasmine Boreal",
+      "typeLine": "Legendary Creature \u2014 Human",
+      "types": ["Creature"],
+      "subtypes": ["Human"],
+      "supertypes": ["Legendary"],
+      "colors": ["G", "W"],
+      "colorIdentity": ["G", "W"],
+      "manaCost": {
+        "W": 1,
+        "U": 0,
+        "B": 0,
+        "R": 0,
+        "G": 1,
+        "C": 0,
+        "generic": 3
+      },
+      "manaValue": 5,
+      "power": 4,
+      "toughness": 5,
+      "keywords": [],
+      "manaAbilities": [],
+      "oracleText": "",
+      "commanderEligible": true,
+      "deckLimit": 1,
+      "obligations": ["rule:302", "rule:601.2", "rule:903.5", "rule:704.5j", "rule:903.3"],
+      "implementationRevision": "commander-development-recipes/1"
+    },
+    "Lone Missionary": {
+      "id": "oracle:626f1dc3-3b14-4873-902f-ffec5487a97d",
+      "oracleId": "626f1dc3-3b14-4873-902f-ffec5487a97d",
+      "sourceVersion": "abf0811b55adc2fab65b3ab0dbb8d1724840d2947269b9250bd049263a06b761",
+      "name": "Lone Missionary",
+      "typeLine": "Creature \u2014 Kor Monk",
+      "types": ["Creature"],
+      "subtypes": ["Kor", "Monk"],
+      "supertypes": [],
+      "colors": ["W"],
+      "colorIdentity": ["W"],
+      "manaCost": {
+        "W": 1,
+        "U": 0,
+        "B": 0,
+        "R": 0,
+        "G": 0,
+        "C": 0,
+        "generic": 1
+      },
+      "manaValue": 2,
+      "power": 2,
+      "toughness": 1,
+      "keywords": [],
+      "manaAbilities": [],
+      "oracleText": "When this creature enters, you gain 4 life.",
+      "commanderEligible": false,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:302",
+        "rule:601.2",
+        "rule:903.5",
+        "rule:603.2",
+        "rule:603.2c",
+        "rule:603.3",
+        "rule:603.3a",
+        "rule:603.3b",
+        "rule:603.6a",
+        "rule:603.6b",
+        "rule:603.10",
+        "rule:109.5",
+        "rule:113.7a",
+        "rule:117.2a",
+        "rule:117.5",
+        "rule:101.4",
+        "rule:608.2n",
+        "rule:800.4a",
+        "rule:800.4d",
+        "rule:119.3"
+      ],
+      "implementationRevision": "self-entry-creature/1",
+      "triggerPrograms": [
+        {
+          "schema": "commander-trigger/1",
+          "id": "self-entry-0",
+          "trigger": {
+            "kind": "self-enters-battlefield",
+            "view": "post-committed-event",
+            "placementClass": "ordinary"
+          },
+          "choice": {
+            "kind": "mandatory"
+          },
+          "effect": {
+            "kind": "gain-life",
+            "recipient": "trigger-controller",
+            "amount": 4
+          }
+        }
+      ]
+    },
+    "Vine Trellis": {
+      "id": "oracle:57de8fe7-3d1b-41cd-8354-38aff3d2d052",
+      "oracleId": "57de8fe7-3d1b-41cd-8354-38aff3d2d052",
+      "sourceVersion": "cabfc2f2a131203e0063244e7d59f7f10c7d2ed7f1e3851fca9219cc9e726702",
+      "name": "Vine Trellis",
+      "typeLine": "Creature \u2014 Plant Wall",
+      "types": ["Creature"],
+      "subtypes": ["Plant", "Wall"],
+      "supertypes": [],
+      "colors": ["G"],
+      "colorIdentity": ["G"],
+      "manaCost": {
+        "W": 0,
+        "U": 0,
+        "B": 0,
+        "R": 0,
+        "G": 1,
+        "C": 0,
+        "generic": 1
+      },
+      "manaValue": 2,
+      "power": 0,
+      "toughness": 4,
+      "keywords": ["defender"],
+      "manaAbilities": ["G"],
+      "oracleText": "Defender (This creature can't attack.)\n{T}: Add {G}.",
+      "commanderEligible": false,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:302",
+        "rule:601.2",
+        "rule:903.5",
+        "rule:702.3",
+        "rule:207.2",
+        "rule:207.2a",
+        "rule:605.1a",
+        "rule:302.6"
+      ],
+      "implementationRevision": "keyword-reminder-creature/1"
+    }
+  }
+}

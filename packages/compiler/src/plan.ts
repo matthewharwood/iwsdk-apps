@@ -1,8 +1,12 @@
 import {
+  KEYWORD_REMINDER_RECIPE_VERSION,
+  reviewedKeywordReminderDefinition,
+  reviewedLegacyDefinition,
   reviewedSelfEntryDefinition,
+  reviewedTemporaryCreatureDefinition,
   SELF_ENTRY_RECIPE_VERSION,
   SELF_ENTRY_SEQUENCE_VERSION,
-  SPELL_FAMILY_VERSION,
+  TEMPORARY_CREATURE_VERSION,
 } from "@iwsdk-apps/card-programs";
 import {
   type CardDefinition,
@@ -11,8 +15,10 @@ import {
   semanticHash,
 } from "@iwsdk-apps/contracts";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/3";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.8.0";
+import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
+
+export const MATCH_PLAN_VERSION = "development-match-plan/5";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.9.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -22,6 +28,13 @@ export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:serialization",
   "trigger:ordered-effects",
   "trigger:individual-draws",
+] as const;
+export const TEMPORARY_CREATURE_CORE_CAPABILITIES = [
+  "continuous:fixed-object-generation",
+  "continuous:layer6-intrinsic-keywords",
+  "continuous:layer7c-fixed-deltas",
+  "continuous:cleanup-expiry",
+  "continuous:serialization",
 ] as const;
 export type Dependency =
   | { kind: "exact"; identity: string }
@@ -127,27 +140,50 @@ const DEVELOPMENT_CORE = [
   "elimination",
   "spell-sequence",
 ];
-const RECOGNIZED_RECIPES = new Set([
-  "commander-development-recipes/1",
-  "reviewed-spell/1",
-  SPELL_FAMILY_VERSION,
-]);
-function recognizedDependencyDeclaration(
+const REVIEWED_BINDINGS_BY_VERSION = new Map(
+  Object.values(REVIEWED_SOURCE_BINDINGS).map((binding) => [binding.sourceVersion, binding]),
+);
+
+async function recognizedDependencyDeclaration(
   definition: CardDefinition,
   processorAbi: string,
-): boolean {
+  dictionaryIdentity: string,
+): Promise<boolean> {
+  if (dictionaryIdentity !== definition.id) return false;
+  const byOracle = REVIEWED_SOURCE_BINDINGS[definition.oracleId];
+  const byId = REVIEWED_SOURCE_BINDINGS[definition.id.replace(/^oracle:/, "")];
+  const byDictionary = REVIEWED_SOURCE_BINDINGS[dictionaryIdentity.replace(/^oracle:/, "")];
+  const bySourceVersion = REVIEWED_BINDINGS_BY_VERSION.get(definition.sourceVersion);
+  const pinned = byOracle ?? byId ?? byDictionary ?? bySourceVersion;
+  if (
+    pinned &&
+    (byOracle !== pinned ||
+      byId !== pinned ||
+      byDictionary !== pinned ||
+      bySourceVersion !== pinned ||
+      definition.id !== `oracle:${definition.oracleId}` ||
+      definition.sourceVersion !== pinned.sourceVersion ||
+      definition.implementationRevision !== pinned.implementationRevision ||
+      (await semanticHash(definition)) !== pinned.definitionHash)
+  )
+    return false;
+  if (definition.implementationRevision === KEYWORD_REMINDER_RECIPE_VERSION)
+    return (
+      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedKeywordReminderDefinition(definition)
+    );
+  if (definition.implementationRevision === TEMPORARY_CREATURE_VERSION)
+    return (
+      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedTemporaryCreatureDefinition(definition)
+    );
   if (
     [SELF_ENTRY_RECIPE_VERSION, SELF_ENTRY_SEQUENCE_VERSION].includes(
       definition.implementationRevision,
     )
   )
     return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedSelfEntryDefinition(definition);
-  return (
-    definition.triggerPrograms === undefined &&
-    RECOGNIZED_RECIPES.has(definition.implementationRevision)
-  );
+  return reviewedLegacyDefinition(definition);
 }
-/** Reviewed development families create no tokens, copied/granted abilities, or external definitions. */
+/** Reviewed families create no tokens or external definitions. Bounded intrinsic keyword grants use core processors. */
 export async function buildDevelopmentMatchPlan(
   releaseInput: ContentRelease,
   deckInputs: readonly DeckRevision[],
@@ -168,13 +204,25 @@ export async function buildDevelopmentMatchPlan(
       deck.commander,
       ...deck.entries.map((entry) => entry.definition),
     ]),
-    registry: Object.values(release.definitions).map((definition) => {
-      const known = recognizedDependencyDeclaration(definition, release.processorAbi);
-      return { identity: definition.id, implemented: known, dependencies: known ? [] : null };
-    }),
+    registry: await Promise.all(
+      Object.entries(release.definitions).map(async ([identity, definition]) => {
+        const known = await recognizedDependencyDeclaration(
+          definition,
+          release.processorAbi,
+          identity,
+        );
+        return { identity, implemented: known, dependencies: known ? [] : null };
+      }),
+    ),
     core: [
       ...DEVELOPMENT_CORE,
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI ? SELF_ENTRY_CORE_CAPABILITIES : []),
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === TEMPORARY_CREATURE_VERSION,
+      )
+        ? TEMPORARY_CREATURE_CORE_CAPABILITIES
+        : []),
     ].map((identity) => ({ identity, implemented: true })),
   });
   const base = {
@@ -192,7 +240,7 @@ export async function buildDevelopmentMatchPlan(
       assumptions: [
         "fixed pinned release",
         "recognized development recipe dependency declarations",
-        "no generated, copied, granted or external definitions in admitted programs",
+        "no generated, copied or external definitions; granted intrinsic keywords are bounded core capabilities",
       ],
       proof: "not reachable from deck roots under complete declared development dependencies",
       tests: ["packages/compiler/src/plan.test.ts"],

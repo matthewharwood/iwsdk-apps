@@ -8,7 +8,7 @@ import {
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/4";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/5";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;
@@ -70,9 +70,9 @@ function present(observation: PlayerObservation, write: (line: string) => void):
         counters: object.counters,
         manaCost: object.card.manaCost,
         type: object.card.typeLine,
-        power: object.card.power,
-        toughness: object.card.toughness,
-        keywords: object.card.keywords,
+        power: object.characteristics.power,
+        toughness: object.characteristics.toughness,
+        keywords: object.characteristics.keywords,
         oracleText: object.card.oracleText,
       })),
     )}`,

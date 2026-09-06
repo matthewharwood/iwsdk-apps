@@ -5,11 +5,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createPreparedMatchArtifact } from "@iwsdk-apps/compiler/prepared";
 import {
-  type CardDefinition,
   CHANCE_VERSION,
   CONTRACT_VERSION,
-  type ContentRelease,
-  type DeckRevision,
   ENGINE_VERSION,
   emptyMana,
   type GameCommand,
@@ -18,6 +15,7 @@ import {
   SERIALIZER_VERSION,
   semanticHash,
 } from "@iwsdk-apps/contracts";
+import { fixtureDeck, fixtureRelease } from "../test-fixtures/authenticated";
 import {
   Coordinator,
   createRepository,
@@ -50,77 +48,11 @@ function open(path = location()): Repository {
   return repo;
 }
 async function fixtures(id = "fixture-match", count: 2 | 4 = 2) {
-  const base: CardDefinition = {
-    id: "fixture-commander",
-    oracleId: "fixture-commander",
-    sourceVersion: "0".repeat(64),
-    name: "Synthetic storage-test commander",
-    typeLine: "Legendary Creature",
-    types: ["Creature"],
-    subtypes: [],
-    supertypes: ["Legendary"],
-    colors: ["G"],
-    colorIdentity: ["G"],
-    manaCost: { ...emptyMana(), generic: 0 },
-    manaValue: 0,
-    power: 2,
-    toughness: 2,
-    keywords: [],
-    manaAbilities: [],
-    oracleText: "",
-    commanderEligible: true,
-    deckLimit: 1,
-    obligations: [],
-    implementationRevision: "commander-development-recipes/1",
-  };
-  const land: CardDefinition = {
-    ...base,
-    id: "fixture-land",
-    oracleId: "fixture-land",
-    name: "Synthetic storage-test basic land",
-    typeLine: "Basic Land — Forest",
-    types: ["Land"],
-    subtypes: ["Forest"],
-    supertypes: ["Basic"],
-    manaCost: null,
-    power: null,
-    toughness: null,
-    manaAbilities: ["G"],
-    commanderEligible: false,
-    deckLimit: null,
-  };
-  const payload = {
-    schema: "commander-content/1" as const,
-    id: "storage-fixtures",
-    sourceBundle: "0".repeat(64),
-    rulesHash: "0".repeat(64),
-    profile: "tabletop-commander" as const,
-    assurance: "development-subset" as const,
-    definitions: {
-      [base.id]: base,
-      [land.id]: land,
-      "fixture-unused": {
-        ...base,
-        id: "fixture-unused",
-        oracleId: "fixture-unused",
-        name: "Unused synthetic fixture",
-      },
-    },
-    unsupportedOracleIds: [],
-    eligibleDenominator: 0,
-    compilerVersion: "storage-test/1",
-    processorAbi: ENGINE_VERSION,
-  };
-  const release: ContentRelease = { ...payload, hash: await semanticHash(payload) };
-  const deckPayload = {
-    id: "synthetic-unit-deck",
-    commander: base.id,
-    entries: [
-      { definition: base.id, count: 1 },
-      { definition: land.id, count: 99 },
-    ],
-  };
-  const deck: DeckRevision = { ...deckPayload, hash: await semanticHash(deckPayload) };
+  const release = await fixtureRelease(["Isamaru, Hound of Konda", "Plains", "Forest"]);
+  const deck = await fixtureDeck("authenticated-unit-deck", "Isamaru, Hound of Konda", [
+    ["Isamaru, Hound of Konda", 1],
+    ["Plains", 99],
+  ]);
   const manifest: MatchManifest = {
     schema: "commander-match/1",
     id,
@@ -294,6 +226,9 @@ describe("SQLite ownership and durable coordinator", () => {
       (entry) => entry.commander && entry.owner === state.activePlayer,
     );
     if (!commander) throw new Error("Fixture commander unavailable");
+    const land = state.players.find((seat) => seat.id === state.activePlayer)?.hand[0];
+    if (!land) throw new Error("Missing Plains");
+    await accepted(coordinator, command(coordinator, { kind: "land", card: land }));
     await accepted(coordinator, command(coordinator, { kind: "cast", card: commander.id }));
     const pending = coordinator.current();
     expect(pending.decision?.kind).toBe("payment");
@@ -305,7 +240,13 @@ describe("SQLite ownership and durable coordinator", () => {
     const importedRepo = open();
     expect(await importMatch(importedRepo, release, logical)).toEqual(pending);
     const imported = await Coordinator.open(importedRepo, release, manifest.id);
-    const payment = command(reopened, { kind: "payment", sources: [], spend: emptyMana() });
+    const source = reopened.current().decision?.manaSources[0];
+    if (!source) throw new Error("Missing Plains payment source");
+    const payment = command(reopened, {
+      kind: "payment",
+      sources: [{ object: source.object, color: "W" }],
+      spend: { ...emptyMana(), W: 1 },
+    });
     const [a, b] = await Promise.all([
       reopened.submit(payment.actor, payment),
       imported.submit(payment.actor, payment),
@@ -466,6 +407,11 @@ describe("persisted prepared execution registries", () => {
         .view(coordinator.pendingActor ?? "")
         .objects.find((entry) => entry.commander && entry.owner === coordinator.pendingActor);
       if (!commander) throw new Error("Missing fixture commander");
+      const land = coordinator
+        .current()
+        .players.find((seat) => seat.id === coordinator.pendingActor)?.hand[0];
+      if (!land) throw new Error("Missing authenticated Plains");
+      await accepted(coordinator, command(coordinator, { kind: "land", card: land }));
       const castInput = command(coordinator, { kind: "cast", card: commander.id });
       const receipt = await accepted(coordinator, castInput);
       const saved = coordinator.current();
@@ -486,10 +432,16 @@ describe("persisted prepared execution registries", () => {
       expect(await importMatch(importedRepo, release, exported)).toEqual(saved);
       const imported = await Coordinator.open(importedRepo, release, manifest.id);
       expect(imported.executionInfo()).toEqual(reopened.executionInfo());
-      const payment = command(reopened, { kind: "payment", sources: [], spend: emptyMana() });
-      expect(await reopened.submit(payment.actor, payment)).toEqual(
-        await imported.submit(payment.actor, payment),
-      );
+      const source = reopened.current().decision?.manaSources[0];
+      if (!source) throw new Error("Missing Plains payment source");
+      const payment = command(reopened, {
+        kind: "payment",
+        sources: [{ object: source.object, color: "W" }],
+        spend: { ...emptyMana(), W: 1 },
+      });
+      const paid = await reopened.submit(payment.actor, payment);
+      expect(paid.status).toBe("accepted");
+      expect(paid).toEqual(await imported.submit(payment.actor, payment));
       expect(imported.current()).toEqual(reopened.current());
     });
   }

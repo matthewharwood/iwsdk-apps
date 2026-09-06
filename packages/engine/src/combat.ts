@@ -6,6 +6,7 @@ import type {
   Response,
   RulesState,
 } from "@iwsdk-apps/contracts";
+import { characteristics } from "./characteristics";
 import {
   card,
   creatures,
@@ -28,7 +29,7 @@ type Allocation = DamageResponse["allocations"][number];
 type Domain = Decision["damageDomain"];
 
 function has(state: RulesState, release: ExecutionRegistry, id: string, keyword: Keyword): boolean {
-  return card(state, release, id).keywords.includes(keyword);
+  return characteristics(state, release, id).keywords.includes(keyword);
 }
 
 function liveCreature(

@@ -3,92 +3,35 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import {
-  type CardDefinition,
-  type ContentRelease,
+  ContentRelease,
   canonicalJson,
-  type DeckRevision,
+  DeckRevision,
   ENGINE_VERSION,
-  emptyMana,
   semanticHash,
 } from "@iwsdk-apps/contracts";
+import pinnedFixture from "../test-fixtures/regression-source.json";
 import { deckCompositionKey, runBatch } from "./batch";
 import { planRegression } from "./regress";
 
+const FOREST = "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6";
+
 async function fixture() {
-  const commander: CardDefinition = {
-    id: "commander",
-    oracleId: "synthetic",
-    sourceVersion: "1".repeat(64),
-    name: "Unit commander",
-    typeLine: "Legendary Creature",
-    types: ["Creature"],
-    subtypes: [],
-    supertypes: ["Legendary"],
-    colors: ["G"],
-    colorIdentity: ["G"],
-    manaCost: { ...emptyMana(), G: 1, generic: 1 },
-    manaValue: 2,
-    power: 2,
-    toughness: 2,
-    keywords: [],
-    manaAbilities: [],
-    oracleText: "",
-    commanderEligible: true,
-    deckLimit: 1,
-    obligations: [],
-    implementationRevision: "commander-development-recipes/1",
-  };
-  const land: CardDefinition = {
-    ...commander,
-    id: "land",
-    oracleId: "synthetic-land",
-    name: "Unit Forest",
-    typeLine: "Basic Land — Forest",
-    types: ["Land"],
-    subtypes: ["Forest"],
-    supertypes: ["Basic"],
-    manaCost: null,
-    manaValue: 0,
-    power: null,
-    toughness: null,
-    manaAbilities: ["G"],
-    deckLimit: null,
-    commanderEligible: false,
-  };
-  const definitions: ContentRelease["definitions"] = { land };
-  const decks: DeckRevision[] = [];
-  for (let i = 0; i < 12; i++) {
-    const card = {
-      ...commander,
-      id: `commander-${i}`,
-      oracleId: `synthetic-${i}`,
-      name: `Unit commander ${i}`,
-    };
-    definitions[card.id] = card;
-    const body = {
-      id: `deck-${i}`,
-      commander: card.id,
-      entries: [
-        { definition: card.id, count: 1 },
-        { definition: "land", count: 99 },
-      ],
-    };
-    decks.push({ ...body, hash: await semanticHash(body) });
-  }
+  const definitions = structuredClone(pinnedFixture.definitions);
+  const decks = pinnedFixture.decks.map((deck) => DeckRevision.parse(deck));
   const body = {
     schema: "commander-content/1" as const,
-    id: "regression-synthetic-source",
-    sourceBundle: "2".repeat(64),
-    rulesHash: "3".repeat(64),
+    id: "regression-source-backed-unit-subset",
+    sourceBundle: pinnedFixture.sourceBundle,
+    rulesHash: pinnedFixture.rulesHash,
     profile: "tabletop-commander" as const,
     assurance: "development-subset" as const,
     definitions,
     unsupportedOracleIds: [],
-    eligibleDenominator: 13,
+    eligibleDenominator: Object.keys(definitions).length,
     compilerVersion: "unit/1",
     processorAbi: ENGINE_VERSION,
   };
-  const source = { ...body, hash: await semanticHash(body) };
+  const source = ContentRelease.parse({ ...body, hash: await semanticHash(body) });
   const corpus = {
     schema: "commander-regression-corpus/1",
     id: "synthetic-corpus",
@@ -101,7 +44,7 @@ async function fixture() {
       Object.values(definitions).map((card) => [card.id, card.sourceVersion]),
     ),
     decks,
-    scope: "Synthetic accounting fixture; no source-backed games are claimed.",
+    scope: pinnedFixture.scope,
     baselineBuildHashes: ["5".repeat(64)],
     cases: Array.from({ length: 64 }, (_, i) => ({
       id: `case-${i}`,
@@ -143,14 +86,20 @@ test("fixed regression preserves 64 declared inputs and pins new independent pre
   }
 });
 
-test("regression rejects changed card source even after the release is rehashed", async () => {
+test("regression rejects unauthenticated changed card source even after the release is rehashed", async () => {
   const { source, corpus } = await fixture();
-  const card = source.definitions.land;
+  const card = source.definitions[FOREST];
   if (!card) throw new Error("Missing fixture land");
   card.sourceVersion = "8".repeat(64);
   const { hash: _hash, ...body } = source;
   source.hash = await semanticHash(body);
-  await expect(planRegression(corpus, source, "bad")).rejects.toThrow("card source changed");
+  await expect(planRegression(corpus, source, "bad")).rejects.toThrow("Unauthenticated definition");
+});
+
+test("regression rejects a changed corpus source pin against the authenticated source", async () => {
+  const { source, corpus } = await fixture();
+  corpus.definitionSourcePins[FOREST] = "8".repeat(64);
+  await expect(planRegression(corpus, source, "bad-pin")).rejects.toThrow("card source changed");
 });
 
 test("a new case name cannot count identical game inputs twice", async () => {
@@ -166,7 +115,7 @@ test("regression rejects a changed denominator or a missing pinned source", asyn
   corpus.fourSeat = 49;
   await expect(planRegression(corpus, source, "bad")).rejects.toThrow("denominator");
   corpus.fourSeat = 48;
-  delete corpus.definitionSourcePins.land;
+  delete corpus.definitionSourcePins[FOREST];
   await expect(planRegression(corpus, source, "bad")).rejects.toThrow("pin closure");
 });
 
@@ -265,19 +214,21 @@ test("aliases with distinct seeds preserve exact historical revision pins and ro
   }
 });
 
-test("seat order and each actual seed distinguish valid regression inputs", async () => {
-  for (const change of ["seat-order", "game-seed", "driver-seed"] as const) {
-    const { source, corpus } = await fixture();
-    const first = corpus.cases[0];
-    if (!first) throw new Error("Missing fixture case");
-    const next = { ...structuredClone(first), id: `changed-${change}` };
-    if (change === "seat-order") next.seats.reverse();
-    if (change === "game-seed") next.gameSeed = 123456;
-    if (change === "driver-seed") next.driverSeed = 123456;
-    corpus.cases[1] = next;
-    expect((await planRegression(corpus, source, "distinct")).assignments).toHaveLength(64);
-  }
-});
+test.each([
+  "seat-order",
+  "game-seed",
+  "driver-seed",
+] as const)("%s distinguishes valid regression inputs", async (change) => {
+  const { source, corpus } = await fixture();
+  const first = corpus.cases[0];
+  if (!first) throw new Error("Missing fixture case");
+  const next = { ...structuredClone(first), id: `changed-${change}` };
+  if (change === "seat-order") next.seats.reverse();
+  if (change === "game-seed") next.gameSeed = 123456;
+  if (change === "driver-seed") next.driverSeed = 123456;
+  corpus.cases[1] = next;
+  expect((await planRegression(corpus, source, "distinct")).assignments).toHaveLength(64);
+}, 15000);
 
 async function rejectedBatch(
   alter: (source: ContentRelease, decks: DeckRevision[]) => void | Promise<void>,
@@ -334,9 +285,9 @@ test("batch admits every declared deck even when its first assignment does not u
   await rejectedBatch(async (_source, decks) => {
     const unused = decks[11];
     if (!unused) throw new Error("Missing unused deck");
-    const land = unused.entries.find((entry) => entry.definition === "land");
+    const land = unused.entries.find((entry) => entry.definition === FOREST);
     if (!land) throw new Error("Missing land");
-    land.count = 98;
+    land.count -= 1;
     const { hash: _hash, ...body } = unused;
     unused.hash = await semanticHash(body);
   }, "exactly 100 cards");

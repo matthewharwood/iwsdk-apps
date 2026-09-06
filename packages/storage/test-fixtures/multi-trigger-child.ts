@@ -146,7 +146,7 @@ try {
       status: "passed",
       scenarioAdapter: SCENARIO_ADAPTER,
       ordinaryCommandReachable: false,
-      sourceBackedCards: false,
+      sourceBackedCards: true,
       checks: [
         "strict-schema-roundtrip",
         "native-sqlite",

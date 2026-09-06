@@ -9,6 +9,7 @@ import {
   type SelectionResult,
   type Selector,
 } from "@iwsdk-apps/rule-selection";
+import { characteristics } from "./characteristics";
 import { orderedObjects } from "./object-order";
 
 const fields = {
@@ -111,7 +112,7 @@ export function selectObjectCandidates(
       epoch: state.epoch,
       lens: "current",
       eventVersion: String(state.eventSequence),
-      processorVersion: "development-object-selection/1",
+      processorVersion: "development-object-selection/2",
       bindingsKey: JSON.stringify(bindings),
       universe: "live-objects",
       generation: state.epoch,
@@ -133,7 +134,7 @@ export function selectObjectCandidates(
           tapped: entry.tapped,
           controlledSinceTurn: entry.controlledSinceTurn,
           types: definition.types,
-          keywords: definition.keywords,
+          keywords: characteristics(state, release, entry.id).keywords,
           manaCount: definition.manaAbilities.length,
           hasManaCost: definition.manaCost !== null,
         },

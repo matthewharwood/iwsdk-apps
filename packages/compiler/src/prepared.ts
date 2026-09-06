@@ -1,8 +1,11 @@
 import {
+  KEYWORD_REMINDER_REGISTRY,
   RECIPE_REGISTRY,
   SELF_ENTRY_REGISTRY,
   SELF_ENTRY_SEQUENCES,
   SPELL_FAMILY_REGISTRY,
+  TEMPORARY_CREATURE_BODIES,
+  TEMPORARY_CREATURE_SPELLS,
 } from "@iwsdk-apps/card-programs";
 import {
   type CardDefinition,
@@ -13,6 +16,8 @@ import {
   semanticHash,
 } from "@iwsdk-apps/contracts";
 import { buildDevelopmentMatchPlan, MATCH_PLAN_VERSION } from "./plan";
+
+import { REVIEWED_BINDING_SNAPSHOT, REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
 export class PreparedAdmissionError extends Error {
   constructor(
@@ -28,12 +33,29 @@ export async function verifySourceRelease(input: ContentRelease): Promise<Conten
   const { hash, ...body } = source;
   if ((await semanticHash(body)) !== hash)
     throw new PreparedAdmissionError("InvalidSource", "Full source release hash mismatch");
-  for (const [identity, definition] of Object.entries(source.definitions))
-    if (identity !== definition.id)
+  if (
+    source.sourceBundle !== REVIEWED_BINDING_SNAPSHOT.sourceBundle ||
+    source.rulesHash !== REVIEWED_BINDING_SNAPSHOT.rulesHash
+  )
+    throw new PreparedAdmissionError(
+      "InvalidSource",
+      "Unauthenticated source bundle or rules snapshot",
+    );
+  for (const [identity, definition] of Object.entries(source.definitions)) {
+    if (identity !== definition.id || identity !== `oracle:${definition.oracleId}`)
       throw new PreparedAdmissionError(
         "InvalidSource",
         `Definition dictionary identity mismatch: ${identity}`,
       );
+    const expected = REVIEWED_SOURCE_BINDINGS[definition.oracleId];
+    if (
+      !expected ||
+      definition.sourceVersion !== expected.sourceVersion ||
+      definition.implementationRevision !== expected.implementationRevision ||
+      (await semanticHash(definition)) !== expected.definitionHash
+    )
+      throw new PreparedAdmissionError("InvalidSource", `Unauthenticated definition: ${identity}`);
+  }
   return source;
 }
 async function verifiedDecks(inputs: readonly DeckRevision[]): Promise<DeckRevision[]> {
@@ -98,7 +120,12 @@ async function artifactFor(
       recipes: RECIPE_REGISTRY,
       spellFamilies: SPELL_FAMILY_REGISTRY,
       selfEntryTriggers: SELF_ENTRY_REGISTRY,
+      keywordReminders: KEYWORD_REMINDER_REGISTRY,
+      reviewedBindingSnapshot: REVIEWED_BINDING_SNAPSHOT,
+      reviewedBindingGuard: "closed-source-registry-bundle-rules/1",
       selfEntrySequences: SELF_ENTRY_SEQUENCES,
+      temporaryCreatureSpells: TEMPORARY_CREATURE_SPELLS,
+      temporaryCreatureBodies: TEMPORARY_CREATURE_BODIES,
     }),
     deckHashes,
     closure: plan.closure,

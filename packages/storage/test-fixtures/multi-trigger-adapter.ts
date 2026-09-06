@@ -3,7 +3,7 @@ import { move } from "../../engine/src/common";
 import type * as Engine from "../../engine/src/index";
 import { enterBattlefield } from "../../engine/src/triggers";
 import { givePriority } from "../../engine/src/turns";
-import { triggerCommand } from "./triggers";
+import { TRIGGER_CARDS, triggerCommand } from "./triggers";
 
 export const SCENARIO_ADAPTER = "constructed-multi-trigger-storage/1";
 /** Test-only deterministic initialization. No admitted card currently produces a multi-entry
@@ -25,13 +25,13 @@ export function constructedTriggerStart(
     state = next.state;
   }
   if (state.step !== "main1") throw new Error("Constructed setup did not reach main phase");
-  const commander = Object.values(state.objects).find(
-    (entry) => entry.owner === "A" && entry.commander,
+  const lifeSource = Object.values(state.objects).find(
+    (entry) => entry.owner === "A" && entry.definition === TRIGGER_CARDS.life,
   );
   const draw = Object.values(state.objects).find(
-    (entry) => entry.owner === "A" && entry.definition === "synthetic-entry-draw",
+    (entry) => entry.owner === "A" && entry.definition === TRIGGER_CARDS.draw,
   );
-  if (!commander || !draw) throw new Error("Constructed scenario lacks its two sources");
+  if (!lifeSource || !draw) throw new Error("Constructed scenario lacks its two sources");
   state.revision = 0;
   state.decision = null;
   state.priorityPlayer = null;
@@ -39,7 +39,7 @@ export function constructedTriggerStart(
     state,
     registry,
     [
-      { objectId: commander.id, controller: "A" },
+      { objectId: lifeSource.id, controller: "A" },
       { objectId: draw.id, controller: "A" },
     ],
     SCENARIO_ADAPTER,

@@ -1,0 +1,32 @@
+{
+  "schema": "commander-exploration-checkpoint/1",
+  "engineVersion": "commander-engine/0.3.0",
+  "releaseHash": "078225448205425a2bb05912afa09ce35cbd7156550b2af7960f45a720d1a42a",
+  "buildHashes": ["51087df513926235b33acbffe8c2f2bc21b97f804b13dd33032efad0e672f923"],
+  "planHash": "1d223e20879c29ac08a42ad1db6e780a875002ce14734ca8f71ffbafac534d8a",
+  "plan": {
+    "path": ".commander/exploration-0.3-plan.json",
+    "sha256": "a6877e3f732077989a813fb78573bdd201ddde8b8a65dad1ed59cbafde3dec57"
+  },
+  "report": {
+    "path": ".commander/exploration-report.json",
+    "sha256": "f265cccb94a196f01839bf5119c454476df83fb4c93f84ad38ab7db91d9f6f1b"
+  },
+  "totals": {
+    "assigned": 1024,
+    "accounted": 1024,
+    "completed": 1024,
+    "pending": 0,
+    "invalid": 0,
+    "replayVerified": 1024,
+    "commands": 1409433,
+    "twoSeat": 256,
+    "fourSeat": 768
+  },
+  "distinctDecks": 14,
+  "blockers": [],
+  "fullyAccounted": true,
+  "allCompletedAndReplayed": true,
+  "scope": "Historical frozen 0.3 executor. Each assignment counted once; replay, resume, and resolver siblings are not new games. Runtime hit counts are not semantic assertions or evidence for 0.9 additions.",
+  "fullSnapshotComplete": false
+}

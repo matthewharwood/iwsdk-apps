@@ -6,6 +6,7 @@ import {
   type RulesState,
 } from "@iwsdk-apps/contracts";
 import { activateMana, answerTarget, beginCast, payForCast, playLand } from "./casting";
+import { characteristics } from "./characteristics";
 import { answerCommanderZone } from "./checkpoints";
 import { answerAttack, answerBlock, answerDamage, applyCombatDamage } from "./combat";
 import { assertRegistryPin, definition, emit, RulesError, requireActivePlayer } from "./common";
@@ -205,6 +206,7 @@ export function observe(
       .map((entry) => ({
         ...structuredClone(entry),
         card: structuredClone(definition(release, entry.definition)),
+        characteristics: characteristics(state, release, entry.id),
       })),
     decision: state.decision?.actor === actor ? structuredClone(state.decision) : null,
     combat: structuredClone(state.combat),

@@ -4,7 +4,9 @@ import type {
   SpellEffect,
   SpellProgram,
 } from "@iwsdk-apps/contracts";
+import { characteristics } from "./characteristics";
 import { card, draw, emit, hit, move, object, player, RulesError } from "./common";
+import { createCreatureModifier } from "./continuous";
 import { orderedObjects } from "./object-order";
 
 /** Complete domains for the supported exact single-target recipes. */
@@ -26,8 +28,11 @@ export function legalSpellTargets(
         const current = card(state, release, entry.id);
         return (
           current.types.includes("Creature") &&
-          !current.keywords.includes("shroud") &&
-          !(entry.controller !== actor && current.keywords.includes("hexproof"))
+          !characteristics(state, release, entry.id).keywords.includes("shroud") &&
+          !(
+            entry.controller !== actor &&
+            characteristics(state, release, entry.id).keywords.includes("hexproof")
+          )
         );
       })
       .map((entry) => entry.id);
@@ -62,7 +67,6 @@ function spellDamage(
   amount: number,
 ): void {
   const spell = object(state, source);
-  const current = card(state, release, source);
   const recipient = state.players.find((seat) => seat.id === target);
   if (recipient) {
     recipient.life -= amount;
@@ -70,11 +74,12 @@ function spellDamage(
   } else {
     const creature = object(state, target);
     creature.damage += amount;
-    if (current.keywords.includes("deathtouch")) creature.deathtouchDamage = true;
+    if (characteristics(state, release, source).keywords.includes("deathtouch"))
+      creature.deathtouchDamage = true;
     hit(state, "rule:120.3e");
   }
   // Damage results occur before a checkpoint; noncombat damage never increments commander damage.
-  if (current.keywords.includes("lifelink")) {
+  if (characteristics(state, release, source).keywords.includes("lifelink")) {
     gainLife(state, spell.controller, amount, source);
     hit(state, "rule:120.3f");
   }
@@ -86,12 +91,21 @@ function applyEffect(
   source: string,
   target: string | null,
   effect: SpellEffect,
+  programIndex: number,
 ): void {
+  if (effect.kind === "modify-creature") {
+    if (target === null) throw new RulesError("Invariant", "Modifier program has no target");
+    createCreatureModifier(state, release, source, target, programIndex, effect);
+    return;
+  }
   if (effect.kind === "destroy" || effect.kind === "exile") {
     if (target === null) throw new RulesError("Invariant", "Removal program has no chosen target");
     const creature = object(state, target);
     const definition = card(state, release, target);
-    if (effect.kind === "destroy" && definition.keywords.includes("indestructible")) {
+    if (
+      effect.kind === "destroy" &&
+      characteristics(state, release, target).keywords.includes("indestructible")
+    ) {
       emit(state, "DestructionDidNotOccur", { source, target, reason: "indestructible" });
       hit(state, "rule:702.12b");
       return;
@@ -148,7 +162,8 @@ export function resolveSpellProgram(
     hit(state, `card:${current.id}:illegal-target`);
     return;
   }
-  for (const effect of program.effects) applyEffect(state, release, source, target, effect);
+  for (const [index, effect] of program.effects.entries())
+    applyEffect(state, release, source, target, effect, index);
   const grave = move(state, source, "graveyard", "instant or sorcery resolution completed");
   emit(state, "SpellResolved", {
     source,

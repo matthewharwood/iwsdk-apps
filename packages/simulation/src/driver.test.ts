@@ -1,5 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { Decision, emptyMana, type PlayerObservation, type Response } from "@iwsdk-apps/contracts";
+import {
+  type CreatureModifier,
+  Decision,
+  emptyMana,
+  type PlayerObservation,
+  type Response,
+} from "@iwsdk-apps/contracts";
 import { findPayment, heuristicDriver, scriptedDriver } from "./driver";
 
 function damageObservation(): PlayerObservation {
@@ -50,7 +56,90 @@ function damageObservation(): PlayerObservation {
     }),
   };
 }
+function targetObservation(effect: CreatureModifier): PlayerObservation {
+  const observation = damageObservation();
+  const makeObject = (id: string, controller: string): PlayerObservation["objects"][number] => ({
+    id,
+    lineage: id,
+    generation: 0,
+    definition: id,
+    owner: controller,
+    controller,
+    zone: "battlefield",
+    tapped: false,
+    controlledSinceTurn: 1,
+    damage: 0,
+    deathtouchDamage: false,
+    counters: {},
+    commander: false,
+    commanderMoveOffered: false,
+    characteristics: { power: 2, toughness: 2, keywords: [] },
+    card: {
+      id,
+      oracleId: id,
+      sourceVersion: "a".repeat(64),
+      name: id,
+      typeLine: "Creature",
+      types: ["Creature"],
+      subtypes: [],
+      supertypes: [],
+      colors: [],
+      colorIdentity: [],
+      manaCost: { ...emptyMana(), generic: 1 },
+      manaValue: 1,
+      power: 2,
+      toughness: 2,
+      keywords: [],
+      manaAbilities: [],
+      oracleText: "",
+      commanderEligible: false,
+      deckLimit: 1,
+      obligations: [],
+      implementationRevision: "synthetic-driver/1",
+    },
+  });
+  const spell = makeObject("spell", "A");
+  spell.zone = "stack";
+  spell.card.typeLine = "Instant";
+  spell.card.types = ["Instant"];
+  spell.card.power = null;
+  spell.card.toughness = null;
+  spell.characteristics = { power: null, toughness: null, keywords: [] };
+  spell.card.spellProgram = { schema: "commander-spell/1", target: "creature", effects: [effect] };
+  observation.objects = [makeObject("enemy", "B"), makeObject("own", "A"), spell];
+  observation.stack = [{ kind: "spell", objectId: spell.id }];
+  if (!observation.decision) throw new Error("Missing fixture decision");
+  observation.decision.kind = "target";
+  observation.decision.damageDomain = [];
+  observation.decision.cards = ["enemy", "own"];
+  return observation;
+}
 describe("observation-only driver", () => {
+  test.each([
+    [3, 3, [], "own"],
+    [0, 0, ["flying"], "own"],
+    [-3, 0, [], "enemy"],
+    [3, -1, [], "enemy"],
+    [0, -9999, [], "enemy"],
+  ] as const)("targets modifiers %s/%s with %s using public allegiance", async (powerDelta, toughnessDelta, keywords, expected) => {
+    const observation = targetObservation({
+      kind: "modify-creature",
+      powerDelta,
+      toughnessDelta,
+      keywords: [...keywords],
+      duration: "until-end-of-turn",
+    });
+    const before = structuredClone(observation);
+    expect(await heuristicDriver(observation, 123)).toEqual({ kind: "target", target: expected });
+    expect(observation).toEqual(before);
+    if (!observation.decision) throw new Error("Missing fixture decision");
+    const remainingTarget = expected === "own" ? "enemy" : "own";
+    observation.decision.cards = [remainingTarget];
+    expect(await heuristicDriver(observation, 123)).toEqual({
+      kind: "target",
+      target: remainingTarget,
+    });
+  });
   test("trigger order is an explicit deterministic permutation over the entitled IDs", async () => {
     const observation = damageObservation();
     if (!observation.decision) throw new Error("Missing fixture decision");

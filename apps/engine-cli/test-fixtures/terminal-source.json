@@ -1,0 +1,71 @@
+{
+  "schema": "authenticated-terminal-fixture/1",
+  "sourceReleaseHash": "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "cards": {
+    "Rorix Bladewing": {
+      "id": "oracle:48fe0f52-1676-49d5-acf6-5476081e8e1b",
+      "oracleId": "48fe0f52-1676-49d5-acf6-5476081e8e1b",
+      "sourceVersion": "3ceaf7826d88f234f41f67e9d8a284bcb0fa873078f830f9f3bd4c1b4d141a1e",
+      "name": "Rorix Bladewing",
+      "typeLine": "Legendary Creature — Dragon",
+      "types": ["Creature"],
+      "subtypes": ["Dragon"],
+      "supertypes": ["Legendary"],
+      "colors": ["R"],
+      "colorIdentity": ["R"],
+      "manaCost": {
+        "W": 0,
+        "U": 0,
+        "B": 0,
+        "R": 3,
+        "G": 0,
+        "C": 0,
+        "generic": 3
+      },
+      "manaValue": 6,
+      "power": 6,
+      "toughness": 5,
+      "keywords": ["flying", "haste"],
+      "manaAbilities": [],
+      "oracleText": "Flying, haste",
+      "commanderEligible": true,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:302",
+        "rule:601.2",
+        "rule:903.5",
+        "rule:702.9",
+        "rule:702.10",
+        "rule:704.5j",
+        "rule:903.3"
+      ],
+      "implementationRevision": "commander-development-recipes/1"
+    },
+    "Mountain": {
+      "id": "oracle:a3fb7228-e76b-4e96-a40e-20b5fed75685",
+      "oracleId": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+      "sourceVersion": "e95644358b0b936de7cd19df9ce2781daa5a490074499d4660e2d0d56404cc48",
+      "name": "Mountain",
+      "typeLine": "Basic Land — Mountain",
+      "types": ["Land"],
+      "subtypes": ["Mountain"],
+      "supertypes": ["Basic"],
+      "colors": [],
+      "colorIdentity": ["R"],
+      "manaCost": null,
+      "manaValue": 0,
+      "power": null,
+      "toughness": null,
+      "keywords": [],
+      "manaAbilities": ["R"],
+      "oracleText": "({T}: Add {R}.)",
+      "commanderEligible": false,
+      "deckLimit": null,
+      "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+      "implementationRevision": "commander-development-recipes/1"
+    }
+  },
+  "scope": "Two exact authenticated definitions. Ordinary commander plus99 basics per seat, chosen to exercise terminal persistence; not a multi-deck simulation acceptance batch."
+}
