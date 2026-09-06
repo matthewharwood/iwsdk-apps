@@ -1,6 +1,6 @@
 # Commander engine reuse assessment
 
-Initial source inspection on 2026-09-06 informed the architecture decision below. Later executions built Phase and XMage and passed two and four upstream constructed Commander tests, respectively; their exact scopes and attempts are recorded below. This remains an incomplete comparison: no common acceptance suite has been run across three external approaches, and no external implementation was copied into this repository.
+Initial source inspection on 2026-09-06 informed the architecture decision below. Phase and XMage then passed two and four upstream constructed Commander tests. A subsequent frozen comparison ran the same three fixture families in this TypeScript engine, Phase and XMage: four executions per engine, all passing, with all 11 checkpoint projections matching. The comparison is bounded to counterspells and commander graveyard handling; no external implementation was copied into the production engine.
 
 The current requirement is one pure TypeScript rules core, run unchanged under Bun and in a browser worker, with serializable decisions/continuations and SQLite outside the core. Retain that boundary. Use Auteur as a publication/provenance reference and XMage as an attributable rules/test reference. Phase is a credible native/WASM alternative if the language requirement is deliberately changed; it should not be described as a TypeScript engine or as complete Commander support.
 
@@ -62,7 +62,7 @@ Phase's [README](https://github.com/phase-rs/phase/blob/2874e52d69d89adf32b64405
 | Commander and elimination | Forge has Commander game/deck formats; XMage includes ordinary multiplayer Commander test bases and FFA tests; Phase has Commander configuration and multiplayer fixtures. | No inspected candidate has passed this project's ordinary two-seat/four-seat, legal 100-card, substantive full-game acceptance suite here. |
 | Portable compound decisions and resume | Phase interaction records include selections, sequences, relations, allocations, stale/unauthorized rejection and persistent semantic owners. Forge/XMage expose real choices but primarily through host-language objects. | Durable receipt replay, imported-state integrity, decision-generation invalidation and native/browser parity need direct fixture execution under the chosen adapter. |
 
-Except for the two explicitly recorded Phase tests below, these fixture paths remain source-inspection references. They do not count toward this project's 24 difficult scenarios, 64 terminating games, 1,024 exploratory assignments, 300-identity research floor or full-pool support gate. No benchmark ranking is asserted.
+Except for the explicitly recorded Phase, XMage and shared fixtures below, these fixture paths remain source-inspection references. They do not count toward this project's 24 difficult scenarios, 64 terminating games, 1,024 exploratory assignments, 300-identity research floor or full-pool support gate. No benchmark ranking is asserted.
 
 ## Executed Phase fixture
 
@@ -86,7 +86,25 @@ The inspected XMage commit `c6221e0c95a575c4f4a1707468df12fab234cae7` built succ
 
 The result and exact command are retained in `.commander/reuse-execution/xmage/result.json` (SHA-256 `cb1ed50ba7b4a8343c9f071c7efd813996e65c5077dbf777dbaf034cbddc5c17`). The run used isolated Temurin `21.0.12.1+1` and Maven `3.9.16` archives, verified against the provider checksums. The [Adoptium API instructions](https://adoptium.net/installation/ci-scripts/) and [Apache Maven release artifact](https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.16/) supplied the toolchain sources. Toolchain metadata, the original fixture digest and complete Maven output are retained; no global runtime installation was changed.
 
-The selected reactor command used `-pl Mage.Tests -am -Dtest=CommanderReplaceEffectTest -Dsurefire.failIfNoSpecifiedTests=false -DfailIfNoTests=false test`, with a separate local Maven repository. Dependencies without that selected test class ran no tests; the final test module explicitly reported four executed tests. This run and the Phase tests establish actual build/fixture feasibility. The same difficult fixtures have not yet been run across TypeScript, XMage and Phase, so the three-approach comparison requirement remains open.
+The selected reactor command used `-pl Mage.Tests -am -Dtest=CommanderReplaceEffectTest -Dsurefire.failIfNoSpecifiedTests=false -DfailIfNoTests=false test`, with a separate local Maven repository. Dependencies without that selected test class ran no tests; the final test module explicitly reported four executed tests. This run and the Phase tests establish actual build/fixture feasibility. The subsequent shared comparison below adds matching executions across TypeScript, XMage and Phase; the broader difficult-rule scenarios above remain unexecuted in that comparison.
+
+## Shared fixtures in three engines
+
+The frozen assignment `b3f14c3119c3b655542de392553359bde80ee1f112f279fd4b90cfe62bdebde5` runs three identical source-bound fixture families across this TypeScript 0.10 engine, pinned XMage and pinned Phase. The commander family has two owner-choice branches, giving four executions per engine and 12 primary passes with zero failures or skips. All 11 declared checkpoints match across the three implementations (33 actual observations).
+
+| Fixture | Matched behavior |
+| --- | --- |
+| Counter Divination | No draw; both spells reach their owners' graveyards; paid lands stay tapped and mana pools remain empty before the next phase. |
+| Counter a counterspell | Divination remains on the stack after the upper counter resolves, then draws the next two cards; costs stay paid. |
+| Counter Tobias Andrion, owner accepts or declines | The commander reaches its owner's graveyard before the owner chooses, after Counterspell finishes. Acceptance moves it to command; declining leaves it in the graveyard. The command-zone cast count remains one. |
+
+The boards each contain 100 live zone cards per player, an ordered library, 40 life and explicit first-main-phase setup. They are constructed scenario inputs, not complete games or benchmark results. Ordered libraries, graveyards and stacks are compared; hands, battlefield, command and exile are compared as multisets with tap status and multiplicity retained. Full serialized state and engine-specific event names are not claimed equal.
+
+The retained [comparison evidence](common-fixture-comparison-0.10.json) points to `.commander/reuse-comparison/common-counterspell-0.10/`, including assignment, complete adapter sources, actual snapshots, JUnit, attempts, source authentication and reproduction scripts. `comparison.json` has SHA-256 `390005d2c65eb7ef978f7dc75ed34bc69d067ae4cb5d6d9237f3933892f57057`. All five source card records and 20 complete official rules nodes were reauthenticated. No rulings for these five cards occurred in the frozen rulings snapshot.
+
+Phase's pinned 4,000-card fixture lacks Tobias Andrion. Its adapter adds that exact source-backed vanilla record using the public card database loader; the four other records are unchanged. XMage uses its native card classes. The pinned runtime check covers 816 Phase and 3,739 XMage core/selected-card source files against Git blobs. TypeScript's 117 captured input files are unchanged across execution.
+
+Earlier failed wrapper and infrastructure attempts remain retained: XMage socket permissions, library setup and response scheduling, and Phase's incomplete sparse-clone metadata capture. The final qualifying attempts reran all four scenarios. These results support the observed behaviors; they do not certify full G2 scenarios, the complete Commander snapshot or the external engines' broader correctness.
 
 ## Decision for this implementation
 

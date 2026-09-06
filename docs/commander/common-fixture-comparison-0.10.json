@@ -1,0 +1,41 @@
+{
+  "schema": "commander-common-fixture-evidence/1",
+  "status": "passed",
+  "sourceReleaseHash": "58b8f2dd09d699ef232ba49257e0287eb8ca204902a9addddb499f73e3084739",
+  "assignment": {
+    "path": ".commander/reuse-comparison/common-counterspell-0.10/assignment.json",
+    "sha256": "b3f14c3119c3b655542de392553359bde80ee1f112f279fd4b90cfe62bdebde5",
+    "bytes": 14493
+  },
+  "comparison": {
+    "path": ".commander/reuse-comparison/common-counterspell-0.10/comparison.json",
+    "sha256": "390005d2c65eb7ef978f7dc75ed34bc69d067ae4cb5d6d9237f3933892f57057",
+    "bytes": 259149
+  },
+  "engines": [
+    "TypeScript commander-engine/0.10.0",
+    "Phase 2874e52d69d89adf32b6440578238f9c5bc9f8ad",
+    "XMage c6221e0c95a575c4f4a1707468df12fab234cae7"
+  ],
+  "fixtureFamilies": 3,
+  "primaryExecutions": 12,
+  "primaryFailures": 0,
+  "primarySkips": 0,
+  "checkpointKinds": 11,
+  "engineObservations": 33,
+  "allComparedCheckpointsEqual": true,
+  "archivedFiles": 73,
+  "archivedBytes": 5101258,
+  "inventory": {
+    "path": ".commander/reuse-comparison/common-counterspell-0.10-inventory.json",
+    "sha256": "fa81e90d97fde65f2ba7fb620feba59c130ada5c0ca1e6e602474ddf0d3813a0"
+  },
+  "fullGames": 0,
+  "fullG2Certification": false,
+  "sourceAuthentication": {
+    "oracleRecords": 5,
+    "fullRuleNodes": 20,
+    "retainedRulings": 0
+  },
+  "scope": "Constructed identical boards, source-backed actions, and matching declared projections. Ordered libraries, graveyards and stacks retained. Other zones compared as multisets; full serialized states and internal event vocabulary are not compared. Failed earlier attempts retained."
+}
