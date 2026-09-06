@@ -1,0 +1,439 @@
+{
+  "schema": "authenticated-return-fixture/1",
+  "originReleaseHash": "dac4f923e99a94e3e54031e635609dca4c91ad3f26c0bf85c4eb1bc3b35fa900",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "cards": [
+    {
+      "definitionHash": "ecc40c87864f27c360b035f99ae03bc3746f55d5063ca291e34065768d1a7235",
+      "definition": {
+        "colorIdentity": ["U"],
+        "colors": ["U"],
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "id": "oracle:837182db-1bf3-4a2c-bd01-1af9d9873561",
+        "implementationRevision": "creature-return-spell/1",
+        "keywords": [],
+        "manaAbilities": [],
+        "manaCost": {
+          "B": 0,
+          "C": 0,
+          "G": 0,
+          "R": 0,
+          "U": 1,
+          "W": 0,
+          "generic": 0
+        },
+        "manaValue": 1,
+        "name": "Unsummon",
+        "obligations": [
+          "rule:121.2",
+          "rule:304.1",
+          "rule:307.1",
+          "rule:400.7",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:608.2d",
+          "rule:608.2n",
+          "rule:614.1",
+          "rule:614.1a",
+          "rule:614.5",
+          "rule:704.3",
+          "rule:704.4",
+          "rule:903.9b"
+        ],
+        "oracleId": "837182db-1bf3-4a2c-bd01-1af9d9873561",
+        "oracleText": "Return target creature to its owner's hand.",
+        "power": null,
+        "sourceVersion": "98769e8e47da2d18fd755e7141a883463789487ff738ab871eb9c9b614c43a06",
+        "spellProgram": {
+          "effects": [
+            {
+              "kind": "return-to-hand"
+            }
+          ],
+          "schema": "commander-spell/1",
+          "target": "creature"
+        },
+        "subtypes": [],
+        "supertypes": [],
+        "toughness": null,
+        "typeLine": "Instant",
+        "types": ["Instant"]
+      }
+    },
+    {
+      "definitionHash": "9dc57ea7507bdff7521e22e0ac5ace2ba1a08f6ebc8d7490697c2cd07b483aad",
+      "definition": {
+        "colorIdentity": ["U"],
+        "colors": ["U"],
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "id": "oracle:a3874282-9887-4b53-b80e-564ac99cca23",
+        "implementationRevision": "creature-return-spell/1",
+        "keywords": [],
+        "manaAbilities": [],
+        "manaCost": {
+          "B": 0,
+          "C": 0,
+          "G": 0,
+          "R": 0,
+          "U": 1,
+          "W": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "name": "Drown in Shapelessness",
+        "obligations": [
+          "rule:121.2",
+          "rule:304.1",
+          "rule:307.1",
+          "rule:400.7",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:608.2d",
+          "rule:608.2n",
+          "rule:614.1",
+          "rule:614.1a",
+          "rule:614.5",
+          "rule:704.3",
+          "rule:704.4",
+          "rule:903.9b"
+        ],
+        "oracleId": "a3874282-9887-4b53-b80e-564ac99cca23",
+        "oracleText": "Return target creature to its owner's hand.",
+        "power": null,
+        "sourceVersion": "20d4fa750b2a1a209489a4ab843c51d92e36fed93da1ab4520a4851867aa3661",
+        "spellProgram": {
+          "effects": [
+            {
+              "kind": "return-to-hand"
+            }
+          ],
+          "schema": "commander-spell/1",
+          "target": "creature"
+        },
+        "subtypes": [],
+        "supertypes": [],
+        "toughness": null,
+        "typeLine": "Instant",
+        "types": ["Instant"]
+      }
+    },
+    {
+      "definitionHash": "1ec3cb0391290d97bdc550bf9bc011b4187c60b226565abcec4f19292008d57f",
+      "definition": {
+        "colorIdentity": ["U"],
+        "colors": ["U"],
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "id": "oracle:6f7ef1d1-c441-41ba-b7d6-6b7727ffcf04",
+        "implementationRevision": "creature-return-spell/1",
+        "keywords": [],
+        "manaAbilities": [],
+        "manaCost": {
+          "B": 0,
+          "C": 0,
+          "G": 0,
+          "R": 0,
+          "U": 1,
+          "W": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "name": "Repulse",
+        "obligations": [
+          "rule:121.2",
+          "rule:304.1",
+          "rule:307.1",
+          "rule:400.7",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:608.2d",
+          "rule:608.2n",
+          "rule:614.1",
+          "rule:614.1a",
+          "rule:614.5",
+          "rule:704.3",
+          "rule:704.4",
+          "rule:903.9b"
+        ],
+        "oracleId": "6f7ef1d1-c441-41ba-b7d6-6b7727ffcf04",
+        "oracleText": "Return target creature to its owner's hand.\nDraw a card.",
+        "power": null,
+        "sourceVersion": "0ab23094897700b94e3d399db2d15c62990eebf1951f37bd86d2263c1087ac02",
+        "spellProgram": {
+          "effects": [
+            {
+              "kind": "return-to-hand"
+            },
+            {
+              "amount": 1,
+              "kind": "draw",
+              "recipient": "controller"
+            }
+          ],
+          "schema": "commander-spell/1",
+          "target": "creature"
+        },
+        "subtypes": [],
+        "supertypes": [],
+        "toughness": null,
+        "typeLine": "Instant",
+        "types": ["Instant"]
+      }
+    },
+    {
+      "definitionHash": "674e95e01777edcf0f555d3c250dd2335c49d92eabcd8b4beeedc3d11ce6374c",
+      "definition": {
+        "colorIdentity": ["U"],
+        "colors": ["U"],
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "id": "oracle:021d8596-782a-4cfd-8b70-ac5bb8a5aff1",
+        "implementationRevision": "creature-return-spell/1",
+        "keywords": [],
+        "manaAbilities": [],
+        "manaCost": {
+          "B": 0,
+          "C": 0,
+          "G": 0,
+          "R": 0,
+          "U": 1,
+          "W": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "name": "Drag Under",
+        "obligations": [
+          "rule:121.2",
+          "rule:304.1",
+          "rule:307.1",
+          "rule:400.7",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:608.2d",
+          "rule:608.2n",
+          "rule:614.1",
+          "rule:614.1a",
+          "rule:614.5",
+          "rule:704.3",
+          "rule:704.4",
+          "rule:903.9b"
+        ],
+        "oracleId": "021d8596-782a-4cfd-8b70-ac5bb8a5aff1",
+        "oracleText": "Return target creature to its owner's hand.\nDraw a card.",
+        "power": null,
+        "sourceVersion": "9e2ed7f847456132a98334a7f37e44b79b551d70fe26ddc0d3c6a61befb266d0",
+        "spellProgram": {
+          "effects": [
+            {
+              "kind": "return-to-hand"
+            },
+            {
+              "amount": 1,
+              "kind": "draw",
+              "recipient": "controller"
+            }
+          ],
+          "schema": "commander-spell/1",
+          "target": "creature"
+        },
+        "subtypes": [],
+        "supertypes": [],
+        "toughness": null,
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"]
+      }
+    },
+    {
+      "definitionHash": "a0be8d760547a4b472543578d0971d73cf553bf4fbf2ed5936fe70025b8a76cd",
+      "definition": {
+        "colorIdentity": ["U"],
+        "colors": ["U"],
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "id": "oracle:c44f1a81-269b-4f05-8ff2-e7ce19a93937",
+        "implementationRevision": "creature-return-spell/1",
+        "keywords": [],
+        "manaAbilities": [],
+        "manaCost": {
+          "B": 0,
+          "C": 0,
+          "G": 0,
+          "R": 0,
+          "U": 1,
+          "W": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "name": "Symbol of Unsummoning",
+        "obligations": [
+          "rule:121.2",
+          "rule:304.1",
+          "rule:307.1",
+          "rule:400.7",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:608.2d",
+          "rule:608.2n",
+          "rule:614.1",
+          "rule:614.1a",
+          "rule:614.5",
+          "rule:704.3",
+          "rule:704.4",
+          "rule:903.9b"
+        ],
+        "oracleId": "c44f1a81-269b-4f05-8ff2-e7ce19a93937",
+        "oracleText": "Return target creature to its owner's hand.\nDraw a card.",
+        "power": null,
+        "sourceVersion": "758b8cccd8ef8c0ba97fe8fb0f2428767842df91ac5c8e1627ce2fbe8d465061",
+        "spellProgram": {
+          "effects": [
+            {
+              "kind": "return-to-hand"
+            },
+            {
+              "amount": 1,
+              "kind": "draw",
+              "recipient": "controller"
+            }
+          ],
+          "schema": "commander-spell/1",
+          "target": "creature"
+        },
+        "subtypes": [],
+        "supertypes": [],
+        "toughness": null,
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"]
+      }
+    },
+    {
+      "definitionHash": "365fec2b964ad15e9b6220cd867ec6b089bf77e21e9c611bacbb8117899d6125",
+      "definition": {
+        "colorIdentity": ["U", "W"],
+        "colors": ["U", "W"],
+        "commanderEligible": true,
+        "deckLimit": 1,
+        "id": "oracle:55dfe722-7487-4d25-b90c-e6ad2c82a671",
+        "implementationRevision": "commander-development-recipes/1",
+        "keywords": [],
+        "manaAbilities": [],
+        "manaCost": {
+          "B": 0,
+          "C": 0,
+          "G": 0,
+          "R": 0,
+          "U": 1,
+          "W": 1,
+          "generic": 3
+        },
+        "manaValue": 5,
+        "name": "Tobias Andrion",
+        "obligations": ["rule:302", "rule:601.2", "rule:903.5", "rule:704.5j", "rule:903.3"],
+        "oracleId": "55dfe722-7487-4d25-b90c-e6ad2c82a671",
+        "oracleText": "",
+        "power": 4,
+        "sourceVersion": "155d17db86833acd61d834269e09d90b88c99604cc3c9404c75e22ae72dc9758",
+        "subtypes": ["Human", "Advisor"],
+        "supertypes": ["Legendary"],
+        "toughness": 4,
+        "typeLine": "Legendary Creature — Human Advisor",
+        "types": ["Creature"]
+      }
+    },
+    {
+      "definitionHash": "980a474445f947e003e3b379a530a587bdef0697149f2e2bb5b1599b1ec421f0",
+      "definition": {
+        "colorIdentity": ["W"],
+        "colors": ["W"],
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "id": "oracle:e3c0b11e-7340-4e0a-98b7-91b38439d4f9",
+        "implementationRevision": "commander-development-recipes/1",
+        "keywords": [],
+        "manaAbilities": [],
+        "manaCost": {
+          "B": 0,
+          "C": 0,
+          "G": 0,
+          "R": 0,
+          "U": 0,
+          "W": 1,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "name": "Silvercoat Lion",
+        "obligations": ["rule:302", "rule:601.2", "rule:903.5"],
+        "oracleId": "e3c0b11e-7340-4e0a-98b7-91b38439d4f9",
+        "oracleText": "",
+        "power": 2,
+        "sourceVersion": "b23a9a69804c787f7da672b6520acea8cdb682cc3c5e868be05c3ae3013faaba",
+        "subtypes": ["Cat"],
+        "supertypes": [],
+        "toughness": 2,
+        "typeLine": "Creature — Cat",
+        "types": ["Creature"]
+      }
+    },
+    {
+      "definitionHash": "0f771503a3d19dd1fd5458ade39ef009a9c130ad0e084a01ab4a261aa027261d",
+      "definition": {
+        "colorIdentity": ["U"],
+        "colors": [],
+        "commanderEligible": false,
+        "deckLimit": null,
+        "id": "oracle:b2c6aa39-2d2a-459c-a555-fb48ba993373",
+        "implementationRevision": "commander-development-recipes/1",
+        "keywords": [],
+        "manaAbilities": ["U"],
+        "manaCost": null,
+        "manaValue": 0,
+        "name": "Island",
+        "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+        "oracleId": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+        "oracleText": "({T}: Add {U}.)",
+        "power": null,
+        "sourceVersion": "6fba8f4cae5af7838b16a40667d8de8b4830d9631b1c08e424717ef98ff8daaf",
+        "subtypes": ["Island"],
+        "supertypes": ["Basic"],
+        "toughness": null,
+        "typeLine": "Basic Land — Island",
+        "types": ["Land"]
+      }
+    },
+    {
+      "definitionHash": "298ea924cdd540f959f65c38cf61b7d70a6d5ec0b95f89d653c6586a5eca170a",
+      "definition": {
+        "colorIdentity": ["W"],
+        "colors": [],
+        "commanderEligible": false,
+        "deckLimit": null,
+        "id": "oracle:bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+        "implementationRevision": "commander-development-recipes/1",
+        "keywords": [],
+        "manaAbilities": ["W"],
+        "manaCost": null,
+        "manaValue": 0,
+        "name": "Plains",
+        "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+        "oracleId": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+        "oracleText": "({T}: Add {W}.)",
+        "power": null,
+        "sourceVersion": "64b256df7b5163d34368b81909121f02b208b0e27e5358319752f001055f2510",
+        "subtypes": ["Plains"],
+        "supertypes": ["Basic"],
+        "toughness": null,
+        "typeLine": "Basic Land — Plains",
+        "types": ["Land"]
+      }
+    }
+  ],
+  "hash": "6c4f4eecafa9338bfa18d54fc071a2974890dd251527c1929aa8f1d1d1d5e071"
+}

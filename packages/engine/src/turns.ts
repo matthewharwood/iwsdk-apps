@@ -29,6 +29,10 @@ export function givePriority(
   release: ExecutionRegistry,
   actor: string = state.priorityPlayer ?? requireActivePlayer(state),
 ): void {
+  requireRule(
+    !state.frames.some((frame) => frame.kind === "resolving-spell"),
+    "No priority during a suspended resolution",
+  );
   if (state.outcome.kind !== "ongoing") return;
   state.priorityPlayer = player(state, actor).lost ? nextLiving(state, actor) : actor;
   const result = checkpoint(state, release);
@@ -198,7 +202,7 @@ export function passPriority(state: RulesState, release: ExecutionRegistry, acto
   }
   state.consecutivePasses = 0;
   if (state.stack.length) {
-    resolveTop(state, release);
+    if (!resolveTop(state, release)) return;
     givePriority(state, release, requireActivePlayer(state));
   } else advanceStep(state, release);
 }

@@ -8,6 +8,7 @@ import { characteristics } from "./characteristics";
 import { card, draw, emit, hit, move, object, player, RulesError } from "./common";
 import { createCreatureModifier } from "./continuous";
 import { orderedObjects } from "./object-order";
+import { beginReturnResolution } from "./return-resolution";
 import { counterSpell, isStackSpellDomain, stackSpellTargets } from "./stack-spells";
 
 /** Complete domains for the supported exact single-target recipes. */
@@ -101,6 +102,8 @@ function applyEffect(
   effect: SpellEffect,
   programIndex: number,
 ): void {
+  if (effect.kind === "return-to-hand")
+    throw new RulesError("Invariant", "Return instructions require resumable resolution");
   if (effect.kind === "counter") {
     if (target === null) throw new RulesError("Invariant", "Counter program has no target");
     counterSpell(state, release, source, target);
@@ -155,7 +158,7 @@ export function resolveSpellProgram(
   state: RulesState,
   release: ExecutionRegistry,
   source: string,
-): void {
+): boolean {
   const spell = object(state, source);
   const current = card(state, release, source);
   const program = current.spellProgram;
@@ -173,7 +176,11 @@ export function resolveSpellProgram(
     });
     hit(state, "rule:608.2b");
     hit(state, `card:${current.id}:illegal-target`);
-    return;
+    return true;
+  }
+  if (program.effects[0]?.kind === "return-to-hand") {
+    if (target === null) throw new RulesError("Invariant", "Return program has no chosen target");
+    return beginReturnResolution(state, release, spell, program, target);
   }
   for (const [index, effect] of program.effects.entries())
     applyEffect(state, release, source, target, effect, index);
@@ -187,4 +194,5 @@ export function resolveSpellProgram(
   hit(state, "rule:608.2c");
   hit(state, "rule:608.2n");
   hit(state, `card:${current.id}:resolve`);
+  return true;
 }

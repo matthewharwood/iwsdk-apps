@@ -1,7 +1,9 @@
 import {
   COUNTER_SPELL_VERSION,
+  CREATURE_RETURN_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
   reviewedCounterSpellDefinition,
+  reviewedCreatureReturnSpellDefinition,
   reviewedKeywordReminderDefinition,
   reviewedLegacyDefinition,
   reviewedSelfEntryDefinition,
@@ -19,8 +21,8 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/6";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.10.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/7";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.11.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -43,6 +45,13 @@ export const COUNTER_SPELL_CORE_CAPABILITIES = [
   "core:spell-self-target-exclusion",
   "core:counter-spell-owner-graveyard",
   "core:stack-target-revalidation",
+] as const;
+export const CREATURE_RETURN_CORE_CAPABILITIES = [
+  "resolution:durable-continuation",
+  "resolution:commander-hand-replacement",
+  "resolution:replacement-owner-choice",
+  "resolution:ordered-return-draw",
+  "resolution:no-priority-between-effects",
 ] as const;
 export type Dependency =
   | { kind: "exact"; identity: string }
@@ -175,6 +184,10 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
+  if (definition.implementationRevision === CREATURE_RETURN_VERSION)
+    return (
+      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedCreatureReturnSpellDefinition(definition)
+    );
   if (definition.implementationRevision === COUNTER_SPELL_VERSION)
     return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedCounterSpellDefinition(definition);
   if (definition.implementationRevision === KEYWORD_REMINDER_RECIPE_VERSION)
@@ -226,6 +239,12 @@ export async function buildDevelopmentMatchPlan(
     ),
     core: [
       ...DEVELOPMENT_CORE,
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === CREATURE_RETURN_VERSION,
+      )
+        ? CREATURE_RETURN_CORE_CAPABILITIES
+        : []),
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === COUNTER_SPELL_VERSION,

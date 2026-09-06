@@ -161,6 +161,10 @@ export function checkpoint(
   state: RulesState,
   release: ExecutionRegistry,
 ): { waiting: boolean; changed: boolean } {
+  requireRule(
+    !state.frames.some((frame) => frame.kind === "resolving-spell"),
+    "No checkpoint during a suspended resolution",
+  );
   let changed = false;
   for (let iteration = 0; iteration < 1000; iteration++) {
     const sba = stateBasedActions(state, release);

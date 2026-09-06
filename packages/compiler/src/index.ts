@@ -1,3 +1,6 @@
+export { makeCreatureReturnDecks } from "./creature-return-decks";
+export { compileCreatureReturnDraft } from "./creature-return-expansion";
+
 import { Database } from "bun:sqlite";
 
 export { makeCounterSpellDecks } from "./counter-spell-decks";
@@ -13,6 +16,8 @@ import {
   bindExactSpellFamily,
   COUNTER_SPELL_VERSION,
   COUNTER_SPELLS,
+  CREATURE_RETURN_SPELLS,
+  CREATURE_RETURN_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
   KEYWORD_REMINDER_REGISTRY,
   RECIPE_REGISTRY,
@@ -68,6 +73,11 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  creatureReturnSpells: {
+    enabled: boolean;
+    version: string;
+    registry: typeof CREATURE_RETURN_SPELLS;
+  };
   counterSpells: { enabled: boolean; version: string; registry: typeof COUNTER_SPELLS };
   temporaryCreatureSpells: {
     enabled: boolean;
@@ -81,6 +91,7 @@ export interface CompilationReport {
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    creatureReturnSpells?: boolean;
     counterSpells?: boolean;
     spellFamilies?: boolean;
     selfEntryTriggers?: boolean;
@@ -117,6 +128,11 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    creatureReturnSpells: {
+      enabled: options.creatureReturnSpells === true,
+      version: CREATURE_RETURN_VERSION,
+      registry: CREATURE_RETURN_SPELLS,
     },
     counterSpells: {
       enabled: options.counterSpells === true,
@@ -176,9 +192,12 @@ export async function compileDevelopmentRelease(
     report.bindings.length + report.unsupported.length !== candidates.length
   )
     throw new Error("Compiler candidate denominator mismatch");
+  const compilerVersion = `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}`;
   const base = {
     schema: "commander-content/1" as const,
-    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}`,
+    id: options.creatureReturnSpells
+      ? `development:${inventory.bundleHash.slice(0, 16)}:${await semanticHash({ compilerVersion, recipeVersion: RECIPE_VERSION })}`
+      : `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}${options.creatureReturnSpells ? ":creature-return-spell/1" : ""}`,
     sourceBundle: inventory.bundleHash,
     rulesHash,
     profile: "tabletop-commander" as const,
@@ -186,7 +205,7 @@ export async function compileDevelopmentRelease(
     definitions,
     unsupportedOracleIds: report.unsupported.map((card) => card.identity),
     eligibleDenominator: candidates.length,
-    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}`,
+    compilerVersion,
     processorAbi: ENGINE_VERSION,
   };
   return { release: ContentRelease.parse({ ...base, hash: await semanticHash(base) }), report };

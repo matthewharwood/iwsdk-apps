@@ -11,11 +11,13 @@ import {
 } from "@iwsdk-apps/catalog";
 import {
   compileCounterSpellDraft,
+  compileCreatureReturnDraft,
   compileDevelopmentRelease,
   compileKeywordReminderDraft,
   compileSelfEntryDraft,
   compileSpellFamilyDraft,
   makeCounterSpellDecks,
+  makeCreatureReturnDecks,
   makeDevelopmentDecks,
   makeKeywordReminderDecks,
 } from "@iwsdk-apps/compiler";
@@ -281,9 +283,10 @@ async function runExecutionCommand(command: string | undefined): Promise<boolean
 async function historicalFixtureRelease(
   release: ContentRelease,
   expectedHash: string,
+  processorAbi = "commander-engine/0.9.0",
 ): Promise<ContentRelease> {
   const { hash: _hash, ...current } = release;
-  const body = { ...current, processorAbi: "commander-engine/0.9.0" };
+  const body = { ...current, processorAbi };
   const hash = await semanticHash(body);
   if (hash !== expectedHash) throw new Error("Historical fixture source changed");
   return ContentRelease.parse({ ...body, hash });
@@ -310,15 +313,22 @@ async function reviewedFixtureDecks(content: ContentRelease) {
     "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
   );
   const reminders = await makeKeywordReminderDecks(historicalReminders, prior24);
-  const counters = await makeCounterSpellDecks(content, reminders.decks);
-  return { ...counters, reminderReport: reminders.report };
+  const counterRelease = await compileCounterSpellDraft(catalogPath);
+  const historicalCounters = await historicalFixtureRelease(
+    counterRelease.release,
+    "58b8f2dd09d699ef232ba49257e0287eb8ca204902a9addddb499f73e3084739",
+    "commander-engine/0.10.0",
+  );
+  const counters = await makeCounterSpellDecks(historicalCounters, reminders.decks);
+  const returns = await makeCreatureReturnDecks(content, counters.decks);
+  return { ...returns, counterReport: counters.report, reminderReport: reminders.report };
 }
 async function compileCatalog(): Promise<void> {
   const allReviewed = args.includes("--all-reviewed");
   const triggers = allReviewed || args.includes("--self-entry-triggers");
   const families = allReviewed || args.includes("--spell-families");
   const compiled = allReviewed
-    ? await compileCounterSpellDraft(catalogPath)
+    ? await compileCreatureReturnDraft(catalogPath)
     : triggers
       ? await compileSelfEntryDraft(catalogPath)
       : families
@@ -341,7 +351,7 @@ async function compileCatalog(): Promise<void> {
       resolve(
         retained,
         allReviewed
-          ? "counter-spell-expansion.json"
+          ? "creature-return-expansion.json"
           : triggers
             ? "self-entry-expansion.json"
             : "spell-family-expansion.json",
@@ -350,7 +360,8 @@ async function compileCatalog(): Promise<void> {
     );
   if (reviewed) {
     await write(resolve(retained, "keyword-reminder-decks.json"), reviewed.reminderReport);
-    await write(resolve(retained, "counter-spell-decks.json"), reviewed.report);
+    await write(resolve(retained, "counter-spell-decks.json"), reviewed.counterReport);
+    await write(resolve(retained, "creature-return-decks.json"), reviewed.report);
   }
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))

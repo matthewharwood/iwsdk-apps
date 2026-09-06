@@ -1,0 +1,298 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.11.0",
+  "sourceReleaseHash": "dac4f923e99a94e3e54031e635609dca4c91ad3f26c0bf85c4eb1bc3b35fa900",
+  "definitions": 1102,
+  "legalDevelopmentDecks": 35,
+  "preservedDefinitions": 1097,
+  "preservedCompleteDeckRevisions": 33,
+  "unsupportedPaperCandidates": 30727,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": "docs/commander/source-creature-return-v0.11.json",
+    "sha256": "54094f95d7584917c9f08e2041e83390b3ff9bb6b297bbb82bcf4e7af73e5420"
+  },
+  "sourceAuthentication": {
+    "path": ".commander/prototypes/engine-0.11/.draft-artifacts/raw-reviewed-source-authentication-v0.11.json",
+    "sha256": "870993e7571d9af13d04c277e39bf547270485b4c49124a1dadfe38ace268c75"
+  },
+  "sourceExecution": {
+    "path": ".commander/prototypes/engine-0.11/.draft-artifacts/return-runtime-execution-evidence.json",
+    "sha256": "9483d15356a3a2aed964cbc3ab32ffd25c7be062fdabc41fe88019e6102144a3"
+  },
+  "independentScenarioExecution": {
+    "path": ".commander/prototypes/engine-0.11/.draft-artifacts/independent-return-execution-review.json",
+    "sha256": "80616095384934a5f00f2a8a7a925c77a3bad748c54714fef4cfa30ad8544395"
+  },
+  "independentBrowserReview": {
+    "path": ".commander/prototypes/engine-0.11/.draft-artifacts/independent-return-browser-review-0.11.json",
+    "sha256": "979543ba1dc3488fc7f69f48b412322c0cfc9d61ee891bbc57786a3297acae85"
+  },
+  "independentScenarioEvidenceJoin": {
+    "path": ".commander/prototypes/engine-0.11/.draft-artifacts/independent-return-browser-scenario-join-0.11.json",
+    "sha256": "0e634d1084e1a4e81c23ba8f4ec04607034958f99a04b390b2851455a4369dd6"
+  },
+  "cliReproduction": {
+    "path": ".commander/prototypes/engine-0.11/.draft-artifacts/cli-all-reviewed-recompile.json",
+    "sha256": "773daf3836ddc34633c965a98c751cf744a4dfc23203b1628d3a5cc0bbcda625"
+  },
+  "mainCompile": {
+    "path": ".commander/evidence/compile-0.11-main.log",
+    "sha256": "712363d8fb94b2e2347a40accd5e3ac6482678baa346b093c184919b9b98a5d4"
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.11/.draft-runs/resolver-comparisons/a893a227-cc1b-488f-9552-192bf54ee1aa/report.json",
+      "sha256": "98d0e149fa96e13a0df4bf83e52af1b89f9a38bc2243aefc80b4bbde4f814659",
+      "status": "passed",
+      "buildHash": "4a7506c33c762117691f7640856535eb35ceb9e4c59742f8f125f9999ee41765",
+      "commands": 728,
+      "boundaries": 729,
+      "independentReplays": 3
+    },
+    {
+      "path": ".commander/prototypes/engine-0.11/.draft-runs/resolver-comparisons/1b5bce80-7bca-4e41-80bb-632c1aa3db51/report.json",
+      "sha256": "2586ff709bd7b42466ea6176e6d861c1fdee6e35045f64329c2bb2df373de8bd",
+      "status": "passed",
+      "buildHash": "4a7506c33c762117691f7640856535eb35ceb9e4c59742f8f125f9999ee41765",
+      "commands": 1727,
+      "boundaries": 1728,
+      "independentReplays": 3
+    }
+  ],
+  "nativePendingCantrip": {
+    "path": ".commander/prototypes/engine-0.11/.draft-artifacts/native-return-continuation-0.11/report.json",
+    "sha256": "25a40fe36ea811cd24b862d7b8091f50e42cdb3783341ad5d6eaa738bb92dfcc",
+    "scope": "One partial source-bound Repulse game at revision160, independently resumed into either owner choice at161. No completed-game claim."
+  },
+  "browser": {
+    "path": ".commander/prototypes/engine-0.11/.commander/browser-proof/2026-09-06T23-23-09-239Z-b93be767/evidence.json",
+    "sha256": "9888715e05e903223eb333feff85a086022fc4046a15ef0eda14e0380ec97794",
+    "status": "passed",
+    "summary": {
+      "path": ".commander/prototypes/engine-0.11/.draft-artifacts/browser-return-proof-v0.11-summary.json",
+      "sha256": "a93f56c19e65e30fb310451ae79921fdc853a7ec8a787068cc9664c55e2a3ff5"
+    },
+    "sourceHash": "52d7321feb4f694f80d8f9f2bd26bff69a419bebe7fb0e426183852e848d08b3",
+    "workerBundleHash": "2b8f34eb5490aa4b338881b20d724955f74dbc4e5f06b09b8711a27bc360ca61",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "driverVersion": "commander-return-targets/2",
+    "baseDriverVersion": "observed-combat/8",
+    "cases": [
+      {
+        "seats": 2,
+        "gameSeed": 11401,
+        "acceptedCommands": 711,
+        "equalBoundaryCount": 712,
+        "finalStateHash": "6d5b87456485f077354fa60df5858d760fdc990c68a02ed6838ce857ed40a7b5",
+        "pendingReplacement": {
+          "proposal": "hand-movement:797",
+          "source": "Unsummon",
+          "sourceDefinition": "oracle:837182db-1bf3-4a2c-bd01-1af9d9873561",
+          "sourceVersion": "98769e8e47da2d18fd755e7141a883463789487ff738ab871eb9c9b614c43a06",
+          "program": {
+            "schema": "commander-spell/1",
+            "target": "creature",
+            "effects": [
+              {
+                "kind": "return-to-hand"
+              }
+            ]
+          },
+          "sourceController": "P2",
+          "commanderOwner": "P1",
+          "revision": 269,
+          "sourceZone": "stack",
+          "targetZone": "battlefield"
+        },
+        "completedReplacementOccurrences": [
+          {
+            "source": "Unsummon",
+            "proposal": "hand-movement:797",
+            "choiceRevision": 270,
+            "owner": "P1",
+            "move": true,
+            "destination": "command",
+            "drawEvents": [],
+            "eventIndices": {
+              "requested": 797,
+              "choice": 799,
+              "targetMovement": 800,
+              "returned": 801,
+              "sourceMovement": 802,
+              "resolved": 803
+            }
+          },
+          {
+            "source": "Unsummon",
+            "proposal": "hand-movement:952",
+            "choiceRevision": 324,
+            "owner": "P2",
+            "move": true,
+            "destination": "command",
+            "drawEvents": [],
+            "eventIndices": {
+              "requested": 952,
+              "choice": 954,
+              "targetMovement": 955,
+              "returned": 956,
+              "sourceMovement": 957,
+              "resolved": 958
+            }
+          }
+        ],
+        "pendingLogicalImportEqual": true,
+        "fullCompletionAndReplayEqual": true
+      },
+      {
+        "seats": 4,
+        "gameSeed": 11601,
+        "acceptedCommands": 1533,
+        "equalBoundaryCount": 1534,
+        "finalStateHash": "08ab8e0205b220cb782599a604fba799b5de40841eda82fd656a94d45eccd7cc",
+        "pendingReplacement": {
+          "proposal": "hand-movement:2854",
+          "source": "Drown in Shapelessness",
+          "sourceDefinition": "oracle:a3874282-9887-4b53-b80e-564ac99cca23",
+          "sourceVersion": "20d4fa750b2a1a209489a4ab843c51d92e36fed93da1ab4520a4851867aa3661",
+          "program": {
+            "schema": "commander-spell/1",
+            "target": "creature",
+            "effects": [
+              {
+                "kind": "return-to-hand"
+              }
+            ]
+          },
+          "sourceController": "P1",
+          "commanderOwner": "P2",
+          "revision": 1117,
+          "sourceZone": "stack",
+          "targetZone": "battlefield"
+        },
+        "completedReplacementOccurrences": [
+          {
+            "source": "Drown in Shapelessness",
+            "proposal": "hand-movement:2854",
+            "choiceRevision": 1118,
+            "owner": "P2",
+            "move": true,
+            "destination": "command",
+            "drawEvents": [],
+            "eventIndices": {
+              "requested": 2854,
+              "choice": 2856,
+              "targetMovement": 2857,
+              "returned": 2858,
+              "sourceMovement": 2859,
+              "resolved": 2860
+            }
+          },
+          {
+            "source": "Symbol of Unsummoning",
+            "proposal": "hand-movement:2896",
+            "choiceRevision": 1132,
+            "owner": "P3",
+            "move": true,
+            "destination": "command",
+            "drawEvents": [
+              {
+                "index": 2902,
+                "epoch": 2903,
+                "type": "CardDrawn",
+                "visibility": ["P1"],
+                "cause": "rules",
+                "data": {
+                  "object": "P1:card:42@1",
+                  "player": "P1"
+                }
+              }
+            ],
+            "eventIndices": {
+              "requested": 2896,
+              "choice": 2898,
+              "targetMovement": 2899,
+              "returned": 2900,
+              "sourceMovement": 2903,
+              "resolved": 2904
+            }
+          }
+        ],
+        "pendingLogicalImportEqual": true,
+        "fullCompletionAndReplayEqual": true
+      }
+    ],
+    "scope": "Two unique completed observation-only policy assignments; browser/import/replay repetitions are not extra games. Saved choices are Unsummon269 and Drown1117. Later Symbol cantrip1132 is ordinary continued parity, not a separate saved cantrip import. All four observed choices move to command zone; native Repulse tests separately cover both choices.",
+    "earlierQualificationMisses": {
+      "path": ".commander/prototypes/engine-0.11/.commander/browser-proof/2026-09-06T23-19-04-585Z-6660f291/evidence.json",
+      "sha256": "7a4c4661f9d68dface2c941b9fe61ca5d5a0a15a01cc3368e65d40d204073e18",
+      "completedLegalGames": 8,
+      "qualifiedReplacementGames": 0,
+      "policy": "commander-return-targets/1"
+    }
+  },
+  "observedUniqueGames": {
+    "path": ".commander/evidence/observed-game-coverage-0.11.json",
+    "sha256": "9529e67bcf1e8adfe8e8c8db2776a4e8b3bab192a30669fbc8df1c3a9d28d12f"
+  },
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.11/promotion.json",
+    "sha256": "e3214a2f575ecc98e56503130f2d3f93e1bd71503b73406df7436450bcc185b0"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.11/archive-inventory.json",
+    "sha256": "d1f4c0fbdc2f2d4a13990df0aa78bec21a7fec05974e11a44a24b1c32a5a2869"
+  },
+  "independentReviewArchiveAddendum": {
+    "path": ".commander/prototypes/engine-0.11/independent-review-archive-inventory.json",
+    "sha256": "56aa065c209ce7a7abd69244e7583cfcef643dee5662ed2e88d1886774a1a44f"
+  },
+  "repositoryGate": {
+    "path": ".commander/evidence/check-full-0.11-main-retry.log",
+    "sha256": "57b63be7a6e27814d7392ceade2e09de9ae45410c07291eb4353a909edd35aa1",
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "unitTests": 577,
+    "unitAssertions": 72723,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true,
+    "earlierAttempt": {
+      "path": ".commander/evidence/check-full-0.11-main.log",
+      "sha256": "918980eabee6773e60a435a5c017daa74c525aa898efb1468f4288682f43977f"
+    },
+    "earlierAttemptScope": "Sandbox denied browser server bind at127.0.0.1:3135 after unit/build success; authorized retry passed.",
+    "finalHarnessScope": "Five final browser harness files were promoted after this full gate; exact bytes passed actual parity proof, independent review, scoped Biome/ESLint and storage typecheck.",
+    "finalHarnessTypecheck": {
+      "path": ".commander/evidence/browser-harness-types-0.11-main.log",
+      "sha256": "fe18b9ea2aa1336104ad969812ccfeb644922d3c47aa9c5904d43cc48b7d20d7"
+    }
+  },
+  "fixedRegression": {
+    "id": "regression-0.11-fixed64",
+    "status": "completed-and-replayed",
+    "assigned": 64,
+    "completed": 64,
+    "pending": 0,
+    "acceptedCommands": 89784,
+    "frozenBuildHash": "4a7506c33c762117691f7640856535eb35ceb9e4c59742f8f125f9999ee41765",
+    "evidence": {
+      "path": "docs/commander/fixed-regression-0.11-evidence.json",
+      "sha256": "693a33649906082d80f1af46526d3694cf27fd72e720941ca001af9803367eb4"
+    }
+  },
+  "remaining": [
+    "Original complete G2 difficult-scenario qualification remains open.",
+    "30,727 paper candidates and broad rule families remain unsupported.",
+    "The shared TypeScript/Phase/XMage fixture comparison is a bounded constructed counterspell comparison, not full-game equivalence or broad G2 qualification.",
+    "Full-source simulation campaign, consumer and physical headset qualification remain incomplete."
+  ],
+  "observedAt": "2026-09-06T23:43:37.326685+00:00"
+}

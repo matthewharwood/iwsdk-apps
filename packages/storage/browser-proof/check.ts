@@ -18,6 +18,8 @@ import { type Browser, chromium, expect, type Page } from "@playwright/test";
 import { DRIVER_VERSION, type GameRun, runGame } from "../../simulation/src/index";
 import { Coordinator, exportMatch, importMatch, type Repository, replayMatch } from "../src/index";
 import { openNativeRepository } from "../src/native";
+import { commanderReturnEvidence } from "./commander-return-evidence";
+import { COMMANDER_RETURN_PROOF_DRIVER_VERSION, proofDriverForVersion } from "./proof-driver";
 import {
   atProofStage,
   continuousEvidence,
@@ -40,6 +42,7 @@ type Snapshot = {
   triggers: ReturnType<typeof triggerEvidence>;
   continuous: ReturnType<typeof continuousEvidence>;
   counters: ReturnType<typeof counterEvidence>;
+  commanderReturns: ReturnType<typeof commanderReturnEvidence>;
   execution: ReturnType<typeof executionEvidence>;
   setup: ReturnType<typeof setupEvidence>;
   storage?: { secureContext: boolean; opfs: boolean; locks: boolean };
@@ -64,6 +67,8 @@ const options = parseArgs({
     "require-ordered-triggers": { type: "boolean", default: false },
     "require-modifiers": { type: "boolean", default: false },
     "require-counters": { type: "boolean", default: false },
+    "require-commander-replacement": { type: "boolean", default: false },
+    "favor-commander-return-targets": { type: "boolean", default: false },
     "two-seed": { type: "string", default: "1901" },
     "four-seed": { type: "string", default: "2901" },
     resolver: { type: "string", default: "full-scan" },
@@ -85,8 +90,16 @@ const fourSeed = boundedInteger(options["four-seed"], 1, 4294967200, "four-seed"
 const requireRemoval = options["require-removal"];
 const requireModifiers = options["require-modifiers"];
 const requireCounters = options["require-counters"];
+const requireCommanderReplacement = options["require-commander-replacement"];
+const proofDriverVersion = options["favor-commander-return-targets"]
+  ? COMMANDER_RETURN_PROOF_DRIVER_VERSION
+  : DRIVER_VERSION;
 const requireSpells =
-  options["require-spells"] || requireRemoval || requireModifiers || requireCounters;
+  options["require-spells"] ||
+  requireRemoval ||
+  requireModifiers ||
+  requireCounters ||
+  requireCommanderReplacement;
 function parseResolver(value: string): MatchManifest["resolver"] {
   switch (value) {
     case "full-scan":
@@ -105,6 +118,7 @@ if (requireOrderedTriggers) stageKinds.push("pending-ordered-trigger");
 else if (requireTriggers) stageKinds.push("pending-trigger");
 if (requireModifiers) stageKinds.push("active-modifier");
 if (requireCounters) stageKinds.push("pending-counter");
+if (requireCommanderReplacement) stageKinds.push("commander-replacement");
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -137,7 +151,13 @@ for (const name of [
     sourceFiles[`packages/${name}/${path}`] = await readFile(join(packageRoot, path), "utf8");
   }
 }
-for (const name of ["check.ts", "worker.ts", "spell-evidence.ts"]) {
+for (const name of [
+  "check.ts",
+  "worker.ts",
+  "spell-evidence.ts",
+  "commander-return-evidence.ts",
+  "proof-driver.ts",
+]) {
   sourceFiles[`packages/storage/browser-proof/${name}`] = await readFile(
     new URL(name, import.meta.url),
     "utf8",
@@ -223,8 +243,9 @@ const evidence: Record<string, unknown> = {
   status: "running",
   engineVersion: ENGINE_VERSION,
   nativeBunVersion: Bun.version,
-  driverVersion: DRIVER_VERSION,
+  driverVersion: proofDriverVersion,
   sourceHash,
+  baseDriverVersion: DRIVER_VERSION,
   sourceSnapshot: "sources.json",
   workerBundleHash: await sha256(workerScript),
   sqliteVersion: "3.53.0-build1",
@@ -280,6 +301,7 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     triggers: triggerEvidence(archive),
     continuous: continuousEvidence(archive, coordinator),
     counters: counterEvidence(archive, release),
+    commanderReturns: commanderReturnEvidence(archive, release, coordinator),
     execution: executionEvidence(release, coordinator.executionInfo()),
     setup: setupEvidence(coordinator, archive),
   };
@@ -308,6 +330,16 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
     stages.every((stage) => stage.run.status === "paused") &&
     (!requireSpells || Object.keys(final.spells.resolved).length > 0) &&
     (!requireCounters || final.counters.occurrences.length > 0) &&
+    (!requireCommanderReplacement ||
+      stages.some(
+        (stage) =>
+          stage.kind === "commander-replacement" &&
+          final.commanderReturns.occurrences.some(
+            (occurrence) =>
+              occurrence.proposal ===
+              stage.snapshot.commanderReturns.pending?.frame.pendingMovement.id,
+          ),
+      )) &&
     (!requireTriggers || Object.keys(final.triggers.resolved).length > 0) &&
     (!requireModifiers ||
       (Object.keys(final.continuous.created).length > 0 &&
@@ -372,6 +404,48 @@ async function verifyDurableRetry(page: Page, operation: "retryLast" | "retrySta
   const retry = await call<{ expected: unknown; result: unknown }>(page, { operation });
   expect(retry.result).toEqual({ status: "accepted", receipt: retry.expected });
 }
+async function retryNativeReplacement(
+  repo: Repository,
+  coordinator: Coordinator,
+  pending: Snapshot | undefined,
+) {
+  const proposal = pending?.commanderReturns.pending?.frame.pendingMovement.id;
+  if (!proposal) return null;
+  const archive = repo.load(coordinator.current().manifest.id);
+  const record = archive?.records.find(
+    (entry) =>
+      entry.command.response.kind === "commander-replacement" &&
+      entry.events.some(
+        (event) =>
+          event.type === "CommanderHandReplacementChosen" && event.data.proposal === proposal,
+      ),
+  );
+  if (!record) throw new Error("Completed native match lacks the captured replacement answer");
+  const before = await nativeSnapshot(repo, coordinator);
+  expect(await coordinator.submit(record.command.actor, record.command)).toEqual({
+    status: "accepted",
+    receipt: record.receipt,
+  });
+  expect(await nativeSnapshot(repo, coordinator)).toEqual(before);
+  return {
+    proposal,
+    command: record.command,
+    receipt: record.receipt,
+    unchangedStateHash: before.stateHash,
+  };
+}
+async function retryBrowserReplacement(page: Page, pending: Snapshot | undefined) {
+  const proposal = pending?.commanderReturns.pending?.frame.pendingMovement.id;
+  if (!proposal) return null;
+  const before = await call<Snapshot>(page, { operation: "snapshot" });
+  const retried = await call<{ command: unknown; expected: unknown; result: unknown }>(page, {
+    operation: "retryCommanderReplacement",
+    proposal,
+  });
+  expect(retried.result).toEqual({ status: "accepted", receipt: retried.expected });
+  expect(await call<Snapshot>(page, { operation: "snapshot" })).toEqual(before);
+  return { proposal, ...retried, unchangedStateHash: before.stateHash };
+}
 async function prepareCase(seatCount: 2 | 4, attempt: number) {
   const gameSeed = (seatCount === 2 ? twoSeed : fourSeed) + attempt;
   const manifest: MatchManifest = {
@@ -383,7 +457,7 @@ async function prepareCase(seatCount: 2 | 4, attempt: number) {
     chance: CHANCE_VERSION,
     gameSeed,
     driverSeed: gameSeed + 17,
-    driverVersion: DRIVER_VERSION,
+    driverVersion: proofDriverVersion,
     mode: seatCount === 2 ? "two-seat" : "four-seat",
     seats: Array.from({ length: seatCount }, (_, index) => {
       const deck = selectedDecks[(index * deckStride) % selectedDecks.length];
@@ -403,6 +477,29 @@ async function prepareCase(seatCount: 2 | 4, attempt: number) {
   return { manifest, artifact };
 }
 function assertPausedStage(kind: ProofStage, snapshot: Snapshot): void {
+  if (kind === "commander-replacement") {
+    const pending = snapshot.commanderReturns.pending;
+    if (!pending) throw new Error("Missing captured resolving spell at the replacement decision");
+    expect(snapshot.decision?.kind).toBe("commander-replacement");
+    expect(pending.decision?.actor).toBe(pending.frame.pendingMovement.before.owner);
+    expect(pending.priorityPlayer).toBeNull();
+    expect(pending.frame.effectIndex).toBe(0);
+    expect(pending.frame.program.effects[0]?.kind).toBe("return-to-hand");
+    expect(pending.frame.sourceVersion).toBe(pending.sourceDefinition?.sourceVersion);
+    expect(pending.frame.program).toEqual(pending.sourceDefinition?.spellProgram);
+    expect(pending.currentSource).toEqual(pending.frame.source);
+    expect(pending.currentSource?.zone).toBe("stack");
+    expect(pending.currentTarget).toEqual(pending.frame.pendingMovement.before);
+    expect(pending.currentTarget?.zone).toBe("battlefield");
+    expect(pending.currentTarget?.commander).toBe(true);
+    expect(pending.stack.at(-1)).toEqual({ kind: "spell", objectId: pending.frame.source.id });
+    for (const view of pending.ownerViews) {
+      if (view.player === pending.frame.pendingMovement.before.owner)
+        expect(view.decision?.kind).toBe("commander-replacement");
+      else expect(view.decision).toBeNull();
+    }
+    return;
+  }
   if (kind === "pending-trigger" || kind === "pending-ordered-trigger")
     expect(snapshot.triggers.pending.length).toBeGreaterThan(0);
   else if (kind === "pending-counter") {
@@ -442,13 +539,16 @@ async function nativeImport(
     }
     const run = await runGame(imported, {
       seed: manifest.driverSeed,
+      driver: proofDriverForVersion(manifest.driverVersion),
       maxCommands: 10_000,
       onProgress: (revision) => console.log(`Native import ${manifest.mode} revision:${revision}`),
     });
     requireCompleted(run);
     const final = await nativeSnapshot(repo, imported);
     expect(final).toEqual(finalSnapshot);
+    const replacementChoiceRetry = await retryNativeReplacement(repo, imported, pendingSnapshot);
     return {
+      replacementChoiceRetry,
       pendingRevision: pending.revision,
       pendingHash: pending.stateHash,
       run,
@@ -531,6 +631,7 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
       for (const kind of stageKinds) {
         const run = await runGame(coordinator, {
           seed: manifest.driverSeed,
+          driver: proofDriverForVersion(manifest.driverVersion),
           maxCommands: 10_000,
           stopAt: (observation) => atProofStage(observation, kind),
           onProgress: (revision) => console.log(`Native ${seatCount}-seat revision:${revision}`),
@@ -554,6 +655,7 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
       }
       const nativeRun = await runGame(coordinator, {
         seed: manifest.driverSeed,
+        driver: proofDriverForVersion(manifest.driverVersion),
         maxCommands: 10_000,
         onProgress: (revision) => console.log(`Native ${seatCount}-seat revision:${revision}`),
       });
@@ -566,6 +668,12 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
         nativeFinal,
         status: exercised ? "selected" : "missing-required-workflow",
       });
+      if (exercised)
+        attemptEvidence.replacementChoiceRetry = await retryNativeReplacement(
+          repo,
+          coordinator,
+          stages.find((stage) => stage.kind === "commander-replacement")?.snapshot,
+        );
       if (exercised && pendingSave)
         attemptEvidence.nativeImport = await nativeImport(
           pendingSave,
@@ -649,6 +757,7 @@ try {
       assertPausedStage(stage.kind, pending);
       expect(pending.continuous).toEqual(stage.snapshot.continuous);
       expect(pending.counters).toEqual(stage.snapshot.counters);
+      expect(pending.commanderReturns).toEqual(stage.snapshot.commanderReturns);
       expect(pending.execution).toEqual(stage.snapshot.execution);
       expect(pending.stateHash).toBe(stage.snapshot.stateHash);
       expect(pending.boundaryHashes).toEqual(stage.snapshot.boundaryHashes);
@@ -694,6 +803,9 @@ try {
     expect(completed.triggers).toEqual(baseline.nativeFinal.triggers);
     expect(completed.continuous).toEqual(baseline.nativeFinal.continuous);
     expect(completed.counters).toEqual(baseline.nativeFinal.counters);
+    expect(completed.commanderReturns).toEqual(baseline.nativeFinal.commanderReturns);
+    if (requireCommanderReplacement)
+      expect(completed.commanderReturns.occurrences.length).toBeGreaterThan(0);
     if (requireCounters) expect(completed.counters.occurrences.length).toBeGreaterThan(0);
     expect(completed.execution).toEqual(baseline.nativeFinal.execution);
     assertSingleChoice(completed);
@@ -708,6 +820,7 @@ try {
       expect(completed.continuous.expired.length).toBeGreaterThan(0);
     }
     expect(resumed).toEqual(baseline.nativeRun);
+    const replacementChoiceRetry = await retryBrowserReplacement(page, importedExpected);
     await call(page, { operation: "close" });
     await page.reload({ waitUntil: "load" });
     const imported = await call<Snapshot>(page, {
@@ -733,8 +846,12 @@ try {
     expect(importedFinal.execution).toEqual(completed.execution);
     assertSingleChoice(importedFinal);
     expect(importedFinal.setup.firstChoice).toEqual(completed.setup.firstChoice);
+    expect(importedFinal.commanderReturns).toEqual(completed.commanderReturns);
+    const importedReplacementChoiceRetry = await retryBrowserReplacement(page, importedExpected);
     caseEvidence.browser = {
       stages: browserStages,
+      replacementChoiceRetry,
+      importedReplacementChoiceRetry,
       resumed,
       completed,
       logicalSaveBytes: new TextEncoder().encode(saved).byteLength,
@@ -768,6 +885,10 @@ try {
   evidence.spellCoverage = {
     required: requireSpells,
     removalRequired: requireRemoval,
+    commanderReplacementRequired: requireCommanderReplacement,
+    commanderReplacements: completedBrowserStates.flatMap(
+      (state) => state.commanderReturns.occurrences,
+    ),
     removalEvents: completedBrowserStates.reduce(
       (total, state) => ({
         destroy: total.destroy + state.spells.removalEvents.destroy,

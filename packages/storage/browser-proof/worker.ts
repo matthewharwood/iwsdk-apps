@@ -17,6 +17,8 @@ import {
   replayMatch,
   StorageError,
 } from "../src/index";
+import { commanderReturnEvidence } from "./commander-return-evidence";
+import { proofDriverForVersion } from "./proof-driver";
 import {
   atProofStage,
   continuousEvidence,
@@ -47,6 +49,7 @@ const Request = z.discriminatedUnion("operation", [
         "pending-ordered-trigger",
         "active-modifier",
         "pending-counter",
+        "commander-replacement",
       ])
       .nullable(),
     maxCommands: z.number().int().positive().max(20_000),
@@ -56,6 +59,7 @@ const Request = z.discriminatedUnion("operation", [
   z.strictObject({ operation: z.literal("export") }),
   z.strictObject({ operation: z.literal("retryLast") }),
   z.strictObject({ operation: z.literal("retryStartingChoice") }),
+  z.strictObject({ operation: z.literal("retryCommanderReplacement"), proposal: z.string() }),
   z.strictObject({ operation: z.literal("close") }),
 ]);
 let repo: Repository | null = null;
@@ -92,6 +96,7 @@ async function snapshot() {
     triggers: triggerEvidence(archive),
     continuous: continuousEvidence(archive, session.coordinator),
     counters: counterEvidence(archive, session.release),
+    commanderReturns: commanderReturnEvidence(archive, session.release, session.coordinator),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
     setup: setupEvidence(session.coordinator, archive),
     storage: {
@@ -129,6 +134,7 @@ async function handle(input: unknown): Promise<unknown> {
       const session = requireOpen();
       return runGame(session.coordinator, {
         seed: session.coordinator.current().manifest.driverSeed,
+        driver: proofDriverForVersion(session.coordinator.current().manifest.driverVersion),
         maxCommands: request.maxCommands,
         ...(request.stopAt
           ? {
@@ -157,6 +163,25 @@ async function handle(input: unknown): Promise<unknown> {
           : archive?.records.find((entry) => entry.command.response.kind === "starting-player");
       if (!record) throw new Error("No durable command to retry");
       return {
+        expected: record.receipt,
+        result: await session.coordinator.submit(record.command.actor, record.command),
+      };
+    }
+    case "retryCommanderReplacement": {
+      const session = requireOpen();
+      const archive = session.repo.load(session.coordinator.current().manifest.id);
+      const record = archive?.records.find(
+        (entry) =>
+          entry.command.response.kind === "commander-replacement" &&
+          entry.events.some(
+            (event) =>
+              event.type === "CommanderHandReplacementChosen" &&
+              event.data.proposal === request.proposal,
+          ),
+      );
+      if (!record) throw new Error("No accepted replacement command matches the captured proposal");
+      return {
+        command: record.command,
         expected: record.receipt,
         result: await session.coordinator.submit(record.command.actor, record.command),
       };

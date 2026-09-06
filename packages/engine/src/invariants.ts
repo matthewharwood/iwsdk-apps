@@ -1,5 +1,6 @@
 import { canonicalJson, type ExecutionRegistry, type RulesState } from "@iwsdk-apps/contracts";
 import { assertRegistryPin, definition, RulesError } from "./common";
+import { assertResolutionContinuation } from "./resolution-context";
 
 function invariant(condition: unknown, message: string): asserts condition {
   if (!condition) throw new RulesError("Invariant", message);
@@ -248,6 +249,7 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
     "Invalid stack order",
   );
   assertTriggers(state, release);
+  assertResolutionContinuation(state, release);
   for (const seat of state.players.filter((candidate) => !candidate.lost)) {
     invariant(
       Object.values(state.objects).filter((entry) => entry.owner === seat.id).length === 100,

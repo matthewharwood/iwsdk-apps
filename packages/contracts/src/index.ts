@@ -10,7 +10,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.10.0";
+export const ENGINE_VERSION = "commander-engine/0.11.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -84,6 +84,7 @@ export const SpellEffect = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("destroy") }),
   z.strictObject({ kind: z.literal("exile") }),
   z.strictObject({ kind: z.literal("counter") }),
+  z.strictObject({ kind: z.literal("return-to-hand") }),
 ]);
 export type SpellEffect = z.infer<typeof SpellEffect>;
 /** Executable instructions; reviewed source compilation assigns these, never runtime prose. */
@@ -96,6 +97,25 @@ export const SpellProgram = z
     effects: z.array(SpellEffect).min(1).max(16),
   })
   .superRefine((program, context) => {
+    const returning = program.effects.some((effect) => effect.kind === "return-to-hand");
+    const followup = program.effects[1];
+    if (
+      returning &&
+      (program.target !== "creature" ||
+        program.effects[0]?.kind !== "return-to-hand" ||
+        program.effects.length > 2 ||
+        (followup !== undefined &&
+          !(
+            followup.kind === "draw" &&
+            followup.recipient === "controller" &&
+            followup.amount === 1
+          )))
+    )
+      context.addIssue({
+        code: "custom",
+        message:
+          "Return programs support one creature return, optionally followed by controller draw one.",
+      });
     const stackTarget =
       program.target === "spell" ||
       program.target === "creature-spell" ||
@@ -328,6 +348,7 @@ export const Response = z.discriminatedUnion("kind", [
     allocations: z.array(z.strictObject({ source: Id, target: Id, amount: Natural })).max(2000),
   }),
   z.strictObject({ kind: z.literal("commander-zone"), move: z.boolean() }),
+  z.strictObject({ kind: z.literal("commander-replacement"), move: z.boolean() }),
   z.strictObject({ kind: z.literal("discard"), cards: z.array(Id).max(1000) }),
 ]);
 export type Response = z.infer<typeof Response>;
@@ -357,6 +378,7 @@ export const Decision = z.strictObject({
     "block",
     "damage",
     "commander-zone",
+    "commander-replacement",
     "discard",
   ]),
   context: z.string(),
@@ -397,7 +419,26 @@ export const CombatState = z.strictObject({
   allocations: z.array(z.strictObject({ source: Id, target: Id, amount: Natural })),
   firstStrikeParticipants: z.array(Id),
 });
+/** A single uncommitted hand movement; general competing replacement ordering is not represented. */
+export const ResolvingSpellFrame = z.strictObject({
+  kind: z.literal("resolving-spell"),
+  source: GameObject,
+  sourceVersion: Digest,
+  controller: Id,
+  program: SpellProgram,
+  target: Id,
+  effectIndex: Natural.max(15),
+  pendingMovement: z.strictObject({
+    id: Id,
+    proposedAtEvent: Natural,
+    before: GameObject,
+    destination: z.literal("hand"),
+    replacement: z.literal("commander-hand/1"),
+  }),
+});
+export type ResolvingSpellFrame = z.infer<typeof ResolvingSpellFrame>;
 export const Frame = z.discriminatedUnion("kind", [
+  ResolvingSpellFrame,
   z.strictObject({
     kind: z.literal("casting"),
     card: Id,

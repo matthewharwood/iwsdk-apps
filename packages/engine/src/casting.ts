@@ -297,12 +297,12 @@ export function payForCast(
   hit(state, "rule:601.2");
   hit(state, `card:${spell.definition}:cast`);
 }
-export function resolveTop(state: RulesState, release: ExecutionRegistry): void {
+export function resolveTop(state: RulesState, release: ExecutionRegistry): boolean {
   const top = state.stack.at(-1);
   if (!top) throw new RulesError("Invariant", "No stack object to resolve");
   if (top.kind === "triggered-ability") {
     resolveTriggeredAbility(state);
-    return;
+    return true;
   }
   const id = top.objectId;
   const current = card(state, release, id);
@@ -310,8 +310,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): void 
     (current.types.includes("Instant") || current.types.includes("Sorcery")) &&
     current.spellProgram
   ) {
-    resolveSpellProgram(state, release, id);
-    return;
+    return resolveSpellProgram(state, release, id);
   }
   if (!current.types.includes("Creature"))
     throw new RulesError(
@@ -330,6 +329,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): void 
   emit(state, "PermanentSpellResolved", { object: entered.id, definition: entered.definition });
   hit(state, "rule:608.3");
   hit(state, `card:${entered.definition}:resolve`);
+  return true;
 }
 
 import { enterBattlefield, resolveTriggeredAbility } from "./triggers";

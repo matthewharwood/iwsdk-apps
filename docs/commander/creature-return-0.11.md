@@ -1,0 +1,38 @@
+# Creature return and suspended resolution, development 0.11
+
+This development release adds five exact creature-return spell bodies and a serializable commander replacement choice during resolution. It does not implement arbitrary replacement ordering or the full Commander snapshot.
+
+| Card | Mana | Timing | Instructions |
+| --- | --- | --- | --- |
+| Drag Under | `{2}{U}` | Sorcery | Return the targeted creature to its owner's hand, then the spell's controller draws one card. |
+| Drown in Shapelessness | `{1}{U}` | Instant | Return the targeted creature to its owner's hand. |
+| Repulse | `{2}{U}` | Instant | Return the targeted creature to its owner's hand, then the spell's controller draws one card. |
+| Symbol of Unsummoning | `{2}{U}` | Sorcery | Return the targeted creature to its owner's hand, then the spell's controller draws one card. |
+| Unsummon | `{U}` | Instant | Return the targeted creature to its owner's hand. |
+
+Whole-body binding preserves each printed target, cost, timing and mandatory instruction. Optional draws, extra costs, alternate target domains, hybrid costs and other unreviewed bodies remain unsupported. All five match authenticated source identities, normalized versions, original archive ordinals and complete Oracle text. The source proposal is research evidence; binding is not execution certification.
+
+When a legal target is a commander, CR903.9b gives its owner the option to replace the proposed hand movement with command-zone movement. The engine captures the resolving source incarnation, full program and source version, controller, target incarnation, instruction cursor and movement proposal before anything moves. Only the owner receives the `commander-replacement` decision. Priority and state-based actions remain suspended until the spell finishes.
+
+Accepting or declining commits one destination and creates one new object generation. A following draw belongs to the captured spell controller, even when the spell owner, spell controller, target owner and target controller are four different players. The spell then reaches its owner's graveyard, followed by the ordinary state-based-action checkpoint and priority. An illegal target at the initial resolution check prevents the entire spell from resolving, including the draw. The old target is not revalidated between the successful return instruction and its following draw.
+
+The continuation is a constrained `resolving-spell` frame. It authenticates the source program, target, owner decision and retained proposal event at admission. This is a bounded implementation of one owner-hand movement, not a generic CR616 replacement-order engine. CR903.9b's exception to the ordinary once-per-event replacement rule remains explicit; competing replacements are not admitted by these five definitions.
+
+The compiled release is `dac4f923e99a94e3e54031e635609dca4c91ad3f26c0bf85c4eb1bc3b35fa900`. It contains 1,102 eligible definitions and explicitly retains 30,727 unsupported candidates. All previous 1,097 definition objects and 33 deck revisions remain byte-equivalent after canonical serialization. Two additional legal 100-card profiles preserve 39 basic lands and include all five new spells plus the seven counterspells. Prepared matches retain 111 definitions and exclude 991; all five new resolution capabilities are mandatory.
+
+`bun run commander compile --all-reviewed` reproduces the release and 35 deck revisions from the retained catalog. The compiler reconstructs the exact historical 0.9 and 0.10 fixture release identities solely to preserve earlier deck revisions. Those historical release headers are never executed under the new ABI.
+
+Independent source authentication rehashed all 12 archives and checked 1,102 original Oracle records plus 50 retained ruling records. Prior source digests, legal decks, prepared closure and rejection of forged source/capability changes were independently checked. The retained rulings are authenticated records; this does not assert that every ruling's semantics is implemented.
+
+Two complete headless assignments have passed all three resolvers and their replays. The two-seat assignment used the new blue profiles, seed 11401 and driver seed 11418, and completed 728 commands/729 boundaries. The four-seat assignment used those profiles plus the original GW vanilla and flying profiles, seed 11601 and driver seed 11618, and completed 1,727 commands/1,728 boundaries. The observed-combat/8 driver uses only entitled observations. All five new spell definitions were cast across those games; they produced seven return instructions but no commander-hand replacement choice. Separate native/browser durability evidence now qualifies that bounded continuation, as described below.
+
+
+The browser proof uses a captured observation-only policy, `commander-return-targets/2`, which holds return spells until an opposing commander is visible, preserves land-first choices, and prefers an affordable return cantrip. It reads no hidden state and issues only offered legal actions. Two- and four-seat assignments completed 711 and 1,533 commands respectively, with all 712 and 1,534 boundaries equal across native SQLite and browser OPFS execution and replay. These are different policy assignments from the resolver comparisons. The four-seat browser assignment repeats the two new blue profiles.
+
+Both native and browser stores reopen and import the actual pending replacement: Unsummon at revision 269 and Drown in Shapelessness at 1117. Exact accepted choice receipts survive completion, reopening and logical import without any snapshot change. A later four-seat Symbol of Unsummoning choice at 1132 executes its following draw under continued parity; it was not separately paused and imported. All four browser-observed owner choices selected the command zone. Separate native tests reach a pending Repulse through ordinary legal gameplay at revision 160, import it, and resume either choice at 161; this is one partial game branched twice, not two completed games.
+
+The earlier policy attempt completed eight legal two-seat games but reached no commander replacement choice. All eight qualification misses remain archived and are not reported as qualified passes. Across the four selected complete resolver/browser assignments, 4,699 commands cast 74 distinct definitions, resolved 72, and produced 11 return instructions and 4 commander-hand replacement choices. Those observations describe these games only.
+
+Independent review rehashed the captured source, worker, release, lockfile and SQLite WASM, verified every stored receipt event hash, compared native/imported databases and all browser boundaries, and checked all four return event chains. It reran 32 focused tests with 592 assertions; 145 captured source and fixture files remained unchanged. Its evidence joins all 20 bounded expectations while leaving full G2 qualification false.
+
+The integrated `bun run check` passed 577 unit tests with 72,723 assertions, 12 production browser tests, the emulated Quest smoke test, and a fresh generated workspace/application. The five final browser harness files separately passed their actual proof, independent review, typecheck and scoped lint after promotion. Physical headset qualification remains unverified. The fixed 64-game historical-input regression completed and replayed all 64 assignments under the new frozen executable (89,784 accepted commands); old outcomes were not reused. Its historical deck compositions do not exercise the new return spells. Exact files, hashes and remaining scope are retained in [development evidence](development-0.11-evidence.json).

@@ -1,10 +1,10 @@
 /** Fixed authenticated snapshot binding digests. Source membership only; never semantic certification.
- * The1090 prior tuples remain exact; seven counterspell additions were independently source-reviewed and raw-record authenticated. */
+ * The1097 prior tuples remain exact; five creature-return additions were independently source-reviewed and raw-record authenticated. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "58b8f2dd09d699ef232ba49257e0287eb8ca204902a9addddb499f73e3084739",
-  bindingsHash: "7a3f6263a6f3c7e726f0378d06402921efc40bc22df8f28ea9da613a4de2649b",
+  releaseHash: "dac4f923e99a94e3e54031e635609dca4c91ad3f26c0bf85c4eb1bc3b35fa900",
+  bindingsHash: "d6dca1331bda51c2f09f22b874d3d0d04099890946b177f1b1c92e84f65467f2",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
   Record<string, { sourceVersion: string; implementationRevision: string; definitionHash: string }>
@@ -5493,5 +5493,30 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "ab4dc3ac2c4d4bbd9b78b0648cfe0fed9e107cabe74552a870641e5598c4599b",
     implementationRevision: "stack-counter-spell/1",
     definitionHash: "18d0585e570a7ee12e20445bf153b347e1b7d3a30c22c29ccc52ca83b34bf3ea",
+  },
+  "021d8596-782a-4cfd-8b70-ac5bb8a5aff1": {
+    sourceVersion: "9e2ed7f847456132a98334a7f37e44b79b551d70fe26ddc0d3c6a61befb266d0",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "674e95e01777edcf0f555d3c250dd2335c49d92eabcd8b4beeedc3d11ce6374c",
+  },
+  "a3874282-9887-4b53-b80e-564ac99cca23": {
+    sourceVersion: "20d4fa750b2a1a209489a4ab843c51d92e36fed93da1ab4520a4851867aa3661",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "9dc57ea7507bdff7521e22e0ac5ace2ba1a08f6ebc8d7490697c2cd07b483aad",
+  },
+  "6f7ef1d1-c441-41ba-b7d6-6b7727ffcf04": {
+    sourceVersion: "0ab23094897700b94e3d399db2d15c62990eebf1951f37bd86d2263c1087ac02",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "1ec3cb0391290d97bdc550bf9bc011b4187c60b226565abcec4f19292008d57f",
+  },
+  "c44f1a81-269b-4f05-8ff2-e7ce19a93937": {
+    sourceVersion: "758b8cccd8ef8c0ba97fe8fb0f2428767842df91ac5c8e1627ce2fbe8d465061",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "a0be8d760547a4b472543578d0971d73cf553bf4fbf2ed5936fe70025b8a76cd",
+  },
+  "837182db-1bf3-4a2c-bd01-1af9d9873561": {
+    sourceVersion: "98769e8e47da2d18fd755e7141a883463789487ff738ab871eb9c9b614c43a06",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "ecc40c87864f27c360b035f99ae03bc3746f55d5063ca291e34065768d1a7235",
   },
 };

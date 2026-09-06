@@ -8,7 +8,7 @@ import {
   type Response,
 } from "@iwsdk-apps/contracts";
 
-export const DRIVER_VERSION = "observed-combat/7";
+export const DRIVER_VERSION = "observed-combat/8";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -181,6 +181,8 @@ export const heuristicDriver: Driver = (observation, seed) => {
       return { kind: "bottom", cards: decision.cards.slice(0, decision.count) };
     case "discard":
       return { kind: "discard", cards: decision.cards.slice(0, decision.count) };
+    case "commander-replacement":
+      return { kind: "commander-replacement", move: true };
     case "commander-zone":
       return { kind: "commander-zone", move: true };
     case "priority":
@@ -195,7 +197,7 @@ export const heuristicDriver: Driver = (observation, seed) => {
         throw new Error("Target decision lacks its public announced spell");
       const harmful = spell.card.spellProgram.effects.some(
         (effect) =>
-          ["damage", "destroy", "exile", "counter"].includes(effect.kind) ||
+          ["damage", "destroy", "exile", "counter", "return-to-hand"].includes(effect.kind) ||
           (effect.kind === "modify-creature" &&
             (effect.powerDelta < 0 || effect.toughnessDelta < 0)),
       );

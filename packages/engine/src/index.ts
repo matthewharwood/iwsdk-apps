@@ -12,6 +12,8 @@ import { answerAttack, answerBlock, answerDamage, applyCombatDamage } from "./co
 import { assertRegistryPin, definition, emit, RulesError, requireActivePlayer } from "./common";
 import { assertInvariants } from "./invariants";
 import { orderedObjects } from "./object-order";
+import { assertResolutionContinuation } from "./resolution-context";
+import { answerCommanderReplacement } from "./return-resolution";
 import { bottom, chooseStartingPlayer, mulligan } from "./setup";
 import { answerTriggerOrder } from "./triggers";
 import { answerDiscard, givePriority, passPriority, startTurn } from "./turns";
@@ -77,6 +79,10 @@ function answer(
     case "target":
       if (answerTarget(state, release, actor, response)) givePriority(state, release, actor);
       return;
+    case "commander-replacement":
+      if (answerCommanderReplacement(state, actor, response))
+        givePriority(state, release, requireActivePlayer(state));
+      return;
     case "commander-zone":
       if (answerCommanderZone(state, actor, response)) givePriority(state, release);
       return;
@@ -137,6 +143,7 @@ export function transition(
     };
   try {
     assertRegistryPin(committed.manifest, release);
+    assertResolutionContinuation(committed, release);
     const state = structuredClone(committed);
     state.revision++;
     state.events = [];

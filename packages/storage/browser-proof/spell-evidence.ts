@@ -246,7 +246,8 @@ export type ProofStage =
   | "pending-trigger"
   | "pending-ordered-trigger"
   | "active-modifier"
-  | "pending-counter";
+  | "pending-counter"
+  | "commander-replacement";
 export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean {
   if (kind === "pending-counter") {
     const spells = new Set(

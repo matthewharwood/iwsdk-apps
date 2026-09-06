@@ -1,3 +1,16 @@
+import { bindCreatureReturnSpell, CREATURE_RETURN_VERSION } from "./creature-return";
+
+export {
+  bindCreatureReturnSpell,
+  CREATURE_RETURN_ARCHIVE,
+  CREATURE_RETURN_RULES,
+  CREATURE_RETURN_SOURCE_BUNDLE,
+  CREATURE_RETURN_SPELLS,
+  CREATURE_RETURN_VERSION,
+  type CreatureReturnSpellSource,
+  reviewedCreatureReturnSpellDefinition,
+} from "./creature-return";
+
 import type { CatalogCard } from "@iwsdk-apps/catalog";
 import { bindCounterSpell, COUNTER_SPELL_VERSION } from "./counter-spells";
 
@@ -440,6 +453,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  creatureReturnSpells?: boolean;
   counterSpells?: boolean;
   spellFamilies?: boolean;
   selfEntryTriggers?: boolean;
@@ -452,6 +466,10 @@ function bindSpell(
   parts: NonNullable<ReturnType<typeof characteristics>>,
   options: BindingOptions,
 ): BindingResult {
+  if (options.creatureReturnSpells) {
+    const definition = bindCreatureReturnSpell(input);
+    if (definition) return { kind: "bound", definition, recipes: [CREATURE_RETURN_VERSION] };
+  }
   if (options.counterSpells) {
     const definition = bindCounterSpell(input);
     if (definition) return { kind: "bound", definition, recipes: [COUNTER_SPELL_VERSION] };
