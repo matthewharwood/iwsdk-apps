@@ -1,4 +1,5 @@
 import { expect, test } from "bun:test";
+import { proposeSelfEntryBody } from "@iwsdk-apps/card-programs";
 import {
   type CardDefinition,
   type ContentRelease,
@@ -7,7 +8,11 @@ import {
   type PreparedMatchArtifact,
   semanticHash,
 } from "@iwsdk-apps/contracts";
-import { buildDevelopmentMatchPlan } from "./plan";
+import {
+  buildDevelopmentMatchPlan,
+  SELF_ENTRY_CORE_CAPABILITIES,
+  SELF_ENTRY_PROCESSOR_ABI,
+} from "./plan";
 import {
   admitPreparedMatchArtifact,
   createFullExecutionRegistry,
@@ -247,4 +252,90 @@ test("browser prepared entrypoint builds without importing the native SQLite/com
   const text = await result.outputs[0]?.text();
   expect(text).not.toContain("bun:sqlite");
   expect(text).not.toContain("node:fs");
+});
+
+test("self-entry closure retains all trigger processors and serialized programs only under the exact reviewed ABI", async () => {
+  const { source, decks } = await fixture();
+  const commander = source.definitions.commander;
+  const proposal = proposeSelfEntryBody("When this creature enters, draw a card.");
+  if (!commander || !proposal) throw new Error("Missing fixture source");
+  commander.oracleText = "When this creature enters, draw a card.";
+  commander.triggerPrograms = [proposal.program];
+  commander.implementationRevision = "self-entry-creature/1";
+  source.processorAbi = SELF_ENTRY_PROCESSOR_ABI;
+  const revised = await rehashSource(source);
+  const artifact = await createPreparedMatchArtifact(revised, decks);
+  const registry = await admitPreparedMatchArtifact(
+    JSON.parse(JSON.stringify(artifact)),
+    revised,
+    decks,
+  );
+  expect(artifact.compilerVersion).toBe("development-match-plan/2");
+  expect(artifact.closure.excluded).toEqual(["unused"]);
+  expect(artifact.closure.blockers).toEqual([]);
+  for (const capability of SELF_ENTRY_CORE_CAPABILITIES)
+    expect(artifact.requiredCoreCapabilities).toContain(capability);
+  expect(registry.definitions.commander?.triggerPrograms).toEqual([proposal.program]);
+  expect(Object.keys(registry.definitions)).toEqual(["commander", "land"]);
+});
+
+function alterTriggerFixture(altered: ContentRelease, card: CardDefinition, change: string) {
+  if (change === "old-abi") altered.processorAbi = "commander-engine/0.6.0";
+  if (change === "future-abi") altered.processorAbi = "commander-engine/0.8.0";
+  if (change === "future-recipe") card.implementationRevision = "self-entry-creature/2";
+  if (change === "old-recipe") card.implementationRevision = "commander-development-recipes/1";
+  if (change === "optional") card.oracleText = "When this creature enters, you may draw a card.";
+  if (change === "unknown-remainder") card.oracleText += "\nCreatures you control get +1/+1.";
+  if (change === "altered-program" && card.triggerPrograms?.[0])
+    card.triggerPrograms[0].effect.amount = 2;
+  if (change === "extra-keyword") card.keywords = ["flying"];
+  if (change === "missing-program") delete card.triggerPrograms;
+  if (change === "unknown-characteristic") card.power = null;
+  if (change === "unknown-type") {
+    card.types.push("Planeswalker");
+    card.typeLine += " Planeswalker";
+  }
+  if (change === "null-cost") card.manaCost = null;
+  if (change === "wrong-mana-value") card.manaValue += 1;
+  if (change === "type-discrepancy") card.subtypes = ["Elf"];
+}
+
+test("unknown trigger recipe, ABI, body, remainder, or program cannot inherit an empty dependency declaration", async () => {
+  const { source, decks } = await fixture();
+  const commander = source.definitions.commander;
+  const proposal = proposeSelfEntryBody("When this creature enters, draw a card.");
+  if (!commander || !proposal) throw new Error("Missing fixture source");
+  commander.oracleText = "When this creature enters, draw a card.";
+  commander.triggerPrograms = [proposal.program];
+  commander.implementationRevision = "self-entry-creature/1";
+  source.processorAbi = SELF_ENTRY_PROCESSOR_ABI;
+  for (const change of [
+    "old-abi",
+    "future-abi",
+    "future-recipe",
+    "old-recipe",
+    "optional",
+    "unknown-remainder",
+    "altered-program",
+    "extra-keyword",
+    "missing-program",
+    "unknown-characteristic",
+    "unknown-type",
+    "null-cost",
+    "wrong-mana-value",
+    "type-discrepancy",
+  ]) {
+    const altered = structuredClone(source);
+    const card = altered.definitions.commander;
+    if (!card) throw new Error("Missing fixture commander");
+    alterTriggerFixture(altered, card, change);
+    const revised = await rehashSource(altered);
+    const plan = await buildDevelopmentMatchPlan(revised, decks);
+    expect(plan.closure.excluded).toEqual([]);
+    expect(plan.closure.retained).toEqual(["commander", "land", "unused"]);
+    expect(plan.closure.blockers).toContain("unresolved-dependencies:commander");
+    await expect(createPreparedMatchArtifact(revised, decks)).rejects.toThrow(
+      "Prepared execution blocked",
+    );
+  }
 });

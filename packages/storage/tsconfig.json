@@ -1,5 +1,5 @@
 {
   "extends": "@iwsdk-apps/tsconfig/base.json",
   "compilerOptions": { "lib": ["es2024", "dom", "webworker"], "types": ["bun"] },
-  "include": ["src", "browser-proof"]
+  "include": ["src", "browser-proof", "test-fixtures"]
 }

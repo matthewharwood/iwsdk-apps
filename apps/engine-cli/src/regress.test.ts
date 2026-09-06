@@ -1,12 +1,17 @@
 import { expect, test } from "bun:test";
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { resolve } from "node:path";
 import {
   type CardDefinition,
   type ContentRelease,
+  canonicalJson,
   type DeckRevision,
   ENGINE_VERSION,
   emptyMana,
   semanticHash,
 } from "@iwsdk-apps/contracts";
+import { deckCompositionKey, runBatch } from "./batch";
 import { planRegression } from "./regress";
 
 async function fixture() {
@@ -163,4 +168,191 @@ test("regression rejects a changed denominator or a missing pinned source", asyn
   corpus.fourSeat = 48;
   delete corpus.definitionSourcePins.land;
   await expect(planRegression(corpus, source, "bad")).rejects.toThrow("pin closure");
+});
+
+test("renamed or reordered copies do not inflate the distinct deck denominator", async () => {
+  const { source, corpus } = await fixture();
+  const first = corpus.decks[0];
+  if (!first) throw new Error("Missing fixture deck");
+  corpus.decks = await Promise.all(
+    corpus.decks.map(async (_, i) => {
+      const body = {
+        id: `alias-${i}`,
+        commander: first.commander,
+        entries: i % 2 ? [...first.entries].reverse() : first.entries,
+      };
+      return { ...body, hash: await semanticHash(body) };
+    }),
+  );
+  corpus.definitionSourcePins = Object.fromEntries(
+    first.entries.map((row) => {
+      const card = source.definitions[row.definition];
+      if (!card) throw new Error("Missing fixture definition");
+      return [row.definition, card.sourceVersion];
+    }),
+  );
+  for (const [i, item] of corpus.cases.entries())
+    item.seats = item.seats.map((seat, j) => ({
+      ...seat,
+      deckHash: corpus.decks[(i + j) % 12]?.hash,
+    }));
+  await expect(planRegression(corpus, source, "aliases")).rejects.toThrow("deck denominator");
+});
+
+test("seat renaming cannot turn the same seeds and ordered compositions into a new game", async () => {
+  const { source, corpus } = await fixture();
+  const first = corpus.cases[0];
+  if (!first) throw new Error("Missing fixture case");
+  corpus.cases[1] = {
+    ...structuredClone(first),
+    id: "seat-alias",
+    seats: first.seats.map((seat, i) => ({ ...seat, id: `renamed-${i}` })),
+  };
+  await expect(planRegression(corpus, source, "aliases")).rejects.toThrow("identical game inputs");
+});
+
+async function addDeckAliases(corpus: Awaited<ReturnType<typeof fixture>>["corpus"]) {
+  const first = corpus.cases[0];
+  if (!first) throw new Error("Missing fixture case");
+  const aliases: DeckRevision[] = [];
+  for (const seat of first.seats) {
+    const original = corpus.decks.find((deck) => deck.hash === seat.deckHash);
+    if (!original) throw new Error("Missing fixture deck");
+    const body = {
+      id: `${original.id}-alias`,
+      commander: original.commander,
+      entries: [...original.entries].reverse(),
+    };
+    aliases.push({ ...body, hash: await semanticHash(body) });
+  }
+  corpus.decks.push(...aliases);
+  corpus.cases[1] = {
+    ...structuredClone(first),
+    id: "deck-alias",
+    seats: first.seats.map((seat, i) => ({ ...seat, deckHash: aliases[i]?.hash })),
+  };
+  return corpus.cases[1];
+}
+
+test("deck aliases and row permutations cannot count identical seeded compositions twice", async () => {
+  const { source, corpus } = await fixture();
+  await addDeckAliases(corpus);
+  expect(corpus.decks).toHaveLength(14);
+  expect(corpus.distinctDecks).toBe(12);
+  await expect(planRegression(corpus, source, "aliases")).rejects.toThrow("identical game inputs");
+});
+
+test("aliases with distinct seeds preserve exact historical revision pins and row order", async () => {
+  const { source, corpus } = await fixture();
+  const changed = await addDeckAliases(corpus);
+  changed.driverSeed = 123456;
+  const plan = await planRegression(corpus, source, "preserved");
+  expect(new Set(plan.corpus.decks.map(deckCompositionKey)).size).toBe(12);
+  expect(plan.corpus.decks).toHaveLength(14);
+  expect(canonicalJson(plan.corpus)).toBe(canonicalJson(corpus));
+  for (const [i, assignment] of plan.assignments.entries()) {
+    const original = corpus.cases[i];
+    if (!original) throw new Error("Missing original case");
+    expect(assignment.gameSeed).toBe(original.gameSeed);
+    expect(assignment.driverSeed).toBe(original.driverSeed);
+    expect(assignment.seats).toEqual(
+      original.seats.map((seat) => {
+        const deck = corpus.decks.find((candidate) => candidate.hash === seat.deckHash);
+        if (!deck) throw new Error("Missing original deck");
+        return { id: seat.id, deck };
+      }),
+    );
+  }
+});
+
+test("seat order and each actual seed distinguish valid regression inputs", async () => {
+  for (const change of ["seat-order", "game-seed", "driver-seed"] as const) {
+    const { source, corpus } = await fixture();
+    const first = corpus.cases[0];
+    if (!first) throw new Error("Missing fixture case");
+    const next = { ...structuredClone(first), id: `changed-${change}` };
+    if (change === "seat-order") next.seats.reverse();
+    if (change === "game-seed") next.gameSeed = 123456;
+    if (change === "driver-seed") next.driverSeed = 123456;
+    corpus.cases[1] = next;
+    expect((await planRegression(corpus, source, "distinct")).assignments).toHaveLength(64);
+  }
+});
+
+async function rejectedBatch(
+  alter: (source: ContentRelease, decks: DeckRevision[]) => void | Promise<void>,
+  message: string,
+) {
+  const { source, corpus } = await fixture();
+  await alter(source, corpus.decks);
+  const directory = await mkdtemp(resolve(tmpdir(), "commander-batch-preflight-"));
+  try {
+    const sourcePath = resolve(directory, "release.json"),
+      decksPath = resolve(directory, "decks.json");
+    await Bun.write(sourcePath, JSON.stringify(source));
+    await Bun.write(decksPath, JSON.stringify(corpus.decks));
+    await expect(
+      runBatch(
+        directory,
+        { id: "preflight", two: 1, four: 0, seed: 1, maxCommands: 1 },
+        sourcePath,
+        decksPath,
+      ),
+    ).rejects.toThrow(message);
+    expect(await Bun.file(resolve(directory, "batches/preflight/assignments.json")).exists()).toBe(
+      false,
+    );
+    expect(await Bun.file(resolve(directory, "batches/preflight/0.sqlite")).exists()).toBe(false);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+}
+
+test("batch rejects a bad common release before declaring per-game attempts", async () => {
+  await rejectedBatch((source) => {
+    source.hash = "f".repeat(64);
+  }, "release hash");
+});
+
+test("batch rejects an incompatible ABI before declaring per-game attempts", async () => {
+  await rejectedBatch(async (source) => {
+    source.processorAbi = "unsupported-engine/1";
+    const { hash: _hash, ...body } = source;
+    source.hash = await semanticHash(body);
+  }, "ABI mismatch");
+});
+
+test("batch authenticates every declared deck even when its first assignment does not use it", async () => {
+  await rejectedBatch((_source, decks) => {
+    const unused = decks[11];
+    if (!unused) throw new Error("Missing unused deck");
+    unused.hash = "e".repeat(64);
+  }, "deck hash");
+});
+
+test("batch admits every declared deck even when its first assignment does not use it", async () => {
+  await rejectedBatch(async (_source, decks) => {
+    const unused = decks[11];
+    if (!unused) throw new Error("Missing unused deck");
+    const land = unused.entries.find((entry) => entry.definition === "land");
+    if (!land) throw new Error("Missing land");
+    land.count = 98;
+    const { hash: _hash, ...body } = unused;
+    unused.hash = await semanticHash(body);
+  }, "exactly 100 cards");
+});
+
+test("batch requires twelve compositions rather than twelve renamed revisions", async () => {
+  await rejectedBatch(async (_source, decks) => {
+    const first = decks[0];
+    if (!first) throw new Error("Missing fixture deck");
+    for (const [i, deck] of decks.entries()) {
+      const body = {
+        id: deck.id,
+        commander: first.commander,
+        entries: i % 2 ? [...first.entries].reverse() : first.entries,
+      };
+      decks[i] = { ...body, hash: await semanticHash(body) };
+    }
+  }, "twelve distinct deck compositions");
 });

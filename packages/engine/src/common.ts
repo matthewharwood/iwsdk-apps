@@ -110,6 +110,7 @@ export function request(
     context: kind,
     count: 0,
     cards: [],
+    triggers: [],
     players: [],
     manaSources: [],
     cost: null,
@@ -130,10 +131,20 @@ export function removeFromLists(state: RulesState, id: string): void {
   for (const seat of state.players)
     for (const zone of ["library", "hand", "graveyard"] as const)
       seat[zone] = seat[zone].filter((entry) => entry !== id);
-  state.stack = state.stack.filter((entry) => entry !== id);
+  state.stack = state.stack.filter((entry) => entry.kind !== "spell" || entry.objectId !== id);
 }
 /** A zone transition creates a new game object; physical lineage/commander designation survive. */
-export function move(state: RulesState, id: string, destination: Zone, cause: string): GameObject {
+export function move(
+  state: RulesState,
+  id: string,
+  destination: Zone,
+  cause: string,
+  controller?: string,
+): GameObject {
+  requireRule(
+    controller === undefined || destination === "battlefield",
+    "An entry controller applies only on the battlefield",
+  );
   const before = object(state, id);
   const lastKnown = { ...before, counters: { ...before.counters } };
   removeFromLists(state, id);
@@ -145,7 +156,7 @@ export function move(state: RulesState, id: string, destination: Zone, cause: st
     generation,
     definition: before.definition,
     owner: before.owner,
-    controller: before.owner,
+    controller: controller ?? before.owner,
     zone: destination,
     tapped: false,
     controlledSinceTurn: state.turn,
@@ -156,7 +167,7 @@ export function move(state: RulesState, id: string, destination: Zone, cause: st
     commanderMoveOffered: false,
   };
   state.objects[after.id] = after;
-  if (destination === "stack") state.stack.push(after.id);
+  if (destination === "stack") state.stack.push({ kind: "spell", objectId: after.id });
   if (["library", "hand", "graveyard"].includes(destination))
     player(state, after.owner)[destination as "library" | "hand" | "graveyard"].push(after.id);
   const hidden =

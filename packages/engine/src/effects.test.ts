@@ -371,8 +371,8 @@ function announce(f: Fixture, actor: string, key: SpellKey): string {
   givePriority(f.state, f.release, actor);
   answer(f, { kind: "cast", card: id });
   const stackId = f.state.stack.at(-1);
-  if (!stackId) throw new Error("Spell was not put on the stack");
-  return stackId;
+  if (stackId?.kind !== "spell") throw new Error("Spell was not put on the stack");
+  return stackId.objectId;
 }
 function cast(f: Fixture, actor: string, key: SpellKey, target?: string) {
   const id = announce(f, actor, key);

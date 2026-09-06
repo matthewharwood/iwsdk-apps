@@ -5,6 +5,7 @@ import {
   MatchManifest,
   type Response,
   type RulesState,
+  SelfEntryProgram,
   SpellProgram,
 } from "@iwsdk-apps/contracts";
 import {
@@ -48,6 +49,20 @@ export function admitDeck(
   const nameCounts = new Map<string, number>();
   for (const entry of deck.entries) {
     const current = definition(release, entry.definition);
+    if (
+      current.triggerPrograms &&
+      (!current.types.includes("Creature") ||
+        current.types.some((type) => !["Creature", "Artifact", "Enchantment"].includes(type)) ||
+        current.manaCost === null ||
+        current.power === null ||
+        current.toughness === null ||
+        current.triggerPrograms.length !== 1 ||
+        !current.triggerPrograms.every((program) => SelfEntryProgram.safeParse(program).success))
+    )
+      throw new RulesError(
+        "UnsupportedMechanic",
+        "Only reviewed mandatory creature self-entry programs are admitted",
+      );
     requireRule(
       current.colorIdentity.every((color) => commander.colorIdentity.includes(color)),
       `Card outside commander color identity: ${current.name}`,
@@ -124,6 +139,9 @@ export function createMatch(input: unknown, release: ExecutionRegistry): RulesSt
     })),
     objects: {},
     stack: [],
+    abilities: {},
+    pendingTriggers: [],
+    triggerPlacement: null,
     chanceState: manifest.gameSeed,
     chanceOperations: 0,
     combat: emptyCombat(),

@@ -1,0 +1,264 @@
+{
+  "schema": "etb-sequence-binding-research-review/1",
+  "scope": "Four complete ordinary creature bodies; proposed ordered IR only",
+  "sourceResearchHash": "4d20c0e485a8638eade131447773b079c118f0f6cb22bc3c1ac0854d6832edb0",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "reviewedRecords": 4,
+  "records": [
+    {
+      "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+      "name": "Cloudblazer",
+      "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 37464,
+      "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+      "completeOracleText": "Flying\nWhen this creature enters, you gain 2 life and draw two cards.",
+      "typeLine": "Creature — Human Scout",
+      "manaCost": "{3}{W}{U}",
+      "manaValue": 5,
+      "power": "2",
+      "toughness": "2",
+      "otherAbilities": {
+        "keywords": ["flying"],
+        "manaAbilities": []
+      },
+      "expectedTrigger": {
+        "schema": "commander-trigger/research-sequence-1",
+        "id": "self-entry-0",
+        "trigger": {
+          "kind": "self-enters-battlefield",
+          "view": "post-committed-event",
+          "placementClass": "ordinary"
+        },
+        "choice": {
+          "kind": "mandatory"
+        },
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 2,
+            "recipient": "trigger-controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 2,
+            "recipient": "trigger-controller"
+          }
+        ]
+      },
+      "review": "complete source tuple and written instruction order manually inspected",
+      "externalDefinitionDependencies": [],
+      "implemented": false,
+      "executed": false
+    },
+    {
+      "identity": "92dfeeb2-1117-422b-87ea-08a589f1134b",
+      "name": "Elite Guardmage",
+      "sourceVersion": "ccbca7002c12892cdade3f9eac050b9d5635a2abccabd911775b503d8b3158f5",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 22091,
+      "completeBodyHash": "1a71f9ea7f8dacfc38636ea20a81051aa10f696579e498b5a5249a21645816f2",
+      "completeOracleText": "Flying\nWhen this creature enters, you gain 3 life and draw a card.",
+      "typeLine": "Creature — Human Wizard",
+      "manaCost": "{2}{W}{U}",
+      "manaValue": 4,
+      "power": "2",
+      "toughness": "3",
+      "otherAbilities": {
+        "keywords": ["flying"],
+        "manaAbilities": []
+      },
+      "expectedTrigger": {
+        "schema": "commander-trigger/research-sequence-1",
+        "id": "self-entry-0",
+        "trigger": {
+          "kind": "self-enters-battlefield",
+          "view": "post-committed-event",
+          "placementClass": "ordinary"
+        },
+        "choice": {
+          "kind": "mandatory"
+        },
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 3,
+            "recipient": "trigger-controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "trigger-controller"
+          }
+        ]
+      },
+      "review": "complete source tuple and written instruction order manually inspected",
+      "externalDefinitionDependencies": [],
+      "implemented": false,
+      "executed": false
+    },
+    {
+      "identity": "d646e42b-5635-4798-b633-29c093b66a55",
+      "name": "Inspiring Overseer",
+      "sourceVersion": "62a754ae153c38533aa67eaac5c4790213d59567d3794010e817e16be4991b4b",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 32274,
+      "completeBodyHash": "797d8ce54bc4af2c11c223744a287e4772324cd0ffb2509a39ce493067161b7f",
+      "completeOracleText": "Flying\nWhen this creature enters, you gain 1 life and draw a card.",
+      "typeLine": "Creature — Angel Cleric",
+      "manaCost": "{2}{W}",
+      "manaValue": 3,
+      "power": "2",
+      "toughness": "1",
+      "otherAbilities": {
+        "keywords": ["flying"],
+        "manaAbilities": []
+      },
+      "expectedTrigger": {
+        "schema": "commander-trigger/research-sequence-1",
+        "id": "self-entry-0",
+        "trigger": {
+          "kind": "self-enters-battlefield",
+          "view": "post-committed-event",
+          "placementClass": "ordinary"
+        },
+        "choice": {
+          "kind": "mandatory"
+        },
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 1,
+            "recipient": "trigger-controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "trigger-controller"
+          }
+        ]
+      },
+      "review": "complete source tuple and written instruction order manually inspected",
+      "externalDefinitionDependencies": [],
+      "implemented": false,
+      "executed": false
+    },
+    {
+      "identity": "a89b0fd5-84b2-487c-8b03-e78d97276fd3",
+      "name": "Priest of Ancient Lore",
+      "sourceVersion": "dcec03ce58fe31bdf5aae97fffc6739562254aa2fa274cdb639c88a7442a7ba3",
+      "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+      "sourceOrdinal": 25348,
+      "completeBodyHash": "f2a379cdfd37db7edb7f142ed5686e28653b8d38de2eea34b7c5a1a77a7e98cd",
+      "completeOracleText": "When this creature enters, you gain 1 life and draw a card.",
+      "typeLine": "Creature — Dwarf Cleric",
+      "manaCost": "{2}{W}",
+      "manaValue": 3,
+      "power": "2",
+      "toughness": "1",
+      "otherAbilities": {
+        "keywords": [],
+        "manaAbilities": []
+      },
+      "expectedTrigger": {
+        "schema": "commander-trigger/research-sequence-1",
+        "id": "self-entry-0",
+        "trigger": {
+          "kind": "self-enters-battlefield",
+          "view": "post-committed-event",
+          "placementClass": "ordinary"
+        },
+        "choice": {
+          "kind": "mandatory"
+        },
+        "effects": [
+          {
+            "kind": "gain-life",
+            "amount": 1,
+            "recipient": "trigger-controller"
+          },
+          {
+            "kind": "draw",
+            "amount": 1,
+            "recipient": "trigger-controller"
+          }
+        ]
+      },
+      "review": "complete source tuple and written instruction order manually inspected",
+      "externalDefinitionDependencies": [],
+      "implemented": false,
+      "executed": false
+    }
+  ],
+  "authentication": {
+    "schema": "etb-sequence-source-authentication/1",
+    "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+    "researchHash": "4d20c0e485a8638eade131447773b079c118f0f6cb22bc3c1ac0854d6832edb0",
+    "archiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+    "archiveFullyHashed": true,
+    "records": [
+      {
+        "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+        "name": "Cloudblazer",
+        "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+        "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+        "sourceOrdinal": 37464,
+        "rawRecordHash": "bcb26b69115ff2e44c7e9bfbdf9675dfe65238f540a280478d8723a60c0020f2",
+        "byteStart": 196752173,
+        "byteEnd": 196757136,
+        "archivePayloadMatchesCatalog": true,
+        "fullTupleMatchesResearch": true,
+        "rulings": []
+      },
+      {
+        "identity": "92dfeeb2-1117-422b-87ea-08a589f1134b",
+        "name": "Elite Guardmage",
+        "sourceVersion": "ccbca7002c12892cdade3f9eac050b9d5635a2abccabd911775b503d8b3158f5",
+        "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+        "sourceOrdinal": 22091,
+        "rawRecordHash": "a9c93dffc64f50d125a39afea83a292f49ae4d202bf8b8a1eb2c8bc113b62ad9",
+        "byteStart": 116062848,
+        "byteEnd": 116067991,
+        "archivePayloadMatchesCatalog": true,
+        "fullTupleMatchesResearch": true,
+        "rulings": []
+      },
+      {
+        "identity": "d646e42b-5635-4798-b633-29c093b66a55",
+        "name": "Inspiring Overseer",
+        "sourceVersion": "62a754ae153c38533aa67eaac5c4790213d59567d3794010e817e16be4991b4b",
+        "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+        "sourceOrdinal": 32274,
+        "rawRecordHash": "29b03569c6a16677845fc518d98ab7a265bb42116e2747e82f586d2a5c937024",
+        "byteStart": 169533637,
+        "byteEnd": 169538482,
+        "archivePayloadMatchesCatalog": true,
+        "fullTupleMatchesResearch": true,
+        "rulings": []
+      },
+      {
+        "identity": "a89b0fd5-84b2-487c-8b03-e78d97276fd3",
+        "name": "Priest of Ancient Lore",
+        "sourceVersion": "dcec03ce58fe31bdf5aae97fffc6739562254aa2fa274cdb639c88a7442a7ba3",
+        "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+        "sourceOrdinal": 25348,
+        "rawRecordHash": "4bc9f4aaf5728657f5f86df7d01f9d24a07bd45568f41119dcbd3664b0b69fed",
+        "byteStart": 133237353,
+        "byteEnd": 133242393,
+        "archivePayloadMatchesCatalog": true,
+        "fullTupleMatchesResearch": true,
+        "rulings": []
+      }
+    ],
+    "executedGameScenarios": 0,
+    "semanticCertification": false,
+    "hash": "243db5d3864bc42ea332d5aabf0e30a67fba272868e1b04069c1524303d147ac"
+  },
+  "catalogRulingsForTheseIdentities": 0,
+  "sourceReviewDoesNotCertifyInteractions": true,
+  "executedTests": 0,
+  "executedGames": 0,
+  "fullSemanticCoverage": false,
+  "hash": "9a45e3b6e0071ff23ff9f60f3abab9fcc469d29f1efac72ac4b1a47b29edde62"
+}

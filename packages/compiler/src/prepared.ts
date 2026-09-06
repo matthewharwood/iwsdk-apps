@@ -1,4 +1,8 @@
-import { RECIPE_REGISTRY, SPELL_FAMILY_REGISTRY } from "@iwsdk-apps/card-programs";
+import {
+  RECIPE_REGISTRY,
+  SELF_ENTRY_REGISTRY,
+  SPELL_FAMILY_REGISTRY,
+} from "@iwsdk-apps/card-programs";
 import {
   type CardDefinition,
   ContentRelease,
@@ -92,6 +96,7 @@ async function artifactFor(
     recipeRegistryHash: await semanticHash({
       recipes: RECIPE_REGISTRY,
       spellFamilies: SPELL_FAMILY_REGISTRY,
+      selfEntryTriggers: SELF_ENTRY_REGISTRY,
     }),
     deckHashes,
     closure: plan.closure,

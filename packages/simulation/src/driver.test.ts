@@ -16,6 +16,7 @@ function damageObservation(): PlayerObservation {
     players: [],
     objects: [],
     stack: [],
+    abilities: [],
     combat: {
       attacks: [],
       blocks: [],
@@ -33,6 +34,7 @@ function damageObservation(): PlayerObservation {
       context: "",
       count: 0,
       cards: [],
+      triggers: [],
       players: [],
       manaSources: [],
       cost: null,
@@ -49,6 +51,19 @@ function damageObservation(): PlayerObservation {
   };
 }
 describe("observation-only driver", () => {
+  test("trigger order is an explicit deterministic permutation over the entitled IDs", async () => {
+    const observation = damageObservation();
+    if (!observation.decision) throw new Error("Missing fixture decision");
+    observation.decision.kind = "trigger-order";
+    observation.decision.triggers = ["trigger-b", "trigger-a"];
+    observation.decision.count = 2;
+    observation.decision.damageDomain = [];
+    expect(await heuristicDriver(observation, 123)).toEqual({
+      kind: "trigger-order",
+      triggers: ["trigger-a", "trigger-b"],
+    });
+    expect(observation.decision.triggers).toEqual(["trigger-b", "trigger-a"]);
+  });
   test("starting-player proposal chooses the owned seat through an explicit ordinary response", async () => {
     const observation = damageObservation();
     observation.revision = 0;

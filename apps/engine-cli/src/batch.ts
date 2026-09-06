@@ -1,8 +1,10 @@
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { verifySourceRelease } from "@iwsdk-apps/compiler/prepared";
 import {
   CHANCE_VERSION,
   ContentRelease,
+  canonicalJson,
   DeckRevision,
   ENGINE_VERSION,
   MatchManifest,
@@ -10,11 +12,22 @@ import {
   SERIALIZER_VERSION,
   semanticHash,
 } from "@iwsdk-apps/contracts";
+import { admitDeck } from "@iwsdk-apps/engine";
 import { DRIVER_VERSION, runGame } from "@iwsdk-apps/simulation";
 import { Coordinator, replayMatch } from "@iwsdk-apps/storage";
 import { openNativeRepository } from "@iwsdk-apps/storage/native";
 import { z } from "zod";
 import { archiveBuild, writeEvidence } from "./evidence";
+
+/** Diversity accounting only; preserve original IDs and row order in execution/replay pins. */
+export function deckCompositionKey(deck: DeckRevision): string {
+  return canonicalJson({
+    commander: deck.commander,
+    entries: [...deck.entries].sort((a, b) =>
+      a.definition < b.definition ? -1 : a.definition > b.definition ? 1 : 0,
+    ),
+  });
+}
 
 /** Predeclare all attempts, retain failures, and replay outcomes separately from game counts. */
 export async function runBatch(
@@ -28,6 +41,15 @@ export async function runBatch(
     .array(DeckRevision)
     .min(12)
     .parse(await Bun.file(decksPath).json());
+  await verifySourceRelease(content);
+  if (content.processorAbi !== ENGINE_VERSION) throw new Error("Batch release ABI mismatch");
+  for (const deck of decks) {
+    const { hash, ...body } = deck;
+    if ((await semanticHash(body)) !== hash) throw new Error("Batch deck hash is invalid");
+    admitDeck(deck, content);
+  }
+  if (new Set(decks.map(deckCompositionKey)).size < 12)
+    throw new Error("Batch requires at least twelve distinct deck compositions");
   const root = resolve(directory, "batches", options.id);
   await mkdir(root, { recursive: false });
   const buildHash = await archiveBuild(directory);

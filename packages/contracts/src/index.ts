@@ -1,7 +1,10 @@
 import { z } from "zod";
+import { SelfEntryProgram } from "./triggers";
+
+export { SelfEntryProgram } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.6.0";
+export const ENGINE_VERSION = "commander-engine/0.7.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -122,6 +125,7 @@ export const CardDefinition = z.strictObject({
   obligations: z.array(Id),
   implementationRevision: Id,
   spellProgram: SpellProgram.optional(),
+  triggerPrograms: z.array(SelfEntryProgram).min(1).max(1).optional(),
 });
 export type CardDefinition = z.infer<typeof CardDefinition>;
 export const ContentRelease = z.strictObject({
@@ -196,6 +200,27 @@ export const GameObject = z.strictObject({
   spellState: z.strictObject({ target: Id.nullable() }).optional(),
 });
 export type GameObject = z.infer<typeof GameObject>;
+/** Noncard ability context survives changes to or removal of its physical source. */
+export const TriggeredAbility = z.strictObject({
+  id: Id,
+  source: GameObject,
+  sourceVersion: Digest,
+  controller: Id,
+  program: SelfEntryProgram,
+  eventIndex: Natural,
+  occurrenceOrdinal: Natural,
+});
+export type TriggeredAbility = z.infer<typeof TriggeredAbility>;
+export const StackEntry = z.discriminatedUnion("kind", [
+  z.strictObject({ kind: z.literal("spell"), objectId: Id }),
+  z.strictObject({ kind: z.literal("triggered-ability"), triggerId: Id }),
+]);
+export type StackEntry = z.infer<typeof StackEntry>;
+export const TriggerPlacement = z.strictObject({
+  phase: z.enum(["ordinary", "triggered-by-trigger"]),
+  cohort: z.array(Id),
+  remainingPlayers: z.array(Id),
+});
 export const PlayerState = z.strictObject({
   id: Id,
   life: z.number().int(),
@@ -235,6 +260,7 @@ export const PaymentSource = z.strictObject({ object: Id, color: ManaColor });
 export const Attack = z.strictObject({ attacker: Id, defender: Id });
 export const Block = z.strictObject({ blocker: Id, attacker: Id });
 export const Response = z.discriminatedUnion("kind", [
+  z.strictObject({ kind: z.literal("trigger-order"), triggers: z.array(Id) }),
   z.strictObject({ kind: z.literal("starting-player"), player: Id }),
   z.strictObject({ kind: z.literal("mulligan"), keep: z.boolean() }),
   z.strictObject({ kind: z.literal("bottom"), cards: z.array(Id).max(7) }),
@@ -274,6 +300,7 @@ export const Decision = z.strictObject({
   actor: Id,
   revision: Natural,
   kind: z.enum([
+    "trigger-order",
     "starting-player",
     "mulligan",
     "bottom",
@@ -289,6 +316,7 @@ export const Decision = z.strictObject({
   context: z.string(),
   count: Natural,
   cards: z.array(Id),
+  triggers: z.array(Id),
   players: z.array(Id),
   manaSources: z.array(z.strictObject({ object: Id, colors: z.array(ManaColor) })),
   cost: Cost.nullable(),
@@ -356,7 +384,10 @@ export const RulesState = z.strictObject({
   cleanupPriority: z.boolean(),
   players: z.array(PlayerState),
   objects: z.record(Id, GameObject),
-  stack: z.array(Id),
+  stack: z.array(StackEntry),
+  abilities: z.record(Id, TriggeredAbility),
+  pendingTriggers: z.array(Id),
+  triggerPlacement: TriggerPlacement.nullable(),
   chanceState: z.number().int().min(1).max(0xffffffff),
   chanceOperations: Natural,
   combat: CombatState,
@@ -409,7 +440,8 @@ export type PlayerObservation = {
   objects: (GameObject & { card: CardDefinition })[];
   decision: Decision | null;
   combat: RulesState["combat"];
-  stack: string[];
+  stack: StackEntry[];
+  abilities: (TriggeredAbility & { sourceCard: CardDefinition })[];
 };
 
 /** Canonical semantic encoding. Undefined/nonfinite/cyclic values must never become silent nulls. */

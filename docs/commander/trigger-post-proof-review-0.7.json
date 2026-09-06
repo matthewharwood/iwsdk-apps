@@ -1,0 +1,67 @@
+{
+  "schema": "commander-trigger-post-proof-review/1",
+  "engineVersion": "commander-engine/0.7.0",
+  "reviewer": "skills_audit independent agent",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "sourceReferences": [
+    "113.7a",
+    "603.2",
+    "603.3a",
+    "603.3b",
+    "603.6a",
+    "704.3",
+    "704.4",
+    "800.4a",
+    "800.4d",
+    "800.4j"
+  ],
+  "browserProof": {
+    "path": ".commander/browser-proof/2026-09-06T20-59-30-848Z-7d77f2cb/evidence.json",
+    "status": "passed",
+    "sourceHash": "1af7e9ed48cbe66a9c0cd35626e7ba999a715c47264aeea82128df08436bd714",
+    "representsExactFinalSource": false
+  },
+  "postProofCapturedSourceHash": "fd22a6b9bf6bfbca08361ebc45d1aae9b92126a4189beb3ed88f1d5a804bc006",
+  "differences": [
+    {
+      "path": "packages/engine/src/invariants.ts",
+      "beforeSha256": "ec974a6ef1b42d18c82149d2b9aaebb94011aee7e7f1f6d06a5a2fb457da6790",
+      "afterSha256": "323b995e4a20618aabb0fc7f1083b5b409aa3cc32e3c54fd6640e91d4d191f04"
+    }
+  ],
+  "findings": [
+    {
+      "kind": "captured-controller-invariant",
+      "status": "fixed",
+      "reproduction": "A contradictory captured controller passed assertInvariants and could redirect the constant life gain in a constructed state. The immutable entry snapshot and ability controller must agree."
+    },
+    {
+      "kind": "apnap-continuation-invariant",
+      "status": "fixed",
+      "reproduction": "A reordered APNAP continuation passed assertInvariants and could place constructed waiting cohorts in the wrong order. The continuation must be the living APNAP suffix and include every remaining cohort controller."
+    }
+  ],
+  "acceptedStateAlgorithmChanges": false,
+  "storageImportBypassDemonstrated": false,
+  "replayDefense": "verifyArchive recreates the initial state and every command boundary; a recomputed modified checkpoint is still rejected by replay equality.",
+  "newTests": {
+    "path": "packages/engine/src/triggers.test.ts",
+    "fileSha256": "c4b57065bb58d99a77addf4fcff882c0155b842aa0206a6fd6cecb5c9f60ea26",
+    "count": 4
+  },
+  "validation": {
+    "suite": "engine/storage/simulation",
+    "tests": 128,
+    "assertions": 1591,
+    "failures": 0,
+    "junit": ".commander/evidence/trigger-post-proof-0.7.junit.xml",
+    "junitSha256": "b2d6b5ebf877aabb36e3b3631c39f6600d643b792ddb8e15d196fe05703375c5",
+    "engineTypecheck": "passed",
+    "biome": "passed",
+    "eslint": "passed"
+  },
+  "newBrowserRun": false,
+  "newFullGames": 0,
+  "wholeScenarioCertification": false,
+  "scope": "Bounded review of the admitted mandatory targetless constant draw/life self-entry slice. Stronger malformed-state rejection only. No added card abilities, trigger-on-trigger, optional choices, continuous effects or control-history claims."
+}

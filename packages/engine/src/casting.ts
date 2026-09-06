@@ -298,8 +298,13 @@ export function payForCast(
   hit(state, `card:${spell.definition}:cast`);
 }
 export function resolveTop(state: RulesState, release: ExecutionRegistry): void {
-  const id = state.stack.at(-1);
-  if (!id) throw new RulesError("Invariant", "No spell to resolve");
+  const top = state.stack.at(-1);
+  if (!top) throw new RulesError("Invariant", "No stack object to resolve");
+  if (top.kind === "triggered-ability") {
+    resolveTriggeredAbility(state);
+    return;
+  }
+  const id = top.objectId;
   const current = card(state, release, id);
   if (
     (current.types.includes("Instant") || current.types.includes("Sorcery")) &&
@@ -313,8 +318,18 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): void 
       "UnsupportedMechanic",
       `Spell program is not implemented: ${current.name}`,
     );
-  const entered = move(state, id, "battlefield", "resolve permanent spell");
+  const controller = object(state, id).controller;
+  const enteredId = enterBattlefield(
+    state,
+    release,
+    [{ objectId: id, controller }],
+    "resolve permanent spell",
+  )[0];
+  if (!enteredId) throw new RulesError("Invariant", "Permanent spell failed to enter");
+  const entered = object(state, enteredId);
   emit(state, "PermanentSpellResolved", { object: entered.id, definition: entered.definition });
   hit(state, "rule:608.3");
   hit(state, `card:${entered.definition}:resolve`);
 }
+
+import { enterBattlefield, resolveTriggeredAbility } from "./triggers";

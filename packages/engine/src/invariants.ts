@@ -1,4 +1,4 @@
-import type { ExecutionRegistry, RulesState } from "@iwsdk-apps/contracts";
+import { canonicalJson, type ExecutionRegistry, type RulesState } from "@iwsdk-apps/contracts";
 import { assertRegistryPin, definition, RulesError } from "./common";
 
 function invariant(condition: unknown, message: string): asserts condition {
@@ -16,6 +16,9 @@ function assertUndealtSetup(state: RulesState, seats: ReadonlySet<string>): void
   invariant(
     Object.keys(state.objects).length === 0 &&
       state.stack.length === 0 &&
+      Object.keys(state.abilities).length === 0 &&
+      state.pendingTriggers.length === 0 &&
+      state.triggerPlacement === null &&
       state.frames.length === 0,
     "Cards or continuations exist before starting-player selection",
   );
@@ -38,6 +41,90 @@ function assertUndealtSetup(state: RulesState, seats: ReadonlySet<string>): void
       state.decision.players.every((id) => seats.has(id)),
     "Starting-player decision does not contain every seat exactly once",
   );
+}
+function assertTriggers(state: RulesState, release: ExecutionRegistry): void {
+  const occurrences = [
+    ...state.pendingTriggers,
+    ...(state.triggerPlacement?.cohort ?? []),
+    ...state.stack.flatMap((entry) =>
+      entry.kind === "triggered-ability" ? [entry.triggerId] : [],
+    ),
+  ];
+  invariant(
+    new Set(occurrences).size === occurrences.length,
+    "Trigger instance appears in multiple locations",
+  );
+  invariant(
+    occurrences.length === Object.keys(state.abilities).length &&
+      occurrences.every((id) => state.abilities[id]),
+    "Captured trigger lost its queue or stack location",
+  );
+  for (const [id, ability] of Object.entries(state.abilities)) {
+    invariant(
+      id ===
+        `${state.manifest.id}:trigger:${ability.eventIndex}:${ability.occurrenceOrdinal}:${ability.program.id}` &&
+        ability.source.zone === "battlefield",
+      "Captured trigger event identity or source zone mismatch",
+    );
+    const source = definition(release, ability.source.definition);
+    invariant(
+      id === ability.id &&
+        ability.source.id === `${ability.source.lineage}@${ability.source.generation}`,
+      "Captured trigger or source identity mismatch",
+    );
+    invariant(
+      source.sourceVersion === ability.sourceVersion &&
+        source.triggerPrograms?.some(
+          (program) => canonicalJson(program) === canonicalJson(ability.program),
+        ),
+      "Captured trigger program differs from its pinned source",
+    );
+    invariant(
+      state.players.some((seat) => seat.id === ability.controller && !seat.lost),
+      "Captured trigger belongs to a departed or missing player",
+    );
+    invariant(
+      ability.controller === ability.source.controller,
+      "Captured trigger controller differs from its entry snapshot",
+    );
+  }
+  if (state.triggerPlacement) {
+    invariant(
+      state.triggerPlacement.phase === "ordinary" && state.decision?.kind === "trigger-order",
+      "Trigger placement lacks its serializable ordering decision",
+    );
+    const actor = state.triggerPlacement.remainingPlayers[0];
+    invariant(actor !== undefined, "Trigger placement has no remaining APNAP controller");
+    const activeIndex = state.players.findIndex((seat) => seat.id === state.activePlayer);
+    const apnap = [...state.players.slice(activeIndex), ...state.players.slice(0, activeIndex)]
+      .filter((seat) => !seat.lost)
+      .map((seat) => seat.id);
+    const actorIndex = apnap.indexOf(actor);
+    invariant(
+      actorIndex >= 0 &&
+        canonicalJson(state.triggerPlacement.remainingPlayers) ===
+          canonicalJson(apnap.slice(actorIndex)) &&
+        state.triggerPlacement.cohort.every((id) =>
+          state.triggerPlacement?.remainingPlayers.includes(state.abilities[id]?.controller ?? ""),
+        ),
+      "Trigger placement continuation differs from living APNAP order",
+    );
+    const owned = state.triggerPlacement.cohort.filter(
+      (id) => state.abilities[id]?.controller === actor,
+    );
+    invariant(
+      state.decision.actor === actor &&
+        owned.length > 1 &&
+        state.decision.triggers.length === owned.length &&
+        new Set(state.decision.triggers).size === owned.length &&
+        state.decision.triggers.every((id) => owned.includes(id)),
+      "Trigger ordering decision differs from its owned cohort",
+    );
+  } else
+    invariant(
+      state.decision?.kind !== "trigger-order",
+      "Trigger ordering decision has no continuation",
+    );
 }
 export function assertInvariants(state: RulesState, release: ExecutionRegistry): void {
   assertRegistryPin(state.manifest, release);
@@ -86,7 +173,8 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
       "Object missing from its ordered zone",
     );
     invariant(
-      entry.zone !== "stack" || state.stack.includes(entry.id),
+      entry.zone !== "stack" ||
+        state.stack.some((item) => item.kind === "spell" && item.objectId === entry.id),
       "Stack object missing from stack order",
     );
     invariant(
@@ -108,10 +196,16 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
     }
   }
   invariant(
-    new Set(state.stack).size === state.stack.length &&
-      state.stack.every((id) => state.objects[id]?.zone === "stack"),
+    new Set(state.stack.map((entry) => (entry.kind === "spell" ? entry.objectId : entry.triggerId)))
+      .size === state.stack.length &&
+      state.stack.every((entry) =>
+        entry.kind === "spell"
+          ? state.objects[entry.objectId]?.zone === "stack"
+          : state.abilities[entry.triggerId],
+      ),
     "Invalid stack order",
   );
+  assertTriggers(state, release);
   for (const seat of state.players.filter((candidate) => !candidate.lost)) {
     invariant(
       Object.values(state.objects).filter((entry) => entry.owner === seat.id).length === 100,

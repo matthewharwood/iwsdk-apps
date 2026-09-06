@@ -1,0 +1,1717 @@
+{
+  "schema": "etb-sequence-scenario-draft/1",
+  "sourceResearchHash": "4d20c0e485a8638eade131447773b079c118f0f6cb22bc3c1ac0854d6832edb0",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "scenarioCount": 33,
+  "scenarios": [
+    {
+      "id": "SEQ01",
+      "group": "written-order",
+      "setup": "A at 40 life resolves Cloudblazer entry ability with library top cards C1,C2 and no modifiers.",
+      "expected": "One life-gain instruction changes A to 42; then C1 and C2 are drawn individually in library order. There is one noncard ability resolution, not two separately respondable effects.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.1",
+          "text_hash": "f13751a2eb57bc468343ca0d2e276408961644440eed6ad68544d0f777a52a2c",
+          "start_line": 1142,
+          "end_line": 1143,
+          "byte_start": 122324,
+          "byte_end": 122555
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.2",
+          "text_hash": "58ad14a184258a360f52958eae4e728df9ae2ab914262bed3f3cf1f3190674b3",
+          "start_line": 1144,
+          "end_line": 1145,
+          "byte_start": 122555,
+          "byte_end": 122708
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2e",
+          "text_hash": "6ef3554aed30e8095ab71f3ff18ee1114ceb6590ff8b8f4f2714255261b27656",
+          "start_line": 946,
+          "end_line": 947,
+          "byte_start": 95763,
+          "byte_end": 96051
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "source-bound authored fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ02",
+      "group": "written-order",
+      "setup": "A at 40 life resolves Elite Guardmage entry ability with card C1 on top.",
+      "expected": "A gains 3 life, then draws C1; the creature retains flying. Both instructions use the captured trigger controller.",
+      "sourceCards": [
+        {
+          "identity": "92dfeeb2-1117-422b-87ea-08a589f1134b",
+          "name": "Elite Guardmage",
+          "sourceVersion": "ccbca7002c12892cdade3f9eac050b9d5635a2abccabd911775b503d8b3158f5",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 22091,
+          "completeBodyHash": "1a71f9ea7f8dacfc38636ea20a81051aa10f696579e498b5a5249a21645816f2",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "119.3",
+          "text_hash": "7845c16bf057f04aca5cbb168693f56e25912a39eeff32bebea4bcd31bdceb6b",
+          "start_line": 1065,
+          "end_line": 1066,
+          "byte_start": 110311,
+          "byte_end": 110429
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.1",
+          "text_hash": "f13751a2eb57bc468343ca0d2e276408961644440eed6ad68544d0f777a52a2c",
+          "start_line": 1142,
+          "end_line": 1143,
+          "byte_start": 122324,
+          "byte_end": 122555
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "109.5",
+          "text_hash": "3dc856c9f1cc75eefd4292df1d73be1d5fff0384d667c22c4b9279a555c06145",
+          "start_line": 610,
+          "end_line": 611,
+          "byte_start": 52326,
+          "byte_end": 52908
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        }
+      ],
+      "fixtureKind": "source-bound authored fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ03",
+      "group": "written-order",
+      "setup": "A at 40 life resolves Inspiring Overseer entry ability with card C1 on top.",
+      "expected": "A gains 1 life, then draws C1. The definition also retains its complete flying keyword.",
+      "sourceCards": [
+        {
+          "identity": "d646e42b-5635-4798-b633-29c093b66a55",
+          "name": "Inspiring Overseer",
+          "sourceVersion": "62a754ae153c38533aa67eaac5c4790213d59567d3794010e817e16be4991b4b",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 32274,
+          "completeBodyHash": "797d8ce54bc4af2c11c223744a287e4772324cd0ffb2509a39ce493067161b7f",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "119.3",
+          "text_hash": "7845c16bf057f04aca5cbb168693f56e25912a39eeff32bebea4bcd31bdceb6b",
+          "start_line": 1065,
+          "end_line": 1066,
+          "byte_start": 110311,
+          "byte_end": 110429
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.1",
+          "text_hash": "f13751a2eb57bc468343ca0d2e276408961644440eed6ad68544d0f777a52a2c",
+          "start_line": 1142,
+          "end_line": 1143,
+          "byte_start": 122324,
+          "byte_end": 122555
+        }
+      ],
+      "fixtureKind": "source-bound authored fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ04",
+      "group": "whole-body-binding",
+      "setup": "Construct Priest of Ancient Lore from its reviewed source tuple and resolve its entry ability.",
+      "expected": "Use gain 1 life then draw 1 with no flying ability. Its program may share the effect sequence with Inspiring Overseer while retaining a distinct identity/source version and different keyword set.",
+      "sourceCards": [
+        {
+          "identity": "a89b0fd5-84b2-487c-8b03-e78d97276fd3",
+          "name": "Priest of Ancient Lore",
+          "sourceVersion": "dcec03ce58fe31bdf5aae97fffc6739562254aa2fa274cdb639c88a7442a7ba3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 25348,
+          "completeBodyHash": "f2a379cdfd37db7edb7f142ed5686e28653b8d38de2eea34b7c5a1a77a7e98cd",
+          "disposition": "ordered-sequence-research-candidate"
+        },
+        {
+          "identity": "d646e42b-5635-4798-b633-29c093b66a55",
+          "name": "Inspiring Overseer",
+          "sourceVersion": "62a754ae153c38533aa67eaac5c4790213d59567d3794010e817e16be4991b4b",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 32274,
+          "completeBodyHash": "797d8ce54bc4af2c11c223744a287e4772324cd0ffb2509a39ce493067161b7f",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "119.3",
+          "text_hash": "7845c16bf057f04aca5cbb168693f56e25912a39eeff32bebea4bcd31bdceb6b",
+          "start_line": 1065,
+          "end_line": 1066,
+          "byte_start": 110311,
+          "byte_end": 110429
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.1",
+          "text_hash": "f13751a2eb57bc468343ca0d2e276408961644440eed6ad68544d0f777a52a2c",
+          "start_line": 1142,
+          "end_line": 1143,
+          "byte_start": 122324,
+          "byte_end": 122555
+        }
+      ],
+      "fixtureKind": "source-bound authored fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ05",
+      "group": "source-independence",
+      "setup": "A Cloudblazer ability is on the stack; its source leaves before that ability resolves.",
+      "expected": "The same captured ability remains; A gains 2 life then draws 2. The ability disappears after resolution, without moving an invented card to a graveyard.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "source-bound authored fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ06",
+      "group": "captured-controller",
+      "setup": "Cloudblazer triggers under A; an independently supplied control-change fixture makes B control its source before resolution.",
+      "expected": "A remains controller of that ability and receives both life and cards. B receives neither simply because B now controls the source.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "109.5",
+          "text_hash": "3dc856c9f1cc75eefd4292df1d73be1d5fff0384d667c22c4b9279a555c06145",
+          "start_line": 610,
+          "end_line": 611,
+          "byte_start": 52326,
+          "byte_end": 52908
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "113.7a",
+          "text_hash": "d53d6bfb1fdd519ca2d3a166dd4908b9eb60c27dc8732e21b215e158360bfb01",
+          "start_line": 805,
+          "end_line": 806,
+          "byte_start": 76002,
+          "byte_end": 76867
+        }
+      ],
+      "fixtureKind": "source-bound ability plus synthetic control-change fixture",
+      "prerequisites": [
+        "future ordered self-entry implementation",
+        "separately specified control-change fixture"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ07",
+      "group": "ability-order",
+      "setup": "A has simultaneously captured Cloudblazer and Priest of Ancient Lore entry abilities and chooses their stack order.",
+      "expected": "A orders whole ability instances. If Cloudblazer is on top, its gain 2 and both draws finish before Priest can resolve; the engine must not interleave the two abilities instruction by instruction.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        },
+        {
+          "identity": "a89b0fd5-84b2-487c-8b03-e78d97276fd3",
+          "name": "Priest of Ancient Lore",
+          "sourceVersion": "dcec03ce58fe31bdf5aae97fffc6739562254aa2fa274cdb639c88a7442a7ba3",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 25348,
+          "completeBodyHash": "f2a379cdfd37db7edb7f142ed5686e28653b8d38de2eea34b7c5a1a77a7e98cd",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.1",
+          "text_hash": "9edcb482b0ecd772e072126f9809e5e0cdf6957968bbc5466de8ae0950ee1d5c",
+          "start_line": 2787,
+          "end_line": 2788,
+          "byte_start": 351646,
+          "byte_end": 351780
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2e",
+          "text_hash": "6ef3554aed30e8095ab71f3ff18ee1114ceb6590ff8b8f4f2714255261b27656",
+          "start_line": 946,
+          "end_line": 947,
+          "byte_start": 95763,
+          "byte_end": 96051
+        }
+      ],
+      "fixtureKind": "source-bound abilities plus synthetic simultaneous-entry fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ08",
+      "group": "apnap-order",
+      "setup": "A is active; A and B each control a captured ordered entry ability in one ordinary placement cohort.",
+      "expected": "A places their ability first and B next. B’s top ability resolves as one ordered sequence after the required passes; A’s remains below it.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        },
+        {
+          "identity": "92dfeeb2-1117-422b-87ea-08a589f1134b",
+          "name": "Elite Guardmage",
+          "sourceVersion": "ccbca7002c12892cdade3f9eac050b9d5635a2abccabd911775b503d8b3158f5",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 22091,
+          "completeBodyHash": "1a71f9ea7f8dacfc38636ea20a81051aa10f696579e498b5a5249a21645816f2",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3b",
+          "text_hash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+          "start_line": 2590,
+          "end_line": 2591,
+          "byte_start": 316722,
+          "byte_end": 317504
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.1",
+          "text_hash": "9edcb482b0ecd772e072126f9809e5e0cdf6957968bbc5466de8ae0950ee1d5c",
+          "start_line": 2787,
+          "end_line": 2788,
+          "byte_start": 351646,
+          "byte_end": 351780
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        }
+      ],
+      "fixtureKind": "source-bound abilities plus synthetic simultaneous-entry fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ09",
+      "group": "empty-library",
+      "setup": "A has exactly one library card when Cloudblazer entry ability resolves.",
+      "expected": "A gains 2 life and draws the available card, then records the failed draw attempt. Finish and remove the ability before the next state-based checkpoint eliminates A for the failed draw.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.2",
+          "text_hash": "58ad14a184258a360f52958eae4e728df9ae2ab914262bed3f3cf1f3190674b3",
+          "start_line": 1144,
+          "end_line": 1145,
+          "byte_start": 122555,
+          "byte_end": 122708
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.4",
+          "text_hash": "462fdd51b25f0e092b5604ba5da36cf9e08dff90f477c55c67c6f084068f6a38",
+          "start_line": 1158,
+          "end_line": 1159,
+          "byte_start": 124414,
+          "byte_end": 124604
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.4",
+          "text_hash": "74a59f2aa685d6b37f6e7b063c5a80f4ba141a247ad4dbf26827195bebe6ab19",
+          "start_line": 5503,
+          "end_line": 5505,
+          "byte_start": 648818,
+          "byte_end": 649569
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.5b",
+          "text_hash": "41c136ad4ae8881b71b8471fa6b7cf67f60823eb82b60c2fdd97dcbc98e9c66f",
+          "start_line": 5510,
+          "end_line": 5511,
+          "byte_start": 649689,
+          "byte_end": 649853
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "source-bound authored fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ10",
+      "group": "empty-library",
+      "setup": "A has an empty library when Cloudblazer entry ability resolves.",
+      "expected": "The life gain still occurs; no cards enter A’s hand. The failed draw state is checked only after this ability finishes; A then loses at the state-based checkpoint.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.4",
+          "text_hash": "462fdd51b25f0e092b5604ba5da36cf9e08dff90f477c55c67c6f084068f6a38",
+          "start_line": 1158,
+          "end_line": 1159,
+          "byte_start": 124414,
+          "byte_end": 124604
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.4",
+          "text_hash": "74a59f2aa685d6b37f6e7b063c5a80f4ba141a247ad4dbf26827195bebe6ab19",
+          "start_line": 5503,
+          "end_line": 5505,
+          "byte_start": 648818,
+          "byte_end": 649569
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.5b",
+          "text_hash": "41c136ad4ae8881b71b8471fa6b7cf67f60823eb82b60c2fdd97dcbc98e9c66f",
+          "start_line": 5510,
+          "end_line": 5511,
+          "byte_start": 649689,
+          "byte_end": 649853
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "source-bound authored fixture",
+      "prerequisites": ["future ordered self-entry implementation"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ11",
+      "group": "checkpoint-boundary",
+      "setup": "A synthetic typed sequence draws 2 and then gains 3 life; A has one card in the library.",
+      "expected": "Draw the available card and retain failed-draw state, then still perform the later gain 3 life instruction before ability completion and elimination. This reversed sequence is not claimed to be one of the four source cards.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.4",
+          "text_hash": "462fdd51b25f0e092b5604ba5da36cf9e08dff90f477c55c67c6f084068f6a38",
+          "start_line": 1158,
+          "end_line": 1159,
+          "byte_start": 124414,
+          "byte_end": 124604
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.4",
+          "text_hash": "74a59f2aa685d6b37f6e7b063c5a80f4ba141a247ad4dbf26827195bebe6ab19",
+          "start_line": 5503,
+          "end_line": 5505,
+          "byte_start": 648818,
+          "byte_end": 649569
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.5b",
+          "text_hash": "41c136ad4ae8881b71b8471fa6b7cf67f60823eb82b60c2fdd97dcbc98e9c66f",
+          "start_line": 5510,
+          "end_line": 5511,
+          "byte_start": 649689,
+          "byte_end": 649853
+        }
+      ],
+      "fixtureKind": "synthetic sequence-semantic fixture",
+      "prerequisites": [
+        "future ordered self-entry implementation",
+        "explicit synthetic reverse-order program"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ12",
+      "group": "nested-trigger-timing",
+      "setup": "A Cloudblazer ability resolves while synthetic observers watch life gain and each individual draw.",
+      "expected": "Capture observers at their actual events. Do not place them, request APNAP ordering, perform state-based actions, or grant priority between gain 2, draw 1, draw 1. Process the later checkpoint after the parent ability finishes.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.2",
+          "text_hash": "7ed2ab3c0c0f193ef1e7eb5bcf569ea1a5311fce60b089f491ea6c7d6cd49f0b",
+          "start_line": 2565,
+          "end_line": 2566,
+          "byte_start": 313112,
+          "byte_end": 313291
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2a",
+          "text_hash": "76033b576d42ee859efa405656fe68bddf05c45f049758913042d12abca9ff1f",
+          "start_line": 938,
+          "end_line": 939,
+          "byte_start": 94658,
+          "byte_end": 95089
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2e",
+          "text_hash": "6ef3554aed30e8095ab71f3ff18ee1114ceb6590ff8b8f4f2714255261b27656",
+          "start_line": 946,
+          "end_line": 947,
+          "byte_start": 95763,
+          "byte_end": 96051
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.5",
+          "text_hash": "388983a2d56290c8a37678d9819c1d3db9a11b74f93558fbe472b6d071041dec",
+          "start_line": 960,
+          "end_line": 961,
+          "byte_start": 97252,
+          "byte_end": 97752
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.2",
+          "text_hash": "58ad14a184258a360f52958eae4e728df9ae2ab914262bed3f3cf1f3190674b3",
+          "start_line": 1144,
+          "end_line": 1145,
+          "byte_start": 122555,
+          "byte_end": 122708
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.4",
+          "text_hash": "74a59f2aa685d6b37f6e7b063c5a80f4ba141a247ad4dbf26827195bebe6ab19",
+          "start_line": 5503,
+          "end_line": 5505,
+          "byte_start": 648818,
+          "byte_end": 649569
+        }
+      ],
+      "fixtureKind": "source-bound ability plus synthetic observer fixtures",
+      "prerequisites": [
+        "future ordered self-entry implementation",
+        "separately specified life/draw observer fixtures"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ13",
+      "group": "durable-before-resolution",
+      "setup": "Save while a Cloudblazer ability is on the stack, reopen, then resolve using accepted command receipts.",
+      "expected": "Preserve captured controller, source instance/version, immutable ordered program, stack position and command ordering. Produce the same life, hand, library and ability-removal result as uninterrupted execution; exact accepted-command retries return their original receipts.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.2",
+          "text_hash": "58ad14a184258a360f52958eae4e728df9ae2ab914262bed3f3cf1f3190674b3",
+          "start_line": 1144,
+          "end_line": 1145,
+          "byte_start": 122555,
+          "byte_end": 122708
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "source-bound persistence requirement",
+      "prerequisites": [
+        "future ordered self-entry implementation",
+        "versioned coordinator serialization and replay"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "SEQ14",
+      "group": "observation",
+      "setup": "A resolves Elite Guardmage while B observes.",
+      "expected": "Expose life gain, public ability source/controller and hand-count changes; the drawn card’s private identity is visible only to its entitled observer. No physical spell-card object is invented for the trigger.",
+      "sourceCards": [
+        {
+          "identity": "92dfeeb2-1117-422b-87ea-08a589f1134b",
+          "name": "Elite Guardmage",
+          "sourceVersion": "ccbca7002c12892cdade3f9eac050b9d5635a2abccabd911775b503d8b3158f5",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 22091,
+          "completeBodyHash": "1a71f9ea7f8dacfc38636ea20a81051aa10f696579e498b5a5249a21645816f2",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.1",
+          "text_hash": "f13751a2eb57bc468343ca0d2e276408961644440eed6ad68544d0f777a52a2c",
+          "start_line": 1142,
+          "end_line": 1143,
+          "byte_start": 122324,
+          "byte_end": 122555
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "402.3",
+          "text_hash": "3322beb157c9354c6d37b63a10ae906ef00134f85aab6fcf7f43687f5f054c79",
+          "start_line": 2018,
+          "end_line": 2019,
+          "byte_start": 234718,
+          "byte_end": 234915
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3",
+          "text_hash": "c5604cb8b1e99a7dd6c80a93ecbfc8c50189efb1c221d9dcdcba109c1116370c",
+          "start_line": 2586,
+          "end_line": 2587,
+          "byte_start": 316017,
+          "byte_end": 316487
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "source-bound observation requirement",
+      "prerequisites": [
+        "future ordered self-entry implementation",
+        "existing private-zone observation contract"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT01",
+      "group": "optional-trigger-timing",
+      "setup": "A synthetic self-entry ability says A may draw 1; A intends to decline.",
+      "expected": "It still triggers and is placed normally. Intention does not suppress capture or placement; request A’s option only when that ability is resolving.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        }
+      ],
+      "fixtureKind": "synthetic optional-choice fixture",
+      "prerequisites": ["future optional trigger contract; no candidate card is claimed"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT02",
+      "group": "optional-accept",
+      "setup": "The synthetic optional draw 1 ability begins resolution with a nonempty library and no prohibition.",
+      "expected": "Offer an owned accept/decline decision to the captured trigger controller. Accept draws exactly1 and then completes the same ability; it does not create a new stack object.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.1",
+          "text_hash": "f13751a2eb57bc468343ca0d2e276408961644440eed6ad68544d0f777a52a2c",
+          "start_line": 1142,
+          "end_line": 1143,
+          "byte_start": 122324,
+          "byte_end": 122555
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "synthetic optional-choice fixture",
+      "prerequisites": ["future optional trigger contract"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT03",
+      "group": "optional-decline",
+      "setup": "A chooses decline for the same optional draw 1 ability.",
+      "expected": "Perform no draw and no failed-draw marking, then complete/remove that ability and continue the ordinary checkpoint.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "synthetic optional-choice fixture",
+      "prerequisites": ["future optional trigger contract"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT04",
+      "group": "optional-empty-library",
+      "setup": "A may draw 1 at resolution but has no library cards.",
+      "expected": "Accept remains a legal choice despite the empty library. If chosen, the attempt fails and A loses at the next state-based checkpoint; decline makes no draw attempt.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.3",
+          "text_hash": "20fed73315e00c37587ca98722975e227c969a744489bcde468ded067b1c2772",
+          "start_line": 1154,
+          "end_line": 1155,
+          "byte_start": 123816,
+          "byte_end": 124127
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.4",
+          "text_hash": "462fdd51b25f0e092b5604ba5da36cf9e08dff90f477c55c67c6f084068f6a38",
+          "start_line": 1158,
+          "end_line": 1159,
+          "byte_start": 124414,
+          "byte_end": 124604
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "704.5b",
+          "text_hash": "41c136ad4ae8881b71b8471fa6b7cf67f60823eb82b60c2fdd97dcbc98e9c66f",
+          "start_line": 5510,
+          "end_line": 5511,
+          "byte_start": 649689,
+          "byte_end": 649853
+        }
+      ],
+      "fixtureKind": "synthetic optional-choice fixture",
+      "prerequisites": ["future optional trigger contract"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT05",
+      "group": "optional-prohibition",
+      "setup": "A future synthetic continuous effect says A cannot draw cards while the optional draw 1 choice is offered.",
+      "expected": "Accept is unavailable; an empty library is not the same as a draw prohibition. Do not generalize the empty-library exception into permission to ignore a cannot-draw effect.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.3",
+          "text_hash": "20fed73315e00c37587ca98722975e227c969a744489bcde468ded067b1c2772",
+          "start_line": 1154,
+          "end_line": 1155,
+          "byte_start": 123816,
+          "byte_end": 124127
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        }
+      ],
+      "fixtureKind": "synthetic future-prohibition fixture",
+      "prerequisites": [
+        "future optional trigger contract",
+        "separately implemented continuous prohibition"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT06",
+      "group": "optional-multiple-draw-limit",
+      "setup": "A synthetic effect lets A choose to draw 2 while an independent rule effect limits A to 1 card drawn this turn.",
+      "expected": "The choice to draw 2 is unavailable. Distinguish this from a mandatory draw 2 instruction, which may be partially performed under the same restriction.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.2b",
+          "text_hash": "bf74c1329989301d5ce2acdb04b435bdb4ce13d74f6ffacf95c26d857affd321",
+          "start_line": 1148,
+          "end_line": 1149,
+          "byte_start": 122931,
+          "byte_end": 123333
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        }
+      ],
+      "fixtureKind": "synthetic future-prohibition fixture",
+      "prerequisites": [
+        "future optional multiple-draw contract",
+        "separately implemented draw restriction"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT07",
+      "group": "optional-controller",
+      "setup": "A captured an optional self-entry ability, then B gains control of its source before resolution.",
+      "expected": "A owns the resolution choice and receives any accepted self effect. Do not hand the choice to B by consulting current source control.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.3a",
+          "text_hash": "ab33f1519d2daaf0bc6396e138c24bb62d029dd07334aa027fb869db1c360a3c",
+          "start_line": 2588,
+          "end_line": 2589,
+          "byte_start": 316487,
+          "byte_end": 316722
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "109.5",
+          "text_hash": "3dc856c9f1cc75eefd4292df1d73be1d5fff0384d667c22c4b9279a555c06145",
+          "start_line": 610,
+          "end_line": 611,
+          "byte_start": 52326,
+          "byte_end": 52908
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "synthetic optional-control fixture",
+      "prerequisites": [
+        "future optional trigger contract",
+        "separately specified control-change fixture"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT08",
+      "group": "optional-no-priority",
+      "setup": "The engine is waiting for an optional resolution choice.",
+      "expected": "No ordinary pass, cast, attack or response window exists inside that resolution. Accept only the owned resolution-choice command; resume the same ability at the same cursor.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "117.2e",
+          "text_hash": "6ef3554aed30e8095ab71f3ff18ee1114ceb6590ff8b8f4f2714255261b27656",
+          "start_line": 946,
+          "end_line": 947,
+          "byte_start": 95763,
+          "byte_end": 96051
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2g",
+          "text_hash": "9b0d82892e42c118259625691035b63c5109fc39b75a3e98ee7263e8da80f645",
+          "start_line": 2808,
+          "end_line": 2809,
+          "byte_start": 358402,
+          "byte_end": 358996
+        }
+      ],
+      "fixtureKind": "synthetic optional-continuation fixture",
+      "prerequisites": ["future optional continuation and command contract"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT09",
+      "group": "optional-durable-choice",
+      "setup": "Save and reopen while optional resolution is paused; accept once, retry exactly the accepted command ID, then submit a new stale command.",
+      "expected": "Reopen retains the same controller, decision ID, ability instance and continuation. Apply the chosen branch once; the accepted-command retry returns its recorded receipt, while the new stale command is rejected.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2n",
+          "text_hash": "42184b46c94653bb5c46c2c1e302ab7447a8c9eea6f8c5aa2dff9e1033524b94",
+          "start_line": 2823,
+          "end_line": 2824,
+          "byte_start": 361752,
+          "byte_end": 361981
+        }
+      ],
+      "fixtureKind": "synthetic optional-persistence requirement",
+      "prerequisites": [
+        "future optional continuation",
+        "versioned coordinator receipt and replay support"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "OPT10",
+      "group": "optional-life-prohibition",
+      "setup": "A synthetic optional gain 3 life choice resolves while a separately implemented effect forbids A from gaining life.",
+      "expected": "Do not offer an impossible gain-life branch as legal. Resolve the decline branch; this is a future interaction prerequisite rather than current-source coverage.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "101.3",
+          "text_hash": "af85c9dc432ce16ea6496a37916256c8da7731dbddd1f7f423cb95d629168d2c",
+          "start_line": 233,
+          "end_line": 234,
+          "byte_start": 9011,
+          "byte_end": 9190
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "119.7",
+          "text_hash": "ee62bcf46720468b3fc3b29009a7505c6eac30104821b9e6f7020b0c0c2a98e2",
+          "start_line": 1077,
+          "end_line": 1078,
+          "byte_start": 111512,
+          "byte_end": 112045
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2d",
+          "text_hash": "542f634ae6fc5b3e506d0b0437fa433e81f6875c31d31b05a8fed6f274b5cfa6",
+          "start_line": 2799,
+          "end_line": 2801,
+          "byte_start": 355238,
+          "byte_end": 356451
+        }
+      ],
+      "fixtureKind": "synthetic future-prohibition fixture",
+      "prerequisites": [
+        "future optional trigger contract",
+        "separately implemented life-gain prohibition"
+      ],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG01",
+      "group": "negative-admission",
+      "setup": "Attempt to admit the complete current source body of Bookwurm.",
+      "expected": "Remain unsupported: Its graveyard-to-library activated ability remains unimplemented despite the matching gain 3 and draw 1 entry line.",
+      "sourceCards": [
+        {
+          "identity": "ce77fff1-32f8-4a55-9124-b1dafe95840d",
+          "name": "Bookwurm",
+          "sourceVersion": "8ba3982dc0d5452abc582f1a206dd34c60c4143470b1484652d13904cace9a43",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 31055,
+          "completeBodyHash": "53f16c626b199b84afc13f5c052bd190ca8eacee2d255de3fe50fc8dc3f410ad",
+          "disposition": "outside-research-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "source-bound exclusion expectation",
+      "prerequisites": ["complete-body constructor validation; no partial-text fallback"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG02",
+      "group": "negative-admission",
+      "setup": "Attempt to admit the complete current source body of Mulldrifter.",
+      "expected": "Remain unsupported: Its evoke ability and alternative casting path remain unimplemented despite a familiar draw 2 entry line.",
+      "sourceCards": [
+        {
+          "identity": "24d0f5e7-0d9e-4b76-900e-a7274e80312d",
+          "name": "Mulldrifter",
+          "sourceVersion": "02c70f0189f3e28a6d7067994178f47fcb4a718917fcf8fd6dd868d1136cd783",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 5534,
+          "completeBodyHash": "1a4287c1f096f3298eedade0142efdcc38e3e84e5d61d6a42bcf68cf61553b1a",
+          "disposition": "outside-research-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "source-bound exclusion expectation",
+      "prerequisites": ["complete-body constructor validation; no partial-text fallback"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG03",
+      "group": "negative-admission",
+      "setup": "Attempt to admit the complete current source body of Hero in Training.",
+      "expected": "Remain unsupported: Its later conditional gain-life instruction must not be erased when recognizing the preceding draw.",
+      "sourceCards": [
+        {
+          "identity": "87f1a840-021c-4699-a2c4-f2926daf98eb",
+          "name": "Hero in Training",
+          "sourceVersion": "3c88a63f19716b87e634a1f421bf69adec4d75e52ce440ccbd2d4e00e2bb3be8",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 20444,
+          "completeBodyHash": "5a74ebd15c0eadd128de2dfc007f63f160e68c2450d8a933853671bbe4306925",
+          "disposition": "outside-research-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "source-bound exclusion expectation",
+      "prerequisites": ["complete-body constructor validation; no partial-text fallback"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG04",
+      "group": "negative-admission",
+      "setup": "Attempt to admit the complete current source body of Disciple of Bolas.",
+      "expected": "Remain unsupported: Sacrifice, variable X and source-power history require their own explicit semantics.",
+      "sourceCards": [
+        {
+          "identity": "8f2c8498-5b10-4ec7-8678-598c90987556",
+          "name": "Disciple of Bolas",
+          "sourceVersion": "0a877116d7885f5015dacbd18e0794fe3f860121c289a49eefa1a4bc98532cc4",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 21512,
+          "completeBodyHash": "2b9a65345d9e8a26dfba4af285257723d1946d33835256d926525415802bffa4",
+          "disposition": "outside-research-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "source-bound exclusion expectation",
+      "prerequisites": ["complete-body constructor validation; no partial-text fallback"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG05",
+      "group": "negative-admission",
+      "setup": "Attempt to admit the complete current source body of Tataru Taru.",
+      "expected": "Remain unsupported: Another player’s optional draw and the additional Treasure trigger require different domains and dependencies.",
+      "sourceCards": [
+        {
+          "identity": "70dd5013-f18f-4501-882f-70590c424e20",
+          "name": "Tataru Taru",
+          "sourceVersion": "e49807753564b9a100ca87d095761c2a67b75674974d2ee5dbaee2adacb7101b",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 16939,
+          "completeBodyHash": "f2844c056de15809d5097d928017a69d587494735a77e4cb22d37f0d1323619a",
+          "disposition": "outside-research-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "source-bound exclusion expectation",
+      "prerequisites": ["complete-body constructor validation; no partial-text fallback"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG06",
+      "group": "negative-admission",
+      "setup": "Attempt to admit the complete current source body of Dovin's Acuity.",
+      "expected": "Remain unsupported: Enchantment characteristics and the additional instant-cast return trigger are outside the ordinary creature constructor.",
+      "sourceCards": [
+        {
+          "identity": "898e480d-c44e-4080-910a-f53e4ee471e1",
+          "name": "Dovin's Acuity",
+          "sourceVersion": "58a6fb13801a909c296ead8e883cb0205cd6b681e92618a488b66e10ade4744e",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 20688,
+          "completeBodyHash": "a97fd0868920ba094c6f179995966b7f75d679d6be5cf320524f48211f39ac40",
+          "disposition": "outside-research-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "source-bound exclusion expectation",
+      "prerequisites": ["complete-body constructor validation; no partial-text fallback"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG07",
+      "group": "negative-admission",
+      "setup": "Attempt to admit the complete current source body of Invasion of Dominaria // Serra Faithkeeper.",
+      "expected": "Remain unsupported: Battle/Siege, another face and its surrounding mechanics remain outside this creature-only proposal.",
+      "sourceCards": [
+        {
+          "identity": "dcbd8b15-e5fd-4f0d-ba2d-06f018b64fb3",
+          "name": "Invasion of Dominaria // Serra Faithkeeper",
+          "sourceVersion": "d01660ceca314170b4fee14d2c7b6ab57277144b440e49468e6824d6a8686862",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 33241,
+          "completeBodyHash": "7b885d24f9284865904fbab69d8963e1abb0871bee13d8433504e863bea901fc",
+          "disposition": "outside-research-scope"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.4",
+          "text_hash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+          "start_line": 2596,
+          "end_line": 2598,
+          "byte_start": 318221,
+          "byte_end": 319583
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "source-bound exclusion expectation",
+      "prerequisites": ["complete-body constructor validation; no partial-text fallback"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG08",
+      "group": "negative-admission",
+      "setup": "Swap Cloudblazer’s proposed gain 2/draw 2 order, alter a count, or omit flying while keeping its identity.",
+      "expected": "The altered definition cannot inherit the reviewed full-body binding or prepared proof. Reject mismatched whole-body/program/characteristic evidence.",
+      "sourceCards": [
+        {
+          "identity": "f84d1291-1f82-4b67-a26e-b79624b4ce1d",
+          "name": "Cloudblazer",
+          "sourceVersion": "9c1c7a7228eff2db7d8b40982bea5fb30775f3ea11efcea82d8a395640acc770",
+          "sourceArchiveHash": "ffb464b35a97613efa7927f5c05bdef3b8385b7d82ecf4f50f7487a9ab6c2274",
+          "sourceOrdinal": 37464,
+          "completeBodyHash": "8bb4c3cc6f2cb742662cdfaacda7bbfdb45469f0795bb6e428885e0c72544a13",
+          "disposition": "ordered-sequence-research-candidate"
+        }
+      ],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "608.2c",
+          "text_hash": "4ff98e5b63b9447d6873b3206aaaaae8a32bffcff204c9c6919665f010b0b541",
+          "start_line": 2797,
+          "end_line": 2798,
+          "byte_start": 354652,
+          "byte_end": 355238
+        },
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "121.2",
+          "text_hash": "58ad14a184258a360f52958eae4e728df9ae2ab914262bed3f3cf1f3190674b3",
+          "start_line": 1144,
+          "end_line": 1145,
+          "byte_start": 122555,
+          "byte_end": 122708
+        }
+      ],
+      "fixtureKind": "source-bound constructor rejection expectation",
+      "prerequisites": ["future exact ordered constructor and prepared admission"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    },
+    {
+      "id": "NEG09",
+      "group": "coverage-accounting",
+      "setup": "Produce a source coverage report for this bounded scan.",
+      "expected": "Report4 ordered research candidates and0 optional candidates; synthetic optional tests must never increase real-card identity coverage or imply implementation/execution.",
+      "sourceCards": [],
+      "rules": [
+        {
+          "document_hash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+          "node_id": "603.5",
+          "text_hash": "0ae57a1da9c2bb103c1b07dcabd4138cb453cc33380510cf9cac30c47aa3f551",
+          "start_line": 2599,
+          "end_line": 2600,
+          "byte_start": 319583,
+          "byte_end": 320147
+        }
+      ],
+      "fixtureKind": "coverage-accounting requirement",
+      "prerequisites": ["source-bound coverage ledger"],
+      "status": "authored-not-executed",
+      "executionEvidence": []
+    }
+  ],
+  "executedScenarios": 0,
+  "executedGames": 0,
+  "fullSemanticCoverage": false,
+  "hash": "f28319410c8fba4172ceb17409810a60776f4c6e5dffba06cf6c3fbf54bcca07"
+}

@@ -1,0 +1,203 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.7.0",
+  "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "definitions": 757,
+  "triggerDefinitions": 60,
+  "unsupportedPaperCandidates": 31072,
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "resolverComparisons": [
+    {
+      "schema": "commander-resolver-comparison-report/1",
+      "status": "passed",
+      "buildHash": "6347c789ecee3a6363f098ca1fdecac60bd3a7d9fa6af77bdda6a373e00bf197",
+      "revision": 707,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "replays": [
+        {
+          "mode": "full-scan",
+          "revision": 707,
+          "hash": "e11aae5de30d6c3613ddfc5874a7b5a7a77707db8a29c9e82cc9fe72f71a3c60",
+          "semanticHash": "ff8f8e52146c50966e8d40a6b7e2cda8425589609eb5ec091b45586931d81190",
+          "executionRegistry": {
+            "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+            "preparedArtifactHash": null,
+            "definitionCount": 757
+          }
+        },
+        {
+          "mode": "prepared-scan",
+          "revision": 707,
+          "hash": "c0fbaf7742ab2c9fd7a99ae0b5743fd7b02c369317fca942935934d4caea7c86",
+          "semanticHash": "ff8f8e52146c50966e8d40a6b7e2cda8425589609eb5ec091b45586931d81190",
+          "executionRegistry": {
+            "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+            "preparedArtifactHash": "4aef7784b462cada73a719d818b6a7b5321ea31bea3d7546f29247052b9e9673",
+            "definitionCount": 123
+          }
+        },
+        {
+          "mode": "prepared-indexed",
+          "revision": 707,
+          "hash": "e8d66e84d919fc923e0314164488568c52f75f02233d59b692d53f5c95065065",
+          "semanticHash": "ff8f8e52146c50966e8d40a6b7e2cda8425589609eb5ec091b45586931d81190",
+          "executionRegistry": {
+            "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+            "preparedArtifactHash": "4aef7784b462cada73a719d818b6a7b5321ea31bea3d7546f29247052b9e9673",
+            "definitionCount": 123
+          }
+        }
+      ],
+      "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding.",
+      "path": ".commander/prototypes/engine-0.7/.draft-runs/resolver-comparisons/ec3147b7-9a15-4203-b2c7-9228f6e244bb/report.json",
+      "sha256": "266ca74e98def23234bd8cb5e11bdd85f0b161f0bdb86d773b5d5d8e7b4dff99",
+      "comparedBoundaries": 708,
+      "comparedActingObservations": 707
+    },
+    {
+      "schema": "commander-resolver-comparison-report/1",
+      "status": "passed",
+      "buildHash": "6347c789ecee3a6363f098ca1fdecac60bd3a7d9fa6af77bdda6a373e00bf197",
+      "revision": 1712,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "replays": [
+        {
+          "mode": "full-scan",
+          "revision": 1712,
+          "hash": "db26d1a6add91f67b1243f4a1e14ab38d88a69f6e6defed35d68083829e73321",
+          "semanticHash": "b3c7b3eaf581b0dc1b070e67cd5f27ef47bb3f3d0e13dd41e9f5bbc5aa6a7982",
+          "executionRegistry": {
+            "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+            "preparedArtifactHash": null,
+            "definitionCount": 757
+          }
+        },
+        {
+          "mode": "prepared-scan",
+          "revision": 1712,
+          "hash": "02c34aa33d9a00c6127f38a388d6fb5eb0524e7082713909370515374c33a1b9",
+          "semanticHash": "b3c7b3eaf581b0dc1b070e67cd5f27ef47bb3f3d0e13dd41e9f5bbc5aa6a7982",
+          "executionRegistry": {
+            "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+            "preparedArtifactHash": "d7b2a3736c446572912f3be8b1cb276deeb3210f80c1f8258ddd0542dc2a681e",
+            "definitionCount": 240
+          }
+        },
+        {
+          "mode": "prepared-indexed",
+          "revision": 1712,
+          "hash": "59e4257b9ce31d377a4ca6aea7e81c940a954d358532930c4d1e081630208f67",
+          "semanticHash": "b3c7b3eaf581b0dc1b070e67cd5f27ef47bb3f3d0e13dd41e9f5bbc5aa6a7982",
+          "executionRegistry": {
+            "sourceReleaseHash": "15d505263948face9482d6ba3586eabfb9bac114edce46ae9b4ec0db256dd769",
+            "preparedArtifactHash": "d7b2a3736c446572912f3be8b1cb276deeb3210f80c1f8258ddd0542dc2a681e",
+            "definitionCount": 240
+          }
+        }
+      ],
+      "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding.",
+      "path": ".commander/prototypes/engine-0.7/.draft-runs/resolver-comparisons/21bf109b-f67e-47de-9160-4e6b7f7ff19b/report.json",
+      "sha256": "cc3323827968f1c25a6312b78cc13c4a4881f9fe5a3b5304ebf34dfa66bde6b5",
+      "comparedBoundaries": 1713,
+      "comparedActingObservations": 1712
+    }
+  ],
+  "sourceAdmissionReview": {
+    "path": ".commander/prototypes/engine-0.7/.draft-artifacts/source-admission-self-entry-v0.7.json",
+    "sha256": "7f3cc0c5f9cd36cab01196bf99a5de9d2295aa8d799de2ab7f330c512c7d1a04"
+  },
+  "preparedReview": {
+    "path": ".commander/prototypes/engine-0.7/.draft-artifacts/independent-prepared-review.json",
+    "sha256": "820e3b7a40db08539e0b05cffb7196bb12e6a6ff58be602df6f776a51766bbd7"
+  },
+  "browserProof": {
+    "path": ".commander/prototypes/engine-0.7/.commander/browser-proof/2026-09-06T20-59-30-848Z-7d77f2cb/evidence.json",
+    "sha256": "b7e157df4f5af96a427baff237e25ce125c8984d22d388b5a5db071bd6a85462"
+  },
+  "triggerObservations": {
+    "path": ".commander/prototypes/engine-0.7/.commander/browser-proof/2026-09-06T20-59-30-848Z-7d77f2cb/trigger-observations.json",
+    "sha256": "6b234b84962e599a0d09449257dabec1b6fcde6b99fc57c54125dac88062282f"
+  },
+  "constructedOrderingProof": {
+    "path": ".commander/prototypes/engine-0.7/.commander/trigger-storage-proof/2026-09-06T20-59-15-827Z-6bf6b1e7/evidence.json",
+    "sha256": "469254b496c46fa57d705f0ffa3eebf4235825ef181ab6f137e1e46b65c38aef"
+  },
+  "prototypeArchive": {
+    "path": ".commander/prototypes/engine-0.7/archive-inventory.json",
+    "sha256": "252429817fbb6d1df533eece3d68c924bf919031e187674f1f8aec9dba0b0c75"
+  },
+  "browserScope": "trigger-storage-proof-0.7.md",
+  "fullRepositoryGate": {
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "date": "2026-09-06",
+    "log": ".commander/evidence/check-full-0.7-host.log",
+    "logSha256": "799d3974f0277463e5e683a9ffc035bc07bec4b981453cd5da08319a95be5d8d",
+    "unitTests": 267,
+    "unitAssertions": 66710,
+    "browserTests": 12,
+    "includes": [
+      "boundary import checks",
+      "Biome/Stylelint/SonarJS",
+      "strict types",
+      "unit tests",
+      "production build",
+      "Playwright browser tests",
+      "emulated Quest development smoke",
+      "fresh standalone workspace and generated app install/check/build"
+    ],
+    "sandboxAttempt": {
+      "log": ".commander/evidence/check-full-0.7.log",
+      "exitCode": 1,
+      "reason": "Source checks and build passed; browser server binding 127.0.0.1:3135 was denied by sandbox. Full gate rerun with local-server permission passed."
+    }
+  },
+  "postProofChanges": {
+    "status": "reviewed-and-tested",
+    "review": "trigger-post-proof-review-0.7.json",
+    "scope": "CLI deck-composition accounting and rejection of contradictory trigger-controller/APNAP snapshots; valid transition algorithms unchanged.",
+    "nativeHistoriesReplayedWithPromotedBuild": {
+      "path": ".commander/post-proof-replay-0.7/report.json",
+      "sha256": "e3b8ce0ad363ad57dce5f5e916d6facc9933745958ade975981e96e81ced1335",
+      "buildHash": "98dc44e5e8c048a1a5a6a88869e7d3de0c72d3a08c1f15de152c7d8b486e2fc1",
+      "replays": 6,
+      "newGameAssignments": 0
+    },
+    "browserRerunOnPostProofBytes": false
+  },
+  "remaining": [
+    "Full-snapshot card/rule obligations remain unclosed.",
+    "Historical 0.3 exploration and 0.6 fixed regression continue separately; no outcomes are reassigned to 0.7.",
+    "Constructed multi-trigger ordering is not currently reachable through admitted ordinary card commands.",
+    "Native/browser observed trigger resolution does not cover every compiled trigger definition."
+  ],
+  "catalogPromotion": {
+    "path": ".commander/evidence/catalog-promotion-0.7.json",
+    "sha256": "0ae09e04ad8f0bd94ba029a23363af61f9684201a3b47842edd6fadc16b5e174"
+  },
+  "regression": {
+    "corpusHash": "8afa8a1c5ac3ce774fddecab88b5131ef66a7b37d053af590b876da28e763ba8",
+    "path": ".commander/regressions/regression-0.7-fixed64",
+    "status": "running",
+    "historicalOutcomesReused": false,
+    "observedAt": "2026-09-06T21:14:11.290679+00:00",
+    "progress": {
+      "assigned": 64,
+      "accounted": 5,
+      "completed": 5,
+      "pending": 59
+    }
+  }
+}

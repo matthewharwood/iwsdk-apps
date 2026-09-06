@@ -2,12 +2,21 @@ import type { CatalogCard } from "@iwsdk-apps/catalog";
 import {
   CardDefinition,
   type Cost,
+  canonicalJson,
   emptyMana,
   type Keyword,
   type ManaColor,
 } from "@iwsdk-apps/contracts";
+import { proposeSelfEntryBody, SELF_ENTRY_RECIPE_VERSION, SELF_ENTRY_RULES } from "./self-entry";
 import { bindExactSpellFamily, SPELL_FAMILY_VERSION } from "./spell-families";
 import { REVIEWED_SPELLS, SPELL_RECIPE_VERSION } from "./spells";
+
+export {
+  proposeSelfEntryBody,
+  SELF_ENTRY_RECIPE_VERSION,
+  SELF_ENTRY_REGISTRY,
+  SELF_ENTRY_RULES,
+} from "./self-entry";
 
 export {
   bindExactSpellFamily,
@@ -139,6 +148,41 @@ function textProgram(text: string): { keywords: Keyword[]; manaAbilities: ManaCo
   )
     return null;
   return { keywords, manaAbilities };
+}
+
+/** Reconstruct the finite whole-body declaration before using its empty external-dependency claim. */
+export function reviewedSelfEntryDefinition(definition: CardDefinition): boolean {
+  const typeParts = definition.typeLine.split(" — ");
+  const typeTokens = typeParts[0]?.split(" ") ?? [];
+  if (
+    definition.implementationRevision !== SELF_ENTRY_RECIPE_VERSION ||
+    definition.triggerPrograms === undefined ||
+    !definition.types.includes("Creature") ||
+    definition.types.some((type) => !ORDINARY_TYPES.has(type)) ||
+    definition.supertypes.some((type) => !SUPERTYPES.has(type)) ||
+    typeParts.length > 2 ||
+    canonicalJson(definition.types) !==
+      canonicalJson(typeTokens.filter((type) => !SUPERTYPES.has(type))) ||
+    canonicalJson(definition.supertypes) !==
+      canonicalJson(typeTokens.filter((type) => SUPERTYPES.has(type))) ||
+    canonicalJson(definition.subtypes) !== canonicalJson(typeParts[1]?.split(" ") ?? []) ||
+    !Number.isSafeInteger(definition.power) ||
+    !Number.isSafeInteger(definition.toughness) ||
+    definition.manaCost === null ||
+    definition.manaValue !==
+      Object.values(definition.manaCost).reduce((sum, amount) => sum + amount, 0) ||
+    definition.spellProgram !== undefined
+  )
+    return false;
+  const entry = proposeSelfEntryBody(definition.oracleText);
+  const remainder = entry ? textProgram(entry.remainder) : null;
+  return (
+    entry !== null &&
+    remainder !== null &&
+    canonicalJson(definition.triggerPrograms) === canonicalJson([entry.program]) &&
+    canonicalJson(definition.keywords) === canonicalJson(remainder.keywords) &&
+    canonicalJson(definition.manaAbilities) === canonicalJson(remainder.manaAbilities)
+  );
 }
 
 function exactInteger(value: unknown): number | null {
@@ -274,7 +318,7 @@ function familySpell(
 /** Binds only explicitly reviewed data recipes. No unknown English clause can become a no-op. */
 export function bindDevelopmentCard(
   input: CatalogCard,
-  options: { spellFamilies?: boolean } = {},
+  options: { spellFamilies?: boolean; selfEntryTriggers?: boolean } = {},
 ): BindingResult {
   if (!input.eligibility.some((row) => row.role === "main-deck" && row.status === "candidate"))
     return { kind: "unsupported", reason: "not-observed-main-deck-candidate" };
@@ -305,13 +349,21 @@ export function bindDevelopmentCard(
     return { kind: "unsupported", reason: "nonordinary-cost-or-characteristic-expression" };
   if (typeof card.oracle_text !== "string")
     return { kind: "unsupported", reason: "missing-oracle-behavior-source" };
-  const program = textProgram(card.oracle_text);
+  const entry = options.selfEntryTriggers ? proposeSelfEntryBody(card.oracle_text) : null;
+  if (
+    entry &&
+    (input.identity !== card.oracle_id ||
+      card.keywords.some((keyword) => !KEYWORDS.has(keyword.toLowerCase())))
+  )
+    return { kind: "unsupported", reason: "self-entry-source-identity-or-keyword-discrepancy" };
+  const program = textProgram(entry?.remainder ?? card.oracle_text);
   if (!program)
     return {
       kind: "unsupported",
       reason: "unrecognized-oracle-clause; reviewed-definition-required",
     };
   const recipes = ["ordinary-creature/1"];
+  if (entry) recipes.push(SELF_ENTRY_RECIPE_VERSION);
   if (program.keywords.length) recipes.push("keyword-creature/1");
   if (program.manaAbilities.length) recipes.push("mana-creature/1");
   const obligations = [
@@ -321,6 +373,11 @@ export function bindDevelopmentCard(
     ...program.keywords.map((keyword) => `rule:${KEYWORD_RULES[keyword]}`),
   ];
   if (program.manaAbilities.length) obligations.push("rule:605.1a", "rule:302.6");
+  if (entry)
+    obligations.push(
+      ...SELF_ENTRY_RULES.map((rule) => `rule:${rule}`),
+      entry.program.effect.kind === "draw" ? "rule:121.1" : "rule:119.3",
+    );
   if (parts.supertypes.includes("Legendary")) obligations.push("rule:704.5j", "rule:903.3");
   const definition = CardDefinition.parse({
     ...definitionBase(input, parts),
@@ -329,6 +386,9 @@ export function bindDevelopmentCard(
     power,
     toughness,
     ...program,
+    ...(entry
+      ? { triggerPrograms: [entry.program], implementationRevision: SELF_ENTRY_RECIPE_VERSION }
+      : {}),
     commanderEligible: parts.supertypes.includes("Legendary"),
     deckLimit: 1,
     obligations,

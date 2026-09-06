@@ -18,7 +18,14 @@ import { type Browser, chromium, expect, type Page } from "@playwright/test";
 import { DRIVER_VERSION, type GameRun, runGame } from "../../simulation/src/index";
 import { Coordinator, type Repository, replayMatch } from "../src/index";
 import { openNativeRepository } from "../src/native";
-import { executionEvidence, setupEvidence, spellEvidence } from "./spell-evidence";
+import {
+  atProofStage,
+  executionEvidence,
+  type ProofStage,
+  setupEvidence,
+  spellEvidence,
+  triggerEvidence,
+} from "./spell-evidence";
 
 type Snapshot = {
   revision: number;
@@ -28,6 +35,7 @@ type Snapshot = {
   decision: { kind: string; id: string; actor: string } | null;
   outcome: unknown;
   spells: ReturnType<typeof spellEvidence>;
+  triggers: ReturnType<typeof triggerEvidence>;
   execution: ReturnType<typeof executionEvidence>;
   setup: ReturnType<typeof setupEvidence>;
   storage?: { secureContext: boolean; opfs: boolean; locks: boolean };
@@ -48,6 +56,7 @@ const options = parseArgs({
     "seed-attempts": { type: "string", default: "8" },
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
+    "require-triggers": { type: "boolean", default: false },
     resolver: { type: "string", default: "full-scan" },
   },
 }).values;
@@ -60,6 +69,7 @@ function boundedInteger(value: string, minimum: number, maximum: number, name: s
 const deckOffset = boundedInteger(options["deck-offset"], 0, 100_000, "deck-offset");
 const deckStride = boundedInteger(options["deck-stride"], 1, 100_000, "deck-stride");
 const seedAttempts = boundedInteger(options["seed-attempts"], 1, 32, "seed-attempts");
+const requireTriggers = options["require-triggers"];
 const requireRemoval = options["require-removal"];
 const requireSpells = options["require-spells"] || requireRemoval;
 function parseResolver(value: string): MatchManifest["resolver"] {
@@ -73,9 +83,10 @@ function parseResolver(value: string): MatchManifest["resolver"] {
   }
 }
 const resolver = parseResolver(options.resolver);
-const stageKinds = requireSpells
-  ? (["starting-player", "target", "payment"] as const)
-  : (["starting-player", "payment"] as const);
+const stageKinds: ProofStage[] = requireSpells
+  ? ["starting-player", "target", "payment"]
+  : ["starting-player", "payment"];
+if (requireTriggers) stageKinds.push("pending-trigger");
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -248,6 +259,7 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     decision: state.decision,
     outcome: state.outcome,
     spells: spellEvidence(archive, release),
+    triggers: triggerEvidence(archive),
     execution: executionEvidence(release, coordinator.executionInfo()),
     setup: setupEvidence(coordinator, archive),
   };
@@ -257,7 +269,7 @@ function requireCompleted(run: GameRun) {
     throw new Error(`Match ${run.matchId} did not complete: ${JSON.stringify(run)}`);
 }
 type NativeStage = {
-  kind: "starting-player" | "target" | "payment";
+  kind: ProofStage;
   run: GameRun;
   snapshot: Snapshot;
 };
@@ -273,6 +285,7 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
     stages.length === stageKinds.length &&
     stages.every((stage) => stage.run.status === "paused") &&
     (!requireSpells || Object.keys(final.spells.resolved).length > 0) &&
+    (!requireTriggers || Object.keys(final.triggers.resolved).length > 0) &&
     (!requireRemoval || final.spells.removalEvents.destroy + final.spells.removalEvents.exile > 0)
   );
 }
@@ -389,7 +402,7 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
         const run = await runGame(coordinator, {
           seed: manifest.driverSeed,
           maxCommands: 10_000,
-          stopAt: (observation) => observation.decision?.kind === kind,
+          stopAt: (observation) => atProofStage(observation, kind),
           onProgress: (revision) => console.log(`Native ${seatCount}-seat revision:${revision}`),
         });
         const snapshot = await nativeSnapshot(repo, coordinator);
@@ -399,7 +412,8 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
           requireCompleted(run); // Actual engine/driver/budget failures are not discarded as seed misses.
           break;
         }
-        expect(snapshot.decision?.kind).toBe(kind);
+        if (kind === "pending-trigger") expect(snapshot.triggers.pending.length).toBeGreaterThan(0);
+        else expect(snapshot.decision?.kind).toBe(kind);
       }
       const nativeRun = await runGame(coordinator, {
         seed: manifest.driverSeed,
@@ -487,7 +501,9 @@ try {
       });
       expect(paused.status).toBe("paused");
       const pending = await call<Snapshot>(page, { operation: "snapshot" });
-      expect(pending.decision?.kind).toBe(stage.kind);
+      if (stage.kind === "pending-trigger")
+        expect(pending.triggers.pending.length).toBeGreaterThan(0);
+      else expect(pending.decision?.kind).toBe(stage.kind);
       expect(pending.execution).toEqual(stage.snapshot.execution);
       expect(pending.stateHash).toBe(stage.snapshot.stateHash);
       expect(pending.boundaryHashes).toEqual(stage.snapshot.boundaryHashes);

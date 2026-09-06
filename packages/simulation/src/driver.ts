@@ -8,7 +8,7 @@ import {
   type Response,
 } from "@iwsdk-apps/contracts";
 
-export const DRIVER_VERSION = "observed-combat/4";
+export const DRIVER_VERSION = "observed-combat/5";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -151,6 +151,8 @@ export const heuristicDriver: Driver = (observation, seed) => {
   if (!decision || decision.actor !== observation.player)
     throw new Error("Driver has no owned decision");
   switch (decision.kind) {
+    case "trigger-order":
+      return { kind: "trigger-order", triggers: [...decision.triggers].sort() };
     case "starting-player":
       if (!decision.players.includes(observation.player))
         throw new Error("Starting-player decision omits the chooser's own seat");
@@ -167,7 +169,10 @@ export const heuristicDriver: Driver = (observation, seed) => {
       return priority(observation, decision, seed);
     case "target": {
       const top = observation.stack.at(-1);
-      const spell = observation.objects.find((object) => object.id === top);
+      const spell =
+        top?.kind === "spell"
+          ? observation.objects.find((object) => object.id === top.objectId)
+          : undefined;
       if (!spell?.card.spellProgram || spell.controller !== observation.player)
         throw new Error("Target decision lacks its public announced spell");
       const harmful = spell.card.spellProgram.effects.some((effect) =>

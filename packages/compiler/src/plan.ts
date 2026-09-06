@@ -1,7 +1,25 @@
-import { SPELL_FAMILY_VERSION } from "@iwsdk-apps/card-programs";
-import { ContentRelease, DeckRevision, semanticHash } from "@iwsdk-apps/contracts";
+import {
+  reviewedSelfEntryDefinition,
+  SELF_ENTRY_RECIPE_VERSION,
+  SPELL_FAMILY_VERSION,
+} from "@iwsdk-apps/card-programs";
+import {
+  type CardDefinition,
+  ContentRelease,
+  DeckRevision,
+  semanticHash,
+} from "@iwsdk-apps/contracts";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/1";
+export const MATCH_PLAN_VERSION = "development-match-plan/2";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.7.0";
+export const SELF_ENTRY_CORE_CAPABILITIES = [
+  "trigger:capture",
+  "trigger:waiting",
+  "trigger:apnap",
+  "trigger:noncard-stack",
+  "trigger:resolution",
+  "trigger:serialization",
+] as const;
 export type Dependency =
   | { kind: "exact"; identity: string }
   | { kind: "class-bounded"; classId: string; boundVersion: string }
@@ -111,6 +129,17 @@ const RECOGNIZED_RECIPES = new Set([
   "reviewed-spell/1",
   SPELL_FAMILY_VERSION,
 ]);
+function recognizedDependencyDeclaration(
+  definition: CardDefinition,
+  processorAbi: string,
+): boolean {
+  if (definition.implementationRevision === SELF_ENTRY_RECIPE_VERSION)
+    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedSelfEntryDefinition(definition);
+  return (
+    definition.triggerPrograms === undefined &&
+    RECOGNIZED_RECIPES.has(definition.implementationRevision)
+  );
+}
 /** Reviewed development families create no tokens, copied/granted abilities, or external definitions. */
 export async function buildDevelopmentMatchPlan(
   releaseInput: ContentRelease,
@@ -132,12 +161,14 @@ export async function buildDevelopmentMatchPlan(
       deck.commander,
       ...deck.entries.map((entry) => entry.definition),
     ]),
-    registry: Object.values(release.definitions).map((definition) => ({
-      identity: definition.id,
-      implemented: RECOGNIZED_RECIPES.has(definition.implementationRevision),
-      dependencies: RECOGNIZED_RECIPES.has(definition.implementationRevision) ? [] : null,
-    })),
-    core: DEVELOPMENT_CORE.map((identity) => ({ identity, implemented: true })),
+    registry: Object.values(release.definitions).map((definition) => {
+      const known = recognizedDependencyDeclaration(definition, release.processorAbi);
+      return { identity: definition.id, implemented: known, dependencies: known ? [] : null };
+    }),
+    core: [
+      ...DEVELOPMENT_CORE,
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI ? SELF_ENTRY_CORE_CAPABILITIES : []),
+    ].map((identity) => ({ identity, implemented: true })),
   });
   const base = {
     schema: MATCH_PLAN_VERSION,

@@ -1,5 +1,6 @@
 import {
   ContentRelease,
+  GameCommand,
   MatchManifest,
   PreparedMatchArtifact,
   semanticHash,
@@ -16,7 +17,13 @@ import {
   replayMatch,
   StorageError,
 } from "../src/index";
-import { executionEvidence, setupEvidence, spellEvidence } from "./spell-evidence";
+import {
+  atProofStage,
+  executionEvidence,
+  setupEvidence,
+  spellEvidence,
+  triggerEvidence,
+} from "./spell-evidence";
 
 const Request = z.discriminatedUnion("operation", [
   z.strictObject({
@@ -29,10 +36,11 @@ const Request = z.discriminatedUnion("operation", [
   z.strictObject({ operation: z.literal("import"), namespace: z.string(), text: z.string() }),
   z.strictObject({
     operation: z.literal("run"),
-    stopAt: z.enum(["starting-player", "payment", "target"]).nullable(),
+    stopAt: z.enum(["starting-player", "payment", "target", "pending-trigger"]).nullable(),
     maxCommands: z.number().int().positive().max(20_000),
   }),
   z.strictObject({ operation: z.literal("snapshot") }),
+  z.strictObject({ operation: z.literal("submit"), actor: z.string(), command: GameCommand }),
   z.strictObject({ operation: z.literal("export") }),
   z.strictObject({ operation: z.literal("retryLast") }),
   z.strictObject({ operation: z.literal("retryStartingChoice") }),
@@ -69,6 +77,7 @@ async function snapshot() {
     decision: state.decision,
     outcome: state.outcome,
     spells: spellEvidence(archive, session.release),
+    triggers: triggerEvidence(archive),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
     setup: setupEvidence(session.coordinator, archive),
     storage: {
@@ -108,13 +117,18 @@ async function handle(input: unknown): Promise<unknown> {
         seed: session.coordinator.current().manifest.driverSeed,
         maxCommands: request.maxCommands,
         ...(request.stopAt
-          ? { stopAt: (observation) => observation.decision?.kind === request.stopAt }
+          ? {
+              stopAt: (observation) =>
+                request.stopAt !== null && atProofStage(observation, request.stopAt),
+            }
           : {}),
         onProgress: (revision) => self.postMessage({ progress: revision }),
       });
     }
     case "snapshot":
       return snapshot();
+    case "submit":
+      return requireOpen().coordinator.submit(request.actor, request.command);
     case "export": {
       const session = requireOpen();
       return exportMatch(session.repo, session.release, session.coordinator.current().manifest.id);

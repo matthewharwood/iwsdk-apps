@@ -1,6 +1,7 @@
 import { Database } from "bun:sqlite";
 
 export { buildDevelopmentMatchPlan, computeDependencyClosure, MATCH_PLAN_VERSION } from "./plan";
+export { compileSelfEntryDraft } from "./self-entry-expansion";
 export { compileSpellFamilyDraft } from "./spell-expansion";
 
 import {
@@ -9,6 +10,9 @@ import {
   RECIPE_REGISTRY,
   RECIPE_VERSION,
   REVIEWED_SPELLS,
+  reviewedSelfEntryDefinition,
+  SELF_ENTRY_RECIPE_VERSION,
+  SELF_ENTRY_REGISTRY,
   SPELL_FAMILY_REGISTRY,
   SPELL_FAMILY_VERSION,
 } from "@iwsdk-apps/card-programs";
@@ -43,12 +47,13 @@ export interface CompilationReport {
   unresolvedEligibility: { identity: string; name: string; role: string; reason: string }[];
   executedAssertions: 0;
   spellFamilies: { enabled: boolean; version: string; registry: typeof SPELL_FAMILY_REGISTRY };
+  selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
 }
 
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
 export async function compileDevelopmentRelease(
   dbPath: string,
-  options: { spellFamilies?: boolean } = {},
+  options: { spellFamilies?: boolean; selfEntryTriggers?: boolean } = {},
 ): Promise<{ release: ContentRelease; report: CompilationReport }> {
   const inventory = readInventory(dbPath);
   if (!inventory || inventory.status !== "complete")
@@ -74,6 +79,11 @@ export async function compileDevelopmentRelease(
       )
       .all(inventory.importId),
     executedAssertions: 0,
+    selfEntryTriggers: {
+      enabled: options.selfEntryTriggers === true,
+      version: SELF_ENTRY_RECIPE_VERSION,
+      registry: SELF_ENTRY_REGISTRY,
+    },
     spellFamilies: {
       enabled: options.spellFamilies === true,
       version: SPELL_FAMILY_VERSION,
@@ -113,7 +123,7 @@ export async function compileDevelopmentRelease(
     throw new Error("Compiler candidate denominator mismatch");
   const base = {
     schema: "commander-content/1" as const,
-    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}`,
+    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}`,
     sourceBundle: inventory.bundleHash,
     rulesHash,
     profile: "tabletop-commander" as const,
@@ -121,9 +131,7 @@ export async function compileDevelopmentRelease(
     definitions,
     unsupportedOracleIds: report.unsupported.map((card) => card.identity),
     eligibleDenominator: candidates.length,
-    compilerVersion: options.spellFamilies
-      ? `${COMPILER_VERSION}+spell-families/1`
-      : COMPILER_VERSION,
+    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}`,
     processorAbi: ENGINE_VERSION,
   };
   return { release: ContentRelease.parse({ ...base, hash: await semanticHash(base) }), report };
@@ -136,6 +144,7 @@ interface DeckProfile {
   commanderSourceVersion?: string;
   spells?: readonly string[];
   familyLibrary?: boolean;
+  triggerLibrary?: boolean;
 }
 const DECK_PROFILES: DeckProfile[] = [
   { commander: "Jasmine Boreal", focus: "vanilla", code: "gw-vanilla" },
@@ -190,6 +199,47 @@ export const FAMILY_DECK_PROFILES: readonly DeckProfile[] = [
     familyLibrary: true,
   },
 ];
+
+export const TRIGGER_DECK_PROFILES: readonly DeckProfile[] = [
+  {
+    commander: "Jasmine Boreal",
+    commanderSourceVersion: "715ac4501a52d881b939d5793a333b1e407382c7aec56be50a2e2f2b4159d7b5",
+    focus: "vanilla",
+    code: "gw-self-entry-library",
+    triggerLibrary: true,
+  },
+  {
+    commander: "Sivitri Scarzam",
+    commanderSourceVersion: "848d9ade8051172c06537d6f69dd3a6612df2d3441d20756bc4ca3c9f9458bbf",
+    focus: "vanilla",
+    code: "ub-self-entry-library",
+    triggerLibrary: true,
+  },
+];
+
+function deckTriggers(
+  release: ContentRelease,
+  commander: CardDefinition,
+  profile: DeckProfile,
+): CardDefinition[] {
+  if (!profile.triggerLibrary) return [];
+  const triggers = Object.values(release.definitions)
+    .filter(
+      (definition) =>
+        definition.triggerPrograms &&
+        definition.id !== commander.id &&
+        definition.colorIdentity.every((color) => commander.colorIdentity.includes(color)),
+    )
+    .sort((a, b) => compare(a.id, b.id));
+  if (triggers.length === 0 || triggers.length > 60)
+    throw new Error(
+      `Trigger fixture needs between 1 and 60 compatible programs: ${profile.commander}`,
+    );
+  for (const definition of triggers)
+    if (!reviewedSelfEntryDefinition(definition))
+      throw new Error(`Unreviewed or altered trigger definition: ${definition.name}`);
+  return triggers;
+}
 
 function reviewedFamilyProgram(definition: CardDefinition): boolean {
   if (definition.implementationRevision === SPELL_FAMILY_VERSION) {
@@ -262,6 +312,7 @@ function deckCreatures(
   const candidates = Object.values(release.definitions).filter(
     (card) =>
       card.types.includes("Creature") &&
+      card.triggerPrograms === undefined &&
       card.id !== commander.id &&
       card.colorIdentity.every((color) => commander.colorIdentity.includes(color)) &&
       (card.power ?? 0) > 0 &&
@@ -286,18 +337,24 @@ function deckCreatures(
 /** Twelve creature fixtures plus two spell fixtures; existence is not completed-game evidence. */
 export async function makeDevelopmentDecks(
   releaseInput: ContentRelease,
-  options: { includeSpellDecks?: boolean; includeFamilyDecks?: boolean } = {},
+  options: {
+    includeSpellDecks?: boolean;
+    includeFamilyDecks?: boolean;
+    includeTriggerDecks?: boolean;
+  } = {},
 ): Promise<DeckRevision[]> {
   const release = ContentRelease.parse(releaseInput);
   const { hash: releaseHash, ...releaseBody } = release;
   if ((await semanticHash(releaseBody)) !== releaseHash)
     throw new Error("Content release hash mismatch");
   const decks: DeckRevision[] = [];
-  const profiles = options.includeFamilyDecks
-    ? [...DECK_PROFILES, ...SPELL_DECK_PROFILES, ...FAMILY_DECK_PROFILES]
-    : options.includeSpellDecks === false
-      ? DECK_PROFILES
-      : [...DECK_PROFILES, ...SPELL_DECK_PROFILES];
+  const profiles = options.includeTriggerDecks
+    ? [...DECK_PROFILES, ...SPELL_DECK_PROFILES, ...FAMILY_DECK_PROFILES, ...TRIGGER_DECK_PROFILES]
+    : options.includeFamilyDecks
+      ? [...DECK_PROFILES, ...SPELL_DECK_PROFILES, ...FAMILY_DECK_PROFILES]
+      : options.includeSpellDecks === false
+        ? DECK_PROFILES
+        : [...DECK_PROFILES, ...SPELL_DECK_PROFILES];
   for (const [index, profile] of profiles.entries()) {
     const commander = Object.values(release.definitions).find(
       (card) => card.name === profile.commander,
@@ -310,9 +367,10 @@ export async function makeDevelopmentDecks(
     )
       throw new Error(`Commander source changed: ${profile.commander}`);
     const spells = deckSpells(release, commander, profile);
+    const triggers = deckTriggers(release, commander, profile);
     const creatures = deckCreatures(release, commander, profile.focus, index).slice(
       0,
-      60 - spells.length,
+      60 - spells.length - triggers.length,
     );
     const lands = commander.colorIdentity.map((color) =>
       Object.values(release.definitions).find(
@@ -329,6 +387,7 @@ export async function makeDevelopmentDecks(
       { definition: commander.id, count: 1 },
       ...creatures.map((card) => ({ definition: card.id, count: 1 })),
       ...spells.map((card) => ({ definition: card.id, count: 1 })),
+      ...triggers.map((card) => ({ definition: card.id, count: 1 })),
       ...lands.map((land, ordinal) => ({
         definition: (land as CardDefinition).id,
         count: ordinal === 0 ? 20 : 19,
@@ -341,9 +400,9 @@ export async function makeDevelopmentDecks(
     };
     decks.push(DeckRevision.parse({ ...base, hash: await semanticHash(base) }));
   }
-  if (options.includeFamilyDecks) {
+  if (options.includeFamilyDecks || options.includeTriggerDecks) {
     const included = new Set(
-      decks.slice(-3).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
+      decks.slice(14, 17).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
     );
     const missing = Object.values(release.definitions).filter(
       (definition) => definition.spellProgram && !included.has(definition.id),
@@ -351,6 +410,18 @@ export async function makeDevelopmentDecks(
     if (missing.length > 0)
       throw new Error(
         `Family fixtures do not cover all admitted spell programs: ${missing.map((card) => card.name).join(", ")}`,
+      );
+  }
+  if (options.includeTriggerDecks) {
+    const included = new Set(
+      decks.slice(17).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
+    );
+    const missing = Object.values(release.definitions).filter(
+      (definition) => definition.triggerPrograms && !included.has(definition.id),
+    );
+    if (missing.length > 0)
+      throw new Error(
+        `Trigger fixtures do not cover all admitted trigger programs: ${missing.map((card) => card.name).join(", ")}`,
       );
   }
   return decks;

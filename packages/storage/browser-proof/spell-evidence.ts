@@ -1,4 +1,4 @@
-import type { ContentRelease } from "@iwsdk-apps/contracts";
+import type { ContentRelease, PlayerObservation } from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
 
 function removals(record: MatchArchive["records"][number], release: ContentRelease) {
@@ -93,4 +93,37 @@ export function setupEvidence(coordinator: Coordinator, archive: MatchArchive) {
     acceptedChoices: choices.length,
     firstChoice: choices[0] ? { command: choices[0].command, receipt: choices[0].receipt } : null,
   };
+}
+
+/** Counts only captured/resolved occurrences actually emitted by the engine. */
+export function triggerEvidence(archive: MatchArchive) {
+  const captured: Record<string, number> = {};
+  const resolved: Record<string, number> = {};
+  for (const record of archive.records)
+    for (const event of record.events) {
+      const id = event.data.definition;
+      if (typeof id !== "string") continue;
+      if (event.type === "TriggerCaptured") captured[id] = (captured[id] ?? 0) + 1;
+      if (event.type === "TriggeredAbilityResolved") resolved[id] = (resolved[id] ?? 0) + 1;
+    }
+  return {
+    captured,
+    resolved,
+    pending: archive.current.stack.flatMap((entry) =>
+      entry.kind === "triggered-ability" ? [entry.triggerId] : [],
+    ),
+    abilities: archive.current.abilities,
+    absentCapturedSources: Object.values(archive.current.abilities)
+      .filter((ability) => !archive.current.objects[ability.source.id])
+      .map((ability) => ability.source.id),
+    pendingTriggers: archive.current.pendingTriggers,
+    placement: archive.current.triggerPlacement,
+  };
+}
+export type ProofStage = "starting-player" | "target" | "payment" | "pending-trigger";
+export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean {
+  return kind === "pending-trigger"
+    ? view.decision?.kind === "priority" &&
+        view.stack.some((entry) => entry.kind === "triggered-ability")
+    : view.decision?.kind === kind;
 }

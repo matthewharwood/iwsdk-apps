@@ -1,5 +1,9 @@
 import { expect, test } from "bun:test";
-import { parsePlainManaCost, REVIEWED_SPELLS } from "@iwsdk-apps/card-programs";
+import {
+  parsePlainManaCost,
+  proposeSelfEntryBody,
+  REVIEWED_SPELLS,
+} from "@iwsdk-apps/card-programs";
 import {
   CardDefinition,
   ContentRelease,
@@ -9,7 +13,12 @@ import {
   semanticHash,
 } from "@iwsdk-apps/contracts";
 import { admitDeck } from "@iwsdk-apps/engine";
-import { makeDevelopmentDecks, REVIEWED_RULES_HASH, SPELL_DECK_PROFILES } from "./index";
+import {
+  makeDevelopmentDecks,
+  REVIEWED_RULES_HASH,
+  SPELL_DECK_PROFILES,
+  TRIGGER_DECK_PROFILES,
+} from "./index";
 
 async function fixtureRelease(): Promise<ContentRelease> {
   const definitions: Record<string, CardDefinition> = {};
@@ -130,6 +139,80 @@ function assertFamilyCoverage(release: ContentRelease, families: DeckRevision[])
     expect(() => admitDeck(deck, release)).not.toThrow();
   }
   expect([...covered].sort()).toEqual(allSpells);
+}
+
+async function assertTriggerComposition(releaseInput: ContentRelease, template: CardDefinition) {
+  const release = structuredClone(releaseInput);
+  const profile = TRIGGER_DECK_PROFILES[1];
+  if (!profile?.commanderSourceVersion) throw new Error("Missing pinned trigger commander");
+  release.definitions["fixture:sivitri"] = {
+    ...template,
+    id: "fixture:sivitri",
+    oracleId: "fixture:sivitri",
+    name: profile.commander,
+    sourceVersion: profile.commanderSourceVersion,
+    commanderEligible: true,
+    supertypes: ["Legendary"],
+    colorIdentity: ["B", "U"],
+  };
+  // These are isolated composition fixtures, not source-card execution evidence.
+  for (const [id, colorIdentity, text] of [
+    ["fixture:green-entry", ["G"], "When this creature enters, draw a card."],
+    ["fixture:blue-black-entry", ["U", "B"], "When this creature enters, you gain 3 life."],
+  ] as const) {
+    const proposal = proposeSelfEntryBody(text);
+    if (!proposal) throw new Error("Missing fixture constructor");
+    release.definitions[id] = {
+      ...template,
+      id,
+      oracleId: id,
+      name: id,
+      colorIdentity: [...colorIdentity],
+      manaValue: Object.values(template.manaCost ?? {}).reduce((sum, amount) => sum + amount, 0),
+      oracleText: text,
+      triggerPrograms: [proposal.program],
+      implementationRevision: "self-entry-creature/1",
+    };
+  }
+  const { hash: _oldHash, ...body } = release;
+  release.hash = await semanticHash(body);
+  const baseline = await makeDevelopmentDecks(release, { includeFamilyDecks: true });
+  const expanded = await makeDevelopmentDecks(release, { includeTriggerDecks: true });
+  expect(expanded).toHaveLength(19);
+  expect(expanded.slice(0, 17)).toEqual(baseline);
+  expect(
+    baseline
+      .flatMap((deck) => deck.entries)
+      .some((entry) => release.definitions[entry.definition]?.triggerPrograms),
+  ).toBe(false);
+  expect(new Set(expanded.map((deck) => deck.hash)).size).toBe(19);
+  const included = new Set<string>();
+  for (const deck of expanded.slice(17)) {
+    expect(() => admitDeck(deck, release)).not.toThrow();
+    expect(deck.entries.reduce((sum, entry) => sum + entry.count, 0)).toBe(100);
+    expect(
+      deck.entries
+        .filter((entry) => entry.count > 1)
+        .map((entry) => entry.count)
+        .sort(),
+    ).toEqual([19, 20]);
+    expect(new Set(deck.entries.map((entry) => entry.definition)).size).toBe(deck.entries.length);
+    for (const entry of deck.entries)
+      if (release.definitions[entry.definition]?.triggerPrograms) included.add(entry.definition);
+  }
+  expect([...included].sort()).toEqual(["fixture:blue-black-entry", "fixture:green-entry"]);
+  for (const change of ["altered-program", "uncovered-color", "commander-source"]) {
+    const altered = structuredClone(release);
+    const trigger = altered.definitions["fixture:green-entry"];
+    const commander = altered.definitions["fixture:sivitri"];
+    if (!trigger?.triggerPrograms?.[0] || !commander) throw new Error("Missing trigger fixture");
+    if (change === "altered-program") trigger.triggerPrograms[0].effect.amount = 2;
+    if (change === "uncovered-color") trigger.colorIdentity = ["R"];
+    if (change === "commander-source") commander.sourceVersion = "0".repeat(64);
+    const { hash: _hash, ...changedBody } = altered;
+    altered.hash = await semanticHash(changedBody);
+    await expect(makeDevelopmentDecks(altered, { includeTriggerDecks: true })).rejects.toThrow();
+  }
 }
 
 test("twelve deterministic composition fixtures preserve count, singleton, color and source-release hashes", async () => {
@@ -270,6 +353,7 @@ test("spell deck profiles retain seven pinned programs, legal 100-card compositi
   expect(families).toHaveLength(17);
   expect(new Set(families.map((deck) => deck.hash)).size).toBe(17);
   assertFamilyCoverage(release, families);
+  await assertTriggerComposition(release, template);
   const tampered = structuredClone(release);
   const alteredSpell = tampered.definitions["family:draw-three"];
   if (!alteredSpell) throw new Error("Missing family spell");

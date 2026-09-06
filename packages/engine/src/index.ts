@@ -12,6 +12,7 @@ import { assertRegistryPin, definition, emit, RulesError, requireActivePlayer } 
 import { assertInvariants } from "./invariants";
 import { orderedObjects } from "./object-order";
 import { bottom, chooseStartingPlayer, mulligan } from "./setup";
+import { answerTriggerOrder } from "./triggers";
 import { answerDiscard, givePriority, passPriority, startTurn } from "./turns";
 
 export { RulesError } from "./common";
@@ -53,6 +54,9 @@ function answer(
   response: Response,
 ): void {
   switch (kind) {
+    case "trigger-order":
+      if (answerTriggerOrder(state, actor, response)) givePriority(state, release);
+      return;
     case "starting-player":
       chooseStartingPlayer(state, actor, response);
       return;
@@ -204,6 +208,12 @@ export function observe(
       })),
     decision: state.decision?.actor === actor ? structuredClone(state.decision) : null,
     combat: structuredClone(state.combat),
-    stack: [...state.stack],
+    stack: structuredClone(state.stack),
+    abilities: Object.values(state.abilities)
+      .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+      .map((ability) => ({
+        ...structuredClone(ability),
+        sourceCard: structuredClone(definition(release, ability.source.definition)),
+      })),
   };
 }

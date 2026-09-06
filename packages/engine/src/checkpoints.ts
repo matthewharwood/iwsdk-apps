@@ -31,6 +31,7 @@ function eliminate(state: RulesState, losses: { player: string; reason: string }
     seat.lossReason = entry.reason;
   }
   const lost = new Set(losses.map((entry) => entry.player));
+  removeDepartedTriggers(state, lost);
   for (const entry of orderedObjects(state)) {
     if (lost.has(entry.owner)) {
       removeFromLists(state, entry.id);
@@ -99,7 +100,7 @@ function recordDeathRules(state: RulesState, release: ExecutionRegistry, id: str
     if (entry.deathtouchDamage) hit(state, "rule:704.5h");
   }
 }
-export function checkpoint(
+function stateBasedActions(
   state: RulesState,
   release: ExecutionRegistry,
 ): { waiting: boolean; changed: boolean } {
@@ -156,6 +157,25 @@ export function checkpoint(
   }
   return { waiting: commanderChoice(state), changed };
 }
+
+export function checkpoint(
+  state: RulesState,
+  release: ExecutionRegistry,
+): { waiting: boolean; changed: boolean } {
+  let changed = false;
+  for (let iteration = 0; iteration < 1000; iteration++) {
+    const sba = stateBasedActions(state, release);
+    changed ||= sba.changed;
+    if (sba.waiting || state.outcome.kind !== "ongoing") return { waiting: sba.waiting, changed };
+    const placement = placeWaitingTriggers(state);
+    changed ||= placement.changed;
+    if (placement.waiting || !placement.changed) return { waiting: placement.waiting, changed };
+  }
+  throw new RulesError(
+    "UnsupportedMechanic",
+    "Checkpoint requires a resumable trigger-loop policy",
+  );
+}
 export function answerCommanderZone(state: RulesState, actor: string, response: Response): boolean {
   requireRule(response.kind === "commander-zone", "Expected commander destination choice");
   const frame = state.frames.at(-1);
@@ -177,3 +197,4 @@ export function answerCommanderZone(state: RulesState, actor: string, response: 
 }
 
 import { orderedObjects } from "./object-order";
+import { placeWaitingTriggers, removeDepartedTriggers } from "./triggers";

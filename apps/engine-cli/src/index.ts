@@ -11,6 +11,7 @@ import {
 } from "@iwsdk-apps/catalog";
 import {
   compileDevelopmentRelease,
+  compileSelfEntryDraft,
   compileSpellFamilyDraft,
   makeDevelopmentDecks,
 } from "@iwsdk-apps/compiler";
@@ -272,18 +273,27 @@ async function runExecutionCommand(command: string | undefined): Promise<boolean
   return true;
 }
 async function compileCatalog(): Promise<void> {
+  const triggers = args.includes("--self-entry-triggers");
   const families = args.includes("--spell-families");
-  const compiled = families
-    ? await compileSpellFamilyDraft(catalogPath)
-    : await compileDevelopmentRelease(catalogPath);
-  const decks = await makeDevelopmentDecks(compiled.release, { includeFamilyDecks: families });
+  const compiled = triggers
+    ? await compileSelfEntryDraft(catalogPath)
+    : families
+      ? await compileSpellFamilyDraft(catalogPath)
+      : await compileDevelopmentRelease(catalogPath);
+  const decks = await makeDevelopmentDecks(compiled.release, {
+    includeFamilyDecks: families,
+    includeTriggerDecks: triggers,
+  });
   const retained = resolve(directory, "compilations", compiled.release.hash);
   await mkdir(retained, { recursive: true });
   await write(resolve(retained, "release.json"), compiled.release);
   await write(resolve(retained, "report.json"), compiled.report);
   await write(resolve(retained, "decks.json"), decks);
   if ("expansion" in compiled)
-    await write(resolve(retained, "spell-family-expansion.json"), compiled.expansion);
+    await write(
+      resolve(retained, triggers ? "self-entry-expansion.json" : "spell-family-expansion.json"),
+      compiled.expansion,
+    );
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))
     await write(resolve(directory, "development-compilation.json"), compiled.report);

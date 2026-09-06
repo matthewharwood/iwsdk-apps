@@ -3,7 +3,7 @@ import { CONTRACT_VERSION, type PlayerObservation, Response } from "@iwsdk-apps/
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/2";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/3";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;
@@ -49,6 +49,7 @@ function present(observation: PlayerObservation, write: (line: string) => void):
       activePlayer: observation.activePlayer,
       players: observation.players,
       combat: observation.combat,
+      stack: observation.stack,
     }),
   );
   write(
@@ -72,6 +73,17 @@ function present(observation: PlayerObservation, write: (line: string) => void):
     )}`,
   );
   write(`Decision constraints: ${JSON.stringify(observation.decision)}`);
+  write(
+    `Triggered abilities: ${JSON.stringify(
+      observation.abilities.map((ability) => ({
+        id: ability.id,
+        source: ability.source.id,
+        name: ability.sourceCard.name,
+        controller: ability.controller,
+        effect: ability.program.effect,
+      })),
+    )}`,
+  );
 }
 
 async function proposal(

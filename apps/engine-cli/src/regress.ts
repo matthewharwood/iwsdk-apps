@@ -16,7 +16,7 @@ import {
 import { admitDeck } from "@iwsdk-apps/engine";
 import { DRIVER_VERSION } from "@iwsdk-apps/simulation";
 import { z } from "zod";
-import { executeAssignedGames } from "./batch";
+import { deckCompositionKey, executeAssignedGames } from "./batch";
 import { archiveBuild, writeEvidence } from "./evidence";
 
 const Corpus = z.strictObject({
@@ -64,6 +64,7 @@ export async function planRegression(raw: unknown, content: ContentRelease, id: 
   if (content.rulesHash !== corpus.rulesHash) throw new Error("Regression rules source changed");
   const decks = new Map<string, DeckRevision>();
   const usedDefinitions = new Set<string>();
+  const compositions = new Set<string>();
   for (const deck of corpus.decks) {
     const { hash, ...body } = deck;
     if ((await semanticHash(body)) !== hash || decks.has(hash))
@@ -71,8 +72,10 @@ export async function planRegression(raw: unknown, content: ContentRelease, id: 
     admitDeck(deck, content);
     for (const entry of deck.entries) usedDefinitions.add(entry.definition);
     decks.set(hash, deck);
+    compositions.add(deckCompositionKey(deck));
   }
-  if (decks.size !== corpus.distinctDecks) throw new Error("Regression deck denominator changed");
+  if (compositions.size !== corpus.distinctDecks)
+    throw new Error("Regression deck denominator changed");
   if (Object.keys(corpus.definitionSourcePins).length !== usedDefinitions.size)
     throw new Error("Regression definition source pin closure is incomplete");
   for (const definition of usedDefinitions) {
@@ -89,14 +92,6 @@ export async function planRegression(raw: unknown, content: ContentRelease, id: 
     caseIds.add(item.id);
     if (!corpus.baselineBuildHashes.includes(item.baseline.buildHash))
       throw new Error("Regression baseline build is not declared");
-    const identity = await semanticHash({
-      mode: item.mode,
-      gameSeed: item.gameSeed,
-      driverSeed: item.driverSeed,
-      seats: item.seats,
-    });
-    if (identities.has(identity)) throw new Error("Regression repeats identical game inputs");
-    identities.add(identity);
     if (
       item.seats.length !== (item.mode === "two-seat" ? 2 : 4) ||
       new Set(item.seats.map((seat) => seat.id)).size !== item.seats.length
@@ -105,9 +100,17 @@ export async function planRegression(raw: unknown, content: ContentRelease, id: 
     const seats = item.seats.map((seat) => {
       const deck = decks.get(seat.deckHash);
       if (!deck) throw new Error("Regression references an undeclared deck");
-      usedDecks.add(deck.hash);
+      usedDecks.add(deckCompositionKey(deck));
       return { id: seat.id, deck };
     });
+    const identity = await semanticHash({
+      mode: item.mode,
+      gameSeed: item.gameSeed,
+      driverSeed: item.driverSeed,
+      seatCompositions: seats.map((seat) => deckCompositionKey(seat.deck)),
+    });
+    if (identities.has(identity)) throw new Error("Regression repeats identical game inputs");
+    identities.add(identity);
     const artifact = await createPreparedMatchArtifact(
       content,
       seats.map((seat) => seat.deck),
