@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "globalEnv": ["NODE_ENV", "CI"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "env": ["BASE_PATH", "VITE_*"],
+      "outputs": ["dist/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev:quest": {
+      "cache": false,
+      "persistent": true,
+      "env": ["XR_DEV", "XR_CERT", "XR_KEY"]
+    }
+  }
+}

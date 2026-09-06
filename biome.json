@@ -1,0 +1,37 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.13/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!**/routeTree.gen.ts",
+      "!**/dist",
+      "!**/node_modules",
+      "!**/storybook-static",
+      "!**/test-results",
+      "!**/playwright-report",
+      "!**/.turbo",
+      "!**/.generated",
+      "!**/.tanstack",
+      "!**/public/litert",
+      "!**/public/sqlite",
+      "!**/public/xr-profiles"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}

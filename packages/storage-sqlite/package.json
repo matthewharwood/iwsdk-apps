@@ -1,0 +1,22 @@
+{
+  "name": "@iwsdk-apps/storage-sqlite",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./browser": "./src/browser.ts"
+  },
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "test:unit": "bun test src"
+  },
+  "dependencies": {
+    "@iwsdk-apps/schemas": "workspace:*",
+    "@iwsdk-apps/game-core": "workspace:*",
+    "@sqlite.org/sqlite-wasm": "3.53.0-build1"
+  },
+  "devDependencies": {
+    "@iwsdk-apps/tsconfig": "workspace:*"
+  }
+}
