@@ -1,4 +1,5 @@
 import {
+  COUNTER_SPELLS,
   KEYWORD_REMINDER_REGISTRY,
   RECIPE_REGISTRY,
   SELF_ENTRY_REGISTRY,
@@ -121,6 +122,7 @@ async function artifactFor(
       spellFamilies: SPELL_FAMILY_REGISTRY,
       selfEntryTriggers: SELF_ENTRY_REGISTRY,
       keywordReminders: KEYWORD_REMINDER_REGISTRY,
+      counterSpells: COUNTER_SPELLS,
       reviewedBindingSnapshot: REVIEWED_BINDING_SNAPSHOT,
       reviewedBindingGuard: "closed-source-registry-bundle-rules/1",
       selfEntrySequences: SELF_ENTRY_SEQUENCES,

@@ -1,4 +1,17 @@
 import type { CatalogCard } from "@iwsdk-apps/catalog";
+import { bindCounterSpell, COUNTER_SPELL_VERSION } from "./counter-spells";
+
+export {
+  bindCounterSpell,
+  COUNTER_SPELL_ARCHIVE,
+  COUNTER_SPELL_RULES,
+  COUNTER_SPELL_SOURCE_BUNDLE,
+  COUNTER_SPELL_VERSION,
+  COUNTER_SPELLS,
+  type CounterSpellSource,
+  reviewedCounterSpellDefinition,
+} from "./counter-spells";
+
 import {
   CardDefinition,
   type Cost,
@@ -427,6 +440,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  counterSpells?: boolean;
   spellFamilies?: boolean;
   selfEntryTriggers?: boolean;
   selfEntrySequences?: boolean;
@@ -438,6 +452,10 @@ function bindSpell(
   parts: NonNullable<ReturnType<typeof characteristics>>,
   options: BindingOptions,
 ): BindingResult {
+  if (options.counterSpells) {
+    const definition = bindCounterSpell(input);
+    if (definition) return { kind: "bound", definition, recipes: [COUNTER_SPELL_VERSION] };
+  }
   if (options.temporaryCreatureSpells) {
     const definition = bindTemporaryCreatureSpell(input);
     if (definition) return { kind: "bound", definition, recipes: [TEMPORARY_CREATURE_VERSION] };

@@ -1,0 +1,746 @@
+{
+  "schema": "counter-source-scenario-fixture/1",
+  "originReleaseHash": "58b8f2dd09d699ef232ba49257e0287eb8ca204902a9addddb499f73e3084739",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "scope": "Fourteen unchanged authenticated definitions. A separate fixture subset release receives its own hash and production source admission; constructed hand and land placement are not ordinary full-game evidence.",
+  "cards": [
+    {
+      "name": "Tobias Andrion",
+      "definitionHash": "365fec2b964ad15e9b6220cd867ec6b089bf77e21e9c611bacbb8117899d6125",
+      "definition": {
+        "id": "oracle:55dfe722-7487-4d25-b90c-e6ad2c82a671",
+        "oracleId": "55dfe722-7487-4d25-b90c-e6ad2c82a671",
+        "sourceVersion": "155d17db86833acd61d834269e09d90b88c99604cc3c9404c75e22ae72dc9758",
+        "name": "Tobias Andrion",
+        "typeLine": "Legendary Creature — Human Advisor",
+        "types": ["Creature"],
+        "subtypes": ["Human", "Advisor"],
+        "supertypes": ["Legendary"],
+        "colors": ["U", "W"],
+        "colorIdentity": ["U", "W"],
+        "manaCost": {
+          "W": 1,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 5,
+        "power": 4,
+        "toughness": 4,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "",
+        "commanderEligible": true,
+        "deckLimit": 1,
+        "obligations": ["rule:302", "rule:601.2", "rule:903.5", "rule:704.5j", "rule:903.3"],
+        "implementationRevision": "commander-development-recipes/1"
+      }
+    },
+    {
+      "name": "Island",
+      "definitionHash": "0f771503a3d19dd1fd5458ade39ef009a9c130ad0e084a01ab4a261aa027261d",
+      "definition": {
+        "id": "oracle:b2c6aa39-2d2a-459c-a555-fb48ba993373",
+        "oracleId": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+        "sourceVersion": "6fba8f4cae5af7838b16a40667d8de8b4830d9631b1c08e424717ef98ff8daaf",
+        "name": "Island",
+        "typeLine": "Basic Land — Island",
+        "types": ["Land"],
+        "subtypes": ["Island"],
+        "supertypes": ["Basic"],
+        "colors": [],
+        "colorIdentity": ["U"],
+        "manaCost": null,
+        "manaValue": 0,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": ["U"],
+        "oracleText": "({T}: Add {U}.)",
+        "commanderEligible": false,
+        "deckLimit": null,
+        "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+        "implementationRevision": "commander-development-recipes/1"
+      }
+    },
+    {
+      "name": "Plains",
+      "definitionHash": "298ea924cdd540f959f65c38cf61b7d70a6d5ec0b95f89d653c6586a5eca170a",
+      "definition": {
+        "id": "oracle:bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+        "oracleId": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+        "sourceVersion": "64b256df7b5163d34368b81909121f02b208b0e27e5358319752f001055f2510",
+        "name": "Plains",
+        "typeLine": "Basic Land — Plains",
+        "types": ["Land"],
+        "subtypes": ["Plains"],
+        "supertypes": ["Basic"],
+        "colors": [],
+        "colorIdentity": ["W"],
+        "manaCost": null,
+        "manaValue": 0,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": ["W"],
+        "oracleText": "({T}: Add {W}.)",
+        "commanderEligible": false,
+        "deckLimit": null,
+        "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+        "implementationRevision": "commander-development-recipes/1"
+      }
+    },
+    {
+      "name": "Priest of Ancient Lore",
+      "definitionHash": "8ed337f8acbd95ad3e76316fa7456847f8df285a762e2d0d1ecdfa126dc25240",
+      "definition": {
+        "id": "oracle:a89b0fd5-84b2-487c-8b03-e78d97276fd3",
+        "oracleId": "a89b0fd5-84b2-487c-8b03-e78d97276fd3",
+        "sourceVersion": "dcec03ce58fe31bdf5aae97fffc6739562254aa2fa274cdb639c88a7442a7ba3",
+        "name": "Priest of Ancient Lore",
+        "typeLine": "Creature — Dwarf Cleric",
+        "types": ["Creature"],
+        "subtypes": ["Dwarf", "Cleric"],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": 2,
+        "toughness": 1,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "When this creature enters, you gain 1 life and draw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:302",
+          "rule:601.2",
+          "rule:903.5",
+          "rule:603.2",
+          "rule:603.2c",
+          "rule:603.3",
+          "rule:603.3a",
+          "rule:603.3b",
+          "rule:603.6a",
+          "rule:603.6b",
+          "rule:603.10",
+          "rule:109.5",
+          "rule:113.7a",
+          "rule:117.2a",
+          "rule:117.5",
+          "rule:101.4",
+          "rule:608.2n",
+          "rule:800.4a",
+          "rule:800.4d",
+          "rule:119.3",
+          "rule:121.1",
+          "rule:608.2c",
+          "rule:117.2e",
+          "rule:121.1",
+          "rule:121.2",
+          "rule:121.4",
+          "rule:119.3",
+          "rule:704.4",
+          "rule:704.5b"
+        ],
+        "implementationRevision": "self-entry-sequence-four/1",
+        "triggerPrograms": [
+          {
+            "schema": "commander-trigger/2",
+            "id": "self-entry-0",
+            "trigger": {
+              "kind": "self-enters-battlefield",
+              "view": "post-committed-event",
+              "placementClass": "ordinary"
+            },
+            "choice": {
+              "kind": "mandatory"
+            },
+            "effects": [
+              {
+                "kind": "gain-life",
+                "recipient": "trigger-controller",
+                "amount": 1
+              },
+              {
+                "kind": "draw",
+                "recipient": "trigger-controller",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Revitalize",
+      "definitionHash": "e48ea53903f16eed6d460ae7e6e273d183777511a841fadf07b4eaf0cd88b64b",
+      "definition": {
+        "id": "oracle:b1385b03-cb4b-4812-857f-7421f1df39af",
+        "oracleId": "b1385b03-cb4b-4812-857f-7421f1df39af",
+        "sourceVersion": "fb337595e5e3fe9197aed80a12cd72f5589c2db771395a9c332463d67e54b608",
+        "name": "Revitalize",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "manaCost": {
+          "W": 1,
+          "U": 0,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "You gain 3 life.\nDraw a card.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:601.2",
+          "rule:608.2b",
+          "rule:608.2c",
+          "rule:304.1",
+          "rule:119.3",
+          "rule:121.1"
+        ],
+        "implementationRevision": "reviewed-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": null,
+          "effects": [
+            {
+              "kind": "gain-life",
+              "recipient": "controller",
+              "amount": 3
+            },
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Divination",
+      "definitionHash": "5f30f944e34d3d5d8ce1e105be013ef19aac3cdf81c711198cd83ba8a5451a76",
+      "definition": {
+        "id": "oracle:273b339c-964b-4a18-8eb5-ceb8abcdfd9e",
+        "oracleId": "273b339c-964b-4a18-8eb5-ceb8abcdfd9e",
+        "sourceVersion": "00d836618ec785082d7ed41e79f928fd91f7d0d4533f8364856c9349b6271111",
+        "name": "Divination",
+        "typeLine": "Sorcery",
+        "types": ["Sorcery"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 2
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Draw two cards.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": ["rule:601.2", "rule:608.2b", "rule:608.2c", "rule:307.1", "rule:121.1"],
+        "implementationRevision": "reviewed-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": null,
+          "effects": [
+            {
+              "kind": "draw",
+              "recipient": "controller",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Inspiration",
+      "definitionHash": "50f084eb632d92379f494e61fad090b9c4f3707d1257fedecfda971f276a5493",
+      "definition": {
+        "id": "oracle:8f32ceb2-92c2-4dde-bf73-40bb79c3fcef",
+        "oracleId": "8f32ceb2-92c2-4dde-bf73-40bb79c3fcef",
+        "sourceVersion": "5027154446951c932a29f443e58f0c460fddb2e8cfdde09b794d952886515e7b",
+        "name": "Inspiration",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 3
+        },
+        "manaValue": 4,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Target player draws two cards.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": ["rule:601.2", "rule:608.2b", "rule:608.2c", "rule:304.1", "rule:121.1"],
+        "implementationRevision": "reviewed-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "player",
+          "effects": [
+            {
+              "kind": "draw",
+              "recipient": "target",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cancel",
+      "definitionHash": "7a2c76b8e8a39015f2a19d6268228f30ad50ab58d4a1034b97a29963b50132d7",
+      "definition": {
+        "id": "oracle:7d00fb28-ea6c-49a9-b4af-ffb38860a9a7",
+        "oracleId": "7d00fb28-ea6c-49a9-b4af-ffb38860a9a7",
+        "sourceVersion": "58b637831503fd08b63a3968a1df1abbe6bb7b8a8bff57225267602a46cffdaf",
+        "name": "Cancel",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 2,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 3,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Counter target spell.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:112.1",
+          "rule:112.2",
+          "rule:115.5",
+          "rule:405.1",
+          "rule:405.5",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2n",
+          "rule:701.6a",
+          "rule:701.6b",
+          "rule:704.3",
+          "rule:903.9a",
+          "rule:304.1"
+        ],
+        "implementationRevision": "stack-counter-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "spell",
+          "effects": [
+            {
+              "kind": "counter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Counterspell",
+      "definitionHash": "cf716ef9670f384afd925f5d6ff04a82f2d815e835a3cdebb75ff15ec382fe4a",
+      "definition": {
+        "id": "oracle:cc187110-1148-4090-bbb8-e205694a39f5",
+        "oracleId": "cc187110-1148-4090-bbb8-e205694a39f5",
+        "sourceVersion": "204fdb2171e221f7dc09fbec90d69f139da4bc943971c3a419bc4d2df955cf62",
+        "name": "Counterspell",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 2,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 0
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Counter target spell.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:112.1",
+          "rule:112.2",
+          "rule:115.5",
+          "rule:405.1",
+          "rule:405.5",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2n",
+          "rule:701.6a",
+          "rule:701.6b",
+          "rule:704.3",
+          "rule:903.9a",
+          "rule:304.1"
+        ],
+        "implementationRevision": "stack-counter-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "spell",
+          "effects": [
+            {
+              "kind": "counter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Essence Scatter",
+      "definitionHash": "0e9f59bada4c5ad9953a78df2274f8e7822aa361d550958b297a13bf9f48a900",
+      "definition": {
+        "id": "oracle:46665089-aa3d-44c3-964d-6638dfbb5782",
+        "oracleId": "46665089-aa3d-44c3-964d-6638dfbb5782",
+        "sourceVersion": "8252bcbe449928c2758c24582e78771bf31433bb8157a471d2f481563c3c00e1",
+        "name": "Essence Scatter",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Counter target creature spell.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:112.1",
+          "rule:112.2",
+          "rule:115.5",
+          "rule:405.1",
+          "rule:405.5",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2n",
+          "rule:701.6a",
+          "rule:701.6b",
+          "rule:704.3",
+          "rule:903.9a",
+          "rule:304.1"
+        ],
+        "implementationRevision": "stack-counter-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature-spell",
+          "effects": [
+            {
+              "kind": "counter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "False Summoning",
+      "definitionHash": "f083ae9bf4a7de271e89a4a8963aff1b894068b6f1fc277d29627c6b64a64909",
+      "definition": {
+        "id": "oracle:4f891c68-c959-4210-94e5-94a8e487d5ef",
+        "oracleId": "4f891c68-c959-4210-94e5-94a8e487d5ef",
+        "sourceVersion": "6bc58e365852b76c31193373380f6a6393d9d895869aa7942c0ed04e2933f7b2",
+        "name": "False Summoning",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Counter target creature spell.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:112.1",
+          "rule:112.2",
+          "rule:115.5",
+          "rule:405.1",
+          "rule:405.5",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2n",
+          "rule:701.6a",
+          "rule:701.6b",
+          "rule:704.3",
+          "rule:903.9a",
+          "rule:304.1"
+        ],
+        "implementationRevision": "stack-counter-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature-spell",
+          "effects": [
+            {
+              "kind": "counter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Negate",
+      "definitionHash": "0970186211085a226044ed70269d56057c4d8b6bf4b01c2f47644f4b540312f2",
+      "definition": {
+        "id": "oracle:3407fe41-fdd3-4119-8f70-4bc4590a379f",
+        "oracleId": "3407fe41-fdd3-4119-8f70-4bc4590a379f",
+        "sourceVersion": "1b90be89e4134ba466ec5214ab20fa572837c1dbcd1270dd30d7bd104cdd85a6",
+        "name": "Negate",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Counter target noncreature spell.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:112.1",
+          "rule:112.2",
+          "rule:115.5",
+          "rule:405.1",
+          "rule:405.5",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2n",
+          "rule:701.6a",
+          "rule:701.6b",
+          "rule:704.3",
+          "rule:903.9a",
+          "rule:304.1"
+        ],
+        "implementationRevision": "stack-counter-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "noncreature-spell",
+          "effects": [
+            {
+              "kind": "counter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Preemptive Strike",
+      "definitionHash": "31893f1cb469d364c1c145bb3dc60ae8f7c31f8ff8de6e1eb67cc25125d2bd88",
+      "definition": {
+        "id": "oracle:250f8642-9754-48fd-8f09-70ed13d7a42c",
+        "oracleId": "250f8642-9754-48fd-8f09-70ed13d7a42c",
+        "sourceVersion": "de51ca02c4586103afb6d82459d623505ba777551089695cfe037d18974df6d2",
+        "name": "Preemptive Strike",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Counter target creature spell.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:112.1",
+          "rule:112.2",
+          "rule:115.5",
+          "rule:405.1",
+          "rule:405.5",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2n",
+          "rule:701.6a",
+          "rule:701.6b",
+          "rule:704.3",
+          "rule:903.9a",
+          "rule:304.1"
+        ],
+        "implementationRevision": "stack-counter-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature-spell",
+          "effects": [
+            {
+              "kind": "counter"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Remove Soul",
+      "definitionHash": "18d0585e570a7ee12e20445bf153b347e1b7d3a30c22c29ccc52ca83b34bf3ea",
+      "definition": {
+        "id": "oracle:b13c0f76-fbda-4911-9442-c3d7e97f1aac",
+        "oracleId": "b13c0f76-fbda-4911-9442-c3d7e97f1aac",
+        "sourceVersion": "ab4dc3ac2c4d4bbd9b78b0648cfe0fed9e107cabe74552a870641e5598c4599b",
+        "name": "Remove Soul",
+        "typeLine": "Instant",
+        "types": ["Instant"],
+        "subtypes": [],
+        "supertypes": [],
+        "colors": ["U"],
+        "colorIdentity": ["U"],
+        "manaCost": {
+          "W": 0,
+          "U": 1,
+          "B": 0,
+          "R": 0,
+          "G": 0,
+          "C": 0,
+          "generic": 1
+        },
+        "manaValue": 2,
+        "power": null,
+        "toughness": null,
+        "keywords": [],
+        "manaAbilities": [],
+        "oracleText": "Counter target creature spell.",
+        "commanderEligible": false,
+        "deckLimit": 1,
+        "obligations": [
+          "rule:112.1",
+          "rule:112.2",
+          "rule:115.5",
+          "rule:405.1",
+          "rule:405.5",
+          "rule:601.2c",
+          "rule:608.2b",
+          "rule:608.2n",
+          "rule:701.6a",
+          "rule:701.6b",
+          "rule:704.3",
+          "rule:903.9a",
+          "rule:304.1"
+        ],
+        "implementationRevision": "stack-counter-spell/1",
+        "spellProgram": {
+          "schema": "commander-spell/1",
+          "target": "creature-spell",
+          "effects": [
+            {
+              "kind": "counter"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "hash": "ffe21a93950ea2adee205b6bdf440580af580aff70d896a4be4925a2916441fe"
+}

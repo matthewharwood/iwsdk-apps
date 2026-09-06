@@ -1,4 +1,4 @@
-import type { ContentRelease, PlayerObservation } from "@iwsdk-apps/contracts";
+import { type ContentRelease, GameObject, type PlayerObservation } from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
 
 function removals(record: MatchArchive["records"][number], release: ContentRelease) {
@@ -161,14 +161,111 @@ export function continuousEvidence(archive: MatchArchive, coordinator: Coordinat
     }),
   };
 }
+/** Actual counter events must agree with movement and source resolution in the same record. */
+export function counterEvidence(archive: MatchArchive, release: ContentRelease) {
+  const occurrences = [];
+  for (const record of archive.records) {
+    for (const [index, event] of record.events.entries()) {
+      if (event.type !== "SpellCountered") continue;
+      const resolvedIndex = record.events.findIndex(
+        (row) => row.type === "SpellResolved" && row.data.source === event.data.source,
+      );
+      const resolved = record.events[resolvedIndex];
+      const definition = resolved?.data.definition;
+      if (
+        typeof definition !== "string" ||
+        !release.definitions[definition]?.spellProgram?.effects.some((e) => e.kind === "counter") ||
+        resolvedIndex <= index
+      )
+        throw new Error("Counter event lacks its subsequently resolved reviewed source");
+      const movementIndex = record.events.findIndex((row) => {
+        if (row.type !== "ObjectMoved") return false;
+        const before = GameObject.safeParse(row.data.before);
+        return before.success && before.data.id === event.data.before;
+      });
+      const movement = record.events[movementIndex];
+      const before = GameObject.parse(movement?.data.before);
+      const after = GameObject.parse(movement?.data.after);
+      if (
+        movementIndex >= index ||
+        before.zone !== "stack" ||
+        after.zone !== "graveyard" ||
+        before.id === after.id ||
+        before.lineage !== after.lineage ||
+        after.id !== event.data.after ||
+        before.definition !== event.data.definition ||
+        before.owner !== event.data.owner ||
+        after.owner !== before.owner ||
+        before.id === event.data.source ||
+        record.events.some((row) => row.type === "SpellResolved" && row.data.source === before.id)
+      )
+        throw new Error(
+          "Counter event does not match a distinct unresolved spell moving to its owner's graveyard",
+        );
+      occurrences.push({
+        revision: record.receipt.revision,
+        source: event.data.source,
+        sourceDefinition: definition,
+        targetBefore: before.id,
+        targetAfter: after.id,
+        targetDefinition: before.definition,
+        targetOwner: before.owner,
+        targetController: before.controller,
+        commander: before.commander,
+        eventIndex: index,
+        sourceResolvedIndex: resolvedIndex,
+      });
+    }
+  }
+  const state = archive.current;
+  const spellIds = new Set(
+    state.stack.flatMap((entry) => (entry.kind === "spell" ? [entry.objectId] : [])),
+  );
+  const pending = Object.values(state.objects).flatMap((source) => {
+    const targetId = source.spellState?.target;
+    if (
+      !spellIds.has(source.id) ||
+      !targetId ||
+      source.id === targetId ||
+      !spellIds.has(targetId) ||
+      !release.definitions[source.definition]?.spellProgram?.effects.some(
+        (effect) => effect.kind === "counter",
+      )
+    )
+      return [];
+    const target = state.objects[targetId];
+    if (!target) throw new Error("Pending counter target object is missing");
+    return [{ source, target }];
+  });
+  return { occurrences, pending };
+}
 export type ProofStage =
   | "starting-player"
   | "target"
   | "payment"
   | "pending-trigger"
   | "pending-ordered-trigger"
-  | "active-modifier";
+  | "active-modifier"
+  | "pending-counter";
 export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean {
+  if (kind === "pending-counter") {
+    const spells = new Set(
+      view.stack.flatMap((entry) => (entry.kind === "spell" ? [entry.objectId] : [])),
+    );
+    return (
+      view.decision?.kind === "priority" &&
+      view.objects.some((source) => {
+        const target = source.spellState?.target;
+        return (
+          spells.has(source.id) &&
+          !!target &&
+          source.id !== target &&
+          spells.has(target) &&
+          source.card.spellProgram?.effects.some((effect) => effect.kind === "counter")
+        );
+      })
+    );
+  }
   if (kind === "active-modifier")
     return (
       view.decision?.kind === "priority" &&

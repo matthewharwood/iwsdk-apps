@@ -1,5 +1,7 @@
 import { Database } from "bun:sqlite";
 
+export { makeCounterSpellDecks } from "./counter-spell-decks";
+export { compileCounterSpellDraft } from "./counter-spell-expansion";
 export { makeKeywordReminderDecks } from "./keyword-reminder-decks";
 export { compileKeywordReminderDraft } from "./keyword-reminder-expansion";
 export { buildDevelopmentMatchPlan, computeDependencyClosure, MATCH_PLAN_VERSION } from "./plan";
@@ -9,6 +11,8 @@ export { compileSpellFamilyDraft } from "./spell-expansion";
 import {
   bindDevelopmentCard,
   bindExactSpellFamily,
+  COUNTER_SPELL_VERSION,
+  COUNTER_SPELLS,
   KEYWORD_REMINDER_RECIPE_VERSION,
   KEYWORD_REMINDER_REGISTRY,
   RECIPE_REGISTRY,
@@ -64,6 +68,7 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  counterSpells: { enabled: boolean; version: string; registry: typeof COUNTER_SPELLS };
   temporaryCreatureSpells: {
     enabled: boolean;
     version: string;
@@ -76,6 +81,7 @@ export interface CompilationReport {
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    counterSpells?: boolean;
     spellFamilies?: boolean;
     selfEntryTriggers?: boolean;
     selfEntrySequences?: boolean;
@@ -111,6 +117,11 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    counterSpells: {
+      enabled: options.counterSpells === true,
+      version: COUNTER_SPELL_VERSION,
+      registry: COUNTER_SPELLS,
     },
     temporaryCreatureSpells: {
       enabled: options.temporaryCreatureSpells === true,
@@ -167,7 +178,7 @@ export async function compileDevelopmentRelease(
     throw new Error("Compiler candidate denominator mismatch");
   const base = {
     schema: "commander-content/1" as const,
-    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}`,
+    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}`,
     sourceBundle: inventory.bundleHash,
     rulesHash,
     profile: "tabletop-commander" as const,
@@ -175,7 +186,7 @@ export async function compileDevelopmentRelease(
     definitions,
     unsupportedOracleIds: report.unsupported.map((card) => card.identity),
     eligibleDenominator: candidates.length,
-    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}`,
+    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}`,
     processorAbi: ENGINE_VERSION,
   };
   return { release: ContentRelease.parse({ ...base, hash: await semanticHash(base) }), report };

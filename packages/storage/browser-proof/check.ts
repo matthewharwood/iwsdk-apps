@@ -21,6 +21,7 @@ import { openNativeRepository } from "../src/native";
 import {
   atProofStage,
   continuousEvidence,
+  counterEvidence,
   executionEvidence,
   type ProofStage,
   setupEvidence,
@@ -38,6 +39,7 @@ type Snapshot = {
   spells: ReturnType<typeof spellEvidence>;
   triggers: ReturnType<typeof triggerEvidence>;
   continuous: ReturnType<typeof continuousEvidence>;
+  counters: ReturnType<typeof counterEvidence>;
   execution: ReturnType<typeof executionEvidence>;
   setup: ReturnType<typeof setupEvidence>;
   storage?: { secureContext: boolean; opfs: boolean; locks: boolean };
@@ -61,6 +63,7 @@ const options = parseArgs({
     "require-triggers": { type: "boolean", default: false },
     "require-ordered-triggers": { type: "boolean", default: false },
     "require-modifiers": { type: "boolean", default: false },
+    "require-counters": { type: "boolean", default: false },
     "two-seed": { type: "string", default: "1901" },
     "four-seed": { type: "string", default: "2901" },
     resolver: { type: "string", default: "full-scan" },
@@ -81,7 +84,9 @@ const twoSeed = boundedInteger(options["two-seed"], 1, 4294967200, "two-seed");
 const fourSeed = boundedInteger(options["four-seed"], 1, 4294967200, "four-seed");
 const requireRemoval = options["require-removal"];
 const requireModifiers = options["require-modifiers"];
-const requireSpells = options["require-spells"] || requireRemoval || requireModifiers;
+const requireCounters = options["require-counters"];
+const requireSpells =
+  options["require-spells"] || requireRemoval || requireModifiers || requireCounters;
 function parseResolver(value: string): MatchManifest["resolver"] {
   switch (value) {
     case "full-scan":
@@ -99,6 +104,7 @@ const stageKinds: ProofStage[] = requireSpells
 if (requireOrderedTriggers) stageKinds.push("pending-ordered-trigger");
 else if (requireTriggers) stageKinds.push("pending-trigger");
 if (requireModifiers) stageKinds.push("active-modifier");
+if (requireCounters) stageKinds.push("pending-counter");
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -273,6 +279,7 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     spells: spellEvidence(archive, release),
     triggers: triggerEvidence(archive),
     continuous: continuousEvidence(archive, coordinator),
+    counters: counterEvidence(archive, release),
     execution: executionEvidence(release, coordinator.executionInfo()),
     setup: setupEvidence(coordinator, archive),
   };
@@ -300,9 +307,18 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
     stages.length === stageKinds.length &&
     stages.every((stage) => stage.run.status === "paused") &&
     (!requireSpells || Object.keys(final.spells.resolved).length > 0) &&
+    (!requireCounters || final.counters.occurrences.length > 0) &&
     (!requireTriggers || Object.keys(final.triggers.resolved).length > 0) &&
     (!requireModifiers ||
-      (Object.keys(final.continuous.created).length > 0 && final.continuous.expired.length > 0)) &&
+      (Object.keys(final.continuous.created).length > 0 &&
+        final.continuous.expired.length > 0 &&
+        stages
+          .filter((stage) => stage.kind === "active-modifier")
+          .every((stage) =>
+            stage.snapshot.continuous.active.every((effect) =>
+              final.continuous.expired.includes(effect.id),
+            ),
+          ))) &&
     (!requireOrderedTriggers ||
       Object.keys(final.triggers.resolved).some((id) =>
         release.definitions[id]?.triggerPrograms?.some(
@@ -389,7 +405,10 @@ async function prepareCase(seatCount: 2 | 4, attempt: number) {
 function assertPausedStage(kind: ProofStage, snapshot: Snapshot): void {
   if (kind === "pending-trigger" || kind === "pending-ordered-trigger")
     expect(snapshot.triggers.pending.length).toBeGreaterThan(0);
-  else if (kind === "active-modifier") {
+  else if (kind === "pending-counter") {
+    expect(snapshot.decision?.kind).toBe("priority");
+    expect(snapshot.counters.pending.length).toBeGreaterThan(0);
+  } else if (kind === "active-modifier") {
     expect(snapshot.continuous.active.length).toBeGreaterThan(0);
     expect(snapshot.continuous.absentSources.length).toBeGreaterThan(0);
   } else expect(snapshot.decision?.kind).toBe(kind);
@@ -408,6 +427,19 @@ async function nativeImport(
     imported = await Coordinator.open(repo, release, manifest.id);
     const pending = await nativeSnapshot(repo, imported);
     expect(pending).toEqual(pendingSnapshot);
+    const archive = repo.load(manifest.id);
+    const retryRecords = [
+      archive?.records.at(-1),
+      archive?.records.find((record) => record.command.response.kind === "starting-player"),
+    ];
+    for (const record of retryRecords) {
+      if (!record) continue;
+      expect(await imported.submit(record.command.actor, record.command)).toEqual({
+        status: "accepted",
+        receipt: record.receipt,
+      });
+      expect(await nativeSnapshot(repo, imported)).toEqual(pending);
+    }
     const run = await runGame(imported, {
       seed: manifest.driverSeed,
       maxCommands: 10_000,
@@ -616,6 +648,7 @@ try {
       const pending = await call<Snapshot>(page, { operation: "snapshot" });
       assertPausedStage(stage.kind, pending);
       expect(pending.continuous).toEqual(stage.snapshot.continuous);
+      expect(pending.counters).toEqual(stage.snapshot.counters);
       expect(pending.execution).toEqual(stage.snapshot.execution);
       expect(pending.stateHash).toBe(stage.snapshot.stateHash);
       expect(pending.boundaryHashes).toEqual(stage.snapshot.boundaryHashes);
@@ -660,6 +693,8 @@ try {
     expect(completed.spells).toEqual(baseline.nativeFinal.spells);
     expect(completed.triggers).toEqual(baseline.nativeFinal.triggers);
     expect(completed.continuous).toEqual(baseline.nativeFinal.continuous);
+    expect(completed.counters).toEqual(baseline.nativeFinal.counters);
+    if (requireCounters) expect(completed.counters.occurrences.length).toBeGreaterThan(0);
     expect(completed.execution).toEqual(baseline.nativeFinal.execution);
     assertSingleChoice(completed);
     expect(completed.setup.firstChoice).toEqual(baseline.nativeFinal.setup.firstChoice);
@@ -681,6 +716,11 @@ try {
       text: saved,
     });
     expect(imported).toEqual(importedExpected);
+    if (imported.revision > 0) {
+      await verifyDurableRetry(page, "retryLast");
+      await verifyDurableRetry(page, "retryStartingChoice");
+      expect(await call<Snapshot>(page, { operation: "snapshot" })).toEqual(imported);
+    }
     const importedRun = await call<GameRun>(page, {
       operation: "run",
       stopAt: null,

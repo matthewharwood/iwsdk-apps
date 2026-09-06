@@ -230,7 +230,7 @@ test("source-authenticated self-entry and reminder closures retain exact program
       source,
       decks,
     );
-    expect(artifact.compilerVersion).toBe("development-match-plan/5");
+    expect(artifact.compilerVersion).toBe("development-match-plan/6");
     expect(artifact.closure.excluded).toEqual([UNUSED]);
     expect(artifact.closure.blockers).toEqual([]);
     for (const capability of SELF_ENTRY_CORE_CAPABILITIES)

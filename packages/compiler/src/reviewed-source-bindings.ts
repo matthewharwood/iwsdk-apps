@@ -1,10 +1,10 @@
-/** Fixed reviewed snapshot binding digests. Consistency evidence only; never semantic certification.
- * Generated from source-bound release 8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd; new source versions require explicit review. */
+/** Fixed authenticated snapshot binding digests. Source membership only; never semantic certification.
+ * The1090 prior tuples remain exact; seven counterspell additions were independently source-reviewed and raw-record authenticated. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
-  bindingsHash: "cd651570d557df8ebc49c9e8919fe43408237ae870be7542f8a503c532fffdd5",
+  releaseHash: "58b8f2dd09d699ef232ba49257e0287eb8ca204902a9addddb499f73e3084739",
+  bindingsHash: "7a3f6263a6f3c7e726f0378d06402921efc40bc22df8f28ea9da613a4de2649b",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
   Record<string, { sourceVersion: string; implementationRevision: string; definitionHash: string }>
@@ -5458,5 +5458,40 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "d866a0444a1a31bb3929cb4e63ee0e40935a8ef7b3ee5da7ef1d063cacfcd7a4",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "7b767251c9aa2b1b4a83338615a57d90b82629887ac74c934ea14f13e3130a27",
+  },
+  "7d00fb28-ea6c-49a9-b4af-ffb38860a9a7": {
+    sourceVersion: "58b637831503fd08b63a3968a1df1abbe6bb7b8a8bff57225267602a46cffdaf",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "7a2c76b8e8a39015f2a19d6268228f30ad50ab58d4a1034b97a29963b50132d7",
+  },
+  "cc187110-1148-4090-bbb8-e205694a39f5": {
+    sourceVersion: "204fdb2171e221f7dc09fbec90d69f139da4bc943971c3a419bc4d2df955cf62",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "cf716ef9670f384afd925f5d6ff04a82f2d815e835a3cdebb75ff15ec382fe4a",
+  },
+  "46665089-aa3d-44c3-964d-6638dfbb5782": {
+    sourceVersion: "8252bcbe449928c2758c24582e78771bf31433bb8157a471d2f481563c3c00e1",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "0e9f59bada4c5ad9953a78df2274f8e7822aa361d550958b297a13bf9f48a900",
+  },
+  "4f891c68-c959-4210-94e5-94a8e487d5ef": {
+    sourceVersion: "6bc58e365852b76c31193373380f6a6393d9d895869aa7942c0ed04e2933f7b2",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "f083ae9bf4a7de271e89a4a8963aff1b894068b6f1fc277d29627c6b64a64909",
+  },
+  "3407fe41-fdd3-4119-8f70-4bc4590a379f": {
+    sourceVersion: "1b90be89e4134ba466ec5214ab20fa572837c1dbcd1270dd30d7bd104cdd85a6",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "0970186211085a226044ed70269d56057c4d8b6bf4b01c2f47644f4b540312f2",
+  },
+  "250f8642-9754-48fd-8f09-70ed13d7a42c": {
+    sourceVersion: "de51ca02c4586103afb6d82459d623505ba777551089695cfe037d18974df6d2",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "31893f1cb469d364c1c145bb3dc60ae8f7c31f8ff8de6e1eb67cc25125d2bd88",
+  },
+  "b13c0f76-fbda-4911-9442-c3d7e97f1aac": {
+    sourceVersion: "ab4dc3ac2c4d4bbd9b78b0648cfe0fed9e107cabe74552a870641e5598c4599b",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "18d0585e570a7ee12e20445bf153b347e1b7d3a30c22c29ccc52ca83b34bf3ea",
   },
 };

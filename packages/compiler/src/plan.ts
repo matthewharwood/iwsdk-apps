@@ -1,5 +1,7 @@
 import {
+  COUNTER_SPELL_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
+  reviewedCounterSpellDefinition,
   reviewedKeywordReminderDefinition,
   reviewedLegacyDefinition,
   reviewedSelfEntryDefinition,
@@ -17,8 +19,8 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/5";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.9.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/6";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.10.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -35,6 +37,12 @@ export const TEMPORARY_CREATURE_CORE_CAPABILITIES = [
   "continuous:layer7c-fixed-deltas",
   "continuous:cleanup-expiry",
   "continuous:serialization",
+] as const;
+export const COUNTER_SPELL_CORE_CAPABILITIES = [
+  "core:stack-spell-target-domain",
+  "core:spell-self-target-exclusion",
+  "core:counter-spell-owner-graveyard",
+  "core:stack-target-revalidation",
 ] as const;
 export type Dependency =
   | { kind: "exact"; identity: string }
@@ -167,6 +175,8 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
+  if (definition.implementationRevision === COUNTER_SPELL_VERSION)
+    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedCounterSpellDefinition(definition);
   if (definition.implementationRevision === KEYWORD_REMINDER_RECIPE_VERSION)
     return (
       processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedKeywordReminderDefinition(definition)
@@ -216,6 +226,12 @@ export async function buildDevelopmentMatchPlan(
     ),
     core: [
       ...DEVELOPMENT_CORE,
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === COUNTER_SPELL_VERSION,
+      )
+        ? COUNTER_SPELL_CORE_CAPABILITIES
+        : []),
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI ? SELF_ENTRY_CORE_CAPABILITIES : []),
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(

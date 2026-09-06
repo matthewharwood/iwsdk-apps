@@ -1,0 +1,160 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.10.0",
+  "sourceReleaseHash": "58b8f2dd09d699ef232ba49257e0287eb8ca204902a9addddb499f73e3084739",
+  "definitions": 1097,
+  "legalDevelopmentDecks": 33,
+  "preservedDefinitions": 1090,
+  "preservedCompleteDeckRevisions": 31,
+  "unsupportedPaperCandidates": 30732,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": "docs/commander/source-counter-spells-v0.10.json",
+    "sha256": "50d5ad6de7a90f3d2d865a51ef56c06bb818c570feb0e96a0dad2cb1a26c24ae"
+  },
+  "sourceExecution": {
+    "path": ".commander/prototypes/engine-0.10/.draft-artifacts/counter-source-execution-evidence.json",
+    "sha256": "f138a677ee057eb96854456a811a4f5936d14eb1dcbb796bcb0c9ac04cc4606c"
+  },
+  "independentImplementationReview": {
+    "path": ".commander/prototypes/engine-0.10/.draft-artifacts/independent-counter-implementation-review.json",
+    "sha256": "5fc1e2e0d5d6207bac3ab98add1e5b7175df3ea1e599bcb235a9b30b475d8295"
+  },
+  "independentScenarioExecution": {
+    "path": ".commander/prototypes/engine-0.10/.draft-artifacts/counterspell-independent-execution-review.json",
+    "sha256": "b8bcaf7de715ffb488396150b9777c8e7160f47e7c3c5f5b506072b40e4c538c"
+  },
+  "independentBrowserReview": {
+    "path": ".commander/prototypes/engine-0.10/.draft-artifacts/independent-counter-browser-proof-review.json",
+    "sha256": "d9f609c5b3adffa335a95c0c6643c9f5ba064d7bb322e4f9392204441779db24"
+  },
+  "cliReproduction": {
+    "path": ".commander/prototypes/engine-0.10/.draft-artifacts/cli-all-reviewed-recompile.json",
+    "sha256": "c830a4ada36a55ec7ed3bd3c5b87dcfb512569a282c1b6ed7a38883a08f8df0a"
+  },
+  "mainCompile": {
+    "path": ".commander/evidence/compile-0.10-main.log",
+    "sha256": "3f214378e82e3d5f7b22b3e7ee10b36d71b6dd57046e05eb46865a81ad8ca2a8"
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.10/.draft-runs/resolver-comparisons/6cb71d17-4086-485d-8af2-81a6b022dbef/report.json",
+      "sha256": "1a1c139fb59572f200c96fa80487ae9c8ce8a4e6fc020e32798ac1e760006c0f",
+      "status": "passed",
+      "buildHash": "66a5ad3c3c8231a4f8281c9c7afee89b691e7e1a3787c711dfb8dd83fa9ed7c7",
+      "commands": 1642,
+      "boundaries": 1643,
+      "actingObservations": 1642,
+      "independentReplays": 3
+    },
+    {
+      "path": ".commander/prototypes/engine-0.10/.draft-runs/resolver-comparisons/da812c6b-7604-458f-b695-b83539034eb9/report.json",
+      "sha256": "946cb790c95c2fb623679ffd41a977e18eaa344ca15cd9bf0d6cfc69a13dfe64",
+      "status": "passed",
+      "buildHash": "66a5ad3c3c8231a4f8281c9c7afee89b691e7e1a3787c711dfb8dd83fa9ed7c7",
+      "commands": 924,
+      "boundaries": 925,
+      "actingObservations": 924,
+      "independentReplays": 3
+    }
+  ],
+  "browser": {
+    "path": ".commander/prototypes/engine-0.10/.commander/browser-proof/2026-09-06T22-51-36-496Z-c920fb5f/evidence.json",
+    "sha256": "60e95d9c29675282071efc1c4916b42521eecd99229913619725c311b0ca080a",
+    "status": "passed",
+    "sourceHash": "b21328bed3386f6db8eef6522ccdc9f6d08102fe3010574b3acc831b62ac38d0",
+    "workerBundleHash": "b05ab7c0560c187839d1b4924459460c6e43fb72f17f2861f427975c5d8ae920",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 10301,
+        "driverSeed": 10318,
+        "commands": 405,
+        "boundaries": 406,
+        "importedRevision": 365,
+        "importedPendingCounterCount": 1,
+        "counterEvents": 1,
+        "allBrowserBoundaryHashesEqual": true
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 10501,
+        "driverSeed": 10518,
+        "commands": 1613,
+        "boundaries": 1614,
+        "importedRevision": 1330,
+        "importedPendingCounterCount": 1,
+        "counterEvents": 2,
+        "allBrowserBoundaryHashesEqual": true
+      }
+    ],
+    "scope": "Each required checkpoint reopened and retried. Final pending-counter checkpoint imported into distinct native SQLite and browser OPFS namespaces and recorded receipts retried unchanged. Target/payment checkpoints not separately imported in this run. Two-seat saved Cancel resolves; four-seat saved Preemptive Strike is countered by Negate."
+  },
+  "observedUniqueGames": {
+    "path": ".commander/evidence/observed-game-coverage-0.10.json",
+    "sha256": "418e54d86c2bf8850f876a808d8c43ac85ac7641daf22b8f4e5645832f8d8a46"
+  },
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.10/promotion.json",
+    "sha256": "feede568b5cedc3c32a400d605824a076ecbbaa563411ffd24f346184bef3ec8"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.10/archive-inventory.json",
+    "sha256": "c94ad183778f1a74180ebfdbfdacdafba024705c1b507b2dedc2f70a56f9a4f4"
+  },
+  "postPromotionTestFormatting": {
+    "path": "packages/engine/test-fixtures/counter-source.json",
+    "sha256": "8f8dcc7f05d1ccacfd147c110817b7bdca898346daa89c58ad27463fcd7d422a",
+    "priorRawSha256": "a24c641b608540074c101b0419be98783d26251ac803df85c905908800986943",
+    "sameParsedJson": true,
+    "changesRuntimeOrBrowserProofSource": false
+  },
+  "repositoryGate": {
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "path": ".commander/evidence/check-full-0.10-main-retry.log",
+    "sha256": "c690a453f80a41bd5e543021116e98afafbfdbdf4fae55ba1a4118b9f1da41d9",
+    "unitTests": 515,
+    "unitAssertions": 71511,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true,
+    "earlierAttempt": {
+      "path": ".commander/evidence/check-full-0.10-main.log",
+      "sha256": "2e3a4a959a62bae537c7431606aebbba05ac040b582698abf2eecff8ffd4ce42"
+    },
+    "isolatedAttempt": {
+      "path": ".commander/prototypes/engine-0.10/.draft-artifacts/check-full-v0.10.log",
+      "sha256": "22fa15cae5920a0856ca9c3aa40720b90a39dd1327769fa53ac8944bc685190b"
+    },
+    "isolatedAttemptScope": "The prototype-root full lint encountered retained research artifacts outside the production .commander exclusion. No source check was suppressed; the integrated main full gate passed after formatting a test fixture."
+  },
+  "fixedRegression": {
+    "id": "regression-0.10-fixed64",
+    "status": "running-at-checkpoint",
+    "assigned": 64,
+    "path": "/private/tmp/iwsdk-commander-0.10/.draft-runs/regressions/regression-0.10-fixed64",
+    "frozenBuildHash": "66a5ad3c3c8231a4f8281c9c7afee89b691e7e1a3787c711dfb8dd83fa9ed7c7",
+    "previousCompletedCorpus": {
+      "path": "docs/commander/fixed-regression-0.9-evidence.json",
+      "sha256": "7e12d61e7c1f1739f18ca0be2ec7f91508f2ab44f263062b3205d1c8760afa49"
+    },
+    "resultFilesAtObservation": 23
+  },
+  "remaining": [
+    "Original complete G2 difficult-scenario qualification remains open.",
+    "30,732 paper candidates and broad rule families remain unsupported.",
+    "Common fixture execution across TypeScript, XMage and Phase is ongoing.",
+    "Historical0.3 exploration does not certify0.10 additions; full-source campaign remains a final target.",
+    "Consumer and physical headset qualification remain incomplete."
+  ],
+  "observedAt": "2026-09-06T23:04:35.091595+00:00"
+}

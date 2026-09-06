@@ -8,6 +8,7 @@ import { characteristics } from "./characteristics";
 import { card, draw, emit, hit, move, object, player, RulesError } from "./common";
 import { createCreatureModifier } from "./continuous";
 import { orderedObjects } from "./object-order";
+import { counterSpell, isStackSpellDomain, stackSpellTargets } from "./stack-spells";
 
 /** Complete domains for the supported exact single-target recipes. */
 export function legalSpellTargets(
@@ -15,7 +16,13 @@ export function legalSpellTargets(
   release: ExecutionRegistry,
   actor: string,
   program: SpellProgram,
+  source: string | null = null,
 ): { cards: string[]; players: string[] } {
+  if (isStackSpellDomain(program.target)) {
+    if (source === null)
+      throw new RulesError("Invariant", "Stack target lookup requires its source incarnation");
+    return { cards: stackSpellTargets(state, release, program.target, source), players: [] };
+  }
   if (program.target === "player")
     return {
       cards: [],
@@ -47,10 +54,11 @@ export function isLegalSpellTarget(
   actor: string,
   program: SpellProgram,
   target: string | null,
+  source: string | null = null,
 ): boolean {
   if (program.target === null) return target === null;
   if (target === null) return false;
-  const legal = legalSpellTargets(state, release, actor, program);
+  const legal = legalSpellTargets(state, release, actor, program, source);
   return legal.cards.includes(target) || legal.players.includes(target);
 }
 
@@ -93,6 +101,11 @@ function applyEffect(
   effect: SpellEffect,
   programIndex: number,
 ): void {
+  if (effect.kind === "counter") {
+    if (target === null) throw new RulesError("Invariant", "Counter program has no target");
+    counterSpell(state, release, source, target);
+    return;
+  }
   if (effect.kind === "modify-creature") {
     if (target === null) throw new RulesError("Invariant", "Modifier program has no target");
     createCreatureModifier(state, release, source, target, programIndex, effect);
@@ -150,7 +163,7 @@ export function resolveSpellProgram(
   if (!spell.spellState)
     throw new RulesError("Invariant", "A cast spell has no saved target state");
   const target = spell.spellState.target;
-  if (!isLegalSpellTarget(state, release, spell.controller, program, target)) {
+  if (!isLegalSpellTarget(state, release, spell.controller, program, target, source)) {
     const grave = move(state, source, "graveyard", "all spell targets became illegal");
     emit(state, "SpellDidNotResolve", {
       source,

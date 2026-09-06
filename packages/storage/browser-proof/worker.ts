@@ -20,6 +20,7 @@ import {
 import {
   atProofStage,
   continuousEvidence,
+  counterEvidence,
   executionEvidence,
   setupEvidence,
   spellEvidence,
@@ -45,6 +46,7 @@ const Request = z.discriminatedUnion("operation", [
         "pending-trigger",
         "pending-ordered-trigger",
         "active-modifier",
+        "pending-counter",
       ])
       .nullable(),
     maxCommands: z.number().int().positive().max(20_000),
@@ -89,6 +91,7 @@ async function snapshot() {
     spells: spellEvidence(archive, session.release),
     triggers: triggerEvidence(archive),
     continuous: continuousEvidence(archive, session.coordinator),
+    counters: counterEvidence(archive, session.release),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
     setup: setupEvidence(session.coordinator, archive),
     storage: {

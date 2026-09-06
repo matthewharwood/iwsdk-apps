@@ -10,10 +10,12 @@ import {
   selectRiskSample,
 } from "@iwsdk-apps/catalog";
 import {
+  compileCounterSpellDraft,
   compileDevelopmentRelease,
   compileKeywordReminderDraft,
   compileSelfEntryDraft,
   compileSpellFamilyDraft,
+  makeCounterSpellDecks,
   makeDevelopmentDecks,
   makeKeywordReminderDecks,
 } from "@iwsdk-apps/compiler";
@@ -274,37 +276,61 @@ async function runExecutionCommand(command: string | undefined): Promise<boolean
   } else await simulate(command === "play");
   return true;
 }
+// Reproduce historical fixture identity only. These releases are never executed
+// under a newer ABI; exact content hashes prevent accidental historical relabeling.
+async function historicalFixtureRelease(
+  release: ContentRelease,
+  expectedHash: string,
+): Promise<ContentRelease> {
+  const { hash: _hash, ...current } = release;
+  const body = { ...current, processorAbi: "commander-engine/0.9.0" };
+  const hash = await semanticHash(body);
+  if (hash !== expectedHash) throw new Error("Historical fixture source changed");
+  return ContentRelease.parse({ ...body, hash });
+}
+async function reviewedFixtureDecks(content: ContentRelease) {
+  const base = await compileDevelopmentRelease(catalogPath, {
+    spellFamilies: true,
+    selfEntryTriggers: true,
+    selfEntrySequences: true,
+    temporaryCreatureSpells: true,
+  });
+  const historical = await historicalFixtureRelease(
+    base.release,
+    "671c50aa072e6004b9fe286d387fc07edc722cf7b4a57c7f5653c8c113b655ba",
+  );
+  const prior24 = await makeDevelopmentDecks(historical, {
+    includeFamilyDecks: true,
+    includeTriggerDecks: true,
+    includeTemporaryDecks: true,
+  });
+  const reminderRelease = await compileKeywordReminderDraft(catalogPath);
+  const historicalReminders = await historicalFixtureRelease(
+    reminderRelease.release,
+    "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
+  );
+  const reminders = await makeKeywordReminderDecks(historicalReminders, prior24);
+  const counters = await makeCounterSpellDecks(content, reminders.decks);
+  return { ...counters, reminderReport: reminders.report };
+}
 async function compileCatalog(): Promise<void> {
   const allReviewed = args.includes("--all-reviewed");
   const triggers = allReviewed || args.includes("--self-entry-triggers");
   const families = allReviewed || args.includes("--spell-families");
   const compiled = allReviewed
-    ? await compileKeywordReminderDraft(catalogPath)
+    ? await compileCounterSpellDraft(catalogPath)
     : triggers
       ? await compileSelfEntryDraft(catalogPath)
       : families
         ? await compileSpellFamilyDraft(catalogPath)
         : await compileDevelopmentRelease(catalogPath);
-  // Preserve the original 24 fixture identities while adding reminder-card decks.
-  const fixtureRelease = allReviewed
-    ? (
-        await compileDevelopmentRelease(catalogPath, {
-          spellFamilies: true,
-          selfEntryTriggers: true,
-          selfEntrySequences: true,
-          temporaryCreatureSpells: true,
-        })
-      ).release
-    : compiled.release;
-  const priorDecks = await makeDevelopmentDecks(fixtureRelease, {
-    includeFamilyDecks: families,
-    includeTriggerDecks: triggers,
-    includeTemporaryDecks: allReviewed,
-  });
-  const reminders = allReviewed
-    ? await makeKeywordReminderDecks(compiled.release, priorDecks)
-    : null;
-  const decks = reminders?.decks ?? priorDecks;
+  const reviewed = allReviewed ? await reviewedFixtureDecks(compiled.release) : null;
+  const decks =
+    reviewed?.decks ??
+    (await makeDevelopmentDecks(compiled.release, {
+      includeFamilyDecks: families,
+      includeTriggerDecks: triggers,
+    }));
   const retained = resolve(directory, "compilations", compiled.release.hash);
   await mkdir(retained, { recursive: true });
   await write(resolve(retained, "release.json"), compiled.release);
@@ -315,14 +341,17 @@ async function compileCatalog(): Promise<void> {
       resolve(
         retained,
         allReviewed
-          ? "keyword-reminder-expansion.json"
+          ? "counter-spell-expansion.json"
           : triggers
             ? "self-entry-expansion.json"
             : "spell-family-expansion.json",
       ),
       compiled.expansion,
     );
-  if (reminders) await write(resolve(retained, "keyword-reminder-decks.json"), reminders.report);
+  if (reviewed) {
+    await write(resolve(retained, "keyword-reminder-decks.json"), reviewed.reminderReport);
+    await write(resolve(retained, "counter-spell-decks.json"), reviewed.report);
+  }
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))
     await write(resolve(directory, "development-compilation.json"), compiled.report);

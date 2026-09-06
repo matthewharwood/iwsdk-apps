@@ -67,7 +67,7 @@ export function priorityCards(
     .filter((entry) => {
       const current = definition(release, entry.definition);
       if (!current.spellProgram?.target) return true;
-      const targets = legalSpellTargets(state, release, actor, current.spellProgram);
+      const targets = legalSpellTargets(state, release, actor, current.spellProgram, entry.id);
       return targets.cards.length + targets.players.length > 0;
     })
     .map((entry) => entry.id);
@@ -146,7 +146,7 @@ export function beginCast(
       `Spell program is not implemented: ${current.name}`,
     );
   const targets = program
-    ? legalSpellTargets(state, release, actor, program)
+    ? legalSpellTargets(state, release, actor, program, response.card)
     : { cards: [], players: [] };
   requireRule(
     !program?.target || targets.cards.length + targets.players.length > 0,
@@ -206,7 +206,7 @@ export function answerTarget(
     "This spell does not require a target",
   );
   requireRule(
-    isLegalSpellTarget(state, release, actor, program, response.target),
+    isLegalSpellTarget(state, release, actor, program, response.target, frame.card),
     "The chosen target is not legal for this spell.",
   );
   frame.target = response.target;
@@ -249,7 +249,7 @@ export function payForCast(
   requireRule(response.kind === "payment", "Expected payment or cancellation");
   const program = card(state, release, frame.card).spellProgram;
   requireRule(
-    !program || isLegalSpellTarget(state, release, actor, program, frame.target),
+    !program || isLegalSpellTarget(state, release, actor, program, frame.target, frame.card),
     "A required legal target has not been chosen.",
   );
   requireRule(

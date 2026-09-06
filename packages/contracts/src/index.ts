@@ -10,7 +10,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.9.0";
+export const ENGINE_VERSION = "commander-engine/0.10.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -83,16 +83,30 @@ export const SpellEffect = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("damage"), amount: Natural.min(1).max(100_000) }),
   z.strictObject({ kind: z.literal("destroy") }),
   z.strictObject({ kind: z.literal("exile") }),
+  z.strictObject({ kind: z.literal("counter") }),
 ]);
 export type SpellEffect = z.infer<typeof SpellEffect>;
 /** Executable instructions; reviewed source compilation assigns these, never runtime prose. */
 export const SpellProgram = z
   .strictObject({
     schema: z.literal("commander-spell/1"),
-    target: z.enum(["player", "creature"]).nullable(),
+    target: z
+      .enum(["player", "creature", "spell", "creature-spell", "noncreature-spell"])
+      .nullable(),
     effects: z.array(SpellEffect).min(1).max(16),
   })
   .superRefine((program, context) => {
+    const stackTarget =
+      program.target === "spell" ||
+      program.target === "creature-spell" ||
+      program.target === "noncreature-spell";
+    const counter = program.effects.some((effect) => effect.kind === "counter");
+    if (stackTarget !== counter || (counter && program.effects.length !== 1))
+      context.addIssue({
+        code: "custom",
+        message:
+          "This program version requires exactly one counter instruction with a spell target.",
+      });
     const targets = program.effects.filter(
       (effect) => !("recipient" in effect) || effect.recipient === "target",
     );
