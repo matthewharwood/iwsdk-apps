@@ -139,15 +139,20 @@
   },
   "fixedRegression": {
     "id": "regression-0.10-fixed64",
-    "status": "running-at-checkpoint",
+    "status": "completed-and-replayed",
     "assigned": 64,
-    "path": "/private/tmp/iwsdk-commander-0.10/.draft-runs/regressions/regression-0.10-fixed64",
+    "completed": 64,
+    "pending": 0,
+    "acceptedCommands": 89784,
     "frozenBuildHash": "66a5ad3c3c8231a4f8281c9c7afee89b691e7e1a3787c711dfb8dd83fa9ed7c7",
-    "previousCompletedCorpus": {
-      "path": "docs/commander/fixed-regression-0.9-evidence.json",
-      "sha256": "7e12d61e7c1f1739f18ca0be2ec7f91508f2ab44f263062b3205d1c8760afa49"
+    "evidence": {
+      "path": "docs/commander/fixed-regression-0.10-evidence.json",
+      "sha256": "26648e17e045fac7b6d3f94e11368d5c289dd6374fd8ea5112a7212251f2246c"
     },
-    "resultFilesAtObservation": 23
+    "earlierObservation": {
+      "status": "running-at-checkpoint",
+      "resultFilesAtObservation": 23
+    }
   },
   "remaining": [
     "Original complete G2 difficult-scenario qualification remains open.",
