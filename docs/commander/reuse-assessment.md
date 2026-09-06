@@ -1,6 +1,6 @@
 # Commander engine reuse assessment
 
-Initial source inspection on 2026-09-06 informed the architecture decision below. A later execution built Phase and passed two upstream constructed Commander tests; its exact scope and failed attempts are recorded below. This remains an incomplete comparison: no common acceptance suite has been run across three external approaches, and no external implementation was copied into this repository.
+Initial source inspection on 2026-09-06 informed the architecture decision below. Later executions built Phase and XMage and passed two and four upstream constructed Commander tests, respectively; their exact scopes and attempts are recorded below. This remains an incomplete comparison: no common acceptance suite has been run across three external approaches, and no external implementation was copied into this repository.
 
 The current requirement is one pure TypeScript rules core, run unchanged under Bun and in a browser worker, with serializable decisions/continuations and SQLite outside the core. Retain that boundary. Use Auteur as a publication/provenance reference and XMage as an attributable rules/test reference. Phase is a credible native/WASM alternative if the language requirement is deliberately changed; it should not be described as a TypeScript engine or as complete Commander support.
 
@@ -79,6 +79,14 @@ RUST_MIN_STACK=16777216 CARGO_TARGET_DIR=/private/tmp/commander-reuse-execution/
 ```
 
 The preceding retained failures were a missing offline dependency, a missing lockfile, fixture files omitted by the initial sparse checkout, and a test-thread stack overflow. Fetching the actual fixture/generated interaction files and setting the test stack resolved those specific problems. The final run exited zero with two tests passed and 6,529 filtered out. No benchmark ranking or claim about the filtered tests follows from this run.
+
+## Executed XMage fixtures
+
+The inspected XMage commit `c6221e0c95a575c4f4a1707468df12fab234cae7` built successfully and ran all four `CommanderReplaceEffectTest` methods with zero failures, errors or skips. The fixtures exercise commander destruction with a subsequent token-size calculation, optional graveyard retention with Gift of Immortality, and Soulherder reactions to exile versus destruction. Their privileged board setup and upstream card implementations remain explicit; none is counted as an ordinary headless game or a full G2 qualification.
+
+The result and exact command are retained in `.commander/reuse-execution/xmage/result.json` (SHA-256 `cb1ed50ba7b4a8343c9f071c7efd813996e65c5077dbf777dbaf034cbddc5c17`). The run used isolated Temurin `21.0.12.1+1` and Maven `3.9.16` archives, verified against the provider checksums. The [Adoptium API instructions](https://adoptium.net/installation/ci-scripts/) and [Apache Maven release artifact](https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.16/) supplied the toolchain sources. Toolchain metadata, the original fixture digest and complete Maven output are retained; no global runtime installation was changed.
+
+The selected reactor command used `-pl Mage.Tests -am -Dtest=CommanderReplaceEffectTest -Dsurefire.failIfNoSpecifiedTests=false -DfailIfNoTests=false test`, with a separate local Maven repository. Dependencies without that selected test class ran no tests; the final test module explicitly reported four executed tests. This run and the Phase tests establish actual build/fixture feasibility. The same difficult fixtures have not yet been run across TypeScript, XMage and Phase, so the three-approach comparison requirement remains open.
 
 ## Decision for this implementation
 

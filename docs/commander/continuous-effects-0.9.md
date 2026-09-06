@@ -14,7 +14,7 @@ All 97 modifier source cards have ordinary cast/target/payment/resolution assert
 
 ## Complete game evidence
 
-The native/browser proof uses actual Chromium 149 and SQLite WASM 3.53.0-build1 with OPFS. Both seat modes reopen native SQLite, reload the browser worker, retry exact commands, import an active-effect save into independent databases and complete with matching boundary hashes. A competing browser owner receives `AlreadyOpen`.
+The corrected native/browser proof uses actual Chromium 149 and SQLite WASM 3.53.0-build1 with OPFS. Both seat modes reopen native SQLite, reload the browser worker, retry exact commands, import an active-effect save into independent databases and complete with matching boundary hashes. A competing browser owner receives `AlreadyOpen`.
 
 | Execution | Seed | Accepted commands | Compared boundaries |
 | --- | ---: | ---: | ---: |
@@ -23,7 +23,7 @@ The native/browser proof uses actual Chromium 149 and SQLite WASM 3.53.0-build1 
 | Three independent resolvers, two seats | 9401 | 355 | 356 |
 | Three independent resolvers, four seats | 9601 | 1,777 | 1,778 |
 
-The browser proof pauses at starting-player, target, payment and active-modifier decisions. It records 45 naturally created and expired effects from 36 distinct modifier definitions. Resolver comparisons separately execute the complete registry, prepared scan and prepared index, comparing acting observations as well as semantic state boundaries and driver choices. Each execution has its own SQLite history and verified replay.
+The browser proof pauses at starting-player, target, payment and active-modifier decisions. A later audit found the original browser import selected revision zero; the corrected run imports the final active-modifier saves at revisions 91 and 165. The earlier evidence remains retained, and both saved effect IDs are observed in the final expiry history. Exact retries are checked after reopening; this 0.9 proof does not separately retry imported receipts. It records 45 naturally created and expired effects from 36 distinct modifier definitions. Resolver comparisons separately execute the complete registry, prepared scan and prepared index, comparing acting observations as well as semantic state boundaries and driver choices. Each execution has its own SQLite history and verified replay.
 
 Two additional telemetry games completed with 689 and 1,538 commands. Across these six unique assignments, actual event histories contain 6,814 accepted commands and 144 distinct cast/resolved definitions, including 25 newly admitted reminder definitions. Resolver siblings, browser repetitions, imports and replay are not counted as extra assignments. These hit counts are not independent semantic assertions.
 
@@ -35,6 +35,6 @@ The historical [0.3 exploration](exploration-0.3-evidence.json) completed all 1,
 
 Run `bun run commander compile --all-reviewed` against the pinned catalog to reproduce release `8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd` and all 31 deck revisions. Native CLI proof source, exact assignments and database histories are retained under `.commander/prototypes/engine-0.9`; the completed regression is under `.commander/regressions/regression-0.9-fixed64`. Historical paths inside those archives remain unchanged.
 
-The final main-workspace `bun run check` passed 465 unit tests with 70,756 assertions, 12 production browser tests, the XR emulator smoke check and the independently generated workspace/application gate. After the browser/runtime freeze, terminal test fixtures were migrated to authentic source cards and a test JSON file was formatted; the final gate includes those changes. Physical headset play is unverified.
+At commit `964e318`, the full main-workspace `bun run check` passed 465 unit tests with 70,756 assertions, 12 production browser tests, the XR emulator smoke check and the independently generated workspace/application gate. After the browser/runtime freeze, terminal test fixtures were migrated to authentic source cards and a test JSON file was formatted; that gate includes those changes. The later import-checkpoint harness correction passed its separate complete native/browser rerun. Physical headset play is unverified.
 
 The [G2 audit](g2-scenario-audit-0.7.md) still has no fully qualified original difficult-scenario manifest. General continuous effects, replacements, suspended resolutions, complex costs, copies, loops and many other rules remain implementation work. The card design package and `/cards` integration continue to pass the application gate; those presentation fixtures do not establish Commander semantic coverage.

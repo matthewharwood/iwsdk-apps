@@ -635,10 +635,9 @@ try {
       }
       const stageSave = await call<string>(page, { operation: "export" });
       await Bun.write(join(output, `${seatCount}-seat-${stage.kind}-save.json`), stageSave);
-      if (!saved || stage.kind === "pending-ordered-trigger") {
-        saved = stageSave;
-        importedExpected = pending;
-      }
+      // Import the final required workflow checkpoint, matching nativeImport.
+      saved = stageSave;
+      importedExpected = pending;
       browserStages.push({
         kind: stage.kind,
         paused,

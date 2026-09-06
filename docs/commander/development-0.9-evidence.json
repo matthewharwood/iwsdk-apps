@@ -20,11 +20,11 @@
     "sha256": "240b07d767b99198f7a912705f500c381ddfc8ce7918d8d8337d058e3362cabf"
   },
   "browser": {
-    "path": ".commander/prototypes/engine-0.9/.commander/browser-proof/2026-09-06T21-40-32-169Z-e3c2a762/evidence.json",
-    "sha256": "c38bec743e8ce100f3cf07776347a3196e11a72989f6125d184f8ef2001348b5",
+    "path": ".commander/prototypes/engine-0.9/.commander/browser-proof/2026-09-06T22-48-49-038Z-8d64cf07/evidence.json",
+    "sha256": "4b5837bd73855ebcc5d6ca47d6031fd1ddb36802fca6cf6c938d7d787eb45a6d",
     "status": "passed",
-    "sourceHash": "852d8a3d507d1c3f39365b03e26533fe01f83fb27b84317ac0a1ab8f80996860",
-    "workerBundleHash": "eb942a2008480c720d51fc6af4401b04931282184dcad995cb8eac394122ee48",
+    "sourceHash": "4bca8e7d7320cc4a6d524bcf012a1975ed983f27ecd2a94deb734e779f30b72c",
+    "workerBundleHash": "be7942d0c7cc30d2977141d150fc86ab1eb7c50592225e21ec449b9249e115a1",
     "browserVersion": "149.0.7827.55",
     "sqliteVersion": "3.53.0-build1",
     "sourceFilesChangedDuringRun": [],
@@ -33,28 +33,30 @@
       {
         "mode": "two-seat",
         "gameSeed": 9301,
-        "driverSeed": 9318,
         "commands": 559,
         "boundaries": 560,
-        "finalStateHash": "8793e00b7d3fa7110f2161600a3c43ab101601195995e866b6d34ec62deb969b",
-        "replayHash": "8793e00b7d3fa7110f2161600a3c43ab101601195995e866b6d34ec62deb969b",
-        "allBrowserBoundaryHashesEqual": true,
-        "lockContention": "AlreadyOpen",
-        "stages": ["starting-player", "target", "payment", "active-modifier"]
+        "importedRevision": 91,
+        "importedActiveEffects": 1,
+        "savedEffectIdsAllObservedExpired": true,
+        "allBrowserBoundaryHashesEqual": true
       },
       {
         "mode": "four-seat",
         "gameSeed": 9501,
-        "driverSeed": 9518,
         "commands": 1896,
         "boundaries": 1897,
-        "finalStateHash": "abeeadf987cfadc0ca99559472f4b2bc5bcb1e6ca6dfe685295234a3032c6a4c",
-        "replayHash": "abeeadf987cfadc0ca99559472f4b2bc5bcb1e6ca6dfe685295234a3032c6a4c",
-        "allBrowserBoundaryHashesEqual": true,
-        "lockContention": "AlreadyOpen",
-        "stages": ["starting-player", "target", "payment", "active-modifier"]
+        "importedRevision": 165,
+        "importedActiveEffects": 1,
+        "savedEffectIdsAllObservedExpired": true,
+        "allBrowserBoundaryHashesEqual": true
       }
-    ]
+    ],
+    "comparisonToEarlierProof": {
+      "changedSourceFiles": ["packages/storage/browser-proof/check.ts"],
+      "workerBundleIdentity": "Each proof retains its own actual worker bundle hash; runtime and worker source equality is checked separately.",
+      "sameManifestAndAllStateBoundaries": true,
+      "countsAsNewUniqueGames": false
+    }
   },
   "resolverComparisons": [
     {
@@ -100,7 +102,8 @@
   },
   "archiveInventory": {
     "path": ".commander/prototypes/engine-0.9/archive-inventory.json",
-    "sha256": "456a03bbefb8f167c31e746019bd75733801447b40f8baccb6c9ee54b92379b6"
+    "sha256": "456a03bbefb8f167c31e746019bd75733801447b40f8baccb6c9ee54b92379b6",
+    "scope": "Original promotion archive inventory. Additional corrected proof has its own retained sources and evidence reference under browser."
   },
   "repositoryGate": {
     "command": "bun run check",
@@ -116,9 +119,10 @@
     "earlierAttempt": {
       "path": ".commander/evidence/check-full-0.9-host.log",
       "sha256": "1c8ae1ffdf643143d634be1e2195f5a98e8a6b6e0b329a844abf87feb89d3991"
-    }
+    },
+    "scope": "Full repository gate at commit964e318; subsequent browser-harness checkpoint correction is verified by the separately retained full native/browser proof rerun."
   },
-  "sourceScope": "Runtime and browser harness were frozen for recorded proof. Later changes migrated terminal test fixtures to real source cards and formatted temporary-source JSON; the full main and generated-workspace gates cover those final test changes.",
+  "sourceScope": "Runtime and browser harness were frozen for recorded proof. Later changes migrated terminal test fixtures to real source cards and formatted temporary-source JSON; the full main and generated-workspace gates cover those final test changes. The browser import checkpoint selection was then corrected without changing runtime or worker source; corrected proof is separately pinned.",
   "remaining": [
     "Full frozen-snapshot card and rule support: 30,739 paper candidates remain unsupported.",
     "The independent G2 audit has not qualified the 24 complete difficult-scenario manifests.",
@@ -127,5 +131,47 @@
     "Three external approaches have not been executed against a common acceptance suite.",
     "Physical headset Commander gameplay and performance are not qualified."
   ],
-  "observedAt": "2026-09-06T22:43:04.360579+00:00"
+  "observedAt": "2026-09-06T22:53:17.769023+00:00",
+  "browserImportCorrection": {
+    "earlierEvidence": {
+      "path": ".commander/prototypes/engine-0.9/.commander/browser-proof/2026-09-06T21-40-32-169Z-e3c2a762/evidence.json",
+      "sha256": "c38bec743e8ce100f3cf07776347a3196e11a72989f6125d184f8ef2001348b5",
+      "status": "passed",
+      "sourceHash": "852d8a3d507d1c3f39365b03e26533fe01f83fb27b84317ac0a1ab8f80996860",
+      "workerBundleHash": "eb942a2008480c720d51fc6af4401b04931282184dcad995cb8eac394122ee48",
+      "browserVersion": "149.0.7827.55",
+      "sqliteVersion": "3.53.0-build1",
+      "sourceFilesChangedDuringRun": [],
+      "browserFailures": [],
+      "cases": [
+        {
+          "mode": "two-seat",
+          "gameSeed": 9301,
+          "driverSeed": 9318,
+          "commands": 559,
+          "boundaries": 560,
+          "finalStateHash": "8793e00b7d3fa7110f2161600a3c43ab101601195995e866b6d34ec62deb969b",
+          "replayHash": "8793e00b7d3fa7110f2161600a3c43ab101601195995e866b6d34ec62deb969b",
+          "allBrowserBoundaryHashesEqual": true,
+          "lockContention": "AlreadyOpen",
+          "stages": ["starting-player", "target", "payment", "active-modifier"]
+        },
+        {
+          "mode": "four-seat",
+          "gameSeed": 9501,
+          "driverSeed": 9518,
+          "commands": 1896,
+          "boundaries": 1897,
+          "finalStateHash": "abeeadf987cfadc0ca99559472f4b2bc5bcb1e6ca6dfe685295234a3032c6a4c",
+          "replayHash": "abeeadf987cfadc0ca99559472f4b2bc5bcb1e6ca6dfe685295234a3032c6a4c",
+          "allBrowserBoundaryHashesEqual": true,
+          "lockContention": "AlreadyOpen",
+          "stages": ["starting-player", "target", "payment", "active-modifier"]
+        }
+      ]
+    },
+    "reason": "Earlier run reloaded active-modifier checkpoints, but imported the starting-player save in the browser. This rerun imports the final active-modifier save at revisions91/165. Native import already selected that checkpoint. Exact retries are asserted after reopen; this0.9 harness does not separately retry after import.",
+    "path": ".commander/evidence/browser-parity-0.9-import-correction.log",
+    "sha256": "dba597a55c52a893057631995c5bd4b64bf5d9193718a5d2daf449b56b656026"
+  }
 }
