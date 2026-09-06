@@ -2,6 +2,7 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { stripVTControlCharacters } from "node:util";
 import { type Browser, chromium, expect } from "@playwright/test";
 
 // This isolated test never installs a CA or changes application trust policy.
@@ -40,6 +41,8 @@ try {
     throw new Error(
       `Could not create the disposable TLS certificate: ${await new Response(certificate.stderr).text()}`,
     );
+  const serverEnvironment = { ...process.env };
+  delete serverEnvironment.NO_COLOR;
   server = Bun.spawn(
     [
       "node",
@@ -51,7 +54,15 @@ try {
     ],
     {
       cwd: appRoot,
-      env: { ...process.env, BASE_PATH: "/", XR_DEV: "true", XR_CERT: cert, XR_KEY: key },
+      // Exercise colored CI output even when this smoke runs in a plain local pipe.
+      env: {
+        ...serverEnvironment,
+        BASE_PATH: "/",
+        XR_DEV: "true",
+        XR_CERT: cert,
+        XR_KEY: key,
+        FORCE_COLOR: "1",
+      },
       stdout: "pipe",
       stderr: "pipe",
     },
@@ -69,7 +80,8 @@ try {
       const item = await reader.read();
       if (item.done) break;
       serverOutput = `${serverOutput}${decoder.decode(item.value)}`.slice(-100_000);
-      if (serverOutput.includes("https://127.0.0.1:3145/")) resolveReady();
+      if (stripVTControlCharacters(serverOutput).includes("https://127.0.0.1:3145/"))
+        resolveReady();
     }
   };
   if (!(server.stdout instanceof ReadableStream) || !(server.stderr instanceof ReadableStream))
