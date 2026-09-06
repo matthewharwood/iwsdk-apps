@@ -1,6 +1,7 @@
 import {
   reviewedSelfEntryDefinition,
   SELF_ENTRY_RECIPE_VERSION,
+  SELF_ENTRY_SEQUENCE_VERSION,
   SPELL_FAMILY_VERSION,
 } from "@iwsdk-apps/card-programs";
 import {
@@ -10,8 +11,8 @@ import {
   semanticHash,
 } from "@iwsdk-apps/contracts";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/2";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.7.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/3";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.8.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -19,6 +20,8 @@ export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:noncard-stack",
   "trigger:resolution",
   "trigger:serialization",
+  "trigger:ordered-effects",
+  "trigger:individual-draws",
 ] as const;
 export type Dependency =
   | { kind: "exact"; identity: string }
@@ -133,7 +136,11 @@ function recognizedDependencyDeclaration(
   definition: CardDefinition,
   processorAbi: string,
 ): boolean {
-  if (definition.implementationRevision === SELF_ENTRY_RECIPE_VERSION)
+  if (
+    [SELF_ENTRY_RECIPE_VERSION, SELF_ENTRY_SEQUENCE_VERSION].includes(
+      definition.implementationRevision,
+    )
+  )
     return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedSelfEntryDefinition(definition);
   return (
     definition.triggerPrograms === undefined &&

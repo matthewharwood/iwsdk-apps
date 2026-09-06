@@ -57,6 +57,9 @@ const options = parseArgs({
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
     "require-triggers": { type: "boolean", default: false },
+    "require-ordered-triggers": { type: "boolean", default: false },
+    "two-seed": { type: "string", default: "1901" },
+    "four-seed": { type: "string", default: "2901" },
     resolver: { type: "string", default: "full-scan" },
   },
 }).values;
@@ -69,7 +72,10 @@ function boundedInteger(value: string, minimum: number, maximum: number, name: s
 const deckOffset = boundedInteger(options["deck-offset"], 0, 100_000, "deck-offset");
 const deckStride = boundedInteger(options["deck-stride"], 1, 100_000, "deck-stride");
 const seedAttempts = boundedInteger(options["seed-attempts"], 1, 32, "seed-attempts");
-const requireTriggers = options["require-triggers"];
+const requireOrderedTriggers = options["require-ordered-triggers"];
+const requireTriggers = options["require-triggers"] || requireOrderedTriggers;
+const twoSeed = boundedInteger(options["two-seed"], 1, 4294967200, "two-seed");
+const fourSeed = boundedInteger(options["four-seed"], 1, 4294967200, "four-seed");
 const requireRemoval = options["require-removal"];
 const requireSpells = options["require-spells"] || requireRemoval;
 function parseResolver(value: string): MatchManifest["resolver"] {
@@ -86,7 +92,8 @@ const resolver = parseResolver(options.resolver);
 const stageKinds: ProofStage[] = requireSpells
   ? ["starting-player", "target", "payment"]
   : ["starting-player", "payment"];
-if (requireTriggers) stageKinds.push("pending-trigger");
+if (requireOrderedTriggers) stageKinds.push("pending-ordered-trigger");
+else if (requireTriggers) stageKinds.push("pending-trigger");
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -286,6 +293,12 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
     stages.every((stage) => stage.run.status === "paused") &&
     (!requireSpells || Object.keys(final.spells.resolved).length > 0) &&
     (!requireTriggers || Object.keys(final.triggers.resolved).length > 0) &&
+    (!requireOrderedTriggers ||
+      Object.keys(final.triggers.resolved).some((id) =>
+        release.definitions[id]?.triggerPrograms?.some(
+          (program) => program.schema === "commander-trigger/2",
+        ),
+      )) &&
     (!requireRemoval || final.spells.removalEvents.destroy + final.spells.removalEvents.exile > 0)
   );
 }
@@ -334,7 +347,7 @@ async function verifyDurableRetry(page: Page, operation: "retryLast" | "retrySta
   expect(retry.result).toEqual({ status: "accepted", receipt: retry.expected });
 }
 async function prepareCase(seatCount: 2 | 4, attempt: number) {
-  const gameSeed = (seatCount === 2 ? 1901 : 2901) + attempt;
+  const gameSeed = (seatCount === 2 ? twoSeed : fourSeed) + attempt;
   const manifest: MatchManifest = {
     schema: "commander-match/1",
     id: `browser-parity-${seatCount}-seat-attempt-${attempt}`,
@@ -412,7 +425,8 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
           requireCompleted(run); // Actual engine/driver/budget failures are not discarded as seed misses.
           break;
         }
-        if (kind === "pending-trigger") expect(snapshot.triggers.pending.length).toBeGreaterThan(0);
+        if (kind === "pending-trigger" || kind === "pending-ordered-trigger")
+          expect(snapshot.triggers.pending.length).toBeGreaterThan(0);
         else expect(snapshot.decision?.kind).toBe(kind);
       }
       const nativeRun = await runGame(coordinator, {
@@ -501,7 +515,7 @@ try {
       });
       expect(paused.status).toBe("paused");
       const pending = await call<Snapshot>(page, { operation: "snapshot" });
-      if (stage.kind === "pending-trigger")
+      if (stage.kind === "pending-trigger" || stage.kind === "pending-ordered-trigger")
         expect(pending.triggers.pending.length).toBeGreaterThan(0);
       else expect(pending.decision?.kind).toBe(stage.kind);
       expect(pending.execution).toEqual(stage.snapshot.execution);
@@ -523,7 +537,7 @@ try {
       }
       const stageSave = await call<string>(page, { operation: "export" });
       await Bun.write(join(output, `${seatCount}-seat-${stage.kind}-save.json`), stageSave);
-      if (!saved) {
+      if (!saved || stage.kind === "pending-ordered-trigger") {
         saved = stageSave;
         importedExpected = pending;
       }
@@ -547,6 +561,7 @@ try {
     expect(completed.replayHash).toBe(completed.stateHash);
     expect(completed.boundaryHashes).toEqual(baseline.nativeFinal.boundaryHashes);
     expect(completed.spells).toEqual(baseline.nativeFinal.spells);
+    expect(completed.triggers).toEqual(baseline.nativeFinal.triggers);
     expect(completed.execution).toEqual(baseline.nativeFinal.execution);
     assertSingleChoice(completed);
     expect(completed.setup.firstChoice).toEqual(baseline.nativeFinal.setup.firstChoice);

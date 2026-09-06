@@ -6,8 +6,23 @@ import {
   emptyMana,
   type Keyword,
   type ManaColor,
+  selfEntryEffects,
 } from "@iwsdk-apps/contracts";
 import { proposeSelfEntryBody, SELF_ENTRY_RECIPE_VERSION, SELF_ENTRY_RULES } from "./self-entry";
+import {
+  bindSelfEntrySequence,
+  reviewedSequenceProposal,
+  SELF_ENTRY_SEQUENCE_RULES,
+  SELF_ENTRY_SEQUENCE_VERSION,
+} from "./self-entry-sequence";
+
+export {
+  bindSelfEntrySequence,
+  SELF_ENTRY_SEQUENCE_RULES,
+  SELF_ENTRY_SEQUENCE_VERSION,
+  SELF_ENTRY_SEQUENCES,
+} from "./self-entry-sequence";
+
 import { bindExactSpellFamily, SPELL_FAMILY_VERSION } from "./spell-families";
 import { REVIEWED_SPELLS, SPELL_RECIPE_VERSION } from "./spells";
 
@@ -155,7 +170,9 @@ export function reviewedSelfEntryDefinition(definition: CardDefinition): boolean
   const typeParts = definition.typeLine.split(" — ");
   const typeTokens = typeParts[0]?.split(" ") ?? [];
   if (
-    definition.implementationRevision !== SELF_ENTRY_RECIPE_VERSION ||
+    ![SELF_ENTRY_RECIPE_VERSION, SELF_ENTRY_SEQUENCE_VERSION].includes(
+      definition.implementationRevision,
+    ) ||
     definition.triggerPrograms === undefined ||
     !definition.types.includes("Creature") ||
     definition.types.some((type) => !ORDINARY_TYPES.has(type)) ||
@@ -174,7 +191,10 @@ export function reviewedSelfEntryDefinition(definition: CardDefinition): boolean
     definition.spellProgram !== undefined
   )
     return false;
-  const entry = proposeSelfEntryBody(definition.oracleText);
+  const entry =
+    definition.implementationRevision === SELF_ENTRY_SEQUENCE_VERSION
+      ? reviewedSequenceProposal(definition)
+      : proposeSelfEntryBody(definition.oracleText);
   const remainder = entry ? textProgram(entry.remainder) : null;
   return (
     entry !== null &&
@@ -318,7 +338,11 @@ function familySpell(
 /** Binds only explicitly reviewed data recipes. No unknown English clause can become a no-op. */
 export function bindDevelopmentCard(
   input: CatalogCard,
-  options: { spellFamilies?: boolean; selfEntryTriggers?: boolean } = {},
+  options: {
+    spellFamilies?: boolean;
+    selfEntryTriggers?: boolean;
+    selfEntrySequences?: boolean;
+  } = {},
 ): BindingResult {
   if (!input.eligibility.some((row) => row.role === "main-deck" && row.status === "candidate"))
     return { kind: "unsupported", reason: "not-observed-main-deck-candidate" };
@@ -349,7 +373,10 @@ export function bindDevelopmentCard(
     return { kind: "unsupported", reason: "nonordinary-cost-or-characteristic-expression" };
   if (typeof card.oracle_text !== "string")
     return { kind: "unsupported", reason: "missing-oracle-behavior-source" };
-  const entry = options.selfEntryTriggers ? proposeSelfEntryBody(card.oracle_text) : null;
+  const sequence = options.selfEntrySequences ? bindSelfEntrySequence(input) : null;
+  const entry =
+    sequence ?? (options.selfEntryTriggers ? proposeSelfEntryBody(card.oracle_text) : null);
+  const entryRecipe = sequence ? SELF_ENTRY_SEQUENCE_VERSION : SELF_ENTRY_RECIPE_VERSION;
   if (
     entry &&
     (input.identity !== card.oracle_id ||
@@ -363,7 +390,7 @@ export function bindDevelopmentCard(
       reason: "unrecognized-oracle-clause; reviewed-definition-required",
     };
   const recipes = ["ordinary-creature/1"];
-  if (entry) recipes.push(SELF_ENTRY_RECIPE_VERSION);
+  if (entry) recipes.push(entryRecipe);
   if (program.keywords.length) recipes.push("keyword-creature/1");
   if (program.manaAbilities.length) recipes.push("mana-creature/1");
   const obligations = [
@@ -376,7 +403,10 @@ export function bindDevelopmentCard(
   if (entry)
     obligations.push(
       ...SELF_ENTRY_RULES.map((rule) => `rule:${rule}`),
-      entry.program.effect.kind === "draw" ? "rule:121.1" : "rule:119.3",
+      ...selfEntryEffects(entry.program).map((effect) =>
+        effect.kind === "draw" ? "rule:121.1" : "rule:119.3",
+      ),
+      ...(sequence ? SELF_ENTRY_SEQUENCE_RULES.map((rule) => `rule:${rule}`) : []),
     );
   if (parts.supertypes.includes("Legendary")) obligations.push("rule:704.5j", "rule:903.3");
   const definition = CardDefinition.parse({
@@ -386,9 +416,7 @@ export function bindDevelopmentCard(
     power,
     toughness,
     ...program,
-    ...(entry
-      ? { triggerPrograms: [entry.program], implementationRevision: SELF_ENTRY_RECIPE_VERSION }
-      : {}),
+    ...(entry ? { triggerPrograms: [entry.program], implementationRevision: entryRecipe } : {}),
     commanderEligible: parts.supertypes.includes("Legendary"),
     deckLimit: 1,
     obligations,

@@ -62,7 +62,9 @@ test("opt-in self-entry constructors retain source pins and capture-controller s
     );
     if (result.kind !== "bound") throw Error(result.reason);
     expect(result.definition.keywords).toEqual(["flying", "deathtouch"]);
-    expect(result.definition.triggerPrograms?.[0]?.effect).toEqual({
+    const program = result.definition.triggerPrograms?.[0];
+    if (program?.schema !== "commander-trigger/1") throw new Error("Expected legacy single effect");
+    expect(program.effect).toEqual({
       kind: "gain-life",
       recipient: "trigger-controller",
       amount,

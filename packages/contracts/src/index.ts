@@ -1,10 +1,16 @@
 import { z } from "zod";
 import { SelfEntryProgram } from "./triggers";
 
-export { SelfEntryProgram } from "./triggers";
+export {
+  OrderedSelfEntryProgram,
+  SelfEntryEffect,
+  SelfEntryProgram,
+  SingleSelfEntryProgram,
+  selfEntryEffects,
+} from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.7.0";
+export const ENGINE_VERSION = "commander-engine/0.8.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);

@@ -1,9 +1,14 @@
 import { createInterface } from "node:readline";
-import { CONTRACT_VERSION, type PlayerObservation, Response } from "@iwsdk-apps/contracts";
+import {
+  CONTRACT_VERSION,
+  type PlayerObservation,
+  Response,
+  selfEntryEffects,
+} from "@iwsdk-apps/contracts";
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/3";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/4";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;
@@ -80,7 +85,7 @@ function present(observation: PlayerObservation, write: (line: string) => void):
         source: ability.source.id,
         name: ability.sourceCard.name,
         controller: ability.controller,
-        effect: ability.program.effect,
+        effects: selfEntryEffects(ability.program),
       })),
     )}`,
   );

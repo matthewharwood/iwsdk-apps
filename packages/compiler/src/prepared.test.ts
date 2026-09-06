@@ -270,7 +270,7 @@ test("self-entry closure retains all trigger processors and serialized programs 
     revised,
     decks,
   );
-  expect(artifact.compilerVersion).toBe("development-match-plan/2");
+  expect(artifact.compilerVersion).toBe("development-match-plan/3");
   expect(artifact.closure.excluded).toEqual(["unused"]);
   expect(artifact.closure.blockers).toEqual([]);
   for (const capability of SELF_ENTRY_CORE_CAPABILITIES)
@@ -281,12 +281,12 @@ test("self-entry closure retains all trigger processors and serialized programs 
 
 function alterTriggerFixture(altered: ContentRelease, card: CardDefinition, change: string) {
   if (change === "old-abi") altered.processorAbi = "commander-engine/0.6.0";
-  if (change === "future-abi") altered.processorAbi = "commander-engine/0.8.0";
+  if (change === "future-abi") altered.processorAbi = "commander-engine/unsupported-future";
   if (change === "future-recipe") card.implementationRevision = "self-entry-creature/2";
   if (change === "old-recipe") card.implementationRevision = "commander-development-recipes/1";
   if (change === "optional") card.oracleText = "When this creature enters, you may draw a card.";
   if (change === "unknown-remainder") card.oracleText += "\nCreatures you control get +1/+1.";
-  if (change === "altered-program" && card.triggerPrograms?.[0])
+  if (change === "altered-program" && card.triggerPrograms?.[0]?.schema === "commander-trigger/1")
     card.triggerPrograms[0].effect.amount = 2;
   if (change === "extra-keyword") card.keywords = ["flying"];
   if (change === "missing-program") delete card.triggerPrograms;

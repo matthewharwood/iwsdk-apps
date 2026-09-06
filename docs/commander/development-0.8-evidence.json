@@ -1,0 +1,211 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.8.0",
+  "sourceReleaseHash": "d8f3ff94446ec9ecfe4c037e4a3fe7c4397626b16da87b27f66771397de0c403",
+  "definitions": 761,
+  "legalDevelopmentDecks": 20,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "unsupportedPaperCandidates": 31068,
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "delta": {
+    "preservedDefinitions": 757,
+    "newOrderedEntryDefinitions": 4,
+    "schema": "commander-trigger/2",
+    "programs": [
+      {
+        "name": "Cloudblazer",
+        "effects": ["gain2", "draw2"]
+      },
+      {
+        "name": "Elite Guardmage",
+        "effects": ["gain3", "draw1"]
+      },
+      {
+        "name": "Inspiring Overseer",
+        "effects": ["gain1", "draw1"]
+      },
+      {
+        "name": "Priest of Ancient Lore",
+        "effects": ["gain1", "draw1"]
+      }
+    ]
+  },
+  "sourceAdmission": {
+    "path": ".commander/prototypes/engine-0.8/.draft-artifacts/admission-sequences-v0.8.json",
+    "sha256": "d9a2a700bf567bfda15fb0397c6d5df70b66f08838276670d5c5e2a133d668b7"
+  },
+  "scenarioReview": {
+    "path": ".commander/prototypes/engine-0.8/.draft-artifacts/scenario-review-sequences-v0.8.json",
+    "sha256": "07ec3bb914eb10332d25195b64ebed7f4abf706bf92b965b21760df1d8b92b99"
+  },
+  "native": {
+    "path": ".commander/prototypes/engine-0.8/.draft-artifacts/native-sequences-proof/2026-09-06T21-15-32-236Z/evidence.json",
+    "sha256": "16ddf983130565c2c915e0363ba891a3ca0f46f15de56572b94d601702723a24",
+    "sourceHash": "200acb9f72021fafb816522e82ec3c21d27cc46f0fea8266edf247f6cdd9d60e",
+    "status": "passed",
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 8301,
+        "commands": 721,
+        "boundaries": 722,
+        "pendingRevision": 629,
+        "pendingHash": "50687ed7af0f5b1c6ef6fbb96792fffc6ca86404a3a91a1fdd4369c45712bf54",
+        "finalHash": "864fde73836b45ad4d5352eeb8abbb55707be2e006c979806411e18bd3bd7ea5",
+        "actualExecution": {
+          "sourceReleaseHash": "d8f3ff94446ec9ecfe4c037e4a3fe7c4397626b16da87b27f66771397de0c403",
+          "preparedArtifactHash": "0bce61b786ff58172b2f56e4f10bc2853faddc8b605ced4e5fe800339bf897f9",
+          "definitionCount": 120
+        },
+        "orderedResolved": {
+          "oracle:d646e42b-5635-4798-b633-29c093b66a55": 1
+        },
+        "importedAllBoundariesEqual": true
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 8501,
+        "commands": 1547,
+        "boundaries": 1548,
+        "pendingRevision": 386,
+        "pendingHash": "1f14d6eebaef3ef473792d875e92c3e2f09538e75f6f6933c7116657169ee33b",
+        "finalHash": "8737bd0ae73f8ea44877d996b396ebb8eb4a8c059ae4d54da30fd63bc03b662a",
+        "actualExecution": {
+          "sourceReleaseHash": "d8f3ff94446ec9ecfe4c037e4a3fe7c4397626b16da87b27f66771397de0c403",
+          "preparedArtifactHash": "22ebf33a98b835bd681074b253f779ae1a03aa14eb35bcf251da599aa5f060b5",
+          "definitionCount": 184
+        },
+        "orderedResolved": {
+          "oracle:a89b0fd5-84b2-487c-8b03-e78d97276fd3": 1
+        },
+        "importedAllBoundariesEqual": true
+      }
+    ]
+  },
+  "browser": {
+    "path": ".commander/prototypes/engine-0.8/.commander/browser-proof/2026-09-06T21-21-29-879Z-4c355379/evidence.json",
+    "sha256": "cba7c3f6a0ef3a3cdf4b39ce0f02d2cc39faff049f00d7a26f16047130502d39",
+    "sourceHash": "5c45cbbde1bc81269489bfd4a64c454f181a14119bbb428717a5960fabce8115",
+    "workerBundleHash": "c3d315b154a882e503c69e5c5e3923a470a301d25142af1f9247cfb3b718e521",
+    "status": "passed",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 8301,
+        "commands": 721,
+        "boundaries": 722,
+        "stateHash": "46f9200e6805c3cda7f8a6b8e094155c89e250599a117efb98d2e0e090323e1c",
+        "execution": {
+          "sourceReleaseHash": "d8f3ff94446ec9ecfe4c037e4a3fe7c4397626b16da87b27f66771397de0c403",
+          "preparedArtifactHash": "0bce61b786ff58172b2f56e4f10bc2853faddc8b605ced4e5fe800339bf897f9",
+          "definitionCount": 120,
+          "fullDefinitionCount": 761,
+          "excludedDefinitionCount": 641
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "exactRetry": false,
+            "startingChoiceRetry": false,
+            "revision": 0
+          },
+          {
+            "kind": "payment",
+            "exactRetry": true,
+            "startingChoiceRetry": true,
+            "revision": 133
+          },
+          {
+            "kind": "pending-ordered-trigger",
+            "exactRetry": true,
+            "startingChoiceRetry": true,
+            "revision": 629
+          }
+        ],
+        "importedRevision": 629,
+        "allBoundaryHashesEqual": true
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 8501,
+        "commands": 1547,
+        "boundaries": 1548,
+        "stateHash": "96542d95e715791f92ff493dd5b9eb5eb9b3a991f038559e5668c6db343bd5ba",
+        "execution": {
+          "sourceReleaseHash": "d8f3ff94446ec9ecfe4c037e4a3fe7c4397626b16da87b27f66771397de0c403",
+          "preparedArtifactHash": "22ebf33a98b835bd681074b253f779ae1a03aa14eb35bcf251da599aa5f060b5",
+          "definitionCount": 184,
+          "fullDefinitionCount": 761,
+          "excludedDefinitionCount": 577
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "exactRetry": false,
+            "startingChoiceRetry": false,
+            "revision": 0
+          },
+          {
+            "kind": "payment",
+            "exactRetry": true,
+            "startingChoiceRetry": true,
+            "revision": 219
+          },
+          {
+            "kind": "pending-ordered-trigger",
+            "exactRetry": true,
+            "startingChoiceRetry": true,
+            "revision": 386
+          }
+        ],
+        "importedRevision": 386,
+        "allBoundaryHashesEqual": true
+      }
+    ],
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": []
+  },
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.8/promotion.json",
+    "sha256": "249e109079c5c580d232d5cdd0e8b79a4bffc56d42a29b7adaabb6ee05e8e8a5"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.8/archive-inventory.json",
+    "sha256": "bc43e1763209e398d0c6a9677cec48816d61973044d163e52b2921f4cbbf6279"
+  },
+  "repositoryGate": {
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "path": ".commander/evidence/check-full-0.8-host-retry.log",
+    "sha256": "e2932d3d7069ce97fc4db27bc78a5a1bc4814e182765b8290fba8bd1feb5263e",
+    "unitTests": 293,
+    "unitAssertions": 66937,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true,
+    "earlierAttempt": {
+      "path": ".commander/evidence/check-full-0.8-host.log",
+      "sha256": "9427dcec260e4a9917720469ecdf5042cf145ccd249da27e9382e96f597772d7",
+      "status": "failed",
+      "reason": "New G2 audit JSON formatting; formatted before rerunning entire gate."
+    }
+  },
+  "previousFixedRegression": {
+    "path": "docs/commander/fixed-regression-0.6-evidence.json",
+    "sha256": "abc8152f20f742f2e0bbe0ee591a9579928aec40c40f0db5defe7f7cf6d03dbd"
+  },
+  "scope": "Ordered source cards executed in constructed scenarios; Inspiring Overseer/Priest naturally resolved in two complete game assignments. Native/browser runs reuse the same seed/deck tuples; retries, imports, and replay are not new unique games.",
+  "remaining": [
+    "Full-universe card/rule obligations and full G2 scenario manifests remain open.",
+    "This increment does not claim fresh three-resolver comparison or fixed64 runs on0.8; prior proofs retain their own ABI/source pins.",
+    "Independent0.9 audit found prepared admission could trust a false constructor label; identity-first rejection is being verified in isolated0.9. Authenticated compiled0.8 release bytes remain unchanged.",
+    "Cloudblazer/Elite Guardmage have source-bound scenario execution, not observed resolution in these full games.",
+    "No per-game historical memory/timing telemetry is invented."
+  ],
+  "observedAt": "2026-09-06T21:35:08.404664+00:00"
+}

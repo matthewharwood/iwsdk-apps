@@ -1,4 +1,4 @@
-import { SelfEntryProgram } from "@iwsdk-apps/contracts";
+import { SingleSelfEntryProgram } from "@iwsdk-apps/contracts";
 
 export const SELF_ENTRY_RECIPE_VERSION = "self-entry-creature/1";
 export const SELF_ENTRY_RULES = [
@@ -31,7 +31,7 @@ export const SELF_ENTRY_REGISTRY = [
 /** Finite exact whole-line constructors; every remaining line must pass the existing full-body ability compiler. */
 export function proposeSelfEntryBody(
   text: string,
-): { program: SelfEntryProgram; remainder: string } | null {
+): { program: SingleSelfEntryProgram; remainder: string } | null {
   const lines = text.split("\n");
   if (lines.some((line) => line === "")) return null;
   const matches = lines.flatMap((line, index) => {
@@ -41,7 +41,7 @@ export function proposeSelfEntryBody(
   const match = matches[0];
   if (matches.length !== 1 || !match) return null;
   return {
-    program: SelfEntryProgram.parse({
+    program: SingleSelfEntryProgram.parse({
       schema: "commander-trigger/1",
       id: "self-entry-0",
       trigger: {

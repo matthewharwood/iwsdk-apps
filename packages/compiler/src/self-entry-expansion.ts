@@ -4,7 +4,11 @@ import {
   SELF_ENTRY_REGISTRY,
 } from "@iwsdk-apps/card-programs";
 import { readCandidateCards } from "@iwsdk-apps/catalog";
-import { type SelfEntryProgram, semanticHash } from "@iwsdk-apps/contracts";
+import {
+  type SelfEntryProgram,
+  type SingleSelfEntryProgram,
+  semanticHash,
+} from "@iwsdk-apps/contracts";
 import { compileDevelopmentRelease } from "./index";
 
 /** Complete-body constructor outcomes and source references; neither execution nor semantic certification. */
@@ -27,7 +31,7 @@ export async function compileSelfEntryDraft(dbPath: string) {
     manaValue: number | null;
     power: unknown;
     toughness: unknown;
-    proposedProgram: SelfEntryProgram;
+    proposedProgram: SingleSelfEntryProgram;
     remainingText: string;
     status: "bound" | "unsupported";
     reason: string | null;

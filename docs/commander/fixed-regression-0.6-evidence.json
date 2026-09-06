@@ -1,0 +1,1252 @@
+{
+  "schema": "commander-fixed-regression-evidence/1",
+  "status": "passed",
+  "fullSnapshotSupported": false,
+  "observedAt": "2026-09-06T21:26:24.867664+00:00",
+  "path": ".commander/regressions/regression-0.6-fixed64",
+  "buildHash": "8544e48149bae061e9fbcd1af7ec24634e3b57908cc91d6bb59bfddc2b88b639",
+  "releaseHash": "dd089c903f133756f1f56e4da48233f4350f0a4c25db5c9336909ff33de68693",
+  "corpusHash": "8afa8a1c5ac3ce774fddecab88b5131ef66a7b37d053af590b876da28e763ba8",
+  "reportSha256": "489655a27fade8dcdc4b74af2ed705e52baa68e5caf8bd2af9feb61fe51aaef9",
+  "assignmentSha256": "3b74d5ef4f8699a0b48d4a773517a168a297f310a4fc14e0ca98fc53bd4fed25",
+  "assigned": 64,
+  "completed": 64,
+  "replayVerified": 64,
+  "pending": 0,
+  "failed": 0,
+  "modes": {
+    "two-seat": 16,
+    "four-seat": 48
+  },
+  "distinctDeckCompositions": 14,
+  "commands": 89784,
+  "minCommands": 347,
+  "maxCommands": 2576,
+  "distinctCastDefinitions": 393,
+  "observedRuleHitKeys": 35,
+  "runtimeHitsAreNotSemanticAssertions": true,
+  "historicalOutcomesReused": false,
+  "cases": [
+    {
+      "index": 0,
+      "matchId": "regression-0.6-fixed64:0",
+      "status": "completed",
+      "commands": 550,
+      "revision": 550,
+      "turn": 21,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "aad008d644a4099805e2ade25fe238d402a22214df3d1a516bbc4462d25dc2ff",
+      "replay": {
+        "verified": true,
+        "stateHash": "aad008d644a4099805e2ade25fe238d402a22214df3d1a516bbc4462d25dc2ff"
+      },
+      "resultFileSha256": "45f54efe2ec86d78e09bbf028ce69e8a597ae7720d91ce391e2046c6db0a87f7"
+    },
+    {
+      "index": 1,
+      "matchId": "regression-0.6-fixed64:1",
+      "status": "completed",
+      "commands": 895,
+      "revision": 895,
+      "turn": 32,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "41904390623a019f3de25b7a83b770d8cea77fd162fd190242edbbe95196c7d6",
+      "replay": {
+        "verified": true,
+        "stateHash": "41904390623a019f3de25b7a83b770d8cea77fd162fd190242edbbe95196c7d6"
+      },
+      "resultFileSha256": "93095cb2994330f0c95550c1d4384fe4b6ee28d8b10c8844d95a13397c58d7ee"
+    },
+    {
+      "index": 2,
+      "matchId": "regression-0.6-fixed64:2",
+      "status": "completed",
+      "commands": 347,
+      "revision": 347,
+      "turn": 15,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "cb31ac8557363f9d81386fb1f0a99487d96cc4a62afa10cbb07ac887ed8c8df7",
+      "replay": {
+        "verified": true,
+        "stateHash": "cb31ac8557363f9d81386fb1f0a99487d96cc4a62afa10cbb07ac887ed8c8df7"
+      },
+      "resultFileSha256": "3a0dbb25f8edee69d68a13dbbf6b1e7f407c7752e22e5cb1e1c3c228ce047ba3"
+    },
+    {
+      "index": 3,
+      "matchId": "regression-0.6-fixed64:3",
+      "status": "completed",
+      "commands": 1011,
+      "revision": 1011,
+      "turn": 38,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "1256d4bbd1a10066c0d51139787372d70f2adb7515875b7e1ce0dc15c89a9d6f",
+      "replay": {
+        "verified": true,
+        "stateHash": "1256d4bbd1a10066c0d51139787372d70f2adb7515875b7e1ce0dc15c89a9d6f"
+      },
+      "resultFileSha256": "89ec80050a9ae7264239b26a17623d1e1cdf58e110110c9c668220dc3a948e2c"
+    },
+    {
+      "index": 4,
+      "matchId": "regression-0.6-fixed64:4",
+      "status": "completed",
+      "commands": 1937,
+      "revision": 1937,
+      "turn": 46,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "0c251cda521a6b352554e2b0fee274edbbdceb224d8604e51b68a3f8e7805591",
+      "replay": {
+        "verified": true,
+        "stateHash": "0c251cda521a6b352554e2b0fee274edbbdceb224d8604e51b68a3f8e7805591"
+      },
+      "resultFileSha256": "00f4607b98892b52b5da5153c24ca8086f9040562b7c6acd961a4106273ca0e2"
+    },
+    {
+      "index": 5,
+      "matchId": "regression-0.6-fixed64:5",
+      "status": "completed",
+      "commands": 1805,
+      "revision": 1805,
+      "turn": 43,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "334998a1fbb7d9247a15033112a685da7745ff8d1c4014882bc932bc3dc16fd6",
+      "replay": {
+        "verified": true,
+        "stateHash": "334998a1fbb7d9247a15033112a685da7745ff8d1c4014882bc932bc3dc16fd6"
+      },
+      "resultFileSha256": "d380d3172ac1d7d26893f2bb3ea4b0d2273edafcca7d706f32ef9a096610516c"
+    },
+    {
+      "index": 6,
+      "matchId": "regression-0.6-fixed64:6",
+      "status": "completed",
+      "commands": 2432,
+      "revision": 2432,
+      "turn": 59,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "0c33ff1364f03866c98728812b4f4e55af2aef9cc703e07058235b7f2775bc3c",
+      "replay": {
+        "verified": true,
+        "stateHash": "0c33ff1364f03866c98728812b4f4e55af2aef9cc703e07058235b7f2775bc3c"
+      },
+      "resultFileSha256": "48610a75b5114e9a0d879a2df242eb6856252fe47b5ca7c5e7405076caa8aadc"
+    },
+    {
+      "index": 7,
+      "matchId": "regression-0.6-fixed64:7",
+      "status": "completed",
+      "commands": 2576,
+      "revision": 2576,
+      "turn": 62,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "3a098561831ab6a1c276083eae4aca954afc57d78750ae83491f762d3840ca2a",
+      "replay": {
+        "verified": true,
+        "stateHash": "3a098561831ab6a1c276083eae4aca954afc57d78750ae83491f762d3840ca2a"
+      },
+      "resultFileSha256": "a8044bbfe300481c4fed0f4f27f18e5d356f214056e76b0632d7b481881e39b7"
+    },
+    {
+      "index": 8,
+      "matchId": "regression-0.6-fixed64:8",
+      "status": "completed",
+      "commands": 1982,
+      "revision": 1982,
+      "turn": 46,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "850e118ca355a5c8a0dea8b599fad692e82f5ec873fb756737905f2205c33ee4",
+      "replay": {
+        "verified": true,
+        "stateHash": "850e118ca355a5c8a0dea8b599fad692e82f5ec873fb756737905f2205c33ee4"
+      },
+      "resultFileSha256": "3c4f0749b996606e3218fb34bb4c54bc686240a630669f4de8e30737c3ed2bc6"
+    },
+    {
+      "index": 9,
+      "matchId": "regression-0.6-fixed64:9",
+      "status": "completed",
+      "commands": 1386,
+      "revision": 1386,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "b0b45e8f8acf2fc77f959fc521162b9830b6dc0808d25318da229c3e7c37f167",
+      "replay": {
+        "verified": true,
+        "stateHash": "b0b45e8f8acf2fc77f959fc521162b9830b6dc0808d25318da229c3e7c37f167"
+      },
+      "resultFileSha256": "8c92d613cfef28eaeab8fcccbe433ff66466f5394c1a6e2934a45b3d86da7461"
+    },
+    {
+      "index": 10,
+      "matchId": "regression-0.6-fixed64:10",
+      "status": "completed",
+      "commands": 1700,
+      "revision": 1700,
+      "turn": 41,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "9c5b872581ed6ede33fbb5544bf7d8197bed994207b432f0f1b4737a3535e4b2",
+      "replay": {
+        "verified": true,
+        "stateHash": "9c5b872581ed6ede33fbb5544bf7d8197bed994207b432f0f1b4737a3535e4b2"
+      },
+      "resultFileSha256": "5fbc5b9512510d7169317044f8b02816f27f4ada6067f6cb8f5830ef22208ecf"
+    },
+    {
+      "index": 11,
+      "matchId": "regression-0.6-fixed64:11",
+      "status": "completed",
+      "commands": 1591,
+      "revision": 1591,
+      "turn": 40,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "8aa0d14def9635cd6bd3b7dcb56adc439e567972b3270a84e707b0615117e2ca",
+      "replay": {
+        "verified": true,
+        "stateHash": "8aa0d14def9635cd6bd3b7dcb56adc439e567972b3270a84e707b0615117e2ca"
+      },
+      "resultFileSha256": "2c76670c9d875a1f6ff36fd0ac205d5d5a50c2f9e5a6f7ff7ef2e6e8ab833b20"
+    },
+    {
+      "index": 12,
+      "matchId": "regression-0.6-fixed64:12",
+      "status": "completed",
+      "commands": 1624,
+      "revision": 1624,
+      "turn": 39,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "1c2eaf368af2c30042dae544630474472e3fcab4c3da30dc2e9fa53676f1c4dc",
+      "replay": {
+        "verified": true,
+        "stateHash": "1c2eaf368af2c30042dae544630474472e3fcab4c3da30dc2e9fa53676f1c4dc"
+      },
+      "resultFileSha256": "d6e912042deded7d4e57e2194845e6a7f1f8385bb63310acc19b0ec71452a0fe"
+    },
+    {
+      "index": 13,
+      "matchId": "regression-0.6-fixed64:13",
+      "status": "completed",
+      "commands": 1385,
+      "revision": 1385,
+      "turn": 36,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "bcf599d12f659471525c79124e882c2ed34dc448d2ab4dd302e2424f4f4ad9a0",
+      "replay": {
+        "verified": true,
+        "stateHash": "bcf599d12f659471525c79124e882c2ed34dc448d2ab4dd302e2424f4f4ad9a0"
+      },
+      "resultFileSha256": "468ab182df13ceb3ebabe14756d0a35c6a4648d5984295c367d07125a426f078"
+    },
+    {
+      "index": 14,
+      "matchId": "regression-0.6-fixed64:14",
+      "status": "completed",
+      "commands": 1941,
+      "revision": 1941,
+      "turn": 49,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "b9d8393a0e4291ad30a7ea15981abfaac31e00c531964d8bc3d6c46bebb2b0ea",
+      "replay": {
+        "verified": true,
+        "stateHash": "b9d8393a0e4291ad30a7ea15981abfaac31e00c531964d8bc3d6c46bebb2b0ea"
+      },
+      "resultFileSha256": "c809e0b2cb0a082cd2302b7da41d54552adddd13ec1c1bdd004d1613a927d485"
+    },
+    {
+      "index": 15,
+      "matchId": "regression-0.6-fixed64:15",
+      "status": "completed",
+      "commands": 1860,
+      "revision": 1860,
+      "turn": 47,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "61bca96e12667a19f9a31a3952742e3a206bcd89df64c03d8596ee35c796d2b0",
+      "replay": {
+        "verified": true,
+        "stateHash": "61bca96e12667a19f9a31a3952742e3a206bcd89df64c03d8596ee35c796d2b0"
+      },
+      "resultFileSha256": "9547ea52eda5cdd96224437ea02c8af25ca54331f3c7f5372fd01d5b03785332"
+    },
+    {
+      "index": 16,
+      "matchId": "regression-0.6-fixed64:16",
+      "status": "completed",
+      "commands": 655,
+      "revision": 655,
+      "turn": 23,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "e1470360e40b0ccea814bd68252fd941c89cb46b45432f03d13eff5650cbf127",
+      "replay": {
+        "verified": true,
+        "stateHash": "e1470360e40b0ccea814bd68252fd941c89cb46b45432f03d13eff5650cbf127"
+      },
+      "resultFileSha256": "bbda399c2e47eb77b593a1fe83b1d2a79f41f67bdba6c27e8da0cab1bb71057e"
+    },
+    {
+      "index": 17,
+      "matchId": "regression-0.6-fixed64:17",
+      "status": "completed",
+      "commands": 606,
+      "revision": 606,
+      "turn": 23,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "e54b73f794808d3646ae1ac82cd88906d86ca73716175d35551f609deb10295a",
+      "replay": {
+        "verified": true,
+        "stateHash": "e54b73f794808d3646ae1ac82cd88906d86ca73716175d35551f609deb10295a"
+      },
+      "resultFileSha256": "709a0742e45115c513822f79b96158780183bacf75bf1038286d0a3e53f07f2b"
+    },
+    {
+      "index": 18,
+      "matchId": "regression-0.6-fixed64:18",
+      "status": "completed",
+      "commands": 504,
+      "revision": 504,
+      "turn": 22,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "675b57a5e33de0eb7f2c524d4e1f7db2cb3140b324ae1ad233a2921fe6c564db",
+      "replay": {
+        "verified": true,
+        "stateHash": "675b57a5e33de0eb7f2c524d4e1f7db2cb3140b324ae1ad233a2921fe6c564db"
+      },
+      "resultFileSha256": "7d2bca2007cea8c481220274980a5ef80ad945b733bdcfd2f2ea4e2e80e37470"
+    },
+    {
+      "index": 19,
+      "matchId": "regression-0.6-fixed64:19",
+      "status": "completed",
+      "commands": 351,
+      "revision": 351,
+      "turn": 16,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "4c9b14fa7431e30ef442d01bfe575f163323e044e8108c7ad30fffdaf5912606",
+      "replay": {
+        "verified": true,
+        "stateHash": "4c9b14fa7431e30ef442d01bfe575f163323e044e8108c7ad30fffdaf5912606"
+      },
+      "resultFileSha256": "505f4f4c5216c7de02807762c31fc0c06316352394bf0f9d50a4e0995273e895"
+    },
+    {
+      "index": 20,
+      "matchId": "regression-0.6-fixed64:20",
+      "status": "completed",
+      "commands": 1423,
+      "revision": 1423,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "1c7ad04ba75d0289ca4aa12ddbbf1305031e2d9a1859bddaa584debd2eb75770",
+      "replay": {
+        "verified": true,
+        "stateHash": "1c7ad04ba75d0289ca4aa12ddbbf1305031e2d9a1859bddaa584debd2eb75770"
+      },
+      "resultFileSha256": "ccf4c19045f621b404e449452a0d70f3b5562b350ef2958fb404231a7bd4e08e"
+    },
+    {
+      "index": 21,
+      "matchId": "regression-0.6-fixed64:21",
+      "status": "completed",
+      "commands": 1337,
+      "revision": 1337,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "cf9dfa2def3fffe2a6cdac03329b720f0c3d1df7dafdeadec20f2a2bf87b9195",
+      "replay": {
+        "verified": true,
+        "stateHash": "cf9dfa2def3fffe2a6cdac03329b720f0c3d1df7dafdeadec20f2a2bf87b9195"
+      },
+      "resultFileSha256": "c5580c10343bab962db87ac48544c1412dd66897558cfe0f87aaab8844b4e6b3"
+    },
+    {
+      "index": 22,
+      "matchId": "regression-0.6-fixed64:22",
+      "status": "completed",
+      "commands": 1467,
+      "revision": 1467,
+      "turn": 36,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "7cbd14a548f2787e496b3b9ffc41b34f27131a5d96f14ed5c1aefd0ee47727ab",
+      "replay": {
+        "verified": true,
+        "stateHash": "7cbd14a548f2787e496b3b9ffc41b34f27131a5d96f14ed5c1aefd0ee47727ab"
+      },
+      "resultFileSha256": "51e0ff6a52e59e918af9c5fcb38b1a4bd72ca27399937b02f5e0507c97fcc2cb"
+    },
+    {
+      "index": 23,
+      "matchId": "regression-0.6-fixed64:23",
+      "status": "completed",
+      "commands": 2175,
+      "revision": 2175,
+      "turn": 50,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "56d8d4e976e0d625de94a1be9728a07a25aa7b887ee582f1da2972defa048c7f",
+      "replay": {
+        "verified": true,
+        "stateHash": "56d8d4e976e0d625de94a1be9728a07a25aa7b887ee582f1da2972defa048c7f"
+      },
+      "resultFileSha256": "a6ee59593b74db6ae76731a73cc8b2b84bc446e131e0be0b1f7cceb7aa56f68d"
+    },
+    {
+      "index": 24,
+      "matchId": "regression-0.6-fixed64:24",
+      "status": "completed",
+      "commands": 1681,
+      "revision": 1681,
+      "turn": 42,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "20195c01fc5de6d33e89582463cc0e71820eeb999ecd4d6ce7e89cd19a4108ec",
+      "replay": {
+        "verified": true,
+        "stateHash": "20195c01fc5de6d33e89582463cc0e71820eeb999ecd4d6ce7e89cd19a4108ec"
+      },
+      "resultFileSha256": "999cb0575c03f87832aadf7e95fc9b5d466cd0f5983d2a82de15d3d1bd9d627b"
+    },
+    {
+      "index": 25,
+      "matchId": "regression-0.6-fixed64:25",
+      "status": "completed",
+      "commands": 1559,
+      "revision": 1559,
+      "turn": 39,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "1800fe57a44e82db62571be7c691a94afec84d4f38cab5de84457c4489102890",
+      "replay": {
+        "verified": true,
+        "stateHash": "1800fe57a44e82db62571be7c691a94afec84d4f38cab5de84457c4489102890"
+      },
+      "resultFileSha256": "c451b45c89da557179e70ed164420cddcb9bbc49893b94143f13373f257bac41"
+    },
+    {
+      "index": 26,
+      "matchId": "regression-0.6-fixed64:26",
+      "status": "completed",
+      "commands": 1406,
+      "revision": 1406,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "aca255e493d603a5e7a228b512a2460a0aef7c4fdbf43c2bf1db60a261c550e2",
+      "replay": {
+        "verified": true,
+        "stateHash": "aca255e493d603a5e7a228b512a2460a0aef7c4fdbf43c2bf1db60a261c550e2"
+      },
+      "resultFileSha256": "a64dcf54322df6354e39c7ad1e1af677c014ce8b1a471ed4517a061a9213bbb7"
+    },
+    {
+      "index": 27,
+      "matchId": "regression-0.6-fixed64:27",
+      "status": "completed",
+      "commands": 1496,
+      "revision": 1496,
+      "turn": 36,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "9ff3cd3dd334a8f1fba86acdc1f7017008aab2662908acf796c40be989e5858f",
+      "replay": {
+        "verified": true,
+        "stateHash": "9ff3cd3dd334a8f1fba86acdc1f7017008aab2662908acf796c40be989e5858f"
+      },
+      "resultFileSha256": "d17a164d79d15ad598a98d9104e70106776c675cb14fcc1868319b0759fbdccc"
+    },
+    {
+      "index": 28,
+      "matchId": "regression-0.6-fixed64:28",
+      "status": "completed",
+      "commands": 1743,
+      "revision": 1743,
+      "turn": 41,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "a7bb770ac7fb289bdc40bba5ec6a944373ca5ec2bba73885e411ca289968b996",
+      "replay": {
+        "verified": true,
+        "stateHash": "a7bb770ac7fb289bdc40bba5ec6a944373ca5ec2bba73885e411ca289968b996"
+      },
+      "resultFileSha256": "6b3e8598e341af25119bdf35873b505006167134763698c2b7d2137d0554368b"
+    },
+    {
+      "index": 29,
+      "matchId": "regression-0.6-fixed64:29",
+      "status": "completed",
+      "commands": 1631,
+      "revision": 1631,
+      "turn": 40,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "fdeebffd694c92ca175495254db1f04024b5918d6e3ece439b2aa8a1706393b8",
+      "replay": {
+        "verified": true,
+        "stateHash": "fdeebffd694c92ca175495254db1f04024b5918d6e3ece439b2aa8a1706393b8"
+      },
+      "resultFileSha256": "858c0ade66192db8b9bb6957d0b180c7afb10f55c2308e3f76879a61dc5c7cd0"
+    },
+    {
+      "index": 30,
+      "matchId": "regression-0.6-fixed64:30",
+      "status": "completed",
+      "commands": 1668,
+      "revision": 1668,
+      "turn": 42,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "612848b1f2a035b017f9fed5d918ebd4181e2c39a725e73852509de8edc38422",
+      "replay": {
+        "verified": true,
+        "stateHash": "612848b1f2a035b017f9fed5d918ebd4181e2c39a725e73852509de8edc38422"
+      },
+      "resultFileSha256": "823657d6e2d0e989ce81abcbd7bda15e9ffcd0bec0e112120392306017bd5ccb"
+    },
+    {
+      "index": 31,
+      "matchId": "regression-0.6-fixed64:31",
+      "status": "completed",
+      "commands": 1392,
+      "revision": 1392,
+      "turn": 33,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "bdc9de886fbb872bbf999f0eb9c7c676e71b87c8865c81431c2b043e8992f72e",
+      "replay": {
+        "verified": true,
+        "stateHash": "bdc9de886fbb872bbf999f0eb9c7c676e71b87c8865c81431c2b043e8992f72e"
+      },
+      "resultFileSha256": "7b2dc38b64c83e669155c52f0220d439fae98b1874b2c6c4aad3f4ef6c7c3bac"
+    },
+    {
+      "index": 32,
+      "matchId": "regression-0.6-fixed64:32",
+      "status": "completed",
+      "commands": 358,
+      "revision": 358,
+      "turn": 15,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "27cdebce58047da69761ff8b1db013009b8c976bd71f7f9bd4bdaa887cc97d19",
+      "replay": {
+        "verified": true,
+        "stateHash": "27cdebce58047da69761ff8b1db013009b8c976bd71f7f9bd4bdaa887cc97d19"
+      },
+      "resultFileSha256": "b00bc4f7718f76b1caf8b83df52fcbd9e0f6ccb0b549593fbf567801096954b5"
+    },
+    {
+      "index": 33,
+      "matchId": "regression-0.6-fixed64:33",
+      "status": "completed",
+      "commands": 587,
+      "revision": 587,
+      "turn": 22,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "b76aff94c940a51848662148ad734cc556c4909ac1f07747ce095b0cf356af67",
+      "replay": {
+        "verified": true,
+        "stateHash": "b76aff94c940a51848662148ad734cc556c4909ac1f07747ce095b0cf356af67"
+      },
+      "resultFileSha256": "d7fc2c87d320e0bd91200a9e84b143dae05adb72e754673c96bf53d91b49d5f5"
+    },
+    {
+      "index": 34,
+      "matchId": "regression-0.6-fixed64:34",
+      "status": "completed",
+      "commands": 737,
+      "revision": 737,
+      "turn": 29,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "a91fed748fc5233c698b4d8d558e59c3244f14f84c0ad643d2b76b75f2597074",
+      "replay": {
+        "verified": true,
+        "stateHash": "a91fed748fc5233c698b4d8d558e59c3244f14f84c0ad643d2b76b75f2597074"
+      },
+      "resultFileSha256": "595b39a35259611065cd9ed44e1779610c6dc97b8021ccac9b97e718f98e79cd"
+    },
+    {
+      "index": 35,
+      "matchId": "regression-0.6-fixed64:35",
+      "status": "completed",
+      "commands": 498,
+      "revision": 498,
+      "turn": 20,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "8da1ce813158ec530df2dadc962e094285f04a76b019352e9c9b8f8a3b48c6d6",
+      "replay": {
+        "verified": true,
+        "stateHash": "8da1ce813158ec530df2dadc962e094285f04a76b019352e9c9b8f8a3b48c6d6"
+      },
+      "resultFileSha256": "072ed3c794ffb252deb69748c20543bc4fc27c159819e2393dc30d65d6fa558a"
+    },
+    {
+      "index": 36,
+      "matchId": "regression-0.6-fixed64:36",
+      "status": "completed",
+      "commands": 1586,
+      "revision": 1586,
+      "turn": 38,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "418e402a64f90c0af7730df73853f7292caf870cdb162b2881c82e6dde413c21",
+      "replay": {
+        "verified": true,
+        "stateHash": "418e402a64f90c0af7730df73853f7292caf870cdb162b2881c82e6dde413c21"
+      },
+      "resultFileSha256": "4f72c3072492728fc3f5b3050dd45758eac90b298f9065a831a8832048d45fce"
+    },
+    {
+      "index": 37,
+      "matchId": "regression-0.6-fixed64:37",
+      "status": "completed",
+      "commands": 1528,
+      "revision": 1528,
+      "turn": 38,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "483445f8cda00a9b8e2cdea037895eba750a7cfc63b6efffb93e298d5cf693d4",
+      "replay": {
+        "verified": true,
+        "stateHash": "483445f8cda00a9b8e2cdea037895eba750a7cfc63b6efffb93e298d5cf693d4"
+      },
+      "resultFileSha256": "d7faaf65a4c4bb6f9e1cf18466d423595319cfe0cb6219581c9d850ea5159f76"
+    },
+    {
+      "index": 38,
+      "matchId": "regression-0.6-fixed64:38",
+      "status": "completed",
+      "commands": 1379,
+      "revision": 1379,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "2a940b85d16a80eb17f2e0721d5aae1f84101ca591a20eb6e7745349d901eba9",
+      "replay": {
+        "verified": true,
+        "stateHash": "2a940b85d16a80eb17f2e0721d5aae1f84101ca591a20eb6e7745349d901eba9"
+      },
+      "resultFileSha256": "a2f186023b9a6fc9e60fd20993de6ad64e62905219318c350df1cd42a26af02c"
+    },
+    {
+      "index": 39,
+      "matchId": "regression-0.6-fixed64:39",
+      "status": "completed",
+      "commands": 1413,
+      "revision": 1413,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "0a65a432128a777e97d471c22a95e2338553d8fbd27501d81edd1ca08374f8c9",
+      "replay": {
+        "verified": true,
+        "stateHash": "0a65a432128a777e97d471c22a95e2338553d8fbd27501d81edd1ca08374f8c9"
+      },
+      "resultFileSha256": "57651527d1b60728cec5c37cecd8c9fba20b328d6c78990d57bdd683642611ae"
+    },
+    {
+      "index": 40,
+      "matchId": "regression-0.6-fixed64:40",
+      "status": "completed",
+      "commands": 1551,
+      "revision": 1551,
+      "turn": 39,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "f5fa090913f1717146d714af963ce03e68220fa9089a9fecdf62a63d8dd33437",
+      "replay": {
+        "verified": true,
+        "stateHash": "f5fa090913f1717146d714af963ce03e68220fa9089a9fecdf62a63d8dd33437"
+      },
+      "resultFileSha256": "3cedd8c93fa372aba341397a1c119f63bddc1767cf9580944943f8313cab62c5"
+    },
+    {
+      "index": 41,
+      "matchId": "regression-0.6-fixed64:41",
+      "status": "completed",
+      "commands": 1549,
+      "revision": 1549,
+      "turn": 39,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "c6e871f7571a97a0281df209bf89e7a9a127b2139b6fd350fcac62a8c33fc8b9",
+      "replay": {
+        "verified": true,
+        "stateHash": "c6e871f7571a97a0281df209bf89e7a9a127b2139b6fd350fcac62a8c33fc8b9"
+      },
+      "resultFileSha256": "d2037f4c74e9d8a8b6eb30b15957ae747c1fb40c88c54e0b1983a9d2bca507fe"
+    },
+    {
+      "index": 42,
+      "matchId": "regression-0.6-fixed64:42",
+      "status": "completed",
+      "commands": 1403,
+      "revision": 1403,
+      "turn": 36,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "559b997e9d394650997a8637c6fcd643194254e52cf23aded4bbf55f0d0245c8",
+      "replay": {
+        "verified": true,
+        "stateHash": "559b997e9d394650997a8637c6fcd643194254e52cf23aded4bbf55f0d0245c8"
+      },
+      "resultFileSha256": "acd0244520d62708530bbfc488c69846a65556658c5f9a6555248993d94906ba"
+    },
+    {
+      "index": 43,
+      "matchId": "regression-0.6-fixed64:43",
+      "status": "completed",
+      "commands": 1755,
+      "revision": 1755,
+      "turn": 43,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "22d524fc82ee0f2afef717705f3d99c5a7fdf978c304a5bfdf99b8a2b4429dab",
+      "replay": {
+        "verified": true,
+        "stateHash": "22d524fc82ee0f2afef717705f3d99c5a7fdf978c304a5bfdf99b8a2b4429dab"
+      },
+      "resultFileSha256": "3e7295c90b9124343d4f67b7cb1a9830e3d7d844c33aeea1eac96993d10bf3f9"
+    },
+    {
+      "index": 44,
+      "matchId": "regression-0.6-fixed64:44",
+      "status": "completed",
+      "commands": 1739,
+      "revision": 1739,
+      "turn": 43,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "561f110fc87f32e4eb9ee0f04ccee2ccf6ea0856055ddecb423a51f67cb92307",
+      "replay": {
+        "verified": true,
+        "stateHash": "561f110fc87f32e4eb9ee0f04ccee2ccf6ea0856055ddecb423a51f67cb92307"
+      },
+      "resultFileSha256": "ad0a07428f2af719cd02306ad5b3d2d9cef6650068f8c0638f14c3bbcacf7c26"
+    },
+    {
+      "index": 45,
+      "matchId": "regression-0.6-fixed64:45",
+      "status": "completed",
+      "commands": 1457,
+      "revision": 1457,
+      "turn": 37,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "c3b7037e8ab751de6a2e80d40c243c34599196dc543cbd39c3c90025874b6cc2",
+      "replay": {
+        "verified": true,
+        "stateHash": "c3b7037e8ab751de6a2e80d40c243c34599196dc543cbd39c3c90025874b6cc2"
+      },
+      "resultFileSha256": "dd60af0e145fc6ce51cdd6a832745d6118ee2371315dfacd62449056265b799b"
+    },
+    {
+      "index": 46,
+      "matchId": "regression-0.6-fixed64:46",
+      "status": "completed",
+      "commands": 1456,
+      "revision": 1456,
+      "turn": 40,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "0dce13e58e20e63dee8ab4178bcafe7063b507a4e7fd19e33fb3a72a5e751063",
+      "replay": {
+        "verified": true,
+        "stateHash": "0dce13e58e20e63dee8ab4178bcafe7063b507a4e7fd19e33fb3a72a5e751063"
+      },
+      "resultFileSha256": "75c5f4d9ee9e9b14a7cd1c2ebf25e3e33d3f08e47622a4fc01ff550524227fd4"
+    },
+    {
+      "index": 47,
+      "matchId": "regression-0.6-fixed64:47",
+      "status": "completed",
+      "commands": 1422,
+      "revision": 1422,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "024309e0fd37264c882e4333e72534556696f7be1de302673ff6c3a9b2cab259",
+      "replay": {
+        "verified": true,
+        "stateHash": "024309e0fd37264c882e4333e72534556696f7be1de302673ff6c3a9b2cab259"
+      },
+      "resultFileSha256": "5bf3e44eb89c45ee9ad2ef4fd8b1b4bf32f9c3429f0734de186c47662695dd90"
+    },
+    {
+      "index": 48,
+      "matchId": "regression-0.6-fixed64:48",
+      "status": "completed",
+      "commands": 520,
+      "revision": 520,
+      "turn": 20,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "34fca27c9ac7fef2aec8ea17021ddacc44f4219700b9515542063817125aca57",
+      "replay": {
+        "verified": true,
+        "stateHash": "34fca27c9ac7fef2aec8ea17021ddacc44f4219700b9515542063817125aca57"
+      },
+      "resultFileSha256": "cf74429490078cabee7a63841d258af539afb788b3212ff1fa5d54b46b40dd90"
+    },
+    {
+      "index": 49,
+      "matchId": "regression-0.6-fixed64:49",
+      "status": "completed",
+      "commands": 351,
+      "revision": 351,
+      "turn": 16,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "d565d2459056edb7d2850bb418f6f0817c117fc3c8f1b4f99d7c64c538436721",
+      "replay": {
+        "verified": true,
+        "stateHash": "d565d2459056edb7d2850bb418f6f0817c117fc3c8f1b4f99d7c64c538436721"
+      },
+      "resultFileSha256": "7379e09243cbf5a406bcfff2933b7f3b84ed7ea1404510a2981493664262f793"
+    },
+    {
+      "index": 50,
+      "matchId": "regression-0.6-fixed64:50",
+      "status": "completed",
+      "commands": 822,
+      "revision": 822,
+      "turn": 31,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "439b3e2fd97b378322c5e0d146b1aa46ae4a0eb393a42052fea6a7ff1d181a1b",
+      "replay": {
+        "verified": true,
+        "stateHash": "439b3e2fd97b378322c5e0d146b1aa46ae4a0eb393a42052fea6a7ff1d181a1b"
+      },
+      "resultFileSha256": "7a9f01b3caf529d37abf8d395bbb928620343176f3950ce227b220c56f291160"
+    },
+    {
+      "index": 51,
+      "matchId": "regression-0.6-fixed64:51",
+      "status": "completed",
+      "commands": 642,
+      "revision": 642,
+      "turn": 26,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "17be2a8ce04ed2282023d28223f73316b95741b707ad595025022e4a804a1d80",
+      "replay": {
+        "verified": true,
+        "stateHash": "17be2a8ce04ed2282023d28223f73316b95741b707ad595025022e4a804a1d80"
+      },
+      "resultFileSha256": "102473ca9e3a478b2ef60b1f85ecd2622064ffc7fbc4d9e24829aa25f57f36bb"
+    },
+    {
+      "index": 52,
+      "matchId": "regression-0.6-fixed64:52",
+      "status": "completed",
+      "commands": 1577,
+      "revision": 1577,
+      "turn": 38,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "7c851c2c89ca36d80091fb0b4c29fe2e2d0605bb3fd0ead310265b48b7dc0654",
+      "replay": {
+        "verified": true,
+        "stateHash": "7c851c2c89ca36d80091fb0b4c29fe2e2d0605bb3fd0ead310265b48b7dc0654"
+      },
+      "resultFileSha256": "0d829d7d2c8a298ccb651ff747c58f16e76220b596a7a786fc4715f1a2aac072"
+    },
+    {
+      "index": 53,
+      "matchId": "regression-0.6-fixed64:53",
+      "status": "completed",
+      "commands": 1944,
+      "revision": 1944,
+      "turn": 52,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "5b2d4a070d3ed68cb61632c5d6fc68c0ccf5ce830c45b6cb863b618b95ac4ebf",
+      "replay": {
+        "verified": true,
+        "stateHash": "5b2d4a070d3ed68cb61632c5d6fc68c0ccf5ce830c45b6cb863b618b95ac4ebf"
+      },
+      "resultFileSha256": "07e93768f977c6fac3fc15a0305547013f54d08f05be489aee5260b00ea25ecf"
+    },
+    {
+      "index": 54,
+      "matchId": "regression-0.6-fixed64:54",
+      "status": "completed",
+      "commands": 1635,
+      "revision": 1635,
+      "turn": 40,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-1",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "55c9e0a155e1b61c450c8e93d8fd59074aa4118633de4c78f2c42e6c34c01117",
+      "replay": {
+        "verified": true,
+        "stateHash": "55c9e0a155e1b61c450c8e93d8fd59074aa4118633de4c78f2c42e6c34c01117"
+      },
+      "resultFileSha256": "08dfa9c36b949462808b6ab5882136c8a1a98126864559419c5a28e464e0516f"
+    },
+    {
+      "index": 55,
+      "matchId": "regression-0.6-fixed64:55",
+      "status": "completed",
+      "commands": 1805,
+      "revision": 1805,
+      "turn": 45,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "0c0a402f3fa633d39387f0eb5b794d4742d4e6ed4b569e7824b44079cf41a899",
+      "replay": {
+        "verified": true,
+        "stateHash": "0c0a402f3fa633d39387f0eb5b794d4742d4e6ed4b569e7824b44079cf41a899"
+      },
+      "resultFileSha256": "98749192a052ca7f88bea1d467d530f7ef1762325ba415f36939e327b0ec336a"
+    },
+    {
+      "index": 56,
+      "matchId": "regression-0.6-fixed64:56",
+      "status": "completed",
+      "commands": 1561,
+      "revision": 1561,
+      "turn": 37,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "79023927d5dda9f56bf2d98c3be4f92ade738f8b09fa78407be4c9b651efdd7c",
+      "replay": {
+        "verified": true,
+        "stateHash": "79023927d5dda9f56bf2d98c3be4f92ade738f8b09fa78407be4c9b651efdd7c"
+      },
+      "resultFileSha256": "abda95e9158ae1041eb74a1d77c091fdc3d5837576c89e4bf6d1888b7f1f6a11"
+    },
+    {
+      "index": 57,
+      "matchId": "regression-0.6-fixed64:57",
+      "status": "completed",
+      "commands": 2052,
+      "revision": 2052,
+      "turn": 47,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "02124818bc2316a2f22daa6dd75c856ef26d0d27269b7e9df8b25e098cc66fb1",
+      "replay": {
+        "verified": true,
+        "stateHash": "02124818bc2316a2f22daa6dd75c856ef26d0d27269b7e9df8b25e098cc66fb1"
+      },
+      "resultFileSha256": "0c7a9220c39cda7450c094cc509834ae1b184e0a91c821056be19e657ac81845"
+    },
+    {
+      "index": 58,
+      "matchId": "regression-0.6-fixed64:58",
+      "status": "completed",
+      "commands": 1612,
+      "revision": 1612,
+      "turn": 40,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "a586e1a07d9fd60e8cf8cad02f59076b3c29f0024d035ef671dfdbe729aca5d8",
+      "replay": {
+        "verified": true,
+        "stateHash": "a586e1a07d9fd60e8cf8cad02f59076b3c29f0024d035ef671dfdbe729aca5d8"
+      },
+      "resultFileSha256": "37e63832d392260a793734dc76fa0d256b6f7dce0a8782ef69dfb90e04e87b68"
+    },
+    {
+      "index": 59,
+      "matchId": "regression-0.6-fixed64:59",
+      "status": "completed",
+      "commands": 1700,
+      "revision": 1700,
+      "turn": 42,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "297d02c75cd2453eff902683bbd703dc39124d7b10822a05ad5a5c3d30d7ce1a",
+      "replay": {
+        "verified": true,
+        "stateHash": "297d02c75cd2453eff902683bbd703dc39124d7b10822a05ad5a5c3d30d7ce1a"
+      },
+      "resultFileSha256": "ba3be9fccf0676cb288cc21a6a238a7659365aefee4fcdaaaf26c96f9642ead6"
+    },
+    {
+      "index": 60,
+      "matchId": "regression-0.6-fixed64:60",
+      "status": "completed",
+      "commands": 1473,
+      "revision": 1473,
+      "turn": 35,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-4",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "6ae2a1727c644fe98df0de6eccefd5d45d312a60c5510d3061cac6f4fb004947",
+      "replay": {
+        "verified": true,
+        "stateHash": "6ae2a1727c644fe98df0de6eccefd5d45d312a60c5510d3061cac6f4fb004947"
+      },
+      "resultFileSha256": "7e522488229d9a1ac570e0b6cf298c6e65e9982b389d0ae95349532ecf7432d4"
+    },
+    {
+      "index": 61,
+      "matchId": "regression-0.6-fixed64:61",
+      "status": "completed",
+      "commands": 1627,
+      "revision": 1627,
+      "turn": 40,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "350dd5ff51891cfe8866b4f57e65742d88d84aba5c144cc7902eb8c9b26d7e5c",
+      "replay": {
+        "verified": true,
+        "stateHash": "350dd5ff51891cfe8866b4f57e65742d88d84aba5c144cc7902eb8c9b26d7e5c"
+      },
+      "resultFileSha256": "09ad7bf7b607b5f16a1eeae3787571d741726320d0b0419719818d2d0e5cefe4"
+    },
+    {
+      "index": 62,
+      "matchId": "regression-0.6-fixed64:62",
+      "status": "completed",
+      "commands": 2260,
+      "revision": 2260,
+      "turn": 56,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-3",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "7360ec46ec2a23bde08ad4a062843ae11de1a56bf37828a22c90b1e5f4e67166",
+      "replay": {
+        "verified": true,
+        "stateHash": "7360ec46ec2a23bde08ad4a062843ae11de1a56bf37828a22c90b1e5f4e67166"
+      },
+      "resultFileSha256": "aeeb1ca654f77027c236faf1bc519eed698bb47544872147a40c464d6de13db9"
+    },
+    {
+      "index": 63,
+      "matchId": "regression-0.6-fixed64:63",
+      "status": "completed",
+      "commands": 1669,
+      "revision": 1669,
+      "turn": 41,
+      "outcome": {
+        "kind": "win",
+        "winner": "seat-2",
+        "reason": "all-opponents-left"
+      },
+      "stateHash": "5b7f570102ec0e16f40963482de229224ff0b79cc0d120e1978c0be8f94253ec",
+      "replay": {
+        "verified": true,
+        "stateHash": "5b7f570102ec0e16f40963482de229224ff0b79cc0d120e1978c0be8f94253ec"
+      },
+      "resultFileSha256": "ceeee0fd31e3587ad343999046c9efc3f8f565ab7a7fad67f34fc24becee61a7"
+    }
+  ],
+  "limits": [
+    "This is the frozen0.6 executor; no outcomes are counted as0.7 or later games.",
+    "The full high-risk scenario and exploration gates remain separate.",
+    "These case reports do not include per-game memory/timing telemetry; observedAt is aggregation time, not an invented historical run timestamp."
+  ]
+}

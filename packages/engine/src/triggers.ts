@@ -3,6 +3,7 @@ import {
   GameEvent,
   type Response,
   type RulesState,
+  selfEntryEffects,
 } from "@iwsdk-apps/contracts";
 import {
   definition,
@@ -175,18 +176,20 @@ export function resolveTriggeredAbility(state: RulesState): void {
   const ability = state.abilities[top.triggerId];
   if (!ability || player(state, ability.controller).lost)
     throw new RulesError("Invariant", "A resolving ability lacks a living captured controller");
-  const effect = ability.program.effect;
-  if (effect.kind === "draw") draw(state, ability.controller, effect.amount);
-  else {
-    player(state, ability.controller).life += effect.amount;
-    emit(state, "LifeGained", {
-      player: ability.controller,
-      amount: effect.amount,
-      source: ability.source.id,
-      ability: ability.id,
-    });
-    hit(state, "rule:119.3");
+  for (const effect of selfEntryEffects(ability.program)) {
+    if (effect.kind === "draw") draw(state, ability.controller, effect.amount);
+    else {
+      player(state, ability.controller).life += effect.amount;
+      emit(state, "LifeGained", {
+        player: ability.controller,
+        amount: effect.amount,
+        source: ability.source.id,
+        ability: ability.id,
+      });
+      hit(state, "rule:119.3");
+    }
   }
+  hit(state, "rule:608.2c");
   state.stack.pop();
   delete state.abilities[ability.id];
   emit(state, "TriggeredAbilityResolved", {

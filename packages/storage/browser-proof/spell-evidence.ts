@@ -120,8 +120,18 @@ export function triggerEvidence(archive: MatchArchive) {
     placement: archive.current.triggerPlacement,
   };
 }
-export type ProofStage = "starting-player" | "target" | "payment" | "pending-trigger";
+export type ProofStage =
+  | "starting-player"
+  | "target"
+  | "payment"
+  | "pending-trigger"
+  | "pending-ordered-trigger";
 export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean {
+  if (kind === "pending-ordered-trigger")
+    return (
+      view.decision?.kind === "priority" &&
+      view.abilities.some((ability) => ability.program.schema === "commander-trigger/2")
+    );
   return kind === "pending-trigger"
     ? view.decision?.kind === "priority" &&
         view.stack.some((entry) => entry.kind === "triggered-ability")

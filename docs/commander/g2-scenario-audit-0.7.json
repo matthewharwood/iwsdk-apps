@@ -1,0 +1,3513 @@
+{
+  "schema": "commander-g2-scenario-audit/1",
+  "engineVersion": "commander-engine/0.7.0",
+  "purpose": "Read-only source-expectation→executed-test→review audit; not an obligation certification operation.",
+  "inputs": {
+    "historicalInputManifest": {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs.json",
+      "sha256": "cc726f15c7bc6b89997e4443a75f6c0f4135dff07094097b193bbb12e367ba5a"
+    },
+    "spec": {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs/docs/_temp/COMPLETE_SPEC.md",
+      "sha256": "3c94c727644b57d03ac74ba64868c22f7d45b7e196e66517386fdb059e16016b",
+      "originalPath": "docs/_temp/COMPLETE_SPEC.md"
+    },
+    "drafts": {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs/.commander/high-risk-scenarios.json",
+      "sha256": "29dfc78b2e39bec754ffd08b30d707a38d0274a8c361c193b9e1680e6a8ef504",
+      "originalPath": ".commander/high-risk-scenarios.json"
+    },
+    "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+    "validatedRuleSpans": 38,
+    "script": {
+      "path": "docs/commander/audit-g2-scenarios.py",
+      "sha256": "a081d33ffcb034632dc650fb38439f4d1bc135403e1fb138ce676bbf04b5ce34"
+    }
+  },
+  "execution": {
+    "assignment": {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/assignment.json",
+      "sha256": "28a52162975c3025cd610e9202aa397047330ad96d5e025392f0a95b718b18d4"
+    },
+    "result": {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/result.json",
+      "sha256": "a5f696c4c0aa7aa8d793c10a5f96045a9645a1a72617d4885904d740e3236c39"
+    },
+    "junit": {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "sha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9"
+    },
+    "snapshotHash": "e3d011b3503f16e43873d8b2efce371565374d2b66bce65d4dce02562e44e0ed",
+    "sourceFilesChanged": [],
+    "tests": 136,
+    "assertions": 1642,
+    "failures": 0,
+    "testCasesUsedByThisMap": 17,
+    "actualDraftExecutions": 0
+  },
+  "summary": {
+    "originalDrafts": 24,
+    "requiredRiskFamilies": 12,
+    "qualifiedG2Scenarios": 0,
+    "satisfiedRiskFamilies": 0,
+    "g2Satisfied": false,
+    "clauseRelationships": {
+      "bounded": 6,
+      "unexecuted": 28,
+      "analogous": 7,
+      "exact-assertion": 4
+    },
+    "certifiedObligations": 0,
+    "certifiedCards": 0,
+    "newFullGames": 0
+  },
+  "families": [
+    {
+      "id": "setup-admission",
+      "label": "Setup and admission",
+      "draftIds": ["SRC-SET-01", "SRC-SET-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 1,
+      "gap": "Ordinary setup/chooser/mulligan and basic composition run; construction exceptions and many role-specific forms remain outside the slice."
+    },
+    {
+      "id": "casting-payment",
+      "label": "Casting and payment",
+      "draftIds": ["SRC-CAST-01", "SRC-CAST-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 1,
+      "gap": "Ordinary fixed mana, target-before-payment and cancellation work; sacrifice/alternative/constrained costs and reducers remain missing."
+    },
+    {
+      "id": "targets-selections",
+      "label": "Targets and selections",
+      "draftIds": ["SRC-TGT-01", "SRC-TGT-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 1,
+      "gap": "Single target invalidation works; multiple target slots, cross-choice constraints and resolution-time selections remain missing."
+    },
+    {
+      "id": "replacement-prevention",
+      "label": "Replacement and prevention",
+      "draftIds": ["SRC-REP-01", "SRC-REP-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 0,
+      "gap": "Pending rewritable events, chooser ownership and applied-instance tracking are absent."
+    },
+    {
+      "id": "triggers-history",
+      "label": "Triggers and source history",
+      "draftIds": ["SRC-TRG-01", "SRC-TRG-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 1,
+      "gap": "Mandatory constant self-entry capture/APNAP/source lifetime run; second APNAP category, intervening-if, delayed/linked triggers and optional resolution choices remain missing."
+    },
+    {
+      "id": "continuous-characteristics",
+      "label": "Continuous characteristics",
+      "draftIds": ["SRC-LAY-01", "SRC-LAY-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 0,
+      "gap": "No durable continuous-effect instances, dependency/layer evaluator or control-effect history."
+    },
+    {
+      "id": "combat-damage",
+      "label": "Combat and damage",
+      "draftIds": ["SRC-COM-01", "SRC-COM-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 2,
+      "gap": "Ordinary combat/trample/strike states execute; dynamic characteristics and broader requirements remain unimplemented and exact draft coverage is incomplete."
+    },
+    {
+      "id": "identity-copies",
+      "label": "Object identity and copies",
+      "draftIds": ["SRC-OBJ-01", "SRC-OBJ-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 1,
+      "gap": "Zone generations and captured source contexts run; copy/merged/face-down/multiface semantics remain absent."
+    },
+    {
+      "id": "zones-chance",
+      "label": "Zones and chance",
+      "draftIds": ["SRC-ZON-01", "SRC-ZON-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 1,
+      "gap": "Deterministic shuffle/draw and setup continuations run; search/reveal/order choices remain absent."
+    },
+    {
+      "id": "commander-elimination",
+      "label": "Commander and elimination",
+      "draftIds": ["SRC-CMD-01", "SRC-CMD-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 2,
+      "gap": "Tax/history, graveyard/exile SBA choices and ordinary departure run; hand/library replacement and control-history departure remain absent."
+    },
+    {
+      "id": "hidden-simultaneous",
+      "label": "Hidden or simultaneous choices",
+      "draftIds": ["SRC-HID-01", "SRC-HID-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 2,
+      "gap": "Setup privacy runs; effect-owned secret/simultaneous choice batches and control of another player's decision remain absent."
+    },
+    {
+      "id": "exceptional-workflows",
+      "label": "Exceptional workflows",
+      "draftIds": ["SRC-LOOP-01", "SRC-LOOP-02"],
+      "requiredInitialScenarios": 2,
+      "qualifiedScenarios": 0,
+      "satisfied": false,
+      "draftsWithRelatedExecutedAssertions": 0,
+      "gap": "Limits remain explicit incomplete results; optional/mandatory loop adjudication and turn/game-changing workflows are absent."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "SRC-SET-01",
+      "group": "setup-admission",
+      "originalDraft": {
+        "id": "SRC-SET-01",
+        "group": "setup-admission",
+        "rules": ["903.3", "903.5a", "903.5b", "903.5c"],
+        "assumptions": [
+          "An ordinary legendary creature commander; 100 cards including it; unique nonbasic English names; all colors inside commander identity; no special construction abilities."
+        ],
+        "action": "Submit the deck for admission.",
+        "expected": [
+          "Ordinary composition constraints pass; repeated basic lands are permitted.",
+          "Admission does not certify executable card support."
+        ],
+        "version": "8d8fad84f642e1b77bc9f955119ed5767aa6b86c6d3ab66c3b58399438db8c1e",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.3",
+            "textHash": "7a27070a8cf1d70792194120b994c2995d80563300645075058f0a3bf674eb80",
+            "byteStart": 836796,
+            "byteEnd": 837554
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.5a",
+            "textHash": "d943c325032e7c7fb9c1f37f232a58028fd900cb95527ca318a8decc675d5678",
+            "byteStart": 840927,
+            "byteEnd": 841082
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.5b",
+            "textHash": "76183fda6111293047b735fa88647e6e9066aeb3d82a6dcce72b54fee93090fb",
+            "byteStart": 841082,
+            "byteEnd": 841299
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.5c",
+            "textHash": "da64c6ef0cdf00a224241e1b19ad74d2d139dba8f58a5f905b664d9a6e7dedf9",
+            "byteStart": 841299,
+            "byteEnd": 841826
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-SET-01#1",
+          "expected": "Ordinary composition constraints pass; repeated basic lands are permitted.",
+          "status": "bounded",
+          "testIds": ["setup"],
+          "rationale": "A normal synthetic composition passes through setup. Role derivation and the full source-backed admission fixture are not this test's assertion."
+        },
+        {
+          "id": "SRC-SET-01#2",
+          "expected": "Admission does not certify executable card support.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No executed assertion specifically proves the distinction between composition admission and semantic certification; current release evidence states development-subset."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-SET-02",
+      "group": "setup-admission",
+      "originalDraft": {
+        "id": "SRC-SET-02",
+        "group": "setup-admission",
+        "rules": ["903.5a", "903.5b", "903.5c"],
+        "assumptions": ["Begin with the valid ordinary composition from SRC-SET-01."],
+        "action": "Separately submit a 99-card deck, a duplicate nonbasic-name variant, and an off-color variant.",
+        "expected": [
+          "Each variant is rejected for its specific construction violation.",
+          "The previously accepted immutable deck revision is unchanged."
+        ],
+        "version": "415bac9c37c17becf9ebb10fe670d30dc1fbddb52c62a32def044450b361fffa",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.5a",
+            "textHash": "d943c325032e7c7fb9c1f37f232a58028fd900cb95527ca318a8decc675d5678",
+            "byteStart": 840927,
+            "byteEnd": 841082
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.5b",
+            "textHash": "76183fda6111293047b735fa88647e6e9066aeb3d82a6dcce72b54fee93090fb",
+            "byteStart": 841082,
+            "byteEnd": 841299
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.5c",
+            "textHash": "da64c6ef0cdf00a224241e1b19ad74d2d139dba8f58a5f905b664d9a6e7dedf9",
+            "byteStart": 841299,
+            "byteEnd": 841826
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-SET-02#1",
+          "expected": "Each variant is rejected for its specific construction violation.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "The reviewed capture has no exact three-variant test for99cards, duplicate nonbasic English names and off-color composition."
+        },
+        {
+          "id": "SRC-SET-02#2",
+          "expected": "The previously accepted immutable deck revision is unchanged.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No exact immutable accepted-deck contrast for those three rejections is joined."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-CAST-01",
+      "group": "casting-payment",
+      "originalDraft": {
+        "id": "SRC-CAST-01",
+        "group": "casting-payment",
+        "rules": ["601.2f", "601.2h"],
+        "assumptions": [
+          "A spell costs one generic plus black and sacrificing a creature; the sacrificed creature supplies a one-generic reduction while total cost is determined."
+        ],
+        "action": "Lock the total cost, then sacrifice that reducer while paying.",
+        "expected": [
+          "The locked mana cost remains black; removal during payment does not recalculate it."
+        ],
+        "version": "668218a6a611efb86a32035c68b70af5b09242ca9a7df7fd03196b5ceb3ebebc",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "601.2f",
+            "textHash": "d950eb522dd4caa3cc74088259a01a2968476e9e0efbe231a5b9130c9c4dbcb0",
+            "byteStart": 298712,
+            "byteEnd": 299677
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "601.2h",
+            "textHash": "e35da9e7eac216655714d395c213f1e9ffe56c6ec0fc57d4a49224f9144ac7f4",
+            "byteStart": 299880,
+            "byteEnd": 300529
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-CAST-01#1",
+          "expected": "The locked mana cost remains black; removal during payment does not recalculate it.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Additional sacrifice costs and continuous cost reducers are not implemented; ordinary locked mana cost does not execute this interaction."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-CAST-02",
+      "group": "casting-payment",
+      "originalDraft": {
+        "id": "SRC-CAST-02",
+        "group": "casting-payment",
+        "rules": ["601.2h"],
+        "assumptions": [
+          "A spell requires two colored mana; the proposed payment supplies only one, with no modifying effects."
+        ],
+        "action": "Attempt to complete casting with the insufficient payment.",
+        "expected": [
+          "Partial payment cannot complete casting.",
+          "Missing implementation is reported separately from rules illegality."
+        ],
+        "version": "806fe30ae655c3310f2cc24519f0218d6c3a509db2f27e3e99635cc6502ac56f",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "601.2h",
+            "textHash": "e35da9e7eac216655714d395c213f1e9ffe56c6ec0fc57d4a49224f9144ac7f4",
+            "byteStart": 299880,
+            "byteEnd": 300529
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-CAST-02#1",
+          "expected": "Partial payment cannot complete casting.",
+          "status": "analogous",
+          "testIds": ["payment"],
+          "rationale": "Real engine rejection is asserted for insufficient2U, not a two-colored requirement supplied only one."
+        },
+        {
+          "id": "SRC-CAST-02#2",
+          "expected": "Missing implementation is reported separately from rules illegality.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "This fixture does not contrast unsupported cost semantics with ordinary payment illegality."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-TGT-01",
+      "group": "targets-selections",
+      "originalDraft": {
+        "id": "SRC-TGT-01",
+        "group": "targets-selections",
+        "rules": ["608.2b"],
+        "assumptions": [
+          "A spell has one creature target and an untargeted benefit; the creature left its original zone before resolution."
+        ],
+        "action": "Attempt resolution after priority passes.",
+        "expected": [
+          "The spell does not resolve and goes from stack to its owner's graveyard.",
+          "The untargeted benefit does not happen either."
+        ],
+        "version": "f761584d8ad0a79b81b6185e29c007fba7eda8486dae1a235e05af440d66a495",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "608.2b",
+            "textHash": "1be715cb72411e6e50dc63e7a40e82a794dc7881d6cca5aa7b4e735a527763d4",
+            "byteStart": 352390,
+            "byteEnd": 354652
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-TGT-01#1",
+          "expected": "The spell does not resolve and goes from stack to its owner's graveyard.",
+          "status": "bounded",
+          "testIds": ["target-benefit", "target-graveyard"],
+          "rationale": "The two tests assert nonresolution and owner-graveyard placement across related separate fixtures; there is no single dispatched draft transcript."
+        },
+        {
+          "id": "SRC-TGT-01#2",
+          "expected": "The untargeted benefit does not happen either.",
+          "status": "exact-assertion",
+          "testIds": ["target-benefit"],
+          "rationale": "The lower Sorin's Thirst caster receives no untargeted life gain after its sole target becomes illegal."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-TGT-02",
+      "group": "targets-selections",
+      "originalDraft": {
+        "id": "SRC-TGT-02",
+        "group": "targets-selections",
+        "rules": ["608.2b"],
+        "assumptions": [
+          "A spell has two independent targets; one remains legal and the other becomes illegal."
+        ],
+        "action": "Resolve the spell.",
+        "expected": [
+          "Resolution proceeds for the legal target as instructed.",
+          "The illegal target is not affected by parts for which it is illegal; unavailable information is not invented."
+        ],
+        "version": "d660bebe6e8faed43b6195a93f864e72b67da42c70bd28c98689555ed93407ac",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "608.2b",
+            "textHash": "1be715cb72411e6e50dc63e7a40e82a794dc7881d6cca5aa7b4e735a527763d4",
+            "byteStart": 352390,
+            "byteEnd": 354652
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-TGT-02#1",
+          "expected": "Resolution proceeds for the legal target as instructed.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Spell programs currently have one target slot; two independently revalidated targets are not implemented."
+        },
+        {
+          "id": "SRC-TGT-02#2",
+          "expected": "The illegal target is not affected by parts for which it is illegal; unavailable information is not invented.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No typed per-target partial-resolution/info-dependency model or executable two-target contrast is joined."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-REP-01",
+      "group": "replacement-prevention",
+      "originalDraft": {
+        "id": "SRC-REP-01",
+        "group": "replacement-prevention",
+        "rules": ["616.1", "614.5"],
+        "assumptions": [
+          "A two-damage event is affected by two distinct independent damage-doubling replacement instances, with no earlier-priority replacement class."
+        ],
+        "action": "Have the affected chooser apply the replacements to the evolving event.",
+        "expected": [
+          "Each instance applies once; damage becomes eight.",
+          "One replacement cannot keep applying itself indefinitely to its rewritten event."
+        ],
+        "version": "78d49577bc658936985ac250e581d4d144d6c60ec033b7d780032f53fb6ea725",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "616.1",
+            "textHash": "d661d8a03af68c5be2eb6e0f3a6ba3dbfefdf238d1e74431364566d1384d4d91",
+            "byteStart": 415960,
+            "byteEnd": 416365
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "614.5",
+            "textHash": "238f4143fe1a6ed7ffe765898f496ed9990ea4d42beb9c620b3d826920ed899c",
+            "byteStart": 398569,
+            "byteEnd": 399054
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-REP-01#1",
+          "expected": "Each instance applies once; damage becomes eight.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No versioned pending-event replacement pipeline executes competing doubling instances."
+        },
+        {
+          "id": "SRC-REP-01#2",
+          "expected": "One replacement cannot keep applying itself indefinitely to its rewritten event.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No per-event applied-instance history prevents repeat replacement application."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-REP-02",
+      "group": "replacement-prevention",
+      "originalDraft": {
+        "id": "SRC-REP-02",
+        "group": "replacement-prevention",
+        "rules": ["616.1"],
+        "assumptions": [
+          "Two ordinary applicable replacements compete over an event affecting an opponent's creature."
+        ],
+        "action": "Determine the chooser for replacement selection.",
+        "expected": [
+          "The affected object's controller chooses, or its owner if it has no controller.",
+          "Selector specificity and active-player convenience do not choose an effect."
+        ],
+        "version": "32a8b5f5d3f95f307e1ff4e4528ef657bf141b6e75fdbd0eb969e2ce1bc0164f",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "616.1",
+            "textHash": "d661d8a03af68c5be2eb6e0f3a6ba3dbfefdf238d1e74431364566d1384d4d91",
+            "byteStart": 415960,
+            "byteEnd": 416365
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-REP-02#1",
+          "expected": "The affected object's controller chooses, or its owner if it has no controller.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No affected-player/object-controller-owned replacement choice exists."
+        },
+        {
+          "id": "SRC-REP-02#2",
+          "expected": "Selector specificity and active-player convenience do not choose an effect.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No replacement competition fixture separates rule-defined chooser ownership from selector specificity."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-TRG-01",
+      "group": "triggers-history",
+      "originalDraft": {
+        "id": "SRC-TRG-01",
+        "group": "triggers-history",
+        "rules": ["603.3b"],
+        "assumptions": [
+          "Both players control multiple waiting triggers, including a trigger caused by another ability triggering."
+        ],
+        "action": "Perform the pending-trigger checkpoint.",
+        "expected": [
+          "Use the two-part APNAP stacking procedure; each controller chooses their order within each part.",
+          "Process state-based actions and new triggers before returning priority."
+        ],
+        "version": "c49924a1e1e1fc4ec916ea568d12cb8c53529c3e08192621f0a71525f1593b8d",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "603.3b",
+            "textHash": "e6f674110a6a9705f7f94a91305d11f10c72b9c9c50fb058cd0ce36261e1dea1",
+            "byteStart": 316722,
+            "byteEnd": 317504
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-TRG-01#1",
+          "expected": "Use the two-part APNAP stacking procedure; each controller chooses their order within each part.",
+          "status": "bounded",
+          "testIds": ["apnap"],
+          "rationale": "Only ordinary-event APNAP is implemented; the draft explicitly includes a trigger caused by another ability triggering."
+        },
+        {
+          "id": "SRC-TRG-01#2",
+          "expected": "Process state-based actions and new triggers before returning priority.",
+          "status": "bounded",
+          "testIds": ["sba-entry", "lost-apnap"],
+          "rationale": "Actual SBAs and ordinary queue placement precede priority; new meta-trigger waves are absent."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-TRG-02",
+      "group": "triggers-history",
+      "originalDraft": {
+        "id": "SRC-TRG-02",
+        "group": "triggers-history",
+        "rules": ["603.4"],
+        "assumptions": [
+          "An intervening-if condition is true at the trigger event and false before resolution."
+        ],
+        "action": "Resolve the trigger; contrast with a run where its condition was false at the event.",
+        "expected": [
+          "In the first run it triggered, but leaves the stack without its effect at resolution.",
+          "In the contrast it never triggered."
+        ],
+        "version": "78d9854f913d6d78bc93dc2dad3ce2b40dccb5b9bc5c99b24159920e914112c9",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "603.4",
+            "textHash": "7fa357f80f9fa5350e921c63411eeb725ebbb9346a2e3e6767df826c853412cb",
+            "byteStart": 318221,
+            "byteEnd": 319583
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-TRG-02#1",
+          "expected": "In the first run it triggered, but leaves the stack without its effect at resolution.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No intervening-if predicate is evaluated at trigger capture and again at resolution."
+        },
+        {
+          "id": "SRC-TRG-02#2",
+          "expected": "In the contrast it never triggered.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No false-at-event contrast exists for the same source-bound conditional trigger."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-LAY-01",
+      "group": "continuous-characteristics",
+      "originalDraft": {
+        "id": "SRC-LAY-01",
+        "group": "continuous-characteristics",
+        "rules": ["613.8", "613.8a", "613.8b"],
+        "assumptions": [
+          "Two same-layer effects satisfy the exact dependency conditions; timestamps would otherwise place the dependent effect first."
+        ],
+        "action": "Evaluate characteristics in that layer.",
+        "expected": [
+          "Apply the prerequisite effect before the dependent one despite timestamps.",
+          "Boolean discovery does not establish semantic ordering."
+        ],
+        "version": "0d7cf1b6f0326d117eac9b26338acdf6fce30b8121faa478c86dfcf36218666a",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "613.8",
+            "textHash": "7cd7dcf2fd03899312d40f7258ea59605db5cd646f24bf63bae0b1cad07093c5",
+            "byteStart": 393337,
+            "byteEnd": 393530
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "613.8a",
+            "textHash": "4787cfc0a5d67619e55023547200507357cb035247500f93b3ab3ff693dd7ba6",
+            "byteStart": 393530,
+            "byteEnd": 394032
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "613.8b",
+            "textHash": "08e0ebdc7b8052a619a453d69463b0a2fdb5fd2d86aad20cfc0805cde94705f0",
+            "byteStart": 394032,
+            "byteEnd": 394444
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-LAY-01#1",
+          "expected": "Apply the prerequisite effect before the dependent one despite timestamps.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No same-layer continuous-effect dependency evaluator."
+        },
+        {
+          "id": "SRC-LAY-01#2",
+          "expected": "Boolean discovery does not establish semantic ordering.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Selector equivalence tests do not establish layer ordering semantics."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-LAY-02",
+      "group": "continuous-characteristics",
+      "originalDraft": {
+        "id": "SRC-LAY-02",
+        "group": "continuous-characteristics",
+        "rules": ["613.8b"],
+        "assumptions": ["Several same-layer effects form a dependency loop."],
+        "action": "Evaluate the effects in the loop.",
+        "expected": [
+          "Ignore dependency waiting within the loop and use timestamp order.",
+          "Do not invent fixed-point iteration as effect semantics."
+        ],
+        "version": "701cb9c8bf59dcd653fb7b8f8134f8c2e20dfbc265f7f6fcf9b14bccf90fae94",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "613.8b",
+            "textHash": "08e0ebdc7b8052a619a453d69463b0a2fdb5fd2d86aad20cfc0805cde94705f0",
+            "byteStart": 394032,
+            "byteEnd": 394444
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-LAY-02#1",
+          "expected": "Ignore dependency waiting within the loop and use timestamp order.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No layer dependency loop/timestamp algorithm."
+        },
+        {
+          "id": "SRC-LAY-02#2",
+          "expected": "Do not invent fixed-point iteration as effect semantics.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Finite dependency closure for registry pruning is a different operation, not this rules procedure."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-COM-01",
+      "group": "combat-damage",
+      "originalDraft": {
+        "id": "SRC-COM-01",
+        "group": "combat-damage",
+        "rules": ["702.19b"],
+        "assumptions": [
+          "An unmodified six-power trampler is blocked by one undamaged two-toughness creature."
+        ],
+        "action": "Compare allocations of two/four and one/five to blocker/defending player.",
+        "expected": [
+          "Two to the blocker and four to the player is legal.",
+          "One to the blocker and five to the player fails lethal-assignment constraints."
+        ],
+        "version": "ebe9b13701d553af1230815820c09cf7c8e5f95f514f2df392241389a31f9023",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "702.19b",
+            "textHash": "876ad5eea2e2a647788fd249043002015518df500a7c214ebc1a60e161dea28b",
+            "byteStart": 510220,
+            "byteEnd": 511761
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-COM-01#1",
+          "expected": "Two to the blocker and four to the player is legal.",
+          "status": "analogous",
+          "testIds": ["trample"],
+          "rationale": "The executed fixture is5power with2/3 allocation; the draft is6power with2/4."
+        },
+        {
+          "id": "SRC-COM-01#2",
+          "expected": "One to the blocker and five to the player fails lethal-assignment constraints.",
+          "status": "analogous",
+          "testIds": ["trample"],
+          "rationale": "The executed rejection is1/4 from5power; exact1/5 from6power remains unexecuted."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-COM-02",
+      "group": "combat-damage",
+      "originalDraft": {
+        "id": "SRC-COM-02",
+        "group": "combat-damage",
+        "rules": ["510.1c"],
+        "assumptions": [
+          "A blocked attacker has no blockers remaining at damage assignment and lacks trample or another permission."
+        ],
+        "action": "Assign combat damage.",
+        "expected": ["It assigns no combat damage; losing its blocker does not make it unblocked."],
+        "version": "5e0e624481aa5d3f2646dcc31020768e12ec40ef652af7355e23013dd35e2194",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "510.1c",
+            "textHash": "0018c414064b32b7be3a1032ddfddf89b2ad966e569920a93883693eba001361",
+            "byteStart": 286702,
+            "byteEnd": 287513
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-COM-02#1",
+          "expected": "It assigns no combat damage; losing its blocker does not make it unblocked.",
+          "status": "exact-assertion",
+          "testIds": ["blocked"],
+          "rationale": "Actual blocker removal through a resolved spell preserves blocked status and prevents nontrampling player damage. Native/browser storage for this exact scenario is not joined."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-OBJ-01",
+      "group": "identity-copies",
+      "originalDraft": {
+        "id": "SRC-OBJ-01",
+        "group": "identity-copies",
+        "rules": ["400.7"],
+        "assumptions": [
+          "A creature changes zones and returns; none of the listed 400.7 exceptions applies to the tested reference."
+        ],
+        "action": "Evaluate an effect still holding the prior object-generation reference.",
+        "expected": [
+          "The returned creature is a new object; the old reference does not silently retarget by physical lineage."
+        ],
+        "version": "dcc5f8612c07054526e7ae3fb8a4b8a910100067632978e2e66b37f08d81eafb",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "400.7",
+            "textHash": "c0fc0a0a0dd24001defe3916c085e1df582b6ac8bc7019f6ba27a5693946fbdb",
+            "byteStart": 228304,
+            "byteEnd": 228480
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-OBJ-01#1",
+          "expected": "The returned creature is a new object; the old reference does not silently retarget by physical lineage.",
+          "status": "exact-assertion",
+          "testIds": ["target-generation"],
+          "rationale": "A returned generation receives no old-target spell damage. Exile/reentry is an explicit unit precondition, not an implemented blink spell."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-OBJ-02",
+      "group": "identity-copies",
+      "originalDraft": {
+        "id": "SRC-OBJ-02",
+        "group": "identity-copies",
+        "rules": ["707.2"],
+        "assumptions": [
+          "A base two/two creature has a plus-one counter and an ordinary temporary characteristic modification."
+        ],
+        "action": "Create an ordinary copy with no copy-setting exceptions.",
+        "expected": [
+          "Copy copiable values, not counters, tapped status, or the ordinary temporary effect.",
+          "A flattened displayed characteristic value is not necessarily a copiable value."
+        ],
+        "version": "66010d5a12a2cbc926da176dd5a29d39d76c2340abe67b8578c5551c66a34804",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "707.2",
+            "textHash": "538fad7cb133f9d5a9e699ea9cf91ecda5e72bca0de744c006074a64c77b3fd6",
+            "byteStart": 664435,
+            "byteEnd": 666088
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-OBJ-02#1",
+          "expected": "Copy copiable values, not counters, tapped status, or the ordinary temporary effect.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No copy-value layer or typed copy operation distinguishes copiable values from counters and temporary effects."
+        },
+        {
+          "id": "SRC-OBJ-02#2",
+          "expected": "A flattened displayed characteristic value is not necessarily a copiable value.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No executable ordinary-copy contrast is joined."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-ZON-01",
+      "group": "zones-chance",
+      "originalDraft": {
+        "id": "SRC-ZON-01",
+        "group": "zones-chance",
+        "rules": ["401.2"],
+        "assumptions": [
+          "A library has a known fixture order; the ordinary player lacks permission to inspect or rearrange it."
+        ],
+        "action": "Request a player observation and unauthorized rearrangement.",
+        "expected": [
+          "The player view reveals neither hidden identities nor order through candidate identifiers.",
+          "The rearrangement is unavailable; inspection leaves the ordered library unchanged."
+        ],
+        "version": "46a467abe87fca6d991ff1c536140b39a115e537569adf68766e50b98c393fcf",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "401.2",
+            "textHash": "c91036d5391c1900d91b58037c083cb0e36aa390752dbc910fb34433169bbf7c",
+            "byteStart": 232626,
+            "byteEnd": 232757
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-ZON-01#1",
+          "expected": "The player view reveals neither hidden identities nor order through candidate identifiers.",
+          "status": "bounded",
+          "testIds": ["setup", "storage-private"],
+          "rationale": "Library objects are absent from views. A candidate/error/trace noninterference proof is broader than these assertions."
+        },
+        {
+          "id": "SRC-ZON-01#2",
+          "expected": "The rearrangement is unavailable; inspection leaves the ordered library unchanged.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No exact unauthorized-library-rearrangement command and inspection-preserves-order contrast is joined."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-ZON-02",
+      "group": "zones-chance",
+      "originalDraft": {
+        "id": "SRC-ZON-02",
+        "group": "zones-chance",
+        "rules": ["701.23b", "701.23d"],
+        "assumptions": [
+          "One effect searches a hidden library for a stated quality; another requests a fixed number without a quality restriction."
+        ],
+        "action": "Try to find zero qualifying cards despite a match, then too few in the unrestricted-number search.",
+        "expected": [
+          "The quality search may fail to find a qualifying card.",
+          "The unrestricted search must find the requested number, or as many as possible if fewer exist."
+        ],
+        "version": "ed95d216e206c2719e1fab512710f6494a29535fcd5d644da58a478aa29165ae",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "701.23b",
+            "textHash": "0abfba1f0ef3629b3a15fdf361d2ff06fe53cf2b6c12d5e14897d068e8cd221d",
+            "byteStart": 450847,
+            "byteEnd": 451607
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "701.23d",
+            "textHash": "0fb5553f80019b44b1a53e16cff810ad1068bf21222d4af1944a5ab6babbd00c",
+            "byteStart": 452225,
+            "byteEnd": 452458
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-ZON-02#1",
+          "expected": "The quality search may fail to find a qualifying card.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No quality-restricted hidden-library search with legal fail-to-find choice."
+        },
+        {
+          "id": "SRC-ZON-02#2",
+          "expected": "The unrestricted search must find the requested number, or as many as possible if fewer exist.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No unrestricted exact/up-to-available count search or saved search continuation."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-CMD-01",
+      "group": "commander-elimination",
+      "originalDraft": {
+        "id": "SRC-CMD-01",
+        "group": "commander-elimination",
+        "rules": ["903.9a", "903.9b"],
+        "assumptions": [
+          "A commander is about to move to graveyard, or to its owner's hand in a separate run."
+        ],
+        "action": "Take the owner through the respective destination choice.",
+        "expected": [
+          "Graveyard/exile return occurs at the state-based-action boundary after entry.",
+          "Hand/library return is a replacement choice; these are distinct timing mechanisms."
+        ],
+        "version": "5c2bb66229d82d0bf6fa7a3f575c0a62b0c2b63595bb27e28441e3343b25024f",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.9a",
+            "textHash": "5df39ef327884e08d0e41eaab80b1945a517fa02f8dd4ed55a5bdb82f3f3b72a",
+            "byteStart": 843054,
+            "byteEnd": 843290
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "903.9b",
+            "textHash": "a784e39f9309ef8d5a96bd9e41384bcf7aeee107a2f907f80f705baab13dfe69",
+            "byteStart": 843290,
+            "byteEnd": 843534
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-CMD-01#1",
+          "expected": "Graveyard/exile return occurs at the state-based-action boundary after entry.",
+          "status": "exact-assertion",
+          "testIds": ["commander-graveyard", "commander-exile"],
+          "rationale": "Graveyard/exile entry occurs before the owner-controlled SBA choice."
+        },
+        {
+          "id": "SRC-CMD-01#2",
+          "expected": "Hand/library return is a replacement choice; these are distinct timing mechanisms.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Owner hand/library destination replacement timing is not implemented."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-CMD-02",
+      "group": "commander-elimination",
+      "originalDraft": {
+        "id": "SRC-CMD-02",
+        "group": "commander-elimination",
+        "rules": ["800.4a"],
+        "assumptions": [
+          "A departing player owns objects and controls an opponent-owned creature through a control-changing effect."
+        ],
+        "action": "Eliminate the departing player.",
+        "expected": [
+          "Owned objects leave immediately; control-giving effects end before still-controlled objects are exiled.",
+          "Ending the control effect can return the opponent-owned creature to its previous controller."
+        ],
+        "version": "7aed43bdbf60a524c98802597ff967ccb30c87ed942598cd0f404c62c69aeeca",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "800.4a",
+            "textHash": "61b30c2459f46a832f0f764a8461fbdd80bd41660070ea8fb2786b200112e7c9",
+            "byteStart": 772969,
+            "byteEnd": 775033
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-CMD-02#1",
+          "expected": "Owned objects leave immediately; control-giving effects end before still-controlled objects are exiled.",
+          "status": "bounded",
+          "testIds": ["source-owner-left"],
+          "rationale": "Owned-source removal is executed; the required control-effect termination/exile ordering is not."
+        },
+        {
+          "id": "SRC-CMD-02#2",
+          "expected": "Ending the control effect can return the opponent-owned creature to its previous controller.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Engine explicitly reports UnsupportedMechanic for departure with foreign controlled objects because control provenance is absent."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-HID-01",
+      "group": "hidden-simultaneous",
+      "originalDraft": {
+        "id": "SRC-HID-01",
+        "group": "hidden-simultaneous",
+        "rules": ["101.4a", "101.4b"],
+        "assumptions": [
+          "An effect has each player choose a card from their hidden hand without revealing it."
+        ],
+        "action": "Collect choices in the required order.",
+        "expected": [
+          "Chosen cards may remain face down while clearly identified as the choices.",
+          "Later players do not automatically learn their hidden identities."
+        ],
+        "version": "541fe5d340a131a473666c65f68b6db7c6aef8a5355a12a5bac8c6ca5c11dd74",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "101.4a",
+            "textHash": "bd5eb48ddde769f371c566745101d75f98ae0ddc7ed891d289871a60be88dc57",
+            "byteStart": 9941,
+            "byteEnd": 10180
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "101.4b",
+            "textHash": "b24e7e1a138a0138c862afbf9cc44570f5906410aa59c5b286afac81ed831853",
+            "byteStart": 10180,
+            "byteEnd": 10303
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-HID-01#1",
+          "expected": "Chosen cards may remain face down while clearly identified as the choices.",
+          "status": "analogous",
+          "testIds": ["mulligan-privacy"],
+          "rationale": "Private setup hands/bottom choices are tested, not each player's secret choice during a resolving effect."
+        },
+        {
+          "id": "SRC-HID-01#2",
+          "expected": "Later players do not automatically learn their hidden identities.",
+          "status": "analogous",
+          "testIds": ["mulligan-privacy"],
+          "rationale": "The analogous setup projection keeps identities private; no simultaneous effect-choice continuation exists."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-HID-02",
+      "group": "hidden-simultaneous",
+      "originalDraft": {
+        "id": "SRC-HID-02",
+        "group": "hidden-simultaneous",
+        "rules": ["101.4", "101.4b"],
+        "assumptions": ["Multiple players make ordinary public simultaneous choices."],
+        "action": "Collect choices, then perform the simultaneous actions.",
+        "expected": [
+          "Players choose in APNAP order and know earlier public choices.",
+          "Actions happen together after choices; selecting one does not prematurely commit its effect."
+        ],
+        "version": "9d12afe3af3db68940629c34ca74cafd80b72ff264eae9bd6a659a33b6d88bfc",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "101.4",
+            "textHash": "c00c4bbb2f7f77c17953afe99ae7c6646e5f077c84ec6cb7677807ef2b27ae90",
+            "byteStart": 9190,
+            "byteEnd": 9941
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "101.4b",
+            "textHash": "b24e7e1a138a0138c862afbf9cc44570f5906410aa59c5b286afac81ed831853",
+            "byteStart": 10180,
+            "byteEnd": 10303
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-HID-02#1",
+          "expected": "Players choose in APNAP order and know earlier public choices.",
+          "status": "analogous",
+          "testIds": ["mulligan-privacy", "apnap"],
+          "rationale": "Public setup declarations and ordinary trigger ordering expose earlier choices. Neither is this general simultaneous effect."
+        },
+        {
+          "id": "SRC-HID-02#2",
+          "expected": "Actions happen together after choices; selecting one does not prematurely commit its effect.",
+          "status": "analogous",
+          "testIds": ["mulligan-privacy"],
+          "rationale": "Setup redraw waits for all declarations. General effect actions are not collected and committed as a simultaneous batch."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-LOOP-01",
+      "group": "exceptional-workflows",
+      "originalDraft": {
+        "id": "SRC-LOOP-01",
+        "group": "exceptional-workflows",
+        "rules": ["104.4b"],
+        "assumptions": [
+          "The game has no limited-range-of-influence option and an unavoidable loop of mandatory actions."
+        ],
+        "action": "Establish that the loop has no stopping choice.",
+        "expected": [
+          "The rules outcome is a draw.",
+          "A computation budget expiring without that proof is an incomplete run, not a draw."
+        ],
+        "version": "a9bb77b8dfb68c665b73e7339622ec1646bd1fd564d9b3ac663347d902d9d345",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "104.4b",
+            "textHash": "504c928e900f78cb47034cf245c989432b17d6443c7c2b996f41fd0ed426f8e7",
+            "byteStart": 22048,
+            "byteEnd": 22341
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-LOOP-01#1",
+          "expected": "The rules outcome is a draw.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No unavoidable mandatory-loop proof and rules-draw adjudication."
+        },
+        {
+          "id": "SRC-LOOP-01#2",
+          "expected": "A computation budget expiring without that proof is an incomplete run, not a draw.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Operational limits are labelled incomplete by the host, but this captured suite does not prove the required mandatory-loop contrast."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    },
+    {
+      "id": "SRC-LOOP-02",
+      "group": "exceptional-workflows",
+      "originalDraft": {
+        "id": "SRC-LOOP-02",
+        "group": "exceptional-workflows",
+        "rules": ["104.4b", "732.3"],
+        "assumptions": [
+          "Optional independent choices keep returning a fragmented loop to the same game state."
+        ],
+        "action": "Reach the repeated state again.",
+        "expected": [
+          "The active involved player, or first involved player in turn order, must make a different choice.",
+          "An optional loop does not itself establish a draw."
+        ],
+        "version": "8a6236271d039d81d19f9b068785496752fbc568c117ea28ac1e4f2158fe280a",
+        "sourceBundle": "ba729f4152706f845504430574c8bfcc2ae6ea91380182c80d6055d24b50edd9",
+        "sourceReferences": [
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "104.4b",
+            "textHash": "504c928e900f78cb47034cf245c989432b17d6443c7c2b996f41fd0ed426f8e7",
+            "byteStart": 22048,
+            "byteEnd": 22341
+          },
+          {
+            "documentHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+            "rule": "732.3",
+            "textHash": "f6c77d5136b83c3cccbef5e5ee0e89a91616dd6731e1a9a8c59b29c4e5e17eb2",
+            "byteStart": 768930,
+            "byteEnd": 770321
+          }
+        ],
+        "execution": "not-run",
+        "independentReview": "pending",
+        "author": "source-investigation-agent",
+        "assurance": "authored-source-expectation-not-executed-proof"
+      },
+      "expectations": [
+        {
+          "id": "SRC-LOOP-02#1",
+          "expected": "The active involved player, or first involved player in turn order, must make a different choice.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "No fragmented-loop state/choice history or required different-choice procedure."
+        },
+        {
+          "id": "SRC-LOOP-02#2",
+          "expected": "An optional loop does not itself establish a draw.",
+          "status": "unexecuted",
+          "testIds": [],
+          "rationale": "Optional loops are not executable; a generic timeout refusal cannot satisfy this scenario."
+        }
+      ],
+      "draftManifestExecuted": false,
+      "g2Qualified": false,
+      "qualificationGaps": [
+        "No original draft adapter/run ID was dispatched.",
+        "No joined exact scenario transcript across production registry, choices, all three resolvers and persistence.",
+        "Whole-scenario independent acceptance remains open."
+      ],
+      "independentExpectationReview": {
+        "reviewer": "skills_audit agent",
+        "author": "source-investigation-agent",
+        "status": "bounded-rule-reference-and-scope-reviewed",
+        "ruleSpanHashesValidated": true
+      }
+    }
+  ],
+  "tests": [
+    {
+      "id": "setup",
+      "path": "packages/engine/src/engine.test.ts",
+      "name": "same pinned setup repeats physical cards and chance state; observations never expose any library or another hand",
+      "suite": "normal setup and command invariants",
+      "line": 160,
+      "testFileSha256": "8be597db0686088d31613c26521c049bcd8e6a5249b60f749cc89abed8550334",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 20,
+      "reviewedAssertionScope": "Normal synthetic 100-card setup repeats; 40 life/7 hand/92 library and command zones are checked. Library and other hands are absent from object projections.",
+      "executionRoute": "ordinary-command-setup",
+      "relatedExpectationIds": ["SET-01", "SRC-SET-01", "SRC-ZON-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "payment",
+      "path": "packages/engine/src/effects.test.ts",
+      "name": "Divination pays {2}{U}, waits for passes, draws two separate cards and finishes in its graveyard",
+      "suite": "source-reviewed spell instructions and casting",
+      "line": 413,
+      "testFileSha256": "0b25ad988b2c3ff3803d4b8248cb9b7ab1c62b79b14aa776fdd2e0edbf51f0eb",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 10,
+      "reviewedAssertionScope": "Submitting U against 2U rejects while the announced spell remains on stack; U+2C succeeds and resolves after passes. This is a generic-plus-colored cost, not the draft's two-colored-cost fixture.",
+      "executionRoute": "constructed-board-real-transitions",
+      "relatedExpectationIds": ["CAST-02", "SRC-CAST-02"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "target-benefit",
+      "path": "packages/engine/src/effects.test.ts",
+      "name": "Sorin's Thirst completes life gain before lethal-damage SBAs; a response killing its sole target cancels all lower effects (CR608.2b example)",
+      "suite": "legal target revalidation and uninterrupted resolution",
+      "line": 551,
+      "testFileSha256": "0b25ad988b2c3ff3803d4b8248cb9b7ab1c62b79b14aa776fdd2e0edbf51f0eb",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 7,
+      "reviewedAssertionScope": "A response kills the sole target; the lower spell emits SpellDidNotResolve and its caster receives no life gain. The test does not explicitly assert that lower spell's graveyard location.",
+      "executionRoute": "constructed-board-real-transitions",
+      "relatedExpectationIds": ["CAST-06", "SRC-TGT-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "target-graveyard",
+      "path": "packages/engine/src/effects.test.ts",
+      "name": "Final Reward responding to Murder exiles the target and the original Murder does not resolve",
+      "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+      "line": 770,
+      "testFileSha256": "0b25ad988b2c3ff3803d4b8248cb9b7ab1c62b79b14aa776fdd2e0edbf51f0eb",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 7,
+      "reviewedAssertionScope": "The exiled target remains unchanged; Murder does not resolve and its card is asserted in the owner's graveyard. This spell has no untargeted benefit.",
+      "executionRoute": "constructed-board-real-transitions",
+      "relatedExpectationIds": ["CAST-06", "SRC-TGT-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "target-generation",
+      "path": "packages/engine/src/effects.test.ts",
+      "name": "a target leaving and returning is a new object and does not receive the old spell's damage",
+      "suite": "legal target revalidation and uninterrupted resolution",
+      "line": 569,
+      "testFileSha256": "0b25ad988b2c3ff3803d4b8248cb9b7ab1c62b79b14aa776fdd2e0edbf51f0eb",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 4,
+      "reviewedAssertionScope": "Explicit synthetic exile/return creates a new generation; the old spell emits SpellDidNotResolve and deals zero damage to the returned object.",
+      "executionRoute": "constructed-zone-change-real-resolution",
+      "relatedExpectationIds": ["CAST-06", "SRC-OBJ-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "trample",
+      "path": "packages/engine/src/combat.test.ts",
+      "name": "trample allows lethal-plus-excess or all damage to blocker, not an underassignment",
+      "suite": "combat damage assignments (COM-05 through COM-14)",
+      "line": 401,
+      "testFileSha256": "15c369b83afe7e52a608cbf28fad0a558d1adf2a472fe05a41d2abb3b52a548b",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 5,
+      "reviewedAssertionScope": "A five-power trampler versus a 2/2 accepts 2/3 and all-to-blocker; 1/4 rejects without mutation. The draft specifies six power and 2/4 versus1/5, so these are analogous assertions.",
+      "executionRoute": "direct-combat-processors",
+      "relatedExpectationIds": ["COM-08", "SRC-COM-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "blocked",
+      "path": "packages/engine/src/integration-scenarios.test.ts",
+      "name": "COM-05 a blocker killed by a resolved spell leaves its nontrampling attacker blocked",
+      "suite": "transition and checkpoint scenario integration",
+      "line": 305,
+      "testFileSha256": "55b51719f7c7c6ed3a6bc2c16a10263659d5faaf6d9b979bd514d0022dd69a8c",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 26,
+      "reviewedAssertionScope": "An ordinary cast/target/payment/pass sequence kills the declared blocker; blocked status survives, damage step advances and the defending player takes no damage.",
+      "executionRoute": "constructed-board-real-transitions",
+      "relatedExpectationIds": ["COM-05", "SRC-COM-02"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "apnap",
+      "path": "packages/engine/src/triggers.test.ts",
+      "name": "ETB11/13 each controller chooses their own cohort in APNAP order and sees earlier public stack choices",
+      "suite": "source-derived self-entry trigger integration",
+      "line": 530,
+      "testFileSha256": "c4b57065bb58d99a77addf4fcff882c0155b842aa0206a6fd6cecb5c9f60ea26",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 20,
+      "reviewedAssertionScope": "Two ordinary triggers per controller are ordered C,D,A,B; each owner sees earlier public stack choices. There is no trigger-on-trigger second pass.",
+      "executionRoute": "constructed-entry-batch-real-transitions",
+      "relatedExpectationIds": ["ETB11", "ETB13", "PRI-05", "SRC-TRG-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "sba-entry",
+      "path": "packages/engine/src/triggers.test.ts",
+      "name": "ETB10 zero-toughness source dies at the real SBA checkpoint before its preserved trigger is placed",
+      "suite": "source-derived self-entry trigger integration",
+      "line": 612,
+      "testFileSha256": "c4b57065bb58d99a77addf4fcff882c0155b842aa0206a6fd6cecb5c9f60ea26",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 5,
+      "reviewedAssertionScope": "A constructed zero-toughness source captures, dies at the real checkpoint, then its surviving trigger is placed and resolves.",
+      "executionRoute": "constructed-entry-batch-real-checkpoints",
+      "relatedExpectationIds": ["ETB10", "PRI-05", "SRC-TRG-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "lost-apnap",
+      "path": "packages/engine/src/triggers.test.ts",
+      "name": "CR603.3b/704.3/800.4 simultaneous departures preserve the living APNAP suffix and captured cohorts",
+      "suite": "",
+      "line": 335,
+      "testFileSha256": "c4b57065bb58d99a77addf4fcff882c0155b842aa0206a6fd6cecb5c9f60ea26",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 11,
+      "reviewedAssertionScope": "Constructed simultaneous loss removes A/C and their cohorts; D/B choose and resolve in living APNAP order. No control-effect history is exercised.",
+      "executionRoute": "constructed-loss-real-checkpoints",
+      "relatedExpectationIds": ["SRC-TRG-01", "ETB21", "ETB22"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "source-owner-left",
+      "path": "packages/engine/src/triggers.test.ts",
+      "name": "CR603.3a/800.4a the source owner's departure does not remove another player's captured ability",
+      "suite": "",
+      "line": 283,
+      "testFileSha256": "c4b57065bb58d99a77addf4fcff882c0155b842aa0206a6fd6cecb5c9f60ea26",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 8,
+      "reviewedAssertionScope": "A-owned source entered under B; actual loss checkpoint removes A's objects but B's captured ability survives and gains life. This does not end a control-giving effect on an opponent-owned object.",
+      "executionRoute": "constructed-control-real-checkpoints",
+      "relatedExpectationIds": ["ETB08", "SRC-CMD-02"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "commander-graveyard",
+      "path": "packages/engine/src/effects.test.ts",
+      "name": "murder visits its destination and finishes resolving before the commander owner accepts the SBA move",
+      "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+      "line": 733,
+      "testFileSha256": "0b25ad988b2c3ff3803d4b8248cb9b7ab1c62b79b14aa776fdd2e0edbf51f0eb",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 12,
+      "reviewedAssertionScope": "Commander enters graveyard; spell fully resolves; owner then chooses command zone. Exact generation, lineage and final priority are asserted.",
+      "executionRoute": "constructed-board-real-transitions",
+      "relatedExpectationIds": ["CMD-03", "SRC-CMD-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "commander-exile",
+      "path": "packages/engine/src/effects.test.ts",
+      "name": "reward visits its destination and finishes resolving before the commander owner declines the SBA move",
+      "suite": "destroy and exile instructions (CR701.8a,701.13a,702.12b,903.9a)",
+      "line": 733,
+      "testFileSha256": "0b25ad988b2c3ff3803d4b8248cb9b7ab1c62b79b14aa776fdd2e0edbf51f0eb",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 12,
+      "reviewedAssertionScope": "Commander enters exile; spell fully resolves; owner declines the later SBA move and exile persists.",
+      "executionRoute": "constructed-board-real-transitions",
+      "relatedExpectationIds": ["CMD-04", "SRC-CMD-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "mulligan-privacy",
+      "path": "packages/engine/src/audit-scenarios.test.ts",
+      "name": "SET-04 4 seats see mulligan declarations and history while hands and bottom choices stay private",
+      "suite": "",
+      "line": 125,
+      "testFileSha256": "0a5ff357326c25aebdd64ffb947fc9175c129cf238a19f5efc0c436361478ae7",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 58,
+      "reviewedAssertionScope": "Setup declarations are public and hands do not redraw before the round is collected; new hands and bottom identities remain private. This is CR103.5 setup, not a spell's simultaneous secret-card selection.",
+      "executionRoute": "ordinary-setup-real-transitions",
+      "relatedExpectationIds": ["SET-04", "SRC-HID-01", "SRC-HID-02"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "storage-private",
+      "path": "packages/storage/src/storage.test.ts",
+      "name": "serialized submissions deduplicate concurrent retries and reject stale/foreign actor without RNG advancement",
+      "suite": "SQLite ownership and durable coordinator",
+      "line": 188,
+      "testFileSha256": "792c45a45ffcdcf535729b04068f9b6291cbce7fd89cbe4ba07b8496a5199685",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 8,
+      "reviewedAssertionScope": "Actual native SQLite coordinator rejects stale/foreign input without changing state; object projections omit every library and other hands. It does not assert a hidden-library rearrangement proposal.",
+      "executionRoute": "native-sqlite-coordinator",
+      "relatedExpectationIds": ["SRC-ZON-01"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "storage-trigger",
+      "path": "packages/storage/src/triggers-storage.test.ts",
+      "name": "ordinary casts: source removal, exact retry, reload and import preserve the captured controller and incarnation",
+      "suite": "durable captured self-entry ability",
+      "line": 43,
+      "testFileSha256": "675f609421fb24c406c1617157d5ede81783fe70a94a03d0127d1319326a2802",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 49,
+      "reviewedAssertionScope": "Synthetic zero-cost trigger commander/removal are cast through normal setup and Coordinator commands; pending ability survives source removal/reload/import, exact retry is idempotent, later resolution/replay agree.",
+      "executionRoute": "synthetic-cards-native-sqlite-coordinator",
+      "relatedExpectationIds": ["ETB04", "ETB26", "ETB27"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    },
+    {
+      "id": "storage-order",
+      "path": "packages/storage/src/triggers-storage.test.ts",
+      "name": "constructed multi-trigger ordering: isolated initialization adapter exercises actual SQLite, transitions and replay",
+      "suite": "",
+      "line": 144,
+      "testFileSha256": "675f609421fb24c406c1617157d5ede81783fe70a94a03d0127d1319326a2802",
+      "capturedSource": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/sources-before.json",
+      "junit": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/junit.xml",
+      "junitSha256": "1fd351eb03900917911ccf8167f55c6864f5c938b75a5c15041e0c444bfb89e9",
+      "execution": "passed",
+      "assertionCount": 6,
+      "reviewedAssertionScope": "Child fixture explicitly reports ordinaryCommandReachable=false and sourceBackedCards=false while exercising actual SQLite/commands/replay for two-trigger ordering.",
+      "executionRoute": "privileged-constructed-native-sqlite-coordinator",
+      "relatedExpectationIds": ["ETB11", "ETB26"],
+      "mappingReview": {
+        "reviewer": "skills_audit agent",
+        "status": "source-and-assertion-scope-reviewed",
+        "independentOfOriginal24ScenarioAuthor": true,
+        "independentOfEveryTestAuthor": false,
+        "note": "Some tests were authored by this reviewer. This is an evidence-scope join, not a fabricated second implementation review."
+      }
+    }
+  ],
+  "historicalMaps": [
+    {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs/docs/commander/executed-scenario-map.json",
+      "sha256": "4fdd996634a88416efd761fb9b2b48153aa1612b3b499ab51b5bedb159b1734a",
+      "originalPath": "docs/commander/executed-scenario-map.json",
+      "priorEngine": "commander-engine/0.3.0",
+      "priorReport": ".commander/evidence/core-scenario-map.junit.xml",
+      "testFileChecks": [
+        {
+          "id": "core-test-001",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-002",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-003",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-004",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-005",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-006",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-007",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-008",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-009",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-010",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-011",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-012",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-013",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-014",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-015",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-016",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-017",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-018",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-019",
+          "path": "packages/storage/src/storage.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-020",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-021",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-022",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-023",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-024",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-025",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-026",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-027",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-028",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-029",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-030",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-031",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-032",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-033",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-034",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-035",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-036",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-037",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-038",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-039",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-040",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-041",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-042",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-043",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-044",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-045",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-046",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-047",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-048",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-049",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-050",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-051",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-052",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-053",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-054",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-055",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-056",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-057",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-058",
+          "path": "packages/compiler/src/index.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-059",
+          "path": "packages/compiler/src/index.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "core-test-060",
+          "path": "packages/compiler/src/index.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        }
+      ],
+      "policy": "Prior execution and review remain historical. No old review is promoted merely because a test name recurs."
+    },
+    {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs/docs/commander/executed-scenario-map-v0.6.json",
+      "sha256": "4dd31b17aa3c5b098f34d26b531d2ebd3e0ed3b6dfb35b295e00197cde1ebe0a",
+      "originalPath": "docs/commander/executed-scenario-map-v0.6.json",
+      "priorEngine": "commander-engine/0.6.0",
+      "priorReport": ".commander/evidence/setup-choice-0.6.junit.xml",
+      "testFileChecks": [
+        {
+          "id": "v06-test-001",
+          "path": "apps/engine-cli/src/terminal.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-002",
+          "path": "apps/engine-cli/src/terminal.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-003",
+          "path": "apps/engine-cli/src/terminal.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-004",
+          "path": "apps/engine-cli/src/terminal.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-005",
+          "path": "apps/engine-cli/src/terminal.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-006",
+          "path": "apps/engine-cli/src/terminal.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-007",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-008",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-009",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-010",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-011",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-012",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-013",
+          "path": "packages/simulation/src/driver.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-014",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-015",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-016",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-017",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-018",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-019",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-020",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-021",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-022",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-023",
+          "path": "packages/engine/src/audit-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-024",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-025",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-026",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-027",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-028",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-029",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-030",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-031",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-032",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-033",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-034",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-035",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-036",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-037",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-038",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-039",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-040",
+          "path": "packages/engine/src/engine.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-041",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-042",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-043",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-044",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-045",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-046",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-047",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-048",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-049",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-050",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-051",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-052",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-053",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-054",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-055",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-056",
+          "path": "packages/engine/src/combat.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-057",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-058",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-059",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-060",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-061",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-062",
+          "path": "packages/engine/src/integration-scenarios.test.ts",
+          "sameTestFileBytes": true,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-063",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-064",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-065",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-066",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-067",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-068",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-069",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-070",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-071",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-072",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-073",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-074",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-075",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-076",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-077",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-078",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-079",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-080",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-081",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-082",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-083",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        },
+        {
+          "id": "v06-test-084",
+          "path": "packages/engine/src/effects.test.ts",
+          "sameTestFileBytes": false,
+          "evidenceTransferred": false
+        }
+      ],
+      "policy": "Prior execution and review remain historical. No old review is promoted merely because a test name recurs."
+    }
+  ],
+  "supplementalExpectations": [
+    {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs/docs/commander/source-etb-scenarios.json",
+      "sha256": "814a0be855b0f3f96d6fbfe15b384a9fd0171ed8bf35470cc7723c793dd915d9",
+      "originalPath": "docs/commander/source-etb-scenarios.json",
+      "scenarioCount": 34,
+      "originalAuthoredExecutionClaims": {
+        "executedTests": 0,
+        "executedGames": 0
+      },
+      "scenarios": [
+        {
+          "id": "ETB01",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB02",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB03",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB04",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["storage-trigger"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB05",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB06",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB07",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB08",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["source-owner-left"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB09",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB10",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["sba-entry"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB11",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["apnap", "storage-order"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB12",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB13",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["apnap"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB14",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB15",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB16",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB17",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB18",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB19",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB20",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB21",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["lost-apnap"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB22",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["lost-apnap"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB23",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB24",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB25",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB26",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["storage-trigger", "storage-order"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB27",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": ["storage-trigger"],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB28",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB29",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB30",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB31",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB32",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB33",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "ETB34",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        }
+      ],
+      "note": "Only curated assertion links are joined. Unlinked rows are unassessed by this original24 audit; in-progress isolated0.8 results are not production0.7 evidence."
+    },
+    {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs/docs/commander/source-etb-sequence-scenarios.json",
+      "sha256": "f70bb1631e87fc4cf63a6509ff4293f5fb4951bf31f17d39f90de6641c06c6a9",
+      "originalPath": "docs/commander/source-etb-sequence-scenarios.json",
+      "scenarioCount": 33,
+      "originalAuthoredExecutionClaims": {
+        "executedScenarios": 0,
+        "executedGames": 0
+      },
+      "scenarios": [
+        {
+          "id": "SEQ01",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ02",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ03",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ04",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ05",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ06",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ07",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ08",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ09",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ10",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ11",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ12",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ13",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "SEQ14",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT01",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT02",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT03",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT04",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT05",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT06",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT07",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT08",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT09",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "OPT10",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG01",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG02",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG03",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG04",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG05",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG06",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG07",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG08",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        },
+        {
+          "id": "NEG09",
+          "authoredStatus": "authored-not-executed",
+          "linkedReviewedTestIds": [],
+          "wholeScenarioCertified": false
+        }
+      ],
+      "note": "Only curated assertion links are joined. Unlinked rows are unassessed by this original24 audit; in-progress isolated0.8 results are not production0.7 evidence."
+    }
+  ],
+  "runnerAudit": {
+    "implementation": {
+      "path": ".commander/evidence/g2-audit-0.7-20260906T211430Z-3322f955/audit-inputs/apps/engine-cli/src/scenarios.ts",
+      "sha256": "2be23f143708a6acfc5b9ed32f330ea1c0ef5fdb92918a55ed84dadcd03e364e",
+      "originalPath": "apps/engine-cli/src/scenarios.ts"
+    },
+    "dispatchesAuthoredScenarioManifests": false,
+    "retainsActualJUnitAndExitStatus": true,
+    "capturesTestBytes": false,
+    "verifiesBeforeAfterSourceEquality": false,
+    "frozenBuildExecutesTests": false,
+    "g2ClaimInRunner": false,
+    "finding": "archiveBuild excludes test files; runScenarios spawns Bun against the live checkout rather than the archived executable. The fresh audit capture above closes its own evidence join only; it does not retroactively repair prior CLI runs."
+  },
+  "nextCoherentWork": [
+    {
+      "priority": 0,
+      "id": "manifest-execution-join",
+      "kind": "evidence-infrastructure",
+      "closes": [
+        "SRC-SET-01",
+        "SRC-SET-02",
+        "SRC-CAST-02",
+        "SRC-COM-01",
+        "SRC-COM-02",
+        "SRC-ZON-01"
+      ],
+      "proposal": "Register explicit versioned scenario adapters with source/definition pins, privileged setup assumptions, command scripts and reviewed assertions; run each adapter through all three resolvers and native storage, with browser parity for selected saved choices. Reuse existing supported semantics to execute exact contrasts; do not infer adapters from labels or alter full-game initialization.",
+      "status": "proposed-not-run"
+    },
+    {
+      "priority": 1,
+      "id": "pending-event-replacement",
+      "kind": "semantic-infrastructure",
+      "closes": ["SRC-REP-01", "SRC-REP-02", "SRC-CMD-01"],
+      "proposal": "Introduce a serializable pending event with version, affected entity/controller, candidate replacement instances and applied-instance history. Resolve chooser-owned replacement branches before committing the event. Execute two independent doublers2→4→8 without reapplying either, the opponent-controlled-object chooser contrast, and owner-selected commander hand/library replacement versus graveyard/exile SBA timing. Save/replay each pending event choice and compare all resolvers.",
+      "sourceRules": ["614.5", "616.1", "903.9a", "903.9b"],
+      "sourceBindings": "Full-body card bindings must be separately selected and reviewed; none invented by this proposal.",
+      "status": "proposed-not-run"
+    },
+    {
+      "priority": 2,
+      "id": "resolution-choice-and-search",
+      "kind": "semantic-infrastructure",
+      "closes": ["SRC-ZON-02", "SRC-HID-01", "SRC-HID-02"],
+      "proposal": "Extend ordered resolution with a durable instruction cursor and owned choice frames. Implement quality-search fail-to-find versus unrestricted count, then collect each player's private/public card choice before one simultaneous commit. Verify privacy at every observer boundary and continue without granting priority inside resolution. Optional self-entry acceptance can reuse this continuation but does not itself close the twelve-family floor.",
+      "sourceRules": ["117.2e", "101.4", "101.4a", "101.4b", "701.23b", "701.23d"],
+      "status": "proposed-not-run"
+    },
+    {
+      "priority": 3,
+      "id": "multiple-target-slots",
+      "kind": "semantic-infrastructure",
+      "closes": ["SRC-TGT-02"],
+      "proposal": "Model target slots and per-effect target references, then execute one-of-two legal versus both-illegal resolution with durable target choices and source-generation revalidation. Keep untargeted instructions and information dependencies explicit.",
+      "sourceRules": ["601.2c", "608.2b"],
+      "status": "proposed-not-run"
+    },
+    {
+      "priority": 4,
+      "id": "continuous-effect-provenance",
+      "kind": "semantic-infrastructure",
+      "closes": ["SRC-LAY-01", "SRC-LAY-02", "SRC-CMD-02", "SRC-OBJ-02", "SRC-CAST-01"],
+      "proposal": "Add timestamped source-bound continuous-effect instances, layer/dependency evaluation and control provenance before using final displayed characteristics as semantics. Execute a true dependency/timestamp contrast and dependency loop, then source departure restoring control, copy values excluding counters, and reducer removal after total-cost lock. These are multiple bounded increments, not one guessed generic effect interpreter.",
+      "sourceRules": ["613.8a", "613.8b", "800.4a", "707.2", "601.2f"],
+      "status": "proposed-not-run"
+    },
+    {
+      "priority": 5,
+      "id": "conditional-and-meta-triggers",
+      "kind": "semantic-infrastructure",
+      "closes": ["SRC-TRG-01", "SRC-TRG-02"],
+      "proposal": "Add explicit event/capture and resolution predicates plus trigger-on-trigger occurrence capture. Execute false-at-event versus true-then-false intervening-if, and a mixed ordinary/meta cohort requiring both APNAP passes. Reuse current source snapshots and immutable trigger IDs.",
+      "sourceRules": ["603.3b", "603.4"],
+      "status": "proposed-not-run"
+    },
+    {
+      "priority": 6,
+      "id": "rules-loop-procedure",
+      "kind": "semantic-infrastructure",
+      "closes": ["SRC-LOOP-01", "SRC-LOOP-02"],
+      "proposal": "Only after repeatable effects/choices exist, distinguish a proved unavoidable mandatory loop from a fragmented optional-choice loop. Persist loop-relevant states and entitled choices; computational exhaustion must stay incomplete.",
+      "sourceRules": ["104.4b", "732.3"],
+      "status": "proposed-not-run"
+    }
+  ]
+}

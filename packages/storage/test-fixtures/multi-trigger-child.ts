@@ -47,7 +47,8 @@ try {
   assert.deepEqual(repo.load(manifest.id)?.initial, initial);
   assert.deepEqual(await replayMatch(repo, release, manifest.id), initial);
   const oldSource = Object.values(initial.abilities).find(
-    (ability) => ability.program.effect.kind === "draw",
+    (ability) =>
+      ability.program.schema === "commander-trigger/1" && ability.program.effect.kind === "draw",
   )?.source;
   if (!oldSource) throw new Error("No captured draw source");
   assert.equal(initial.objects[oldSource.id], undefined);

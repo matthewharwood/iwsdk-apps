@@ -1,6 +1,7 @@
 import {
   RECIPE_REGISTRY,
   SELF_ENTRY_REGISTRY,
+  SELF_ENTRY_SEQUENCES,
   SPELL_FAMILY_REGISTRY,
 } from "@iwsdk-apps/card-programs";
 import {
@@ -97,6 +98,7 @@ async function artifactFor(
       recipes: RECIPE_REGISTRY,
       spellFamilies: SPELL_FAMILY_REGISTRY,
       selfEntryTriggers: SELF_ENTRY_REGISTRY,
+      selfEntrySequences: SELF_ENTRY_SEQUENCES,
     }),
     deckHashes,
     closure: plan.closure,

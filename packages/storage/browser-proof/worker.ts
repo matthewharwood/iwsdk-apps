@@ -36,7 +36,9 @@ const Request = z.discriminatedUnion("operation", [
   z.strictObject({ operation: z.literal("import"), namespace: z.string(), text: z.string() }),
   z.strictObject({
     operation: z.literal("run"),
-    stopAt: z.enum(["starting-player", "payment", "target", "pending-trigger"]).nullable(),
+    stopAt: z
+      .enum(["starting-player", "payment", "target", "pending-trigger", "pending-ordered-trigger"])
+      .nullable(),
     maxCommands: z.number().int().positive().max(20_000),
   }),
   z.strictObject({ operation: z.literal("snapshot") }),

@@ -1,5 +1,10 @@
 import { expect, test } from "bun:test";
-import { SelfEntryProgram } from "./triggers";
+import {
+  OrderedSelfEntryProgram,
+  SelfEntryProgram,
+  SingleSelfEntryProgram,
+  selfEntryEffects,
+} from "./triggers";
 
 const program: SelfEntryProgram = {
   schema: "commander-trigger/1",
@@ -15,7 +20,7 @@ const program: SelfEntryProgram = {
 test("self-entry schema preserves captured-controller constant effect semantics", () => {
   expect(SelfEntryProgram.parse(program)).toEqual(program);
   expect(
-    SelfEntryProgram.parse({
+    SingleSelfEntryProgram.parse({
       ...program,
       effect: { kind: "gain-life", recipient: "trigger-controller", amount: 3 },
     }).effect,
@@ -36,4 +41,24 @@ test("optional, targeted, conditional, multi-effect and wrong event views cannot
     { ...program, trigger: { ...program.trigger, placementClass: "triggered-by-trigger" } },
   ])
     expect(SelfEntryProgram.safeParse(mutation).success).toBe(false);
+});
+
+test("ordered program preserves written effect order and rejects mixed legacy payloads and optional nodes", () => {
+  const { effect, ...base } = program;
+  const ordered: OrderedSelfEntryProgram = {
+    ...base,
+    schema: "commander-trigger/2",
+    effects: [{ kind: "gain-life", recipient: "trigger-controller", amount: 2 }, effect],
+  };
+  const parsed = OrderedSelfEntryProgram.parse(ordered);
+  expect(selfEntryEffects(parsed).map((item) => item.kind)).toEqual(["gain-life", "draw"]);
+  expect(SelfEntryProgram.parse(ordered)).toEqual(ordered);
+  for (const bad of [
+    { ...ordered, effect },
+    { ...ordered, effects: [] },
+    { ...ordered, effects: [effect] },
+    { ...ordered, choice: { kind: "optional" } },
+    { ...ordered, effects: [effect, { kind: "destroy" }] },
+  ])
+    expect(SelfEntryProgram.safeParse(bad).success).toBe(false);
 });

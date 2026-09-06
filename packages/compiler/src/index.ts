@@ -13,6 +13,8 @@ import {
   reviewedSelfEntryDefinition,
   SELF_ENTRY_RECIPE_VERSION,
   SELF_ENTRY_REGISTRY,
+  SELF_ENTRY_SEQUENCE_VERSION,
+  SELF_ENTRY_SEQUENCES,
   SPELL_FAMILY_REGISTRY,
   SPELL_FAMILY_VERSION,
 } from "@iwsdk-apps/card-programs";
@@ -27,7 +29,7 @@ import {
   semanticHash,
 } from "@iwsdk-apps/contracts";
 
-export const COMPILER_VERSION = "commander-development-compiler/2";
+export const COMPILER_VERSION = "commander-development-compiler/3";
 export const REVIEWED_RULES_HASH =
   "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f";
 
@@ -48,12 +50,17 @@ export interface CompilationReport {
   executedAssertions: 0;
   spellFamilies: { enabled: boolean; version: string; registry: typeof SPELL_FAMILY_REGISTRY };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
+  selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
 }
 
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
 export async function compileDevelopmentRelease(
   dbPath: string,
-  options: { spellFamilies?: boolean; selfEntryTriggers?: boolean } = {},
+  options: {
+    spellFamilies?: boolean;
+    selfEntryTriggers?: boolean;
+    selfEntrySequences?: boolean;
+  } = {},
 ): Promise<{ release: ContentRelease; report: CompilationReport }> {
   const inventory = readInventory(dbPath);
   if (!inventory || inventory.status !== "complete")
@@ -79,6 +86,11 @@ export async function compileDevelopmentRelease(
       )
       .all(inventory.importId),
     executedAssertions: 0,
+    selfEntrySequences: {
+      enabled: options.selfEntrySequences === true,
+      version: SELF_ENTRY_SEQUENCE_VERSION,
+      registry: SELF_ENTRY_SEQUENCES,
+    },
     selfEntryTriggers: {
       enabled: options.selfEntryTriggers === true,
       version: SELF_ENTRY_RECIPE_VERSION,
@@ -123,7 +135,7 @@ export async function compileDevelopmentRelease(
     throw new Error("Compiler candidate denominator mismatch");
   const base = {
     schema: "commander-content/1" as const,
-    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}`,
+    id: `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}`,
     sourceBundle: inventory.bundleHash,
     rulesHash,
     profile: "tabletop-commander" as const,
@@ -131,7 +143,7 @@ export async function compileDevelopmentRelease(
     definitions,
     unsupportedOracleIds: report.unsupported.map((card) => card.identity),
     eligibleDenominator: candidates.length,
-    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}`,
+    compilerVersion: `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}`,
     processorAbi: ENGINE_VERSION,
   };
   return { release: ContentRelease.parse({ ...base, hash: await semanticHash(base) }), report };
@@ -341,6 +353,7 @@ export async function makeDevelopmentDecks(
     includeSpellDecks?: boolean;
     includeFamilyDecks?: boolean;
     includeTriggerDecks?: boolean;
+    includeSequenceDecks?: boolean;
   } = {},
 ): Promise<DeckRevision[]> {
   const release = ContentRelease.parse(releaseInput);
@@ -348,13 +361,22 @@ export async function makeDevelopmentDecks(
   if ((await semanticHash(releaseBody)) !== releaseHash)
     throw new Error("Content release hash mismatch");
   const decks: DeckRevision[] = [];
-  const profiles = options.includeTriggerDecks
+  const includeTriggers = options.includeTriggerDecks || options.includeSequenceDecks;
+  const profiles = includeTriggers
     ? [...DECK_PROFILES, ...SPELL_DECK_PROFILES, ...FAMILY_DECK_PROFILES, ...TRIGGER_DECK_PROFILES]
     : options.includeFamilyDecks
       ? [...DECK_PROFILES, ...SPELL_DECK_PROFILES, ...FAMILY_DECK_PROFILES]
       : options.includeSpellDecks === false
         ? DECK_PROFILES
         : [...DECK_PROFILES, ...SPELL_DECK_PROFILES];
+  if (options.includeSequenceDecks)
+    profiles.push({
+      commander: "Tobias Andrion",
+      commanderSourceVersion: "155d17db86833acd61d834269e09d90b88c99604cc3c9404c75e22ae72dc9758",
+      focus: "vanilla",
+      code: "wu-ordered-entry-library",
+      triggerLibrary: true,
+    });
   for (const [index, profile] of profiles.entries()) {
     const commander = Object.values(release.definitions).find(
       (card) => card.name === profile.commander,
@@ -400,7 +422,7 @@ export async function makeDevelopmentDecks(
     };
     decks.push(DeckRevision.parse({ ...base, hash: await semanticHash(base) }));
   }
-  if (options.includeFamilyDecks || options.includeTriggerDecks) {
+  if (options.includeFamilyDecks || includeTriggers) {
     const included = new Set(
       decks.slice(14, 17).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
     );
@@ -412,7 +434,7 @@ export async function makeDevelopmentDecks(
         `Family fixtures do not cover all admitted spell programs: ${missing.map((card) => card.name).join(", ")}`,
       );
   }
-  if (options.includeTriggerDecks) {
+  if (includeTriggers) {
     const included = new Set(
       decks.slice(17).flatMap((deck) => deck.entries.map((entry) => entry.definition)),
     );

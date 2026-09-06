@@ -206,7 +206,8 @@ async function assertTriggerComposition(releaseInput: ContentRelease, template: 
     const trigger = altered.definitions["fixture:green-entry"];
     const commander = altered.definitions["fixture:sivitri"];
     if (!trigger?.triggerPrograms?.[0] || !commander) throw new Error("Missing trigger fixture");
-    if (change === "altered-program") trigger.triggerPrograms[0].effect.amount = 2;
+    if (change === "altered-program" && trigger.triggerPrograms[0].schema === "commander-trigger/1")
+      trigger.triggerPrograms[0].effect.amount = 2;
     if (change === "uncovered-color") trigger.colorIdentity = ["R"];
     if (change === "commander-source") commander.sourceVersion = "0".repeat(64);
     const { hash: _hash, ...changedBody } = altered;
