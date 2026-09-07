@@ -13,6 +13,7 @@ import {
   compileConditionalSelfEntryDraft,
   compileCounterSpellDraft,
   compileCreatureReturnDraft,
+  compileDamageReplacementDraft,
   compileDevelopmentRelease,
   compileEntryObserverDraft,
   compileFixedTokenDraft,
@@ -24,6 +25,7 @@ import {
   makeConditionalSelfEntryDecks,
   makeCounterSpellDecks,
   makeCreatureReturnDecks,
+  makeDamageReplacementDecks,
   makeDevelopmentDecks,
   makeEntryObserverDecks,
   makeFixedTokenDecks,
@@ -365,9 +367,17 @@ async function reviewedFixtureDecks(content: ContentRelease) {
     "commander-engine/0.15.0",
   );
   const conditional = await makeConditionalSelfEntryDecks(historicalConditional, observers.decks);
-  const proctor = await makeStrictProctorDecks(content, conditional.decks);
+  const proctorRelease = await compileStrictProctorDraft(catalogPath);
+  const historicalProctor = await historicalFixtureRelease(
+    proctorRelease.release,
+    "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
+    "commander-engine/0.16.0",
+  );
+  const proctor = await makeStrictProctorDecks(historicalProctor, conditional.decks);
+  const damage = await makeDamageReplacementDecks(content, proctor.decks);
   return {
-    ...proctor,
+    ...damage,
+    proctorReport: proctor.report,
     conditionalReport: conditional.report,
     observerReport: observers.report,
     staticReport: statics.report,
@@ -382,7 +392,7 @@ async function compileCatalog(): Promise<void> {
   const triggers = allReviewed || args.includes("--self-entry-triggers");
   const families = allReviewed || args.includes("--spell-families");
   const compiled = allReviewed
-    ? await compileStrictProctorDraft(catalogPath)
+    ? await compileDamageReplacementDraft(catalogPath)
     : triggers
       ? await compileSelfEntryDraft(catalogPath)
       : families
@@ -405,7 +415,7 @@ async function compileCatalog(): Promise<void> {
       resolve(
         retained,
         allReviewed
-          ? "strict-proctor-expansion.json"
+          ? "damage-replacement-expansion.json"
           : triggers
             ? "self-entry-expansion.json"
             : "spell-family-expansion.json",
@@ -420,7 +430,8 @@ async function compileCatalog(): Promise<void> {
     await write(resolve(retained, "static-bonus-decks.json"), reviewed.staticReport);
     await write(resolve(retained, "entry-observer-decks.json"), reviewed.observerReport);
     await write(resolve(retained, "conditional-self-entry-decks.json"), reviewed.conditionalReport);
-    await write(resolve(retained, "strict-proctor-decks.json"), reviewed.report);
+    await write(resolve(retained, "strict-proctor-decks.json"), reviewed.proctorReport);
+    await write(resolve(retained, "damage-replacement-decks.json"), reviewed.report);
   }
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))

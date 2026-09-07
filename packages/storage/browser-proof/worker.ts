@@ -18,6 +18,7 @@ import {
   StorageError,
 } from "../src/index";
 import { commanderReturnEvidence } from "./commander-return-evidence";
+import { damageReplacementEvidence } from "./damage-evidence";
 import { entryObserverEvidence } from "./entry-observer-evidence";
 import { proofDriverForVersion } from "./proof-driver";
 import {
@@ -54,6 +55,7 @@ const Request = z.discriminatedUnion("operation", [
         "pending-trigger",
         "pending-conditional",
         "trigger-payment",
+        "pending-damage",
         "pending-ordered-trigger",
         "active-modifier",
         "pending-counter",
@@ -114,6 +116,7 @@ async function snapshot() {
     tokens: tokenEvidence(archive, session.release, session.coordinator),
     statics: staticEvidence(archive, session.release, session.coordinator),
     observers: entryObserverEvidence(archive, session.release),
+    damageReplacements: damageReplacementEvidence(archive),
     commanderReturns: commanderReturnEvidence(archive, session.release, session.coordinator),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
     setup: setupEvidence(session.coordinator, archive),

@@ -1,10 +1,10 @@
 /** Authenticated primary source membership only; never semantic certification.
- * The1192 prior tuples remain exact. Twenty auxiliary token templates are separate from1193 Commander card bindings. */
+ * The1193 prior tuples remain exact. Twenty auxiliary token templates are separate from1198 Commander card bindings. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
-  bindingsHash: "526539e8c2a52c6df079236dee7f9b67671c1d17a168aaf96b393b45797e5bcc",
+  releaseHash: "77857dc934ac410326f5a1136bca66757c33ae7ae74326c9d3f0f354432810de",
+  bindingsHash: "bd4bff085d42a069265a98e7a23ef6d28fab638f899af70a0ac3401a71d4e3c6",
   tokenTemplatesHash: "d5a3e91281f6a497cf026bd8b6a89e8e54dcd673edf1a9a22efdb41938205bcf",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
@@ -529,6 +529,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "d25b5b2d0d5b966ef3b48cc8f7dd05ac3ef5c98d9d73a504f6cd225de8ccf899",
     implementationRevision: "static-bonus-permanent/1",
     definitionHash: "2d27b78c8b7cc6a4a347987b5c7cfa7adaa0f2b105f0a2d9efc830b32ffb51a8",
+  },
+  "b437c963-def5-40d6-b567-ae9f1d2a0fa5": {
+    sourceVersion: "22e49dbb1ab926d6a141c77f7e8c5b1b81ffc81b20ff365b8b6bca4aa1d0e103",
+    implementationRevision: "damage-replacement-permanent/1",
+    definitionHash: "257e8d8da0755ba36a2fc9c639b589ecbd79cd9b2da007e332c2c89cf8f63a44",
   },
   "43c449d1-51a9-45e0-8102-823a6811ff54": {
     sourceVersion: "4b6401be8df6bb434f1114c6e8314f962467c7240cc964256028aceed293386c",
@@ -1310,6 +1315,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "static-bonus-permanent/1",
     definitionHash: "826f36339740d6fcce5fee9a057ce506b03e7fcfbeb2abf076d490194b0ae5f9",
   },
+  "3d960d33-623a-4415-ae00-f8cffbc15f5a": {
+    sourceVersion: "87453d634744dd3bf990baba08c8708b138a65ba8a3db7c06c96c1651ec381f7",
+    implementationRevision: "damage-replacement-permanent/1",
+    definitionHash: "0a00cf6f101b7c408c4cb08ff8f482a6d91d39b9b0124fb253f069225a6eb0f5",
+  },
   "77eafe49-b9c5-461d-89c5-cec217dd2974": {
     sourceVersion: "af12d08236477251dc771a70459a946b6147492712ce74717191fe6e9959b746",
     implementationRevision: "temporary-creature-spells/1",
@@ -1579,6 +1589,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "e64afe7b539c45491edbcca292b74823203bae9dee3f4989cf3978ef249f59a8",
     implementationRevision: "exact-spell-families/1",
     definitionHash: "2341afb3b7603687e9eb2433397555635bd108b09282fcb964c49a41627c5ab4",
+  },
+  "9911c2f8-fafb-4979-898e-e86b726e3538": {
+    sourceVersion: "a0b9cd83c22891de1fa7034bf0a17595b74934f6833b4b91d5dd6e6ee63dcba8",
+    implementationRevision: "damage-replacement-permanent/1",
+    definitionHash: "1f2da644771125e847a137018e64b7c26dd6137a36e118bd08ce7bd0deebcfe2",
   },
   "3501a839-eef5-44e4-8637-b5754780454e": {
     sourceVersion: "ca4e89d6d59c734741a0f4c45a8ffc73658123bcd2c67b73f50100ebe539f0c4",
@@ -1884,6 +1899,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "1a1fa8fbcbbd21c4f92ad5d47ee2dc028fc7664437f2731d431b60d7af9e14b0",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "543c7da765a68f9a9799f1b2ddc72f04f91d44a29057aa6cb884fec7ecb261c1",
+  },
+  "68715465-6cf9-4006-87e9-31f227fe9ed3": {
+    sourceVersion: "21c5a889c669b758c94ff858ac90e9b4e78dbb6a6a63cdf99692ce31387e6dc6",
+    implementationRevision: "damage-replacement-permanent/1",
+    definitionHash: "bf8296959598920a67a05eafc45ea4794ee02096b19562ba88a6b9666690a079",
   },
   "a152674f-be29-40ab-8dd9-376fd4eb3bb8": {
     sourceVersion: "618a2b0d454e339bc843ae96f9c7ac7d2e10859010c4d948890cf91fcb3df136",
@@ -5419,6 +5439,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "b2b100aee6015a04d1af45a4b45fe99242de2934926b6d5eda59b8fccb5e4a7a",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "576fe6b98940bfabee966bf6f97413621c7381e18bf7e1ddd8bc6bdf6edcbbab",
+  },
+  "e5fa232a-c8f2-4532-88bf-60d1223181b0": {
+    sourceVersion: "132f0a8d4c54de37b2b1767105ef058bd30e46f44f647d54963a470499ad5959",
+    implementationRevision: "damage-replacement-permanent/1",
+    definitionHash: "24c30192e538f560ce65b4f82b21acfb59c9ef50882ca9000ee4ee1fa4d9286c",
   },
   "9b00b4c2-d5c4-4cf7-bdcf-cd96297c4350": {
     sourceVersion: "f82d80228892aa5591d3870208a24915e6824e5d8b954a03302e78df0f341b30",

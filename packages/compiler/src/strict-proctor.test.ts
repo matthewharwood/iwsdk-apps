@@ -96,9 +96,9 @@ async function deck(source: ContentRelease, commander: "Tobias Andrion" | "Jasmi
   };
   return DeckRevision.parse({ ...body, hash: await semanticHash(body) });
 }
-test("closed1193 registry binds the whole Proctor source and no external definition dependency", async () => {
+test("closed1198 registry binds the whole Proctor source and no external definition dependency", async () => {
   const source = await fixture();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1193);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1198);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   const full = await createFullExecutionRegistry(source);
   expect(Object.keys(full.definitions)).toHaveLength(13);
@@ -141,7 +141,7 @@ for (const commander of ["Tobias Andrion", "Jasmine Boreal"] as const)
       ) ?? [];
     expect(templates).toHaveLength(1);
     expect(Object.keys(prepared.tokenTemplates)).toEqual(templates);
-    expect(artifact.compilerVersion).toBe("development-match-plan/12");
+    expect(artifact.compilerVersion).toBe("development-match-plan/13");
     for (const cap of [...STRICT_PROCTOR_CORE_CAPABILITIES, ...SELF_ENTRY_CORE_CAPABILITIES]) {
       expect(artifact.requiredCoreCapabilities).toContain(cap);
       const changed = structuredClone(artifact);
@@ -217,7 +217,7 @@ test("Proctor body, flying, cost and causal constructor cannot be erased or repl
 test("Proctor source inspection survives old/future ABIs but runtime admission does not", async () => {
   const source = await fixture();
   const d = await deck(source, "Tobias Andrion");
-  for (const processorAbi of ["commander-engine/0.15.0", "commander-engine/0.17.0"]) {
+  for (const processorAbi of ["commander-engine/0.16.0", "commander-engine/0.18.0"]) {
     const altered = await rehash({ ...source, processorAbi });
     expect((await verifySourceRelease(altered)).processorAbi).toBe(processorAbi);
     await expect(createFullExecutionRegistry(altered)).rejects.toThrow("incompatible");

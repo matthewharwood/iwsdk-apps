@@ -7,6 +7,8 @@ import type {
 import { characteristics } from "./characteristics";
 import { card, draw, emit, hit, move, object, permanentBase, player, RulesError } from "./common";
 import { createCreatureModifier } from "./continuous";
+import { beginDamageBatch } from "./damage";
+import { checkedDamageNumber } from "./damage-domain";
 import { orderedObjects } from "./object-order";
 import { beginReturnResolution } from "./return-resolution";
 import { counterSpell, isStackSpellDomain, stackSpellTargets } from "./stack-spells";
@@ -65,35 +67,9 @@ export function isLegalSpellTarget(
 }
 
 function gainLife(state: RulesState, recipient: string, amount: number, source: string): void {
-  player(state, recipient).life += amount;
+  player(state, recipient).life = checkedDamageNumber(player(state, recipient).life + amount);
   emit(state, "LifeGained", { player: recipient, amount, source });
   hit(state, "rule:119.3");
-}
-function spellDamage(
-  state: RulesState,
-  release: ExecutionRegistry,
-  source: string,
-  target: string,
-  amount: number,
-): void {
-  const spell = object(state, source);
-  const recipient = state.players.find((seat) => seat.id === target);
-  if (recipient) {
-    recipient.life -= amount;
-    hit(state, "rule:120.3a");
-  } else {
-    const creature = object(state, target);
-    creature.damage += amount;
-    if (characteristics(state, release, source).keywords.includes("deathtouch"))
-      creature.deathtouchDamage = true;
-    hit(state, "rule:120.3e");
-  }
-  // Damage results occur before a checkpoint; noncombat damage never increments commander damage.
-  if (characteristics(state, release, source).keywords.includes("lifelink")) {
-    gainLife(state, spell.controller, amount, source);
-    hit(state, "rule:120.3f");
-  }
-  emit(state, "NoncombatDamageDealt", { source, target, amount });
 }
 function applyRemoval(
   state: RulesState,
@@ -154,11 +130,8 @@ function applyEffect(
     applyRemoval(state, release, source, target, effect);
     return;
   }
-  if (effect.kind === "damage") {
-    if (target === null) throw new RulesError("Invariant", "Damage program has no chosen target");
-    spellDamage(state, release, source, target, effect.amount);
-    return;
-  }
+  if (effect.kind === "damage")
+    throw new RulesError("Invariant", "Damage instructions require resumable resolution");
   const recipient = effect.recipient === "controller" ? object(state, source).controller : target;
   if (recipient === null) throw new RulesError("Invariant", "Player effect has no recipient");
   if (effect.kind === "draw") draw(state, recipient, effect.amount);
@@ -194,8 +167,38 @@ export function resolveSpellProgram(
     if (target === null) throw new RulesError("Invariant", "Return program has no chosen target");
     return beginReturnResolution(state, release, spell, program, target);
   }
-  for (const [index, effect] of program.effects.entries()) {
-    if (effect.kind === "create-token") createTokens(state, release, source, effect, index);
+  return continueSpellProgram(state, release, source, target, 0);
+}
+/** Resume the accepted instruction stream without rechecking already accepted spell targets. */
+export function continueSpellProgram(
+  state: RulesState,
+  release: ExecutionRegistry,
+  source: string,
+  target: string | null,
+  startIndex: number,
+): boolean {
+  const spell = object(state, source);
+  const current = card(state, release, source);
+  const program = current.spellProgram;
+  if (!program) throw new RulesError("Invariant", "Resuming spell has no source program");
+  for (let index = startIndex; index < program.effects.length; index++) {
+    const effect = program.effects[index];
+    if (!effect) throw new RulesError("Invariant", "Spell cursor exceeds its instruction stream");
+    if (effect.kind === "damage") {
+      if (target === null) throw new RulesError("Invariant", "Damage program has no chosen target");
+      if (
+        !beginDamageBatch(state, release, {
+          kind: "spell-instruction",
+          source: structuredClone(spell),
+          sourceVersion: current.sourceVersion,
+          controller: spell.controller,
+          program: structuredClone(program),
+          target,
+          effectIndex: index,
+        })
+      )
+        return false;
+    } else if (effect.kind === "create-token") createTokens(state, release, source, effect, index);
     else applyEffect(state, release, source, target, effect, index);
   }
   const grave = move(state, source, "graveyard", "instant or sorcery resolution completed");

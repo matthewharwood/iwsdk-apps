@@ -1,6 +1,7 @@
 import {
   type CardDefinition,
   ConditionalSelfEntryProgram,
+  DamageStaticProgram,
   EntryCausedTriggerProgram,
   EntryObserverProgram,
   SelfEntryProgram,
@@ -16,6 +17,7 @@ export function isStaticBonusPermanent(card: CardDefinition): boolean {
     !card.subtypes.includes("Aura") &&
     !card.spellProgram &&
     !card.triggerPrograms &&
+    !card.damagePrograms &&
     card.staticPrograms?.length === 1 &&
     StaticCreatureBonus.safeParse(card.staticPrograms[0]).success &&
     (card.types[0] === "Creature"
@@ -32,6 +34,7 @@ export function isReviewedTriggeredPermanent(card: CardDefinition): boolean {
     card.manaCost === null ||
     card.spellProgram ||
     card.staticPrograms ||
+    card.damagePrograms ||
     card.subtypes.includes("Aura")
   )
     return false;
@@ -52,6 +55,7 @@ export function isEntryObserverPermanent(card: CardDefinition): boolean {
     card.manaCost === null ||
     card.spellProgram ||
     card.staticPrograms ||
+    card.damagePrograms ||
     card.subtypes.includes("Aura") ||
     !EntryObserverProgram.safeParse(card.triggerPrograms[0]).success
   )
@@ -65,6 +69,30 @@ export function isEntryObserverPermanent(card: CardDefinition): boolean {
   return (
     card.types.length === 1 &&
     card.types[0] === "Enchantment" &&
+    card.power === null &&
+    card.toughness === null
+  );
+}
+
+/** One complete finite damage program, with no omitted additional permanent mechanics. */
+export function isDamageProgramPermanent(card: CardDefinition): boolean {
+  if (
+    card.damagePrograms?.length !== 1 ||
+    !DamageStaticProgram.safeParse(card.damagePrograms[0]).success ||
+    card.manaCost === null ||
+    card.spellProgram ||
+    card.triggerPrograms ||
+    card.staticPrograms ||
+    card.types.length !== 1 ||
+    card.subtypes.includes("Aura")
+  )
+    return false;
+  const program = card.damagePrograms[0];
+  if (!program) return false;
+  if (program.kind === "damage-cannot-be-prevented" && card.types[0] !== "Creature") return false;
+  if (card.types[0] === "Creature") return card.power !== null && card.toughness !== null;
+  return (
+    (card.types[0] === "Artifact" || card.types[0] === "Enchantment") &&
     card.power === null &&
     card.toughness === null
   );

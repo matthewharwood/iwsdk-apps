@@ -10,6 +10,9 @@ import { characteristics } from "./characteristics";
 import { answerCommanderZone } from "./checkpoints";
 import { answerAttack, answerBlock, answerDamage, applyCombatDamage } from "./combat";
 import { assertRegistryPin, definition, emit, RulesError, requireActivePlayer } from "./common";
+import { answerDamageReplacement } from "./damage";
+import { assertDamageContinuation } from "./damage-context";
+import { continueSpellProgram } from "./effects";
 import { assertInvariants } from "./invariants";
 import { orderedObjects } from "./object-order";
 import { assertResolutionContinuation } from "./resolution-context";
@@ -51,6 +54,21 @@ function priorityAction(
   }
   givePriority(state, release, actor);
 }
+function finishDamageResponse(
+  state: RulesState,
+  release: ExecutionRegistry,
+  actor: string,
+  response: Response,
+): void {
+  const host = answerDamageReplacement(state, release, actor, response);
+  if (!host) return;
+  if (
+    host.kind === "spell-instruction" &&
+    !continueSpellProgram(state, release, host.source.id, host.target, host.effectIndex + 1)
+  )
+    return;
+  givePriority(state, release, requireActivePlayer(state));
+}
 function answer(
   state: RulesState,
   release: ExecutionRegistry,
@@ -59,6 +77,9 @@ function answer(
   response: Response,
 ): void {
   switch (kind) {
+    case "damage-replacement":
+      finishDamageResponse(state, release, actor, response);
+      return;
     case "trigger-payment":
       if (answerTriggerPayment(state, release, actor, response)) givePriority(state, release);
       return;
@@ -110,8 +131,8 @@ function answer(
       if (response.kind !== "damage")
         throw new RulesError("IllegalCommand", "Expected damage allocation");
       if (answerDamage(state, release, actor, response)) {
-        applyCombatDamage(state, release);
-        givePriority(state, release, requireActivePlayer(state));
+        if (applyCombatDamage(state, release))
+          givePriority(state, release, requireActivePlayer(state));
       }
       return;
   }
@@ -151,6 +172,7 @@ export function transition(
     assertResolutionContinuation(committed, release);
     assertTriggerContexts(committed, release);
     assertTriggerPayment(committed, release);
+    assertDamageContinuation(committed, release);
     const state = structuredClone(committed);
     state.revision++;
     state.events = [];

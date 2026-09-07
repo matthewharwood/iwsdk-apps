@@ -8,7 +8,7 @@ import {
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/7";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/8";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;

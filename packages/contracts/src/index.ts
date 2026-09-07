@@ -1,4 +1,8 @@
 import { z } from "zod";
+import { DamageReplacementProgram, DamageStaticProgram } from "./damage";
+
+export { DamageReplacementProgram, DamageStaticProgram } from "./damage";
+
 import { StaticCreatureBonus } from "./static-bonus";
 import {
   ConditionalSelfEntryProgram,
@@ -26,7 +30,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.16.0";
+export const ENGINE_VERSION = "commander-engine/0.17.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -266,6 +270,7 @@ export const CardDefinition = z.strictObject({
   implementationRevision: Id,
   spellProgram: SpellProgram.optional(),
   triggerPrograms: z.array(TriggeredProgram).min(1).max(1).optional(),
+  damagePrograms: z.array(DamageStaticProgram).length(1).optional(),
   staticPrograms: z.tuple([StaticCreatureBonus]).optional(),
 });
 export type CardDefinition = z.infer<typeof CardDefinition>;
@@ -462,7 +467,16 @@ export const TriggerPaymentResponse = z.discriminatedUnion("pay", [
   }),
 ]);
 export type TriggerPaymentResponse = z.infer<typeof TriggerPaymentResponse>;
+export const DamageReplacementResponse = z.strictObject({
+  kind: z.literal("damage-replacement"),
+  eventId: Id,
+  eventVersion: Natural,
+  occurrenceId: Id,
+  effectId: Id,
+});
+export type DamageReplacementResponse = z.infer<typeof DamageReplacementResponse>;
 export const Response = z.discriminatedUnion("kind", [
+  DamageReplacementResponse,
   TriggerPaymentResponse,
   z.strictObject({ kind: z.literal("trigger-order"), triggers: z.array(Id) }),
   z.strictObject({ kind: z.literal("starting-player"), player: Id }),
@@ -500,11 +514,40 @@ export const GameCommand = z.strictObject({
   response: Response,
 });
 export type GameCommand = z.infer<typeof GameCommand>;
+export const DamageRecipient = z.strictObject({ kind: z.enum(["player", "creature"]), id: Id });
+export type DamageRecipient = z.infer<typeof DamageRecipient>;
+export const DamageReplacementChoice = z.strictObject({
+  eventId: Id,
+  version: Natural,
+  occurrences: z
+    .array(
+      z.strictObject({
+        id: Id,
+        source: Id,
+        recipient: DamageRecipient,
+        amount: Natural,
+        preventable: z.boolean(),
+        effects: z
+          .array(
+            z.strictObject({
+              id: Id,
+              provider: Id,
+              definition: Id,
+              program: DamageReplacementProgram,
+            }),
+          )
+          .min(1),
+      }),
+    )
+    .min(1),
+});
+export type DamageReplacementChoice = z.infer<typeof DamageReplacementChoice>;
 export const Decision = z.strictObject({
   id: Id,
   actor: Id,
   revision: Natural,
   kind: z.enum([
+    "damage-replacement",
     "trigger-order",
     "trigger-payment",
     "starting-player",
@@ -528,6 +571,7 @@ export const Decision = z.strictObject({
   manaSources: z.array(z.strictObject({ object: Id, colors: z.array(ManaColor) })),
   cost: Cost.nullable(),
   cardCosts: z.record(Id, Cost),
+  damageReplacement: DamageReplacementChoice.optional(),
   damageDomain: z.array(
     z.strictObject({
       source: Id,
@@ -585,7 +629,86 @@ export const ResolvingTriggerPaymentFrame = z.strictObject({
   continuation: z.literal("complete-proctor-resolution"),
 });
 export type ResolvingTriggerPaymentFrame = z.infer<typeof ResolvingTriggerPaymentFrame>;
+export const DamageSourceFacts = z.strictObject({
+  object: GameObject,
+  sourceVersion: Digest,
+  isSpell: z.boolean(),
+  deathtouch: z.boolean(),
+  lifelink: z.boolean(),
+  preventable: z.boolean(),
+});
+export type DamageSourceFacts = z.infer<typeof DamageSourceFacts>;
+export const DamageOccurrence = z.strictObject({
+  id: Id,
+  source: DamageSourceFacts,
+  recipient: z.discriminatedUnion("kind", [
+    z.strictObject({ kind: z.literal("player"), id: Id }),
+    z.strictObject({ kind: z.literal("creature"), id: Id, object: GameObject }),
+  ]),
+  affectedPlayer: Id,
+  amount: Natural.min(1),
+});
+export type DamageOccurrence = z.infer<typeof DamageOccurrence>;
+export const DamageHost = z.discriminatedUnion("kind", [
+  z.strictObject({
+    kind: z.literal("spell-instruction"),
+    source: GameObject,
+    sourceVersion: Digest,
+    controller: Id,
+    program: SpellProgram,
+    target: Id,
+    effectIndex: Natural.max(15),
+  }),
+  z.strictObject({
+    kind: z.literal("combat-step"),
+    step: z.enum(["first-strike-damage", "combat-damage"]),
+    allocations: z.array(z.strictObject({ source: Id, target: Id, amount: Natural })).max(2000),
+  }),
+]);
+export type DamageHost = z.infer<typeof DamageHost>;
+export const DamageEffectInstance = z.strictObject({
+  id: Id,
+  provider: GameObject,
+  sourceVersion: Digest,
+  programIndex: z.literal(0),
+  program: DamageReplacementProgram,
+});
+export type DamageEffectInstance = z.infer<typeof DamageEffectInstance>;
+export const DamageRewrite = z.strictObject({
+  version: Natural.min(1),
+  occurrenceId: Id,
+  actor: Id,
+  effect: DamageEffectInstance,
+  before: Natural.min(1),
+  after: Natural,
+  prevented: Natural,
+});
+export type DamageRewrite = z.infer<typeof DamageRewrite>;
+/** Original events outlive state.events; each rewritten descendant retains its own used instances. */
+export const PendingDamageFrame = z.strictObject({
+  kind: z.literal("pending-damage"),
+  eventId: Id,
+  version: Natural,
+  proposedAtRevision: Natural,
+  turn: Natural,
+  step: Step,
+  host: DamageHost,
+  origin: GameEvent,
+  occurrences: z
+    .array(
+      z.strictObject({
+        original: DamageOccurrence,
+        amount: Natural,
+        applied: z.array(Id),
+      }),
+    )
+    .min(1)
+    .max(2000),
+  rewrites: z.array(DamageRewrite),
+});
+export type PendingDamageFrame = z.infer<typeof PendingDamageFrame>;
 export const Frame = z.discriminatedUnion("kind", [
+  PendingDamageFrame,
   ResolvingTriggerPaymentFrame,
   ResolvingSpellFrame,
   z.strictObject({

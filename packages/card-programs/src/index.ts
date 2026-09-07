@@ -1,4 +1,23 @@
 import {
+  bindDamageReplacementPermanent,
+  DAMAGE_REPLACEMENT_PERMANENTS,
+  DAMAGE_REPLACEMENT_VERSION,
+} from "./damage-replacement";
+
+export {
+  bindDamageReplacementPermanent,
+  DAMAGE_REPLACEMENT_ARCHIVE,
+  DAMAGE_REPLACEMENT_PERMANENTS,
+  DAMAGE_REPLACEMENT_RESEARCH_HASH,
+  DAMAGE_REPLACEMENT_RULES,
+  DAMAGE_REPLACEMENT_RULES_HASH,
+  DAMAGE_REPLACEMENT_SOURCE_BUNDLE,
+  DAMAGE_REPLACEMENT_VERSION,
+  type DamageReplacementSource,
+  reviewedDamageReplacementDefinition,
+} from "./damage-replacement";
+
+import {
   bindStrictProctorPermanent,
   STRICT_PROCTOR_PERMANENTS,
   STRICT_PROCTOR_VERSION,
@@ -546,6 +565,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  damageReplacementPermanents?: boolean;
   entryObserverTriggers?: boolean;
   conditionalSelfEntryTriggers?: boolean;
   strictProctorTriggers?: boolean;
@@ -597,6 +617,13 @@ interface KnownPermanentBinder {
   reasonPrefix: string;
 }
 const knownPermanentBinders: readonly KnownPermanentBinder[] = [
+  {
+    sources: DAMAGE_REPLACEMENT_PERMANENTS,
+    option: "damageReplacementPermanents",
+    bind: bindDamageReplacementPermanent,
+    version: DAMAGE_REPLACEMENT_VERSION,
+    reasonPrefix: "damage-replacement",
+  },
   {
     sources: STRICT_PROCTOR_PERMANENTS,
     option: "strictProctorTriggers",

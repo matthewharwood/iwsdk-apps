@@ -25,6 +25,7 @@ import {
 } from "./common";
 
 import {
+  isDamageProgramPermanent,
   isEntryObserverPermanent,
   isReviewedTriggeredPermanent,
   isStaticBonusPermanent,
@@ -69,6 +70,12 @@ export function admitDeck(
       current.deckLimit === null || count <= current.deckLimit,
       `Deck copy limit exceeded: ${current.name}`,
     );
+    const damagePermanent = isDamageProgramPermanent(current);
+    if (current.damagePrograms && !damagePermanent)
+      throw new RulesError(
+        "UnsupportedMechanic",
+        `Damage permanent program is not implemented: ${current.name}.`,
+      );
     const staticPermanent = isStaticBonusPermanent(current);
     if (current.staticPrograms && !staticPermanent)
       throw new RulesError(
@@ -89,6 +96,7 @@ export function admitDeck(
       !current.types.includes("Creature") &&
       !programmedSpell &&
       !staticPermanent &&
+      !damagePermanent &&
       !isEntryObserverPermanent(current)
     )
       throw new RulesError(

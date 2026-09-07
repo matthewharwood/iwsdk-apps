@@ -93,9 +93,9 @@ async function legalDeck(source: ContentRelease, mode: "gw" | "gu") {
   return DeckRevision.parse({ ...body, hash: await semanticHash(body) });
 }
 
-test("the closed1193 primary registry preserves and authenticates all20 observer programs", async () => {
+test("the closed1198 primary registry preserves and authenticates all20 observer programs", async () => {
   const source = await fixture();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1193);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1198);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   const full = await createFullExecutionRegistry(source);
   expect(Object.keys(full.definitions)).toHaveLength(27);
@@ -146,7 +146,7 @@ for (const mode of ["gw", "gu"] as const)
     const effect = named(source, "Raise the Alarm").spellProgram?.effects[0];
     if (effect?.kind !== "create-token") throw new Error("Missing Soldier template");
     expect(Object.keys(prepared.tokenTemplates)).toEqual(mode === "gw" ? [effect.templateId] : []);
-    expect(artifact.compilerVersion).toBe("development-match-plan/12");
+    expect(artifact.compilerVersion).toBe("development-match-plan/13");
     for (const capability of [
       ...ENTRY_OBSERVER_CORE_CAPABILITIES,
       ...SELF_ENTRY_CORE_CAPABILITIES,
@@ -243,7 +243,7 @@ for (const recipe of ENTRY_OBSERVER_PERMANENTS)
 test("observer programs reject older and future execution ABIs while retaining source inspection", async () => {
   const source = await fixture();
   const deck = await legalDeck(source, "gu");
-  for (const processorAbi of ["commander-engine/0.15.0", "commander-engine/0.17.0"]) {
+  for (const processorAbi of ["commander-engine/0.16.0", "commander-engine/0.18.0"]) {
     const changed = await rehash({ ...source, processorAbi });
     expect((await verifySourceRelease(changed)).processorAbi).toBe(processorAbi);
     await expect(createFullExecutionRegistry(changed)).rejects.toThrow("incompatible");

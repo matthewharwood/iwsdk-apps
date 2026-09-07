@@ -2,12 +2,14 @@ import {
   CONDITIONAL_SELF_ENTRY_VERSION,
   COUNTER_SPELL_VERSION,
   CREATURE_RETURN_VERSION,
+  DAMAGE_REPLACEMENT_VERSION,
   ENTRY_OBSERVER_VERSION,
   FIXED_TOKEN_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
   reviewedConditionalSelfEntryDefinition,
   reviewedCounterSpellDefinition,
   reviewedCreatureReturnSpellDefinition,
+  reviewedDamageReplacementDefinition,
   reviewedEntryObserverDefinition,
   reviewedFixedTokenDefinition,
   reviewedKeywordReminderDefinition,
@@ -32,8 +34,8 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/12";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.16.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/13";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.17.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -71,6 +73,24 @@ export const FIXED_TOKEN_CORE_CAPABILITIES = [
   "token:zone-departure-and-state-based-cease",
   "token:no-reentry-after-departure",
   "token:deterministic-durable-identities",
+] as const;
+export const DAMAGE_REPLACEMENT_CORE_CAPABILITIES = [
+  "damage:versioned-proposal-and-host",
+  "damage:live-provider-instance-refinement",
+  "damage:typed-rule-instance-event-selection",
+  "damage:affected-controller-apnap-choice",
+  "damage:per-occurrence-once-only-history",
+  "damage:recompute-after-each-rewrite",
+  "damage:ordinary-double-and-spell-subtract",
+  "damage:controller-prevention-per-source",
+  "damage:unpreventable-prevention-applies-once",
+  "damage:zero-occurrence-elision",
+  "damage:atomic-simultaneous-results",
+  "damage:resumable-spell-and-combat",
+  "damage:no-priority-or-mana-during-choice",
+  "damage:durable-origin-and-rewrite-validation",
+  "damage:checked-safe-integer-arithmetic",
+  "core:reviewed-damage-program-permanent",
 ] as const;
 export const STRICT_PROCTOR_CORE_CAPABILITIES = [
   "trigger:typed-immediate-cause",
@@ -244,6 +264,10 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
+  if (definition.implementationRevision === DAMAGE_REPLACEMENT_VERSION)
+    return (
+      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedDamageReplacementDefinition(definition)
+    );
   if (definition.implementationRevision === STRICT_PROCTOR_VERSION)
     return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedStrictProctorDefinition(definition);
   if (definition.implementationRevision === CONDITIONAL_SELF_ENTRY_VERSION)
@@ -329,6 +353,12 @@ export async function buildDevelopmentMatchPlan(
       ...DEVELOPMENT_CORE,
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === DAMAGE_REPLACEMENT_VERSION,
+      )
+        ? DAMAGE_REPLACEMENT_CORE_CAPABILITIES
+        : []),
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === STRICT_PROCTOR_VERSION,
       )
         ? STRICT_PROCTOR_CORE_CAPABILITIES
@@ -402,7 +432,7 @@ export async function buildDevelopmentMatchPlan(
       assumptions: [
         "fixed pinned release",
         "recognized development recipe dependency declarations",
-        "exact fixed-token template edges; static, entry-observer and current-artifact predicates select game objects and Strict Proctor references actual ability occurrences without external card dependencies; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
+        "exact fixed-token template edges; static, entry-observer and current-artifact predicates select game objects and Strict Proctor references actual ability occurrences; damage programs refine current providers and event occurrences without external card dependencies; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
       ],
       proof: "not reachable from deck roots under complete declared development dependencies",
       tests: ["packages/compiler/src/plan.test.ts"],

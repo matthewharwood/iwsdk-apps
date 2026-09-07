@@ -1,0 +1,30 @@
+{
+  "schema": "commander-completed-fixed-regression/1",
+  "engine": "commander-engine/0.17.0",
+  "sourceReleaseHash": "77857dc934ac410326f5a1136bca66757c33ae7ae74326c9d3f0f354432810de",
+  "buildHash": "dea8dd5e7d4e083017132bd05056b9d6952201617eb4290983ea20cb113c45d3",
+  "assigned": 64,
+  "completed": 64,
+  "replayed": 64,
+  "twoSeat": 16,
+  "fourSeat": 48,
+  "pending": 0,
+  "acceptedCommands": 89784,
+  "report": {
+    "path": ".commander/regressions/regression-0.17-fixed64/report.json",
+    "sha256": "b75c58c7bea8766eac06fd5679b9e15636738a51d140891d6ee6f13039889c5c"
+  },
+  "assignments": {
+    "path": ".commander/regressions/regression-0.17-fixed64/assignments.json",
+    "sha256": "664855c3266dcb3ebcfc7a1ebd28a1db9c4dcb7930c5a5b262adcd996c27de57"
+  },
+  "inventory": {
+    "path": ".commander/regressions/regression-0.17-fixed64/archive-inventory.json",
+    "sha256": "c7f2bb7e9885fd9d98f4a493391ba892c706d4d05bf212d1402c7f9f5282abd7"
+  },
+  "telemetryFiles": 64,
+  "telemetryScope": "Measurements collected during this invocation only; process-wide CPU/memory, separate create/game/replay/close phases.",
+  "originalRunDirectory": "/private/tmp/iwsdk-commander-0.17/.draft-runs/regressions/regression-0.17-fixed64",
+  "retainedDirectory": ".commander/regressions/regression-0.17-fixed64",
+  "scope": "All64 fixed inputs actually executed and replayed under engine0.17; no historical outcomes reused. Fixed older deck compositions do not exercise the new damage programs. The captured build is identical to the selected CLI games and retains its actual pin. This report does not certify full-snapshot support."
+}

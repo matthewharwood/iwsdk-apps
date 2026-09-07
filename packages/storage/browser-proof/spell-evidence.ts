@@ -6,6 +6,7 @@ import {
   type PlayerObservation,
 } from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
+import { atDamageReplacementStage } from "./damage-evidence";
 import { atObserverStage, OBSERVER_STAGES } from "./entry-observer-evidence";
 import { atStaticStage } from "./static-evidence";
 import { atTriggerPaymentStage, triggerPaymentEvidence } from "./trigger-payment-evidence";
@@ -270,6 +271,7 @@ export function counterEvidence(archive: MatchArchive, release: ContentRelease) 
   return { occurrences, pending };
 }
 export type ProofStage =
+  | "pending-damage"
   | "observer-order"
   | "observer-stack"
   | "observer-resolved"
@@ -353,6 +355,7 @@ export function atProofStage(
           ),
       )
     );
+  if (kind === "pending-damage") return atDamageReplacementStage(view);
   if (kind === "trigger-payment") return atTriggerPaymentStage(view);
   if (kind === "pending-conditional")
     return (

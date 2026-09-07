@@ -146,6 +146,7 @@ export function beginCast(
   if (
     !current.types.includes("Creature") &&
     !isStaticBonusPermanent(current) &&
+    !isDamageProgramPermanent(current) &&
     !isEntryObserverPermanent(current) &&
     (!(current.types.includes("Instant") || current.types.includes("Sorcery")) || !program)
   )
@@ -322,6 +323,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   if (
     !current.types.includes("Creature") &&
     !isStaticBonusPermanent(current) &&
+    !isDamageProgramPermanent(current) &&
     !isEntryObserverPermanent(current)
   )
     throw new RulesError(
@@ -343,5 +345,9 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   return true;
 }
 
-import { isEntryObserverPermanent, isStaticBonusPermanent } from "./permanent-programs";
+import {
+  isDamageProgramPermanent,
+  isEntryObserverPermanent,
+  isStaticBonusPermanent,
+} from "./permanent-programs";
 import { enterBattlefield, resolveTriggeredAbility } from "./triggers";

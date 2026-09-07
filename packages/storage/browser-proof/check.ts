@@ -19,6 +19,7 @@ import { DRIVER_VERSION, type GameRun, runGame } from "../../simulation/src/inde
 import { Coordinator, exportMatch, importMatch, type Repository, replayMatch } from "../src/index";
 import { openNativeRepository } from "../src/native";
 import { commanderReturnEvidence } from "./commander-return-evidence";
+import { completedDamageReplacement, damageReplacementEvidence } from "./damage-evidence";
 import { entryObserverEvidence, OBSERVER_STAGES, observerCohort } from "./entry-observer-evidence";
 import { COMMANDER_RETURN_PROOF_DRIVER_VERSION, proofDriverForVersion } from "./proof-driver";
 import {
@@ -49,6 +50,7 @@ type Snapshot = {
   tokens: ReturnType<typeof tokenEvidence>;
   statics: ReturnType<typeof staticEvidence>;
   observers: ReturnType<typeof entryObserverEvidence>;
+  damageReplacements: ReturnType<typeof damageReplacementEvidence>;
   commanderReturns: ReturnType<typeof commanderReturnEvidence>;
   execution: ReturnType<typeof executionEvidence>;
   setup: ReturnType<typeof setupEvidence>;
@@ -74,6 +76,7 @@ const options = parseArgs({
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
     "require-triggers": { type: "boolean", default: false },
+    "require-damage-replacement": { type: "boolean", default: false },
     "require-trigger-payment": { type: "boolean", default: false },
     "require-conditional-triggers": { type: "boolean", default: false },
     "require-ordered-triggers": { type: "boolean", default: false },
@@ -95,6 +98,7 @@ function boundedInteger(value: string, minimum: number, maximum: number, name: s
 const deckOffset = boundedInteger(options["deck-offset"], 0, 100_000, "deck-offset");
 const deckStride = boundedInteger(options["deck-stride"], 1, 100_000, "deck-stride");
 const seedAttempts = boundedInteger(options["seed-attempts"], 1, 32, "seed-attempts");
+const requireDamageReplacement = options["require-damage-replacement"];
 const requireTriggerPayment = options["require-trigger-payment"];
 const requireConditionalTriggers = options["require-conditional-triggers"];
 const requireOrderedTriggers = options["require-ordered-triggers"];
@@ -133,6 +137,7 @@ const stageKinds: ProofStage[] = requireSpells
   : ["starting-player", "payment"];
 if (requireConditionalTriggers) stageKinds.push("pending-conditional");
 if (requireTriggerPayment) stageKinds.push("trigger-payment");
+if (requireDamageReplacement) stageKinds.push("pending-damage");
 if (requireOrderedTriggers) stageKinds.push("pending-ordered-trigger");
 else if (requireTriggers) stageKinds.push("pending-trigger");
 if (requireModifiers) stageKinds.push("active-modifier");
@@ -324,6 +329,7 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     tokens: tokenEvidence(archive, release, coordinator),
     statics: staticEvidence(archive, release, coordinator),
     observers: entryObserverEvidence(archive, release),
+    damageReplacements: damageReplacementEvidence(archive),
     commanderReturns: commanderReturnEvidence(archive, release, coordinator),
     execution: executionEvidence(release, coordinator.executionInfo()),
     setup: setupEvidence(coordinator, archive),
@@ -332,6 +338,18 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
 function requireCompleted(run: GameRun) {
   if (run.status !== "completed")
     throw new Error(`Match ${run.matchId} did not complete: ${JSON.stringify(run)}`);
+}
+function assertDamageReplacementStage(snapshot: Snapshot) {
+  const pending = snapshot.damageReplacements;
+  expect(pending.frames).toHaveLength(1);
+  const frame = pending.frames[0];
+  if (!frame) throw new Error("Missing pending damage frame");
+  expect(snapshot.decision?.kind).toBe("damage-replacement");
+  expect(pending.priorityPlayer).toBeNull();
+  expect(frame.version).toBeGreaterThan(0);
+  expect(frame.rewrites).toHaveLength(frame.version);
+  expect(pending.decision?.damageReplacement?.eventId).toBe(frame.eventId);
+  expect(pending.decision?.damageReplacement?.version).toBe(frame.version);
 }
 function assertTriggerPaymentStage(snapshot: Snapshot) {
   const pending = snapshot.triggers.payments;
@@ -354,6 +372,7 @@ function assertConditionalStage(snapshot: Snapshot) {
   expect(pendingConditionalIds(snapshot).length).toBeGreaterThan(0);
 }
 const additionalStageAssertions: Partial<Record<ProofStage, (snapshot: Snapshot) => void>> = {
+  "pending-damage": assertDamageReplacementStage,
   "trigger-payment": assertTriggerPaymentStage,
   "pending-conditional": assertConditionalStage,
 };
@@ -389,6 +408,12 @@ function conditionalWorkflowCompleted(stages: NativeStage[], final: Snapshot): b
 function qualifies(stages: NativeStage[], final: Snapshot): boolean {
   return (
     (!requireConditionalTriggers || conditionalWorkflowCompleted(stages, final)) &&
+    (!requireDamageReplacement ||
+      stages.some(
+        (stage) =>
+          stage.kind === "pending-damage" &&
+          completedDamageReplacement(stage.snapshot.damageReplacements, final.damageReplacements),
+      )) &&
     (!requireTriggerPayment ||
       stages.some(
         (stage) =>
@@ -989,7 +1014,8 @@ try {
           ["pending-static", "active-static", "static-departure"].includes(stage.kind)) ||
         (requireObservers && OBSERVER_STAGES.some((s) => s === stage.kind)) ||
         (requireConditionalTriggers && stage.kind === "pending-conditional") ||
-        (requireTriggerPayment && stage.kind === "trigger-payment")
+        (requireTriggerPayment && stage.kind === "trigger-payment") ||
+        (requireDamageReplacement && stage.kind === "pending-damage")
       ) {
         await call(page, { operation: "close" });
         stageImport = await call<Snapshot>(page, {
@@ -1036,6 +1062,7 @@ try {
     expect(completed.triggers).toEqual(baseline.nativeFinal.triggers);
     expect(completed.continuous).toEqual(baseline.nativeFinal.continuous);
     expect(completed.counters).toEqual(baseline.nativeFinal.counters);
+    expect(completed.damageReplacements).toEqual(baseline.nativeFinal.damageReplacements);
     expect(completed.commanderReturns).toEqual(baseline.nativeFinal.commanderReturns);
     if (requireCommanderReplacement)
       expect(completed.commanderReturns.occurrences.length).toBeGreaterThan(0);
@@ -1125,6 +1152,7 @@ try {
     tokenLifecycleRequired: requireTokens,
     staticLifecycleRequired: requireStatics,
     triggerPaymentRequired: requireTriggerPayment,
+    damageReplacementRequired: requireDamageReplacement,
     triggerPaymentOutcomes: completedBrowserStates.flatMap(
       (state) => state.triggers.payments.completed,
     ),

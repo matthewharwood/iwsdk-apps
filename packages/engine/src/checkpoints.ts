@@ -182,7 +182,10 @@ export function checkpoint(
 ): { waiting: boolean; changed: boolean } {
   requireRule(
     !state.frames.some(
-      (frame) => frame.kind === "resolving-spell" || frame.kind === "resolving-trigger-payment",
+      (frame) =>
+        frame.kind === "resolving-spell" ||
+        frame.kind === "resolving-trigger-payment" ||
+        frame.kind === "pending-damage",
     ),
     "No checkpoint during a suspended resolution",
   );

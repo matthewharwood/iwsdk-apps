@@ -1,7 +1,9 @@
 export { compileConditionalSelfEntryDraft } from "./conditional-self-entry-expansion";
 export { makeCreatureReturnDecks } from "./creature-return-decks";
 export { compileCreatureReturnDraft } from "./creature-return-expansion";
+export { compileDamageReplacementDraft } from "./damage-replacement-expansion";
 export { makeConditionalSelfEntryDecks } from "./development-conditional-self-entry-decks";
+export { makeDamageReplacementDecks } from "./development-damage-replacement-decks";
 export { makeEntryObserverDecks } from "./development-entry-observer-decks";
 export { makeStrictProctorDecks } from "./development-strict-proctor-decks";
 export { compileEntryObserverDraft } from "./entry-observer-expansion";
@@ -30,6 +32,8 @@ import {
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
   CREATURE_RETURN_VERSION,
+  DAMAGE_REPLACEMENT_PERMANENTS,
+  DAMAGE_REPLACEMENT_VERSION,
   ENTRY_OBSERVER_PERMANENTS,
   ENTRY_OBSERVER_VERSION,
   FIXED_TOKEN_SPELLS,
@@ -94,6 +98,11 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  damageReplacementPermanents: {
+    enabled: boolean;
+    version: string;
+    registry: typeof DAMAGE_REPLACEMENT_PERMANENTS;
+  };
   strictProctorTriggers: {
     enabled: boolean;
     version: string;
@@ -137,30 +146,33 @@ export interface CompilationReport {
 function describeCompilerRecipes(
   options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
 ): string {
-  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}${options.conditionalSelfEntryTriggers ? "+conditional-self-entry-artifact/1" : ""}${options.strictProctorTriggers ? "+strict-proctor-trigger/1" : ""}`;
+  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}${options.conditionalSelfEntryTriggers ? "+conditional-self-entry-artifact/1" : ""}${options.strictProctorTriggers ? "+strict-proctor-trigger/1" : ""}${options.damageReplacementPermanents ? "+damage-replacement-permanent/1" : ""}`;
 }
 
 async function compilerRevision(
   options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
 ): Promise<string> {
   const recipeCompilerVersion = describeCompilerRecipes(options);
-  return options.strictProctorTriggers
-    ? `${COMPILER_VERSION}+strict-proctor-trigger/1:${await semanticHash(recipeCompilerVersion)}`
-    : options.conditionalSelfEntryTriggers
-      ? `${COMPILER_VERSION}+conditional-self-entry-artifact/1:${await semanticHash(recipeCompilerVersion)}`
-      : options.entryObserverTriggers
-        ? `${COMPILER_VERSION}+entry-observer-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-        : options.staticBonusPermanents
-          ? `${COMPILER_VERSION}+static-bonus-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-          : options.fixedTokenSpells
-            ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
-            : recipeCompilerVersion;
+  return options.damageReplacementPermanents
+    ? `${COMPILER_VERSION}+damage-replacement-permanent/1:${await semanticHash(recipeCompilerVersion)}`
+    : options.strictProctorTriggers
+      ? `${COMPILER_VERSION}+strict-proctor-trigger/1:${await semanticHash(recipeCompilerVersion)}`
+      : options.conditionalSelfEntryTriggers
+        ? `${COMPILER_VERSION}+conditional-self-entry-artifact/1:${await semanticHash(recipeCompilerVersion)}`
+        : options.entryObserverTriggers
+          ? `${COMPILER_VERSION}+entry-observer-permanent/1:${await semanticHash(recipeCompilerVersion)}`
+          : options.staticBonusPermanents
+            ? `${COMPILER_VERSION}+static-bonus-permanent/1:${await semanticHash(recipeCompilerVersion)}`
+            : options.fixedTokenSpells
+              ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
+              : recipeCompilerVersion;
 }
 
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    damageReplacementPermanents?: boolean;
     strictProctorTriggers?: boolean;
     conditionalSelfEntryTriggers?: boolean;
     entryObserverTriggers?: boolean;
@@ -203,6 +215,11 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    damageReplacementPermanents: {
+      enabled: options.damageReplacementPermanents === true,
+      version: DAMAGE_REPLACEMENT_VERSION,
+      registry: DAMAGE_REPLACEMENT_PERMANENTS,
     },
     strictProctorTriggers: {
       enabled: options.strictProctorTriggers === true,
@@ -302,7 +319,8 @@ export async function compileDevelopmentRelease(
       options.staticBonusPermanents ||
       options.entryObserverTriggers ||
       options.conditionalSelfEntryTriggers ||
-      options.strictProctorTriggers
+      options.strictProctorTriggers ||
+      options.damageReplacementPermanents
         ? `development:${inventory.bundleHash.slice(0, 16)}:${await semanticHash({ compilerVersion, recipeVersion: RECIPE_VERSION })}`
         : `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}${options.creatureReturnSpells ? ":creature-return-spell/1" : ""}`,
     sourceBundle: inventory.bundleHash,

@@ -31,7 +31,10 @@ export function givePriority(
 ): void {
   requireRule(
     !state.frames.some(
-      (frame) => frame.kind === "resolving-spell" || frame.kind === "resolving-trigger-payment",
+      (frame) =>
+        frame.kind === "resolving-spell" ||
+        frame.kind === "resolving-trigger-payment" ||
+        frame.kind === "pending-damage",
     ),
     "No priority during a suspended resolution",
   );
@@ -89,8 +92,7 @@ function drawStep(state: RulesState, release: ExecutionRegistry): void {
 function beginDamage(state: RulesState, release: ExecutionRegistry, first: boolean): void {
   step(state, first ? "first-strike-damage" : "combat-damage");
   if (!startCombatDamage(state, release, first)) {
-    applyCombatDamage(state, release);
-    givePriority(state, release, requireActivePlayer(state));
+    if (applyCombatDamage(state, release)) givePriority(state, release, requireActivePlayer(state));
   }
 }
 export function finishCleanup(state: RulesState, release: ExecutionRegistry): void {

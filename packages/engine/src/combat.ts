@@ -21,6 +21,7 @@ import {
   requireRule,
   toughness,
 } from "./common";
+import { beginDamageBatch } from "./damage";
 
 type AttackResponse = Extract<Response, { kind: "attack" }>;
 type BlockResponse = Extract<Response, { kind: "block" }>;
@@ -407,68 +408,18 @@ export function answerDamage(
 }
 
 /** Damage is simultaneous. The caller performs SBAs, triggers and priority afterward. */
-export function applyCombatDamage(state: RulesState, release: ExecutionRegistry): void {
+export function applyCombatDamage(state: RulesState, release: ExecutionRegistry): boolean {
   requireRule(
     state.combat.damageActors.length === 0,
     "Every combat damage owner must finish assigning before damage is dealt.",
   );
-  const assignments = state.combat.allocations
-    .filter((entry) => entry.amount > 0)
-    .map((entry) => {
-      const source = object(state, entry.source);
-      const seat = state.players.find(
-        (candidate) => candidate.id === entry.target && !candidate.lost,
-      );
-      requireRule(
-        seat || liveCreature(state, release, entry.target),
-        "A combat damage target left before damage was dealt.",
-      );
-      return {
-        ...entry,
-        controller: source.controller,
-        lineage: source.lineage,
-        commander: source.commander,
-        playerTarget: seat?.id ?? null,
-        deathtouch: has(state, release, source.id, "deathtouch"),
-        lifelink: has(state, release, source.id, "lifelink"),
-      };
-    });
-  const lifeChanges = new Map<string, number>();
-  for (const assignment of assignments) {
-    if (assignment.playerTarget)
-      lifeChanges.set(
-        assignment.playerTarget,
-        (lifeChanges.get(assignment.playerTarget) ?? 0) - assignment.amount,
-      );
-    if (assignment.lifelink)
-      lifeChanges.set(
-        assignment.controller,
-        (lifeChanges.get(assignment.controller) ?? 0) + assignment.amount,
-      );
-  }
-  for (const [id, amount] of lifeChanges) player(state, id).life += amount;
-  for (const assignment of assignments) {
-    if (assignment.playerTarget) {
-      if (assignment.commander) {
-        const seat = player(state, assignment.playerTarget);
-        seat.commanderDamage[assignment.lineage] =
-          (seat.commanderDamage[assignment.lineage] ?? 0) + assignment.amount;
-        hit(state, "rule:903.10a");
-      }
-    } else {
-      const target = object(state, assignment.target);
-      target.damage += assignment.amount;
-      target.deathtouchDamage ||= assignment.deathtouch;
-    }
-    if (assignment.lifelink) hit(state, "rule:702.15");
-    if (assignment.deathtouch) hit(state, "rule:702.2");
-  }
-  state.combat.allocations = [];
-  if (assignments.length > 0) {
-    emit(state, "CombatDamageDealt", {
-      firstStrike: state.step === "first-strike-damage",
-      assignments,
-    });
-    hit(state, "rule:510.2");
-  }
+  requireRule(
+    state.step === "first-strike-damage" || state.step === "combat-damage",
+    "Combat damage requires a damage step",
+  );
+  return beginDamageBatch(state, release, {
+    kind: "combat-step",
+    step: state.step,
+    allocations: structuredClone(state.combat.allocations),
+  });
 }

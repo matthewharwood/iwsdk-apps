@@ -8,7 +8,7 @@ import {
   type Response,
 } from "@iwsdk-apps/contracts";
 
-export const DRIVER_VERSION = "observed-combat/10";
+export const DRIVER_VERSION = "observed-combat/11";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -123,6 +123,35 @@ function damage(decision: Decision): Response {
   }
   return { kind: "damage", allocations };
 }
+function damageReplacement(
+  observation: PlayerObservation,
+  decision: Decision,
+  seed: number,
+): Response {
+  const choice = decision.damageReplacement;
+  if (!choice) throw new Error("Damage replacement decision lacks its current owned event");
+  const candidates = choice.occurrences.flatMap((occurrence) =>
+    occurrence.effects.map((effect) => ({ occurrence: occurrence.id, effect: effect.id })),
+  );
+  // Mandatory effects remain player choices. Seeded ordering is policy, not rules precedence.
+  const identity = (candidate: (typeof candidates)[number]) =>
+    `${choice.eventId}:${choice.version}:${candidate.occurrence}:${candidate.effect}`;
+  candidates.sort(
+    (a, b) =>
+      rank(seed, observation.revision, identity(a)) -
+        rank(seed, observation.revision, identity(b)) ||
+      (identity(a) < identity(b) ? -1 : identity(a) > identity(b) ? 1 : 0),
+  );
+  const selected = candidates[0];
+  if (!selected) throw new Error("Damage replacement decision has no applicable effect");
+  return {
+    kind: "damage-replacement",
+    eventId: choice.eventId,
+    eventVersion: choice.version,
+    occurrenceId: selected.occurrence,
+    effectId: selected.effect,
+  };
+}
 // Ordinary counters are held until an opposing spell in their printed domain is visible.
 // This is driver policy; the rules continue to allow targeting one's own spells.
 function usefulCounterspell(observation: PlayerObservation, candidate: VisibleObject): boolean {
@@ -170,6 +199,8 @@ export const heuristicDriver: Driver = (observation, seed) => {
   if (!decision || decision.actor !== observation.player)
     throw new Error("Driver has no owned decision");
   switch (decision.kind) {
+    case "damage-replacement":
+      return damageReplacement(observation, decision, seed);
     case "trigger-order":
       return { kind: "trigger-order", triggers: [...decision.triggers].sort() };
     case "starting-player":
