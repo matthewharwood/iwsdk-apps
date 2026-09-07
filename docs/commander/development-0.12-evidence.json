@@ -315,11 +315,17 @@
   },
   "fixedRegression": {
     "id": "regression-0.12-fixed64",
-    "status": "running-at-checkpoint",
+    "status": "completed-and-replayed",
     "assigned": 64,
-    "resultFilesAtObservation": 29,
+    "completed": 64,
+    "pending": 0,
+    "acceptedCommands": 89784,
     "frozenBuildHash": "606b91161cdf2eb6e7c3a1bd111e0cd4f02cd426bfce798e7e1f89aff7f7919c",
-    "scope": "Current executable reruns every historical input; no older outcome reused. Older deck compositions do not exercise new token producers."
+    "evidence": {
+      "path": "docs/commander/fixed-regression-0.12-evidence.json",
+      "sha256": "a73e7845be6cdbdbb4e6ddd1ad7add80ef948d366742581a362acddc040a7dd2"
+    },
+    "scope": "Each fixed corpus input actually executed and replayed under 0.12; no historical outcomes reused. Fixed deck compositions do not exercise the 27 new token producers. No full-snapshot support claim."
   },
   "remaining": [
     "30,700 paper candidates and broader rule families remain unsupported.",
