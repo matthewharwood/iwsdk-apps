@@ -29,3 +29,5 @@ The two CLI assignments and two selected browser assignments total 5,630 accepte
 The complete repository check passed: 1,038 unit tests with 113,208 assertions, all 12 browser tests, emulated Quest entry/exit, and a fresh generated workspace plus generated application build. Exact hashes and archived evidence are recorded in [development-0.14-evidence.json](development-0.14-evidence.json).
 
 The original G2 clauses remain open. Ordinary APNAP coverage does not satisfy SRC-TRG-01's explicit trigger-on-trigger second wave, and an immutable entry predicate is not SRC-TRG-02's intervening condition. Full-source implementation, complete difficult-scenario qualification, production Commander session consumption and physical headset validation are separate unfinished work.
+
+The fixed 64-game historical-input regression completed and replayed all 64 assignments (89,784 accepted commands); those older deck compositions do not exercise the new entry observers.
