@@ -8,7 +8,7 @@ import {
   type Response,
 } from "@iwsdk-apps/contracts";
 
-export const DRIVER_VERSION = "observed-combat/8";
+export const DRIVER_VERSION = "observed-combat/9";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -126,13 +126,13 @@ function damage(decision: Decision): Response {
 // Ordinary counters are held until an opposing spell in their printed domain is visible.
 // This is driver policy; the rules continue to allow targeting one's own spells.
 function usefulCounterspell(observation: PlayerObservation, candidate: VisibleObject): boolean {
-  const program = candidate.card.spellProgram;
+  const program = candidate.card?.spellProgram;
   if (!program?.effects.some((effect) => effect.kind === "counter")) return true;
   return observation.stack.some((entry) => {
     if (entry.kind !== "spell") return false;
     const target = observation.objects.find((object) => object.id === entry.objectId);
     if (!target || target.controller === observation.player) return false;
-    const creature = target.card.types.includes("Creature");
+    const creature = target.card?.types.includes("Creature") ?? false;
     return (
       program.target === "spell" ||
       (program.target === "creature-spell" && creature) ||
@@ -144,11 +144,12 @@ function priority(observation: PlayerObservation, decision: Decision, seed: numb
   const actor = observation.players.find((player) => player.id === observation.player);
   if (!actor) throw new Error("Own seat absent from observation");
   const available = observation.objects.filter((object) => decision.cards.includes(object.id));
-  const land = available.find((object) => object.card.types.includes("Land"));
+  const land = available.find((object) => object.card?.types.includes("Land"));
   if (land) return { kind: "land", card: land.id };
   const spells = available.filter((object) => {
     const cost = decision.cardCosts[object.id];
     return (
+      object.card &&
       cost &&
       usefulCounterspell(observation, object) &&
       findPayment(cost, actor.mana, decision.manaSources) !== null
@@ -156,7 +157,7 @@ function priority(observation: PlayerObservation, decision: Decision, seed: numb
   });
   spells.sort(
     (a, b) =>
-      b.card.manaValue - a.card.manaValue ||
+      (b.card?.manaValue ?? 0) - (a.card?.manaValue ?? 0) ||
       rank(seed, observation.revision, a.id) - rank(seed, observation.revision, b.id),
   );
   const spell = spells[0];
@@ -193,7 +194,7 @@ export const heuristicDriver: Driver = (observation, seed) => {
         top?.kind === "spell"
           ? observation.objects.find((object) => object.id === top.objectId)
           : undefined;
-      if (!spell?.card.spellProgram || spell.controller !== observation.player)
+      if (!spell?.card?.spellProgram || spell.controller !== observation.player)
         throw new Error("Target decision lacks its public announced spell");
       const harmful = spell.card.spellProgram.effects.some(
         (effect) =>

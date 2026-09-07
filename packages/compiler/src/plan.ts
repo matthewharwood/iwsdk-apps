@@ -1,13 +1,16 @@
 import {
   COUNTER_SPELL_VERSION,
   CREATURE_RETURN_VERSION,
+  FIXED_TOKEN_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
   reviewedCounterSpellDefinition,
   reviewedCreatureReturnSpellDefinition,
+  reviewedFixedTokenDefinition,
   reviewedKeywordReminderDefinition,
   reviewedLegacyDefinition,
   reviewedSelfEntryDefinition,
   reviewedTemporaryCreatureDefinition,
+  reviewedTokenTemplate,
   SELF_ENTRY_RECIPE_VERSION,
   SELF_ENTRY_SEQUENCE_VERSION,
   TEMPORARY_CREATURE_VERSION,
@@ -21,8 +24,8 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/7";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.11.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/8";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.12.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -52,6 +55,14 @@ export const CREATURE_RETURN_CORE_CAPABILITIES = [
   "resolution:replacement-owner-choice",
   "resolution:ordered-return-draw",
   "resolution:no-priority-between-effects",
+] as const;
+export const FIXED_TOKEN_CORE_CAPABILITIES = [
+  "token:fixed-source-template",
+  "token:batch-creation-and-entry",
+  "token:noncard-inventory",
+  "token:zone-departure-and-state-based-cease",
+  "token:no-reentry-after-departure",
+  "token:deterministic-durable-identities",
 ] as const;
 export type Dependency =
   | { kind: "exact"; identity: string }
@@ -184,6 +195,8 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
+  if (definition.implementationRevision === FIXED_TOKEN_VERSION)
+    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedFixedTokenDefinition(definition);
   if (definition.implementationRevision === CREATURE_RETURN_VERSION)
     return (
       processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedCreatureReturnSpellDefinition(definition)
@@ -206,7 +219,7 @@ async function recognizedDependencyDeclaration(
     return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedSelfEntryDefinition(definition);
   return reviewedLegacyDefinition(definition);
 }
-/** Reviewed families create no tokens or external definitions. Bounded intrinsic keyword grants use core processors. */
+/** Exact producer-to-template edges preserve auxiliary token dependencies without adding deck cards. */
 export async function buildDevelopmentMatchPlan(
   releaseInput: ContentRelease,
   deckInputs: readonly DeckRevision[],
@@ -227,18 +240,39 @@ export async function buildDevelopmentMatchPlan(
       deck.commander,
       ...deck.entries.map((entry) => entry.definition),
     ]),
-    registry: await Promise.all(
-      Object.entries(release.definitions).map(async ([identity, definition]) => {
-        const known = await recognizedDependencyDeclaration(
-          definition,
-          release.processorAbi,
-          identity,
-        );
+    registry: [
+      ...(await Promise.all(
+        Object.entries(release.definitions).map(async ([identity, definition]) => {
+          const known = await recognizedDependencyDeclaration(
+            definition,
+            release.processorAbi,
+            identity,
+          );
+          const dependencies: Dependency[] =
+            definition.spellProgram?.effects.flatMap((effect) =>
+              effect.kind === "create-token"
+                ? [{ kind: "exact" as const, identity: effect.templateId }]
+                : [],
+            ) ?? [];
+          return { identity, implemented: known, dependencies: known ? dependencies : null };
+        }),
+      )),
+      ...Object.entries(release.tokenTemplates ?? {}).map(([identity, template]) => {
+        const known =
+          identity === template.id &&
+          release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+          reviewedTokenTemplate(template);
         return { identity, implemented: known, dependencies: known ? [] : null };
       }),
-    ),
+    ],
     core: [
       ...DEVELOPMENT_CORE,
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === FIXED_TOKEN_VERSION,
+      )
+        ? FIXED_TOKEN_CORE_CAPABILITIES
+        : []),
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === CREATURE_RETURN_VERSION,
@@ -275,7 +309,7 @@ export async function buildDevelopmentMatchPlan(
       assumptions: [
         "fixed pinned release",
         "recognized development recipe dependency declarations",
-        "no generated, copied or external definitions; granted intrinsic keywords are bounded core capabilities",
+        "exact fixed-token template edges; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
       ],
       proof: "not reachable from deck roots under complete declared development dependencies",
       tests: ["packages/compiler/src/plan.test.ts"],

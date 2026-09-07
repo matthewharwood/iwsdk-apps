@@ -147,6 +147,7 @@ function fixture(count: 2 | 4 = 2, active = "A") {
   const registry: ExecutionRegistry = {
     sourceReleaseHash: digest,
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions: { commander, draw, life, zero, visionary, cleric, land },
   };
   const seats = ["A", "B", "C", "D"].slice(0, count);

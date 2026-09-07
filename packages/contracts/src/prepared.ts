@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { CardDefinition } from "./index";
+import type { CardDefinition, TokenTemplate } from "./index";
 
 const Id = z.string().min(1).max(240);
 const Digest = z.string().regex(/^[a-f0-9]{64}$/);
@@ -19,7 +19,7 @@ export const PreparedClosure = z.strictObject({
   iterations: z.number().int().nonnegative().max(50_000),
 });
 export const PreparedMatchArtifact = z.strictObject({
-  schema: z.literal("prepared-match/1"),
+  schema: z.literal("prepared-match/2"),
   id: Id,
   hash: Digest,
   sourceReleaseHash: Digest,
@@ -39,6 +39,14 @@ export const PreparedMatchArtifact = z.strictObject({
     ),
   closure: PreparedClosure,
   retainedDefinitions: z.array(PreparedDefinitionReference).max(50_000),
+  retainedTokenTemplates: z
+    .array(
+      z.strictObject({
+        identity: z.string().regex(/^token-template:[a-f0-9]{64}$/),
+        templateHash: Digest,
+      }),
+    )
+    .max(50_000),
   requiredCoreCapabilities: Ids,
   analysisHash: Digest,
   assurance: z.literal("development-subset"),
@@ -50,4 +58,5 @@ export interface ExecutionRegistry {
   sourceReleaseHash: string;
   preparedArtifactHash: string | null;
   definitions: Record<string, CardDefinition>;
+  tokenTemplates: Record<string, TokenTemplate>;
 }

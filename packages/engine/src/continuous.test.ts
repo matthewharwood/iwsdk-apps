@@ -114,6 +114,7 @@ function fixture(
   const release: ExecutionRegistry = {
     sourceReleaseHash: hash,
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions,
   };
   const entries = Object.keys(definitions).map((id) => ({
@@ -212,7 +213,7 @@ test("resolution creates an independent captured effect and publishes derived ch
   expect(power(f.state, f.release, target)).toBe(5);
   expect(toughness(f.state, f.release, target)).toBe(5);
   const shown = observe(f.state, f.release, "A").objects.find((object) => object.id === target);
-  expect(shown?.card.power).toBe(2);
+  expect(shown?.card?.power).toBe(2);
   expect(shown?.characteristics.power).toBe(5);
   expect(f.release.definitions.creature?.power).toBe(2);
   const restored = RulesState.parse(JSON.parse(JSON.stringify(f.state)));

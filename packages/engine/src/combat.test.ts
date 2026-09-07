@@ -46,6 +46,7 @@ function fixture(seats: 2 | 4 = 2) {
   const release: ExecutionRegistry = {
     sourceReleaseHash: source.hash,
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions: source.definitions,
   };
   const state = RulesState.parse({

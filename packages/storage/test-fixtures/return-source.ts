@@ -40,8 +40,8 @@ export async function reachCommanderReplacement(coordinator: Coordinator): Promi
     else if (decision.kind === "discard") {
       // Preserve the only return spell while drawing enough lands to cast a real commander.
       const choices = [...decision.cards].sort((a, b) => {
-        const aRepulse = observation.objects.find((row) => row.id === a)?.card.name === "Repulse";
-        const bRepulse = observation.objects.find((row) => row.id === b)?.card.name === "Repulse";
+        const aRepulse = observation.objects.find((row) => row.id === a)?.card?.name === "Repulse";
+        const bRepulse = observation.objects.find((row) => row.id === b)?.card?.name === "Repulse";
         return Number(aRepulse) - Number(bRepulse);
       });
       response = { kind: "discard", cards: choices.slice(0, decision.count) };

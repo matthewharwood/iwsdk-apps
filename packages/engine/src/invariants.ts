@@ -1,6 +1,12 @@
-import { canonicalJson, type ExecutionRegistry, type RulesState } from "@iwsdk-apps/contracts";
+import {
+  canonicalJson,
+  type ExecutionRegistry,
+  type GameObject,
+  type RulesState,
+} from "@iwsdk-apps/contracts";
 import { assertRegistryPin, definition, RulesError } from "./common";
 import { assertResolutionContinuation } from "./resolution-context";
+import { assertPhysicalInventory, assertToken } from "./token-invariants";
 
 function invariant(condition: unknown, message: string): asserts condition {
   if (!condition) throw new RulesError("Invariant", message);
@@ -168,6 +174,25 @@ function assertContinuousEffects(state: RulesState, release: ExecutionRegistry):
     );
   }
 }
+function assertStackSpellState(
+  state: RulesState,
+  release: ExecutionRegistry,
+  entry: GameObject,
+): void {
+  const program = entry.token ? undefined : definition(release, entry.definition).spellProgram;
+  if (entry.zone === "stack" && program) {
+    invariant(entry.spellState, "Programmed spell has no serialized target state");
+    const isBeingCast = state.frames.some(
+      (frame) => frame.kind === "casting" && frame.card === entry.id,
+    );
+    invariant(
+      program.target === null
+        ? entry.spellState.target === null
+        : isBeingCast || entry.spellState.target !== null,
+      "Completed casting has inconsistent chosen target state",
+    );
+  }
+}
 export function assertInvariants(state: RulesState, release: ExecutionRegistry): void {
   assertRegistryPin(state.manifest, release);
   assertContinuousEffects(state, release);
@@ -196,7 +221,8 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
   }
   const lineages = new Set<string>();
   for (const entry of Object.values(state.objects)) {
-    definition(release, entry.definition);
+    if (entry.token) assertToken(state, release, entry);
+    else definition(release, entry.definition);
     invariant(
       entry.id === `${entry.lineage}@${entry.generation}`,
       "Object generation identity mismatch",
@@ -224,19 +250,7 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
       !entry.spellState || entry.zone === "stack",
       "Spell target state escaped its stack object",
     );
-    const program = definition(release, entry.definition).spellProgram;
-    if (entry.zone === "stack" && program) {
-      invariant(entry.spellState, "Programmed spell has no serialized target state");
-      const isBeingCast = state.frames.some(
-        (frame) => frame.kind === "casting" && frame.card === entry.id,
-      );
-      invariant(
-        program.target === null
-          ? entry.spellState.target === null
-          : isBeingCast || entry.spellState.target !== null,
-        "Completed casting has inconsistent chosen target state",
-      );
-    }
+    assertStackSpellState(state, release, entry);
   }
   invariant(
     new Set(state.stack.map((entry) => (entry.kind === "spell" ? entry.objectId : entry.triggerId)))
@@ -250,12 +264,7 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
   );
   assertTriggers(state, release);
   assertResolutionContinuation(state, release);
-  for (const seat of state.players.filter((candidate) => !candidate.lost)) {
-    invariant(
-      Object.values(state.objects).filter((entry) => entry.owner === seat.id).length === 100,
-      "Physical card inventory changed without an implemented create/remove operation",
-    );
-  }
+  assertPhysicalInventory(state);
   if (state.outcome.kind === "ongoing") {
     invariant(state.decision !== null, "Ongoing transition has no serializable decision");
     invariant(

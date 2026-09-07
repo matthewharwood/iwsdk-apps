@@ -1,10 +1,11 @@
-/** Fixed authenticated snapshot binding digests. Source membership only; never semantic certification.
- * The1097 prior tuples remain exact; five creature-return additions were independently source-reviewed and raw-record authenticated. */
+/** Authenticated primary source membership only; never semantic certification.
+ * The1102 prior tuples remain exact. Twenty auxiliary token templates are separate from1129 Commander card bindings. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "dac4f923e99a94e3e54031e635609dca4c91ad3f26c0bf85c4eb1bc3b35fa900",
-  bindingsHash: "d6dca1331bda51c2f09f22b874d3d0d04099890946b177f1b1c92e84f65467f2",
+  releaseHash: "fd5d52dc3d11284940cae72faace2ca0ead11deaa11508c12ea6b179967912a4",
+  bindingsHash: "f99dccbd12436ddd1d923a369dcd893b76dc3e50e28b0cf5b201cf97b1cf13b8",
+  tokenTemplatesHash: "d5a3e91281f6a497cf026bd8b6a89e8e54dcd673edf1a9a22efdb41938205bcf",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
   Record<string, { sourceVersion: string; implementationRevision: string; definitionHash: string }>
@@ -5518,5 +5519,140 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "98769e8e47da2d18fd755e7141a883463789487ff738ab871eb9c9b614c43a06",
     implementationRevision: "creature-return-spell/1",
     definitionHash: "ecc40c87864f27c360b035f99ae03bc3746f55d5063ca291e34065768d1a7235",
+  },
+  "eb62aa4b-c11b-4195-ae85-cff8f78ce17b": {
+    sourceVersion: "a1c09f4e3df05fbcfa6c7cc056e66c61df726d0862d0f5026415128fcf15f513",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "391509ec91386b06230d97bea357e4a4817c09c3999e0228b65365828b2c3324",
+  },
+  "2baf2ee6-e290-4a2b-89a0-0e725edde06d": {
+    sourceVersion: "eb6726e66b03e7387081a8fd313498f71ed01209d0b37ff6cc2f4cef7cff9b92",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "49e4762bf13bcd156eda809fa206a26a5f8ed24ab527aa63fa1cf700bcaaf53e",
+  },
+  "e1635acd-ed1e-4038-a11a-6518df285253": {
+    sourceVersion: "0dd60a925088e155471b88e0665687be81bd6a6be1355e6da531268c53a87a96",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "b192400706f455e09e98886517fafb2d70aaedf298035ba633e913b978cd0f94",
+  },
+  "855b168b-e514-4a43-8bbe-7f1df40031ae": {
+    sourceVersion: "cb2f3de808db8213e413aac8e45f25a07f18c11ad5d130546fc15013e0b6eaa5",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "19aa3b88d32976ec3546157a1b0014aff0c3edaff205cef45d0433099c6850f9",
+  },
+  "30536d1f-8b1a-474f-a508-d3426480a532": {
+    sourceVersion: "4653567a22d4888e0fec8f3592ca9100daf84ec67743baecdf40e9f7e0e2b2ec",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "66dd5cecdcf3a322a3e1d18e42fd790e85081d5c89f9a7fc01d8a0eca9f6a6cf",
+  },
+  "46418fe4-065c-4dfa-b796-eee02c14f351": {
+    sourceVersion: "b133a5da9de435acc19d0356be5ef09fb02c5e96422e3d4dc5db67d0b090c735",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "82684ad62e98f17cb8a904a0acd62602b82b23ee3dfc3910fc76bede321747f3",
+  },
+  "d0d2c45b-b6e3-4999-bdab-976e8f0d6617": {
+    sourceVersion: "274a126b5ec696d4118ea0589bb7c7540b088bb4604549aaf60ec9a5f5c4826a",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "d308ff817800a54416c9fe3d8c5dcab2160f6f1549a35076f6f374c3ca7b6671",
+  },
+  "0c8ab7bf-7b6a-4a34-b988-9f3f4d84a9ea": {
+    sourceVersion: "877810bae8c3750aaee7c101941e4c73cc445ded305ab25ed8ad85f81fd1cccd",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "d0ac05dc6434652d56c311d389498631626ac03ef5266807ab6bad4cdf35042b",
+  },
+  "9ccb6ce8-ccb6-4809-a1cc-cebd38744815": {
+    sourceVersion: "ff3105adbadd590f11f00e08bf58027fee424c92c357c44fdc32fa0dcd188345",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "44be6df9b0789cd5bdc0f76a4d6b9974079805ffe1abd73f8f282bff9424370c",
+  },
+  "c7dd0614-e11e-4b6b-a2cb-9904e457148f": {
+    sourceVersion: "e9ed0a567a003bdf2e451e7253a09e17757389534001a3e32fb18c42f2923e73",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "1eaf63fd69fa9ee8cbb87ff22221355b87cf5e1a539798d6f714069b047b16b2",
+  },
+  "e8a9350a-07c1-47ed-8c4f-88e4b3b17545": {
+    sourceVersion: "7476967eeb968e1a5ba3d5e02b8f8f01844eb3750188a4a77965d40d7ee8d5b1",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "5b8e18f6b9119c8f1731c904ed9cfbc30795d8a0c2d671e00e001ec1cb3eafdc",
+  },
+  "a6450b8e-eb18-431c-9eb7-7daf107978b2": {
+    sourceVersion: "23a24be96fb7b5e880a23a6fabe16c07aa18cbd3cf9504121ec628ff0532de5c",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "36a39895a848779133b26333b76973ac8e19a84f4d43707b7588bab76adbd8cf",
+  },
+  "aa8b60b6-cf55-4aaa-9caa-2b17942d8269": {
+    sourceVersion: "06e40db92db51f70c03a6b6cd6df1c217b1e4c8a759bc55822c5e0255f9aba72",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3ea21ce83956c4f8aae1af4b222d7800c9eb09c06136472c4aea233f0b9724b6",
+  },
+  "aa16307a-9c1f-4538-872c-95206e2b7a6e": {
+    sourceVersion: "871de5b98baae9e037b5fde23169cdf40459c0a879305a9f6038b10942594ed0",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "9aa1a63fe5b4f6f516d75be479377e3707c81f8ad4e944fd94d0a0ddd5bee2c2",
+  },
+  "4965f5fe-a5fe-4976-822c-5cf40fea8c34": {
+    sourceVersion: "3e814f710ac0a197ca429ba8baeb2d7261a4d4cb77c8dfdd3d3f7f9c7aacc2ca",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3417016bdf244d15e2fec31fa534b39d6781973ee7d9200b6d0ba3cd0d4150ba",
+  },
+  "9cfe86ae-eebe-44aa-a956-4b3e9e621105": {
+    sourceVersion: "82840bf0ce3ba2e85200c3c41b4ecda54fe08d7103bec89fd8426e3c9c4eaad7",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "cca9c68725e3ca4a9664cb6fe858d755db05efa1c86c673dc8af39a9dbbb1980",
+  },
+  "a79e21fc-89bd-4547-8bef-5510554e1431": {
+    sourceVersion: "02718088a2ef053ddc4751bf6906830b46c6f975a5843b9030115572e3ac383c",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "9af2d3c5f9cd7379b40a0f1382e476bc9c5ab9a354a6883bb3a813d9868ce355",
+  },
+  "5e4c02c2-2e54-4e8d-8d94-6b2454027e7e": {
+    sourceVersion: "9cde3e9b9ea64c2cdc51de758f65d764a0c3557d63149f6ca77e59422e3d7cc8",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "ae88904c4d7b761e51a7dcf32f285103bdff05577ee3097453c9cb96d53bc654",
+  },
+  "5b2364d7-a811-4595-a1b4-224c70555ffa": {
+    sourceVersion: "e7d771ed048948d8359e720351181740b5d02ecfa866b133cf43baa217fb3cd0",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "d0f55fd9280d822604677cb5e2103ea057e9236d4c8748629c1099ec44b2eba6",
+  },
+  "e7fa2fc2-8542-4069-b75f-5520dd30f74d": {
+    sourceVersion: "743e86057a5cb4e6651b6b6afaed87eb08b1c289a874ca8894b76219fa651ffb",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3397e14b1d4502994b505af0202da4fd17e5d2630b8f21397909af478ce4f744",
+  },
+  "b97d21b4-d730-479f-872f-3e1645b66751": {
+    sourceVersion: "850767cc9a48df080d6b1cd2dc3e83dafe4a8cbb6bcba81e3e1945e8fc5284de",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "cb11ceead8daf804a7324e6d5ec80c38d568d070709e8272fe81e532e864f3be",
+  },
+  "5d46b8dd-2a4a-4d9f-b4c6-2b45f05081c2": {
+    sourceVersion: "d9afd0dd096688cc055eb9b23c9f9f0982c5835bc668d0780bb189a1ed1ba878",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "264a153200a6a18d0fca79307f70606840b1f85e1b7ae920ac66edfabd9674da",
+  },
+  "8fb599a7-2c61-446b-a7a7-cd5367f9b796": {
+    sourceVersion: "2d4dd94292093a0ca5fcbe5b247df2deff55955b2769fd6941ae84214eecd811",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "e866cf5363537296b54bf332657c7d65a0682f2b5fff82b44c666187a792e10e",
+  },
+  "424c6f5e-b386-47e9-b3fe-25b263097d40": {
+    sourceVersion: "930fdf7217b790b599d84dbd8f3cd39248356f77237b71c57782bbc0bf489a21",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "da759c1ec32722ba456408d7e7d5a899440542fb5f318e30468d42d30cb461dd",
+  },
+  "d1a9fd14-fecb-4d2a-983c-70143238275b": {
+    sourceVersion: "b162cf23dc4b6989a2e24d1be3b9992954a3507ca6ad4146d993922ccc64bd39",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3b5219ff3914248ccbbf261a21b3873f264057dfb742d5bc4643817c650070f8",
+  },
+  "61e2d557-f08d-489b-94c8-aff87e5189f9": {
+    sourceVersion: "f4fdf7a33fd99d008a1375d6f439495e00aeec6a095d7f9efe001dfe0e60973b",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "b1a8e793cd8eef25e6cc1ff4a42ed7dabdc97ff61d084c3cf4f259662c0cca8b",
+  },
+  "43355ac4-bf8c-48f6-a322-fafbc9d132d1": {
+    sourceVersion: "1cda0624446a5ee20bfcec8de5a4f717a91f04c4f38e36ace587d7acd4578019",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "0c117e593aef41c8a209bfac0b2d3c150ca6e0e916847a6fbd65348629d30d3b",
   },
 };

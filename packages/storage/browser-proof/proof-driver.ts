@@ -9,7 +9,7 @@ import {
 export const COMMANDER_RETURN_PROOF_DRIVER_VERSION = "commander-return-targets/2";
 type VisibleObject = PlayerObservation["objects"][number];
 function isReturn(object: VisibleObject): boolean {
-  return object.card.spellProgram?.effects[0]?.kind === "return-to-hand";
+  return object.card?.spellProgram?.effects[0]?.kind === "return-to-hand";
 }
 function opposingCommanders(observation: PlayerObservation): VisibleObject[] {
   return observation.objects.filter(
@@ -17,7 +17,7 @@ function opposingCommanders(observation: PlayerObservation): VisibleObject[] {
       object.commander &&
       object.zone === "battlefield" &&
       object.controller !== observation.player &&
-      object.card.types.includes("Creature") &&
+      object.card?.types.includes("Creature") &&
       !object.characteristics.keywords.includes("shroud") &&
       !object.characteristics.keywords.includes("hexproof"),
   );
@@ -39,7 +39,7 @@ export const commanderReturnProofDriver: Driver = (observation, seed) => {
         seed,
       );
     }
-    const land = available.find((object) => object.card.types.includes("Land"));
+    const land = available.find((object) => object.card?.types.includes("Land"));
     if (land) return { kind: "land", card: land.id };
     const actor = observation.players.find((player) => player.id === observation.player);
     if (!actor) throw new Error("Missing proof actor");
@@ -51,8 +51,8 @@ export const commanderReturnProofDriver: Driver = (observation, seed) => {
     });
     returns.sort(
       (a, b) =>
-        Number(b.card.spellProgram?.effects.some((effect) => effect.kind === "draw")) -
-          Number(a.card.spellProgram?.effects.some((effect) => effect.kind === "draw")) ||
+        Number(b.card?.spellProgram?.effects.some((effect) => effect.kind === "draw")) -
+          Number(a.card?.spellProgram?.effects.some((effect) => effect.kind === "draw")) ||
         (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
     );
     const returning = returns[0];

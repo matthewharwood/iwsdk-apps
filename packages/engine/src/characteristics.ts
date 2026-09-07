@@ -1,5 +1,7 @@
 import type { DerivedCharacteristics, ExecutionRegistry, RulesState } from "@iwsdk-apps/contracts";
 
+import { objectBase } from "./object-definitions";
+
 /** Admitted layer 6 keyword additions and layer 7c additive modifiers; no generic layer claim. */
 export function characteristics(
   state: RulesState,
@@ -7,7 +9,7 @@ export function characteristics(
   objectId: string,
 ): DerivedCharacteristics {
   const object = state.objects[objectId];
-  const definition = object && registry.definitions[object.definition];
+  const definition = object && objectBase(registry, object);
   if (!object || !definition) throw new Error(`Unavailable characteristics: ${objectId}`);
   const counters = (object.counters["+1/+1"] ?? 0) - (object.counters["-1/-1"] ?? 0);
   let power = definition.power === null ? null : definition.power + counters;

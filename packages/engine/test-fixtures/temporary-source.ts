@@ -86,6 +86,7 @@ export function temporarySourceFixture(
   const registry: ExecutionRegistry = {
     sourceReleaseHash: "e".repeat(64),
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions: Object.fromEntries(definitions.map((d) => [d.id, structuredClone(d)])),
   };
   const manifest: MatchManifest = {

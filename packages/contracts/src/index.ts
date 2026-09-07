@@ -10,7 +10,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.11.0";
+export const ENGINE_VERSION = "commander-engine/0.12.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -51,6 +51,49 @@ export const Keyword = z.enum([
   "flash",
 ]);
 export type Keyword = z.infer<typeof Keyword>;
+export const TokenTemplateId = z.string().regex(/^token-template:[a-f0-9]{64}$/);
+export const TokenTemplate = z.strictObject({
+  schema: z.literal("fixed-token-template/1"),
+  id: TokenTemplateId,
+  rulesHash: Digest,
+  characteristics: z.strictObject({
+    name: z.string().min(1),
+    types: z.tuple([z.literal("Creature")]),
+    subtypes: z.array(z.string().min(1)).min(1).max(8),
+    supertypes: z.tuple([]),
+    colors: z
+      .array(z.enum(["W", "U", "B", "R", "G"]))
+      .max(5)
+      .refine((values) => new Set(values).size === values.length),
+    manaCost: z.null(),
+    manaValue: z.literal(0),
+    power: z.number().int().min(0).max(100_000),
+    toughness: z.number().int().min(0).max(100_000),
+    keywords: z
+      .array(Keyword)
+      .max(15)
+      .refine((values) => new Set(values).size === values.length),
+  }),
+});
+export type TokenTemplate = z.infer<typeof TokenTemplate>;
+export const TokenOrigin = z.strictObject({
+  creator: Id,
+  creationEvent: Natural,
+  ordinal: Natural.max(3),
+  source: z.strictObject({
+    id: Id,
+    lineage: Id,
+    generation: Natural,
+    definition: Id,
+    owner: Id,
+    controller: Id,
+    zone: z.literal("stack"),
+  }),
+  sourceVersion: Digest,
+  programIndex: z.literal(0),
+});
+export type TokenOrigin = z.infer<typeof TokenOrigin>;
+
 export const CreatureModifier = z.strictObject({
   kind: z.literal("modify-creature"),
   powerDelta: z.number().int().min(-100_000).max(100_000),
@@ -70,6 +113,12 @@ export const DerivedCharacteristics = z.strictObject({
 export type DerivedCharacteristics = z.infer<typeof DerivedCharacteristics>;
 export const SpellEffect = z.discriminatedUnion("kind", [
   CreatureModifier,
+  z.strictObject({
+    kind: z.literal("create-token"),
+    recipient: z.literal("controller"),
+    count: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]),
+    templateId: TokenTemplateId,
+  }),
   z.strictObject({
     kind: z.literal("draw"),
     recipient: z.enum(["controller", "target"]),
@@ -97,6 +146,15 @@ export const SpellProgram = z
     effects: z.array(SpellEffect).min(1).max(16),
   })
   .superRefine((program, context) => {
+    if (
+      program.effects.some((effect) => effect.kind === "create-token") &&
+      (program.target !== null || program.effects.length !== 1)
+    )
+      context.addIssue({
+        code: "custom",
+        message: "Fixed token programs require one nontargeted controller creation instruction.",
+      });
+
     const returning = program.effects.some((effect) => effect.kind === "return-to-hand");
     const followup = program.effects[1];
     if (
@@ -203,6 +261,7 @@ export const ContentRelease = z.strictObject({
   profile: z.literal("tabletop-commander"),
   assurance: z.literal("development-subset"),
   definitions: z.record(Id, CardDefinition),
+  tokenTemplates: z.record(TokenTemplateId, TokenTemplate).optional(),
   unsupportedOracleIds: z.array(Id),
   eligibleDenominator: Natural,
   compilerVersion: Id,
@@ -264,6 +323,7 @@ export const GameObject = z.strictObject({
   commander: z.boolean(),
   commanderMoveOffered: z.boolean(),
   spellState: z.strictObject({ target: Id.nullable() }).optional(),
+  token: TokenOrigin.optional(),
 });
 export type GameObject = z.infer<typeof GameObject>;
 /** Noncard ability context survives changes to or removal of its physical source. */
@@ -537,7 +597,11 @@ export type PlayerObservation = {
     mana: Mana;
     commanderDamage: Record<string, number>;
   }[];
-  objects: (GameObject & { card: CardDefinition; characteristics: DerivedCharacteristics })[];
+  objects: (GameObject &
+    (
+      | { card: CardDefinition; tokenTemplate: null }
+      | { card: null; tokenTemplate: TokenTemplate }
+    ) & { characteristics: DerivedCharacteristics })[];
   decision: Decision | null;
   combat: RulesState["combat"];
   stack: StackEntry[];

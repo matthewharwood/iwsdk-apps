@@ -131,6 +131,7 @@ export function counterFixture(seats: 2 | 4 = 2) {
   const registry: ExecutionRegistry = {
     sourceReleaseHash: "c".repeat(64),
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions: Object.fromEntries(definitions.map((row) => [row.id, row])),
   };
   const manifest: MatchManifest = {

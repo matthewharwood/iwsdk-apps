@@ -10,13 +10,13 @@ import {
   draw,
   emit,
   hit,
-  move,
   object,
   player,
   RulesError,
   request,
   requireActivePlayer,
   requireRule,
+  tryMove,
 } from "./common";
 
 /** Complete the entry batch before inspecting post-event self-entry abilities. */
@@ -40,10 +40,36 @@ export function enterBattlefield(
       "A departed player cannot control a newcomer",
     );
   }
-  const entered = entries.map((entry) => {
-    const after = move(state, entry.objectId, "battlefield", cause, entry.controller);
-    return after;
+  const entered = entries.flatMap((entry) => {
+    const result = tryMove(state, entry.objectId, "battlefield", cause, entry.controller);
+    return result.kind === "moved" ? [result.after] : [];
   });
+  if (entered.length)
+    recordBattlefieldEntryBatch(
+      state,
+      registry,
+      entered.map((entry) => entry.id),
+      cause,
+    );
+  return entered.map((entry) => entry.id);
+}
+
+/** All entrants already exist before the single entry event is matched. No priority here. */
+export function recordBattlefieldEntryBatch(
+  state: RulesState,
+  registry: ExecutionRegistry,
+  enteredIds: readonly string[],
+  cause: string,
+): void {
+  requireRule(
+    enteredIds.length > 0 && new Set(enteredIds).size === enteredIds.length,
+    "Entry batch must contain unique objects",
+  );
+  const entered = enteredIds.map((id) => object(state, id));
+  requireRule(
+    entered.every((entry) => entry.zone === "battlefield" && !player(state, entry.controller).lost),
+    "Invalid battlefield entry batch",
+  );
   const eventIndex = state.eventSequence;
   emit(
     state,
@@ -53,6 +79,7 @@ export function enterBattlefield(
     cause,
   );
   for (const [occurrenceOrdinal, source] of entered.entries()) {
+    if (source.token) continue; // These fixed token templates have no triggered programs.
     const card = definition(registry, source.definition);
     for (const program of card.triggerPrograms ?? []) {
       const id = `${state.manifest.id}:trigger:${eventIndex}:${occurrenceOrdinal}:${program.id}`;
@@ -86,7 +113,6 @@ export function enterBattlefield(
       hit(state, `card:${card.id}:trigger:${program.id}:capture`);
     }
   }
-  return entered.map((entry) => entry.id);
 }
 
 function ownedCohort(state: RulesState, actor: string): string[] {

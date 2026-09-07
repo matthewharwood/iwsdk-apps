@@ -5,11 +5,12 @@ import type {
   SpellProgram,
 } from "@iwsdk-apps/contracts";
 import { characteristics } from "./characteristics";
-import { card, draw, emit, hit, move, object, player, RulesError } from "./common";
+import { card, draw, emit, hit, move, object, permanentBase, player, RulesError } from "./common";
 import { createCreatureModifier } from "./continuous";
 import { orderedObjects } from "./object-order";
 import { beginReturnResolution } from "./return-resolution";
 import { counterSpell, isStackSpellDomain, stackSpellTargets } from "./stack-spells";
+import { createTokens } from "./tokens";
 
 /** Complete domains for the supported exact single-target recipes. */
 export function legalSpellTargets(
@@ -33,7 +34,7 @@ export function legalSpellTargets(
     const cards = orderedObjects(state)
       .filter((entry) => {
         if (entry.zone !== "battlefield") return false;
-        const current = card(state, release, entry.id);
+        const current = permanentBase(state, release, entry.id);
         return (
           current.types.includes("Creature") &&
           !characteristics(state, release, entry.id).keywords.includes("shroud") &&
@@ -94,12 +95,47 @@ function spellDamage(
   }
   emit(state, "NoncombatDamageDealt", { source, target, amount });
 }
+function applyRemoval(
+  state: RulesState,
+  release: ExecutionRegistry,
+  source: string,
+  target: string | null,
+  effect: Extract<SpellEffect, { kind: "destroy" | "exile" }>,
+): void {
+  if (target === null) throw new RulesError("Invariant", "Removal program has no chosen target");
+  const creature = object(state, target);
+  const definition = permanentBase(state, release, target);
+  if (
+    effect.kind === "destroy" &&
+    characteristics(state, release, target).keywords.includes("indestructible")
+  ) {
+    emit(state, "DestructionDidNotOccur", { source, target, reason: "indestructible" });
+    hit(state, "rule:702.12b");
+    return;
+  }
+  const destination = effect.kind === "destroy" ? "graveyard" : "exile";
+  const moved = move(state, target, destination, `${effect.kind} spell effect`);
+  emit(state, effect.kind === "destroy" ? "CreatureDestroyed" : "CreatureExiled", {
+    source,
+    before: target,
+    after: moved.id,
+    owner: creature.owner,
+    definition: definition.id,
+  });
+  hit(state, effect.kind === "destroy" ? "rule:701.8a" : "rule:701.13a");
+  if (effect.kind === "destroy") {
+    hit(state, "rule:700.4");
+    hit(state, `${creature.token ? "token" : "card"}:${definition.id}:dies`);
+  }
+  return;
+}
+
 function applyEffect(
   state: RulesState,
   release: ExecutionRegistry,
   source: string,
   target: string | null,
-  effect: SpellEffect,
+  effect: Exclude<SpellEffect, { kind: "create-token" }>,
   programIndex: number,
 ): void {
   if (effect.kind === "return-to-hand")
@@ -115,31 +151,7 @@ function applyEffect(
     return;
   }
   if (effect.kind === "destroy" || effect.kind === "exile") {
-    if (target === null) throw new RulesError("Invariant", "Removal program has no chosen target");
-    const creature = object(state, target);
-    const definition = card(state, release, target);
-    if (
-      effect.kind === "destroy" &&
-      characteristics(state, release, target).keywords.includes("indestructible")
-    ) {
-      emit(state, "DestructionDidNotOccur", { source, target, reason: "indestructible" });
-      hit(state, "rule:702.12b");
-      return;
-    }
-    const destination = effect.kind === "destroy" ? "graveyard" : "exile";
-    const moved = move(state, target, destination, `${effect.kind} spell effect`);
-    emit(state, effect.kind === "destroy" ? "CreatureDestroyed" : "CreatureExiled", {
-      source,
-      before: target,
-      after: moved.id,
-      owner: creature.owner,
-      definition: definition.id,
-    });
-    hit(state, effect.kind === "destroy" ? "rule:701.8a" : "rule:701.13a");
-    if (effect.kind === "destroy") {
-      hit(state, "rule:700.4");
-      hit(state, `card:${definition.id}:dies`);
-    }
+    applyRemoval(state, release, source, target, effect);
     return;
   }
   if (effect.kind === "damage") {
@@ -182,8 +194,10 @@ export function resolveSpellProgram(
     if (target === null) throw new RulesError("Invariant", "Return program has no chosen target");
     return beginReturnResolution(state, release, spell, program, target);
   }
-  for (const [index, effect] of program.effects.entries())
-    applyEffect(state, release, source, target, effect, index);
+  for (const [index, effect] of program.effects.entries()) {
+    if (effect.kind === "create-token") createTokens(state, release, source, effect, index);
+    else applyEffect(state, release, source, target, effect, index);
+  }
   const grave = move(state, source, "graveyard", "instant or sorcery resolution completed");
   emit(state, "SpellResolved", {
     source,

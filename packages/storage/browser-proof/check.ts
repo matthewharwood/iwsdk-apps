@@ -30,6 +30,7 @@ import {
   spellEvidence,
   triggerEvidence,
 } from "./spell-evidence";
+import { tokenEvidence } from "./token-evidence";
 
 type Snapshot = {
   revision: number;
@@ -42,6 +43,7 @@ type Snapshot = {
   triggers: ReturnType<typeof triggerEvidence>;
   continuous: ReturnType<typeof continuousEvidence>;
   counters: ReturnType<typeof counterEvidence>;
+  tokens: ReturnType<typeof tokenEvidence>;
   commanderReturns: ReturnType<typeof commanderReturnEvidence>;
   execution: ReturnType<typeof executionEvidence>;
   setup: ReturnType<typeof setupEvidence>;
@@ -61,6 +63,7 @@ const options = parseArgs({
     "deck-offset": { type: "string", default: "0" },
     "deck-stride": { type: "string", default: "3" },
     "seed-attempts": { type: "string", default: "8" },
+    "require-tokens": { type: "boolean", default: false },
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
     "require-triggers": { type: "boolean", default: false },
@@ -87,6 +90,7 @@ const requireOrderedTriggers = options["require-ordered-triggers"];
 const requireTriggers = options["require-triggers"] || requireOrderedTriggers;
 const twoSeed = boundedInteger(options["two-seed"], 1, 4294967200, "two-seed");
 const fourSeed = boundedInteger(options["four-seed"], 1, 4294967200, "four-seed");
+const requireTokens = options["require-tokens"];
 const requireRemoval = options["require-removal"];
 const requireModifiers = options["require-modifiers"];
 const requireCounters = options["require-counters"];
@@ -119,6 +123,7 @@ else if (requireTriggers) stageKinds.push("pending-trigger");
 if (requireModifiers) stageKinds.push("active-modifier");
 if (requireCounters) stageKinds.push("pending-counter");
 if (requireCommanderReplacement) stageKinds.push("commander-replacement");
+if (requireTokens) stageKinds.push("pending-token", "active-token", "token-departure");
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -157,6 +162,7 @@ for (const name of [
   "spell-evidence.ts",
   "commander-return-evidence.ts",
   "proof-driver.ts",
+  "token-evidence.ts",
 ]) {
   sourceFiles[`packages/storage/browser-proof/${name}`] = await readFile(
     new URL(name, import.meta.url),
@@ -301,6 +307,7 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     triggers: triggerEvidence(archive),
     continuous: continuousEvidence(archive, coordinator),
     counters: counterEvidence(archive, release),
+    tokens: tokenEvidence(archive, release, coordinator),
     commanderReturns: commanderReturnEvidence(archive, release, coordinator),
     execution: executionEvidence(release, coordinator.executionInfo()),
     setup: setupEvidence(coordinator, archive),
@@ -328,6 +335,10 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
   return (
     stages.length === stageKinds.length &&
     stages.every((stage) => stage.run.status === "paused") &&
+    (!requireTokens ||
+      (final.tokens.creations.length > 0 &&
+        final.tokens.departures.length > 0 &&
+        final.tokens.cessations.length > 0)) &&
     (!requireSpells || Object.keys(final.spells.resolved).length > 0) &&
     (!requireCounters || final.counters.occurrences.length > 0) &&
     (!requireCommanderReplacement ||
@@ -476,7 +487,40 @@ async function prepareCase(seatCount: 2 | 4, attempt: number) {
   if (artifact) manifest.preparedArtifactHash = artifact.hash;
   return { manifest, artifact };
 }
+function assertTokenStage(kind: ProofStage, snapshot: Snapshot): void {
+  for (const seat of snapshot.tokens.physicalCards) expect(seat.count).toBe(seat.lost ? 0 : 100);
+  if (kind === "pending-token") {
+    expect(snapshot.tokens.pending.length).toBeGreaterThan(0);
+    for (const pending of snapshot.tokens.pending) {
+      expect(pending.source.zone).toBe("stack");
+      expect(pending.template?.id).toBe(pending.effect.templateId);
+    }
+  } else if (kind === "active-token") {
+    expect(snapshot.tokens.live.length).toBeGreaterThan(0);
+    for (const live of snapshot.tokens.live) {
+      expect(live.object.zone).toBe("battlefield");
+      expect(live.object.definition).toBe(live.template?.id);
+      expect(live.object.token?.creator).toBe(live.object.owner);
+    }
+  } else {
+    const departures = snapshot.tokens.departures.filter(
+      (entry) => entry.revision === snapshot.revision,
+    );
+    expect(departures.length).toBeGreaterThan(0);
+    for (const entry of departures) {
+      expect(entry.before.zone).toBe("battlefield");
+      expect(entry.after.generation).toBe(entry.before.generation + 1);
+      expect(entry.after.token).toEqual(entry.before.token);
+      expect(entry.cessation?.index).toBeGreaterThan(entry.movement.index);
+      expect(snapshot.tokens.live.some((live) => live.object.id === entry.after.id)).toBe(false);
+    }
+  }
+}
 function assertPausedStage(kind: ProofStage, snapshot: Snapshot): void {
+  if (kind === "pending-token" || kind === "active-token" || kind === "token-departure") {
+    assertTokenStage(kind, snapshot);
+    return;
+  }
   if (kind === "commander-replacement") {
     const pending = snapshot.commanderReturns.pending;
     if (!pending) throw new Error("Missing captured resolving spell at the replacement decision");
@@ -616,6 +660,9 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
       const execution = coordinator.executionInfo();
       expect(execution.sourceReleaseHash).toBe(release.hash);
       expect(execution.preparedArtifactHash).toBe(artifact?.hash ?? null);
+      expect(execution.tokenTemplateCount).toBe(
+        artifact?.retainedTokenTemplates.length ?? Object.keys(release.tokenTemplates ?? {}).length,
+      );
       expect(execution.definitionCount).toBe(
         artifact?.retainedDefinitions.length ?? Object.keys(release.definitions).length,
       );
@@ -633,7 +680,7 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
           seed: manifest.driverSeed,
           driver: proofDriverForVersion(manifest.driverVersion),
           maxCommands: 10_000,
-          stopAt: (observation) => atProofStage(observation, kind),
+          stopAt: (observation) => atProofStage(observation, kind, coordinator?.current().events),
           onProgress: (revision) => console.log(`Native ${seatCount}-seat revision:${revision}`),
         });
         const snapshot = await nativeSnapshot(repo, coordinator);
@@ -755,6 +802,7 @@ try {
       expect(paused.status).toBe("paused");
       const pending = await call<Snapshot>(page, { operation: "snapshot" });
       assertPausedStage(stage.kind, pending);
+      expect(pending.tokens).toEqual(stage.snapshot.tokens);
       expect(pending.continuous).toEqual(stage.snapshot.continuous);
       expect(pending.counters).toEqual(stage.snapshot.counters);
       expect(pending.commanderReturns).toEqual(stage.snapshot.commanderReturns);
@@ -777,6 +825,25 @@ try {
       }
       const stageSave = await call<string>(page, { operation: "export" });
       await Bun.write(join(output, `${seatCount}-seat-${stage.kind}-save.json`), stageSave);
+      let stageImport: Snapshot | null = null;
+      if (
+        requireTokens &&
+        ["pending-token", "active-token", "token-departure"].includes(stage.kind)
+      ) {
+        await call(page, { operation: "close" });
+        stageImport = await call<Snapshot>(page, {
+          operation: "import",
+          namespace: `${namespace}-import-${stage.kind}`,
+          text: stageSave,
+        });
+        expect(stageImport).toEqual(pending);
+        await verifyDurableRetry(page, "retryLast");
+        expect(await call<Snapshot>(page, { operation: "snapshot" })).toEqual(pending);
+        await call(page, { operation: "close" });
+        expect(
+          await call<Snapshot>(page, { operation: "open", namespace, matchId: manifest.id }),
+        ).toEqual(pending);
+      }
       // Import the final required workflow checkpoint, matching nativeImport.
       saved = stageSave;
       importedExpected = pending;
@@ -787,6 +854,7 @@ try {
         reopened,
         exactRetry: pending.revision > 0,
         startingChoiceRetry: pending.revision > 0,
+        stageImport,
       });
     }
     const resumed = await call<GameRun>(page, {
@@ -799,6 +867,7 @@ try {
     expect(completed.stateHash).toBe(baseline.nativeFinal.stateHash);
     expect(completed.replayHash).toBe(completed.stateHash);
     expect(completed.boundaryHashes).toEqual(baseline.nativeFinal.boundaryHashes);
+    expect(completed.tokens).toEqual(baseline.nativeFinal.tokens);
     expect(completed.spells).toEqual(baseline.nativeFinal.spells);
     expect(completed.triggers).toEqual(baseline.nativeFinal.triggers);
     expect(completed.continuous).toEqual(baseline.nativeFinal.continuous);
@@ -846,6 +915,7 @@ try {
     expect(importedFinal.execution).toEqual(completed.execution);
     assertSingleChoice(importedFinal);
     expect(importedFinal.setup.firstChoice).toEqual(completed.setup.firstChoice);
+    expect(importedFinal.tokens).toEqual(completed.tokens);
     expect(importedFinal.commanderReturns).toEqual(completed.commanderReturns);
     const importedReplacementChoiceRetry = await retryBrowserReplacement(page, importedExpected);
     caseEvidence.browser = {
@@ -886,6 +956,7 @@ try {
     required: requireSpells,
     removalRequired: requireRemoval,
     commanderReplacementRequired: requireCommanderReplacement,
+    tokenLifecycleRequired: requireTokens,
     commanderReplacements: completedBrowserStates.flatMap(
       (state) => state.commanderReturns.occurrences,
     ),

@@ -111,6 +111,7 @@ export function sequenceFixture(index = 0, reversed = false) {
   const registry: ExecutionRegistry = {
     sourceReleaseHash: "e".repeat(64),
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions: Object.fromEntries([commander, land, ...cards].map((c) => [c.id, c])),
   };
   const manifest: MatchManifest = {

@@ -115,8 +115,8 @@ for (const { card } of cases) {
       toughness: 12000 + printed.toughnessDelta,
       keywords: ["vigilance", ...printed.keywords],
     });
-    expect(affected.card.power).toBe(2);
-    expect(affected.card.toughness).toBe(12000);
+    expect(affected.card?.power).toBe(2);
+    expect(affected.card?.toughness).toBe(12000);
     expect(shown(f, f.otherId).characteristics).toEqual({
       power: 2,
       toughness: 12000,

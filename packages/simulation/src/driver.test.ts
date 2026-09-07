@@ -74,6 +74,7 @@ function targetObservation(effect: CreatureModifier): PlayerObservation {
     commander: false,
     commanderMoveOffered: false,
     characteristics: { power: 2, toughness: 2, keywords: [] },
+    tokenTemplate: null,
     card: {
       id,
       oracleId: id,
@@ -100,6 +101,7 @@ function targetObservation(effect: CreatureModifier): PlayerObservation {
   });
   const spell = makeObject("spell", "A");
   spell.zone = "stack";
+  if (!spell.card) throw new Error("Expected physical spell fixture");
   spell.card.typeLine = "Instant";
   spell.card.types = ["Instant"];
   spell.card.power = null;

@@ -63,6 +63,7 @@ function fixture(seatCount: 2 | 4) {
   const registry: ExecutionRegistry = {
     sourceReleaseHash: digest,
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions: { commander, land },
   };
   const manifest: MatchManifest = {

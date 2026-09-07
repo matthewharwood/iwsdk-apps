@@ -1,5 +1,7 @@
 export { makeCreatureReturnDecks } from "./creature-return-decks";
 export { compileCreatureReturnDraft } from "./creature-return-expansion";
+export { makeFixedTokenDecks } from "./fixed-token-decks";
+export { compileFixedTokenDraft } from "./fixed-token-expansion";
 
 import { Database } from "bun:sqlite";
 
@@ -18,6 +20,9 @@ import {
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
   CREATURE_RETURN_VERSION,
+  FIXED_TOKEN_SPELLS,
+  FIXED_TOKEN_TEMPLATES,
+  FIXED_TOKEN_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
   KEYWORD_REMINDER_REGISTRY,
   RECIPE_REGISTRY,
@@ -73,6 +78,12 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  fixedTokenSpells: {
+    enabled: boolean;
+    version: string;
+    registry: typeof FIXED_TOKEN_SPELLS;
+    tokenTemplates: typeof FIXED_TOKEN_TEMPLATES;
+  };
   creatureReturnSpells: {
     enabled: boolean;
     version: string;
@@ -87,10 +98,17 @@ export interface CompilationReport {
   };
 }
 
+function describeCompilerRecipes(
+  options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
+): string {
+  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}`;
+}
+
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    fixedTokenSpells?: boolean;
     creatureReturnSpells?: boolean;
     counterSpells?: boolean;
     spellFamilies?: boolean;
@@ -128,6 +146,12 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    fixedTokenSpells: {
+      enabled: options.fixedTokenSpells === true,
+      version: FIXED_TOKEN_VERSION,
+      registry: FIXED_TOKEN_SPELLS,
+      tokenTemplates: FIXED_TOKEN_TEMPLATES,
     },
     creatureReturnSpells: {
       enabled: options.creatureReturnSpells === true,
@@ -192,17 +216,22 @@ export async function compileDevelopmentRelease(
     report.bindings.length + report.unsupported.length !== candidates.length
   )
     throw new Error("Compiler candidate denominator mismatch");
-  const compilerVersion = `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}`;
+  const recipeCompilerVersion = describeCompilerRecipes(options);
+  const compilerVersion = options.fixedTokenSpells
+    ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
+    : recipeCompilerVersion;
   const base = {
     schema: "commander-content/1" as const,
-    id: options.creatureReturnSpells
-      ? `development:${inventory.bundleHash.slice(0, 16)}:${await semanticHash({ compilerVersion, recipeVersion: RECIPE_VERSION })}`
-      : `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}${options.creatureReturnSpells ? ":creature-return-spell/1" : ""}`,
+    id:
+      options.creatureReturnSpells || options.fixedTokenSpells
+        ? `development:${inventory.bundleHash.slice(0, 16)}:${await semanticHash({ compilerVersion, recipeVersion: RECIPE_VERSION })}`
+        : `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}${options.creatureReturnSpells ? ":creature-return-spell/1" : ""}`,
     sourceBundle: inventory.bundleHash,
     rulesHash,
     profile: "tabletop-commander" as const,
     assurance: "development-subset" as const,
     definitions,
+    ...(options.fixedTokenSpells ? { tokenTemplates: structuredClone(FIXED_TOKEN_TEMPLATES) } : {}),
     unsupportedOracleIds: report.unsupported.map((card) => card.identity),
     eligibleDenominator: candidates.length,
     compilerVersion,

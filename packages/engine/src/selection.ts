@@ -10,9 +10,11 @@ import {
   type Selector,
 } from "@iwsdk-apps/rule-selection";
 import { characteristics } from "./characteristics";
+import { objectBase } from "./object-definitions";
 import { orderedObjects } from "./object-order";
 
 const fields = {
+  isCard: "boolean",
   zone: "string",
   owner: "string",
   controller: "string",
@@ -58,6 +60,7 @@ export function priorityCandidates(mainWindow: boolean, landAvailable: boolean):
   return {
     op: "and",
     terms: [
+      { op: "boolean-eq", field: "isCard", value: true },
       { op: "string-eq", field: "owner", value: { binding: "actor" } },
       {
         op: "or",
@@ -112,14 +115,14 @@ export function selectObjectCandidates(
       epoch: state.epoch,
       lens: "current",
       eventVersion: String(state.eventSequence),
-      processorVersion: "development-object-selection/2",
+      processorVersion: "development-object-selection/3",
       bindingsKey: JSON.stringify(bindings),
       universe: "live-objects",
       generation: state.epoch,
     },
     fields,
     orderedObjects(state).map((entry) => {
-      const definition = release.definitions[entry.definition];
+      const definition = objectBase(release, entry);
       if (!definition)
         throw new SelectionError(
           "UnavailableSemantics",
@@ -128,6 +131,7 @@ export function selectObjectCandidates(
       return {
         id: entry.id,
         values: {
+          isCard: !entry.token,
           zone: entry.zone,
           owner: entry.owner,
           controller: entry.controller,
@@ -150,6 +154,7 @@ export function selectObjectCandidates(
     plan = prepareSelector(query, fields, {
       prefilterFields: ["zone", "owner", "controller", "tapped"],
       indexedFields: [
+        "isCard",
         "zone",
         "owner",
         "controller",

@@ -8,12 +8,12 @@ import type {
 } from "@iwsdk-apps/contracts";
 import { characteristics } from "./characteristics";
 import {
-  card,
   creatures,
   emit,
   emptyCombat,
   hit,
   object,
+  permanentBase,
   player,
   power,
   request,
@@ -40,7 +40,7 @@ function liveCreature(
   const current = state.objects[id];
   if (!current || current.zone !== "battlefield" || player(state, current.controller).lost)
     return undefined;
-  const types = card(state, release, id).types;
+  const types = permanentBase(state, release, id).types;
   return types.includes("Creature") && !types.includes("Battle") ? current : undefined;
 }
 
@@ -55,7 +55,7 @@ function attackCandidates(
     (entry) =>
       entry.controller === actor &&
       !entry.tapped &&
-      !card(state, release, entry.id).types.includes("Battle") &&
+      !permanentBase(state, release, entry.id).types.includes("Battle") &&
       !has(state, release, entry.id, "defender") &&
       (entry.controlledSinceTurn < seat.lastTurnStarted || has(state, release, entry.id, "haste")),
   );
@@ -70,7 +70,7 @@ function blockCandidates(
     (entry) =>
       entry.controller === actor &&
       !entry.tapped &&
-      !card(state, release, entry.id).types.includes("Battle"),
+      !permanentBase(state, release, entry.id).types.includes("Battle"),
   );
 }
 

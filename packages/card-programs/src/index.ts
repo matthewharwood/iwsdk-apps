@@ -1,3 +1,19 @@
+import { bindFixedTokenSpell, FIXED_TOKEN_VERSION } from "./token-creation";
+
+export {
+  bindFixedTokenSpell,
+  FIXED_TOKEN_ARCHIVE,
+  FIXED_TOKEN_RULES,
+  FIXED_TOKEN_RULES_HASH,
+  FIXED_TOKEN_SOURCE_BUNDLE,
+  FIXED_TOKEN_SPELLS,
+  FIXED_TOKEN_TEMPLATES,
+  FIXED_TOKEN_VERSION,
+  type FixedTokenSpellSource,
+  reviewedFixedTokenDefinition,
+  reviewedTokenTemplate,
+} from "./token-creation";
+
 import { bindCreatureReturnSpell, CREATURE_RETURN_VERSION } from "./creature-return";
 
 export {
@@ -453,6 +469,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  fixedTokenSpells?: boolean;
   creatureReturnSpells?: boolean;
   counterSpells?: boolean;
   spellFamilies?: boolean;
@@ -466,6 +483,10 @@ function bindSpell(
   parts: NonNullable<ReturnType<typeof characteristics>>,
   options: BindingOptions,
 ): BindingResult {
+  if (options.fixedTokenSpells) {
+    const definition = bindFixedTokenSpell(input);
+    if (definition) return { kind: "bound", definition, recipes: [FIXED_TOKEN_VERSION] };
+  }
   if (options.creatureReturnSpells) {
     const definition = bindCreatureReturnSpell(input);
     if (definition) return { kind: "bound", definition, recipes: [CREATURE_RETURN_VERSION] };

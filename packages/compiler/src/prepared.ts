@@ -1,8 +1,11 @@
 import {
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
+  FIXED_TOKEN_SPELLS,
+  FIXED_TOKEN_TEMPLATES,
   KEYWORD_REMINDER_REGISTRY,
   RECIPE_REGISTRY,
+  reviewedTokenTemplate,
   SELF_ENTRY_REGISTRY,
   SELF_ENTRY_SEQUENCES,
   SPELL_FAMILY_REGISTRY,
@@ -13,9 +16,11 @@ import {
   type CardDefinition,
   ContentRelease,
   DeckRevision,
+  ENGINE_VERSION,
   type ExecutionRegistry,
   PreparedMatchArtifact,
   semanticHash,
+  type TokenTemplate,
 } from "@iwsdk-apps/contracts";
 import { buildDevelopmentMatchPlan, MATCH_PLAN_VERSION } from "./plan";
 
@@ -58,6 +63,26 @@ export async function verifySourceRelease(input: ContentRelease): Promise<Conten
     )
       throw new PreparedAdmissionError("InvalidSource", `Unauthenticated definition: ${identity}`);
   }
+  for (const [identity, template] of Object.entries(source.tokenTemplates ?? {})) {
+    const { id, ...payload } = template;
+    if (
+      identity !== id ||
+      id !== `token-template:${await semanticHash(payload)}` ||
+      template.rulesHash !== source.rulesHash ||
+      !reviewedTokenTemplate(template)
+    )
+      throw new PreparedAdmissionError(
+        "InvalidSource",
+        `Unauthenticated token template: ${identity}`,
+      );
+  }
+  for (const definition of Object.values(source.definitions))
+    for (const effect of definition.spellProgram?.effects ?? [])
+      if (effect.kind === "create-token" && !source.tokenTemplates?.[effect.templateId])
+        throw new PreparedAdmissionError(
+          "InvalidSource",
+          `Missing exact token dependency: ${effect.templateId}`,
+        );
   return source;
 }
 async function verifiedDecks(inputs: readonly DeckRevision[]): Promise<DeckRevision[]> {
@@ -69,6 +94,14 @@ async function verifiedDecks(inputs: readonly DeckRevision[]): Promise<DeckRevis
   const decks: DeckRevision[] = [];
   for (const input of inputs) {
     const deck = DeckRevision.parse(input);
+    if (
+      deck.commander.startsWith("token-template:") ||
+      deck.entries.some((row) => row.definition.startsWith("token-template:"))
+    )
+      throw new PreparedAdmissionError(
+        "InvalidDeck",
+        "Auxiliary token templates cannot be Commander deck cards",
+      );
     const { hash, ...body } = deck;
     if ((await semanticHash(body)) !== hash)
       throw new PreparedAdmissionError("InvalidDeck", `Deck hash mismatch: ${deck.id}`);
@@ -87,6 +120,11 @@ async function artifactFor(
   source: ContentRelease,
   decks: readonly DeckRevision[],
 ): Promise<PreparedMatchArtifact> {
+  if (source.processorAbi !== ENGINE_VERSION)
+    throw new PreparedAdmissionError(
+      "InvalidSource",
+      "Prepared execution blocked: incompatible source processor ABI",
+    );
   const plan = await buildDevelopmentMatchPlan(source, decks);
   if (plan.closure.blockers.length > 0)
     throw new PreparedAdmissionError(
@@ -94,7 +132,13 @@ async function artifactFor(
       `Prepared execution blocked: ${plan.closure.blockers.join(", ")}`,
     );
   const retainedDefinitions = [];
+  const retainedTokenTemplates = [];
   for (const identity of plan.closure.retained) {
+    const template = source.tokenTemplates?.[identity];
+    if (template) {
+      retainedTokenTemplates.push({ identity, templateHash: await semanticHash(template) });
+      continue;
+    }
     const definition = source.definitions[identity];
     if (!definition)
       throw new PreparedAdmissionError(
@@ -110,7 +154,7 @@ async function artifactFor(
   const deckHashes = decks.map((deck) => deck.hash);
   const deckDigest = await semanticHash(deckHashes);
   const base = {
-    schema: "prepared-match/1" as const,
+    schema: "prepared-match/2" as const,
     id: `prepared:${source.hash}:${deckDigest}`,
     sourceReleaseHash: source.hash,
     sourceBundle: source.sourceBundle,
@@ -119,6 +163,8 @@ async function artifactFor(
     processorAbi: source.processorAbi,
     compilerVersion: MATCH_PLAN_VERSION,
     recipeRegistryHash: await semanticHash({
+      fixedTokenSpells: FIXED_TOKEN_SPELLS,
+      fixedTokenTemplates: FIXED_TOKEN_TEMPLATES,
       recipes: RECIPE_REGISTRY,
       spellFamilies: SPELL_FAMILY_REGISTRY,
       selfEntryTriggers: SELF_ENTRY_REGISTRY,
@@ -134,6 +180,7 @@ async function artifactFor(
     deckHashes,
     closure: plan.closure,
     retainedDefinitions,
+    retainedTokenTemplates,
     requiredCoreCapabilities: plan.closure.retainedCoreCapabilities,
     analysisHash: plan.hash,
     assurance: source.assurance,
@@ -162,7 +209,13 @@ function registry(
   artifactHash: string | null,
 ): ExecutionRegistry {
   const entries: [string, CardDefinition][] = [];
+  const tokenEntries: [string, TokenTemplate][] = [];
   for (const identity of identities) {
+    const template = source.tokenTemplates?.[identity];
+    if (template) {
+      tokenEntries.push([identity, structuredClone(template)]);
+      continue;
+    }
     const definition = source.definitions[identity];
     if (!definition)
       throw new PreparedAdmissionError(
@@ -176,13 +229,23 @@ function registry(
     sourceReleaseHash: source.hash,
     preparedArtifactHash: artifactHash,
     definitions,
+    tokenTemplates: Object.fromEntries(tokenEntries),
   });
 }
 export async function createFullExecutionRegistry(
   sourceInput: ContentRelease,
 ): Promise<ExecutionRegistry> {
   const source = await verifySourceRelease(sourceInput);
-  return registry(source, Object.keys(source.definitions).sort(), null);
+  if (source.processorAbi !== ENGINE_VERSION)
+    throw new PreparedAdmissionError(
+      "InvalidSource",
+      "Source processor ABI is incompatible with this engine",
+    );
+  return registry(
+    source,
+    [...Object.keys(source.definitions), ...Object.keys(source.tokenTemplates ?? {})].sort(),
+    null,
+  );
 }
 /** Full source verification authenticates subset membership; the artifact never impersonates a release. */
 export async function admitPreparedMatchArtifact(

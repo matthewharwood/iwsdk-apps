@@ -176,6 +176,9 @@ export function transition(
     };
   }
 }
+
+import { lookupTokenTemplate } from "./object-definitions";
+
 export function observe(
   state: RulesState,
   release: ExecutionRegistry,
@@ -212,7 +215,12 @@ export function observe(
       )
       .map((entry) => ({
         ...structuredClone(entry),
-        card: structuredClone(definition(release, entry.definition)),
+        ...(entry.token
+          ? {
+              card: null,
+              tokenTemplate: structuredClone(lookupTokenTemplate(release, entry.definition)),
+            }
+          : { card: structuredClone(definition(release, entry.definition)), tokenTemplate: null }),
         characteristics: characteristics(state, release, entry.id),
       })),
     decision: state.decision?.actor === actor ? structuredClone(state.decision) : null,

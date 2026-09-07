@@ -11,6 +11,7 @@ import {
   type Zone,
 } from "@iwsdk-apps/contracts";
 import { characteristics } from "./characteristics";
+import { objectBase } from "./object-definitions";
 import { orderedObjects } from "./object-order";
 
 export { characteristics } from "./characteristics";
@@ -52,7 +53,12 @@ export function definition(
   return found;
 }
 export function card(state: RulesState, release: ExecutionRegistry, id: string): CardDefinition {
-  return definition(release, object(state, id).definition);
+  const current = object(state, id);
+  requireRule(!current.token, "A token is not a card");
+  return definition(release, current.definition);
+}
+export function permanentBase(state: RulesState, release: ExecutionRegistry, id: string) {
+  return objectBase(release, object(state, id));
 }
 export function battlefield(state: RulesState): GameObject[] {
   return orderedObjects(state).filter((entry) => entry.zone === "battlefield");
@@ -136,7 +142,7 @@ export function removeFromLists(state: RulesState, id: string): void {
   state.stack = state.stack.filter((entry) => entry.kind !== "spell" || entry.objectId !== id);
 }
 /** A zone transition creates a new game object; physical lineage/commander designation survive. */
-export function move(
+function performMove(
   state: RulesState,
   id: string,
   destination: Zone,
@@ -167,6 +173,7 @@ export function move(
     counters: {},
     commander: before.commander,
     commanderMoveOffered: false,
+    ...(before.token ? { token: structuredClone(before.token) } : {}),
   };
   state.objects[after.id] = after;
   if (destination === "stack") state.stack.push({ kind: "spell", objectId: after.id });
@@ -185,6 +192,51 @@ export function move(
   );
   hit(state, "rule:400.7");
   return after;
+}
+export type MoveResult =
+  | { kind: "moved"; before: GameObject; after: GameObject }
+  | { kind: "prevented"; object: GameObject; reason: "departed-token" };
+
+/** CR111.8: an already departed token remains in its first destination. */
+export function tryMove(
+  state: RulesState,
+  id: string,
+  destination: Zone,
+  cause: string,
+  controller?: string,
+): MoveResult {
+  const before = object(state, id);
+  if (before.token && before.zone !== "battlefield") {
+    emit(
+      state,
+      "TokenMovementPrevented",
+      { object: id, destination, reason: "departed-token" },
+      "public",
+      cause,
+    );
+    hit(state, "rule:111.8");
+    return { kind: "prevented", object: before, reason: "departed-token" };
+  }
+  const snapshot = structuredClone(before);
+  return {
+    kind: "moved",
+    before: snapshot,
+    after: performMove(state, id, destination, cause, controller),
+  };
+}
+
+/** For callers whose supported instruction guarantees an actual first zone movement. */
+export function move(
+  state: RulesState,
+  id: string,
+  destination: Zone,
+  cause: string,
+  controller?: string,
+): GameObject {
+  const result = tryMove(state, id, destination, cause, controller);
+  if (result.kind !== "moved")
+    throw new RulesError("Invariant", "A guaranteed movement targeted an already departed token");
+  return result.after;
 }
 export function randomBelow(state: RulesState, bound: number): number {
   requireRule(Number.isInteger(bound) && bound > 0 && bound <= 0xffffffff, "Invalid chance range");

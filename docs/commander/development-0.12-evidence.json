@@ -1,0 +1,336 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.12.0",
+  "sourceReleaseHash": "fd5d52dc3d11284940cae72faace2ca0ead11deaa11508c12ea6b179967912a4",
+  "primaryDefinitions": 1129,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 40,
+  "preservedPrimaryDefinitions": 1102,
+  "preservedCompleteDeckRevisions": 35,
+  "unsupportedPaperCandidates": 30700,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": "docs/commander/source-fixed-token-v0.12.json",
+    "sha256": "dcdee8929a3bf38b5a890806be1f676b305d11dd8d87592f5470cc29a26488bc"
+  },
+  "sourceAuthentication": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/reviewed-source-authentication-v0.12.json",
+    "sha256": "18900fc135485576ec7da0c8f0aa7cb3dcb97d236994d32173d7fcbe8a0062a9"
+  },
+  "sourceExecution": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/token-source-execution/result.json",
+    "sha256": "024836ebf457a4606ec5fe1f5c73029827e695ae18cc761624328a84a905235f",
+    "legalNewProducerIdentitiesExecuted": 26,
+    "templateShapesExecuted": 20,
+    "newProducerIdentitiesWithoutExecution": ["oracle:30536d1f-8b1a-474f-a508-d3426480a532"],
+    "gap": "Call to the Feast has WB color identity; none of37 currently implemented eligible commanders permits it. Shared template/operator coverage does not execute that identity."
+  },
+  "independentRuntimeReview": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/independent-token-runtime-review-0.12/review.json",
+    "sha256": "9e1161ae39a1094945cbc0b955ebcb92cab1a156e9a58aee9e44d80b73d996d8"
+  },
+  "independentSourceClosureReview": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/independent-token-source-closure-review-0.12.json",
+    "sha256": "67e7571d265918e8ac02e1b9c6f6f85f461c9c7ad1f90305a39bc1d84dafafb3"
+  },
+  "compilerExecution": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/compiler-token-execution-attempt-2/result.json",
+    "sha256": "f0a6c5cf9cc2466a31993c20bce75da0afa3d85c678b99a210631b38403e1a39",
+    "tests": 43,
+    "assertions": 1889,
+    "scope": "Includes incompatible old/future ABI rejection in both factories with token roots and with only three legacy card roots; source authenticity inspection remains separate."
+  },
+  "nativeDurability": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/native-token-durability-0.12-qualified/manifest.json",
+    "sha256": "4b18c023e8c6d28de2d4c59cf5a85974d688a1d087fde07ae2bb2544cbadb5a1",
+    "tests": 12,
+    "assertions": 259,
+    "resolvers": 3,
+    "checkpoints": [45, 46, 104, 105],
+    "scope": "Three stopped source-bound native histories, full fixture74 primary/20 auxiliary and prepared5 primary/1 auxiliary; no completed-game count."
+  },
+  "independentNativeReview": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/independent-native-token-qualified-review-0.12.json",
+    "sha256": "19b5089a9124328b680c54e0f6f3d86d390895da30ba4f78a96a5d38015a01cd"
+  },
+  "independentBrowserReview": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/independent-token-browser-review-0.12.json",
+    "sha256": "1e3ad7fc82ce3f62b8b513ba4c1a2b8db561e9ceeca2ec6886719ec3e89f5326"
+  },
+  "independentFinalEvidenceJoin": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/independent-final-token-review-0.12.json",
+    "sha256": "4c9f68ca154c0e837361e5593be44bc28e03e9a4167c6500888155dcc6087b51"
+  },
+  "cliReproduction": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/cli-all-reviewed-recompile-0.12-final.log",
+    "sha256": "ec160aecaac9cd5bd77f6e182ed252f62d4f3b1924571e308247f2686808c0db"
+  },
+  "mainCompile": {
+    "path": ".commander/evidence/compile-0.12-main.log",
+    "sha256": "60a1660112448e0c64942d95ba7596cba4ff442b073f3ec7a1a5ecfc975e1fa6"
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.12/.draft-runs/resolver-comparisons/8d2644f5-8534-4e5b-bbc4-73f91810879f/report.json",
+      "sha256": "4f2461d080fadf0c7b0d3c656303a8aff2bad7173ff391847168d907c6cb88d7",
+      "status": "passed",
+      "buildHash": "606b91161cdf2eb6e7c3a1bd111e0cd4f02cd426bfce798e7e1f89aff7f7919c",
+      "commands": 381,
+      "boundaries": 382,
+      "independentReplays": 3,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.12/.draft-runs/resolver-comparisons/8d2644f5-8534-4e5b-bbc4-73f91810879f/assignment.json",
+        "sha256": "3173aa997ed775444e43af3912c18681cbd58f83bd1f8ba3a8307d0dd3fc36b1"
+      }
+    },
+    {
+      "path": ".commander/prototypes/engine-0.12/.draft-runs/resolver-comparisons/31387fb2-1d7d-4a06-98a6-ad500c215893/report.json",
+      "sha256": "2d47745e1548e7503f52375b9e37fdfb88460a6518d8e6141b992d0eebc7aaac",
+      "status": "passed",
+      "buildHash": "606b91161cdf2eb6e7c3a1bd111e0cd4f02cd426bfce798e7e1f89aff7f7919c",
+      "commands": 1609,
+      "boundaries": 1610,
+      "independentReplays": 3,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.12/.draft-runs/resolver-comparisons/31387fb2-1d7d-4a06-98a6-ad500c215893/assignment.json",
+        "sha256": "9ba2dac596885aee2e2c385a26727023e2af3dc5ddd98f8c972fbf6bbde1f0c2"
+      }
+    }
+  ],
+  "independentCliComparisonReview": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/independent-token-cli-comparisons.json",
+    "sha256": "8db48c1ca349d537663f32f30bee81ed9d10e7d7c1fc713ed35cbe0d22bfb514"
+  },
+  "browser": {
+    "path": ".commander/prototypes/engine-0.12/.commander/browser-proof/2026-09-06T23-52-39-164Z-96acc2d9/evidence.json",
+    "sha256": "46eb74b2864d62be80f761d071a8ac07fdfd0c41ffe82d4a0a21a59b2642be52",
+    "status": "passed",
+    "sourceHash": "69dd722a6c362dfb6cace8fc2b198869c379006e7145d4272207761bf16bb0dc",
+    "workerBundleHash": "99478efa4ae0dd6918e135a1130de7f4b12abbb97cb26d7c4e5faa0c8ae750f9",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "driverVersion": "observed-combat/9",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 12001,
+        "driverSeed": 12018,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "64a91668304ad31997abad6d754ae42b234621a3a3b39b187101e4f7001a2662"
+          },
+          {
+            "id": "P2",
+            "deckHash": "cc7bc82c84b179b9829be4dc6315594476ccd608e9ef8652635d4d7ce765adbb"
+          }
+        ],
+        "commands": 429,
+        "boundaries": 430,
+        "finalStateHash": "a606223e45e01c7a5848d88b04e72f8439a476d588fe2433793258ecd3ee10f4",
+        "execution": {
+          "sourceReleaseHash": "fd5d52dc3d11284940cae72faace2ca0ead11deaa11508c12ea6b179967912a4",
+          "preparedArtifactHash": "2ab30600f886f4d8014b3ae61120b77e0ae9217f35bf226a6ccd684b89618e30",
+          "definitionCount": 116,
+          "tokenTemplateCount": 19,
+          "fullDefinitionCount": 1129,
+          "excludedDefinitionCount": 1013,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 1
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 25,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "pending-token",
+            "revision": 121,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "active-token",
+            "revision": 123,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "token-departure",
+            "revision": 166,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "finalPendingImportRevision": 166,
+        "importedCompleteStateHash": "a606223e45e01c7a5848d88b04e72f8439a476d588fe2433793258ecd3ee10f4",
+        "tokenCreationBatches": 2,
+        "tokenDepartureEvents": 4,
+        "tokenCessationBatches": 2
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 12201,
+        "driverSeed": 12218,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "64a91668304ad31997abad6d754ae42b234621a3a3b39b187101e4f7001a2662"
+          },
+          {
+            "id": "P2",
+            "deckHash": "cc7bc82c84b179b9829be4dc6315594476ccd608e9ef8652635d4d7ce765adbb"
+          },
+          {
+            "id": "P3",
+            "deckHash": "08d539e21381cfcbdc2e464c2865455c346f7f8a97ed4f194b7b843516a87b48"
+          },
+          {
+            "id": "P4",
+            "deckHash": "c45e07811c84993809784f159183849c36ba357bb312bd592027867ecee3f656"
+          }
+        ],
+        "commands": 1411,
+        "boundaries": 1412,
+        "finalStateHash": "4f8894ba31cf2c8c847923814c819593a78efe49d263762ac668c59215622806",
+        "execution": {
+          "sourceReleaseHash": "fd5d52dc3d11284940cae72faace2ca0ead11deaa11508c12ea6b179967912a4",
+          "preparedArtifactHash": "5786f91d14c9f8237271d7c9fc3e91a4cf5ab637d6ad0ab48da9ef2206b90d20",
+          "definitionCount": 214,
+          "tokenTemplateCount": 20,
+          "fullDefinitionCount": 1129,
+          "excludedDefinitionCount": 915,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 0
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 49,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "pending-token",
+            "revision": 937,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "active-token",
+            "revision": 940,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "token-departure",
+            "revision": 1052,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "finalPendingImportRevision": 1052,
+        "importedCompleteStateHash": "4f8894ba31cf2c8c847923814c819593a78efe49d263762ac668c59215622806",
+        "tokenCreationBatches": 3,
+        "tokenDepartureEvents": 5,
+        "tokenCessationBatches": 2
+      }
+    ],
+    "scope": "Actual OPFS reloads and exact retries at every stage; each of three token stages separately logically imported and retried. Final token-departure import continued to completion/replay. Conflicting/stale-command negative assertions remain separate native tests. Owner-loss removal under800.4a is distinguished from token cessation.",
+    "earlierUnqualifiedAttempt": {
+      "path": ".commander/prototypes/engine-0.12/.commander/browser-proof/2026-09-06T23-50-24-362Z-5841f978/evidence.json",
+      "sha256": "8b512fb46d5d69fdde60e9eb62fcb68770b96f51e1aa5e3920b0104ab5ea399c",
+      "status": "failed",
+      "reason": "Source changed during the run: packages/compiler/src/prepared.ts gained the final explicit ABI guard. Both completed trajectories remain retained; this attempt is not qualified."
+    }
+  },
+  "observedAssignments": {
+    "path": ".commander/prototypes/engine-0.12/.draft-artifacts/observed-token-game-coverage-0.12.json",
+    "sha256": "8dda209ad8ae72c55d532b07369f0b702bd209b908f39da600a9df748537729c",
+    "initialDeckGameSeedFamilies": 2,
+    "fullExecutionAssignments": 4,
+    "acceptedCommands": 3830,
+    "scope": "Browser and CLI share two deck-order/game-seed families but use different driver seeds and seat labels. Resolver/replay/import/repeated-qualification executions do not increase these counts."
+  },
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.12/promotion.json",
+    "sha256": "24c920dc041f8f35a8423bdc0cc4b1e79f51523cf7dd0a51d8d4b3cc5168d610"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.12/archive-inventory.json",
+    "sha256": "42a342fec45d72298de0bb6baacae8ca043fb449315f51caaadca649c1e78929"
+  },
+  "bindingFormatting": {
+    "path": ".commander/evidence/binding-format-equivalence-0.12.json",
+    "sha256": "4ade9d4020a26509a39f8c090404aa48d0abf90ae24cd249dde1a3da5f5e6245"
+  },
+  "exactMainWorkerEquivalence": {
+    "path": ".commander/evidence/browser-worker-format-equivalence-0.12.json",
+    "sha256": "69524f097d30b660cf20f1c1d607782e15db95e46642312641623d06d2973ece"
+  },
+  "exactMainCliEquivalence": {
+    "path": ".commander/evidence/cli-format-equivalence-0.12.json",
+    "sha256": "8bfd3a9e2e541efb40fc5f789b64e22eb82b6c43c4856d7844c9be16c7336980"
+  },
+  "repositoryGate": {
+    "path": ".commander/evidence/check-full-0.12-main.log",
+    "sha256": "08b019952a369cea804dc567109fe4238632655020001ab817e1fc9dd7364727",
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "unitTests": 737,
+    "unitAssertions": 78556,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true
+  },
+  "fixedRegression": {
+    "id": "regression-0.12-fixed64",
+    "status": "running-at-checkpoint",
+    "assigned": 64,
+    "resultFilesAtObservation": 29,
+    "frozenBuildHash": "606b91161cdf2eb6e7c3a1bd111e0cd4f02cd426bfce798e7e1f89aff7f7919c",
+    "scope": "Current executable reruns every historical input; no older outcome reused. Older deck compositions do not exercise new token producers."
+  },
+  "remaining": [
+    "30,700 paper candidates and broader rule families remain unsupported.",
+    "Original complete G2 difficult-scenario qualification remains open; TKN18 named producer pair across all modes and browser conflicting/stale negatives are only partially joined.",
+    "Call to the Feast needs a fully implemented compatible commander and its own legal source execution.",
+    "Reproducible full-snapshot release handoff and player-visible session contract remain incomplete.",
+    "Production Commander browser/XR consumption and physical device qualification remain separate unfinished work."
+  ],
+  "consumerGapAudit": {
+    "path": "docs/commander/consumer-gaps-0.12.md",
+    "sha256": "6cfc26300022f0a7b53ec885ab9ed86c4360fcd3013325315d6f22e698751de3"
+  },
+  "observedAt": "2026-09-07T00:05:40.480683+00:00"
+}

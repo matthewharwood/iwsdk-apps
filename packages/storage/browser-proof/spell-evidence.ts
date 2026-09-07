@@ -1,4 +1,9 @@
-import { type ContentRelease, GameObject, type PlayerObservation } from "@iwsdk-apps/contracts";
+import {
+  type ContentRelease,
+  type GameEvent,
+  GameObject,
+  type PlayerObservation,
+} from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
 
 function removals(record: MatchArchive["records"][number], release: ContentRelease) {
@@ -62,6 +67,9 @@ export function executionEvidence(
     ...info,
     fullDefinitionCount,
     excludedDefinitionCount: fullDefinitionCount - info.definitionCount,
+    fullTokenTemplateCount: Object.keys(release.tokenTemplates ?? {}).length,
+    excludedTokenTemplateCount:
+      Object.keys(release.tokenTemplates ?? {}).length - info.tokenTemplateCount,
   };
 }
 
@@ -247,8 +255,35 @@ export type ProofStage =
   | "pending-ordered-trigger"
   | "active-modifier"
   | "pending-counter"
-  | "commander-replacement";
-export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean {
+  | "commander-replacement"
+  | "pending-token"
+  | "active-token"
+  | "token-departure";
+export function atProofStage(
+  view: PlayerObservation,
+  kind: ProofStage,
+  events: readonly GameEvent[] = [],
+): boolean {
+  if (kind === "pending-token")
+    return (
+      view.decision?.kind === "priority" &&
+      view.stack.some(
+        (entry) =>
+          entry.kind === "spell" &&
+          view.objects.some(
+            (object) =>
+              object.id === entry.objectId &&
+              object.card?.spellProgram?.effects[0]?.kind === "create-token",
+          ),
+      )
+    );
+  if (kind === "active-token")
+    return (
+      view.decision?.kind === "priority" &&
+      view.objects.some((object) => !!object.token && object.zone === "battlefield")
+    );
+  if (kind === "token-departure")
+    return view.decision !== null && events.some((event) => event.type === "TokensCeased");
   if (kind === "pending-counter") {
     const spells = new Set(
       view.stack.flatMap((entry) => (entry.kind === "spell" ? [entry.objectId] : [])),
@@ -262,7 +297,7 @@ export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean
           !!target &&
           source.id !== target &&
           spells.has(target) &&
-          source.card.spellProgram?.effects.some((effect) => effect.kind === "counter")
+          source.card?.spellProgram?.effects.some((effect) => effect.kind === "counter")
         );
       })
     );
@@ -272,15 +307,14 @@ export function atProofStage(view: PlayerObservation, kind: ProofStage): boolean
       view.decision?.kind === "priority" &&
       view.objects.some((object) => {
         if (object.zone !== "battlefield") return false;
+        const base = object.card ?? object.tokenTemplate?.characteristics;
+        if (!base) return false;
         const counters = (object.counters["+1/+1"] ?? 0) - (object.counters["-1/-1"] ?? 0);
         return (
-          object.characteristics.keywords.some(
-            (keyword) => !object.card.keywords.includes(keyword),
-          ) ||
-          (object.card.power !== null &&
-            object.characteristics.power !== object.card.power + counters) ||
-          (object.card.toughness !== null &&
-            object.characteristics.toughness !== object.card.toughness + counters)
+          object.characteristics.keywords.some((keyword) => !base.keywords.includes(keyword)) ||
+          (base.power !== null && object.characteristics.power !== base.power + counters) ||
+          (base.toughness !== null &&
+            object.characteristics.toughness !== base.toughness + counters)
         );
       })
     );

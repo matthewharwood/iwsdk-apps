@@ -99,11 +99,13 @@ export class Coordinator {
     sourceReleaseHash: string;
     preparedArtifactHash: string | null;
     definitionCount: number;
+    tokenTemplateCount: number;
   } {
     return {
       sourceReleaseHash: this.registry.sourceReleaseHash,
       preparedArtifactHash: this.registry.preparedArtifactHash,
       definitionCount: Object.keys(this.registry.definitions).length,
+      tokenTemplateCount: Object.keys(this.registry.tokenTemplates).length,
     };
   }
   get pendingActor(): string | null {

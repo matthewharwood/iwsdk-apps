@@ -8,7 +8,7 @@ import {
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/5";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/6";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;
@@ -58,23 +58,28 @@ function present(observation: PlayerObservation, write: (line: string) => void):
     }),
   );
   write(
-    `Visible cards: ${JSON.stringify(
-      observation.objects.map((object) => ({
-        id: object.id,
-        name: object.card.name,
-        owner: object.owner,
-        controller: object.controller,
-        zone: object.zone,
-        tapped: object.tapped,
-        damage: object.damage,
-        counters: object.counters,
-        manaCost: object.card.manaCost,
-        type: object.card.typeLine,
-        power: object.characteristics.power,
-        toughness: object.characteristics.toughness,
-        keywords: object.characteristics.keywords,
-        oracleText: object.card.oracleText,
-      })),
+    `Visible objects: ${JSON.stringify(
+      observation.objects.map((object) => {
+        const base = object.card ?? object.tokenTemplate?.characteristics;
+        if (!base) throw new Error(`Visible object has no characteristics: ${object.id}`);
+        return {
+          id: object.id,
+          name: base.name,
+          token: object.tokenTemplate !== null,
+          owner: object.owner,
+          controller: object.controller,
+          zone: object.zone,
+          tapped: object.tapped,
+          damage: object.damage,
+          counters: object.counters,
+          manaCost: object.card?.manaCost ?? null,
+          type: object.card?.typeLine ?? `${base.types.join(" ")} — ${base.subtypes.join(" ")}`,
+          power: object.characteristics.power,
+          toughness: object.characteristics.toughness,
+          keywords: object.characteristics.keywords,
+          oracleText: object.card?.oracleText ?? null,
+        };
+      }),
     )}`,
   );
   write(`Decision constraints: ${JSON.stringify(observation.decision)}`);

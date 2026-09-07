@@ -13,12 +13,14 @@ import {
   compileCounterSpellDraft,
   compileCreatureReturnDraft,
   compileDevelopmentRelease,
+  compileFixedTokenDraft,
   compileKeywordReminderDraft,
   compileSelfEntryDraft,
   compileSpellFamilyDraft,
   makeCounterSpellDecks,
   makeCreatureReturnDecks,
   makeDevelopmentDecks,
+  makeFixedTokenDecks,
   makeKeywordReminderDecks,
 } from "@iwsdk-apps/compiler";
 import { createPreparedMatchArtifact } from "@iwsdk-apps/compiler/prepared";
@@ -320,15 +322,27 @@ async function reviewedFixtureDecks(content: ContentRelease) {
     "commander-engine/0.10.0",
   );
   const counters = await makeCounterSpellDecks(historicalCounters, reminders.decks);
-  const returns = await makeCreatureReturnDecks(content, counters.decks);
-  return { ...returns, counterReport: counters.report, reminderReport: reminders.report };
+  const returnRelease = await compileCreatureReturnDraft(catalogPath);
+  const historicalReturns = await historicalFixtureRelease(
+    returnRelease.release,
+    "dac4f923e99a94e3e54031e635609dca4c91ad3f26c0bf85c4eb1bc3b35fa900",
+    "commander-engine/0.11.0",
+  );
+  const returns = await makeCreatureReturnDecks(historicalReturns, counters.decks);
+  const tokens = await makeFixedTokenDecks(content, returns.decks);
+  return {
+    ...tokens,
+    returnReport: returns.report,
+    counterReport: counters.report,
+    reminderReport: reminders.report,
+  };
 }
 async function compileCatalog(): Promise<void> {
   const allReviewed = args.includes("--all-reviewed");
   const triggers = allReviewed || args.includes("--self-entry-triggers");
   const families = allReviewed || args.includes("--spell-families");
   const compiled = allReviewed
-    ? await compileCreatureReturnDraft(catalogPath)
+    ? await compileFixedTokenDraft(catalogPath)
     : triggers
       ? await compileSelfEntryDraft(catalogPath)
       : families
@@ -351,7 +365,7 @@ async function compileCatalog(): Promise<void> {
       resolve(
         retained,
         allReviewed
-          ? "creature-return-expansion.json"
+          ? "fixed-token-expansion.json"
           : triggers
             ? "self-entry-expansion.json"
             : "spell-family-expansion.json",
@@ -361,7 +375,8 @@ async function compileCatalog(): Promise<void> {
   if (reviewed) {
     await write(resolve(retained, "keyword-reminder-decks.json"), reviewed.reminderReport);
     await write(resolve(retained, "counter-spell-decks.json"), reviewed.counterReport);
-    await write(resolve(retained, "creature-return-decks.json"), reviewed.report);
+    await write(resolve(retained, "creature-return-decks.json"), reviewed.returnReport);
+    await write(resolve(retained, "fixed-token-decks.json"), reviewed.report);
   }
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))
@@ -372,6 +387,7 @@ async function compileCatalog(): Promise<void> {
       {
         releaseHash: compiled.release.hash,
         definitions: Object.keys(compiled.release.definitions).length,
+        auxiliaryTokenTemplates: Object.keys(compiled.release.tokenTemplates ?? {}).length,
         unsupported: compiled.release.unsupportedOracleIds.length,
         decks: decks.length,
         assurance: compiled.release.assurance,

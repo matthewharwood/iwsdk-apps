@@ -128,6 +128,7 @@ function fixture(count: 2 | 4 = 2, changes: Record<string, Partial<CardDefinitio
   const release: ExecutionRegistry = {
     sourceReleaseHash: source.hash,
     preparedArtifactHash: null,
+    tokenTemplates: {},
     definitions: source.definitions,
   };
   const manifest: MatchManifest = {

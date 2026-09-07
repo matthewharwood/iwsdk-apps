@@ -398,6 +398,7 @@ describe("persisted prepared execution registries", () => {
         sourceReleaseHash: release.hash,
         preparedArtifactHash: artifact.hash,
         definitionCount: 2,
+        tokenTemplateCount: 0,
       });
       expect(Object.keys(release.definitions)).toHaveLength(3);
       // Actual staged commander cast creates a pending payment decision before persistence/reload.

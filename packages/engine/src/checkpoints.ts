@@ -1,12 +1,12 @@
 import type { ExecutionRegistry, Response, RulesState } from "@iwsdk-apps/contracts";
 import { characteristics } from "./characteristics";
 import {
-  card,
   creatures,
   emit,
   hit,
   move,
   object,
+  permanentBase,
   player,
   RulesError,
   removeFromLists,
@@ -114,22 +114,41 @@ function stateBasedActions(
           (entry.damage >= health || entry.deathtouchDamage))
       );
     });
+    const ceased = orderedObjects(state).filter(
+      (entry) => entry.token && entry.zone !== "battlefield",
+    );
     const losses = state.players
       .filter((seat) => !seat.lost)
       .flatMap((seat) => {
         const reason = lossReason(state, seat.id);
         return reason ? [{ player: seat.id, reason }] : [];
       });
-    if (dead.length === 0 && losses.length === 0) break;
+    if (dead.length === 0 && losses.length === 0 && ceased.length === 0) break;
     const moved: { before: string; after: string }[] = [];
     for (const entry of dead) {
       recordDeathRules(state, release, entry.id);
       const after = move(state, entry.id, "graveyard", "state-based creature death");
       moved.push({ before: entry.id, after: after.id });
-      hit(state, `card:${entry.definition}:dies`);
+      hit(state, `${entry.token ? "token" : "card"}:${entry.definition}:dies`);
     }
     if (moved.length) {
       emit(state, "CreaturesDiedBatch", { objects: moved });
+    }
+    for (const entry of ceased) {
+      removeFromLists(state, entry.id);
+      delete state.objects[entry.id];
+    }
+    if (ceased.length) {
+      emit(state, "TokensCeased", {
+        objects: ceased.map((entry) => ({
+          object: entry.id,
+          definition: entry.definition,
+          owner: entry.owner,
+          zone: entry.zone,
+        })),
+      });
+      hit(state, "rule:111.7");
+      hit(state, "rule:704.5d");
     }
     if (losses.length) eliminate(state, losses);
     changed = true;
@@ -144,7 +163,7 @@ function stateBasedActions(
   // Legend choice is never silently approximated by keeping a convenient object.
   const legends = new Set<string>();
   for (const entry of creatures(state, release)) {
-    const current = card(state, release, entry.id);
+    const current = permanentBase(state, release, entry.id);
     if (!current.supertypes.includes("Legendary")) continue;
     const key = `${entry.controller}:${current.name}`;
     if (legends.has(key))

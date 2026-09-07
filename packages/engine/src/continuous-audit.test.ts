@@ -97,6 +97,7 @@ function fixture(
     definitions,
     sourceReleaseHash: digest,
     preparedArtifactHash: null,
+    tokenTemplates: {},
   };
   const ids = ["A", "B", "C", "D"].slice(0, options.seats ?? 2);
   const entries = Object.keys(definitions).map((id) => ({
