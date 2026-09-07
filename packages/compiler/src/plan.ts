@@ -18,12 +18,16 @@ import {
   reviewedOrdinaryActivatedDefinition,
   reviewedSelfEntryDefinition,
   reviewedStaticBonusDefinition,
+  reviewedStaticEvasionDefinition,
+  reviewedStaticKeywordGrantDefinition,
   reviewedStrictProctorDefinition,
   reviewedTemporaryCreatureDefinition,
   reviewedTokenTemplate,
   SELF_ENTRY_RECIPE_VERSION,
   SELF_ENTRY_SEQUENCE_VERSION,
   STATIC_BONUS_VERSION,
+  STATIC_EVASION_VERSION,
+  STATIC_KEYWORD_GRANT_VERSION,
   STRICT_PROCTOR_VERSION,
   TEMPORARY_CREATURE_VERSION,
 } from "@iwsdk-apps/card-programs";
@@ -36,8 +40,30 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/14";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.18.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/16";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.20.0";
+export const STATIC_KEYWORD_GRANT_CORE_CAPABILITIES = [
+  "static-keyword:live-battlefield-provider",
+  "static-keyword:layer6-additive-union",
+  "static-keyword:current-controller-or-any",
+  "static-keyword:all-of-types-subtype-color",
+  "static-keyword:exact-source-object-exclusion",
+  "static-keyword:provider-departure-recomputation",
+  "static-keyword:post-entry-and-state-based-actions",
+  "static-keyword:shared-characteristics-consumers",
+] as const;
+export const STATIC_EVASION_CORE_CAPABILITIES = [
+  "blocking:pair-domain-projection",
+  "blocking:live-state-declaration-validation",
+  "blocking:intersect-all-restrictions",
+  "blocking:artifact-and-current-color",
+  "blocking:defending-player-land-subtypes",
+  "blocking:asymmetric-horsemanship",
+  "blocking:symmetric-shadow",
+  "blocking:derived-signed-power-skulk",
+  "blocking:printed-nonkeyword-restrictions",
+  "blocking:accepted-block-stability",
+] as const;
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -258,6 +284,31 @@ const REVIEWED_BINDINGS_BY_VERSION = new Map(
   Object.values(REVIEWED_SOURCE_BINDINGS).map((binding) => [binding.sourceVersion, binding]),
 );
 
+const dependencyReviewers: Readonly<Record<string, (definition: CardDefinition) => boolean>> = {
+  [STATIC_KEYWORD_GRANT_VERSION]: reviewedStaticKeywordGrantDefinition,
+  [STATIC_EVASION_VERSION]: reviewedStaticEvasionDefinition,
+  [ORDINARY_ACTIVATED_VERSION]: reviewedOrdinaryActivatedDefinition,
+  [DAMAGE_REPLACEMENT_VERSION]: reviewedDamageReplacementDefinition,
+  [STRICT_PROCTOR_VERSION]: reviewedStrictProctorDefinition,
+  [CONDITIONAL_SELF_ENTRY_VERSION]: reviewedConditionalSelfEntryDefinition,
+  [ENTRY_OBSERVER_VERSION]: reviewedEntryObserverDefinition,
+  [STATIC_BONUS_VERSION]: reviewedStaticBonusDefinition,
+  [FIXED_TOKEN_VERSION]: reviewedFixedTokenDefinition,
+  [CREATURE_RETURN_VERSION]: reviewedCreatureReturnSpellDefinition,
+  [COUNTER_SPELL_VERSION]: reviewedCounterSpellDefinition,
+  [KEYWORD_REMINDER_RECIPE_VERSION]: reviewedKeywordReminderDefinition,
+  [TEMPORARY_CREATURE_VERSION]: reviewedTemporaryCreatureDefinition,
+  [SELF_ENTRY_RECIPE_VERSION]: reviewedSelfEntryDefinition,
+  [SELF_ENTRY_SEQUENCE_VERSION]: reviewedSelfEntryDefinition,
+};
+function activeStaticKeywordCapabilities(release: ContentRelease): readonly string[] {
+  return release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+    Object.values(release.definitions).some(
+      (definition) => definition.implementationRevision === STATIC_KEYWORD_GRANT_VERSION,
+    )
+    ? STATIC_KEYWORD_GRANT_CORE_CAPABILITIES
+    : [];
+}
 async function recognizedDependencyDeclaration(
   definition: CardDefinition,
   processorAbi: string,
@@ -281,47 +332,10 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
-  if (definition.implementationRevision === ORDINARY_ACTIVATED_VERSION)
-    return (
-      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedOrdinaryActivatedDefinition(definition)
-    );
-  if (definition.implementationRevision === DAMAGE_REPLACEMENT_VERSION)
-    return (
-      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedDamageReplacementDefinition(definition)
-    );
-  if (definition.implementationRevision === STRICT_PROCTOR_VERSION)
-    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedStrictProctorDefinition(definition);
-  if (definition.implementationRevision === CONDITIONAL_SELF_ENTRY_VERSION)
-    return (
-      processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
-      reviewedConditionalSelfEntryDefinition(definition)
-    );
-  if (definition.implementationRevision === ENTRY_OBSERVER_VERSION)
-    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedEntryObserverDefinition(definition);
-  if (definition.implementationRevision === STATIC_BONUS_VERSION)
-    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedStaticBonusDefinition(definition);
-  if (definition.implementationRevision === FIXED_TOKEN_VERSION)
-    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedFixedTokenDefinition(definition);
-  if (definition.implementationRevision === CREATURE_RETURN_VERSION)
-    return (
-      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedCreatureReturnSpellDefinition(definition)
-    );
-  if (definition.implementationRevision === COUNTER_SPELL_VERSION)
-    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedCounterSpellDefinition(definition);
-  if (definition.implementationRevision === KEYWORD_REMINDER_RECIPE_VERSION)
-    return (
-      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedKeywordReminderDefinition(definition)
-    );
-  if (definition.implementationRevision === TEMPORARY_CREATURE_VERSION)
-    return (
-      processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedTemporaryCreatureDefinition(definition)
-    );
-  if (
-    [SELF_ENTRY_RECIPE_VERSION, SELF_ENTRY_SEQUENCE_VERSION].includes(
-      definition.implementationRevision,
-    )
-  )
-    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedSelfEntryDefinition(definition);
+  const reviewer = Object.hasOwn(dependencyReviewers, definition.implementationRevision)
+    ? dependencyReviewers[definition.implementationRevision]
+    : undefined;
+  if (reviewer) return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewer(definition);
   return reviewedLegacyDefinition(definition);
 }
 /** Exact producer-to-template edges preserve auxiliary token dependencies without adding deck cards. */
@@ -372,6 +386,13 @@ export async function buildDevelopmentMatchPlan(
     ],
     core: [
       ...DEVELOPMENT_CORE,
+      ...activeStaticKeywordCapabilities(release),
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === STATIC_EVASION_VERSION,
+      )
+        ? STATIC_EVASION_CORE_CAPABILITIES
+        : []),
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === ORDINARY_ACTIVATED_VERSION,

@@ -5,6 +5,7 @@ import {
   type RulesState,
 } from "@iwsdk-apps/contracts";
 import { assertActivatedAbility, assertActivationContexts } from "./activation-context";
+import { assertBlockingDecision } from "./combat";
 import { assertRegistryPin, definition, RulesError } from "./common";
 import { assertDamageContinuation } from "./damage-context";
 import { assertResolutionContinuation } from "./resolution-context";
@@ -304,6 +305,7 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
   assertActivationContexts(state, release);
   assertResolutionContinuation(state, release);
   assertDamageContinuation(state, release);
+  assertBlockingDecision(state, release);
   assertPhysicalInventory(state);
   if (state.outcome.kind === "ongoing") {
     invariant(state.decision !== null, "Ongoing transition has no serializable decision");

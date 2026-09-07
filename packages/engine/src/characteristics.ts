@@ -2,6 +2,7 @@ import type { DerivedCharacteristics, ExecutionRegistry, RulesState } from "@iws
 
 import { objectBase } from "./object-definitions";
 import { staticPowerToughnessBonus } from "./static-bonus";
+import { staticGrantedKeywords } from "./static-keywords";
 
 /** Admitted layer 6 keyword additions and layer 7c additive modifiers; no generic layer claim. */
 export function characteristics(
@@ -23,6 +24,7 @@ export function characteristics(
     if (power !== null) power += effect.modifier.powerDelta;
     if (toughness !== null) toughness += effect.modifier.toughnessDelta;
   }
+  for (const keyword of staticGrantedKeywords(state, registry, object)) keywords.add(keyword);
   const bonus = staticPowerToughnessBonus(state, registry, object);
   if (power !== null) power += bonus.power;
   if (toughness !== null) toughness += bonus.toughness;

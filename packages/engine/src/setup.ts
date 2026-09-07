@@ -30,6 +30,7 @@ import {
   isOrdinaryActivatedPermanent,
   isReviewedTriggeredPermanent,
   isStaticBonusPermanent,
+  isStaticKeywordGrantPermanent,
 } from "./permanent-programs";
 
 export function admitDeck(
@@ -83,6 +84,12 @@ export function admitDeck(
         "UnsupportedMechanic",
         `Damage permanent program is not implemented: ${current.name}.`,
       );
+    const keywordPermanent = isStaticKeywordGrantPermanent(current);
+    if (current.staticKeywordPrograms && !keywordPermanent)
+      throw new RulesError(
+        "UnsupportedMechanic",
+        `Static keyword grant is not implemented: ${current.name}.`,
+      );
     const staticPermanent = isStaticBonusPermanent(current);
     if (current.staticPrograms && !staticPermanent)
       throw new RulesError(
@@ -103,6 +110,7 @@ export function admitDeck(
       !current.types.includes("Creature") &&
       !programmedSpell &&
       !staticPermanent &&
+      !keywordPermanent &&
       !damagePermanent &&
       !activatedPermanent &&
       !isEntryObserverPermanent(current)

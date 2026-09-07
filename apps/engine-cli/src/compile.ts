@@ -11,6 +11,8 @@ import {
   compileSelfEntryDraft,
   compileSpellFamilyDraft,
   compileStaticBonusDraft,
+  compileStaticEvasionDraft,
+  compileStaticKeywordGrantDraft,
   compileStrictProctorDraft,
   makeConditionalSelfEntryDecks,
   makeCounterSpellDecks,
@@ -22,6 +24,8 @@ import {
   makeKeywordReminderDecks,
   makeOrdinaryActivatedDecks,
   makeStaticBonusDecks,
+  makeStaticEvasionDecks,
+  makeStaticKeywordGrantDecks,
   makeStrictProctorDecks,
 } from "@iwsdk-apps/compiler";
 import { ContentRelease, semanticHash } from "@iwsdk-apps/contracts";
@@ -39,7 +43,11 @@ export async function historicalFixtureRelease(
   if (hash !== expectedHash) throw new Error("Historical fixture source changed");
   return ContentRelease.parse({ ...body, hash });
 }
-async function reviewedFixtureDecks(catalogPath: string, content: ContentRelease) {
+async function reviewedFixtureDecks(
+  catalogPath: string,
+  content: ContentRelease,
+  mode: "ordinary-activated" | "static-evasion" | "static-keyword-grant",
+) {
   const base = await compileDevelopmentRelease(catalogPath, {
     spellFamilies: true,
     selfEntryTriggers: true,
@@ -117,9 +125,35 @@ async function reviewedFixtureDecks(catalogPath: string, content: ContentRelease
     "commander-engine/0.17.0",
   );
   const damage = await makeDamageReplacementDecks(historicalDamage, proctor.decks);
-  const ordinary = await makeOrdinaryActivatedDecks(content, damage.decks);
+  const ordinarySource =
+    mode !== "ordinary-activated"
+      ? await historicalFixtureRelease(
+          (await compileOrdinaryActivatedDraft(catalogPath)).release,
+          "4efc85ff671b5628c45d617a136f31a5f1d6e4b64067efe39d95525ec61f7e93",
+          "commander-engine/0.18.0",
+        )
+      : content;
+  const ordinary = await makeOrdinaryActivatedDecks(ordinarySource, damage.decks);
+  const evasionSource =
+    mode === "static-keyword-grant"
+      ? await historicalFixtureRelease(
+          (await compileStaticEvasionDraft(catalogPath)).release,
+          "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+          "commander-engine/0.19.0",
+        )
+      : content;
+  const evasion =
+    mode !== "ordinary-activated"
+      ? await makeStaticEvasionDecks(evasionSource, ordinary.decks)
+      : null;
+  const newest =
+    mode === "static-keyword-grant"
+      ? await makeStaticKeywordGrantDecks(content, evasion?.decks ?? [])
+      : (evasion ?? ordinary);
   return {
-    ...ordinary,
+    ...newest,
+    evasionReport: evasion?.report,
+    ordinaryReport: ordinary.report,
     damageReport: damage.report,
     proctorReport: proctor.report,
     conditionalReport: conditional.report,
@@ -136,24 +170,44 @@ export type CompilationMode =
   | "development"
   | "spell-families"
   | "self-entry"
-  | "ordinary-activated";
+  | "ordinary-activated"
+  | "static-evasion"
+  | "static-keyword-grant";
 export function selectCompileMode(args: readonly string[]): CompilationMode {
-  if (args.includes("--all-reviewed") || args.includes("--ordinary-activated-abilities"))
-    return "ordinary-activated";
+  if (args.includes("--all-reviewed") || args.includes("--static-keyword-grants"))
+    return "static-keyword-grant";
+  if (args.includes("--static-evasion")) return "static-evasion";
+  if (args.includes("--ordinary-activated-abilities")) return "ordinary-activated";
   if (args.includes("--self-entry-triggers")) return "self-entry";
   return args.includes("--spell-families") ? "spell-families" : "development";
 }
+export function expansionReportName(mode: CompilationMode): string {
+  return {
+    development: "development-expansion.json",
+    "spell-families": "spell-family-expansion.json",
+    "self-entry": "self-entry-expansion.json",
+    "ordinary-activated": "ordinary-activated-expansion.json",
+    "static-evasion": "static-evasion-expansion.json",
+    "static-keyword-grant": "static-keyword-grant-expansion.json",
+  }[mode];
+}
 export async function compileArtifacts(catalogPath: string, mode: CompilationMode) {
   const result =
-    mode === "ordinary-activated"
-      ? await compileOrdinaryActivatedDraft(catalogPath)
-      : mode === "self-entry"
-        ? await compileSelfEntryDraft(catalogPath)
-        : mode === "spell-families"
-          ? await compileSpellFamilyDraft(catalogPath)
-          : await compileDevelopmentRelease(catalogPath);
+    mode === "static-keyword-grant"
+      ? await compileStaticKeywordGrantDraft(catalogPath)
+      : mode === "static-evasion"
+        ? await compileStaticEvasionDraft(catalogPath)
+        : mode === "ordinary-activated"
+          ? await compileOrdinaryActivatedDraft(catalogPath)
+          : mode === "self-entry"
+            ? await compileSelfEntryDraft(catalogPath)
+            : mode === "spell-families"
+              ? await compileSpellFamilyDraft(catalogPath)
+              : await compileDevelopmentRelease(catalogPath);
   const reviewed =
-    mode === "ordinary-activated" ? await reviewedFixtureDecks(catalogPath, result.release) : null;
+    mode === "ordinary-activated" || mode === "static-evasion" || mode === "static-keyword-grant"
+      ? await reviewedFixtureDecks(catalogPath, result.release, mode)
+      : null;
   const decks =
     reviewed?.decks ??
     (await makeDevelopmentDecks(result.release, {
@@ -171,18 +225,19 @@ export async function compileArtifacts(catalogPath: string, mode: CompilationMod
         "conditional-self-entry-decks.json": reviewed.conditionalReport,
         "strict-proctor-decks.json": reviewed.proctorReport,
         "damage-replacement-decks.json": reviewed.damageReport,
-        "ordinary-activated-decks.json": reviewed.report,
+        "ordinary-activated-decks.json": reviewed.ordinaryReport,
+        ...(mode !== "ordinary-activated"
+          ? { "static-evasion-decks.json": reviewed.evasionReport }
+          : {}),
+        ...(mode === "static-keyword-grant"
+          ? { "static-keyword-grant-decks.json": reviewed.report }
+          : {}),
       }
     : {};
   const expansion =
     "expansion" in result
       ? {
-          name:
-            mode === "ordinary-activated"
-              ? "ordinary-activated-expansion.json"
-              : mode === "self-entry"
-                ? "self-entry-expansion.json"
-                : "spell-family-expansion.json",
+          name: expansionReportName(mode),
           value: result.expansion,
         }
       : null;

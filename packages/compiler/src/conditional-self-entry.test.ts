@@ -95,9 +95,9 @@ async function deck(
   };
   return DeckRevision.parse({ ...body, hash: await semanticHash(body) });
 }
-test("closed1198 registry authenticates both complete conditional source programs", async () => {
+test("closed1583 registry authenticates both complete conditional source programs", async () => {
   const source = await fixture();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1437);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1638);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   const full = await createFullExecutionRegistry(source);
   expect(Object.keys(full.definitions)).toHaveLength(9);
@@ -133,7 +133,7 @@ for (const commander of ["Donatello, Turtle Techie", "Tobias Andrion"] as const)
       d.entries.map((e) => e.definition).sort(),
     );
     expect(Object.keys(prepared.tokenTemplates)).toHaveLength(0);
-    expect(artifact.compilerVersion).toBe("development-match-plan/14");
+    expect(artifact.compilerVersion).toBe("development-match-plan/16");
     for (const cap of [
       ...CONDITIONAL_SELF_ENTRY_CORE_CAPABILITIES,
       ...SELF_ENTRY_CORE_CAPABILITIES,
@@ -207,7 +207,7 @@ for (const recipe of CONDITIONAL_SELF_ENTRY_PERMANENTS)
 test("conditional programs reject old and future execution ABIs but retain source inspection", async () => {
   const source = await fixture();
   const d = await deck(source, "Donatello, Turtle Techie");
-  for (const processorAbi of ["commander-engine/0.17.0", "commander-engine/0.19.0"]) {
+  for (const processorAbi of ["commander-engine/0.19.0", "commander-engine/0.21.0"]) {
     const altered = await rehash({ ...source, processorAbi });
     expect((await verifySourceRelease(altered)).processorAbi).toBe(processorAbi);
     await expect(createFullExecutionRegistry(altered)).rejects.toThrow("incompatible");

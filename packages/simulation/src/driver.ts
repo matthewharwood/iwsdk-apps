@@ -9,7 +9,7 @@ import {
 } from "@iwsdk-apps/contracts";
 import { activationChoice, priorityActivation } from "./activation-driver";
 
-export const DRIVER_VERSION = "observed-combat/12";
+export const DRIVER_VERSION = "observed-combat/13";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -81,24 +81,18 @@ function strength(object: VisibleObject): number {
 function blockers(observation: PlayerObservation, decision: Decision): Response {
   const available = observation.objects.filter((object) => decision.cards.includes(object.id));
   const blocks: Extract<Response, { kind: "block" }>["blocks"] = [];
-  const attacks = observation.combat.attacks.filter(
-    (attack) => attack.defender === observation.player,
-  );
-  for (const attack of attacks) {
-    const attacker = observation.objects.find((object) => object.id === attack.attacker);
+  if (!decision.blockDomain)
+    throw new Error("DriverUnsupportedDecision: missing authoritative blocking domain");
+  for (const domain of decision.blockDomain) {
+    const attacker = observation.objects.find((object) => object.id === domain.attacker);
     if (!attacker) throw new Error("Attacker absent from public observation");
-    const count = attacker.characteristics.keywords.includes("menace") ? 2 : 1;
-    const eligible = available.filter(
-      (object) =>
-        !attacker.characteristics.keywords.includes("flying") ||
-        object.characteristics.keywords.includes("flying") ||
-        object.characteristics.keywords.includes("reach"),
-    );
+    const count = domain.minimumBlockers;
+    const eligible = available.filter((object) => domain.blockers.includes(object.id));
     // Trading is deliberately simple, but it uses only entitled public characteristics.
     eligible.sort((a, b) => strength(b) - strength(a) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
     if (eligible.length < count) continue;
     for (const chosen of eligible.slice(0, count)) {
-      blocks.push({ blocker: chosen.id, attacker: attack.attacker });
+      blocks.push({ blocker: chosen.id, attacker: domain.attacker });
       available.splice(available.indexOf(chosen), 1);
     }
   }

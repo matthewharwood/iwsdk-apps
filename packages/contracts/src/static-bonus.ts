@@ -18,6 +18,8 @@ export const ReviewedCreatureSubtype = z.enum([
   "Turtle",
   "Elf",
   "Merfolk",
+  "Minotaur",
+  "Cleric",
   "Ally",
 ]);
 export type ReviewedCreatureSubtype = z.infer<typeof ReviewedCreatureSubtype>;

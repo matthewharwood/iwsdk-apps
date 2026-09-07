@@ -1,4 +1,42 @@
 import {
+  bindStaticKeywordGrant,
+  STATIC_KEYWORD_GRANT_VERSION,
+  STATIC_KEYWORD_GRANTS,
+} from "./static-keyword-grant";
+
+export {
+  bindStaticKeywordGrant,
+  reviewedStaticKeywordGrantDefinition,
+  STATIC_KEYWORD_GRANT_ARCHIVE,
+  STATIC_KEYWORD_GRANT_RESEARCH_HASH,
+  STATIC_KEYWORD_GRANT_RULES,
+  STATIC_KEYWORD_GRANT_RULES_HASH,
+  STATIC_KEYWORD_GRANT_SOURCE_BUNDLE,
+  STATIC_KEYWORD_GRANT_VERSION,
+  STATIC_KEYWORD_GRANTS,
+  type StaticKeywordGrantSource,
+} from "./static-keyword-grant";
+
+import {
+  bindStaticEvasionPermanent,
+  STATIC_EVASION_PERMANENTS,
+  STATIC_EVASION_VERSION,
+} from "./static-evasion";
+
+export {
+  bindStaticEvasionPermanent,
+  reviewedStaticEvasionDefinition,
+  STATIC_EVASION_ARCHIVE,
+  STATIC_EVASION_PERMANENTS,
+  STATIC_EVASION_RESEARCH_HASH,
+  STATIC_EVASION_RULES,
+  STATIC_EVASION_RULES_HASH,
+  STATIC_EVASION_SOURCE_BUNDLE,
+  STATIC_EVASION_VERSION,
+  type StaticEvasionSource,
+} from "./static-evasion";
+
+import {
   bindOrdinaryActivatedPermanent,
   ORDINARY_ACTIVATED_PERMANENTS,
   ORDINARY_ACTIVATED_VERSION,
@@ -223,7 +261,7 @@ export {
 export { REVIEWED_SPELLS, SPELL_RECIPE_VERSION } from "./spells";
 
 export const RECIPE_VERSION = "commander-development-recipes/1";
-export const KEYWORD_RULES: Record<Keyword, string> = {
+export const LEGACY_KEYWORD_RULES = {
   flying: "702.9",
   reach: "702.17",
   vigilance: "702.20",
@@ -239,6 +277,19 @@ export const KEYWORD_RULES: Record<Keyword, string> = {
   hexproof: "702.11",
   shroud: "702.18",
   flash: "702.8",
+};
+export const KEYWORD_RULES: Record<Keyword, string> = {
+  ...LEGACY_KEYWORD_RULES,
+  fear: "702.36",
+  intimidate: "702.13",
+  horsemanship: "702.31",
+  shadow: "702.28",
+  skulk: "702.118",
+  plainswalk: "702.14",
+  islandwalk: "702.14",
+  swampwalk: "702.14",
+  mountainwalk: "702.14",
+  forestwalk: "702.14",
 };
 export const RECIPE_REGISTRY = [
   {
@@ -292,7 +343,10 @@ const BASIC_TYPES: Record<string, ManaColor> = {
 const SUPERTYPES = new Set(["Basic", "Legendary"]);
 const ORDINARY_TYPES = new Set(["Artifact", "Enchantment", "Creature"]);
 const KEYWORDS = new Map(
-  Object.keys(KEYWORD_RULES).map((keyword) => [keyword.replaceAll("-", " "), keyword as Keyword]),
+  Object.keys(LEGACY_KEYWORD_RULES).map((keyword) => [
+    keyword.replaceAll("-", " "),
+    keyword as Keyword,
+  ]),
 );
 
 export function parsePlainManaCost(source: string): Cost | null {
@@ -584,6 +638,8 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  staticKeywordGrants?: boolean;
+  staticEvasionPermanents?: boolean;
   ordinaryActivatedAbilities?: boolean;
   damageReplacementPermanents?: boolean;
   entryObserverTriggers?: boolean;
@@ -637,6 +693,20 @@ interface KnownPermanentBinder {
   reasonPrefix: string;
 }
 const knownPermanentBinders: readonly KnownPermanentBinder[] = [
+  {
+    sources: STATIC_KEYWORD_GRANTS,
+    option: "staticKeywordGrants",
+    bind: bindStaticKeywordGrant,
+    version: STATIC_KEYWORD_GRANT_VERSION,
+    reasonPrefix: "static-keyword-grant",
+  },
+  {
+    sources: STATIC_EVASION_PERMANENTS,
+    option: "staticEvasionPermanents",
+    bind: bindStaticEvasionPermanent,
+    version: STATIC_EVASION_VERSION,
+    reasonPrefix: "static-evasion",
+  },
   {
     sources: ORDINARY_ACTIVATED_PERMANENTS,
     option: "ordinaryActivatedAbilities",

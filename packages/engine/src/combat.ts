@@ -6,6 +6,8 @@ import type {
   Response,
   RulesState,
 } from "@iwsdk-apps/contracts";
+import { canonicalJson } from "@iwsdk-apps/contracts";
+import { blockingRestriction } from "./blocking";
 import { characteristics } from "./characteristics";
 import {
   creatures,
@@ -71,6 +73,7 @@ function blockCandidates(
     (entry) =>
       entry.controller === actor &&
       !entry.tapped &&
+      !permanentBase(state, release, entry.id).blockingRestrictions?.includes("cannot-block") &&
       !permanentBase(state, release, entry.id).types.includes("Battle"),
   );
 }
@@ -176,6 +179,48 @@ export function answerAttack(
   hit(state, "rule:508.1");
 }
 
+/** Minimum is conditional: choosing zero blockers remains legal. */
+export function blockingDomain(
+  state: RulesState,
+  release: ExecutionRegistry,
+  actor: string,
+): NonNullable<Decision["blockDomain"]> {
+  return currentAttacks(state, release)
+    .filter((attack) => attack.defender === actor)
+    .map((attack) => ({
+      attacker: attack.attacker,
+      blockers: blockCandidates(state, release, actor)
+        .filter(
+          (blocker) =>
+            blockingRestriction(state, release, attack.attacker, blocker.id, actor) === null,
+        )
+        .map((blocker) => blocker.id),
+      minimumBlockers: has(state, release, attack.attacker, "menace") ? 2 : 1,
+    }));
+}
+
+export function assertBlockingDecision(state: RulesState, release: ExecutionRegistry): void {
+  const decision = state.decision;
+  if (decision?.kind !== "block") {
+    requireRule(decision?.blockDomain === undefined, "Blocking domain outside a block decision.");
+    return;
+  }
+  requireRule(
+    state.combat.remainingDefenders[0] === decision.actor,
+    "Blocking decision has the wrong defender.",
+  );
+  requireRule(
+    canonicalJson(decision.blockDomain ?? null) ===
+      canonicalJson(blockingDomain(state, release, decision.actor)),
+    "Blocking decision domain differs from current rules.",
+  );
+  requireRule(
+    canonicalJson(decision.cards) ===
+      canonicalJson(blockCandidates(state, release, decision.actor).map((entry) => entry.id)),
+    "Blocking candidates differ from current creatures.",
+  );
+}
+
 function requestBlock(state: RulesState, release: ExecutionRegistry): boolean {
   const actor = state.combat.remainingDefenders[0];
   if (!actor) {
@@ -185,6 +230,7 @@ function requestBlock(state: RulesState, release: ExecutionRegistry): boolean {
   request(state, "block", actor, {
     context: "Declare all blockers against creatures attacking you.",
     cards: blockCandidates(state, release, actor).map((entry) => entry.id),
+    blockDomain: blockingDomain(state, release, actor),
   });
   return true;
 }
@@ -220,12 +266,8 @@ export function answerBlock(
       "A creature cannot block multiple attackers without an explicit ability.",
     );
     requireRule(attackers.has(block.attacker), "You can block only creatures attacking you.");
-    requireRule(
-      !has(state, release, block.attacker, "flying") ||
-        has(state, release, block.blocker, "flying") ||
-        has(state, release, block.blocker, "reach"),
-      "A flying attacker requires a blocker with flying or reach.",
-    );
+    const restriction = blockingRestriction(state, release, block.attacker, block.blocker, actor);
+    requireRule(restriction === null, restriction ?? "Illegal block.");
     selected.add(block.blocker);
   }
   for (const attack of attacks) {

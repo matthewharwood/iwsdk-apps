@@ -14,6 +14,8 @@ import {
   SELF_ENTRY_SEQUENCES,
   SPELL_FAMILY_REGISTRY,
   STATIC_BONUS_PERMANENTS,
+  STATIC_EVASION_PERMANENTS,
+  STATIC_KEYWORD_GRANTS,
   STRICT_PROCTOR_PERMANENTS,
   TEMPORARY_CREATURE_BODIES,
   TEMPORARY_CREATURE_SPELLS,
@@ -170,6 +172,8 @@ async function artifactFor(
     compilerVersion: MATCH_PLAN_VERSION,
     recipeRegistryHash: await semanticHash({
       ordinaryActivatedAbilities: ORDINARY_ACTIVATED_PERMANENTS,
+      staticKeywordGrants: STATIC_KEYWORD_GRANTS,
+      staticEvasionPermanents: STATIC_EVASION_PERMANENTS,
       damageReplacementPermanents: DAMAGE_REPLACEMENT_PERMANENTS,
       strictProctorTriggers: STRICT_PROCTOR_PERMANENTS,
       conditionalSelfEntryTriggers: CONDITIONAL_SELF_ENTRY_PERMANENTS,

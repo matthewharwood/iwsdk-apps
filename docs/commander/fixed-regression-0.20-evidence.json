@@ -1,0 +1,34 @@
+{
+  "schema": "commander-completed-fixed-regression/1",
+  "engine": "commander-engine/0.20.0",
+  "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+  "buildHash": "87f0aafd52625d2681276619a829c9da310915e8d5728ee7a2c761138f1b7441",
+  "assigned": 64,
+  "completed": 64,
+  "replayed": 64,
+  "twoSeat": 16,
+  "fourSeat": 48,
+  "pending": 0,
+  "acceptedCommands": 89784,
+  "report": {
+    "path": ".commander/regressions/regression-0.20-fixed64/report.json",
+    "sha256": "3a3013c0dae278262b16a801e798118c84dcae192fb9f48ccf154c056933e007"
+  },
+  "assignments": {
+    "path": ".commander/regressions/regression-0.20-fixed64/assignments.json",
+    "sha256": "f2a20654b10f8be338f7b96c55b9ee213cfdc2528b40fd370044cf5d50f21c70"
+  },
+  "inventory": {
+    "path": ".commander/regressions/regression-0.20-fixed64/archive-inventory.json",
+    "sha256": "bd9accdbf5909c6edd6c727080b32cb8d6756cfa8f3d0891954e5bfb362c5568"
+  },
+  "rawSqliteAudit": {
+    "path": ".commander/regressions/regression-0.20-fixed64/root-sqlite-audit.json",
+    "sha256": "bd7fc9875eadb84a2ed5e6c2cd900e5632feae682a9649d129fcf1dd1aa110e5"
+  },
+  "telemetryFiles": 64,
+  "telemetryScope": "Measurements collected during this invocation only; process-wide CPU/memory, separate create/game/replay/close phases.",
+  "originalRunDirectory": "/private/tmp/iwsdk-commander-0.20/.draft-artifacts/static-keyword-games/regressions/static-keyword-fixed-64-0.20",
+  "retainedDirectory": ".commander/regressions/regression-0.20-fixed64",
+  "scope": "All64 exact fixed inputs executed and replayed under engine0.20. No historical outcomes reused. Older deck compositions do not exercise new static keyword-grant bodies. Final captured CLI build is the same as selected static keyword-grant games. No full-snapshot or whole-card obligation certificate."
+}

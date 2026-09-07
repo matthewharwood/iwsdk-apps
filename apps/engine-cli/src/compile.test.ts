@@ -2,10 +2,12 @@ import { expect, test } from "bun:test";
 import { createFullExecutionRegistry } from "@iwsdk-apps/compiler/prepared";
 import { canonicalJson, semanticHash } from "@iwsdk-apps/contracts";
 import { activationFixtureSource } from "../../../packages/compiler/test-fixtures/ordinary-activated";
-import { historicalFixtureRelease, selectCompileMode } from "./compile";
+import { expansionReportName, historicalFixtureRelease, selectCompileMode } from "./compile";
 
-test("public compilation routes all-reviewed and the activation flag to the executable activation family", () => {
-  expect(selectCompileMode(["--all-reviewed"])).toBe("ordinary-activated");
+test("public compilation routes all-reviewed to static keyword grants while preserving explicit earlier family modes", () => {
+  expect(selectCompileMode(["--all-reviewed"])).toBe("static-keyword-grant");
+  expect(selectCompileMode(["--static-keyword-grants"])).toBe("static-keyword-grant");
+  expect(selectCompileMode(["--static-evasion"])).toBe("static-evasion");
   expect(selectCompileMode(["--ordinary-activated-abilities"])).toBe("ordinary-activated");
   expect(selectCompileMode(["--self-entry-triggers"])).toBe("self-entry");
   expect(selectCompileMode(["--spell-families"])).toBe("spell-families");
@@ -60,3 +62,18 @@ for (const changed of ["bundle", "rules", "body", "compiler", "unsupported"] as 
       historicalFixtureRelease(source, expectedHash, "commander-engine/0.17.0"),
     ).rejects.toThrow("Historical fixture source changed");
   });
+
+test("retained expansion reports identify the requested source family", () => {
+  expect(expansionReportName(selectCompileMode(["--all-reviewed"]))).toBe(
+    "static-keyword-grant-expansion.json",
+  );
+  expect(expansionReportName(selectCompileMode(["--ordinary-activated-abilities"]))).toBe(
+    "ordinary-activated-expansion.json",
+  );
+  expect(expansionReportName(selectCompileMode(["--self-entry-triggers"]))).toBe(
+    "self-entry-expansion.json",
+  );
+  expect(expansionReportName(selectCompileMode(["--spell-families"]))).toBe(
+    "spell-family-expansion.json",
+  );
+});

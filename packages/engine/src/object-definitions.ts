@@ -24,6 +24,7 @@ export type ObjectBase = Pick<
   | "power"
   | "toughness"
   | "keywords"
+  | "blockingRestrictions"
 > & { manaAbilities: ManaColor[] };
 
 /** Common battlefield facts do not turn an auxiliary template into an Oracle card. */

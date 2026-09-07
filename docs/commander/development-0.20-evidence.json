@@ -1,0 +1,584 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.20.0",
+  "stage": "qualified-development-checkpoint",
+  "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+  "primaryDefinitions": 1638,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 74,
+  "preservedPrimaryDefinitions": 1583,
+  "preservedCompleteDeckRevisions": 69,
+  "unsupportedPaperCandidates": 30191,
+  "candidateUniverse": 31829,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceCompiler": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-grant-source-checks/manifest.json",
+    "sha256": "825574fc8c503eb0120a34bdb6cfea33de034f10a44a805e73e2450eec7553bf",
+    "summary": {
+      "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-grant-source-checks/summary.json",
+      "sha256": "71c190ef1955b136c4d76a66f118ad7bb89798ccdeba0d0a8da571082f61a44d"
+    },
+    "tests": 535,
+    "assertions": 111814,
+    "newBindings": 55,
+    "scope": "Source/compiler/deck/public compilation only; runtime and game qualification is separate."
+  },
+  "independentSourceReview": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/independent-static-keyword-review/manifest.json",
+    "sha256": "aab3a85ce9eee91fcb9634e40557b0da7e1bbe74022c4ae412112d65ede665af"
+  },
+  "independentCompiledReview": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/independent-static-keyword-compiled-review/manifest.json",
+    "sha256": "c62aa775c53a7266fe9352e5b0083e036eed80cbb49cef9ff812774a5ebf39c8",
+    "counts": {
+      "newDefinitions": 55,
+      "preservedPriorDefinitions": 1583,
+      "preservedAuxiliaryTemplates": 20,
+      "sourceMutationRejections": 1297,
+      "definitionMutationRejections": 440
+    },
+    "finding": {
+      "severity": "source obligation metadata omission",
+      "source": "Shadow Sliver",
+      "missingRule": "702.28",
+      "initialReleaseHash": "daf1a21e3292da33dcf3576f4f1f05802f5061a39c0faa281753dde0917ac9fc",
+      "initialEvidence": "attempt-1/review-result.json",
+      "correction": "Source author added shadow rule obligation; all55 definition obligation lists/hashes changed, raw source and runtime program meanings preserved.",
+      "verified": "Every actual intrinsic/granted keyword now has its exact governing rule in emitted obligations."
+    }
+  },
+  "independentRuntime": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/independent-static-keyword-runtime-review/manifest.json",
+    "sha256": "30ce146425337d61c4b634bdf3ed07baf50bf574c2b3798f01799ee4bc6d9e6f",
+    "counts": {
+      "passed": 24,
+      "failed": 0,
+      "assertions": 222
+    },
+    "scope": "Eight independently authored constructed scenarios across three in-memory resolver modes; no authenticated source casts, real prepared artifact admission, ordinary dealt history, full game, SQLite/OPFS or full G2 qualification.",
+    "limits": [
+      "Synthetic definitions never passed production source authentication; prepared modes use the established constructed fixture marker, not factory-admitted prepared artifacts.",
+      "A constructed zero-cost flash grant provider and zero-cost return spell isolate timing from mana-pool setup; no such printed card is claimed.",
+      "Type/color/control mutations are explicit prefix facts, not executed control/type/color-changing cards.",
+      "The KGR15 pre-fix failing reproduction and production fix were authored by the core agent after the independent source expectation exposed the issue. This report independently verifies the corrected behavior; it does not pretend to have executed that earlier failure.",
+      "No source-cast sweep, legal dealt history, full game, replay receipt, SQLite/OPFS import, performance or all28/fullG2 qualification is asserted."
+    ]
+  },
+  "coreExecution": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-runtime-qualification/manifest.json",
+    "sha256": "8f8dedbc5ab013e625a58b9cad0e85bfac189936bf531a9fec54080436942384",
+    "counts": {
+      "tests": 2430,
+      "assertions": 30448,
+      "failures": 0,
+      "skipped": 0
+    },
+    "capturedInputs": 322,
+    "changedInputs": [],
+    "actualSourceCards": 55,
+    "actualSourceExecutions": 165,
+    "actualSourceAssertions": 3135,
+    "fullFixtureDefinitions": 77,
+    "actualPreparedFixtureDefinitions": [7, 8],
+    "sourceOutputAudit": {
+      "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-runtime-qualification/source-output-audit.json",
+      "sha256": "e0ff7f47205168fd390b095dd94a8ef0d2dcfa0c455b38e3e0d6e8046019dd70"
+    },
+    "expectationJoin": {
+      "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-runtime-qualification/scenario-join.json",
+      "sha256": "5a0640148f44930572826b18ec0fcd41a35588ba205539801f6d08fe5da1b334"
+    },
+    "limits": [
+      "Source-selected hands/lands/opposing witnesses are constructed.",
+      "Pure core schema/scenario tests are not production source admission unless explicitly covered by the actual source suite.",
+      "Native SQLite, real browser/OPFS and complete games are separately captured and not counted here.",
+      "All28 expectations have a clause join; whole-scenario/G2/full-rule certification is not asserted."
+    ],
+    "newCompletedGames": 0
+  },
+  "publicCliCompilation": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/cli-compilation-reproduction/manifest.json",
+    "sha256": "65b0e95897e72423fa0528fa07c5855bb97772e9c9860aee772aa70a8ee1814b"
+  },
+  "nativeDurability": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-native-durability/manifest.json",
+    "sha256": "266ef95fbef8b81d4c62d1ce91ee3e144df0fd0f41c26708b864ef0d5c499bee",
+    "counts": {
+      "passed": 26,
+      "failed": 0,
+      "assertions": 914
+    },
+    "sourceInputCount": 162,
+    "changedPaths": [],
+    "artifactAudit": {
+      "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-native-durability/attempt-1/artifact-audit.json",
+      "sha256": "9e494b42983b63f69c11a90afe5c07db2b2553308f87d85db1f18fcf657bab28"
+    },
+    "checkpointRevisions": [333, 334, 338, 343, 344, 349, 350, 351],
+    "resolverModes": 3,
+    "ownerDestinations": ["command", "hand"],
+    "scope": "Author native SQLite durability: one ordinary legal two-seat deck/game-seed family, three actual resolvers, two owner-choice branches from the same pending prefix; stopped after351 commands. No completed games, OPFS or whole-G2 claim. Privileged initial-deal screening and stage qualification separate from entitled observation-only policy.",
+    "newCompletedGames": 0
+  },
+  "completeCli": {
+    "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-games/actual-live-grant-audit.json",
+    "sha256": "8fe177599da0f5cd4121eb44e9b1b77cd2f0f5840fd270049a3d02785131f314",
+    "comparisons": [
+      {
+        "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-games/resolver-comparisons/097d1e53-d330-497e-bbc3-c97bc6e2bcc8/report.json",
+        "sha256": "d7381ded3178083d7f544d03c14c42f0775755f9f8cc23fc152dfd278784e61f",
+        "status": "passed",
+        "revision": 2448,
+        "buildHash": "87f0aafd52625d2681276619a829c9da310915e8d5728ee7a2c761138f1b7441",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-3",
+          "reason": "all-opponents-left"
+        },
+        "replays": [
+          {
+            "mode": "full-scan",
+            "revision": 2448,
+            "hash": "9a9e53230026e9ec772118bb4f2dd95f268d2b53b318b07cf62d81f5c9d1c34a",
+            "semanticHash": "1d4e916b569233da1f3a8f73004ad1debce80287057a5292b6ab3a54115a36b4",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": null,
+              "definitionCount": 1638,
+              "tokenTemplateCount": 20
+            }
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 2448,
+            "hash": "64fa0ea3bb9116674ce75277684443f2f03f8e91ebc7274c8993553b6ab66c92",
+            "semanticHash": "1d4e916b569233da1f3a8f73004ad1debce80287057a5292b6ab3a54115a36b4",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "9a508b787a83864d2784df572c29a9f368a94baa23caabfd4163122ea1b58006",
+              "definitionCount": 169,
+              "tokenTemplateCount": 2
+            }
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 2448,
+            "hash": "f86c3e11c18462fd7d529c27ee161b946512617d11b732964abc90ca6d22ded1",
+            "semanticHash": "1d4e916b569233da1f3a8f73004ad1debce80287057a5292b6ab3a54115a36b4",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "9a508b787a83864d2784df572c29a9f368a94baa23caabfd4163122ea1b58006",
+              "definitionCount": 169,
+              "tokenTemplateCount": 2
+            }
+          }
+        ],
+        "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding."
+      },
+      {
+        "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-games/resolver-comparisons/92ffa0db-d2ce-4a86-a3c9-c42cceee4cb3/report.json",
+        "sha256": "25879cbf1f786b46f9eef9c4b81c1fabcfd6f634f47a703d02af42588829eecb",
+        "status": "passed",
+        "revision": 490,
+        "buildHash": "87f0aafd52625d2681276619a829c9da310915e8d5728ee7a2c761138f1b7441",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-1",
+          "reason": "all-opponents-left"
+        },
+        "replays": [
+          {
+            "mode": "full-scan",
+            "revision": 490,
+            "hash": "7bbd810c892bc27ffe99b509a25a6ae0a762d4094df8ea5a379242da33a0f44f",
+            "semanticHash": "0a7d7cf57bf163495ba018e465949d37177757beff394095afe36927545c0e56",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": null,
+              "definitionCount": 1638,
+              "tokenTemplateCount": 20
+            }
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 490,
+            "hash": "6e9f84f03625def9f7b4060fa2a9c9250ec7529e86a40cc5dbb4235338e3b351",
+            "semanticHash": "0a7d7cf57bf163495ba018e465949d37177757beff394095afe36927545c0e56",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "e504ffb2583563e86f7a202d6ace9678351e2a67f6680c1c0620433afb8e0f5e",
+              "definitionCount": 106,
+              "tokenTemplateCount": 2
+            }
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 490,
+            "hash": "9e8753d3298df79c3d5401080bde566c90b1e92ef6cf3e1994c4b79ce83064bc",
+            "semanticHash": "0a7d7cf57bf163495ba018e465949d37177757beff394095afe36927545c0e56",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "e504ffb2583563e86f7a202d6ace9678351e2a67f6680c1c0620433afb8e0f5e",
+              "definitionCount": 106,
+              "tokenTemplateCount": 2
+            }
+          }
+        ],
+        "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding."
+      }
+    ],
+    "uniqueCompletedGameInputs": 2,
+    "cases": [
+      {
+        "mode": "four-seat",
+        "commands": 2448,
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-3",
+          "reason": "all-opponents-left"
+        },
+        "buildHash": "87f0aafd52625d2681276619a829c9da310915e8d5728ee7a2c761138f1b7441",
+        "finalHash": "9a9e53230026e9ec772118bb4f2dd95f268d2b53b318b07cf62d81f5c9d1c34a",
+        "checkedCreatureBoundaries": 16708,
+        "applicableProviderNames": [
+          "Winged Sliver",
+          "Serra's Blessing",
+          "Fervor",
+          "Spitting Sliver",
+          "Talon Sliver",
+          "Synchronous Sliver",
+          "Blur Sliver",
+          "Tuktuk Rubblefort",
+          "Akroma's Devoted",
+          "Lancer Sliver",
+          "Galerider Sliver",
+          "Bonescythe Sliver",
+          "Goblin War Drums",
+          "Striking Sliver",
+          "True Conviction"
+        ],
+        "resolverReplays": [
+          {
+            "mode": "full-scan",
+            "revision": 2448,
+            "hash": "9a9e53230026e9ec772118bb4f2dd95f268d2b53b318b07cf62d81f5c9d1c34a",
+            "semanticHash": "1d4e916b569233da1f3a8f73004ad1debce80287057a5292b6ab3a54115a36b4",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": null,
+              "definitionCount": 1638,
+              "tokenTemplateCount": 20
+            }
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 2448,
+            "hash": "64fa0ea3bb9116674ce75277684443f2f03f8e91ebc7274c8993553b6ab66c92",
+            "semanticHash": "1d4e916b569233da1f3a8f73004ad1debce80287057a5292b6ab3a54115a36b4",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "9a508b787a83864d2784df572c29a9f368a94baa23caabfd4163122ea1b58006",
+              "definitionCount": 169,
+              "tokenTemplateCount": 2
+            }
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 2448,
+            "hash": "f86c3e11c18462fd7d529c27ee161b946512617d11b732964abc90ca6d22ded1",
+            "semanticHash": "1d4e916b569233da1f3a8f73004ad1debce80287057a5292b6ab3a54115a36b4",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "9a508b787a83864d2784df572c29a9f368a94baa23caabfd4163122ea1b58006",
+              "definitionCount": 169,
+              "tokenTemplateCount": 2
+            }
+          }
+        ],
+        "paidResolvedGrantProviders": 19,
+        "applicableProviderRecipientKeywordPairs": 115
+      },
+      {
+        "mode": "two-seat",
+        "commands": 490,
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-1",
+          "reason": "all-opponents-left"
+        },
+        "buildHash": "87f0aafd52625d2681276619a829c9da310915e8d5728ee7a2c761138f1b7441",
+        "finalHash": "7bbd810c892bc27ffe99b509a25a6ae0a762d4094df8ea5a379242da33a0f44f",
+        "checkedCreatureBoundaries": 1411,
+        "applicableProviderNames": [
+          "Two-Headed Sliver",
+          "Primal Rage",
+          "Striking Sliver",
+          "Syphon Sliver",
+          "Kinsbaile Cavalier",
+          "Heart Sliver",
+          "Fury Sliver",
+          "Sliver Hivelord"
+        ],
+        "resolverReplays": [
+          {
+            "mode": "full-scan",
+            "revision": 490,
+            "hash": "7bbd810c892bc27ffe99b509a25a6ae0a762d4094df8ea5a379242da33a0f44f",
+            "semanticHash": "0a7d7cf57bf163495ba018e465949d37177757beff394095afe36927545c0e56",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": null,
+              "definitionCount": 1638,
+              "tokenTemplateCount": 20
+            }
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 490,
+            "hash": "6e9f84f03625def9f7b4060fa2a9c9250ec7529e86a40cc5dbb4235338e3b351",
+            "semanticHash": "0a7d7cf57bf163495ba018e465949d37177757beff394095afe36927545c0e56",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "e504ffb2583563e86f7a202d6ace9678351e2a67f6680c1c0620433afb8e0f5e",
+              "definitionCount": 106,
+              "tokenTemplateCount": 2
+            }
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 490,
+            "hash": "9e8753d3298df79c3d5401080bde566c90b1e92ef6cf3e1994c4b79ce83064bc",
+            "semanticHash": "0a7d7cf57bf163495ba018e465949d37177757beff394095afe36927545c0e56",
+            "executionRegistry": {
+              "sourceReleaseHash": "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+              "preparedArtifactHash": "e504ffb2583563e86f7a202d6ace9678351e2a67f6680c1c0620433afb8e0f5e",
+              "definitionCount": 106,
+              "tokenTemplateCount": 2
+            }
+          }
+        ],
+        "paidResolvedGrantProviders": 9,
+        "applicableProviderRecipientKeywordPairs": 41
+      }
+    ],
+    "scope": "Already completed CLI histories replayed with actual state/event hashes. Every live creature keyword set compared to direct source-program recipient predicates plus printed/temporary keywords. Applicability is not unique causal contribution when grants overlap, nor proof of every behavior or whole-card obligation. Resolver variants and this replay add no unique completed games."
+  },
+  "completeBrowser": {
+    "path": ".commander/prototypes/engine-0.20/.commander/browser-proof/2026-09-07T07-48-52-455Z-a989c37d/evidence.json",
+    "sha256": "027ae49fe7d3871c53a24a385822dea733f4aaf0823051143b638ee05570ab67",
+    "artifactAudit": {
+      "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-games/root-browser-audit.json",
+      "sha256": "e1fab244ca72b10195fe1568f0de8cbd4f4afb7ad2e385dbcc84df6118ebfc97"
+    },
+    "workerHash": "46615e1d43cee5808dc5f528310555ee2b4cedc6dce7d18050faaa6023f6754c",
+    "cases": [
+      {
+        "mode": "two-seat",
+        "commands": 490,
+        "boundaries": 491,
+        "finalHash": "ab1053b533b925089a294fd72c65221b6724cc8de446b6ee4e3e86563e6d6373",
+        "outcome": {
+          "kind": "win",
+          "reason": "all-opponents-left",
+          "winner": "P1"
+        },
+        "newSourcePermanentResolutions": 9,
+        "newSourceNames": {
+          "Two-Headed Sliver": 1,
+          "Primal Rage": 1,
+          "Striking Sliver": 1,
+          "Syphon Sliver": 1,
+          "Cryptothrall": 1,
+          "Kinsbaile Cavalier": 1,
+          "Heart Sliver": 1,
+          "Fury Sliver": 1,
+          "Sliver Hivelord": 1
+        }
+      },
+      {
+        "mode": "four-seat",
+        "commands": 2089,
+        "boundaries": 2090,
+        "finalHash": "1ba8bf15e140ea244883d88cabe813cace87abc271f7a6d0773bc1d6033fe570",
+        "outcome": {
+          "kind": "win",
+          "reason": "all-opponents-left",
+          "winner": "P4"
+        },
+        "newSourcePermanentResolutions": 16,
+        "newSourceNames": {
+          "Winged Sliver": 1,
+          "Felhide Petrifier": 1,
+          "Serra's Blessing": 1,
+          "Fervor": 1,
+          "Spitting Sliver": 2,
+          "Blur Sliver": 1,
+          "Tuktuk Rubblefort": 1,
+          "Akroma's Devoted": 1,
+          "Synchronous Sliver": 1,
+          "Talon Sliver": 1,
+          "Bonescythe Sliver": 1,
+          "Galerider Sliver": 1,
+          "Goblin War Drums": 1,
+          "Striking Sliver": 1,
+          "True Conviction": 1
+        }
+      }
+    ]
+  },
+  "stoppedBrowser": {
+    "path": ".commander/prototypes/engine-0.20/.commander/checkpoint-browser-proof/2026-09-07T08-13-59-917Z-b3f62857/evidence.json",
+    "sha256": "bb3b3324fd78bb502dcb5f51a67bdbfbd0db94babc911aa585b3b632e0269139",
+    "artifactAudit": {
+      "path": ".commander/prototypes/engine-0.20/.draft-artifacts/static-keyword-games/root-stopped-browser-audit.json",
+      "sha256": "8b504fe7a3423e36878ec1514e2069ddb6dee4be8c215d7e879696a169f24f38"
+    },
+    "cases": [
+      {
+        "name": "full-scan-command",
+        "resolver": "full-scan",
+        "ownerDestination": "command",
+        "checkpointRevisions": [333, 334, 338, 343, 344, 349, 350, 351],
+        "reloads": 8,
+        "imports": 8,
+        "exactRetries": 16,
+        "advancingImports": 7,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "name": "full-scan-hand",
+        "resolver": "full-scan",
+        "ownerDestination": "hand",
+        "checkpointRevisions": [333, 334, 338, 343, 344, 349, 350, 351],
+        "reloads": 8,
+        "imports": 8,
+        "exactRetries": 16,
+        "advancingImports": 7,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "name": "prepared-scan-command",
+        "resolver": "prepared-scan",
+        "ownerDestination": "command",
+        "checkpointRevisions": [333, 334, 338, 343, 344, 349, 350, 351],
+        "reloads": 8,
+        "imports": 8,
+        "exactRetries": 16,
+        "advancingImports": 7,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "name": "prepared-scan-hand",
+        "resolver": "prepared-scan",
+        "ownerDestination": "hand",
+        "checkpointRevisions": [333, 334, 338, 343, 344, 349, 350, 351],
+        "reloads": 8,
+        "imports": 8,
+        "exactRetries": 16,
+        "advancingImports": 7,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "name": "prepared-indexed-command",
+        "resolver": "prepared-indexed",
+        "ownerDestination": "command",
+        "checkpointRevisions": [333, 334, 338, 343, 344, 349, 350, 351],
+        "reloads": 8,
+        "imports": 8,
+        "exactRetries": 16,
+        "advancingImports": 7,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "name": "prepared-indexed-hand",
+        "resolver": "prepared-indexed",
+        "ownerDestination": "hand",
+        "checkpointRevisions": [333, 334, 338, 343, 344, 349, 350, 351],
+        "reloads": 8,
+        "imports": 8,
+        "exactRetries": 16,
+        "advancingImports": 7,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      }
+    ],
+    "reloads": 48,
+    "imports": 48,
+    "receiptRetries": 96,
+    "advancingImports": 42,
+    "alreadyFinalImports": 6,
+    "newCompletedGames": 0,
+    "scope": "Actual raw logical-save checksums, state/request/event hashes, every exact native command prefix, source/recipient incarnations, granted indestructibility and two-marked-damage survival, suspended owner choice, source departure and draw-before-recipient-death order. Six existing stopped histories; 48 reloads, 48 imports, 96 exact receipt retries. 42 imports advance, six already contain the final command. One shared deck/seed family and no new completed games or whole-card/G2 certificate."
+  },
+  "fixedRegression": {
+    "path": "docs/commander/fixed-regression-0.20-evidence.json",
+    "sha256": "6c1517e516e6fa8f003def2d0caa8591439daac80e49fafcf79fac3799b91481",
+    "status": "passed",
+    "completed": 64,
+    "replayed": 64,
+    "commands": 89784
+  },
+  "deathtouchCorrection": {
+    "engineAbi": "0.20.0",
+    "impactAudit": {
+      "path": ".commander/prototypes/engine-0.20/.draft-artifacts/deathtouch-checkpoint-impact/result.json",
+      "sha256": "c13750da3430c6a714fba321cc85f6798292d20547f5939a53f8b2c5a8ed4c60"
+    },
+    "scope": "A completed state-based check consumes deathtouch-since-last-check flags after capturing current death eligibility. Marked damage persists. Before-fix failures and earlier ABI tapes remain retained without relabeling."
+  },
+  "archive": {
+    "path": ".commander/prototypes/engine-0.20/archive.json",
+    "sha256": "8cd4fdd020cf55d05b3717405550994dcf9146cb5eaa6a45a6c0e5a77c39bad8"
+  },
+  "archiveVerification": {
+    "path": ".commander/prototypes/engine-0.20/manifest-verification.json",
+    "sha256": "84bf7dcff0d36b8b66298f0105ba7f0b7459ed067f54acee08997b0a58df5d75"
+  },
+  "mainGate": {
+    "schema": "commander-main-gate/1",
+    "engine": "commander-engine/0.20.0",
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "closedHandle": 10735,
+    "terminalEvidence": "write_stdin returned exit_code0 for session10735 after completion; original handle was not restarted.",
+    "log": {
+      "path": ".commander/evidence/check-full-0.20-main-attempt-2.log",
+      "sha256": "12169a2262e8a2248f7c7922175051da54ccc0f45da54cd3211b8110dd2bbf2c"
+    },
+    "mainTests": 3331,
+    "mainAssertions": 215113,
+    "generatedWorkspaceTests": 3331,
+    "generatedWorkspaceAssertions": 215113,
+    "browserTests": 12,
+    "productionBuild": true,
+    "emulatedQuestSmoke": true,
+    "standaloneWorkspaceAndGeneratedApplication": true,
+    "postGateUnchangedPromotedFiles": 69,
+    "postGateActiveReleaseAndDeckInputsUnchanged": true,
+    "physicalQuestVerified": false,
+    "scope": "Complete repository gate passed for composed19+20 source. Generated workspace repeats the same unit corpus, not additional unique card/rule scenarios. No separate main19 gate was run. Physical Quest and full Commander acceptance remain incomplete."
+  },
+  "scope": "Finite live layer6 grant selectors, source/compiler review, selected source execution, independent constructed consequences, completed CLI/browser games and native/OPFS durability. Counts overlap and are not whole-card obligation closure. full31829snapshot, G2/G6 and physical Quest qualification remain incomplete.",
+  "historicalAuditByteHashCorrection": {
+    "path": ".commander/prototypes/engine-0.20/post-promotion/live-grant-byte-hashes.json",
+    "sha256": "274369587e6415c21cb1f0efb1f11b3407ead29cb5e5df7e899ddabf79fb8924",
+    "scope": "Corrects only2metadata dbSha256 fields in frozen live-grant audit; raw database archive verification and actual replay comparisons remain separate."
+  },
+  "mainPromotion": {
+    "path": ".commander/prototypes/engine-0.20/promotion.json",
+    "sha256": "c9a1f8e597cefa99d3f86c1889760e29094583744a0442ae9b2e614c0833fbd6"
+  },
+  "mainExecutableEquivalence": {
+    "path": ".commander/evidence/promoted-equivalence-0.20.json",
+    "sha256": "a6c716c51e7510f8cb6fa4666fc89881f6bfd3a6b5d5c2f589c546abba2c9065"
+  }
+}

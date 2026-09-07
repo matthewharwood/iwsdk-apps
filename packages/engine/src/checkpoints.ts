@@ -138,6 +138,10 @@ function stateBasedActions(
   for (let iteration = 0; iteration < 1000; iteration++) {
     guardDuplicateLegends(state, release);
     const dead = creatureDeaths(state, release);
+    // 704.5h/702.2b only consider deathtouch damage since the preceding SBA
+    // check. Capture eligibility first, then expire that fact even if protection
+    // means this check performs no action. Marked damage remains until cleanup.
+    for (const entry of battlefield(state)) entry.deathtouchDamage = false;
     const ceased = orderedObjects(state).filter(
       (entry) => entry.token && entry.zone !== "battlefield",
     );

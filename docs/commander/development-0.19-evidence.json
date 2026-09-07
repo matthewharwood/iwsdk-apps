@@ -1,0 +1,628 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.19.0",
+  "stage": "qualified-historical-prototype-composed-into-main20",
+  "sourceReleaseHash": "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+  "primaryDefinitions": 1583,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 69,
+  "preservedPrimaryDefinitions": 1437,
+  "preservedCompleteDeckRevisions": 63,
+  "unsupportedPaperCandidates": 30246,
+  "candidateUniverse": 31829,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": ".commander/prototypes/engine-0.19/.draft-artifacts/expansion-static-evasion-v0.19-draft.json",
+    "sha256": "c7e1b27c90c6812e5d4c508ed66549b3b50e9363de26155fbcef6d4646edf64b"
+  },
+  "sourceExecution": {
+    "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-source-execution/manifest.json",
+    "sha256": "f5611856435346a430d9958be00ebf12b44f2c61aa751eb763257fc6ede34f30",
+    "summary": {
+      "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-source-execution/summary.json",
+      "sha256": "f44c43acb6dfa58d728f81009b51b535a32d4c294b76a476f62f9c5a8fd92474"
+    },
+    "counts": {
+      "proposedSourceRecords": 146,
+      "authenticatedFixtureDefinitions": 199,
+      "commanderProfiles": 47,
+      "legalUniqueSourceCardsActuallyCast": 145,
+      "attackerScenarios": 435,
+      "additionalBlockerRoleSourceCards": 44,
+      "blockerRoleScenarios": 132,
+      "inventoryAndGapTests": 2,
+      "tests": 569,
+      "assertions": 6406
+    },
+    "sourceGap": {
+      "name": "Storm Fleet Sprinter",
+      "colorIdentity": ["U", "R"],
+      "testedCommanderRejections": 47,
+      "waiver": false,
+      "castExecuted": false
+    },
+    "scope": {
+      "actualSourceCasts": true,
+      "legal100CardDecks": true,
+      "constructedHandsAndBasicLands": true,
+      "actualPrintedManaPaid": true,
+      "actualTurnAndBlockerDeclarations": true,
+      "damageResolutionClaim": false,
+      "ordinaryDealtHistories": 0,
+      "completedGames": 0,
+      "nativeOrBrowserPersistence": false,
+      "wholeCardCertification": false,
+      "fullG2": false
+    },
+    "limits": [
+      "No damage-resolution or complete-game qualification follows from these cast/block-declaration scenarios. Printed deathtouch, lifelink, trample, haste, vigilance and other existing intrinsic keywords are compared as current characteristics here; their entire behavior is not requalified for every card.",
+      "Prepared/full resolver repeats are duplicate scenarios over the same source records, not additional supported identities or unique completed-game assignments.",
+      "This is not a native SQLite, browser OPFS, ordinary dealt-history or hostile logical-import proof.",
+      "No full G2 or whole-card semantic certification is created. The146th source remains uncast because every currently admitted commander profile fails its color identity."
+    ],
+    "failedAttempts": [
+      {
+        "path": "attempt-1/tests.log",
+        "counts": "22pass/1fail/546filtered",
+        "reason": "The single failure was test error-message capitalization. Initial sample input files retained. No runtime change."
+      },
+      {
+        "path": "attempt-2/result.json",
+        "counts": "383pass/186fail,569executed,5476assertions,138unchangedinputs",
+        "reason": "The62 landwalk source records each carry a generic provider Landwalk category in addition to their specific printed ability; the test incorrectly expected an additional runtime keyword. Corrected only this expectation according to CR702.14a; all failed inputs/logs/JUnit retained."
+      }
+    ],
+    "obligationsCertified": 0
+  },
+  "independentRuntime": {
+    "path": ".commander/prototypes/engine-0.19/.draft-artifacts/independent-evasion-review/manifest.json",
+    "sha256": "8f5aca13508013d2c536853f800c37397f70273309c01160e5ffa283d31cda1d",
+    "tests": 14,
+    "assertions": 56,
+    "sourceFiles": 134,
+    "readScope": "All146 complete proposed source bodies, costs/types/PT, all30 associated rulings and61 full retained CR nodes. Entire blocking module and new blocker-domain/answer guards, driver policy, and relevant schema/publication/dispatch integration. Broader unchanged engine not exhaustively re-audited.",
+    "scope": {
+      "syntheticRuleUnitBoards": true,
+      "fullScanOnly": true,
+      "authenticatedSourceCardsExecuted": 0,
+      "productionFactoriesUsed": false,
+      "ordinaryDealtHistories": 0,
+      "completedGames": 0,
+      "nativeOrBrowserPersistence": false
+    },
+    "limits": [
+      "Compiler, source-binder mutation resistance, legal deck membership and all146 source-card executions are not qualified by these synthetic full-scan rule-unit tests. Prepared-mode and complete-game evidence remain separate.",
+      "No fresh paper-printing or rulings archive reauthentication is claimed; all146 original Oracle archive payloads, record ordinals, identities and normalized source versions were independently rechecked.",
+      "Generic block requirements, costs to block, extra blockers, planeswalker/battle attacks, generic control/type/color-changing effects, protection, additional landwalk variants and removal of abilities remain outside this finite mechanism review.",
+      "Current finite printed characteristics and existing derived power/keywords are used. No generic layer or dependency engine is inferred.",
+      "The blockDomain guard is a publication invariant and answerBlock recalculates restrictions; full adversarial save history requires storage replay authentication, not this unit guard alone.",
+      "There are no new SQLite, OPFS, ordinary dealt histories or completed game counts in this review, and no full G2/full-snapshot qualification."
+    ],
+    "finding": "EVA-REV-01",
+    "postRunChangedFiles": ["packages/compiler/src/index.ts"],
+    "postRunDeltaScope": "Compiler index changed after the completed before/after capture while binder/compiler integration continued. Captured inputs remain archived. None of the reviewed runtime/contract/driver/helper bytes changed; this review does not qualify current compiler admission.",
+    "obligationsCertified": 0
+  },
+  "combinedCoreExecution": {
+    "path": ".commander/prototypes/engine-0.19/.draft-artifacts/execution/combined-core-activation-evasion-1.log",
+    "sha256": "9090f2223d780c8f4bcdf3040fdd65a7816b48e6a9426eba87a971db04c4fd96",
+    "tests": 2202,
+    "assertions": 28116,
+    "files": 51,
+    "scope": "Combined prototype core suite including prior activation integration; selected source and independent executions have separately captured manifests."
+  },
+  "publicCliCompilation": {
+    "path": ".commander/prototypes/engine-0.19/.draft-artifacts/cli-compilation-reproduction/manifest.json",
+    "sha256": "4428b0f6d2006f7766b4514c5f1baf24e57742eaf47b8b4423746144335862c6"
+  },
+  "completeCli": {
+    "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/actual-evasion-game-audit.json",
+    "sha256": "d7d9e23d7e9a922c7be0d6150a45d3d51b0eb7f41edf62a1d3ca74e65ca63f98",
+    "cases": [
+      {
+        "mode": "four-seat",
+        "resolver": "full-scan",
+        "commands": 1692,
+        "database": {
+          "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/34448100-97f2-4b79-ba1b-9d660687a154/full-scan.sqlite",
+          "sha256": "81c1d54d533120d6f37e4c8021def225efc6093e2dacbc1aa17183c17a25cfd4"
+        },
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "finalHash": "4a2efc07ba024cfb46e458e2952a5c6d2677a82da4d276dacbd91c5be88b0190",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-2",
+          "reason": "all-opponents-left"
+        },
+        "newSourcePermanentResolutions": 15,
+        "newSourceBlockDecisions": 13,
+        "rejectedPair": {
+          "revision": 1139,
+          "attacker": "Furtive Homunculus",
+          "blocker": "Zephid",
+          "restriction": "Skulk prevents blocking by a creature with greater current power.",
+          "rejection": {
+            "status": "rejected",
+            "code": "IllegalCommand",
+            "message": "Skulk prevents blocking by a creature with greater current power."
+          }
+        }
+      },
+      {
+        "mode": "four-seat",
+        "resolver": "prepared-scan",
+        "commands": 1692,
+        "database": {
+          "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/34448100-97f2-4b79-ba1b-9d660687a154/prepared-scan.sqlite",
+          "sha256": "eae20e009609b95b4fcaa9a50002ed19e46173b8972c486d2baf187236bc584e"
+        },
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "finalHash": "5b5dc606eb4fc41b70fda99beaa255cfb419a160561b82faac2da4581e16cf5f",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-2",
+          "reason": "all-opponents-left"
+        },
+        "newSourcePermanentResolutions": 15,
+        "newSourceBlockDecisions": 13,
+        "rejectedPair": {
+          "revision": 1139,
+          "attacker": "Furtive Homunculus",
+          "blocker": "Zephid",
+          "restriction": "Skulk prevents blocking by a creature with greater current power.",
+          "rejection": {
+            "status": "rejected",
+            "code": "IllegalCommand",
+            "message": "Skulk prevents blocking by a creature with greater current power."
+          }
+        }
+      },
+      {
+        "mode": "four-seat",
+        "resolver": "prepared-indexed",
+        "commands": 1692,
+        "database": {
+          "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/34448100-97f2-4b79-ba1b-9d660687a154/prepared-indexed.sqlite",
+          "sha256": "f7920d595bb4445b3cd2f335ee0daa41864eb74423a99fd6a461444f132ee04a"
+        },
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "finalHash": "025c3d463a3a5f4a44a2f25b00e0836ab3fb492775839f10e990e03c6b1040f0",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-2",
+          "reason": "all-opponents-left"
+        },
+        "newSourcePermanentResolutions": 15,
+        "newSourceBlockDecisions": 13,
+        "rejectedPair": {
+          "revision": 1139,
+          "attacker": "Furtive Homunculus",
+          "blocker": "Zephid",
+          "restriction": "Skulk prevents blocking by a creature with greater current power.",
+          "rejection": {
+            "status": "rejected",
+            "code": "IllegalCommand",
+            "message": "Skulk prevents blocking by a creature with greater current power."
+          }
+        }
+      },
+      {
+        "mode": "two-seat",
+        "resolver": "full-scan",
+        "commands": 509,
+        "database": {
+          "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/bf9906a5-698f-4fad-bcc5-c7867a8384f6/full-scan.sqlite",
+          "sha256": "27ca6d5ba7f847c971a7bc946f7103c2baef416d70263f1ef2c2eaecfe5aedcd"
+        },
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "finalHash": "adb4cacdf93acb39c64679529db883d427c532c0ac41499dce062c3acb9c7148",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-1",
+          "reason": "all-opponents-left"
+        },
+        "newSourcePermanentResolutions": 9,
+        "newSourceBlockDecisions": 12,
+        "rejectedPair": {
+          "revision": 193,
+          "attacker": "Marsh Threader",
+          "blocker": "Sun-Collared Raptor",
+          "restriction": "Landwalk prevents blocking while the defending player controls a Swamp.",
+          "rejection": {
+            "status": "rejected",
+            "code": "IllegalCommand",
+            "message": "Landwalk prevents blocking while the defending player controls a Swamp."
+          }
+        }
+      },
+      {
+        "mode": "two-seat",
+        "resolver": "prepared-scan",
+        "commands": 509,
+        "database": {
+          "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/bf9906a5-698f-4fad-bcc5-c7867a8384f6/prepared-scan.sqlite",
+          "sha256": "ee81153a2cc89daf5b624208ce399f98119bb1f69d6c656515cc8d5d136c5311"
+        },
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "finalHash": "d4dcbb74998781ffc21a8923d500b6dbcb4ae9cdafcdb827c9b334ad40d3850b",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-1",
+          "reason": "all-opponents-left"
+        },
+        "newSourcePermanentResolutions": 9,
+        "newSourceBlockDecisions": 12,
+        "rejectedPair": {
+          "revision": 193,
+          "attacker": "Marsh Threader",
+          "blocker": "Sun-Collared Raptor",
+          "restriction": "Landwalk prevents blocking while the defending player controls a Swamp.",
+          "rejection": {
+            "status": "rejected",
+            "code": "IllegalCommand",
+            "message": "Landwalk prevents blocking while the defending player controls a Swamp."
+          }
+        }
+      },
+      {
+        "mode": "two-seat",
+        "resolver": "prepared-indexed",
+        "commands": 509,
+        "database": {
+          "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/bf9906a5-698f-4fad-bcc5-c7867a8384f6/prepared-indexed.sqlite",
+          "sha256": "83acdac3c24986abf62be07f1e9ac2ea3a7f493b51c893d4d6dcf3a58c181ab2"
+        },
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "finalHash": "e1e534ddb999d378dce9dc1ea7c0e280062b24a35e51eeeffb58fe5813dc129a",
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-1",
+          "reason": "all-opponents-left"
+        },
+        "newSourcePermanentResolutions": 9,
+        "newSourceBlockDecisions": 12,
+        "rejectedPair": {
+          "revision": 193,
+          "attacker": "Marsh Threader",
+          "blocker": "Sun-Collared Raptor",
+          "restriction": "Landwalk prevents blocking while the defending player controls a Swamp.",
+          "rejection": {
+            "status": "rejected",
+            "code": "IllegalCommand",
+            "message": "Landwalk prevents blocking while the defending player controls a Swamp."
+          }
+        }
+      }
+    ],
+    "comparisons": [
+      {
+        "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/34448100-97f2-4b79-ba1b-9d660687a154/report.json",
+        "sha256": "76b92d1b1c8aa5d158cff2dfa1b99cc5431b762fc4f1d1b478a77815ab1bb880",
+        "status": "passed",
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "revision": 1692,
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-2",
+          "reason": "all-opponents-left"
+        },
+        "replays": [
+          {
+            "mode": "full-scan",
+            "revision": 1692,
+            "hash": "4a2efc07ba024cfb46e458e2952a5c6d2677a82da4d276dacbd91c5be88b0190",
+            "semanticHash": "ab0ea8c029cfa2845cf9438a31ca48caee03bc1cb79ab002a3ae3f5a5af3faee",
+            "executionRegistry": {
+              "sourceReleaseHash": "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+              "preparedArtifactHash": null,
+              "definitionCount": 1583,
+              "tokenTemplateCount": 20
+            }
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 1692,
+            "hash": "5b5dc606eb4fc41b70fda99beaa255cfb419a160561b82faac2da4581e16cf5f",
+            "semanticHash": "ab0ea8c029cfa2845cf9438a31ca48caee03bc1cb79ab002a3ae3f5a5af3faee",
+            "executionRegistry": {
+              "sourceReleaseHash": "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+              "preparedArtifactHash": "c6cd93dff4b0fc2c3db6d8d3d02d1d209ab72fcb52cbdb16b4943cdda59c623d",
+              "definitionCount": 213,
+              "tokenTemplateCount": 0
+            }
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 1692,
+            "hash": "025c3d463a3a5f4a44a2f25b00e0836ab3fb492775839f10e990e03c6b1040f0",
+            "semanticHash": "ab0ea8c029cfa2845cf9438a31ca48caee03bc1cb79ab002a3ae3f5a5af3faee",
+            "executionRegistry": {
+              "sourceReleaseHash": "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+              "preparedArtifactHash": "c6cd93dff4b0fc2c3db6d8d3d02d1d209ab72fcb52cbdb16b4943cdda59c623d",
+              "definitionCount": 213,
+              "tokenTemplateCount": 0
+            }
+          }
+        ],
+        "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding."
+      },
+      {
+        "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/resolver-comparisons/bf9906a5-698f-4fad-bcc5-c7867a8384f6/report.json",
+        "sha256": "5ebc24db12dcecf2273436b776602e338d7a918251e9c820dc03c22c326d21fc",
+        "status": "passed",
+        "buildHash": "85a8ccb561bb29bd5b731d197d1675bff5baec09456b33485bc1662339e22d70",
+        "revision": 509,
+        "outcome": {
+          "kind": "win",
+          "winner": "seat-1",
+          "reason": "all-opponents-left"
+        },
+        "replays": [
+          {
+            "mode": "full-scan",
+            "revision": 509,
+            "hash": "adb4cacdf93acb39c64679529db883d427c532c0ac41499dce062c3acb9c7148",
+            "semanticHash": "709f740de0ff5a87dab1da926068cb27d638187586f973908357eda28ad817c3",
+            "executionRegistry": {
+              "sourceReleaseHash": "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+              "preparedArtifactHash": null,
+              "definitionCount": 1583,
+              "tokenTemplateCount": 20
+            }
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 509,
+            "hash": "d4dcbb74998781ffc21a8923d500b6dbcb4ae9cdafcdb827c9b334ad40d3850b",
+            "semanticHash": "709f740de0ff5a87dab1da926068cb27d638187586f973908357eda28ad817c3",
+            "executionRegistry": {
+              "sourceReleaseHash": "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+              "preparedArtifactHash": "f6f112f2aa742ff1f5dd6724a500a51c648977edf271b54053a610b0f21c211d",
+              "definitionCount": 123,
+              "tokenTemplateCount": 0
+            }
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 509,
+            "hash": "e1e534ddb999d378dce9dc1ea7c0e280062b24a35e51eeeffb58fe5813dc129a",
+            "semanticHash": "709f740de0ff5a87dab1da926068cb27d638187586f973908357eda28ad817c3",
+            "executionRegistry": {
+              "sourceReleaseHash": "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
+              "preparedArtifactHash": "f6f112f2aa742ff1f5dd6724a500a51c648977edf271b54053a610b0f21c211d",
+              "definitionCount": 123,
+              "tokenTemplateCount": 0
+            }
+          }
+        ],
+        "comparisonScope": "Full development definition registry versus independently admitted deck dependency subsets with prepared scan and indexed object selectors. Only resolver and preparedArtifactHash execution pins are omitted from state equality. Full-universe semantic support remains outstanding."
+      }
+    ],
+    "uniqueCompletedGameInputs": 2,
+    "scope": "Two real complete CLI games, each independently executed and replayed under all three resolver modes. Resolver repeats do not multiply unique games, card identities or whole-card qualification."
+  },
+  "completeBrowser": {
+    "path": ".commander/prototypes/engine-0.19/.commander/browser-proof/2026-09-07T07-13-21-253Z-3b1b04ac/evidence.json",
+    "sha256": "bd7bc51c9ec4461258e1e066bb1c5a403542ec8bb6e6986386554f66f23e273d",
+    "workerHash": "89f419de2e74064916fcbd9679947fc355396d409a2afdd63b80a4711e82fcfb",
+    "artifactAudit": {
+      "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/root-browser-audit.json",
+      "sha256": "c548ba78a286259680f6b51685c8e8b00559b8daa1503c0ee029b452a0d04bff"
+    },
+    "cases": [
+      {
+        "mode": "two-seat",
+        "commands": 502,
+        "boundaries": 503,
+        "finalHash": "43009e0d7ee8fc7b02893c288a8508f7e489abe810787e224ddec0917cf74d32",
+        "outcome": {
+          "kind": "win",
+          "reason": "all-opponents-left",
+          "winner": "P1"
+        },
+        "newSourcePermanentResolutions": 9,
+        "newSourceNames": {
+          "Marsh Threader": 1,
+          "Yellow Scarves Troops": 1,
+          "Canyon Wildcat": 1,
+          "Hulking Cyclops": 1,
+          "Furtive Homunculus": 1,
+          "Spectral Rider": 1,
+          "Rock Badger": 1,
+          "Craven Giant": 1,
+          "Plasma Elemental": 1
+        }
+      },
+      {
+        "mode": "four-seat",
+        "commands": 1581,
+        "boundaries": 1582,
+        "finalHash": "c49aadd2275df82574afb1807ddcf3c9f0f10fe08030dda413ff4f65701ed63a",
+        "outcome": {
+          "kind": "win",
+          "reason": "all-opponents-left",
+          "winner": "P2"
+        },
+        "newSourcePermanentResolutions": 15,
+        "newSourceNames": {
+          "Hulking Goblin": 1,
+          "Craven Knight": 1,
+          "Jhessian Infiltrator": 1,
+          "Zodiac Dog": 1,
+          "Furtive Homunculus": 1,
+          "Wei Strike Force": 1,
+          "Slinking Serpent": 1,
+          "Hulking Cyclops": 2,
+          "Phantom Warrior": 1,
+          "Koth's Courier": 1,
+          "Vaporkin": 1,
+          "Shu Elite Companions": 1,
+          "Marsh Goblins": 1,
+          "Wei Elite Companions": 1
+        }
+      }
+    ]
+  },
+  "stoppedBrowser": {
+    "path": ".commander/prototypes/engine-0.19/.commander/checkpoint-browser-proof/2026-09-07T07-34-04-612Z-d5564832/evidence.json",
+    "sha256": "3b1eafa5b2cc59e3594f96e2fe3c4199d77d20c5d518ad9d49f887e7057638b0",
+    "artifactAudit": {
+      "path": ".commander/prototypes/engine-0.19/.draft-artifacts/evasion-games/root-stopped-browser-audit.json",
+      "sha256": "0678cfe3520a794e12e1d8c61267e065642a49ab0ca5b63536d4e759b74aca9c"
+    },
+    "cases": [
+      {
+        "mode": "four-seat",
+        "resolver": "full-scan",
+        "revisions": [1139, 1140],
+        "attacker": "Furtive Homunculus",
+        "blocker": "Zephid",
+        "restriction": "Skulk prevents blocking by a creature with greater current power.",
+        "reloads": 2,
+        "imports": 2,
+        "exactRetries": 4,
+        "advancingImports": 1,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "mode": "four-seat",
+        "resolver": "prepared-scan",
+        "revisions": [1139, 1140],
+        "attacker": "Furtive Homunculus",
+        "blocker": "Zephid",
+        "restriction": "Skulk prevents blocking by a creature with greater current power.",
+        "reloads": 2,
+        "imports": 2,
+        "exactRetries": 4,
+        "advancingImports": 1,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "mode": "four-seat",
+        "resolver": "prepared-indexed",
+        "revisions": [1139, 1140],
+        "attacker": "Furtive Homunculus",
+        "blocker": "Zephid",
+        "restriction": "Skulk prevents blocking by a creature with greater current power.",
+        "reloads": 2,
+        "imports": 2,
+        "exactRetries": 4,
+        "advancingImports": 1,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "mode": "two-seat",
+        "resolver": "full-scan",
+        "revisions": [193, 194],
+        "attacker": "Marsh Threader",
+        "blocker": "Sun-Collared Raptor",
+        "restriction": "Landwalk prevents blocking while the defending player controls a Swamp.",
+        "reloads": 2,
+        "imports": 2,
+        "exactRetries": 4,
+        "advancingImports": 1,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "mode": "two-seat",
+        "resolver": "prepared-scan",
+        "revisions": [193, 194],
+        "attacker": "Marsh Threader",
+        "blocker": "Sun-Collared Raptor",
+        "restriction": "Landwalk prevents blocking while the defending player controls a Swamp.",
+        "reloads": 2,
+        "imports": 2,
+        "exactRetries": 4,
+        "advancingImports": 1,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      },
+      {
+        "mode": "two-seat",
+        "resolver": "prepared-indexed",
+        "revisions": [193, 194],
+        "attacker": "Marsh Threader",
+        "blocker": "Sun-Collared Raptor",
+        "restriction": "Landwalk prevents blocking while the defending player controls a Swamp.",
+        "reloads": 2,
+        "imports": 2,
+        "exactRetries": 4,
+        "advancingImports": 1,
+        "alreadyFinalImports": 1,
+        "completedGames": 0
+      }
+    ],
+    "reloads": 12,
+    "imports": 12,
+    "receiptRetries": 24,
+    "advancingImports": 6,
+    "alreadyFinalImports": 6,
+    "completedGames": 0
+  },
+  "fixedRegression": {
+    "path": "docs/commander/fixed-regression-0.19-evidence.json",
+    "sha256": "f32318402e02f032edec4ae1dbd9bce4b726bc5a0a7adcb130aeda41e6c106ce",
+    "status": "passed",
+    "completed": 64,
+    "replayed": 64,
+    "commands": 89784,
+    "scope": "Exact older fixed corpus, without the newly added evasion cards. Fresh completion/replay verifies retained behavior, not new-source semantic coverage."
+  },
+  "archive": {
+    "path": ".commander/prototypes/engine-0.19/archive.json",
+    "sha256": "d5f40125ff7c65b5afd3e4d0b85943867aae81b45e2fe9b12ca70c244782b84c"
+  },
+  "archiveVerification": {
+    "path": ".commander/prototypes/engine-0.19/manifest-verification.json",
+    "sha256": "3f59a675762418a5ce9ea98f92851a63cefbc574dde5e6adcc195f627d0803d6"
+  },
+  "mainGate": {
+    "status": "not-run-as-separate-main19",
+    "composedInto": "commander-engine/0.20.0",
+    "composedMainGate": {
+      "schema": "commander-main-gate/1",
+      "engine": "commander-engine/0.20.0",
+      "command": "bun run check",
+      "status": "passed",
+      "exitCode": 0,
+      "closedHandle": 10735,
+      "terminalEvidence": "write_stdin returned exit_code0 for session10735 after completion; original handle was not restarted.",
+      "log": {
+        "path": ".commander/evidence/check-full-0.20-main-attempt-2.log",
+        "sha256": "12169a2262e8a2248f7c7922175051da54ccc0f45da54cd3211b8110dd2bbf2c"
+      },
+      "mainTests": 3331,
+      "mainAssertions": 215113,
+      "generatedWorkspaceTests": 3331,
+      "generatedWorkspaceAssertions": 215113,
+      "browserTests": 12,
+      "productionBuild": true,
+      "emulatedQuestSmoke": true,
+      "standaloneWorkspaceAndGeneratedApplication": true,
+      "postGateUnchangedPromotedFiles": 69,
+      "postGateActiveReleaseAndDeckInputsUnchanged": true,
+      "physicalQuestVerified": false,
+      "scope": "Complete repository gate passed for composed19+20 source. Generated workspace repeats the same unit corpus, not additional unique card/rule scenarios. No separate main19 gate was run. Physical Quest and full Commander acceptance remain incomplete."
+    }
+  },
+  "historicalDefect": {
+    "status": "repair-in-0.20-ABI",
+    "description": "Deathtouch-since-last-SBA marker survives checks too long in this frozen ABI. The 0.20 implementation corrects its lifetime; earlier tapes are retained without relabeling."
+  },
+  "scope": "Authenticated source bindings, source-specific casts and block declarations, separate independent constructed rule probes, complete command-only games, exact native replay/OPFS and fixed-corpus evidence. Full card obligations, G2, G6 and physical Quest qualification remain incomplete.",
+  "mainPromotion": {
+    "path": ".commander/prototypes/engine-0.20/promotion.json",
+    "sha256": "c9a1f8e597cefa99d3f86c1889760e29094583744a0442ae9b2e614c0833fbd6"
+  },
+  "mainExecutableEquivalence": {
+    "path": ".commander/evidence/promoted-equivalence-0.20.json",
+    "sha256": "a6c716c51e7510f8cb6fa4666fc89881f6bfd3a6b5d5c2f589c546abba2c9065"
+  }
+}

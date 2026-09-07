@@ -7,6 +7,7 @@ import {
   OrdinaryActivatedProgram,
   SelfEntryProgram,
   StaticCreatureBonus,
+  StaticKeywordGrant,
 } from "@iwsdk-apps/contracts";
 
 /** This tier admits one reviewed static creature bonus on a non-Aura permanent. */
@@ -16,6 +17,7 @@ export function isStaticBonusPermanent(card: CardDefinition): boolean {
     (card.types[0] === "Creature" || card.types[0] === "Enchantment") &&
     card.manaCost !== null &&
     !card.subtypes.includes("Aura") &&
+    !card.staticKeywordPrograms &&
     !card.spellProgram &&
     !card.triggerPrograms &&
     !card.damagePrograms &&
@@ -34,6 +36,7 @@ export function isReviewedTriggeredPermanent(card: CardDefinition): boolean {
     !card.triggerPrograms ||
     card.triggerPrograms.length !== 1 ||
     card.manaCost === null ||
+    card.staticKeywordPrograms ||
     card.spellProgram ||
     card.staticPrograms ||
     card.damagePrograms ||
@@ -56,6 +59,7 @@ export function isEntryObserverPermanent(card: CardDefinition): boolean {
   if (
     card.triggerPrograms?.length !== 1 ||
     card.manaCost === null ||
+    card.staticKeywordPrograms ||
     card.spellProgram ||
     card.staticPrograms ||
     card.damagePrograms ||
@@ -84,6 +88,7 @@ export function isDamageProgramPermanent(card: CardDefinition): boolean {
     card.damagePrograms?.length !== 1 ||
     !DamageStaticProgram.safeParse(card.damagePrograms[0]).success ||
     card.manaCost === null ||
+    card.staticKeywordPrograms ||
     card.spellProgram ||
     card.triggerPrograms ||
     card.staticPrograms ||
@@ -111,10 +116,34 @@ export function isOrdinaryActivatedPermanent(card: CardDefinition): boolean {
     OrdinaryActivatedProgram.safeParse(card.activatedPrograms[0]).success &&
     card.manaCost !== null &&
     card.manaAbilities.length === 0 &&
+    !card.staticKeywordPrograms &&
     !card.spellProgram &&
     !card.triggerPrograms &&
     !card.staticPrograms &&
     !card.damagePrograms &&
+    card.types.length > 0 &&
+    card.types.every((type) => ["Creature", "Artifact", "Enchantment"].includes(type)) &&
+    !card.subtypes.some((type) =>
+      ["Aura", "Equipment", "Vehicle", "Saga", "Class", "Case", "Room"].includes(type),
+    ) &&
+    (card.types.includes("Creature")
+      ? card.power !== null && card.toughness !== null
+      : card.power === null && card.toughness === null)
+  );
+}
+
+/** One live additive keyword grant, with no omitted additional program. */
+export function isStaticKeywordGrantPermanent(card: CardDefinition): boolean {
+  return (
+    card.staticKeywordPrograms?.length === 1 &&
+    StaticKeywordGrant.safeParse(card.staticKeywordPrograms[0]).success &&
+    card.manaCost !== null &&
+    card.manaAbilities.length === 0 &&
+    !card.spellProgram &&
+    !card.triggerPrograms &&
+    !card.staticPrograms &&
+    !card.damagePrograms &&
+    !card.activatedPrograms &&
     card.types.length > 0 &&
     card.types.every((type) => ["Creature", "Artifact", "Enchantment"].includes(type)) &&
     !card.subtypes.some((type) =>

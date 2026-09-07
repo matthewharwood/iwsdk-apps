@@ -1,9 +1,13 @@
 import { z } from "zod";
+import { BlockingRestriction, EVASION_KEYWORDS } from "./evasion";
+
+export { BlockingRestriction, EVASION_KEYWORDS } from "./evasion";
+
 import { DamageReplacementProgram, DamageStaticProgram } from "./damage";
 
 export { DamageReplacementProgram, DamageStaticProgram } from "./damage";
 
-import { StaticCreatureBonus } from "./static-bonus";
+import { ReviewedCreatureSubtype, StaticCreatureBonus } from "./static-bonus";
 import {
   ConditionalSelfEntryProgram,
   EntryCausedTriggerProgram,
@@ -30,7 +34,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.18.0";
+export const ENGINE_VERSION = "commander-engine/0.20.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -54,6 +58,7 @@ export function emptyMana(): Mana {
   return { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 };
 }
 export const Keyword = z.enum([
+  ...EVASION_KEYWORDS,
   "flying",
   "reach",
   "vigilance",
@@ -71,6 +76,29 @@ export const Keyword = z.enum([
   "flash",
 ]);
 export type Keyword = z.infer<typeof Keyword>;
+/** Live, additive layer 6 grants; no ability removal or earlier-layer processors. */
+export const StaticKeywordGrant = z.strictObject({
+  schema: z.literal("commander-static-keyword-grant/1"),
+  sourceZone: z.literal("battlefield"),
+  layer: z.literal(6),
+  filter: z.strictObject({
+    types: z.union([
+      z.tuple([z.literal("Creature")]),
+      z.tuple([z.literal("Artifact"), z.literal("Creature")]),
+    ]),
+    color: z.enum(["W", "U", "B", "R", "G"]).nullable(),
+    subtype: ReviewedCreatureSubtype.nullable(),
+    controller: z.enum(["source-controller", "any"]),
+    excludeSource: z.boolean(),
+  }),
+  grant: z
+    .array(Keyword)
+    .min(1)
+    .max(Keyword.options.length)
+    .refine((values) => new Set(values).size === values.length),
+});
+export type StaticKeywordGrant = z.infer<typeof StaticKeywordGrant>;
+
 export const TokenTemplateId = z.string().regex(/^token-template:[a-f0-9]{64}$/);
 export const TokenTemplate = z.strictObject({
   schema: z.literal("fixed-token-template/1"),
@@ -310,6 +338,8 @@ export const CardDefinition = z.strictObject({
   damagePrograms: z.array(DamageStaticProgram).length(1).optional(),
   activatedPrograms: z.tuple([OrdinaryActivatedProgram]).optional(),
   staticPrograms: z.tuple([StaticCreatureBonus]).optional(),
+  staticKeywordPrograms: z.tuple([StaticKeywordGrant]).optional(),
+  blockingRestrictions: z.array(BlockingRestriction).min(1).max(3).optional(),
 });
 export type CardDefinition = z.infer<typeof CardDefinition>;
 export const ContentRelease = z.strictObject({
@@ -621,6 +651,9 @@ export const Decision = z.strictObject({
   cost: Cost.nullable(),
   cardCosts: z.record(Id, Cost),
   damageReplacement: DamageReplacementChoice.optional(),
+  blockDomain: z
+    .array(z.strictObject({ attacker: Id, blockers: z.array(Id), minimumBlockers: Natural.min(1) }))
+    .optional(),
   activations: z
     .array(
       z.strictObject({

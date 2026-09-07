@@ -77,9 +77,9 @@ async function legalDeck(source: ContentRelease) {
   return DeckRevision.parse({ ...body, hash: await semanticHash(body) });
 }
 
-test("all 41 static source tuples authenticate within the 1198 primary registry", async () => {
+test("all 41 static source tuples authenticate within the 1583 primary registry", async () => {
   const source = await fixture();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1437);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1638);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   expect(await semanticHash(source.tokenTemplates)).toBe(
     REVIEWED_BINDING_SNAPSHOT.tokenTemplatesHash,
@@ -140,7 +140,7 @@ test("legal Arvad and Vampire roots retain only the exact Call to the Feast temp
       templateHash: await semanticHash(full.tokenTemplates[effect.templateId]),
     },
   ]);
-  expect(artifact.compilerVersion).toBe("development-match-plan/14");
+  expect(artifact.compilerVersion).toBe("development-match-plan/16");
   for (const capability of [
     ...STATIC_BONUS_CORE_CAPABILITIES,
     ...STATIC_ENCHANTMENT_CORE_CAPABILITIES,
@@ -220,7 +220,7 @@ for (const recipe of STATIC_BONUS_PERMANENTS)
 test("new source tuples cannot execute through an older or future engine ABI", async () => {
   const source = await fixture();
   const deck = await legalDeck(source);
-  for (const processorAbi of ["commander-engine/0.17.0", "commander-engine/0.19.0"]) {
+  for (const processorAbi of ["commander-engine/0.19.0", "commander-engine/0.21.0"]) {
     const altered = await rehash({ ...source, processorAbi });
     expect((await verifySourceRelease(altered)).processorAbi).toBe(processorAbi);
     await expect(createFullExecutionRegistry(altered)).rejects.toThrow("incompatible");

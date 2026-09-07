@@ -6,6 +6,8 @@ export { makeConditionalSelfEntryDecks } from "./development-conditional-self-en
 export { makeDamageReplacementDecks } from "./development-damage-replacement-decks";
 export { makeEntryObserverDecks } from "./development-entry-observer-decks";
 export { makeOrdinaryActivatedDecks } from "./development-ordinary-activated-decks";
+export { makeStaticEvasionDecks } from "./development-static-evasion-decks";
+export { makeStaticKeywordGrantDecks } from "./development-static-keyword-grant-decks";
 export { makeStrictProctorDecks } from "./development-strict-proctor-decks";
 export { compileEntryObserverDraft } from "./entry-observer-expansion";
 export { makeFixedTokenDecks } from "./fixed-token-decks";
@@ -13,6 +15,8 @@ export { compileFixedTokenDraft } from "./fixed-token-expansion";
 export { compileOrdinaryActivatedDraft } from "./ordinary-activated-expansion";
 export { makeStaticBonusDecks } from "./static-bonus-decks";
 export { compileStaticBonusDraft } from "./static-bonus-expansion";
+export { compileStaticEvasionDraft } from "./static-evasion-expansion";
+export { compileStaticKeywordGrantDraft } from "./static-keyword-grant-expansion";
 export { compileStrictProctorDraft } from "./strict-proctor-expansion";
 
 import { Database } from "bun:sqlite";
@@ -58,6 +62,8 @@ import {
   SPELL_FAMILY_VERSION,
   STATIC_BONUS_PERMANENTS,
   STATIC_BONUS_VERSION,
+  STATIC_KEYWORD_GRANT_VERSION,
+  STATIC_KEYWORD_GRANTS,
   STRICT_PROCTOR_PERMANENTS,
   STRICT_PROCTOR_VERSION,
   TEMPORARY_CREATURE_BODIES,
@@ -102,6 +108,11 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  staticKeywordGrants: {
+    enabled: boolean;
+    version: string;
+    registry: typeof STATIC_KEYWORD_GRANTS;
+  };
   ordinaryActivatedAbilities: {
     enabled: boolean;
     version: string;
@@ -155,34 +166,35 @@ export interface CompilationReport {
 function describeCompilerRecipes(
   options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
 ): string {
-  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}${options.conditionalSelfEntryTriggers ? "+conditional-self-entry-artifact/1" : ""}${options.strictProctorTriggers ? "+strict-proctor-trigger/1" : ""}${options.damageReplacementPermanents ? "+damage-replacement-permanent/1" : ""}${options.ordinaryActivatedAbilities ? "+ordinary-activated-permanent/1" : ""}`;
+  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}${options.conditionalSelfEntryTriggers ? "+conditional-self-entry-artifact/1" : ""}${options.strictProctorTriggers ? "+strict-proctor-trigger/1" : ""}${options.damageReplacementPermanents ? "+damage-replacement-permanent/1" : ""}${options.staticEvasionPermanents ? "+static-evasion-permanent/1" : ""}${options.ordinaryActivatedAbilities ? "+ordinary-activated-permanent/1" : ""}${options.staticKeywordGrants ? "+static-keyword-grant-permanent/1" : ""}`;
 }
 
 async function compilerRevision(
   options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
 ): Promise<string> {
   const recipeCompilerVersion = describeCompilerRecipes(options);
-  return options.ordinaryActivatedAbilities
-    ? `${COMPILER_VERSION}+ordinary-activated-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-    : options.damageReplacementPermanents
-      ? `${COMPILER_VERSION}+damage-replacement-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-      : options.strictProctorTriggers
-        ? `${COMPILER_VERSION}+strict-proctor-trigger/1:${await semanticHash(recipeCompilerVersion)}`
-        : options.conditionalSelfEntryTriggers
-          ? `${COMPILER_VERSION}+conditional-self-entry-artifact/1:${await semanticHash(recipeCompilerVersion)}`
-          : options.entryObserverTriggers
-            ? `${COMPILER_VERSION}+entry-observer-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-            : options.staticBonusPermanents
-              ? `${COMPILER_VERSION}+static-bonus-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-              : options.fixedTokenSpells
-                ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
-                : recipeCompilerVersion;
+  const selected = [
+    [options.staticKeywordGrants, "static-keyword-grant-permanent/1"],
+    [options.staticEvasionPermanents, "static-evasion-permanent/1"],
+    [options.ordinaryActivatedAbilities, "ordinary-activated-permanent/1"],
+    [options.damageReplacementPermanents, "damage-replacement-permanent/1"],
+    [options.strictProctorTriggers, "strict-proctor-trigger/1"],
+    [options.conditionalSelfEntryTriggers, "conditional-self-entry-artifact/1"],
+    [options.entryObserverTriggers, "entry-observer-permanent/1"],
+    [options.staticBonusPermanents, "static-bonus-permanent/1"],
+    [options.fixedTokenSpells, "fixed-token-spells/1"],
+  ].find(([enabled]) => enabled)?.[1];
+  return selected
+    ? `${COMPILER_VERSION}+${selected}:${await semanticHash(recipeCompilerVersion)}`
+    : recipeCompilerVersion;
 }
 
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    staticKeywordGrants?: boolean;
+    staticEvasionPermanents?: boolean;
     ordinaryActivatedAbilities?: boolean;
     damageReplacementPermanents?: boolean;
     strictProctorTriggers?: boolean;
@@ -227,6 +239,11 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    staticKeywordGrants: {
+      enabled: options.staticKeywordGrants === true,
+      version: STATIC_KEYWORD_GRANT_VERSION,
+      registry: STATIC_KEYWORD_GRANTS,
     },
     ordinaryActivatedAbilities: {
       enabled: options.ordinaryActivatedAbilities === true,
