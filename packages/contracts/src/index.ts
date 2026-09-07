@@ -1,9 +1,15 @@
 import { z } from "zod";
 import { StaticCreatureBonus } from "./static-bonus";
-import { EntryObserverProgram, SelfEntryProgram, TriggeredProgram } from "./triggers";
+import {
+  ConditionalSelfEntryProgram,
+  EntryObserverProgram,
+  SelfEntryProgram,
+  TriggeredProgram,
+} from "./triggers";
 
 export { ReviewedCreatureSubtype, StaticCreatureBonus } from "./static-bonus";
 export {
+  ConditionalSelfEntryProgram,
   EntryObserverEffect,
   EntryObserverProgram,
   EntrySubjectFilter,
@@ -17,7 +23,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.14.0";
+export const ENGINE_VERSION = "commander-engine/0.15.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -365,7 +371,16 @@ export const EntryObserverAbility = z.strictObject({
   entry: EntryObserverCapture,
 });
 export type EntryObserverAbility = z.infer<typeof EntryObserverAbility>;
-export const TriggeredAbility = z.union([SelfEntryAbility, EntryObserverAbility]);
+export const ConditionalSelfEntryAbility = z.strictObject({
+  ...triggeredAbilityHeader,
+  program: ConditionalSelfEntryProgram,
+});
+export type ConditionalSelfEntryAbility = z.infer<typeof ConditionalSelfEntryAbility>;
+export const TriggeredAbility = z.union([
+  SelfEntryAbility,
+  EntryObserverAbility,
+  ConditionalSelfEntryAbility,
+]);
 export type TriggeredAbility = z.infer<typeof TriggeredAbility>;
 export const StackEntry = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("spell"), objectId: Id }),

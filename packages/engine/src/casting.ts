@@ -309,7 +309,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   const top = state.stack.at(-1);
   if (!top) throw new RulesError("Invariant", "No stack object to resolve");
   if (top.kind === "triggered-ability") {
-    resolveTriggeredAbility(state);
+    resolveTriggeredAbility(state, release);
     return true;
   }
   const id = top.objectId;

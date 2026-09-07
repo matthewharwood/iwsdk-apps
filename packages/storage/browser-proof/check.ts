@@ -73,6 +73,7 @@ const options = parseArgs({
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
     "require-triggers": { type: "boolean", default: false },
+    "require-conditional-triggers": { type: "boolean", default: false },
     "require-ordered-triggers": { type: "boolean", default: false },
     "require-modifiers": { type: "boolean", default: false },
     "require-counters": { type: "boolean", default: false },
@@ -92,6 +93,7 @@ function boundedInteger(value: string, minimum: number, maximum: number, name: s
 const deckOffset = boundedInteger(options["deck-offset"], 0, 100_000, "deck-offset");
 const deckStride = boundedInteger(options["deck-stride"], 1, 100_000, "deck-stride");
 const seedAttempts = boundedInteger(options["seed-attempts"], 1, 32, "seed-attempts");
+const requireConditionalTriggers = options["require-conditional-triggers"];
 const requireOrderedTriggers = options["require-ordered-triggers"];
 const requireTriggers = options["require-triggers"] || requireOrderedTriggers;
 const twoSeed = boundedInteger(options["two-seed"], 1, 4294967200, "two-seed");
@@ -126,6 +128,7 @@ const resolver = parseResolver(options.resolver);
 const stageKinds: ProofStage[] = requireSpells
   ? ["starting-player", "target", "payment"]
   : ["starting-player", "payment"];
+if (requireConditionalTriggers) stageKinds.push("pending-conditional");
 if (requireOrderedTriggers) stageKinds.push("pending-ordered-trigger");
 else if (requireTriggers) stageKinds.push("pending-trigger");
 if (requireModifiers) stageKinds.push("active-modifier");
@@ -341,8 +344,23 @@ type NativeCase = {
   nativeFinal: Snapshot;
   artifact: PreparedMatchArtifact | null;
 };
+function pendingConditionalIds(snapshot: Snapshot): string[] {
+  return snapshot.triggers.pending.filter(
+    (id) =>
+      snapshot.triggers.abilities[id]?.program.schema === "commander-conditional-self-entry/1",
+  );
+}
+function conditionalWorkflowCompleted(stages: NativeStage[], final: Snapshot): boolean {
+  const pending = stages.find((stage) => stage.kind === "pending-conditional");
+  const ids = pending ? pendingConditionalIds(pending.snapshot) : [];
+  return (
+    ids.length > 0 &&
+    ids.every((id) => final.triggers.outcomes.some((outcome) => outcome.trigger === id))
+  );
+}
 function qualifies(stages: NativeStage[], final: Snapshot): boolean {
   return (
+    (!requireConditionalTriggers || conditionalWorkflowCompleted(stages, final)) &&
     stages.length === stageKinds.length &&
     stages.every((stage) => stage.run.status === "paused") &&
     (!requireTokens ||
@@ -613,6 +631,11 @@ function assertPausedStage(
         expect(view.decision?.kind).toBe("commander-replacement");
       else expect(view.decision).toBeNull();
     }
+    return;
+  }
+  if (kind === "pending-conditional") {
+    expect(snapshot.decision?.kind).toBe("priority");
+    expect(pendingConditionalIds(snapshot).length).toBeGreaterThan(0);
     return;
   }
   if (kind === "pending-trigger" || kind === "pending-ordered-trigger")
@@ -930,7 +953,8 @@ try {
           ["pending-token", "active-token", "token-departure"].includes(stage.kind)) ||
         (requireStatics &&
           ["pending-static", "active-static", "static-departure"].includes(stage.kind)) ||
-        (requireObservers && OBSERVER_STAGES.some((s) => s === stage.kind))
+        (requireObservers && OBSERVER_STAGES.some((s) => s === stage.kind)) ||
+        (requireConditionalTriggers && stage.kind === "pending-conditional")
       ) {
         await call(page, { operation: "close" });
         stageImport = await call<Snapshot>(page, {
@@ -1065,6 +1089,10 @@ try {
     commanderReplacementRequired: requireCommanderReplacement,
     tokenLifecycleRequired: requireTokens,
     staticLifecycleRequired: requireStatics,
+    conditionalTriggerRequired: requireConditionalTriggers,
+    conditionalConditionChecks: completedBrowserStates.flatMap(
+      (state) => state.triggers.conditionChecks,
+    ),
     observerLifecycleRequired: requireObservers,
     observerCaptures: completedBrowserStates.flatMap((state) => state.observers.captures),
     observerResolutions: completedBrowserStates.flatMap((state) => state.observers.resolved),

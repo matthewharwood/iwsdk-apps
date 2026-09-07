@@ -1,5 +1,7 @@
+export { compileConditionalSelfEntryDraft } from "./conditional-self-entry-expansion";
 export { makeCreatureReturnDecks } from "./creature-return-decks";
 export { compileCreatureReturnDraft } from "./creature-return-expansion";
+export { makeConditionalSelfEntryDecks } from "./development-conditional-self-entry-decks";
 export { makeEntryObserverDecks } from "./development-entry-observer-decks";
 export { compileEntryObserverDraft } from "./entry-observer-expansion";
 export { makeFixedTokenDecks } from "./fixed-token-decks";
@@ -20,6 +22,8 @@ export { compileSpellFamilyDraft } from "./spell-expansion";
 import {
   bindDevelopmentCard,
   bindExactSpellFamily,
+  CONDITIONAL_SELF_ENTRY_PERMANENTS,
+  CONDITIONAL_SELF_ENTRY_VERSION,
   COUNTER_SPELL_VERSION,
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
@@ -86,6 +90,11 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  conditionalSelfEntryTriggers: {
+    enabled: boolean;
+    version: string;
+    registry: typeof CONDITIONAL_SELF_ENTRY_PERMANENTS;
+  };
   entryObserverTriggers: {
     enabled: boolean;
     version: string;
@@ -119,13 +128,29 @@ export interface CompilationReport {
 function describeCompilerRecipes(
   options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
 ): string {
-  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}`;
+  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}${options.conditionalSelfEntryTriggers ? "+conditional-self-entry-artifact/1" : ""}`;
+}
+
+async function compilerRevision(
+  options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
+): Promise<string> {
+  const recipeCompilerVersion = describeCompilerRecipes(options);
+  return options.conditionalSelfEntryTriggers
+    ? `${COMPILER_VERSION}+conditional-self-entry-artifact/1:${await semanticHash(recipeCompilerVersion)}`
+    : options.entryObserverTriggers
+      ? `${COMPILER_VERSION}+entry-observer-permanent/1:${await semanticHash(recipeCompilerVersion)}`
+      : options.staticBonusPermanents
+        ? `${COMPILER_VERSION}+static-bonus-permanent/1:${await semanticHash(recipeCompilerVersion)}`
+        : options.fixedTokenSpells
+          ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
+          : recipeCompilerVersion;
 }
 
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    conditionalSelfEntryTriggers?: boolean;
     entryObserverTriggers?: boolean;
     staticBonusPermanents?: boolean;
     fixedTokenSpells?: boolean;
@@ -166,6 +191,11 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    conditionalSelfEntryTriggers: {
+      enabled: options.conditionalSelfEntryTriggers === true,
+      version: CONDITIONAL_SELF_ENTRY_VERSION,
+      registry: CONDITIONAL_SELF_ENTRY_PERMANENTS,
     },
     entryObserverTriggers: {
       enabled: options.entryObserverTriggers === true,
@@ -246,21 +276,15 @@ export async function compileDevelopmentRelease(
     report.bindings.length + report.unsupported.length !== candidates.length
   )
     throw new Error("Compiler candidate denominator mismatch");
-  const recipeCompilerVersion = describeCompilerRecipes(options);
-  const compilerVersion = options.entryObserverTriggers
-    ? `${COMPILER_VERSION}+entry-observer-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-    : options.staticBonusPermanents
-      ? `${COMPILER_VERSION}+static-bonus-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-      : options.fixedTokenSpells
-        ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
-        : recipeCompilerVersion;
+  const compilerVersion = await compilerRevision(options);
   const base = {
     schema: "commander-content/1" as const,
     id:
       options.creatureReturnSpells ||
       options.fixedTokenSpells ||
       options.staticBonusPermanents ||
-      options.entryObserverTriggers
+      options.entryObserverTriggers ||
+      options.conditionalSelfEntryTriggers
         ? `development:${inventory.bundleHash.slice(0, 16)}:${await semanticHash({ compilerVersion, recipeVersion: RECIPE_VERSION })}`
         : `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}${options.creatureReturnSpells ? ":creature-return-spell/1" : ""}`,
     sourceBundle: inventory.bundleHash,

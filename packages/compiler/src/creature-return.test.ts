@@ -43,9 +43,9 @@ async function rehash(source: ContentRelease) {
   return { ...body, hash: await semanticHash(body) };
 }
 
-test("five creature-return identities are authenticated against the closed1190 registry and preserve exact frozen decks", async () => {
+test("five creature-return identities are authenticated against the closed1192 registry and preserve exact frozen decks", async () => {
   const { source, decks } = await fixture();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1190);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1192);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   await verifySourceRelease(source);
   const result = await makeCreatureReturnDecks(source, decks);

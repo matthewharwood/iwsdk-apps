@@ -3,6 +3,7 @@ import {
   GameEvent,
   type Response,
   type RulesState,
+  TriggeredAbility,
   triggerEffects,
 } from "@iwsdk-apps/contracts";
 import {
@@ -19,6 +20,7 @@ import {
   tryMove,
 } from "./common";
 
+import { checkInterveningIf } from "./conditional-triggers";
 import { captureEntryObservers } from "./entry-observers";
 
 /** Complete the entry batch before inspecting post-event self-entry abilities. */
@@ -85,10 +87,15 @@ export function recordBattlefieldEntryBatch(
     const card = definition(registry, source.definition);
     for (const program of card.triggerPrograms ?? []) {
       if (program.schema === "commander-entry-observer/1") continue;
+      if (
+        program.schema === "commander-conditional-self-entry/1" &&
+        !checkInterveningIf(state, registry, source, program, "capture")
+      )
+        continue;
       const id = `${state.manifest.id}:trigger:${eventIndex}:${occurrenceOrdinal}:${program.id}`;
       if (state.abilities[id])
         throw new RulesError("Invariant", "Trigger occurrence captured twice");
-      state.abilities[id] = {
+      state.abilities[id] = TriggeredAbility.parse({
         id,
         source: structuredClone(source),
         sourceVersion: card.sourceVersion,
@@ -96,7 +103,7 @@ export function recordBattlefieldEntryBatch(
         program: structuredClone(program),
         eventIndex,
         occurrenceOrdinal,
-      };
+      });
       state.pendingTriggers.push(id);
       emit(
         state,
@@ -199,13 +206,29 @@ export function answerTriggerOrder(state: RulesState, actor: string, response: R
   return finishPlacement(state);
 }
 
-export function resolveTriggeredAbility(state: RulesState): void {
+export function resolveTriggeredAbility(state: RulesState, registry: ExecutionRegistry): void {
   const top = state.stack.at(-1);
   if (top?.kind !== "triggered-ability")
     throw new RulesError("Invariant", "No triggered ability to resolve");
   const ability = state.abilities[top.triggerId];
   if (!ability || player(state, ability.controller).lost)
     throw new RulesError("Invariant", "A resolving ability lacks a living captured controller");
+  if (
+    ability.program.schema === "commander-conditional-self-entry/1" &&
+    !checkInterveningIf(state, registry, ability.source, ability.program, "resolution")
+  ) {
+    state.stack.pop();
+    delete state.abilities[ability.id];
+    emit(state, "TriggeredAbilityRemoved", {
+      trigger: ability.id,
+      source: ability.source.id,
+      controller: ability.controller,
+      definition: ability.source.definition,
+      ability: ability.program.id,
+      reason: "intervening-if-false",
+    });
+    return;
+  }
   for (const effect of triggerEffects(ability.program)) {
     if (effect.kind === "draw") draw(state, ability.controller, effect.amount);
     else {

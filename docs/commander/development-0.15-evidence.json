@@ -1,0 +1,922 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.15.0",
+  "sourceReleaseHash": "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
+  "primaryDefinitions": 1192,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 51,
+  "preservedPrimaryDefinitions": 1190,
+  "preservedCompleteDeckRevisions": 49,
+  "unsupportedPaperCandidates": 30637,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": "docs/commander/source-conditional-self-entry-v0.15.json",
+    "sha256": "76b61b7b8761f21342199042a8e55dd51a2fd6f6d46955d8d8378496e63835d1"
+  },
+  "sourceResearch": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/g2-trigger-next-research/manifest.json",
+    "sha256": "606374f503f06c5458e3162c8189726ffda5b340de36193c3621eeb5422fe889"
+  },
+  "independentSourceReview": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-conditional-source-review/manifest.json",
+    "sha256": "1dfbde9a30e00020a15c384313b5850e18be362aa8da9e92d560e41867e5fb92"
+  },
+  "bindingAndDeckExecution": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/conditional-binding-decks/attempt-1/result.json",
+    "sha256": "9c94969fa156bd38bf3aca7d443110e52a445de9a3889611b2d98344608e169b",
+    "tests": 71,
+    "assertions": 22426,
+    "capturedFilesUnchanged": 184
+  },
+  "coreAndSourceExecution": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/conditional-runtime-execution/manifest.json",
+    "sha256": "1db5faf168e6c265627b8d5802cf17d177c78eaae7bd177a45788bee5c273f45",
+    "focusedTests": 31,
+    "focusedAssertions": 190,
+    "broadTests": 662,
+    "broadAssertions": 9168,
+    "newSourceIdentitiesExecuted": 2,
+    "scope": "Twelve authenticated scenarios use legal100-card inventories with explicitly selected hands and land preconditions. Ordinary casting/payment; no random-deal complete games claimed by these scenarios."
+  },
+  "independentRuntimeReview": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-conditional-runtime-review/manifest.json",
+    "sha256": "abf1ed3ad606cb719f1611d6e33dbb2f7db63176e4e7a65b6c0d4419c9882638",
+    "tests": 57,
+    "assertions": 507,
+    "newIndependentTests": 26,
+    "scope": "Artifact-token supplemental subclause unexecuted; noncreature Artifact query separately constructed."
+  },
+  "compilerExecution": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/conditional-compiler-execution/qualified/result.json",
+    "sha256": "da6cd952e7a1a21b964f93385de8648f01fb6eb5b9201d4193317ed0eca16799",
+    "tests": 139,
+    "assertions": 34590,
+    "capturedFilesUnchanged": 193
+  },
+  "independentCompilerReview": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-conditional-compiler-review/manifest.json",
+    "sha256": "8ffe9442ad58318d59eae4e1d8180a34d20e7194fca15480b768d5566aa06bd4",
+    "rejectionProbes": 79
+  },
+  "nativeDurability": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/native-conditional-durability/attempt-1/result.json",
+    "sha256": "c734bf1960b262e71fff36ce07f11c21f8282a94f5da26550ea3de214c6e5385",
+    "tests": 20,
+    "assertions": 699,
+    "resolvers": 3,
+    "commandsPerResolver": 130,
+    "checkpoints": [121, 122, 128, 130],
+    "gameSeed": 1354,
+    "driverSeed": 1,
+    "sourcePublicationHash": "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
+    "actualFixtureReleaseHash": "b348cf3fe6a86de860c51edda94fdad326432e18c0be572cf7e99b365b2d0923",
+    "actualFixturePrimaryDefinitions": 6,
+    "preparedDefinitions": 5,
+    "completedGames": 0,
+    "supplementalTypecheck": {
+      "path": ".commander/prototypes/engine-0.15/.draft-artifacts/native-conditional-durability/validation-2/result.json",
+      "sha256": "017871bc4da52c43d870870ac6ae81721522f0c4c1bd3672d6aed0c19a6e506b"
+    },
+    "scope": "One ordinary legal starting setup; selected seed search retained. Initial shared typecheck failed in a concurrently authored browser-runner test; supplemental typecheck passed with native captured bytes unchanged."
+  },
+  "independentNativeReview": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-native-conditional-review/result.json",
+    "sha256": "a98f9e12dfb7e05fa969105e7da49c6eb6d7abf126120aad9ad936011338b762"
+  },
+  "stoppedBrowser": {
+    "path": ".commander/prototypes/engine-0.15/.commander/checkpoint-browser-proof/2026-09-07T01-27-13-098Z-f06b4760/evidence.json",
+    "sha256": "e828315ec618fd0135fdedf85983cea919e46c3ef04b2f35a8981db3b5f33aff",
+    "status": "passed",
+    "sourceHash": "5487fed94c0c7524197ca64c8837686e022dc236adfb5e49206fb6a222f2ea9e",
+    "workerBundleHash": "8103bf4c48f0912f30105a76962297fd77796cd89cfe2f6eb62aafde954ae3ad",
+    "sourceFilesUnchanged": 100,
+    "inputFilesUnchanged": 14,
+    "resolvers": 3,
+    "reloadCheckpoints": 12,
+    "separateImports": 12,
+    "receiptRetries": 24,
+    "rpcRows": 621,
+    "newCompletedGames": 0,
+    "scope": "Existing native command tapes replayed in real Chromium dedicated workers and SQLite OPFS. Scholar capture at122, artifact returned by opponent Repulse at128 with same ability pending, condition false and ability removed at130. Repulse draws B; Scholar does not draw A. Nine positive import continuations and three imports already at final130; no autoplay claim."
+  },
+  "independentStoppedBrowserReview": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-conditional-checkpoint-review/manifest.json",
+    "sha256": "131bab8895d3aeeb01385a9db17153e057268b71299cc6a9d113157084f9f8ad"
+  },
+  "originalG2ConditionalJoin": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-conditional-checkpoint-review/scope-join.json",
+    "sha256": "33dc3be41edb48832ccc8930c6e8a0c68342dff60ce651c3c52d51578891aadd"
+  },
+  "mainCompile": {
+    "path": ".commander/evidence/compile-0.15-main.log",
+    "sha256": "ba32f3bcb0f673ed87aaf350019ecec2580f4e428448b4904f1b4d7cab3f5176"
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.15/.draft-runs/resolver-comparisons/4d799d36-3fd7-4d40-8741-a87acdd23a35/report.json",
+      "sha256": "c4acc0f133807b016a07ed8445792d30a2089aa68d99318d45924773188d0ca5",
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.15/.draft-runs/resolver-comparisons/4d799d36-3fd7-4d40-8741-a87acdd23a35/assignment.json",
+        "sha256": "9108cc62c80d1ee4ed26e4aa722560134b84246e888cdee03e0dedc4008bd9ce"
+      },
+      "mode": "four-seat",
+      "gameSeed": 15201,
+      "driverSeed": 15218,
+      "commands": 1869,
+      "boundaries": 1870,
+      "independentResolversAndReplays": 3,
+      "conditionalChecks": [
+        {
+          "revision": 897,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "condition": {
+                "kind": "controls-permanent",
+                "types": ["Artifact"]
+              },
+              "controller": "seat-1",
+              "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+              "matched": true,
+              "phase": "capture",
+              "source": "seat-1:card:98@2"
+            },
+            "epoch": 2324,
+            "index": 2323,
+            "type": "TriggerConditionEvaluated",
+            "visibility": "public"
+          },
+          "sourceName": "Donatello, Turtle Techie"
+        },
+        {
+          "revision": 905,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "condition": {
+                "kind": "controls-permanent",
+                "types": ["Artifact"]
+              },
+              "controller": "seat-1",
+              "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+              "matched": true,
+              "phase": "resolution",
+              "source": "seat-1:card:98@2"
+            },
+            "epoch": 2348,
+            "index": 2347,
+            "type": "TriggerConditionEvaluated",
+            "visibility": "public"
+          },
+          "sourceName": "Donatello, Turtle Techie"
+        }
+      ],
+      "conditionalOutcomes": [
+        {
+          "revision": 905,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "controller": "seat-1",
+              "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+              "source": "seat-1:card:98@2",
+              "trigger": "four-seat-15201-c289d0aa:trigger:2322:0:conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0"
+            },
+            "epoch": 2351,
+            "index": 2350,
+            "type": "TriggeredAbilityResolved",
+            "visibility": "public"
+          },
+          "draws": 1,
+          "sourceName": "Donatello, Turtle Techie"
+        }
+      ]
+    },
+    {
+      "path": ".commander/prototypes/engine-0.15/.draft-runs/resolver-comparisons/6095db27-30ca-4c2e-acf1-6ed53710993d/report.json",
+      "sha256": "0c25c9d4cc44147ed0ff0e38135c3cea8d7cb31fd781bfa036f4bd4dd6825933",
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.15/.draft-runs/resolver-comparisons/6095db27-30ca-4c2e-acf1-6ed53710993d/assignment.json",
+        "sha256": "7d02bde03bce85b7cfac2854bd9808a31345669177bb35f4454451189aba969a"
+      },
+      "mode": "two-seat",
+      "gameSeed": 15001,
+      "driverSeed": 15018,
+      "commands": 826,
+      "boundaries": 827,
+      "independentResolversAndReplays": 3,
+      "conditionalChecks": [
+        {
+          "revision": 166,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "condition": {
+                "kind": "controls-permanent",
+                "types": ["Artifact"]
+              },
+              "controller": "seat-1",
+              "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+              "matched": true,
+              "phase": "capture",
+              "source": "seat-1:card:98@2"
+            },
+            "epoch": 516,
+            "index": 515,
+            "type": "TriggerConditionEvaluated",
+            "visibility": "public"
+          },
+          "sourceName": "Donatello, Turtle Techie"
+        },
+        {
+          "revision": 168,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "condition": {
+                "kind": "controls-permanent",
+                "types": ["Artifact"]
+              },
+              "controller": "seat-1",
+              "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+              "matched": true,
+              "phase": "resolution",
+              "source": "seat-1:card:98@2"
+            },
+            "epoch": 524,
+            "index": 523,
+            "type": "TriggerConditionEvaluated",
+            "visibility": "public"
+          },
+          "sourceName": "Donatello, Turtle Techie"
+        },
+        {
+          "revision": 650,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:0753aee4-33db-48c5-9854-16a9d91535b2:0",
+              "condition": {
+                "kind": "controls-permanent",
+                "types": ["Artifact"]
+              },
+              "controller": "seat-1",
+              "definition": "oracle:0753aee4-33db-48c5-9854-16a9d91535b2",
+              "matched": true,
+              "phase": "capture",
+              "source": "seat-1:card:2@3"
+            },
+            "epoch": 1916,
+            "index": 1915,
+            "type": "TriggerConditionEvaluated",
+            "visibility": "public"
+          },
+          "sourceName": "Scholar of Stars"
+        },
+        {
+          "revision": 652,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:0753aee4-33db-48c5-9854-16a9d91535b2:0",
+              "condition": {
+                "kind": "controls-permanent",
+                "types": ["Artifact"]
+              },
+              "controller": "seat-1",
+              "definition": "oracle:0753aee4-33db-48c5-9854-16a9d91535b2",
+              "matched": true,
+              "phase": "resolution",
+              "source": "seat-1:card:2@3"
+            },
+            "epoch": 1924,
+            "index": 1923,
+            "type": "TriggerConditionEvaluated",
+            "visibility": "public"
+          },
+          "sourceName": "Scholar of Stars"
+        }
+      ],
+      "conditionalOutcomes": [
+        {
+          "revision": 168,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "controller": "seat-1",
+              "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+              "source": "seat-1:card:98@2",
+              "trigger": "two-seat-15001-8b2090bb:trigger:514:0:conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0"
+            },
+            "epoch": 527,
+            "index": 526,
+            "type": "TriggeredAbilityResolved",
+            "visibility": "public"
+          },
+          "draws": 1,
+          "sourceName": "Donatello, Turtle Techie"
+        },
+        {
+          "revision": 652,
+          "event": {
+            "cause": "rules",
+            "data": {
+              "ability": "conditional-self-entry:0753aee4-33db-48c5-9854-16a9d91535b2:0",
+              "controller": "seat-1",
+              "definition": "oracle:0753aee4-33db-48c5-9854-16a9d91535b2",
+              "source": "seat-1:card:2@3",
+              "trigger": "two-seat-15001-8b2090bb:trigger:1914:0:conditional-self-entry:0753aee4-33db-48c5-9854-16a9d91535b2:0"
+            },
+            "epoch": 1927,
+            "index": 1926,
+            "type": "TriggeredAbilityResolved",
+            "visibility": "public"
+          },
+          "draws": 1,
+          "sourceName": "Scholar of Stars"
+        }
+      ]
+    }
+  ],
+  "independentCliComparisonReview": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-conditional-cli-comparisons.json",
+    "sha256": "00dd6664968d699a5e68396869233d0c742e44b074eff88c5ce980c29a80987f"
+  },
+  "frozenBuildHash": "a3a323736e51e06f84cd9bc574f2aa869f40d083007042c970a86d085cfbcf12",
+  "frozenExecutableSha256": "b32db28d7490ca4458b7a4e9e17566434b26d30ac5f5d21b3e8be1e8bdf15d5a",
+  "browser": {
+    "path": ".commander/prototypes/engine-0.15/.commander/browser-proof/2026-09-07T01-27-13-031Z-c0164e5c/evidence.json",
+    "sha256": "bfa69226de8618301f6d3e3eeb9f05b53609ef8854bc2a99aa326f2a6ea3aadd",
+    "status": "passed",
+    "sourceHash": "c152ac825b17307cede3d0dac80d838c499c5571db392f3d625ee2e2e7f08f32",
+    "workerBundleHash": "8103bf4c48f0912f30105a76962297fd77796cd89cfe2f6eb62aafde954ae3ad",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "driverVersion": "observed-combat/9",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 15001,
+        "driverSeed": 15018,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "e4bd15b8bf72c9e14e23bfa1e491098adaebd411a85f625834d3e10ab9565f49"
+          },
+          {
+            "id": "P2",
+            "deckHash": "2b5dca63fee1f87c689ac2161f79ed1af1872361f9d674d7077870439709585e"
+          }
+        ],
+        "commands": 842,
+        "boundaries": 843,
+        "finalStateHash": "0278d8a2e33fb2f958591981e52c90585f66c545c8da49111ed9e10d52128050",
+        "execution": {
+          "sourceReleaseHash": "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
+          "preparedArtifactHash": "e4a6366c102b33f325b0694ee3ef3f622a35b8ab1df16abfc00620cdc53a44b1",
+          "definitionCount": 96,
+          "tokenTemplateCount": 0,
+          "fullDefinitionCount": 1192,
+          "excludedDefinitionCount": 1096,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 20
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 7,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "pending-conditional",
+            "revision": 166,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "importedCompleteStateHash": "0278d8a2e33fb2f958591981e52c90585f66c545c8da49111ed9e10d52128050",
+        "triggerEvidence": {
+          "captured": {
+            "oracle:f84850bc-6348-449e-bd82-bb39e2119bec": 1,
+            "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc": 4,
+            "oracle:1050f029-60d4-4769-b39f-9100c949a822": 1,
+            "oracle:09bd4e1c-9861-481f-80dc-4de955c8d3af": 1,
+            "oracle:0753aee4-33db-48c5-9854-16a9d91535b2": 1
+          },
+          "resolved": {
+            "oracle:f84850bc-6348-449e-bd82-bb39e2119bec": 1,
+            "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc": 4,
+            "oracle:1050f029-60d4-4769-b39f-9100c949a822": 1,
+            "oracle:09bd4e1c-9861-481f-80dc-4de955c8d3af": 1,
+            "oracle:0753aee4-33db-48c5-9854-16a9d91535b2": 1
+          },
+          "outcomes": [
+            {
+              "trigger": "browser-parity-2-seat-attempt-0:trigger:514:0:conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "revision": 168,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:632:1:93:3:0:0",
+              "revision": 205,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:818:1:93:3:0:0",
+              "revision": 269,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:839:1:93:3:0:0",
+              "revision": 275,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:859:1:93:3:0:0",
+              "revision": 281,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "browser-parity-2-seat-attempt-0:trigger:1363:0:self-entry-0",
+              "revision": 460,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "browser-parity-2-seat-attempt-0:trigger:1763:0:self-entry-0",
+              "revision": 604,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "browser-parity-2-seat-attempt-0:trigger:1940:0:conditional-self-entry:0753aee4-33db-48c5-9854-16a9d91535b2:0",
+              "revision": 665,
+              "kind": "TriggeredAbilityResolved"
+            }
+          ],
+          "conditionChecks": [
+            {
+              "revision": 166,
+              "event": {
+                "index": 515,
+                "epoch": 516,
+                "type": "TriggerConditionEvaluated",
+                "visibility": "public",
+                "cause": "rules",
+                "data": {
+                  "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+                  "condition": {
+                    "kind": "controls-permanent",
+                    "types": ["Artifact"]
+                  },
+                  "controller": "P1",
+                  "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+                  "matched": true,
+                  "phase": "capture",
+                  "source": "P1:card:98@2"
+                }
+              }
+            },
+            {
+              "revision": 168,
+              "event": {
+                "index": 523,
+                "epoch": 524,
+                "type": "TriggerConditionEvaluated",
+                "visibility": "public",
+                "cause": "rules",
+                "data": {
+                  "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+                  "condition": {
+                    "kind": "controls-permanent",
+                    "types": ["Artifact"]
+                  },
+                  "controller": "P1",
+                  "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+                  "matched": true,
+                  "phase": "resolution",
+                  "source": "P1:card:98@2"
+                }
+              }
+            },
+            {
+              "revision": 663,
+              "event": {
+                "index": 1941,
+                "epoch": 1942,
+                "type": "TriggerConditionEvaluated",
+                "visibility": "public",
+                "cause": "rules",
+                "data": {
+                  "ability": "conditional-self-entry:0753aee4-33db-48c5-9854-16a9d91535b2:0",
+                  "condition": {
+                    "kind": "controls-permanent",
+                    "types": ["Artifact"]
+                  },
+                  "controller": "P1",
+                  "definition": "oracle:0753aee4-33db-48c5-9854-16a9d91535b2",
+                  "matched": true,
+                  "phase": "capture",
+                  "source": "P1:card:2@3"
+                }
+              }
+            },
+            {
+              "revision": 665,
+              "event": {
+                "index": 1949,
+                "epoch": 1950,
+                "type": "TriggerConditionEvaluated",
+                "visibility": "public",
+                "cause": "rules",
+                "data": {
+                  "ability": "conditional-self-entry:0753aee4-33db-48c5-9854-16a9d91535b2:0",
+                  "condition": {
+                    "kind": "controls-permanent",
+                    "types": ["Artifact"]
+                  },
+                  "controller": "P1",
+                  "definition": "oracle:0753aee4-33db-48c5-9854-16a9d91535b2",
+                  "matched": true,
+                  "phase": "resolution",
+                  "source": "P1:card:2@3"
+                }
+              }
+            }
+          ],
+          "pending": [],
+          "abilities": {},
+          "absentCapturedSources": [],
+          "pendingTriggers": [],
+          "placement": null
+        }
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 15201,
+        "driverSeed": 15218,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "e4bd15b8bf72c9e14e23bfa1e491098adaebd411a85f625834d3e10ab9565f49"
+          },
+          {
+            "id": "P2",
+            "deckHash": "2b5dca63fee1f87c689ac2161f79ed1af1872361f9d674d7077870439709585e"
+          },
+          {
+            "id": "P3",
+            "deckHash": "19e1c0ab313a2b345b7092d9715645dfa280359805f2928829a2cac968d006ef"
+          },
+          {
+            "id": "P4",
+            "deckHash": "d615153567bd7bd17f2c47e40ec1a2309313967666c4c51e10543a15997eddea"
+          }
+        ],
+        "commands": 1797,
+        "boundaries": 1798,
+        "finalStateHash": "b20e24f883f81ed07f028b740a74b40bf038d989d9942d713a00359a43a1ede1",
+        "execution": {
+          "sourceReleaseHash": "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
+          "preparedArtifactHash": "2329d88667581419f0f4565f2e3136dd4b82e9d1694c432b81132578ae7a6d0a",
+          "definitionCount": 159,
+          "tokenTemplateCount": 7,
+          "fullDefinitionCount": 1192,
+          "excludedDefinitionCount": 1033,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 13
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 49,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "pending-conditional",
+            "revision": 891,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "importedCompleteStateHash": "b20e24f883f81ed07f028b740a74b40bf038d989d9942d713a00359a43a1ede1",
+        "triggerEvidence": {
+          "captured": {
+            "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6": 7,
+            "oracle:f3fad295-1af2-4ecc-8546-b121ad6be27b": 22,
+            "oracle:f84850bc-6348-449e-bd82-bb39e2119bec": 1,
+            "oracle:1050f029-60d4-4769-b39f-9100c949a822": 1
+          },
+          "resolved": {
+            "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6": 7,
+            "oracle:f3fad295-1af2-4ecc-8546-b121ad6be27b": 22,
+            "oracle:f84850bc-6348-449e-bd82-bb39e2119bec": 1,
+            "oracle:1050f029-60d4-4769-b39f-9100c949a822": 1
+          },
+          "outcomes": [
+            {
+              "trigger": "entry-observer:948:3:93:3:0:0",
+              "revision": 360,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:977:3:99:3:0:0",
+              "revision": 371,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:977:3:93:3:0:0",
+              "revision": 375,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1019:3:99:3:0:0",
+              "revision": 386,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1019:3:93:3:0:0",
+              "revision": 390,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1167:3:99:3:0:0",
+              "revision": 444,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1298:3:99:3:0:0",
+              "revision": 495,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1523:3:99:3:0:0",
+              "revision": 588,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1523:3:93:3:0:0",
+              "revision": 592,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1703:3:99:3:0:0",
+              "revision": 658,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1838:3:99:3:0:0",
+              "revision": 712,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1867:3:99:3:0:0",
+              "revision": 722,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:1896:3:99:3:0:0",
+              "revision": 732,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2032:3:99:3:0:0",
+              "revision": 786,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2148:3:99:3:0:0",
+              "revision": 831,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2148:3:93:3:0:0",
+              "revision": 835,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2312:3:99:3:0:0",
+              "revision": 895,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "browser-parity-4-seat-attempt-0:trigger:2312:0:conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+              "revision": 899,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2355:3:99:3:0:0",
+              "revision": 909,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2494:3:99:3:0:0",
+              "revision": 964,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2637:3:99:3:0:0",
+              "revision": 1023,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2774:3:99:3:0:0",
+              "revision": 1079,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2774:3:93:3:0:0",
+              "revision": 1083,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2936:3:99:3:0:0",
+              "revision": 1143,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:2966:3:99:3:0:0",
+              "revision": 1153,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:3532:3:99:3:0:0",
+              "revision": 1381,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "browser-parity-4-seat-attempt-0:trigger:3532:0:self-entry-0",
+              "revision": 1384,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:3847:3:99:3:0:0",
+              "revision": 1503,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:4043:3:99:3:0:0",
+              "revision": 1576,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:4288:3:99:3:0:0",
+              "revision": 1668,
+              "kind": "TriggeredAbilityResolved"
+            },
+            {
+              "trigger": "entry-observer:4288:3:93:3:0:0",
+              "revision": 1670,
+              "kind": "TriggeredAbilityResolved"
+            }
+          ],
+          "conditionChecks": [
+            {
+              "revision": 891,
+              "event": {
+                "index": 2313,
+                "epoch": 2314,
+                "type": "TriggerConditionEvaluated",
+                "visibility": "public",
+                "cause": "rules",
+                "data": {
+                  "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+                  "condition": {
+                    "kind": "controls-permanent",
+                    "types": ["Artifact"]
+                  },
+                  "controller": "P1",
+                  "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+                  "matched": true,
+                  "phase": "capture",
+                  "source": "P1:card:98@2"
+                }
+              }
+            },
+            {
+              "revision": 899,
+              "event": {
+                "index": 2337,
+                "epoch": 2338,
+                "type": "TriggerConditionEvaluated",
+                "visibility": "public",
+                "cause": "rules",
+                "data": {
+                  "ability": "conditional-self-entry:f84850bc-6348-449e-bd82-bb39e2119bec:0",
+                  "condition": {
+                    "kind": "controls-permanent",
+                    "types": ["Artifact"]
+                  },
+                  "controller": "P1",
+                  "definition": "oracle:f84850bc-6348-449e-bd82-bb39e2119bec",
+                  "matched": true,
+                  "phase": "resolution",
+                  "source": "P1:card:98@2"
+                }
+              }
+            }
+          ],
+          "pending": [],
+          "abilities": {},
+          "absentCapturedSources": [],
+          "pendingTriggers": [],
+          "placement": null
+        }
+      }
+    ],
+    "scope": "Two complete browser/native games, same actual pending conditional IDs through OPFS reload/import/exact retry and later actual resolved outcomes. Both selected trajectories exercised TRUE conditions; false resolution is separate source/native/stopped-browser evidence."
+  },
+  "independentBrowserReview": {
+    "path": ".commander/prototypes/engine-0.15/.draft-artifacts/independent-conditional-fullbrowser-review/manifest.json",
+    "sha256": "d2be8f6f3623a94bb043901be7a94d084af42a5613f9c8e902e765d371879388"
+  },
+  "observedAssignments": {
+    "initialDeckGameSeedFamilies": 4,
+    "selectedFullExecutionAssignments": 4,
+    "acceptedCommands": 5334,
+    "scope": "Two CLI assignments plus two selected browser assignments. Resolver variants, replays/imports and repeated qualifications count zero additional assignments. Stopped130-command history is separate and incomplete."
+  },
+  "attemptNotes": [
+    "First checkpoint attempt failed local listener before browser execution. Second failed namespace validation before match creation. Both retained; corrected third passed.",
+    "Preliminary fullbrowser gameplay finished but source-stability guard rejected concurrent corrections to two unused checkpoint helpers. Frozen final fullbrowser passed.",
+    "Initial compiler lint complexity and narrower test-error expectations were corrected; failed captures remain retained."
+  ],
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.15/promotion.json",
+    "sha256": "1d9f9792ed74642836c3697961bcafbeccadac106b6f28c69d90b097a83790e7"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.15/archive-inventory.json",
+    "sha256": "8a57dfc407a1e53716c44677d70294472526c1da829c84257be5ed9ed40919f0"
+  },
+  "exactMainSourceCliEquivalence": {
+    "path": ".commander/evidence/promotion-equality-0.15.json",
+    "sha256": "d4db297f095176522eeb53eaa1e406fd58ad4f9fdb7bf4b94937c4019d0feaae"
+  },
+  "exactMainWorkerEquivalence": {
+    "path": ".commander/evidence/browser-worker-byte-equivalence-0.15.json",
+    "sha256": "46f2382ebae4af1ee0a52f62151920e0ea6ed4dfe051ac56d04bd8d78cb88f27"
+  },
+  "repositoryGate": {
+    "path": ".commander/evidence/check-full-0.15-main.log",
+    "sha256": "c93cc7f52f6b4e5f345250057c786417b03c403d12f6c0c42d15dbf2206ba635",
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "unitTests": 1113,
+    "unitAssertions": 124536,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true
+  },
+  "fixedRegression": {
+    "id": "regression-0.15-fixed64",
+    "status": "running-at-checkpoint",
+    "assigned": 64,
+    "resultFilesAtObservation": 56,
+    "frozenBuildHash": "a3a323736e51e06f84cd9bc574f2aa869f40d083007042c970a86d085cfbcf12",
+    "scope": "Fresh executions/replays under captured0.15; older deck compositions do not exercise the new conditional sources."
+  },
+  "remaining": [
+    "30,637 paper candidates and broader rule families remain unsupported.",
+    "Full originalG2 qualification remains open, including genuine trigger-on-trigger processing and unless payments.",
+    "Inspiring Veteran and Kargan Warleader need a compatible implemented RW commander and legal source execution.",
+    "General layers/control/type/ability changes, entry replacements and broader conditions remain unsupported.",
+    "Full-snapshot release handoff and player-visible session contract remain incomplete.",
+    "Production Commander browser/XR consumption and physical headset qualification remain unfinished."
+  ],
+  "consumerGapAudit": {
+    "path": "docs/commander/consumer-gaps-0.12.md",
+    "sha256": "6cfc26300022f0a7b53ec885ab9ed86c4360fcd3013325315d6f22e698751de3"
+  },
+  "observedAt": "2026-09-07T01:49:29.535277+00:00"
+}

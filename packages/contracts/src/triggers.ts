@@ -107,11 +107,29 @@ export const EntryObserverProgram = z.strictObject({
     ),
 });
 export type EntryObserverProgram = z.infer<typeof EntryObserverProgram>;
+/** CR603.4 checks this closed current-state condition at capture and at resolution. */
+export const ConditionalSelfEntryProgram = z.strictObject({
+  schema: z.literal("commander-conditional-self-entry/1"),
+  ...header,
+  interveningIf: z.strictObject({
+    kind: z.literal("controls-permanent"),
+    types: z.tuple([z.literal("Artifact")]),
+  }),
+  effects: z.tuple([
+    z.strictObject({
+      kind: z.literal("draw"),
+      recipient: z.literal("trigger-controller"),
+      amount: z.literal(1),
+    }),
+  ]),
+});
+export type ConditionalSelfEntryProgram = z.infer<typeof ConditionalSelfEntryProgram>;
 /** New observer programs do not rewrite either historical self-entry representation. */
 export const TriggeredProgram = z.discriminatedUnion("schema", [
   SingleSelfEntryProgram,
   OrderedSelfEntryProgram,
   EntryObserverProgram,
+  ConditionalSelfEntryProgram,
 ]);
 export type TriggeredProgram = z.infer<typeof TriggeredProgram>;
 export function triggerEffects(program: TriggeredProgram): readonly SelfEntryEffect[] {

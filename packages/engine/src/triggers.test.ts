@@ -717,7 +717,7 @@ describe("source-derived self-entry trigger integration", () => {
     f.priority();
     expect(player(f.state, "B").lost).toBe(false);
     expect(player(f.state, "B").drawnFromEmptyLibrary).toBe(false);
-    resolveTriggeredAbility(f.state);
+    resolveTriggeredAbility(f.state, f.registry);
     expect(player(f.state, "B").drawnFromEmptyLibrary).toBe(true);
     expect(player(f.state, "B").lost).toBe(false);
     expect(f.state.stack).toEqual([]);

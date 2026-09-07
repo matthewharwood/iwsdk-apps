@@ -1,5 +1,6 @@
 import {
   type CardDefinition,
+  ConditionalSelfEntryProgram,
   EntryObserverProgram,
   SelfEntryProgram,
   StaticCreatureBonus,
@@ -39,7 +40,8 @@ export function isReviewedTriggeredPermanent(card: CardDefinition): boolean {
     card.types.every((type) => ["Creature", "Artifact", "Enchantment"].includes(type)) &&
     card.power !== null &&
     card.toughness !== null &&
-    SelfEntryProgram.safeParse(card.triggerPrograms[0]).success
+    (SelfEntryProgram.safeParse(card.triggerPrograms[0]).success ||
+      ConditionalSelfEntryProgram.safeParse(card.triggerPrograms[0]).success)
   );
 }
 export function isEntryObserverPermanent(card: CardDefinition): boolean {

@@ -1,4 +1,5 @@
 import {
+  CONDITIONAL_SELF_ENTRY_PERMANENTS,
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
   ENTRY_OBSERVER_PERMANENTS,
@@ -165,6 +166,7 @@ async function artifactFor(
     processorAbi: source.processorAbi,
     compilerVersion: MATCH_PLAN_VERSION,
     recipeRegistryHash: await semanticHash({
+      conditionalSelfEntryTriggers: CONDITIONAL_SELF_ENTRY_PERMANENTS,
       entryObserverTriggers: ENTRY_OBSERVER_PERMANENTS,
       staticBonusPermanents: STATIC_BONUS_PERMANENTS,
       fixedTokenSpells: FIXED_TOKEN_SPELLS,

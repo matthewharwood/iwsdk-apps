@@ -1,4 +1,24 @@
 import {
+  bindConditionalSelfEntryPermanent,
+  CONDITIONAL_SELF_ENTRY_PERMANENTS,
+  CONDITIONAL_SELF_ENTRY_VERSION,
+} from "./conditional-self-entry";
+
+export {
+  bindConditionalSelfEntryPermanent,
+  CONDITIONAL_SELF_ENTRY_ARCHIVE,
+  CONDITIONAL_SELF_ENTRY_PERMANENTS,
+  CONDITIONAL_SELF_ENTRY_RESEARCH_HASH,
+  CONDITIONAL_SELF_ENTRY_RULES,
+  CONDITIONAL_SELF_ENTRY_RULES_HASH,
+  CONDITIONAL_SELF_ENTRY_SOURCE_BUNDLE,
+  CONDITIONAL_SELF_ENTRY_SOURCE_PACK_HASH,
+  CONDITIONAL_SELF_ENTRY_VERSION,
+  type ConditionalSelfEntrySource,
+  reviewedConditionalSelfEntryDefinition,
+} from "./conditional-self-entry";
+
+import {
   bindEntryObserverPermanent,
   ENTRY_OBSERVER_PERMANENTS,
   ENTRY_OBSERVER_VERSION,
@@ -507,6 +527,7 @@ function consistentReminderMetadata(
 
 interface BindingOptions {
   entryObserverTriggers?: boolean;
+  conditionalSelfEntryTriggers?: boolean;
   staticBonusPermanents?: boolean;
   fixedTokenSpells?: boolean;
   creatureReturnSpells?: boolean;
@@ -553,6 +574,26 @@ export function bindDevelopmentCard(
   options: BindingOptions = {},
 ): BindingResult {
   // Known source anchors cannot be relabeled or stripped into a legacy vanilla constructor.
+  const conditionalSource = CONDITIONAL_SELF_ENTRY_PERMANENTS.some(
+    (row) =>
+      row.identity === input.identity ||
+      row.identity === input.oracle.oracle_id ||
+      row.sourceVersion === input.versionHash,
+  );
+  if (conditionalSource) {
+    const definition = options.conditionalSelfEntryTriggers
+      ? bindConditionalSelfEntryPermanent(input)
+      : null;
+    return definition
+      ? { kind: "bound", definition, recipes: [CONDITIONAL_SELF_ENTRY_VERSION] }
+      : {
+          kind: "unsupported",
+          reason: options.conditionalSelfEntryTriggers
+            ? "conditional-self-entry-source-mismatch"
+            : "conditional-self-entry-requires-explicit-opt-in",
+        };
+  }
+
   const observerSource = ENTRY_OBSERVER_PERMANENTS.some(
     (row) =>
       row.identity === input.identity ||

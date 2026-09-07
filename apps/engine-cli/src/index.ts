@@ -10,6 +10,7 @@ import {
   selectRiskSample,
 } from "@iwsdk-apps/catalog";
 import {
+  compileConditionalSelfEntryDraft,
   compileCounterSpellDraft,
   compileCreatureReturnDraft,
   compileDevelopmentRelease,
@@ -19,6 +20,7 @@ import {
   compileSelfEntryDraft,
   compileSpellFamilyDraft,
   compileStaticBonusDraft,
+  makeConditionalSelfEntryDecks,
   makeCounterSpellDecks,
   makeCreatureReturnDecks,
   makeDevelopmentDecks,
@@ -347,9 +349,17 @@ async function reviewedFixtureDecks(content: ContentRelease) {
     "commander-engine/0.13.0",
   );
   const statics = await makeStaticBonusDecks(historicalStatics, tokens.decks);
-  const observers = await makeEntryObserverDecks(content, statics.decks);
+  const observerRelease = await compileEntryObserverDraft(catalogPath);
+  const historicalObservers = await historicalFixtureRelease(
+    observerRelease.release,
+    "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
+    "commander-engine/0.14.0",
+  );
+  const observers = await makeEntryObserverDecks(historicalObservers, statics.decks);
+  const conditional = await makeConditionalSelfEntryDecks(content, observers.decks);
   return {
-    ...observers,
+    ...conditional,
+    observerReport: observers.report,
     staticReport: statics.report,
     tokenReport: tokens.report,
     returnReport: returns.report,
@@ -362,7 +372,7 @@ async function compileCatalog(): Promise<void> {
   const triggers = allReviewed || args.includes("--self-entry-triggers");
   const families = allReviewed || args.includes("--spell-families");
   const compiled = allReviewed
-    ? await compileEntryObserverDraft(catalogPath)
+    ? await compileConditionalSelfEntryDraft(catalogPath)
     : triggers
       ? await compileSelfEntryDraft(catalogPath)
       : families
@@ -385,7 +395,7 @@ async function compileCatalog(): Promise<void> {
       resolve(
         retained,
         allReviewed
-          ? "entry-observer-expansion.json"
+          ? "conditional-self-entry-expansion.json"
           : triggers
             ? "self-entry-expansion.json"
             : "spell-family-expansion.json",
@@ -398,7 +408,8 @@ async function compileCatalog(): Promise<void> {
     await write(resolve(retained, "creature-return-decks.json"), reviewed.returnReport);
     await write(resolve(retained, "fixed-token-decks.json"), reviewed.tokenReport);
     await write(resolve(retained, "static-bonus-decks.json"), reviewed.staticReport);
-    await write(resolve(retained, "entry-observer-decks.json"), reviewed.report);
+    await write(resolve(retained, "entry-observer-decks.json"), reviewed.observerReport);
+    await write(resolve(retained, "conditional-self-entry-decks.json"), reviewed.report);
   }
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))

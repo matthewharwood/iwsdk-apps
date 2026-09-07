@@ -110,16 +110,33 @@ export function setupEvidence(coordinator: Coordinator, archive: MatchArchive) {
 export function triggerEvidence(archive: MatchArchive) {
   const captured: Record<string, number> = {};
   const resolved: Record<string, number> = {};
+  const outcomes: { trigger: string; revision: number; kind: string }[] = [];
+  const conditionChecks: { revision: number; event: GameEvent }[] = [];
   for (const record of archive.records)
     for (const event of record.events) {
       const id = event.data.definition;
       if (typeof id !== "string") continue;
+      if (event.type === "TriggerConditionEvaluated")
+        conditionChecks.push({ revision: record.receipt.revision, event });
+      if (
+        typeof event.data.trigger === "string" &&
+        (event.type === "TriggeredAbilityResolved" ||
+          (event.type === "TriggeredAbilityRemoved" &&
+            event.data.reason === "intervening-if-false"))
+      )
+        outcomes.push({
+          trigger: event.data.trigger,
+          revision: record.receipt.revision,
+          kind: event.type,
+        });
       if (event.type === "TriggerCaptured") captured[id] = (captured[id] ?? 0) + 1;
       if (event.type === "TriggeredAbilityResolved") resolved[id] = (resolved[id] ?? 0) + 1;
     }
   return {
     captured,
     resolved,
+    outcomes,
+    conditionChecks,
     pending: archive.current.stack.flatMap((entry) =>
       entry.kind === "triggered-ability" ? [entry.triggerId] : [],
     ),
@@ -258,6 +275,7 @@ export type ProofStage =
   | "target"
   | "payment"
   | "pending-trigger"
+  | "pending-conditional"
   | "pending-ordered-trigger"
   | "active-modifier"
   | "pending-counter"
@@ -329,6 +347,17 @@ export function atProofStage(
               object.id === effect.affectedObject &&
               object.zone === "battlefield" &&
               (object.card ?? object.tokenTemplate?.characteristics)?.types.includes("Creature"),
+          ),
+      )
+    );
+  if (kind === "pending-conditional")
+    return (
+      view.decision?.kind === "priority" &&
+      view.abilities.some(
+        (ability) =>
+          ability.program.schema === "commander-conditional-self-entry/1" &&
+          view.stack.some(
+            (entry) => entry.kind === "triggered-ability" && entry.triggerId === ability.id,
           ),
       )
     );

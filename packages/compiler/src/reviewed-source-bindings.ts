@@ -1,10 +1,10 @@
 /** Authenticated primary source membership only; never semantic certification.
- * The1170 prior tuples remain exact. Twenty auxiliary token templates are separate from1190 Commander card bindings. */
+ * The1190 prior tuples remain exact. Twenty auxiliary token templates are separate from1192 Commander card bindings. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
-  bindingsHash: "fbdb9abf1be2c3eb3939f386e4bde875d96aeda05f3db0d0ccec99ffb1ae3c12",
+  releaseHash: "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
+  bindingsHash: "4d3cb90d848e94dd84f14a76b596625de4fca6b35ec19be7aaa41aa8fa25d364",
   tokenTemplatesHash: "d5a3e91281f6a497cf026bd8b6a89e8e54dcd673edf1a9a22efdb41938205bcf",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
@@ -1334,6 +1334,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "44d8b9a68a57ba72c768c5ec605de371893c8a2c47288deadf4115426ea75c24",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "06c1fbcec3667b783bc7414be4fdab4379ced6cd4fc99acf1eda4be49eac8bc1",
+  },
+  "f84850bc-6348-449e-bd82-bb39e2119bec": {
+    sourceVersion: "b546586e541e5376375f1a7441d223e41a84310a3e205e44bdcc30349e6741d5",
+    implementationRevision: "conditional-self-entry-artifact/1",
+    definitionHash: "2f24e69f289a20ed619cf0bbb2ac7c9371bd8fa58da62b2c552584a07600be83",
   },
   "59aeeb18-d263-426f-aebc-0f687b09801b": {
     sourceVersion: "098deba7e540ba0f9fcb7c8c7adee60c5a3c48087b1f401f5f81cf69064fbc8f",
@@ -4319,6 +4324,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "c70a36554c4b235c398b8335c5f456ab9bccadf3465935ca2a711d6d468c1362",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "845932f2732220b9b0004b019c103075b43ea4800e7cc6cac5bc6263ed3349d1",
+  },
+  "0753aee4-33db-48c5-9854-16a9d91535b2": {
+    sourceVersion: "0e8213d46e50161c9b790259f23da9aa3a771fafe19e77d50f30c54b89869f08",
+    implementationRevision: "conditional-self-entry-artifact/1",
+    definitionHash: "75dd38f2f0939904df8b51bf6ec7750b47275feb24b6347fe8e1c988e9dcd124",
   },
   "7422f43d-0c1e-42cb-864d-1c63f2ec533a": {
     sourceVersion: "970e38146114aecc8cfd34ef995291469e25fa8019d6467af6cf72e701ed1d51",
