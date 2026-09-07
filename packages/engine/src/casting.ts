@@ -139,6 +139,7 @@ export function beginCast(
   const program = current.spellProgram;
   if (
     !current.types.includes("Creature") &&
+    !isStaticBonusPermanent(current) &&
     (!(current.types.includes("Instant") || current.types.includes("Sorcery")) || !program)
   )
     throw new RulesError(
@@ -312,7 +313,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   ) {
     return resolveSpellProgram(state, release, id);
   }
-  if (!current.types.includes("Creature"))
+  if (!current.types.includes("Creature") && !isStaticBonusPermanent(current))
     throw new RulesError(
       "UnsupportedMechanic",
       `Spell program is not implemented: ${current.name}`,
@@ -332,4 +333,5 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   return true;
 }
 
+import { isStaticBonusPermanent } from "./permanent-programs";
 import { enterBattlefield, resolveTriggeredAbility } from "./triggers";

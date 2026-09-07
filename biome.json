@@ -18,7 +18,8 @@
       "!**/public/litert",
       "!**/public/sqlite",
       "!**/public/xr-profiles"
-    ]
+    ],
+    "maxSize": 2000000
   },
   "formatter": {
     "indentStyle": "space",

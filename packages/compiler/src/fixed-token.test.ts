@@ -81,9 +81,9 @@ beforeAll(async () => {
     );
 });
 
-test("closed authentication counts 1129 primary cards separately from 20 canonical auxiliary token templates", async () => {
+test("closed authentication counts 1170 primary cards separately from 20 canonical auxiliary token templates", async () => {
   const { source } = await fixture();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1129);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1170);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   expect(frozen.originPrimaryCount).toBe(1129);
   expect(frozen.originAuxiliaryCount).toBe(20);
@@ -444,7 +444,7 @@ test("source authenticity alone cannot authorize execution under a past or futur
   const supplement = (await makeFixedTokenDecks(source, decks)).decks[5];
   if (!supplement) throw new Error("Missing authenticated ABI fixture");
   const selected = [supplement, supplement];
-  for (const processorAbi of ["commander-engine/0.11.0", "commander-engine/0.13.0"]) {
+  for (const processorAbi of ["commander-engine/0.12.0", "commander-engine/0.14.0"]) {
     const altered = await rehash({ ...source, processorAbi });
     // Historical source verification is data authentication, not permission to execute it.
     expect((await verifySourceRelease(altered)).processorAbi).toBe(processorAbi);
@@ -482,7 +482,7 @@ test("prepared ABI rejection also applies to legal legacy-only decks with no rea
   const admitted = await createPreparedMatchArtifact(source, selected);
   expect(admitted.retainedDefinitions).toHaveLength(3);
   expect(admitted.retainedTokenTemplates).toEqual([]);
-  for (const processorAbi of ["commander-engine/0.11.0", "commander-engine/0.13.0"]) {
+  for (const processorAbi of ["commander-engine/0.12.0", "commander-engine/0.14.0"]) {
     const altered = await rehash({ ...source, processorAbi });
     const legacyPlan = await buildDevelopmentMatchPlan(altered, selected);
     // Unreachable incompatible declarations cannot substitute for an ABI admission guard.

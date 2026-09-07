@@ -9,10 +9,12 @@ import {
   reviewedKeywordReminderDefinition,
   reviewedLegacyDefinition,
   reviewedSelfEntryDefinition,
+  reviewedStaticBonusDefinition,
   reviewedTemporaryCreatureDefinition,
   reviewedTokenTemplate,
   SELF_ENTRY_RECIPE_VERSION,
   SELF_ENTRY_SEQUENCE_VERSION,
+  STATIC_BONUS_VERSION,
   TEMPORARY_CREATURE_VERSION,
 } from "@iwsdk-apps/card-programs";
 import {
@@ -24,8 +26,8 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/8";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.12.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/9";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.13.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -63,6 +65,21 @@ export const FIXED_TOKEN_CORE_CAPABILITIES = [
   "token:zone-departure-and-state-based-cease",
   "token:no-reentry-after-departure",
   "token:deterministic-durable-identities",
+] as const;
+export const STATIC_BONUS_CORE_CAPABILITIES = [
+  "core:static-battlefield-source",
+  "core:static-current-controller",
+  "core:static-source-incarnation-exclusion",
+  "core:characteristics-pre-layer-7c",
+  "core:static-creature-predicate",
+  "core:static-additive-7c",
+  "core:static-entry-characteristics",
+  "core:static-source-cessation",
+  "core:static-sba-recompute",
+] as const;
+export const STATIC_ENCHANTMENT_CORE_CAPABILITIES = [
+  "core:non-aura-enchantment-spell",
+  "core:legendary-permanent-unsupported-guard",
 ] as const;
 export type Dependency =
   | { kind: "exact"; identity: string }
@@ -195,6 +212,8 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
+  if (definition.implementationRevision === STATIC_BONUS_VERSION)
+    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedStaticBonusDefinition(definition);
   if (definition.implementationRevision === FIXED_TOKEN_VERSION)
     return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedFixedTokenDefinition(definition);
   if (definition.implementationRevision === CREATURE_RETURN_VERSION)
@@ -269,6 +288,20 @@ export async function buildDevelopmentMatchPlan(
       ...DEVELOPMENT_CORE,
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === STATIC_BONUS_VERSION,
+      )
+        ? STATIC_BONUS_CORE_CAPABILITIES
+        : []),
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
+        (definition) =>
+          definition.implementationRevision === STATIC_BONUS_VERSION &&
+          definition.types.includes("Enchantment"),
+      )
+        ? STATIC_ENCHANTMENT_CORE_CAPABILITIES
+        : []),
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === FIXED_TOKEN_VERSION,
       )
         ? FIXED_TOKEN_CORE_CAPABILITIES
@@ -309,7 +342,7 @@ export async function buildDevelopmentMatchPlan(
       assumptions: [
         "fixed pinned release",
         "recognized development recipe dependency declarations",
-        "exact fixed-token template edges; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
+        "exact fixed-token template edges; static predicates select live objects without external card dependencies; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
       ],
       proof: "not reachable from deck roots under complete declared development dependencies",
       tests: ["packages/compiler/src/plan.test.ts"],

@@ -25,6 +25,8 @@ import {
   shuffleLibrary,
 } from "./common";
 
+import { isStaticBonusPermanent } from "./permanent-programs";
+
 export function admitDeck(
   deck: DeckRevision,
   release: Pick<ExecutionRegistry, "definitions">,
@@ -73,6 +75,12 @@ export function admitDeck(
       current.deckLimit === null || count <= current.deckLimit,
       `Deck copy limit exceeded: ${current.name}`,
     );
+    const staticPermanent = isStaticBonusPermanent(current);
+    if (current.staticPrograms && !staticPermanent)
+      throw new RulesError(
+        "UnsupportedMechanic",
+        `Static permanent program is not implemented: ${current.name}.`,
+      );
     const programmedSpell =
       current.types.length === 1 &&
       (current.types.includes("Instant") || current.types.includes("Sorcery")) &&
@@ -82,7 +90,12 @@ export function admitDeck(
         "UnsupportedMechanic",
         `Spell programs require an implemented instant or sorcery: ${current.name}.`,
       );
-    if (!current.types.includes("Land") && !current.types.includes("Creature") && !programmedSpell)
+    if (
+      !current.types.includes("Land") &&
+      !current.types.includes("Creature") &&
+      !programmedSpell &&
+      !staticPermanent
+    )
       throw new RulesError(
         "UnsupportedMechanic",
         `This development executor does not yet implement ${current.name}.`,

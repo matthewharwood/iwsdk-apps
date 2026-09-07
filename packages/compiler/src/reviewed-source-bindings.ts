@@ -1,10 +1,10 @@
 /** Authenticated primary source membership only; never semantic certification.
- * The1102 prior tuples remain exact. Twenty auxiliary token templates are separate from1129 Commander card bindings. */
+ * The1129 prior tuples remain exact. Twenty auxiliary token templates are separate from1170 Commander card bindings. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "fd5d52dc3d11284940cae72faace2ca0ead11deaa11508c12ea6b179967912a4",
-  bindingsHash: "f99dccbd12436ddd1d923a369dcd893b76dc3e50e28b0cf5b201cf97b1cf13b8",
+  releaseHash: "7f1e1b65f7134dce4add33ded2019720f74b44f0c9c194dbc34e182383914bdf",
+  bindingsHash: "7a7055ec78455d17f6b2cc8281e5665d2350ddd008ebb3bb10ae03e5affc65b0",
   tokenTemplatesHash: "d5a3e91281f6a497cf026bd8b6a89e8e54dcd673edf1a9a22efdb41938205bcf",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
@@ -34,6 +34,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "3fdb98c4aa14b36a28e47b007e9ed4f4032e98da088f587e9a08ba40f0616756",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "37570d982e73d064972dafbdb249f87bb5c5a93c7830e9c5241347b3c5f9dcdf",
+  },
+  "eb62aa4b-c11b-4195-ae85-cff8f78ce17b": {
+    sourceVersion: "a1c09f4e3df05fbcfa6c7cc056e66c61df726d0862d0f5026415128fcf15f513",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "391509ec91386b06230d97bea357e4a4817c09c3999e0228b65365828b2c3324",
   },
   "f84c30e7-2ea8-43ff-9356-1f907558cfd9": {
     sourceVersion: "93b1a92574827ad129205781581fb35deee08e30ff9961348b50a3403f6b3dbc",
@@ -119,6 +124,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "d67391f2ad63c8fc5c99d4ebce5ac056008d2a3f5520f5bf4002a19b0e37fc45",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "9b2000031a50b3f42de81194139508592660ebca1195fb649399f946b05f2641",
+  },
+  "2baf2ee6-e290-4a2b-89a0-0e725edde06d": {
+    sourceVersion: "eb6726e66b03e7387081a8fd313498f71ed01209d0b37ff6cc2f4cef7cff9b92",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "49e4762bf13bcd156eda809fa206a26a5f8ed24ab527aa63fa1cf700bcaaf53e",
   },
   "4caa8e68-e599-416f-b839-3d009569ff29": {
     sourceVersion: "031970e747b393af7dd825bd1e61ad60258bcd03c66dc4994cae136395bbfc6a",
@@ -220,6 +230,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "temporary-creature-spells/1",
     definitionHash: "a58e0b21da1b16d447893108de653d6fc0b7e1aba7a3b072a70a63e5156a5c71",
   },
+  "f1d8e9a6-1903-4be5-8609-1009a463f393": {
+    sourceVersion: "59c5807de60aba3f4980de35ab82d5d2d428e4cdfa5820535e2de0f4a42fac1d",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "947e1fc4399a9dc2aca30773dc1342b6155f50cafe0f6d9f5555382b7c62b4e5",
+  },
   "d87ebd8c-ad2c-45c9-8c97-f046aeda861c": {
     sourceVersion: "c09c5d4677fab174180df9486f048f0cb9949f98d88cd505e8510d0b04028bb1",
     implementationRevision: "keyword-reminder-creature/1",
@@ -299,6 +314,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "f842f33ee1c8a0497331f248102906c30bc6a99b90eaee76da88867eeba19371",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "cb9c7d5ab4445113114c4452ac263d12e6d2f512b8b81076ae180543f3001136",
+  },
+  "d561dcff-0a19-46ac-9dee-f374c840d532": {
+    sourceVersion: "77c8dbebcda1938b64732ef60c31c9d0994428606afaa31b603509259e530a1f",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "cd8a4bafcdc19be5ca01af92fbd28922bbf0c61eec7ef5e266bee537624dff25",
   },
   "4317f4f1-d339-4940-b46e-659641035595": {
     sourceVersion: "7faed4bd63371dd395afc9bdcbbe9c8926fdec5bf26ff7f9372443b723fe0456",
@@ -465,10 +485,20 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "cd6bf7bca4802937f6566d332bdafbf6e9a8742030a0f98903f01ac756b63bc4",
   },
+  "d513e5df-31b0-4756-bf47-403460d0068e": {
+    sourceVersion: "dfd9b61c07784f9651515359dad517bd0c20236a58d00ddfd668afbeb49d1648",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "964fdf24faf7128f99b61d929edf6fbf18598ac91cbed6a3ca4402aa970cf1c2",
+  },
   "68a99e50-0e98-480b-ad25-aa2c226d24ca": {
     sourceVersion: "70dc402c0588739c4c89a9fe7e515a33235a017c20a986042c7482817f878ab1",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "14bd9aa7d92975e0ed10498f4cb71da28987c7bfc522b031f99706b810f36946",
+  },
+  "2450d35b-7d87-4885-b396-f8e1d3ac0b22": {
+    sourceVersion: "63ecfcb290f36222b2c439c0ffa47cdd3685ac7e706064adf52aa4a3eb746b76",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "d1641c3c6e5a10185a1ba76cf7a0863b9a029297f474d9e04dcf6b0f1b3a4531",
   },
   "709e99f1-288b-49e0-80a1-f817b457a2cf": {
     sourceVersion: "cf1adb61db180bdbe9e90af3914d5726152cba38c041f6d052f4b20776288333",
@@ -489,6 +519,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "db8b66afa83d6ef4037da103806530cb5d14da93f053d3a566e84af3ae54a0b8",
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "30d478761e4cb343b3a65b6771391f21e8604f141df6289daaca7ff499c457d0",
+  },
+  "2cc439e8-d112-44e6-bc5a-6e99333c519a": {
+    sourceVersion: "d25b5b2d0d5b966ef3b48cc8f7dd05ac3ef5c98d9d73a504f6cd225de8ccf899",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "2d27b78c8b7cc6a4a347987b5c7cfa7adaa0f2b105f0a2d9efc830b32ffb51a8",
   },
   "43c449d1-51a9-45e0-8102-823a6811ff54": {
     sourceVersion: "4b6401be8df6bb434f1114c6e8314f962467c7240cc964256028aceed293386c",
@@ -540,10 +575,20 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "temporary-creature-spells/1",
     definitionHash: "0441116dee499690467b2fba0d0198c8e23253254381de2f94291a4b5f30364c",
   },
+  "d72b8254-3df8-431b-955a-ec2aea493e2b": {
+    sourceVersion: "325155dd5ca833941b67eb256934f061f4fac21374c3436a8e0e5675ce6e2611",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "4aa11b2b2870e477d2ccd5c8d47dd903da9d45b7f77e4ae7e309b3a1327b58cc",
+  },
   "a3090daf-26d9-4ba5-9fa3-42bd128e229d": {
     sourceVersion: "769f1caee668b8e6232bc3cea0d9d9cfb53802f2daaa9d961ccd4dd1c46da104",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "5380441f56fc30b68558f3fcff3d8ef1dd634d5d7c838afcbe2743b0537afb47",
+  },
+  "c0856fea-cbdc-427b-ae00-bfd9311f284f": {
+    sourceVersion: "cdf9869dedad0762e81b8216eef0496573f65bfff8572b9cc5dd48e949ed3878",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "1076a469989d9cf03532270865afb3994191469707f09f17a554c5248eeed18f",
   },
   "3b91be0e-0683-48df-91b0-25e90b492796": {
     sourceVersion: "458d5025ba5c94053e840af0dd872b8240b9b883ead84c62429a2ddc6ae8c982",
@@ -695,10 +740,30 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "9053f6a83f23edd59eb535c3211c9693b2aa09376828d9d3c9ad0f7632d44f1c",
   },
+  "e1635acd-ed1e-4038-a11a-6518df285253": {
+    sourceVersion: "0dd60a925088e155471b88e0665687be81bd6a6be1355e6da531268c53a87a96",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "b192400706f455e09e98886517fafb2d70aaedf298035ba633e913b978cd0f94",
+  },
+  "855b168b-e514-4a43-8bbe-7f1df40031ae": {
+    sourceVersion: "cb2f3de808db8213e413aac8e45f25a07f18c11ad5d130546fc15013e0b6eaa5",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "19aa3b88d32976ec3546157a1b0014aff0c3edaff205cef45d0433099c6850f9",
+  },
+  "30536d1f-8b1a-474f-a508-d3426480a532": {
+    sourceVersion: "4653567a22d4888e0fec8f3592ca9100daf84ec67743baecdf40e9f7e0e2b2ec",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "66dd5cecdcf3a322a3e1d18e42fd790e85081d5c89f9a7fc01d8a0eca9f6a6cf",
+  },
   "9dadeecc-1d4b-4799-9ac9-4ca492006e46": {
     sourceVersion: "0eaeca562b9005ad22bd6d47354d262c2dfdfc372a9a6e79299683e85bd46a0f",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "5895dd8fd83ba44b110a387ce0366a0a227a850418318f7f6781b7c1d824b843",
+  },
+  "7d00fb28-ea6c-49a9-b4af-ffb38860a9a7": {
+    sourceVersion: "58b637831503fd08b63a3968a1df1abbe6bb7b8a8bff57225267602a46cffdaf",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "7a2c76b8e8a39015f2a19d6268228f30ad50ab58d4a1034b97a29963b50132d7",
   },
   "1d614b37-d578-4f35-8fd8-3c7800d5f742": {
     sourceVersion: "951354eb47f0b1c89b6254e4f413db5cc5d7716ff7b2c37c736bbb4172fe205c",
@@ -719,6 +784,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "d9dc36ca95bd012af3306661812534bda7221a931713307cab3704cf08396b53",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "36de1c3d1f109bb3cfdddc658de7effb808cc9d9d8127e32f20b675c39649027",
+  },
+  "46418fe4-065c-4dfa-b796-eee02c14f351": {
+    sourceVersion: "b133a5da9de435acc19d0356be5ef09fb02c5e96422e3d4dc5db67d0b090c735",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "82684ad62e98f17cb8a904a0acd62602b82b23ee3dfc3910fc76bede321747f3",
   },
   "2c0b8cc3-b1c1-498d-b34c-f317c2c9468f": {
     sourceVersion: "5ce2998f41a7fc692eed49a3017e233badd1812b698d2062fc8b73aeb8cefc6f",
@@ -810,10 +880,25 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "ce75383f4c4d7237b584e4c75e6a8fd5349c938fbc5c0d8f0d8598c9cb5d178c",
   },
+  "636a9364-54a6-4f67-ad96-731646e8bde7": {
+    sourceVersion: "08861822ebedda5180bbaa24990875616561fd17e7b4eb05aeb4df39ec6317b4",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "aeec087917faa007720fcf14713de4327d57e7c5ee06b19f1aa3ff9b0e47a12c",
+  },
+  "32e4de02-8437-4ffc-acc9-a3736652d282": {
+    sourceVersion: "9d7c9111ff99acb299ddcb17c1a2a354b1b08a816c059f692b4a8d2e48f8394f",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "24d53667f58b7e948325d4f130761aa0085544fbeedaa76302e68a3787382d23",
+  },
   "c650a7bc-e350-44a0-a698-d4a233d66156": {
     sourceVersion: "b472a423c7712e6694d7fc2033612fd5cfd57e19d112e712e04e41a74594cc24",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "384b472de0bea280b38dd212d71c29a624792359064b711b86fef16decff720d",
+  },
+  "9b33059c-c862-4452-8609-14a0e2551fb3": {
+    sourceVersion: "72d9849c0ca26db65a64e4bc81f9d22f6f736136d472a09dc8756902ffa10963",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "de8ab6feb3cafca269c6a655169adac7a4f37883c8ffe5339cef1a7e74300497",
   },
   "5f0c8c60-96f1-4b26-a9f6-386e1cec517d": {
     sourceVersion: "7f18be379ee9474042e3395e0fc7084d60cc200a2181a4cb53106294f3c5f040",
@@ -869,6 +954,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "e825529500aed25dd512620e60cf2de4f2381dcce020c7223154393deb59b766",
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "8621b744ed9750a34c9fa62ee8e758fc6424c0cbf9a9204bf49115e939b87017",
+  },
+  "7f7049e8-49ed-46da-89f7-1e40aefb3b0c": {
+    sourceVersion: "444f4ecd12639b76bcd8f58f58ed8c4c288aa4cd08830f2a3a7f70f955527bf6",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "49c91e20ab280ed34be9b5b33db1a7034843a1336fee7523e2cf0d1d83274cd5",
   },
   "82657b8b-de2d-46ab-ab56-e2790e326d95": {
     sourceVersion: "eaaa4025f575f80903ac087f6158583ce7d1a13e60c0b03cba9efd52ce94b0dd",
@@ -965,6 +1055,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "exact-spell-families/1",
     definitionHash: "7e311cd8f4e88d2331eb62e114610f4827c702e74416ae65e2f34718e55a9c97",
   },
+  "cc187110-1148-4090-bbb8-e205694a39f5": {
+    sourceVersion: "204fdb2171e221f7dc09fbec90d69f139da4bc943971c3a419bc4d2df955cf62",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "cf716ef9670f384afd925f5d6ff04a82f2d815e835a3cdebb75ff15ec382fe4a",
+  },
   "2bb0a5e3-ccb0-4f87-b021-e60ebfa35b2b": {
     sourceVersion: "7bbffdce90faed6dd5cc9376742823d97d2a973aa98cfbaf518f7cca30bf3483",
     implementationRevision: "self-entry-creature/1",
@@ -1009,6 +1104,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "1f032b624e5a09adbab2b6a5cdaa65fe40c2515280c0ce82ca9b7e83883719b4",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "427887be7f2ab6f8e6191345d50d7445582dbcaadfa8c1071fb7c4a9fbb4f2eb",
+  },
+  "0c572396-4e53-4c86-9b04-f41341dcea05": {
+    sourceVersion: "0f600f7d547c4e9f63ea6f57f9056c9380bf588f7c5c8f91ed8d6724716abf7a",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "d140eb6d39e80a9701d2d74de91a7bfe1f542872a0eeb5de3851ed8c07f84558",
   },
   "baddf7ee-f6b9-41e3-b930-57129952cc1d": {
     sourceVersion: "5b56ed33101f8d6ed6c66ba5fbbd460d6811266be509c57c3286c87a1221333e",
@@ -1110,6 +1210,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "7dbe99120fa33db7e557aa9870c6b6e2c4547311b9c60694bcd92b226d3a4fc8",
   },
+  "64247fcb-0e1b-48c9-bdac-769d7edd8d1d": {
+    sourceVersion: "4f3289d4146c777c1b6de2379c03410e36fb313d34ce56a984a2765919fc3375",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "b7af4d11f770dfac892e8d82e44be06e4bb67df27db0e286e9b7d3ff6a1a4a9e",
+  },
   "ebd33f4c-2cc8-46e3-b367-ce5b37c2719b": {
     sourceVersion: "f9a682bdc7ff73b394ce5cc0de5cd19256c6946fd38109f44ccdb7a4284718e2",
     implementationRevision: "keyword-reminder-creature/1",
@@ -1185,6 +1290,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "self-entry-creature/1",
     definitionHash: "b9ecdbb203cd831cf3c8ad6931268d0352c652d19b42f9b7911a064f4bb742c6",
   },
+  "b989279c-665d-4f15-afc1-adf3872a4851": {
+    sourceVersion: "bcd0fec8abc2c2e969ea909924ed66a92d3e2b6e7be251119fbac56a874573a0",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "826f36339740d6fcce5fee9a057ce506b03e7fcfbeb2abf076d490194b0ae5f9",
+  },
   "77eafe49-b9c5-461d-89c5-cec217dd2974": {
     sourceVersion: "af12d08236477251dc771a70459a946b6147492712ce74717191fe6e9959b746",
     implementationRevision: "temporary-creature-spells/1",
@@ -1225,6 +1335,16 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "bbfb9d894706ec20025cb695f03da62619f6fb2b86ed0a88126c9fbe7f98b67f",
   },
+  "021d8596-782a-4cfd-8b70-ac5bb8a5aff1": {
+    sourceVersion: "9e2ed7f847456132a98334a7f37e44b79b551d70fe26ddc0d3c6a61befb266d0",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "674e95e01777edcf0f555d3c250dd2335c49d92eabcd8b4beeedc3d11ce6374c",
+  },
+  "d0d2c45b-b6e3-4999-bdab-976e8f0d6617": {
+    sourceVersion: "274a126b5ec696d4118ea0589bb7c7540b088bb4604549aaf60ec9a5f5c4826a",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "d308ff817800a54416c9fe3d8c5dcab2160f6f1549a35076f6f374c3ca7b6671",
+  },
   "4a678c6f-5a93-4a3b-80fd-4c0d0f9040c9": {
     sourceVersion: "f3c781707aae019c5fc1b26ffa0040c8b17c03b01cc37e36ffbff550f8871962",
     implementationRevision: "keyword-reminder-creature/1",
@@ -1259,6 +1379,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "44a2db789dbde27f2b10d88fd0c397558323e6449a17e27dfc08dd44adf98678",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "adb11bc366d6c7156a005c30f42d47337e40e66e86c90c273a17066c4777f639",
+  },
+  "a3874282-9887-4b53-b80e-564ac99cca23": {
+    sourceVersion: "20d4fa750b2a1a209489a4ab843c51d92e36fed93da1ab4520a4851867aa3661",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "9dc57ea7507bdff7521e22e0ac5ace2ba1a08f6ebc8d7490697c2cd07b483aad",
   },
   "b1793c3b-25d6-4fae-a99d-cfdd2210ca67": {
     sourceVersion: "5f101357d52652c718f2ded0a4ab5559a8e3f08a0e4deeaa75d9d3493be513b7",
@@ -1410,6 +1535,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "exact-spell-families/1",
     definitionHash: "3aebd91304abf66d8889141289aa4b548ac4350afc1d1b43c0cce749a43b44c5",
   },
+  "46665089-aa3d-44c3-964d-6638dfbb5782": {
+    sourceVersion: "8252bcbe449928c2758c24582e78771bf31433bb8157a471d2f481563c3c00e1",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "0e9f59bada4c5ad9953a78df2274f8e7822aa361d550958b297a13bf9f48a900",
+  },
   "c3a89c67-1931-4d42-98c8-94a40cfd046e": {
     sourceVersion: "e64afe7b539c45491edbcca292b74823203bae9dee3f4989cf3978ef249f59a8",
     implementationRevision: "exact-spell-families/1",
@@ -1454,6 +1584,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "a23bbd89166636260ef00e55d8f88a3a2a7bb01610626cd88c038f073264f1ab",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "37625112a8c9c9ac136109b51004c22e37ed4cc7eb02e688252ec61afe4e0ee4",
+  },
+  "4f891c68-c959-4210-94e5-94a8e487d5ef": {
+    sourceVersion: "6bc58e365852b76c31193373380f6a6393d9d895869aa7942c0ed04e2933f7b2",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "f083ae9bf4a7de271e89a4a8963aff1b894068b6f1fc277d29627c6b64a64909",
   },
   "f1231def-96fb-4408-a0c9-25d6932d7ead": {
     sourceVersion: "9818e2a38fc63ad0950cf9dec950a9ba3c344d2fe095eb8bbdd4cdc9fcc35e8f",
@@ -1585,6 +1720,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "6bb1c7419807691507aa4404952e799932cf15c357217a3f930c75c8bab3a979",
   },
+  "8893af49-2f90-4aed-bcaf-905bb9e8ed8f": {
+    sourceVersion: "3d7e96208d10c20fffa5ce69097f43837fc1fafcf191bcc7289cd434581b9c30",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "1682241da8bc3eb42eb3d695c54f3cd97d95206446b29266dea0160ffab63877",
+  },
   "fc05e582-e760-4fe2-ba43-e9d8e63f3f85": {
     sourceVersion: "636a710146d00b86c6a1d5a7c2d9bd6d9dd964fc99b296e6faa310e3fafa368f",
     implementationRevision: "temporary-creature-spells/1",
@@ -1629,6 +1769,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "f27abc7703403bdacc5b36706d2f7a7ad0750f7a63a873004fc46c835404b471",
     implementationRevision: "temporary-creature-spells/1",
     definitionHash: "62eda54bef69fc1032f3fb90f95afb5547ba7d852a18186bddc6e47586ee42fa",
+  },
+  "0c8ab7bf-7b6a-4a34-b988-9f3f4d84a9ea": {
+    sourceVersion: "877810bae8c3750aaee7c101941e4c73cc445ded305ab25ed8ad85f81fd1cccd",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "d0ac05dc6434652d56c311d389498631626ac03ef5266807ab6bad4cdf35042b",
   },
   "59fa8323-bba9-4c51-833d-2ab966599b62": {
     sourceVersion: "50f526f2fda2d12c16421ccdbbe49ad3d2a272d4e2c20a6b36f2020f5cb4acd5",
@@ -1710,6 +1855,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "2db576b68fc15d517d8d61810fdc04160d38bffbfb805b268c8c5bd80e6d83a6",
   },
+  "3754dce0-3e97-406f-8807-a4942a222c41": {
+    sourceVersion: "e80bff9907e9994888fb863238f7096aa51e5759be8babe58ba7f41f2cd44b86",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "76eb28b5beea117966d833de10de7b710620bcf6c874f68e5c72fbbac0e36b9e",
+  },
   "dd0da475-55d0-462e-bfac-6eeb5d39a099": {
     sourceVersion: "25f9ba4484f355bf10757c369c5475bb672e2ac1920d15173677062e3d4bcaa9",
     implementationRevision: "commander-development-recipes/1",
@@ -1719,6 +1869,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "1e97aa5987001ddae1c1f2452ebca5f0d9c1b24a651a4aeb20042b74ccaf30f9",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "0d42f6e67498295dda91fa7e6ad46e8675b5700aff2af3d14e2e9981579ab80a",
+  },
+  "06157e34-dbe1-4936-a718-3b1d70726794": {
+    sourceVersion: "e66a3c93ee175735f07fd52c99bf267545566591f2c2152456fc77548a02c753",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "350bc04ed20ba52b8f56ef51cafaed6cb89fa62368aa2dc8fde1f2f78dd6ffd5",
   },
   "32fc8fa7-7e0a-4d4e-85cf-2f98b3fc6ecf": {
     sourceVersion: "3f953b3d6c8c7273c16447f33679639d86332a2d091b17c5689d206cf84dd677",
@@ -1850,6 +2005,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "00e90745be4145e11ddd75aa17b999c7e4ac7ca8356a2a9257fe6064c5ca88e7",
   },
+  "e3886fe8-9b76-4613-8891-4ec74657c087": {
+    sourceVersion: "8161e8062cd8a482a5fd63895f5ccdf64804da1e13ce5714e683434b5432ce6f",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "a408ff45d30df51dd5e71bc902054a129cdce420dbd90eb154f271fc048d5d43",
+  },
   "55c60b29-52c5-428c-9229-11ed0e26bd71": {
     sourceVersion: "94c32a9e328da1f38783a7d3cb46f3d880f4880c23b23103e0785300c6c51e2a",
     implementationRevision: "commander-development-recipes/1",
@@ -1904,6 +2064,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "7b15e743b93f3b93ce2d5f10148daf135ea45571f7bbe3cf39a381c33f2177bf",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "d3d7cc811eab1e24773da9287a38cee39b9fbd08c145e466fd551f8e94471e73",
+  },
+  "9ccb6ce8-ccb6-4809-a1cc-cebd38744815": {
+    sourceVersion: "ff3105adbadd590f11f00e08bf58027fee424c92c357c44fdc32fa0dcd188345",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "44be6df9b0789cd5bdc0f76a4d6b9974079805ffe1abd73f8f282bff9424370c",
   },
   "a920d37e-e172-41f7-bfbf-c18821dcbed7": {
     sourceVersion: "7d2351a1467c079e1692858b495829499b83e0f3573bb5090bde7b25f555bb51",
@@ -2215,6 +2380,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "3120cad19c828fa73637523ccd0fe6580b3cec7c0d4be22424108cc086049d1c",
   },
+  "c7dd0614-e11e-4b6b-a2cb-9904e457148f": {
+    sourceVersion: "e9ed0a567a003bdf2e451e7253a09e17757389534001a3e32fb18c42f2923e73",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "1eaf63fd69fa9ee8cbb87ff22221355b87cf5e1a539798d6f714069b047b16b2",
+  },
   "a13b02c2-7ec1-4032-99cc-c76fe512914e": {
     sourceVersion: "510bfe116621c7d9e9119bec0bebe290b1f62dc5b0f9354bb8dca6eb0299fe96",
     implementationRevision: "commander-development-recipes/1",
@@ -2224,6 +2394,16 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "0fcf777369367864f139fe49e2632f9066242b4dad9705bc33c1c655e6322cae",
     implementationRevision: "self-entry-creature/1",
     definitionHash: "bd374f52c8bdad52b804035922ff84e5f0b2a5fd6f9afc5512d6c306ba9fd633",
+  },
+  "e8a9350a-07c1-47ed-8c4f-88e4b3b17545": {
+    sourceVersion: "7476967eeb968e1a5ba3d5e02b8f8f01844eb3750188a4a77965d40d7ee8d5b1",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "5b8e18f6b9119c8f1731c904ed9cfbc30795d8a0c2d671e00e001ec1cb3eafdc",
+  },
+  "a6450b8e-eb18-431c-9eb7-7daf107978b2": {
+    sourceVersion: "23a24be96fb7b5e880a23a6fabe16c07aa18cbd3cf9504121ec628ff0532de5c",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "36a39895a848779133b26333b76973ac8e19a84f4d43707b7588bab76adbd8cf",
   },
   "7a4ae76b-6241-4fa8-b239-5ec941a0e7df": {
     sourceVersion: "bedd85c534662e674ddcee8971fee848141b7078299ceafa61c7e3903a7b8e77",
@@ -2315,6 +2495,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "2d254d0b8452e8722d0499053af87578b6b0cdf9d65e0d90399cfd15640ef42a",
   },
+  "aa8b60b6-cf55-4aaa-9caa-2b17942d8269": {
+    sourceVersion: "06e40db92db51f70c03a6b6cd6df1c217b1e4c8a759bc55822c5e0255f9aba72",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3ea21ce83956c4f8aae1af4b222d7800c9eb09c06136472c4aea233f0b9724b6",
+  },
   "dcdf40a9-5a7e-45b1-aee4-36dda598baaf": {
     sourceVersion: "adde556669b9f2b74169e20ff0cff9e7648089040bed92d455267cd2ed20a9a8",
     implementationRevision: "exact-spell-families/1",
@@ -2369,6 +2554,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "62a754ae153c38533aa67eaac5c4790213d59567d3794010e817e16be4991b4b",
     implementationRevision: "self-entry-sequence-four/1",
     definitionHash: "19cb19c30a6817c703882654bb593f13f75ffa12981a3c4ab57a83d00e9bc567",
+  },
+  "aa1a63dd-acb1-465f-8970-667b8d7c57c9": {
+    sourceVersion: "c5e8ab0f49ea545cc99c0d7229b15774683068a591eb94c4e770ae9039c710d4",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "49e11b1e07fb8ea3a7106e86f16c0b9ff1375da0783e6f56982a350985afd84a",
   },
   "47bbadcf-11c6-4a4d-9575-1eb8284a174c": {
     sourceVersion: "a773e2e191b20bbaf4876d928bd3fd34e8f21c387f601486053df8afb057049b",
@@ -2465,6 +2655,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "ee80880d469a93976c16f1b6b431451bb5e88e7088cde72981cc94bd277c3765",
   },
+  "aa16307a-9c1f-4538-872c-95206e2b7a6e": {
+    sourceVersion: "871de5b98baae9e037b5fde23169cdf40459c0a879305a9f6038b10942594ed0",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "9aa1a63fe5b4f6f516d75be479377e3707c81f8ad4e944fd94d0a0ddd5bee2c2",
+  },
   "7854f475-5470-4f2b-99df-af9026895595": {
     sourceVersion: "afe830aaaa6f3aaa9726112683956b486433ceade50cb4e3a8ae25dadced64bc",
     implementationRevision: "self-entry-creature/1",
@@ -2504,6 +2699,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "b288b49cbb2d8bc22e17e04c0952d220f0ca7fad8fa35902a008737a54e7dfe1",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "b0e0ae89825ec96b377c451c6fa6403202d0e489cf600e6bbcdc5ac9966d1e18",
+  },
+  "63324e72-e580-456a-91be-766c9f07b7b3": {
+    sourceVersion: "8ed6e10a5f1eea29c6d5d364c8926d74ba03d37213bf39c09cf8f3da63188644",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "539a78bbb5644729f6cae63389ff1cdf9a96628e924efe49ad185d6940a8bd82",
   },
   "64b1a2a2-d3ff-41c6-8d92-987ef29bb776": {
     sourceVersion: "5a245b0dbfd44c7d8bf2c22b2cea336a4b378631a77bbcdcf74b8c2c1ce80690",
@@ -2560,6 +2760,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "99dde4e74d5ff906600b64780069964401519438f9977635db7cfab64b079603",
   },
+  "96d0e4dd-6cc2-4349-ac44-785b50f8dd90": {
+    sourceVersion: "983208ee1003447a1276c4027a0a4871054095fd9290ed6bf3f2330e456100b0",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "9255a560242c53d7f66b6cd116de7fbaa4b7bf5706e8722d4307b9c486726e01",
+  },
   "b365a7dd-fed1-40f8-9544-2b5bc1af761c": {
     sourceVersion: "dbdfa6a6d4ed4228588aea6b35162262fd1dbad298f23fc0d7fe1d8872483fd6",
     implementationRevision: "commander-development-recipes/1",
@@ -2574,6 +2779,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "70b2cb06dd2787e2250b4ca52f175e9f6c14bc28bef475dd3570372301b42d50",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "de9d38b776c7e19e1ceea06e709af7fb6c391355b26690bdd5c033c076c31afe",
+  },
+  "4965f5fe-a5fe-4976-822c-5cf40fea8c34": {
+    sourceVersion: "3e814f710ac0a197ca429ba8baeb2d7261a4d4cb77c8dfdd3d3f7f9c7aacc2ca",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3417016bdf244d15e2fec31fa534b39d6781973ee7d9200b6d0ba3cd0d4150ba",
   },
   "4e6c71e8-aeaf-404e-84c2-c79f2a1cbe4b": {
     sourceVersion: "f9b224ea27ffe8167f45a56b280f5d25cabfcc14f4da650f23ee1e8eee0d7ce7",
@@ -2600,6 +2810,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "self-entry-creature/1",
     definitionHash: "e0d4b603c5bec59dc1d42c6065ea735ed18f67ec2c82e7ce8a539681a0c763f3",
   },
+  "372f2534-25dc-4ff3-9891-31ee42b33345": {
+    sourceVersion: "34ccf1c80f8780928c35ed512778f6cd1b88f9316a7cec368e8fea0aaab65a58",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "604b683d7bc6d8c3a000a1a87d27e1427659656f6b73b25cb3424d5e7af296d4",
+  },
   "badf0669-9f65-44e3-bf91-6c57ac2fecff": {
     sourceVersion: "fc2f565490468aaa4a77adddfb0ae852f3d0533f6f92604c35c8994323c00b2d",
     implementationRevision: "commander-development-recipes/1",
@@ -2615,6 +2830,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "c13e793f3e4a6179f1180913a6022fab90e283c2d951755973838b2930977fa8",
   },
+  "21e9e1a9-5d6d-473e-adab-6a1e8e2b0ebd": {
+    sourceVersion: "824b7352841ce4a4299149879ad8f308b6cfd24d7cb9d9443e7f9f1daf10b699",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "351c0e516c2ca169834bac882e4ecb47085f600bbc8e58ce9bd1d7c9eafe8a2b",
+  },
   "08e6c786-d553-4c23-9137-cfad84146739": {
     sourceVersion: "861dcebc86b39d468b6490004cbcdb1fbb24bcfd4ff47958f479ba92275d192f",
     implementationRevision: "commander-development-recipes/1",
@@ -2629,6 +2849,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "ea9c4c9d46740263ff6e43de880db0e54c887fc4c4ccc682967c8c910b597255",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "607c5e5f95c6de971dc488f0d7b1489b867475e3ec14f89ecec03473a82da2c0",
+  },
+  "9cfe86ae-eebe-44aa-a956-4b3e9e621105": {
+    sourceVersion: "82840bf0ce3ba2e85200c3c41b4ecda54fe08d7103bec89fd8426e3c9c4eaad7",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "cca9c68725e3ca4a9664cb6fe858d755db05efa1c86c673dc8af39a9dbbb1980",
   },
   "44c437ca-5d36-4bb3-9450-baf0c93ff4ce": {
     sourceVersion: "45e6bb741fa350e260abe232219795ae883234e7610277ceb9d19884d9a25f3f",
@@ -2719,6 +2944,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "8418992cdc3949019449d1e2cf7ace926247ac9475fe7595ceef73c57d406503",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "9445240003069624908b3c86318cf072c2cc784f92ef7b4046a8cdc046ed8535",
+  },
+  "5fa1b2f0-3ba4-49db-9cb5-b6130e4c255e": {
+    sourceVersion: "8af11b92a052698f87ce069df5a4097201b79dc93cf3858a0027d0f8462727a0",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "b47f16512e605a73c36c46943e01aa5dea6a05f52fd014a900ad859722cf3ee7",
   },
   "517c7295-8ba2-47a6-a1c6-aee722f8ca88": {
     sourceVersion: "187838cc1db7efdff3113bb19e51aaee7add85a3751533cf47e1f845bcd67607",
@@ -2890,6 +3120,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "temporary-creature-spells/1",
     definitionHash: "f40181bed954cb6181b4b6eee4150b355cea3e681c742a26b7ffa2cf219e0ae3",
   },
+  "52e8ec03-23ed-43a0-bce2-ad0cd5c4d737": {
+    sourceVersion: "64a180fe4277a75cc23aca5abfcb39d1e60d603c44fac040b33ebe841040a4a8",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "b1bb6a2e7113bee07cc0d25124deb4f007c997ba82f990d85e769a6e821eff84",
+  },
   "7663ac7c-1de3-4250-b96a-fae9dbd66a27": {
     sourceVersion: "277b0165b4001b7cce5da4660fe67fd87b605ee53d29645a4a7f8728fea5a53d",
     implementationRevision: "commander-development-recipes/1",
@@ -2904,6 +3139,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "ed440ba0ff483c80adf2c7c2b3f4ca976f6c787152ea9a2c1c1b46ebd16f7920",
     implementationRevision: "self-entry-creature/1",
     definitionHash: "ad9e7481d6cee1315894809a3057f8cf31f9c2f3802d1c5d3922f34bab40ed76",
+  },
+  "be56dfea-1ece-4f06-b1cc-d7425b5018b4": {
+    sourceVersion: "6214e69ea518b00498fea14935db6c0bacb46fd8bea11025375afdf8b2f4771c",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "61985d405c0938cd48b04e4af8ea0cce3029d0667ce035104367c10961a946aa",
   },
   "218d9277-c179-4de3-9c7f-79b5a6d4fa38": {
     sourceVersion: "751a24649bb87266db099e0b7e947d7eb2e749e93a846e79bdb5eb5bfae32f72",
@@ -2929,6 +3169,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "b26f84f889cbbc99e5a5e9db56d67c4567cd5d514f08e88ad1b6ec25399679b5",
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "775fd5f1c34547b0ef180a750f5e4e1d2659914c04ef4585ec68729288659848",
+  },
+  "a79e21fc-89bd-4547-8bef-5510554e1431": {
+    sourceVersion: "02718088a2ef053ddc4751bf6906830b46c6f975a5843b9030115572e3ac383c",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "9af2d3c5f9cd7379b40a0f1382e476bc9c5ab9a354a6883bb3a813d9868ce355",
   },
   "8331f281-819b-4a0b-bad7-bd86dbedb877": {
     sourceVersion: "f5fbb0a0f860a7ccf99a776656b5fcbe2947604c2668a79e60eaf2d761f70afb",
@@ -3124,6 +3369,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "dae644f36d466dede5231824b988e5ead9679c48a0b29915eb1ef78eb860da18",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "8eeceea869aa5f7981ebadbcec2339e4ce89871cc10f951e3b14d8da176aa819",
+  },
+  "3407fe41-fdd3-4119-8f70-4bc4590a379f": {
+    sourceVersion: "1b90be89e4134ba466ec5214ab20fa572837c1dbcd1270dd30d7bd104cdd85a6",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "0970186211085a226044ed70269d56057c4d8b6bf4b01c2f47644f4b540312f2",
   },
   "f4542dff-1ba1-4b15-beaf-51a7a42782cf": {
     sourceVersion: "4a58d80100feb46d96bce88115d25e07d1caf7f4a9856aa0ea786f54e431643f",
@@ -3460,6 +3710,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "7e93058d005d0675b912850ae13a88773efe4dd53a28241b48783e17dc1610cb",
   },
+  "fed58ccc-db56-4094-8b56-bd29b00e9327": {
+    sourceVersion: "87328f02982259df1c727feba4af5a0ad46cc17054635601b983f13d79b2e0f1",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "82c531b1649ac4669f888149ada37656b83fb1f1613f3a9c9df15ae93e729214",
+  },
   "9c5f130d-5972-449e-83db-41fb8cf76004": {
     sourceVersion: "feb45c7745f2c8341c7e69de1b9028ca61b82b4b7aede9b9ee373b07ff033a82",
     implementationRevision: "commander-development-recipes/1",
@@ -3469,6 +3724,21 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "9695b74fad32867872594806f5e469db65a58ce4a03dcbc74cac0d43a4e71edb",
     implementationRevision: "temporary-creature-spells/1",
     definitionHash: "6221eecbfb5abb8acf5c2861efd590c83d8fc06e376cc0f7c6948874227c5617",
+  },
+  "6b589e70-9c1d-48dd-a597-479959e692bf": {
+    sourceVersion: "5e5ad311a4517098fb11ea2bcd3eeeea1e8bd121ebf64c7ebe9c472139caa873",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "dcad16f852f46d42c3307b946f088c6bd1b48bdad57a1c42c324aa9817dc9d67",
+  },
+  "250f8642-9754-48fd-8f09-70ed13d7a42c": {
+    sourceVersion: "de51ca02c4586103afb6d82459d623505ba777551089695cfe037d18974df6d2",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "31893f1cb469d364c1c145bb3dc60ae8f7c31f8ff8de6e1eb67cc25125d2bd88",
+  },
+  "83e2b251-bd60-4c5c-b9e2-32c22b28fb8b": {
+    sourceVersion: "2f8547de95bc552eca9ea3572ad60b3b4de1361a5042f92e0d4da955ba5a1fbe",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "fe6cc21c213b0f900a3de0dd08c2fcfc6f640453d4ec8edaa742cf56690391f6",
   },
   "a89b0fd5-84b2-487c-8b03-e78d97276fd3": {
     sourceVersion: "dcec03ce58fe31bdf5aae97fffc6739562254aa2fa274cdb639c88a7442a7ba3",
@@ -3545,6 +3815,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "fbfdda9a2ab0996d9d2110a3f3f86c76bc8612179bb677ae4c4d6cf02b42bef9",
   },
+  "5e4c02c2-2e54-4e8d-8d94-6b2454027e7e": {
+    sourceVersion: "9cde3e9b9ea64c2cdc51de758f65d764a0c3557d63149f6ca77e59422e3d7cc8",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "ae88904c4d7b761e51a7dcf32f285103bdff05577ee3097453c9cb96d53bc654",
+  },
   "7bff8d4a-1c7d-48b8-b3e3-737dd6f01823": {
     sourceVersion: "e073aa24b5adf3fc8187dd530f920aa1abadb55e1015fe1ddb5ee9328b7341b8",
     implementationRevision: "exact-spell-families/1",
@@ -3600,10 +3875,20 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "8736504b605ca9c6b5ba1c0449fe93ce57ecf95f511cb34c284ca1364964f52e",
   },
+  "5b2364d7-a811-4595-a1b4-224c70555ffa": {
+    sourceVersion: "e7d771ed048948d8359e720351181740b5d02ecfa866b133cf43baa217fb3cd0",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "d0f55fd9280d822604677cb5e2103ea057e9236d4c8748629c1099ec44b2eba6",
+  },
   "8f4c7419-bbbe-4ddc-83ae-fd9ea3e86c3d": {
     sourceVersion: "0a7bd2d5c8d1d235b41b6499e673619c940de1ecd6723a0153f2ba990ff27179",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "0f4126882f358f861a349d10bf4f4bb13d733f09e5080a8cb0bc7de09573f3ec",
+  },
+  "e7fa2fc2-8542-4069-b75f-5520dd30f74d": {
+    sourceVersion: "743e86057a5cb4e6651b6b6afaed87eb08b1c289a874ca8894b76219fa651ffb",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3397e14b1d4502994b505af0202da4fd17e5d2630b8f21397909af478ce4f744",
   },
   "48b9c510-03ed-41cb-8c17-16110d447490": {
     sourceVersion: "427f35774345aee0bb7c80b6e20b4c1ae7fea17a6c4c80c5ec7aee136b029f06",
@@ -3645,6 +3930,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "84ff11b7af32187189fc12ccd3c11f7bd2479a5f04b1ac99dca4fc6d88df380e",
   },
+  "83a76601-ef59-4888-af70-5088dd1f504c": {
+    sourceVersion: "5c5e17f8ebe7120b90b385ec22fbf33d4c0be647ef8375e178fbb581321fa2f0",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "d874ce07aac964eada982b04dd6d78cddf10e7159f71a9c5f7bb43f838abb1fe",
+  },
   "2b856a43-ca6b-4f08-b610-9794ee6d7fcf": {
     sourceVersion: "5d4dc0f4bb70a57e3f979cc3e1ad6f6ba0c69147f3d805e1071b9cb431912be3",
     implementationRevision: "commander-development-recipes/1",
@@ -3655,10 +3945,20 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "e6aa846f1cb7aa0466c76889ddbd878191d2b24e168d0eb8653f28927db1ebd2",
   },
+  "b97d21b4-d730-479f-872f-3e1645b66751": {
+    sourceVersion: "850767cc9a48df080d6b1cd2dc3e83dafe4a8cbb6bcba81e3e1945e8fc5284de",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "cb11ceead8daf804a7324e6d5ec80c38d568d070709e8272fe81e532e864f3be",
+  },
   "eb9b0655-3ca3-4d12-8665-54ef0c2c4de2": {
     sourceVersion: "ce19dbcb4ef6ea7f1e2b1a6466401043be8963baf8db4ead43475042c8aa23cd",
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "4fc43387fb3b072089ddd7eb73cc09e714bf55a97524cfd95b9bdde416c27866",
+  },
+  "b13c0f76-fbda-4911-9442-c3d7e97f1aac": {
+    sourceVersion: "ab4dc3ac2c4d4bbd9b78b0648cfe0fed9e107cabe74552a870641e5598c4599b",
+    implementationRevision: "stack-counter-spell/1",
+    definitionHash: "18d0585e570a7ee12e20445bf153b347e1b7d3a30c22c29ccc52ca83b34bf3ea",
   },
   "5f444efc-3bc2-4ca8-986c-f804f9e1a95e": {
     sourceVersion: "5c11b52547f3fefc852d643b75b22528c9318439f23b98813bb1f27c70e649d8",
@@ -3669,6 +3969,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "f32672ea7bfdbb7ca7b15bcf8d92ea8961c0f1ff4f300eeb5d19de1724b994b8",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "092c662bfc8d660bbf3147b2ac25432c87b86690da6c0420d7202dbba3158072",
+  },
+  "6f7ef1d1-c441-41ba-b7d6-6b7727ffcf04": {
+    sourceVersion: "0ab23094897700b94e3d399db2d15c62990eebf1951f37bd86d2263c1087ac02",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "1ec3cb0391290d97bdc550bf9bc011b4187c60b226565abcec4f19292008d57f",
   },
   "053a90b8-61b1-4390-afc0-c5eaef0138a9": {
     sourceVersion: "d641c418b5a3652535f7af815f8b073cefe2339a15879829d63e41729b480bfe",
@@ -3684,6 +3989,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "e8770d724f2bf8a2bd10953f234aa8694dee33dc3f6b0b4e361f1eae5c5a05b1",
     implementationRevision: "exact-spell-families/1",
     definitionHash: "9b9eb7c3ed01a4babde43d3f58f580016f1e2af0e63d0311fb32b3357e2c8be0",
+  },
+  "5d46b8dd-2a4a-4d9f-b4c6-2b45f05081c2": {
+    sourceVersion: "d9afd0dd096688cc055eb9b23c9f9f0982c5835bc668d0780bb189a1ed1ba878",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "264a153200a6a18d0fca79307f70606840b1f85e1b7ae920ac66edfabd9674da",
   },
   "b1385b03-cb4b-4812-857f-7421f1df39af": {
     sourceVersion: "fb337595e5e3fe9197aed80a12cd72f5589c2db771395a9c332463d67e54b608",
@@ -4350,6 +4660,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "self-entry-creature/1",
     definitionHash: "d4032af585528d7a42e9c0f4d35aea2a20080f131f5a786499a3034d7cf3500e",
   },
+  "8fb599a7-2c61-446b-a7a7-cd5367f9b796": {
+    sourceVersion: "2d4dd94292093a0ca5fcbe5b247df2deff55955b2769fd6941ae84214eecd811",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "e866cf5363537296b54bf332657c7d65a0682f2b5fff82b44c666187a792e10e",
+  },
   "e9b5d4f3-b98a-463a-b628-289c2df81204": {
     sourceVersion: "7f17e5588860a174283200e78c701e1b8a1db0c47a23e267546094fbb5a332d8",
     implementationRevision: "commander-development-recipes/1",
@@ -4370,10 +4685,20 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "self-entry-creature/1",
     definitionHash: "4a975b3701a735e7968ac7c80f68e4c804f24f83cd40e01bb10b6debf6634de1",
   },
+  "424c6f5e-b386-47e9-b3fe-25b263097d40": {
+    sourceVersion: "930fdf7217b790b599d84dbd8f3cd39248356f77237b71c57782bbc0bf489a21",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "da759c1ec32722ba456408d7e7d5a899440542fb5f318e30468d42d30cb461dd",
+  },
   "aa6cdcc7-f5ea-47bf-9448-1c63e36b18d1": {
     sourceVersion: "65193d58d5cd307c11739da7c689f9188b5dcf55ca4fe2c5ddcad784e3849841",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "8479ad30b488ec100a9648ddb9b53c5298c8f5f9f78ce1ffcac3acdf7d8dfcfb",
+  },
+  "f43d1ea5-8127-4b64-a87b-ee5cc9b9e9fa": {
+    sourceVersion: "e2623598858401ca6ede327eefdcd68afe104c5c0ff15f914ec65308d339c4f4",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "c76d21c1567e5917aa7a45072c2952baaaf0a35c6943b0e1baa88059e646b048",
   },
   "315ddc7a-c39c-43d9-b134-23acbd865e3e": {
     sourceVersion: "68057abddd91f39ebe40c22f255c594c7fc7f29c38842fe0f2eee82d607fc1ca",
@@ -4429,6 +4754,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "b771f90b3e23be8a050f9c12374b18908943765e79ef89713a5b44a21fc3fe4a",
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "266fa7cec08589a50b32f91cad2a33d01c4f85e8f95ff3e9ee6bbe9313d81c37",
+  },
+  "ae58e71c-b617-404f-a5dc-5e6a487f2675": {
+    sourceVersion: "e0840aeb3ed00cb4d233efcfa4db195d88216068cda349e4c8379d2d323208c4",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "d3d4784b33fb81a7aca49af508ce74f034ac21eac57a36242d320483f18f1ba6",
   },
   "f1ba6053-14e0-46b0-b760-b72e4fa0c5f5": {
     sourceVersion: "545755e3e41b820f8dbcab293318a72463d198d320b383a355adcd3a37a2afeb",
@@ -4545,6 +4875,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "c7f5ca566b0f4a60e67017b9619bc051f67fae74a73933d15c8d7057439b9ad7",
   },
+  "9c5f4d02-eedb-4c6c-9f13-1b7a45382483": {
+    sourceVersion: "e869f5d523a2ab64d6ad950699731608cdb5fb23096e637c8696928345243d95",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "50e8068b15e53a76cadb7ec8e19d14aad70fa56cb9636252a726b87c0325247f",
+  },
   "343ecf2f-0bbc-4840-8fb3-f5f61b26e76f": {
     sourceVersion: "96ea4ce6f68c7c6a9684335b46bae5faa1a2ba6c00ac5dc154923c496e81a94b",
     implementationRevision: "commander-development-recipes/1",
@@ -4575,6 +4910,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "04cdf43ac22b12727ccfae8b04a25a851cbdb050c5832b6e7a9684539d5675cd",
   },
+  "d1a9fd14-fecb-4d2a-983c-70143238275b": {
+    sourceVersion: "b162cf23dc4b6989a2e24d1be3b9992954a3507ca6ad4146d993922ccc64bd39",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "3b5219ff3914248ccbbf261a21b3873f264057dfb742d5bc4643817c650070f8",
+  },
   "9f63ab29-b86e-4337-b9dd-2b35c8415f90": {
     sourceVersion: "087f1d364e809ea9b2bf43b0770efeef257fc3baf0547d914fb5e48ae80fb9b3",
     implementationRevision: "commander-development-recipes/1",
@@ -4584,6 +4924,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "23a9001f31e1ca20a5408392b7c20c6f50375ae7873b7bc7dc71839368ec2104",
     implementationRevision: "self-entry-creature/1",
     definitionHash: "dcd74f273a7f4c82c3271fcdb5ada76ef6926a401b21501b8f70fc8fe5150b68",
+  },
+  "c44f1a81-269b-4f05-8ff2-e7ce19a93937": {
+    sourceVersion: "758b8cccd8ef8c0ba97fe8fb0f2428767842df91ac5c8e1627ce2fbe8d465061",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "a0be8d760547a4b472543578d0971d73cf553bf4fbf2ed5936fe70025b8a76cd",
   },
   "debbbdd8-c8e2-4384-bcac-dbdfb18b54fa": {
     sourceVersion: "6fbf63c415fd2166493631cb6487dc5c094810a23f910387ae2f3b5d7276e668",
@@ -4599,6 +4944,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "1b6a22d82018b140493ed0622a08fbe4c5018afbdce59703ae9ab7c38612f1f0",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "fffe36782f9ae3f8105483b72d268250f947b01a3c4b0032c8334c21d3e8bf45",
+  },
+  "61e2d557-f08d-489b-94c8-aff87e5189f9": {
+    sourceVersion: "f4fdf7a33fd99d008a1375d6f439495e00aeec6a095d7f9efe001dfe0e60973b",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "b1a8e793cd8eef25e6cc1ff4a42ed7dabdc97ff61d084c3cf4f259662c0cca8b",
   },
   "8cb3f047-bd8b-4a34-8a2b-ced2cc0487eb": {
     sourceVersion: "93ac6eab34fdb4fd2e4da7a4fb1d0fd54ba0ee57edd350109e5318bdeace415c",
@@ -4619,6 +4969,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "f8b8dc60ebc2172f209a187c18404087c784900e32e828715e1d593b87a8d5b2",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "8edcd23e8a8e342a8b18ecc66e523540c979af32bca100221377e1a4c828fcfb",
+  },
+  "43355ac4-bf8c-48f6-a322-fafbc9d132d1": {
+    sourceVersion: "1cda0624446a5ee20bfcec8de5a4f717a91f04c4f38e36ace587d7acd4578019",
+    implementationRevision: "fixed-token-spells/1",
+    definitionHash: "0c117e593aef41c8a209bfac0b2d3c150ca6e0e916847a6fbd65348629d30d3b",
   },
   "c5661500-c48f-4f6d-bbe7-c8bd7118d862": {
     sourceVersion: "4e6a7923c212315dd01ea90ef4494e73ddcbed13064fa10588337f2e3d989dae",
@@ -4709,6 +5064,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "53ae785f63e78857e14fefc7a544d9e290bbaf4390dac7aab8feda947bc1de64",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "b195336f6b66c7fb64388db7606691c4fb1eed2a4ec87251f6a7aa6cba741ee9",
+  },
+  "b04ba676-a1f5-4216-9d93-3c475b504bfa": {
+    sourceVersion: "e189918989dda30b278a85d54429d10a6bb839f0dfb7775cf74467aaef8ec5bb",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "a55ebd3385426b6fb8a82e86ae22c1a743a99b1de26d390e5d5d74d56bd3f5a0",
   },
   "c5c221e6-dafe-4661-b920-3faed9551802": {
     sourceVersion: "3e0515ba96bd7ffd13307916987d027d4c7fadeee56ebaa7f1b02af5617237f6",
@@ -4875,6 +5235,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "self-entry-creature/1",
     definitionHash: "025bc6fbcac5b1300f0b90926b28d49f8d1032f48e0a9d84b9755250e43109d4",
   },
+  "15934a19-a29e-4728-816f-20b610eec377": {
+    sourceVersion: "509f10b1d3857f39d9f2f33fe87149089c28bba8245d8f9f1e215abd2688f3e3",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "299cbb96ab3715ed25e06c462ed11723c74366f47249c5f7383c2a17a204c00d",
+  },
   "e0172cad-8b93-4d1a-b442-5eced3212b17": {
     sourceVersion: "8b1e4be79178d5294369ee5dc7e608406c76055556f4bfcd759c825741c4ba61",
     implementationRevision: "keyword-reminder-creature/1",
@@ -4939,6 +5304,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "dafdea630d54d537c972f32d3edcfa91e45499811f699226ddea506a6d19ed1c",
     implementationRevision: "temporary-creature-spells/1",
     definitionHash: "323392f5624bc6cd8b69dc2e061b1e6fe9e9520ae885e274771d40dca1a72b89",
+  },
+  "837182db-1bf3-4a2c-bd01-1af9d9873561": {
+    sourceVersion: "98769e8e47da2d18fd755e7141a883463789487ff738ab871eb9c9b614c43a06",
+    implementationRevision: "creature-return-spell/1",
+    definitionHash: "ecc40c87864f27c360b035f99ae03bc3746f55d5063ca291e34065768d1a7235",
   },
   "a33982e4-d7d2-4319-bf04-534b8f253dfb": {
     sourceVersion: "b2b100aee6015a04d1af45a4b45fe99242de2934926b6d5eda59b8fccb5e4a7a",
@@ -5005,10 +5375,25 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "abdfa4670c7bbb0fafca80274415e2ee23e4a2d7582c8c617a25be3824a2eef9",
   },
+  "1b1214e9-1581-4008-b3d4-8b7af6b092fd": {
+    sourceVersion: "18827665a2d6bb9a67bfc176af9bbfc4d1c1aa57dd574baa2339c570bf57bfa6",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "59d1bc5929098678d57fca397332195df1da571c2df27db69f5c505d3f35c5cd",
+  },
+  "fcb34e92-f991-401c-a494-c2919083bf9e": {
+    sourceVersion: "90b579392c5652450ce040bc387a49e917fee34c2bfe6d642fbe6d5839e093da",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "69e94dd5182b899db09f5f4630f73e73ae5f31f56413b7e4eae823b5f7788d9c",
+  },
   "2d02cfce-a142-4b3b-a01f-4e156e75164e": {
     sourceVersion: "335a17ed1512584136161dbe68c48b8500df97159edc185a8f0eac5a8e78f2b0",
     implementationRevision: "keyword-reminder-creature/1",
     definitionHash: "036e01b85298186e6cd724c26d2743c00d082c83089ed7fde342a634968165ab",
+  },
+  "cc71b6c4-09d4-423b-a134-2f2f2fd7b533": {
+    sourceVersion: "211517e6b886ebcc515de799f58a20170a5fbceadc3792b4911a27305e59f04c",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "d0b16ffdb8dcdbe3c272a0c17b82fa12e8e28a00043e1ed9fc18c350c3476a39",
   },
   "1a36d2a8-6117-4828-bbe2-bc63212d29d8": {
     sourceVersion: "56f76469bce63187e3fc3174df3cedb3e90b74411bf00c2393710970f68caf19",
@@ -5255,6 +5640,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "temporary-creature-spells/1",
     definitionHash: "6e4377d174d1bec9e1a1f2a3de97126a2ace5c620db45baab9ae5c34497e7c91",
   },
+  "c55a4b25-ccc4-49de-9f98-a829c547a64d": {
+    sourceVersion: "5f3a098933b65ab9313754c926bc91fd8a021f46cd208b023d5bfe41ed37bd8f",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "9177eeb5e90e85dd76277ef37b93a9fa817ebcb7065722215853029a997ee590",
+  },
   "df702285-3577-47cc-aa1e-868921cdf6f2": {
     sourceVersion: "307fea5df1a4da15e1763d6d5a62f8579e87ab5ead5bbb5ef6e210b2c376f4f7",
     implementationRevision: "exact-spell-families/1",
@@ -5355,6 +5745,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "64228ce7b9b5cd360daff98638a9d4735f5c2102ccd7ca13bc11e7464640c38c",
   },
+  "b5905ef3-6565-462f-a015-2bb5b5b09eff": {
+    sourceVersion: "c715b6e1f609c5100c509afc498c0b11544d166133a961dfe19c453d4ff3436c",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "f843bd32f25041081d9dae6f0eb90901d5acb7d14272db641f506dc74a39831e",
+  },
   "96b3c4ff-b5f7-4315-9b39-2e2146ef10d1": {
     sourceVersion: "cc12b85143169e05ae07afe8436f7599109f3ddd0f59138184c6adc5b6cf0284",
     implementationRevision: "commander-development-recipes/1",
@@ -5420,6 +5815,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "c760f892dac1d4dda6726afcb7de7bc3552540b7b6c534b5221768b59aab4ceb",
   },
+  "0d9d7f04-6319-4596-8b74-de5a794936e5": {
+    sourceVersion: "fbd9211ec7113173ae9662e0be871fb1495fde410ef98ca3f1052df8532208ed",
+    implementationRevision: "static-bonus-permanent/1",
+    definitionHash: "31399fa10b597b294b02fa3ed6fc64158330ee8e704297a5a9fe741a6cbbb8eb",
+  },
   "ef2a24f5-ce5e-4054-843a-2cae0c66318a": {
     sourceVersion: "6593de3adc61c82d58cd6c400413c79261ba40b2f76739833a454e20107a1efd",
     implementationRevision: "commander-development-recipes/1",
@@ -5459,200 +5859,5 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "d866a0444a1a31bb3929cb4e63ee0e40935a8ef7b3ee5da7ef1d063cacfcd7a4",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "7b767251c9aa2b1b4a83338615a57d90b82629887ac74c934ea14f13e3130a27",
-  },
-  "7d00fb28-ea6c-49a9-b4af-ffb38860a9a7": {
-    sourceVersion: "58b637831503fd08b63a3968a1df1abbe6bb7b8a8bff57225267602a46cffdaf",
-    implementationRevision: "stack-counter-spell/1",
-    definitionHash: "7a2c76b8e8a39015f2a19d6268228f30ad50ab58d4a1034b97a29963b50132d7",
-  },
-  "cc187110-1148-4090-bbb8-e205694a39f5": {
-    sourceVersion: "204fdb2171e221f7dc09fbec90d69f139da4bc943971c3a419bc4d2df955cf62",
-    implementationRevision: "stack-counter-spell/1",
-    definitionHash: "cf716ef9670f384afd925f5d6ff04a82f2d815e835a3cdebb75ff15ec382fe4a",
-  },
-  "46665089-aa3d-44c3-964d-6638dfbb5782": {
-    sourceVersion: "8252bcbe449928c2758c24582e78771bf31433bb8157a471d2f481563c3c00e1",
-    implementationRevision: "stack-counter-spell/1",
-    definitionHash: "0e9f59bada4c5ad9953a78df2274f8e7822aa361d550958b297a13bf9f48a900",
-  },
-  "4f891c68-c959-4210-94e5-94a8e487d5ef": {
-    sourceVersion: "6bc58e365852b76c31193373380f6a6393d9d895869aa7942c0ed04e2933f7b2",
-    implementationRevision: "stack-counter-spell/1",
-    definitionHash: "f083ae9bf4a7de271e89a4a8963aff1b894068b6f1fc277d29627c6b64a64909",
-  },
-  "3407fe41-fdd3-4119-8f70-4bc4590a379f": {
-    sourceVersion: "1b90be89e4134ba466ec5214ab20fa572837c1dbcd1270dd30d7bd104cdd85a6",
-    implementationRevision: "stack-counter-spell/1",
-    definitionHash: "0970186211085a226044ed70269d56057c4d8b6bf4b01c2f47644f4b540312f2",
-  },
-  "250f8642-9754-48fd-8f09-70ed13d7a42c": {
-    sourceVersion: "de51ca02c4586103afb6d82459d623505ba777551089695cfe037d18974df6d2",
-    implementationRevision: "stack-counter-spell/1",
-    definitionHash: "31893f1cb469d364c1c145bb3dc60ae8f7c31f8ff8de6e1eb67cc25125d2bd88",
-  },
-  "b13c0f76-fbda-4911-9442-c3d7e97f1aac": {
-    sourceVersion: "ab4dc3ac2c4d4bbd9b78b0648cfe0fed9e107cabe74552a870641e5598c4599b",
-    implementationRevision: "stack-counter-spell/1",
-    definitionHash: "18d0585e570a7ee12e20445bf153b347e1b7d3a30c22c29ccc52ca83b34bf3ea",
-  },
-  "021d8596-782a-4cfd-8b70-ac5bb8a5aff1": {
-    sourceVersion: "9e2ed7f847456132a98334a7f37e44b79b551d70fe26ddc0d3c6a61befb266d0",
-    implementationRevision: "creature-return-spell/1",
-    definitionHash: "674e95e01777edcf0f555d3c250dd2335c49d92eabcd8b4beeedc3d11ce6374c",
-  },
-  "a3874282-9887-4b53-b80e-564ac99cca23": {
-    sourceVersion: "20d4fa750b2a1a209489a4ab843c51d92e36fed93da1ab4520a4851867aa3661",
-    implementationRevision: "creature-return-spell/1",
-    definitionHash: "9dc57ea7507bdff7521e22e0ac5ace2ba1a08f6ebc8d7490697c2cd07b483aad",
-  },
-  "6f7ef1d1-c441-41ba-b7d6-6b7727ffcf04": {
-    sourceVersion: "0ab23094897700b94e3d399db2d15c62990eebf1951f37bd86d2263c1087ac02",
-    implementationRevision: "creature-return-spell/1",
-    definitionHash: "1ec3cb0391290d97bdc550bf9bc011b4187c60b226565abcec4f19292008d57f",
-  },
-  "c44f1a81-269b-4f05-8ff2-e7ce19a93937": {
-    sourceVersion: "758b8cccd8ef8c0ba97fe8fb0f2428767842df91ac5c8e1627ce2fbe8d465061",
-    implementationRevision: "creature-return-spell/1",
-    definitionHash: "a0be8d760547a4b472543578d0971d73cf553bf4fbf2ed5936fe70025b8a76cd",
-  },
-  "837182db-1bf3-4a2c-bd01-1af9d9873561": {
-    sourceVersion: "98769e8e47da2d18fd755e7141a883463789487ff738ab871eb9c9b614c43a06",
-    implementationRevision: "creature-return-spell/1",
-    definitionHash: "ecc40c87864f27c360b035f99ae03bc3746f55d5063ca291e34065768d1a7235",
-  },
-  "eb62aa4b-c11b-4195-ae85-cff8f78ce17b": {
-    sourceVersion: "a1c09f4e3df05fbcfa6c7cc056e66c61df726d0862d0f5026415128fcf15f513",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "391509ec91386b06230d97bea357e4a4817c09c3999e0228b65365828b2c3324",
-  },
-  "2baf2ee6-e290-4a2b-89a0-0e725edde06d": {
-    sourceVersion: "eb6726e66b03e7387081a8fd313498f71ed01209d0b37ff6cc2f4cef7cff9b92",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "49e4762bf13bcd156eda809fa206a26a5f8ed24ab527aa63fa1cf700bcaaf53e",
-  },
-  "e1635acd-ed1e-4038-a11a-6518df285253": {
-    sourceVersion: "0dd60a925088e155471b88e0665687be81bd6a6be1355e6da531268c53a87a96",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "b192400706f455e09e98886517fafb2d70aaedf298035ba633e913b978cd0f94",
-  },
-  "855b168b-e514-4a43-8bbe-7f1df40031ae": {
-    sourceVersion: "cb2f3de808db8213e413aac8e45f25a07f18c11ad5d130546fc15013e0b6eaa5",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "19aa3b88d32976ec3546157a1b0014aff0c3edaff205cef45d0433099c6850f9",
-  },
-  "30536d1f-8b1a-474f-a508-d3426480a532": {
-    sourceVersion: "4653567a22d4888e0fec8f3592ca9100daf84ec67743baecdf40e9f7e0e2b2ec",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "66dd5cecdcf3a322a3e1d18e42fd790e85081d5c89f9a7fc01d8a0eca9f6a6cf",
-  },
-  "46418fe4-065c-4dfa-b796-eee02c14f351": {
-    sourceVersion: "b133a5da9de435acc19d0356be5ef09fb02c5e96422e3d4dc5db67d0b090c735",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "82684ad62e98f17cb8a904a0acd62602b82b23ee3dfc3910fc76bede321747f3",
-  },
-  "d0d2c45b-b6e3-4999-bdab-976e8f0d6617": {
-    sourceVersion: "274a126b5ec696d4118ea0589bb7c7540b088bb4604549aaf60ec9a5f5c4826a",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "d308ff817800a54416c9fe3d8c5dcab2160f6f1549a35076f6f374c3ca7b6671",
-  },
-  "0c8ab7bf-7b6a-4a34-b988-9f3f4d84a9ea": {
-    sourceVersion: "877810bae8c3750aaee7c101941e4c73cc445ded305ab25ed8ad85f81fd1cccd",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "d0ac05dc6434652d56c311d389498631626ac03ef5266807ab6bad4cdf35042b",
-  },
-  "9ccb6ce8-ccb6-4809-a1cc-cebd38744815": {
-    sourceVersion: "ff3105adbadd590f11f00e08bf58027fee424c92c357c44fdc32fa0dcd188345",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "44be6df9b0789cd5bdc0f76a4d6b9974079805ffe1abd73f8f282bff9424370c",
-  },
-  "c7dd0614-e11e-4b6b-a2cb-9904e457148f": {
-    sourceVersion: "e9ed0a567a003bdf2e451e7253a09e17757389534001a3e32fb18c42f2923e73",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "1eaf63fd69fa9ee8cbb87ff22221355b87cf5e1a539798d6f714069b047b16b2",
-  },
-  "e8a9350a-07c1-47ed-8c4f-88e4b3b17545": {
-    sourceVersion: "7476967eeb968e1a5ba3d5e02b8f8f01844eb3750188a4a77965d40d7ee8d5b1",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "5b8e18f6b9119c8f1731c904ed9cfbc30795d8a0c2d671e00e001ec1cb3eafdc",
-  },
-  "a6450b8e-eb18-431c-9eb7-7daf107978b2": {
-    sourceVersion: "23a24be96fb7b5e880a23a6fabe16c07aa18cbd3cf9504121ec628ff0532de5c",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "36a39895a848779133b26333b76973ac8e19a84f4d43707b7588bab76adbd8cf",
-  },
-  "aa8b60b6-cf55-4aaa-9caa-2b17942d8269": {
-    sourceVersion: "06e40db92db51f70c03a6b6cd6df1c217b1e4c8a759bc55822c5e0255f9aba72",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "3ea21ce83956c4f8aae1af4b222d7800c9eb09c06136472c4aea233f0b9724b6",
-  },
-  "aa16307a-9c1f-4538-872c-95206e2b7a6e": {
-    sourceVersion: "871de5b98baae9e037b5fde23169cdf40459c0a879305a9f6038b10942594ed0",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "9aa1a63fe5b4f6f516d75be479377e3707c81f8ad4e944fd94d0a0ddd5bee2c2",
-  },
-  "4965f5fe-a5fe-4976-822c-5cf40fea8c34": {
-    sourceVersion: "3e814f710ac0a197ca429ba8baeb2d7261a4d4cb77c8dfdd3d3f7f9c7aacc2ca",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "3417016bdf244d15e2fec31fa534b39d6781973ee7d9200b6d0ba3cd0d4150ba",
-  },
-  "9cfe86ae-eebe-44aa-a956-4b3e9e621105": {
-    sourceVersion: "82840bf0ce3ba2e85200c3c41b4ecda54fe08d7103bec89fd8426e3c9c4eaad7",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "cca9c68725e3ca4a9664cb6fe858d755db05efa1c86c673dc8af39a9dbbb1980",
-  },
-  "a79e21fc-89bd-4547-8bef-5510554e1431": {
-    sourceVersion: "02718088a2ef053ddc4751bf6906830b46c6f975a5843b9030115572e3ac383c",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "9af2d3c5f9cd7379b40a0f1382e476bc9c5ab9a354a6883bb3a813d9868ce355",
-  },
-  "5e4c02c2-2e54-4e8d-8d94-6b2454027e7e": {
-    sourceVersion: "9cde3e9b9ea64c2cdc51de758f65d764a0c3557d63149f6ca77e59422e3d7cc8",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "ae88904c4d7b761e51a7dcf32f285103bdff05577ee3097453c9cb96d53bc654",
-  },
-  "5b2364d7-a811-4595-a1b4-224c70555ffa": {
-    sourceVersion: "e7d771ed048948d8359e720351181740b5d02ecfa866b133cf43baa217fb3cd0",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "d0f55fd9280d822604677cb5e2103ea057e9236d4c8748629c1099ec44b2eba6",
-  },
-  "e7fa2fc2-8542-4069-b75f-5520dd30f74d": {
-    sourceVersion: "743e86057a5cb4e6651b6b6afaed87eb08b1c289a874ca8894b76219fa651ffb",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "3397e14b1d4502994b505af0202da4fd17e5d2630b8f21397909af478ce4f744",
-  },
-  "b97d21b4-d730-479f-872f-3e1645b66751": {
-    sourceVersion: "850767cc9a48df080d6b1cd2dc3e83dafe4a8cbb6bcba81e3e1945e8fc5284de",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "cb11ceead8daf804a7324e6d5ec80c38d568d070709e8272fe81e532e864f3be",
-  },
-  "5d46b8dd-2a4a-4d9f-b4c6-2b45f05081c2": {
-    sourceVersion: "d9afd0dd096688cc055eb9b23c9f9f0982c5835bc668d0780bb189a1ed1ba878",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "264a153200a6a18d0fca79307f70606840b1f85e1b7ae920ac66edfabd9674da",
-  },
-  "8fb599a7-2c61-446b-a7a7-cd5367f9b796": {
-    sourceVersion: "2d4dd94292093a0ca5fcbe5b247df2deff55955b2769fd6941ae84214eecd811",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "e866cf5363537296b54bf332657c7d65a0682f2b5fff82b44c666187a792e10e",
-  },
-  "424c6f5e-b386-47e9-b3fe-25b263097d40": {
-    sourceVersion: "930fdf7217b790b599d84dbd8f3cd39248356f77237b71c57782bbc0bf489a21",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "da759c1ec32722ba456408d7e7d5a899440542fb5f318e30468d42d30cb461dd",
-  },
-  "d1a9fd14-fecb-4d2a-983c-70143238275b": {
-    sourceVersion: "b162cf23dc4b6989a2e24d1be3b9992954a3507ca6ad4146d993922ccc64bd39",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "3b5219ff3914248ccbbf261a21b3873f264057dfb742d5bc4643817c650070f8",
-  },
-  "61e2d557-f08d-489b-94c8-aff87e5189f9": {
-    sourceVersion: "f4fdf7a33fd99d008a1375d6f439495e00aeec6a095d7f9efe001dfe0e60973b",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "b1a8e793cd8eef25e6cc1ff4a42ed7dabdc97ff61d084c3cf4f259662c0cca8b",
-  },
-  "43355ac4-bf8c-48f6-a322-fafbc9d132d1": {
-    sourceVersion: "1cda0624446a5ee20bfcec8de5a4f717a91f04c4f38e36ace587d7acd4578019",
-    implementationRevision: "fixed-token-spells/1",
-    definitionHash: "0c117e593aef41c8a209bfac0b2d3c150ca6e0e916847a6fbd65348629d30d3b",
   },
 };

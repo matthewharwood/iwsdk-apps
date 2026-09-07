@@ -1,6 +1,7 @@
 import type { ExecutionRegistry, Response, RulesState } from "@iwsdk-apps/contracts";
 import { characteristics } from "./characteristics";
 import {
+  battlefield,
   creatures,
   emit,
   hit,
@@ -12,7 +13,6 @@ import {
   removeFromLists,
   request,
   requireRule,
-  toughness,
 } from "./common";
 
 function lossReason(state: RulesState, actor: string): string | null {
@@ -90,15 +90,34 @@ function commanderChoice(state: RulesState): boolean {
   });
   return true;
 }
-/** Simultaneous SBA batches precede all ordinary priority decisions. */
-function recordDeathRules(state: RulesState, release: ExecutionRegistry, id: string): void {
-  const entry = object(state, id);
-  const health = toughness(state, release, id);
-  if (health <= 0) hit(state, "rule:704.5f");
-  else {
-    if (entry.damage >= health) hit(state, "rule:704.5g");
-    if (entry.deathtouchDamage) hit(state, "rule:704.5h");
+/** Reject the unimplemented choice before applying a convenient partial SBA batch. */
+function guardDuplicateLegends(state: RulesState, release: ExecutionRegistry): void {
+  const legends = new Set<string>();
+  for (const entry of battlefield(state)) {
+    const current = permanentBase(state, release, entry.id);
+    if (!current.supertypes.includes("Legendary")) continue;
+    const key = JSON.stringify([entry.controller, current.name]);
+    if (legends.has(key))
+      throw new RulesError(
+        "UnsupportedMechanic",
+        "Legend-rule selection is not implemented in this content release.",
+      );
+    legends.add(key);
   }
+}
+/** Capture eligibility AND reason from the same pre-batch characteristic view. */
+function creatureDeaths(state: RulesState, release: ExecutionRegistry) {
+  return creatures(state, release).flatMap((entry) => {
+    const current = characteristics(state, release, entry.id);
+    const health = current.toughness ?? 0;
+    const rules: string[] = [];
+    if (health <= 0) rules.push("rule:704.5f");
+    else if (!current.keywords.includes("indestructible")) {
+      if (entry.damage >= health) rules.push("rule:704.5g");
+      if (entry.deathtouchDamage) rules.push("rule:704.5h");
+    }
+    return rules.length ? [{ entry, rules }] : [];
+  });
 }
 function stateBasedActions(
   state: RulesState,
@@ -106,14 +125,8 @@ function stateBasedActions(
 ): { waiting: boolean; changed: boolean } {
   let changed = false;
   for (let iteration = 0; iteration < 1000; iteration++) {
-    const dead = creatures(state, release).filter((entry) => {
-      const health = toughness(state, release, entry.id);
-      return (
-        health <= 0 ||
-        (!characteristics(state, release, entry.id).keywords.includes("indestructible") &&
-          (entry.damage >= health || entry.deathtouchDamage))
-      );
-    });
+    guardDuplicateLegends(state, release);
+    const dead = creatureDeaths(state, release);
     const ceased = orderedObjects(state).filter(
       (entry) => entry.token && entry.zone !== "battlefield",
     );
@@ -125,8 +138,8 @@ function stateBasedActions(
       });
     if (dead.length === 0 && losses.length === 0 && ceased.length === 0) break;
     const moved: { before: string; after: string }[] = [];
-    for (const entry of dead) {
-      recordDeathRules(state, release, entry.id);
+    for (const { entry, rules } of dead) {
+      for (const rule of rules) hit(state, rule);
       const after = move(state, entry.id, "graveyard", "state-based creature death");
       moved.push({ before: entry.id, after: after.id });
       hit(state, `${entry.token ? "token" : "card"}:${entry.definition}:dies`);
@@ -159,19 +172,6 @@ function stateBasedActions(
         "UnsupportedMechanic",
         "Unbounded automatic checkpoint requires a resumable loop policy.",
       );
-  }
-  // Legend choice is never silently approximated by keeping a convenient object.
-  const legends = new Set<string>();
-  for (const entry of creatures(state, release)) {
-    const current = permanentBase(state, release, entry.id);
-    if (!current.supertypes.includes("Legendary")) continue;
-    const key = `${entry.controller}:${current.name}`;
-    if (legends.has(key))
-      throw new RulesError(
-        "UnsupportedMechanic",
-        "Legend-rule selection is not implemented in this content release.",
-      );
-    legends.add(key);
   }
   return { waiting: commanderChoice(state), changed };
 }

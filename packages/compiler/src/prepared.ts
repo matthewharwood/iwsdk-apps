@@ -9,6 +9,7 @@ import {
   SELF_ENTRY_REGISTRY,
   SELF_ENTRY_SEQUENCES,
   SPELL_FAMILY_REGISTRY,
+  STATIC_BONUS_PERMANENTS,
   TEMPORARY_CREATURE_BODIES,
   TEMPORARY_CREATURE_SPELLS,
 } from "@iwsdk-apps/card-programs";
@@ -163,6 +164,7 @@ async function artifactFor(
     processorAbi: source.processorAbi,
     compilerVersion: MATCH_PLAN_VERSION,
     recipeRegistryHash: await semanticHash({
+      staticBonusPermanents: STATIC_BONUS_PERMANENTS,
       fixedTokenSpells: FIXED_TOKEN_SPELLS,
       fixedTokenTemplates: FIXED_TOKEN_TEMPLATES,
       recipes: RECIPE_REGISTRY,

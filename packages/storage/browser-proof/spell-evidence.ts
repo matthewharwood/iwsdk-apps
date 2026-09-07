@@ -1,10 +1,12 @@
 import {
   type ContentRelease,
+  type ContinuousEffect,
   type GameEvent,
   GameObject,
   type PlayerObservation,
 } from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
+import { atStaticStage } from "./static-evidence";
 
 function removals(record: MatchArchive["records"][number], release: ContentRelease) {
   const removalEvents = { destroy: 0, exile: 0 };
@@ -258,12 +260,19 @@ export type ProofStage =
   | "commander-replacement"
   | "pending-token"
   | "active-token"
-  | "token-departure";
+  | "token-departure"
+  | "pending-static"
+  | "active-static"
+  | "static-departure";
 export function atProofStage(
   view: PlayerObservation,
   kind: ProofStage,
   events: readonly GameEvent[] = [],
+  release?: ContentRelease,
+  continuousEffects: readonly ContinuousEffect[] = [],
 ): boolean {
+  if (["pending-static", "active-static", "static-departure"].includes(kind))
+    return atStaticStage(view, kind, events, release);
   if (kind === "pending-token")
     return (
       view.decision?.kind === "priority" &&
@@ -305,18 +314,16 @@ export function atProofStage(
   if (kind === "active-modifier")
     return (
       view.decision?.kind === "priority" &&
-      view.objects.some((object) => {
-        if (object.zone !== "battlefield") return false;
-        const base = object.card ?? object.tokenTemplate?.characteristics;
-        if (!base) return false;
-        const counters = (object.counters["+1/+1"] ?? 0) - (object.counters["-1/-1"] ?? 0);
-        return (
-          object.characteristics.keywords.some((keyword) => !base.keywords.includes(keyword)) ||
-          (base.power !== null && object.characteristics.power !== base.power + counters) ||
-          (base.toughness !== null &&
-            object.characteristics.toughness !== base.toughness + counters)
-        );
-      })
+      continuousEffects.some(
+        (effect) =>
+          effect.expiresAfterTurn >= view.turn &&
+          view.objects.some(
+            (object) =>
+              object.id === effect.affectedObject &&
+              object.zone === "battlefield" &&
+              (object.card ?? object.tokenTemplate?.characteristics)?.types.includes("Creature"),
+          ),
+      )
     );
   if (kind === "pending-ordered-trigger")
     return (

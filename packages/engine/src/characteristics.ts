@@ -1,6 +1,7 @@
 import type { DerivedCharacteristics, ExecutionRegistry, RulesState } from "@iwsdk-apps/contracts";
 
 import { objectBase } from "./object-definitions";
+import { staticPowerToughnessBonus } from "./static-bonus";
 
 /** Admitted layer 6 keyword additions and layer 7c additive modifiers; no generic layer claim. */
 export function characteristics(
@@ -22,5 +23,8 @@ export function characteristics(
     if (power !== null) power += effect.modifier.powerDelta;
     if (toughness !== null) toughness += effect.modifier.toughnessDelta;
   }
+  const bonus = staticPowerToughnessBonus(state, registry, object);
+  if (power !== null) power += bonus.power;
+  if (toughness !== null) toughness += bonus.toughness;
   return { power, toughness, keywords: [...keywords] };
 }

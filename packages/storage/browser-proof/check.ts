@@ -30,6 +30,7 @@ import {
   spellEvidence,
   triggerEvidence,
 } from "./spell-evidence";
+import { staticEvidence } from "./static-evidence";
 import { tokenEvidence } from "./token-evidence";
 
 type Snapshot = {
@@ -44,6 +45,7 @@ type Snapshot = {
   continuous: ReturnType<typeof continuousEvidence>;
   counters: ReturnType<typeof counterEvidence>;
   tokens: ReturnType<typeof tokenEvidence>;
+  statics: ReturnType<typeof staticEvidence>;
   commanderReturns: ReturnType<typeof commanderReturnEvidence>;
   execution: ReturnType<typeof executionEvidence>;
   setup: ReturnType<typeof setupEvidence>;
@@ -64,6 +66,7 @@ const options = parseArgs({
     "deck-stride": { type: "string", default: "3" },
     "seed-attempts": { type: "string", default: "8" },
     "require-tokens": { type: "boolean", default: false },
+    "require-statics": { type: "boolean", default: false },
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
     "require-triggers": { type: "boolean", default: false },
@@ -91,6 +94,7 @@ const requireTriggers = options["require-triggers"] || requireOrderedTriggers;
 const twoSeed = boundedInteger(options["two-seed"], 1, 4294967200, "two-seed");
 const fourSeed = boundedInteger(options["four-seed"], 1, 4294967200, "four-seed");
 const requireTokens = options["require-tokens"];
+const requireStatics = options["require-statics"];
 const requireRemoval = options["require-removal"];
 const requireModifiers = options["require-modifiers"];
 const requireCounters = options["require-counters"];
@@ -124,6 +128,7 @@ if (requireModifiers) stageKinds.push("active-modifier");
 if (requireCounters) stageKinds.push("pending-counter");
 if (requireCommanderReplacement) stageKinds.push("commander-replacement");
 if (requireTokens) stageKinds.push("pending-token", "active-token", "token-departure");
+if (requireStatics) stageKinds.push("pending-static", "active-static", "static-departure");
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -163,6 +168,7 @@ for (const name of [
   "commander-return-evidence.ts",
   "proof-driver.ts",
   "token-evidence.ts",
+  "static-evidence.ts",
 ]) {
   sourceFiles[`packages/storage/browser-proof/${name}`] = await readFile(
     new URL(name, import.meta.url),
@@ -308,6 +314,7 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     continuous: continuousEvidence(archive, coordinator),
     counters: counterEvidence(archive, release),
     tokens: tokenEvidence(archive, release, coordinator),
+    statics: staticEvidence(archive, release, coordinator),
     commanderReturns: commanderReturnEvidence(archive, release, coordinator),
     execution: executionEvidence(release, coordinator.executionInfo()),
     setup: setupEvidence(coordinator, archive),
@@ -339,6 +346,8 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
       (final.tokens.creations.length > 0 &&
         final.tokens.departures.length > 0 &&
         final.tokens.cessations.length > 0)) &&
+    (!requireStatics ||
+      (final.statics.entries.length > 0 && final.statics.departures.length > 0)) &&
     (!requireSpells || Object.keys(final.spells.resolved).length > 0) &&
     (!requireCounters || final.counters.occurrences.length > 0) &&
     (!requireCommanderReplacement ||
@@ -516,7 +525,41 @@ function assertTokenStage(kind: ProofStage, snapshot: Snapshot): void {
     }
   }
 }
+function assertStaticStage(kind: ProofStage, snapshot: Snapshot): void {
+  for (const { object, expected } of snapshot.statics.recipients) {
+    expect(object.characteristics.power).toBe(expected.power);
+    expect(object.characteristics.toughness).toBe(expected.toughness);
+    expect([...object.characteristics.keywords].sort()).toEqual(expected.keywords);
+  }
+  if (kind === "pending-static") {
+    expect(snapshot.statics.pending.length).toBeGreaterThan(0);
+    for (const pending of snapshot.statics.pending) {
+      expect(pending.zone).toBe("stack");
+      expect(snapshot.statics.liveSources.some((source) => source.id === pending.id)).toBe(false);
+    }
+  } else if (kind === "active-static") {
+    expect(snapshot.statics.recipients.some((recipient) => recipient.statics.length > 0)).toBe(
+      true,
+    );
+  } else {
+    expect(snapshot.statics.cessationWitnesses.length).toBeGreaterThan(0);
+    for (const witness of snapshot.statics.cessationWitnesses) {
+      expect(
+        snapshot.statics.liveSources.some(
+          (source) => source.id === witness.source || source.id === witness.sourceAfter,
+        ),
+      ).toBe(false);
+      expect(
+        snapshot.statics.recipients.some((recipient) => recipient.object.id === witness.recipient),
+      ).toBe(true);
+    }
+  }
+}
 function assertPausedStage(kind: ProofStage, snapshot: Snapshot): void {
+  if (["pending-static", "active-static", "static-departure"].includes(kind)) {
+    assertStaticStage(kind, snapshot);
+    return;
+  }
   if (kind === "pending-token" || kind === "active-token" || kind === "token-departure") {
     assertTokenStage(kind, snapshot);
     return;
@@ -680,7 +723,14 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
           seed: manifest.driverSeed,
           driver: proofDriverForVersion(manifest.driverVersion),
           maxCommands: 10_000,
-          stopAt: (observation) => atProofStage(observation, kind, coordinator?.current().events),
+          stopAt: (observation) =>
+            atProofStage(
+              observation,
+              kind,
+              coordinator?.current().events,
+              release,
+              coordinator?.current().continuousEffects,
+            ),
           onProgress: (revision) => console.log(`Native ${seatCount}-seat revision:${revision}`),
         });
         const snapshot = await nativeSnapshot(repo, coordinator);
@@ -803,6 +853,7 @@ try {
       const pending = await call<Snapshot>(page, { operation: "snapshot" });
       assertPausedStage(stage.kind, pending);
       expect(pending.tokens).toEqual(stage.snapshot.tokens);
+      expect(pending.statics).toEqual(stage.snapshot.statics);
       expect(pending.continuous).toEqual(stage.snapshot.continuous);
       expect(pending.counters).toEqual(stage.snapshot.counters);
       expect(pending.commanderReturns).toEqual(stage.snapshot.commanderReturns);
@@ -827,8 +878,10 @@ try {
       await Bun.write(join(output, `${seatCount}-seat-${stage.kind}-save.json`), stageSave);
       let stageImport: Snapshot | null = null;
       if (
-        requireTokens &&
-        ["pending-token", "active-token", "token-departure"].includes(stage.kind)
+        (requireTokens &&
+          ["pending-token", "active-token", "token-departure"].includes(stage.kind)) ||
+        (requireStatics &&
+          ["pending-static", "active-static", "static-departure"].includes(stage.kind))
       ) {
         await call(page, { operation: "close" });
         stageImport = await call<Snapshot>(page, {
@@ -868,6 +921,7 @@ try {
     expect(completed.replayHash).toBe(completed.stateHash);
     expect(completed.boundaryHashes).toEqual(baseline.nativeFinal.boundaryHashes);
     expect(completed.tokens).toEqual(baseline.nativeFinal.tokens);
+    expect(completed.statics).toEqual(baseline.nativeFinal.statics);
     expect(completed.spells).toEqual(baseline.nativeFinal.spells);
     expect(completed.triggers).toEqual(baseline.nativeFinal.triggers);
     expect(completed.continuous).toEqual(baseline.nativeFinal.continuous);
@@ -916,6 +970,7 @@ try {
     assertSingleChoice(importedFinal);
     expect(importedFinal.setup.firstChoice).toEqual(completed.setup.firstChoice);
     expect(importedFinal.tokens).toEqual(completed.tokens);
+    expect(importedFinal.statics).toEqual(completed.statics);
     expect(importedFinal.commanderReturns).toEqual(completed.commanderReturns);
     const importedReplacementChoiceRetry = await retryBrowserReplacement(page, importedExpected);
     caseEvidence.browser = {
@@ -957,6 +1012,9 @@ try {
     removalRequired: requireRemoval,
     commanderReplacementRequired: requireCommanderReplacement,
     tokenLifecycleRequired: requireTokens,
+    staticLifecycleRequired: requireStatics,
+    staticEntries: completedBrowserStates.flatMap((state) => state.statics.entries),
+    staticDepartures: completedBrowserStates.flatMap((state) => state.statics.departures),
     commanderReplacements: completedBrowserStates.flatMap(
       (state) => state.commanderReturns.occurrences,
     ),

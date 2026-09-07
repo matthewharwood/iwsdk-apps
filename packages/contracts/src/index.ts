@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { StaticCreatureBonus } from "./static-bonus";
 import { SelfEntryProgram } from "./triggers";
 
+export { ReviewedCreatureSubtype, StaticCreatureBonus } from "./static-bonus";
 export {
   OrderedSelfEntryProgram,
   SelfEntryEffect,
@@ -10,7 +12,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.12.0";
+export const ENGINE_VERSION = "commander-engine/0.13.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -250,6 +252,7 @@ export const CardDefinition = z.strictObject({
   implementationRevision: Id,
   spellProgram: SpellProgram.optional(),
   triggerPrograms: z.array(SelfEntryProgram).min(1).max(1).optional(),
+  staticPrograms: z.tuple([StaticCreatureBonus]).optional(),
 });
 export type CardDefinition = z.infer<typeof CardDefinition>;
 export const ContentRelease = z.strictObject({

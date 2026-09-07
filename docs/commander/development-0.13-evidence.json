@@ -1,0 +1,399 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.13.0",
+  "sourceReleaseHash": "7f1e1b65f7134dce4add33ded2019720f74b44f0c9c194dbc34e182383914bdf",
+  "primaryDefinitions": 1170,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 46,
+  "preservedPrimaryDefinitions": 1129,
+  "preservedCompleteDeckRevisions": 40,
+  "unsupportedPaperCandidates": 30659,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": "docs/commander/source-static-bonus-v0.13.json",
+    "sha256": "761945663bf94973e063b56623ed36ddffc08235bf498940aa8338e5c7841a52"
+  },
+  "sourceResearch": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/static-bonus-research/manifest.json",
+    "sha256": "dcfe62f26abbfbfdb35b2cec02e34c50ce2cfc4784f06d451c2929236ecf2e32"
+  },
+  "bindingExecution": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/static-bonus-binding-execution/result.json",
+    "sha256": "2311aab00e4fda244e28a49fbfbe40941039b497d492e19db11a0d2643f12479",
+    "tests": 50,
+    "assertions": 9384
+  },
+  "independentSourceReview": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/independent-static-source-review/manifest.json",
+    "sha256": "4a5729c16da96bc03a53f79b4ab20dbb5120dfe2385e21a79d085da201c00dfa"
+  },
+  "coreExecution": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/static-core-evidence-0.13/manifest.json",
+    "sha256": "773d0cd462f5fdc674b436f095bdf7979659fbce1b7ce7aa1ebf29f2d238abf0",
+    "focusedTests": 33,
+    "focusedAssertions": 156,
+    "broadTests": 520,
+    "broadAssertions": 7138
+  },
+  "sourceExecution": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/static-source-execution-0.13/manifest.json",
+    "sha256": "abbc96f3d30e4e52839901c36f1297d4b82f245e1ffbe0b5b58ab4eb90882fa0",
+    "tests": 46,
+    "assertions": 992,
+    "legalNewIdentitiesExecuted": 38,
+    "newIdentitiesWithoutExecution": [
+      "Inspiring Veteran",
+      "Kargan Warleader",
+      "Merfolk Mistbinder"
+    ],
+    "gap": "No compatible commander among the39 implemented eligible commanders for these RW/GU identities; all117 admission attempts reject.",
+    "priorSourceGapClosed": "Arvad the Cursed admits and legally executes Call to the Feast."
+  },
+  "deckExecution": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/static-bonus-decks-execution/result.json",
+    "sha256": "93fd8babfa5941c39520c52837965e28edb62f03eebe749f7c702ae80504972c",
+    "tests": 94,
+    "assertions": 12229,
+    "scope": "Compiler suite including six new legal deck fixtures, not completed games."
+  },
+  "compilerReview": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/independent-static-compiler-browser-review/manifest.json",
+    "sha256": "87289288751445c1ccae9ee50f8176c1c8280399b670b6e2318f20d7e8121c98"
+  },
+  "harnessFix": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/independent-static-compiler-browser-review/fix/manifest.json",
+    "sha256": "6c56cbef41e64fd99ca6ed56001d199e3e960437961d7366363b9a49e97cb267",
+    "finding": "STATIC-HARNESS-01",
+    "focusedTests": 14,
+    "focusedAssertions": 55,
+    "scope": "Temporary-effect stop requires an actual active fixed-target effect; a static-only derived-stat difference is insufficient. Original review and failed behavior retained."
+  },
+  "nativeDurability": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/native-static-durability-0.13-qualified/result.json",
+    "sha256": "3f14fe5e3d6c7d8d9d47c39ce7a7c36b4709ab610419970d5e486f5fa49f7558",
+    "tests": 17,
+    "assertions": 766,
+    "resolvers": 3,
+    "checkpoints": [157, 158, 163, 164, 165],
+    "scope": "One ordinary legal two-seat setup,165 accepted commands per resolver; ongoing match, not completed games. Pending Arvad owner choice, either hand/command departure, reopen/import/replay/exact receipts, rollback and tamper negatives."
+  },
+  "independentBrowserReview": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/independent-static-browser-review/manifest.json",
+    "sha256": "4ded6e17bef193334f02706f2341d73f938beefbcdf72597b2f7dbe3f00498df"
+  },
+  "nativeBrowserScopeJoin": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/independent-static-browser-review/scope-join.json",
+    "sha256": "399c5c07a1dac3f3a0ee1d6936c0b3c3517477ce95c3975a8eeea7d202731784",
+    "nativeReviewerRole": "Native-test author checks retained integrity; independent semantic review is the parent review, not claimed by the author."
+  },
+  "mainCompile": {
+    "path": ".commander/evidence/compile-0.13-main.log",
+    "sha256": "4e46462d7f79896a7ab95bd952af90e4c21a9abc2282ea29ac0769d7e16e7ae4"
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/5783cc68-8250-4d5c-ae03-de5a0da15cc0/report.json",
+      "sha256": "50bb6a5a4aa0c26108c78d912db5b950f8a2fb03b49c0ec5796ac557aefb2986",
+      "mode": "two-seat",
+      "gameSeed": 13002,
+      "driverSeed": 13019,
+      "classification": "selected-static-game-assignment",
+      "commands": 649,
+      "boundaries": 650,
+      "independentResolversAndReplays": 3,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/5783cc68-8250-4d5c-ae03-de5a0da15cc0/assignment.json",
+        "sha256": "b35e034f55764153411fb327a26a8ef2fae14675900313ee3c39bb0bc4e7ef86"
+      }
+    },
+    {
+      "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/58f1aaa8-53ea-4006-9dba-5dfe4b4b906c/report.json",
+      "sha256": "6a39983a7a1bc1a03cadcc1558950db2514d5adda47429cda4c2aa2d19a8eda0",
+      "mode": "two-seat",
+      "gameSeed": 13201,
+      "driverSeed": 13218,
+      "classification": "additional-completed-exploratory-assignment",
+      "commands": 735,
+      "boundaries": 736,
+      "independentResolversAndReplays": 3,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/58f1aaa8-53ea-4006-9dba-5dfe4b4b906c/assignment.json",
+        "sha256": "073b2c9f247fb2bf92bea89deb9f15c6b1ad414cbcdd797cc4f39936f7bd4aef"
+      }
+    },
+    {
+      "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/ef08e23a-ca84-4c27-b95f-146c2ae23e71/report.json",
+      "sha256": "babdd006970883993825d1b6b0857408da96cd76a6d1219a50e9782a13f2c031",
+      "mode": "four-seat",
+      "gameSeed": 13201,
+      "driverSeed": 13218,
+      "classification": "selected-static-game-assignment",
+      "commands": 1698,
+      "boundaries": 1699,
+      "independentResolversAndReplays": 3,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/ef08e23a-ca84-4c27-b95f-146c2ae23e71/assignment.json",
+        "sha256": "39c5d5ffd92113f701bfec9320834a0163826ee9b388c1afd4728eaf4d2012b2"
+      }
+    },
+    {
+      "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/fa4b1dab-58d3-4d46-ba5b-ace8e0df350e/report.json",
+      "sha256": "686981766ffc1e4826060089f7b30dce2de2c8a8e3c8629552f1ccde2a69b996",
+      "mode": "two-seat",
+      "gameSeed": 13001,
+      "driverSeed": 13018,
+      "classification": "additional-completed-exploratory-assignment",
+      "commands": 376,
+      "boundaries": 377,
+      "independentResolversAndReplays": 3,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.13/.draft-runs/resolver-comparisons/fa4b1dab-58d3-4d46-ba5b-ace8e0df350e/assignment.json",
+        "sha256": "56cc9b8d3eb915c1a962feea3156a0d5ea16f43afc5a401b860e63eb4ed37afb"
+      }
+    }
+  ],
+  "independentCliComparisonReview": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/independent-static-cli-comparisons.json",
+    "sha256": "cebc070d33f03e5f6d901eced1f89315310f154ad38ebf2da95136d81ce03b13"
+  },
+  "frozenBuildHash": "8986ca5bbd7aba503fd4ca6cbb39834d7346fcb466c01564df3e32656e3bc96d",
+  "frozenExecutableSha256": "939938536c1290e424f655dccab826d9f5432363d53ee5c392041ad611ad1152",
+  "browser": {
+    "path": ".commander/prototypes/engine-0.13/.commander/browser-proof/2026-09-07T00-30-13-740Z-0fde838b/evidence.json",
+    "sha256": "5038f10654d866311fa438172376dd271e8d6a13dfe00bf4d90f10383271eb08",
+    "status": "passed",
+    "sourceHash": "765c34bc3b546e199a02fc35f2ca96237517ce419b2a813ff8faa79750ef455a",
+    "workerBundleHash": "842f7f77103f0de1b37f45e7ca6d2de4f2f68d7fbb1d4282f7599df993615e98",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "driverVersion": "observed-combat/9",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 13002,
+        "driverSeed": 13019,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "9eee1ad3b9e748727a109954d2101e3196f827cb9e96c280a1f85f8b5ea41511"
+          },
+          {
+            "id": "P2",
+            "deckHash": "709ad748f9138574f0fc2ecdcc6b21e7532fdb3a810cd2be144b44aa6d4ee846"
+          }
+        ],
+        "commands": 542,
+        "boundaries": 543,
+        "finalStateHash": "9f89bec5a4a9171af302c71b5ae0e32ae72ac611d9084b2188d4711050ded08f",
+        "execution": {
+          "sourceReleaseHash": "7f1e1b65f7134dce4add33ded2019720f74b44f0c9c194dbc34e182383914bdf",
+          "preparedArtifactHash": "2fca1155f24c2cdb9fb39c092c26022158b9ca06bc72d07d4666a8993cd32be2",
+          "definitionCount": 86,
+          "tokenTemplateCount": 6,
+          "fullDefinitionCount": 1170,
+          "excludedDefinitionCount": 1084,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 14
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 7,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "pending-static",
+            "revision": 135,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "active-static",
+            "revision": 244,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "static-departure",
+            "revision": 317,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "finalDepartureImportRevision": 317,
+        "importedCompleteStateHash": "9f89bec5a4a9171af302c71b5ae0e32ae72ac611d9084b2188d4711050ded08f",
+        "staticEntries": 5,
+        "staticDepartures": 3,
+        "commanderReturnOccurrences": 0
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 13201,
+        "driverSeed": 13218,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "9eee1ad3b9e748727a109954d2101e3196f827cb9e96c280a1f85f8b5ea41511"
+          },
+          {
+            "id": "P2",
+            "deckHash": "709ad748f9138574f0fc2ecdcc6b21e7532fdb3a810cd2be144b44aa6d4ee846"
+          },
+          {
+            "id": "P3",
+            "deckHash": "d361cce2b910a4aabebe820ca87439b6342a7282d2ae8a909fbee0df3150dab8"
+          },
+          {
+            "id": "P4",
+            "deckHash": "45c3ff16954ffbfd7d011fc00459074ece8985e0f9d3d547bfdf92ad7c6006fe"
+          }
+        ],
+        "commands": 1710,
+        "boundaries": 1711,
+        "finalStateHash": "d4bc8251fc4f30cebb7231c36054388f8309d4d935f5f7371015334160229b52",
+        "execution": {
+          "sourceReleaseHash": "7f1e1b65f7134dce4add33ded2019720f74b44f0c9c194dbc34e182383914bdf",
+          "preparedArtifactHash": "d2f989cc57e0448b791cc2b59f6d186d5176949e2cf522bb58a58e8fc5de385f",
+          "definitionCount": 160,
+          "tokenTemplateCount": 11,
+          "fullDefinitionCount": 1170,
+          "excludedDefinitionCount": 1010,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 9
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 185,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "pending-static",
+            "revision": 226,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "active-static",
+            "revision": 230,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "static-departure",
+            "revision": 1558,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "finalDepartureImportRevision": 1558,
+        "importedCompleteStateHash": "d4bc8251fc4f30cebb7231c36054388f8309d4d935f5f7371015334160229b52",
+        "staticEntries": 14,
+        "staticDepartures": 5,
+        "commanderReturnOccurrences": 0
+      }
+    ],
+    "scope": "Real OPFS reload/new-worker open at every stage. Each pending-static, active-static and static-departure stage separately exported/imported/retried. Final departure import resumes to identical completion/replay. These checkpoints can concern different provider incarnations; no unified one-provider timing proof. No commander-return occurrence or pending-choice stage in these browser games.",
+    "earlierPassingRun": {
+      "path": ".commander/prototypes/engine-0.13/.commander/browser-proof/2026-09-07T00-18-16-432Z-e5b22e50/evidence.json",
+      "sha256": "b6347c11a07376efdf37fac989f5de0b4f4c8b1b093d9a5c40a20aed093a4eee",
+      "status": "passed-for-static-scope-before-temporary-stop-fix",
+      "scope": "Selected assignments repeat and are not counted twice. Its two-seat seed13001 native candidate completed but lacked the required departure workflow and was not selected."
+    },
+    "initialEnvironmentFailure": {
+      "path": ".commander/prototypes/engine-0.13/.draft-artifacts/browser-static-0.13.log",
+      "sha256": "3699b275cb0900e9777e8934b19aebf6fd0f4cf8a93d3e8af7a7c4bc7166053f"
+    }
+  },
+  "observedAssignments": {
+    "initialDeckGameSeedFamilies": 4,
+    "fullExecutionAssignments": 6,
+    "acceptedCommands": 5710,
+    "selectedInitialFamilies": 2,
+    "selectedFullAssignments": 4,
+    "scope": "Four CLI comparisons plus two selected browser assignments. Composition/seed fingerprints differ from full fingerprints including seat IDs. Resolver/replay/import/repeated browser qualification adds zero assignments. Unselected browser candidate remains separately retained."
+  },
+  "invocationAttemptNotes": {
+    "path": ".commander/prototypes/engine-0.13/.draft-artifacts/initial-qualification-notes.json",
+    "sha256": "ed6804545df42e6d354247491937d6e99b87a07d727d56f129910084cd0bca9a",
+    "closureCorrection": "Both notes labeled running are now completed in the four closed comparison artifacts. compare-static-four.log used ignored --players4 and actually ran two-seat; corrected --mode four-seat is separate. Manifest mode is authority."
+  },
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.13/promotion.json",
+    "sha256": "a84b172a7d5cb46def79e44cb54d95a8c01855dbf969ddcf3df1e8f2cf722093"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.13/archive-inventory.json",
+    "sha256": "1cd8dfcbbc56ab3084ea0518f9097059fa75198a2246c408e6749556cfb8fa6b"
+  },
+  "exactMainSourceCliEquivalence": {
+    "path": ".commander/evidence/promotion-equality-0.13.json",
+    "sha256": "2c00ce65605cc48c11a5670e0e05aa4270736b58baefe44dbda9f8b62059b15d"
+  },
+  "exactMainWorkerEquivalence": {
+    "path": ".commander/evidence/browser-worker-byte-equivalence-0.13.json",
+    "sha256": "829a19c932df2bcc90b0a12edc4c171911cbffb8310cdf02102c064006898211"
+  },
+  "repositoryGate": {
+    "path": ".commander/evidence/check-full-0.13-main.log",
+    "sha256": "1416e90a5124a7e23ab4c50d26e69eccaf7f5a1792803615c6997cf2620315d0",
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "unitTests": 905,
+    "unitAssertions": 96199,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true
+  },
+  "fixedRegression": {
+    "id": "regression-0.13-fixed64",
+    "status": "running-at-checkpoint",
+    "assigned": 64,
+    "resultFilesAtObservation": 53,
+    "frozenBuildHash": "8986ca5bbd7aba503fd4ca6cbb39834d7346fcb466c01564df3e32656e3bc96d",
+    "scope": "Each older corpus input executes/replays under captured0.13; older deck compositions do not exercise static additions."
+  },
+  "remaining": [
+    "30,659 paper candidates and broader rule families remain unsupported.",
+    "Original complete G2 difficult-scenario qualification remains open; partial STB clauses are joined explicitly.",
+    "Inspiring Veteran, Kargan Warleader and Merfolk Mistbinder need compatible implemented commanders and legal source execution.",
+    "General layer dependencies/timestamps, control/type/ability changes, and legendary-permanent choice remain unsupported.",
+    "Full-snapshot release handoff and player-visible session contract remain incomplete.",
+    "Production Commander browser/XR consumption and physical headset qualification remain separate unfinished work."
+  ],
+  "consumerGapAudit": {
+    "path": "docs/commander/consumer-gaps-0.12.md",
+    "sha256": "6cfc26300022f0a7b53ec885ab9ed86c4360fcd3013325315d6f22e698751de3"
+  },
+  "observedAt": "2026-09-07T00:43:20.143349+00:00"
+}

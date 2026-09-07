@@ -28,6 +28,7 @@ import {
   spellEvidence,
   triggerEvidence,
 } from "./spell-evidence";
+import { staticEvidence } from "./static-evidence";
 import { tokenEvidence } from "./token-evidence";
 
 const Request = z.discriminatedUnion("operation", [
@@ -54,6 +55,9 @@ const Request = z.discriminatedUnion("operation", [
         "pending-token",
         "active-token",
         "token-departure",
+        "pending-static",
+        "active-static",
+        "static-departure",
       ])
       .nullable(),
     maxCommands: z.number().int().positive().max(20_000),
@@ -101,6 +105,7 @@ async function snapshot() {
     continuous: continuousEvidence(archive, session.coordinator),
     counters: counterEvidence(archive, session.release),
     tokens: tokenEvidence(archive, session.release, session.coordinator),
+    statics: staticEvidence(archive, session.release, session.coordinator),
     commanderReturns: commanderReturnEvidence(archive, session.release, session.coordinator),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
     setup: setupEvidence(session.coordinator, archive),
@@ -145,7 +150,13 @@ async function handle(input: unknown): Promise<unknown> {
           ? {
               stopAt: (observation) =>
                 request.stopAt !== null &&
-                atProofStage(observation, request.stopAt, session.coordinator.current().events),
+                atProofStage(
+                  observation,
+                  request.stopAt,
+                  session.coordinator.current().events,
+                  session.release,
+                  session.coordinator.current().continuousEffects,
+                ),
             }
           : {}),
         onProgress: (revision) => self.postMessage({ progress: revision }),

@@ -1,4 +1,22 @@
+import {
+  bindStaticBonusPermanent,
+  STATIC_BONUS_PERMANENTS,
+  STATIC_BONUS_VERSION,
+} from "./static-bonus";
 import { bindFixedTokenSpell, FIXED_TOKEN_VERSION } from "./token-creation";
+
+export {
+  bindStaticBonusPermanent,
+  reviewedStaticBonusDefinition,
+  STATIC_BONUS_ARCHIVE,
+  STATIC_BONUS_PERMANENTS,
+  STATIC_BONUS_RESEARCH_HASH,
+  STATIC_BONUS_RULES,
+  STATIC_BONUS_RULES_HASH,
+  STATIC_BONUS_SOURCE_BUNDLE,
+  STATIC_BONUS_VERSION,
+  type StaticBonusPermanentSource,
+} from "./static-bonus";
 
 export {
   bindFixedTokenSpell,
@@ -469,6 +487,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  staticBonusPermanents?: boolean;
   fixedTokenSpells?: boolean;
   creatureReturnSpells?: boolean;
   counterSpells?: boolean;
@@ -513,6 +532,24 @@ export function bindDevelopmentCard(
   input: CatalogCard,
   options: BindingOptions = {},
 ): BindingResult {
+  // Known source anchors cannot be relabeled or stripped into a legacy vanilla constructor.
+  const staticSource = STATIC_BONUS_PERMANENTS.some(
+    (row) =>
+      row.identity === input.identity ||
+      row.identity === input.oracle.oracle_id ||
+      row.sourceVersion === input.versionHash,
+  );
+  if (staticSource) {
+    const definition = options.staticBonusPermanents ? bindStaticBonusPermanent(input) : null;
+    return definition
+      ? { kind: "bound", definition, recipes: [STATIC_BONUS_VERSION] }
+      : {
+          kind: "unsupported",
+          reason: options.staticBonusPermanents
+            ? "static-bonus-source-mismatch"
+            : "static-bonus-requires-explicit-opt-in",
+        };
+  }
   if (!input.eligibility.some((row) => row.role === "main-deck" && row.status === "candidate"))
     return { kind: "unsupported", reason: "not-observed-main-deck-candidate" };
   const card = input.oracle;
