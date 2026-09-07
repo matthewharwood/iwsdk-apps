@@ -3,6 +3,7 @@ import {
   type ContinuousEffect,
   type GameEvent,
   GameObject,
+  OrdinaryActivatedProgram,
   type PlayerObservation,
 } from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
@@ -151,22 +152,110 @@ export function triggerEvidence(archive: MatchArchive) {
     placement: archive.current.triggerPlacement,
   };
 }
-/** Durable resolved modifiers, independently distinguished from announced spell effects. */
-export function continuousEvidence(archive: MatchArchive, coordinator: Coordinator) {
+type ModifierOrigin = {
+  source: string;
+  definition: string;
+  controller: string;
+  program: OrdinaryActivatedProgram;
+  paid: boolean;
+};
+function modifierDefinition(
+  events: readonly GameEvent[],
+  index: number,
+  spells: ReadonlyMap<string, string>,
+  abilities: ReadonlyMap<string, ModifierOrigin>,
+): string {
+  const created = events[index];
+  if (!created) throw new Error("Missing modifier creation event");
+  const resolutions = events
+    .slice(index + 1)
+    .filter(
+      (event) =>
+        (event.type === "SpellResolved" || event.type === "ActivatedAbilityResolved") &&
+        event.data.source === created.data.source,
+    );
+  const resolved = resolutions[0];
+  if (resolutions.length !== 1 || !resolved || typeof resolved.data.definition !== "string")
+    throw new Error("Modifier lacks one subsequently resolved source");
+  if (resolved.type === "SpellResolved") {
+    if (spells.get(String(resolved.data.source)) !== resolved.data.definition)
+      throw new Error("Modifier spell resolution differs from its announced source");
+  } else {
+    const origin = abilities.get(String(resolved.data.ability));
+    if (
+      !origin?.paid ||
+      origin.source !== created.data.source ||
+      origin.definition !== resolved.data.definition ||
+      origin.controller !== resolved.data.controller ||
+      origin.program.id !== resolved.data.program ||
+      origin.program.effects[0].kind !== "modify-creature" ||
+      created.data.programIndex !== 0
+    )
+      throw new Error("Modifier ability resolution differs from its paid captured source");
+  }
+  return resolved.data.definition;
+}
+function recordModifierOrigin(
+  event: GameEvent,
+  spells: Map<string, string>,
+  abilities: Map<string, ModifierOrigin>,
+): void {
+  if (
+    event.type === "SpellAnnounced" &&
+    typeof event.data.object === "string" &&
+    typeof event.data.definition === "string"
+  )
+    spells.set(event.data.object, event.data.definition);
+  if (event.type === "AbilityAnnounced") {
+    const source = GameObject.parse(event.data.source);
+    const program = OrdinaryActivatedProgram.parse(event.data.program);
+    if (typeof event.data.ability !== "string" || typeof event.data.controller !== "string")
+      throw new Error("Modifier ability announcement lost its identity");
+    abilities.set(event.data.ability, {
+      source: source.id,
+      definition: source.definition,
+      controller: event.data.controller,
+      program,
+      paid: false,
+    });
+  }
+  if (event.type === "AbilityActivated") {
+    const origin = abilities.get(String(event.data.ability));
+    if (
+      !origin ||
+      origin.source !== event.data.source ||
+      origin.program.id !== event.data.program ||
+      origin.controller !== event.data.controller
+    )
+      throw new Error("Modifier ability payment differs from its announced source");
+    origin.paid = true;
+  }
+}
+/** Counts creation only when the same record subsequently completes its exact spell/ability source. */
+export function continuousEvidence(
+  archive: { records: readonly { events: readonly GameEvent[] }[] },
+  coordinator: Pick<Coordinator, "current" | "view">,
+) {
   const created: Record<string, number> = {};
   const expired: string[] = [];
+  const spells = new Map<string, string>();
+  const abilities = new Map<string, ModifierOrigin>();
   for (const record of archive.records) {
-    const sources = new Map(
-      record.events
-        .filter((event) => event.type === "SpellResolved")
-        .map((event) => [event.data.source, event.data.definition]),
-    );
-    for (const event of record.events) {
+    for (const [index, event] of record.events.entries()) {
+      recordModifierOrigin(event, spells, abilities);
       if (event.type === "ContinuousEffectCreated") {
-        const definition = sources.get(event.data.source);
-        if (typeof definition !== "string") throw new Error("Modifier lacks a resolved source");
+        const definition = modifierDefinition(record.events, index, spells, abilities);
         created[definition] = (created[definition] ?? 0) + 1;
       }
+      if (event.type === "SpellResolved") spells.delete(String(event.data.source));
+      if (
+        [
+          "ActivatedAbilityResolved",
+          "ActivatedAbilityDidNotResolve",
+          "ActivationReversed",
+        ].includes(event.type)
+      )
+        abilities.delete(String(event.data.ability));
       if (event.type === "ContinuousEffectsExpired" && Array.isArray(event.data.effects))
         for (const id of event.data.effects) if (typeof id === "string") expired.push(id);
     }

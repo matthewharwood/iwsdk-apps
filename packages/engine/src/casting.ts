@@ -1,12 +1,4 @@
-import {
-  type Cost,
-  type Decision,
-  type ExecutionRegistry,
-  MANA_COLORS,
-  type Mana,
-  type Response,
-  type RulesState,
-} from "@iwsdk-apps/contracts";
+import type { Cost, ExecutionRegistry, Response, RulesState } from "@iwsdk-apps/contracts";
 import {
   card,
   definition,
@@ -21,21 +13,11 @@ import {
   requireRule,
 } from "./common";
 import { isLegalSpellTarget, legalSpellTargets, resolveSpellProgram } from "./effects";
-import { availableMana, priorityCandidates, selectedObjects } from "./selection";
+import { priorityCandidates, selectedObjects } from "./selection";
 
-export function manaSources(
-  state: RulesState,
-  release: ExecutionRegistry,
-  actor: string,
-): Decision["manaSources"] {
-  return selectedObjects(state, release, availableMana, {
-    actor,
-    lastTurn: player(state, actor).lastTurnStarted,
-  }).map((entry) => ({
-    object: entry.id,
-    colors: definition(release, entry.definition).manaAbilities,
-  }));
-}
+export { activateMana, manaSources, validSpend } from "./mana";
+
+import { commitManaPayment, manaSources, planManaPayment } from "./mana";
 export function isMainWindow(state: RulesState, actor: string): boolean {
   return (
     state.activePlayer === actor &&
@@ -102,30 +84,6 @@ export function playLand(
   hit(state, "rule:305.1");
   hit(state, `card:${target.definition}:land`);
 }
-export function activateMana(
-  state: RulesState,
-  release: ExecutionRegistry,
-  actor: string,
-  response: Response,
-): void {
-  requireRule(response.kind === "mana", "Expected a mana activation");
-  const source = manaSources(state, release, actor).find(
-    (entry) => entry.object === response.source.object,
-  );
-  requireRule(
-    source?.colors.includes(response.source.color),
-    "That mana ability is not available.",
-  );
-  object(state, response.source.object).tapped = true;
-  player(state, actor).mana[response.source.color]++;
-  state.consecutivePasses = 0;
-  emit(state, "ManaAbilityResolved", {
-    player: actor,
-    source: response.source.object,
-    color: response.source.color,
-  });
-  hit(state, "rule:605.3b");
-}
 export function beginCast(
   state: RulesState,
   release: ExecutionRegistry,
@@ -147,6 +105,7 @@ export function beginCast(
     !current.types.includes("Creature") &&
     !isStaticBonusPermanent(current) &&
     !isDamageProgramPermanent(current) &&
+    !isOrdinaryActivatedPermanent(current) &&
     !isEntryObserverPermanent(current) &&
     (!(current.types.includes("Instant") || current.types.includes("Sorcery")) || !program)
   )
@@ -237,12 +196,6 @@ function reverseCast(state: RulesState, actor: string): void {
   emit(state, "CastingReversed", { player: actor, object: frame.origin.id });
   hit(state, "rule:733.1");
 }
-export function validSpend(pool: Mana, spend: Mana, cost: Cost): boolean {
-  return (
-    MANA_COLORS.every((color) => spend[color] <= pool[color] && spend[color] >= cost[color]) &&
-    MANA_COLORS.reduce((sum, color) => sum + spend[color] - cost[color], 0) === cost.generic
-  );
-}
 export function payForCast(
   state: RulesState,
   release: ExecutionRegistry,
@@ -261,34 +214,16 @@ export function payForCast(
     !program || isLegalSpellTarget(state, release, actor, program, frame.target, frame.card),
     "A required legal target has not been chosen.",
   );
-  requireRule(
-    new Set(response.sources.map((source) => source.object)).size === response.sources.length,
-    "A mana source cannot be tapped twice.",
-  );
-  const available = manaSources(state, release, actor);
-  const pool = { ...player(state, actor).mana };
-  for (const source of response.sources) {
-    requireRule(
-      available.find((entry) => entry.object === source.object)?.colors.includes(source.color),
-      "Invalid mana source or output color",
-    );
-    pool[source.color]++;
-  }
-  requireRule(
-    validSpend(pool, response.spend, frame.cost),
-    "Mana payment does not satisfy the exact cost.",
+  const payment = planManaPayment(
+    state,
+    release,
+    actor,
+    frame.cost,
+    response.sources,
+    response.spend,
   );
   const before = frame.origin;
-  for (const source of response.sources) {
-    object(state, source.object).tapped = true;
-    emit(state, "ManaAbilityResolved", {
-      player: actor,
-      source: source.object,
-      color: source.color,
-    });
-  }
-  for (const color of MANA_COLORS)
-    player(state, actor).mana[color] = pool[color] - response.spend[color];
+  commitManaPayment(state, actor, payment);
   if (before.commander && before.zone === "command") {
     const owner = player(state, actor);
     owner.commanderCasts[before.lineage] = (owner.commanderCasts[before.lineage] ?? 0) + 1;
@@ -312,6 +247,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   if (top.kind === "triggered-ability") {
     return resolveTriggeredAbility(state, release);
   }
+  if (top.kind === "activated-ability") return resolveActivatedAbility(state, release);
   const id = top.objectId;
   const current = card(state, release, id);
   if (
@@ -324,6 +260,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
     !current.types.includes("Creature") &&
     !isStaticBonusPermanent(current) &&
     !isDamageProgramPermanent(current) &&
+    !isOrdinaryActivatedPermanent(current) &&
     !isEntryObserverPermanent(current)
   )
     throw new RulesError(
@@ -345,9 +282,11 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   return true;
 }
 
+import { resolveActivatedAbility } from "./activation-resolution";
 import {
   isDamageProgramPermanent,
   isEntryObserverPermanent,
+  isOrdinaryActivatedPermanent,
   isStaticBonusPermanent,
 } from "./permanent-programs";
 import { enterBattlefield, resolveTriggeredAbility } from "./triggers";

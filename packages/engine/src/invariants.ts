@@ -4,6 +4,7 @@ import {
   type GameObject,
   type RulesState,
 } from "@iwsdk-apps/contracts";
+import { assertActivatedAbility, assertActivationContexts } from "./activation-context";
 import { assertRegistryPin, definition, RulesError } from "./common";
 import { assertDamageContinuation } from "./damage-context";
 import { assertResolutionContinuation } from "./resolution-context";
@@ -27,6 +28,7 @@ function assertUndealtSetup(state: RulesState, seats: ReadonlySet<string>): void
     Object.keys(state.objects).length === 0 &&
       state.stack.length === 0 &&
       Object.keys(state.abilities).length === 0 &&
+      Object.keys(state.activatedAbilities ?? {}).length === 0 &&
       state.pendingTriggers.length === 0 &&
       state.triggerPlacement === null &&
       state.frames.length === 0 &&
@@ -115,6 +117,26 @@ function assertTriggers(state: RulesState, release: ExecutionRegistry): void {
       "Trigger ordering decision has no continuation",
     );
 }
+function sameActivationModifier(
+  instruction: {
+    kind: string;
+    powerDelta: number;
+    toughnessDelta: number;
+    keywords: string[];
+    duration: string;
+  },
+  modifier: unknown,
+): boolean {
+  return (
+    canonicalJson({
+      kind: instruction.kind,
+      powerDelta: instruction.powerDelta,
+      toughnessDelta: instruction.toughnessDelta,
+      keywords: instruction.keywords,
+      duration: instruction.duration,
+    }) === canonicalJson(modifier)
+  );
+}
 function assertContinuousEffects(state: RulesState, release: ExecutionRegistry): void {
   invariant(
     new Set(state.continuousEffects.map((effect) => effect.id)).size ===
@@ -128,6 +150,32 @@ function assertContinuousEffects(state: RulesState, release: ExecutionRegistry):
         effect.eventIndex < state.eventSequence,
       "Continuous effect occurrence mismatch",
     );
+    if (effect.activation) {
+      const ability = assertActivatedAbility(state, release, effect.activation, true);
+      const instruction = ability.program.effects[0];
+      invariant(
+        ability.payment &&
+          instruction.kind === "modify-creature" &&
+          effect.programIndex === 0 &&
+          sameActivationModifier(instruction, effect.modifier),
+        "Continuous activation effect changed its complete instruction",
+      );
+      invariant(
+        canonicalJson(effect.source) === canonicalJson(ability.source) &&
+          effect.sourceVersion === ability.sourceVersion &&
+          effect.controller === ability.controller &&
+          effect.eventIndex > ability.payment.event.index,
+        "Continuous effect changed its captured activation host",
+      );
+      invariant(
+        effect.affectedObject ===
+          (instruction.recipient === "source" ? ability.source.id : ability.target) &&
+          effect.expiresAfterTurn === state.turn &&
+          state.turn > 0,
+        "Continuous activation effect changed its affected incarnation or duration",
+      );
+      continue;
+    }
     invariant(
       effect.source.zone === "stack" &&
         effect.source.id === `${effect.source.lineage}@${effect.source.generation}`,
@@ -234,16 +282,26 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
     assertStackSpellState(state, release, entry);
   }
   invariant(
-    new Set(state.stack.map((entry) => (entry.kind === "spell" ? entry.objectId : entry.triggerId)))
-      .size === state.stack.length &&
+    new Set(
+      state.stack.map((entry) =>
+        entry.kind === "spell"
+          ? entry.objectId
+          : entry.kind === "triggered-ability"
+            ? entry.triggerId
+            : entry.abilityId,
+      ),
+    ).size === state.stack.length &&
       state.stack.every((entry) =>
         entry.kind === "spell"
           ? state.objects[entry.objectId]?.zone === "stack"
-          : state.abilities[entry.triggerId],
+          : entry.kind === "triggered-ability"
+            ? state.abilities[entry.triggerId]
+            : state.activatedAbilities?.[entry.abilityId],
       ),
     "Invalid stack order",
   );
   assertTriggers(state, release);
+  assertActivationContexts(state, release);
   assertResolutionContinuation(state, release);
   assertDamageContinuation(state, release);
   assertPhysicalInventory(state);

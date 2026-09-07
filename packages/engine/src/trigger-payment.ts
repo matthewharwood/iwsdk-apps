@@ -3,13 +3,12 @@ import {
   type EntryCausedTriggerAbility,
   type ExecutionRegistry,
   GameEvent,
-  MANA_COLORS,
   ResolvingTriggerPaymentFrame,
   type Response,
   type RulesState,
 } from "@iwsdk-apps/contracts";
-import { activateMana, manaSources, validSpend } from "./casting";
-import { emit, hit, object, player, RulesError, request, requireRule } from "./common";
+import { emit, hit, player, RulesError, request, requireRule } from "./common";
+import { activateMana, commitManaPayment, manaSources, planManaPayment } from "./mana";
 
 function invariant(condition: unknown, message: string): asserts condition {
   if (!condition) throw new RulesError("Invariant", message);
@@ -140,33 +139,15 @@ export function answerTriggerPayment(
     "Expected optional trigger payment or a mana ability",
   );
   if (response.pay) {
-    requireRule(
-      new Set(response.sources.map((source) => source.object)).size === response.sources.length,
-      "A mana source cannot be tapped twice",
+    const payment = planManaPayment(
+      state,
+      registry,
+      actor,
+      frame.cost,
+      response.sources,
+      response.spend,
     );
-    const available = manaSources(state, registry, actor);
-    const pool = { ...player(state, actor).mana };
-    for (const source of response.sources) {
-      requireRule(
-        available.find((entry) => entry.object === source.object)?.colors.includes(source.color),
-        "Invalid payment mana source or color",
-      );
-      pool[source.color]++;
-    }
-    requireRule(
-      validSpend(pool, response.spend, frame.cost),
-      "Payment must satisfy the entire generic cost",
-    );
-    for (const source of response.sources) {
-      object(state, source.object).tapped = true;
-      emit(state, "ManaAbilityResolved", {
-        player: actor,
-        source: source.object,
-        color: source.color,
-      });
-    }
-    for (const color of MANA_COLORS)
-      player(state, actor).mana[color] = pool[color] - response.spend[color];
+    commitManaPayment(state, actor, payment);
     hit(state, "rule:118.3a");
     hit(state, "rule:118.10");
   }

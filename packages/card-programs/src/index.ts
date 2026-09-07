@@ -1,4 +1,23 @@
 import {
+  bindOrdinaryActivatedPermanent,
+  ORDINARY_ACTIVATED_PERMANENTS,
+  ORDINARY_ACTIVATED_VERSION,
+} from "./ordinary-activated";
+
+export {
+  bindOrdinaryActivatedPermanent,
+  ORDINARY_ACTIVATED_ARCHIVE,
+  ORDINARY_ACTIVATED_PERMANENTS,
+  ORDINARY_ACTIVATED_RESEARCH_HASH,
+  ORDINARY_ACTIVATED_RULES,
+  ORDINARY_ACTIVATED_RULES_HASH,
+  ORDINARY_ACTIVATED_SOURCE_BUNDLE,
+  ORDINARY_ACTIVATED_VERSION,
+  type OrdinaryActivatedSource,
+  reviewedOrdinaryActivatedDefinition,
+} from "./ordinary-activated";
+
+import {
   bindDamageReplacementPermanent,
   DAMAGE_REPLACEMENT_PERMANENTS,
   DAMAGE_REPLACEMENT_VERSION,
@@ -565,6 +584,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  ordinaryActivatedAbilities?: boolean;
   damageReplacementPermanents?: boolean;
   entryObserverTriggers?: boolean;
   conditionalSelfEntryTriggers?: boolean;
@@ -617,6 +637,13 @@ interface KnownPermanentBinder {
   reasonPrefix: string;
 }
 const knownPermanentBinders: readonly KnownPermanentBinder[] = [
+  {
+    sources: ORDINARY_ACTIVATED_PERMANENTS,
+    option: "ordinaryActivatedAbilities",
+    bind: bindOrdinaryActivatedPermanent,
+    version: ORDINARY_ACTIVATED_VERSION,
+    reasonPrefix: "ordinary-activated",
+  },
   {
     sources: DAMAGE_REPLACEMENT_PERMANENTS,
     option: "damageReplacementPermanents",

@@ -30,7 +30,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.17.0";
+export const ENGINE_VERSION = "commander-engine/0.18.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -125,6 +125,43 @@ export const CreatureModifier = z.strictObject({
   duration: z.literal("until-end-of-turn"),
 });
 export type CreatureModifier = z.infer<typeof CreatureModifier>;
+/** One ordinary battlefield activation; printed source reconstruction fixes every parameter. */
+export const OrdinaryActivatedEffect = z.discriminatedUnion("kind", [
+  CreatureModifier.extend({ recipient: z.enum(["source", "target"]) }),
+  z.strictObject({ kind: z.literal("tap"), recipient: z.literal("target") }),
+  z.strictObject({
+    kind: z.literal("draw"),
+    recipient: z.literal("controller"),
+    amount: Natural.min(1).max(3),
+  }),
+  z.strictObject({
+    kind: z.literal("gain-life"),
+    recipient: z.literal("controller"),
+    amount: Natural.min(1).max(5),
+  }),
+]);
+export type OrdinaryActivatedEffect = z.infer<typeof OrdinaryActivatedEffect>;
+export const OrdinaryActivatedProgram = z
+  .strictObject({
+    schema: z.literal("commander-activated/1"),
+    id: Id,
+    sourceZone: z.literal("battlefield"),
+    timing: z.literal("priority"),
+    cost: z.strictObject({ mana: Cost.nullable(), tapSource: z.boolean() }),
+    target: z.literal("creature").nullable(),
+    effects: z.tuple([OrdinaryActivatedEffect]),
+  })
+  .superRefine((program, context) => {
+    if (program.cost.mana === null && !program.cost.tapSource)
+      context.addIssue({ code: "custom", message: "Activation must have a printed cost" });
+    const targeted = program.effects[0].recipient === "target";
+    if (targeted !== (program.target === "creature"))
+      context.addIssue({
+        code: "custom",
+        message: "Activation target domain disagrees with its complete instruction",
+      });
+  });
+export type OrdinaryActivatedProgram = z.infer<typeof OrdinaryActivatedProgram>;
 export const DerivedCharacteristics = z.strictObject({
   power: z.number().int().nullable(),
   toughness: z.number().int().nullable(),
@@ -271,6 +308,7 @@ export const CardDefinition = z.strictObject({
   spellProgram: SpellProgram.optional(),
   triggerPrograms: z.array(TriggeredProgram).min(1).max(1).optional(),
   damagePrograms: z.array(DamageStaticProgram).length(1).optional(),
+  activatedPrograms: z.tuple([OrdinaryActivatedProgram]).optional(),
   staticPrograms: z.tuple([StaticCreatureBonus]).optional(),
 });
 export type CardDefinition = z.infer<typeof CardDefinition>;
@@ -412,6 +450,7 @@ export type TriggeredAbility = z.infer<typeof TriggeredAbility>;
 export const StackEntry = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("spell"), objectId: Id }),
   z.strictObject({ kind: z.literal("triggered-ability"), triggerId: Id }),
+  z.strictObject({ kind: z.literal("activated-ability"), abilityId: Id }),
 ]);
 export type StackEntry = z.infer<typeof StackEntry>;
 export const TriggerPlacement = z.strictObject({
@@ -478,6 +517,14 @@ export type DamageReplacementResponse = z.infer<typeof DamageReplacementResponse
 export const Response = z.discriminatedUnion("kind", [
   DamageReplacementResponse,
   TriggerPaymentResponse,
+  z.strictObject({ kind: z.literal("activate"), source: Id, programIndex: z.literal(0) }),
+  z.strictObject({ kind: z.literal("activation-target"), target: Id }),
+  z.strictObject({
+    kind: z.literal("activation-payment"),
+    sources: z.array(PaymentSource).max(100),
+    spend: Mana,
+  }),
+  z.strictObject({ kind: z.literal("cancel-activation") }),
   z.strictObject({ kind: z.literal("trigger-order"), triggers: z.array(Id) }),
   z.strictObject({ kind: z.literal("starting-player"), player: Id }),
   z.strictObject({ kind: z.literal("mulligan"), keep: z.boolean() }),
@@ -548,6 +595,8 @@ export const Decision = z.strictObject({
   revision: Natural,
   kind: z.enum([
     "damage-replacement",
+    "activation-target",
+    "activation-payment",
     "trigger-order",
     "trigger-payment",
     "starting-player",
@@ -572,6 +621,24 @@ export const Decision = z.strictObject({
   cost: Cost.nullable(),
   cardCosts: z.record(Id, Cost),
   damageReplacement: DamageReplacementChoice.optional(),
+  activations: z
+    .array(
+      z.strictObject({
+        source: Id,
+        programIndex: z.literal(0),
+        cost: OrdinaryActivatedProgram.shape.cost,
+        target: z.literal("creature").nullable(),
+      }),
+    )
+    .optional(),
+  activation: z
+    .strictObject({
+      abilityId: Id,
+      source: Id,
+      programIndex: z.literal(0),
+      cost: OrdinaryActivatedProgram.shape.cost,
+    })
+    .optional(),
   damageDomain: z.array(
     z.strictObject({
       source: Id,
@@ -593,6 +660,35 @@ export const GameEvent = z.strictObject({
   data: z.record(z.string(), z.json()),
 });
 export type GameEvent = z.infer<typeof GameEvent>;
+/** Durable noncard source and payment context; not an entry-trigger occurrence. */
+export const ActivationPayment = z.strictObject({
+  poolBefore: Mana,
+  sources: z.array(z.strictObject({ source: GameObject, color: ManaColor })).max(100),
+  spend: Mana,
+  sourceBefore: GameObject,
+  event: GameEvent,
+});
+export type ActivationPayment = z.infer<typeof ActivationPayment>;
+export const ActivatedAbility = z.strictObject({
+  id: Id,
+  source: GameObject,
+  sourceVersion: Digest,
+  controller: Id,
+  programIndex: z.literal(0),
+  program: OrdinaryActivatedProgram,
+  target: Id.nullable(),
+  announcement: GameEvent,
+  targetEvent: GameEvent.nullable(),
+  payment: ActivationPayment.nullable(),
+});
+export type ActivatedAbility = z.infer<typeof ActivatedAbility>;
+export const ActivatingFrame = z.strictObject({
+  kind: z.literal("activating"),
+  abilityId: Id,
+  actor: Id,
+  stage: z.enum(["target", "payment"]),
+});
+export type ActivatingFrame = z.infer<typeof ActivatingFrame>;
 export const CombatState = z.strictObject({
   attacks: z.array(Attack),
   blocks: z.array(Block),
@@ -708,6 +804,7 @@ export const PendingDamageFrame = z.strictObject({
 });
 export type PendingDamageFrame = z.infer<typeof PendingDamageFrame>;
 export const Frame = z.discriminatedUnion("kind", [
+  ActivatingFrame,
   PendingDamageFrame,
   ResolvingTriggerPaymentFrame,
   ResolvingSpellFrame,
@@ -736,6 +833,8 @@ export const ContinuousEffect = z.strictObject({
   affectedObject: Id,
   expiresAfterTurn: Natural.min(1),
   modifier: CreatureModifier,
+  /** Absent for the unchanged legacy spell-origin form. */
+  activation: ActivatedAbility.optional(),
 });
 export type ContinuousEffect = z.infer<typeof ContinuousEffect>;
 export const RulesState = z.strictObject({
@@ -757,6 +856,7 @@ export const RulesState = z.strictObject({
   objects: z.record(Id, GameObject),
   stack: z.array(StackEntry),
   abilities: z.record(Id, TriggeredAbility),
+  activatedAbilities: z.record(Id, ActivatedAbility).optional(),
   continuousEffects: z.array(ContinuousEffect),
   pendingTriggers: z.array(Id),
   triggerPlacement: TriggerPlacement.nullable(),
@@ -818,6 +918,7 @@ export type PlayerObservation = {
   combat: RulesState["combat"];
   stack: StackEntry[];
   abilities: (TriggeredAbility & { sourceCard: CardDefinition })[];
+  activatedAbilities?: (ActivatedAbility & { sourceCard: CardDefinition })[];
 };
 
 /** Canonical semantic encoding. Undefined/nonfinite/cyclic values must never become silent nulls. */

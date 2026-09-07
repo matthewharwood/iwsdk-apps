@@ -90,9 +90,9 @@ async function deck(source: ContentRelease, red: boolean) {
   };
   return DeckRevision.parse({ ...body, hash: await semanticHash(body) });
 }
-test("closed1198 membership authenticates all five whole damage bodies without inventing dependency roots", async () => {
+test("closed1437 membership authenticates all five whole damage bodies without inventing dependency roots", async () => {
   const source = await fixture();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1198);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1437);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   const full = await createFullExecutionRegistry(source);
   expect(Object.keys(full.definitions)).toHaveLength(13);
@@ -126,7 +126,7 @@ for (const red of [true, false])
       d.entries.map((row) => row.definition).sort(),
     );
     expect(Object.keys(prepared.tokenTemplates)).toEqual([]);
-    expect(artifact.compilerVersion).toBe("development-match-plan/13");
+    expect(artifact.compilerVersion).toBe("development-match-plan/14");
     for (const capability of DAMAGE_REPLACEMENT_CORE_CAPABILITIES) {
       expect(artifact.requiredCoreCapabilities).toContain(capability);
       const changed = structuredClone(artifact);
@@ -217,7 +217,7 @@ test("whole identifiers cannot be remapped to escape dependency recognition, inc
 test("damage source inspection retains old/future ABI metadata but those releases cannot execute", async () => {
   const source = await fixture(),
     d = await deck(source, true);
-  for (const processorAbi of ["commander-engine/0.16.0", "commander-engine/0.18.0"]) {
+  for (const processorAbi of ["commander-engine/0.17.0", "commander-engine/0.19.0"]) {
     const changed = await rehash({ ...source, processorAbi });
     expect((await verifySourceRelease(changed)).processorAbi).toBe(processorAbi);
     await expect(createFullExecutionRegistry(changed)).rejects.toThrow("incompatible");

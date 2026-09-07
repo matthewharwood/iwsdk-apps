@@ -4,6 +4,7 @@ import {
   DamageStaticProgram,
   EntryCausedTriggerProgram,
   EntryObserverProgram,
+  OrdinaryActivatedProgram,
   SelfEntryProgram,
   StaticCreatureBonus,
 } from "@iwsdk-apps/contracts";
@@ -18,6 +19,7 @@ export function isStaticBonusPermanent(card: CardDefinition): boolean {
     !card.spellProgram &&
     !card.triggerPrograms &&
     !card.damagePrograms &&
+    !card.activatedPrograms &&
     card.staticPrograms?.length === 1 &&
     StaticCreatureBonus.safeParse(card.staticPrograms[0]).success &&
     (card.types[0] === "Creature"
@@ -35,6 +37,7 @@ export function isReviewedTriggeredPermanent(card: CardDefinition): boolean {
     card.spellProgram ||
     card.staticPrograms ||
     card.damagePrograms ||
+    card.activatedPrograms ||
     card.subtypes.includes("Aura")
   )
     return false;
@@ -56,6 +59,7 @@ export function isEntryObserverPermanent(card: CardDefinition): boolean {
     card.spellProgram ||
     card.staticPrograms ||
     card.damagePrograms ||
+    card.activatedPrograms ||
     card.subtypes.includes("Aura") ||
     !EntryObserverProgram.safeParse(card.triggerPrograms[0]).success
   )
@@ -83,6 +87,7 @@ export function isDamageProgramPermanent(card: CardDefinition): boolean {
     card.spellProgram ||
     card.triggerPrograms ||
     card.staticPrograms ||
+    card.activatedPrograms ||
     card.types.length !== 1 ||
     card.subtypes.includes("Aura")
   )
@@ -95,5 +100,28 @@ export function isDamageProgramPermanent(card: CardDefinition): boolean {
     (card.types[0] === "Artifact" || card.types[0] === "Enchantment") &&
     card.power === null &&
     card.toughness === null
+  );
+}
+
+/** The complete finite nonmana activation tier; intrinsic supported keywords remain on the source. */
+export function isOrdinaryActivatedPermanent(card: CardDefinition): boolean {
+  return (
+    !!card.activatedPrograms &&
+    card.activatedPrograms.length === 1 &&
+    OrdinaryActivatedProgram.safeParse(card.activatedPrograms[0]).success &&
+    card.manaCost !== null &&
+    card.manaAbilities.length === 0 &&
+    !card.spellProgram &&
+    !card.triggerPrograms &&
+    !card.staticPrograms &&
+    !card.damagePrograms &&
+    card.types.length > 0 &&
+    card.types.every((type) => ["Creature", "Artifact", "Enchantment"].includes(type)) &&
+    !card.subtypes.some((type) =>
+      ["Aura", "Equipment", "Vehicle", "Saga", "Class", "Case", "Room"].includes(type),
+    ) &&
+    (card.types.includes("Creature")
+      ? card.power !== null && card.toughness !== null
+      : card.power === null && card.toughness === null)
   );
 }

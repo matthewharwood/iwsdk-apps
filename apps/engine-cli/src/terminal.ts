@@ -8,7 +8,7 @@ import {
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/8";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/9";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;
@@ -83,6 +83,20 @@ function present(observation: PlayerObservation, write: (line: string) => void):
     )}`,
   );
   write(`Decision constraints: ${JSON.stringify(observation.decision)}`);
+  write(
+    `Activated abilities: ${JSON.stringify(
+      (observation.activatedAbilities ?? []).map((ability) => ({
+        id: ability.id,
+        source: ability.source.id,
+        name: ability.sourceCard.name,
+        controller: ability.controller,
+        target: ability.target,
+        cost: ability.program.cost,
+        effects: ability.program.effects,
+        payment: ability.payment,
+      })),
+    )}`,
+  );
   write(
     `Triggered abilities: ${JSON.stringify(
       observation.abilities.map((ability) => {

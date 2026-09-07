@@ -16,6 +16,8 @@ import { orderedObjects } from "./object-order";
 const fields = {
   isCard: "boolean",
   hasDamageProgram: "boolean",
+  hasActivatedProgram: "boolean",
+  activationTaps: "boolean",
   zone: "string",
   owner: "string",
   controller: "string",
@@ -118,7 +120,7 @@ export function selectObjectCandidates(
       epoch: state.epoch,
       lens: "current",
       eventVersion: String(state.eventSequence),
-      processorVersion: "development-object-selection/5",
+      processorVersion: "development-object-selection/6",
       bindingsKey: JSON.stringify(bindings),
       universe: "live-objects",
       generation: state.epoch,
@@ -135,6 +137,11 @@ export function selectObjectCandidates(
         id: entry.id,
         values: {
           isCard: !entry.token,
+          hasActivatedProgram:
+            !entry.token && !!release.definitions[entry.definition]?.activatedPrograms,
+          activationTaps:
+            !entry.token &&
+            !!release.definitions[entry.definition]?.activatedPrograms?.[0]?.cost.tapSource,
           hasDamageProgram: !entry.token && !!release.definitions[entry.definition]?.damagePrograms,
           zone: entry.zone,
           owner: entry.owner,
@@ -162,6 +169,8 @@ export function selectObjectCandidates(
       indexedFields: [
         "isCard",
         "hasDamageProgram",
+        "hasActivatedProgram",
+        "activationTaps",
         "zone",
         "owner",
         "controller",

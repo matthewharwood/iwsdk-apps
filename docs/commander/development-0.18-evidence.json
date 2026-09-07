@@ -1,0 +1,265 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.18.0",
+  "stage": "qualified-development-checkpoint",
+  "sourceReleaseHash": "4efc85ff671b5628c45d617a136f31a5f1d6e4b64067efe39d95525ec61f7e93",
+  "primaryDefinitions": 1437,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 63,
+  "preservedPrimaryDefinitions": 1198,
+  "preservedCompleteDeckRevisions": 55,
+  "unsupportedPaperCandidates": 30392,
+  "candidateUniverse": 31829,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/expansion-ordinary-activated-v0.18-draft.json",
+    "sha256": "40c05a7200d73f3f8d6222ab9a5a5d4569a6ffb4d19a8a6054c99685400ccb65"
+  },
+  "independentSourceReview": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/ordinary-activation-source-review/manifest.json",
+    "sha256": "8ab942cd8099f6cdb318f71c42f96e608314b1ee6fe0b2e8d558f540b7195ab8"
+  },
+  "sourceCompilerExecution": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/ordinary-activated-source-execution/manifest.json",
+    "sha256": "0fcefa4d3028dfcd68ad53897273ce2d2b5b5538f9cb3670858810081ab864fc",
+    "tests": 402,
+    "assertions": 96104,
+    "scope": "Author binder/compiler/deck qualification only; no game/card ability execution or complete coverage certificate."
+  },
+  "runtimeExecution": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/activation-runtime-qualification/manifest.json",
+    "sha256": "de85346832fc22773d4bdb5d2a38bacdf89a4eef70d5a612798a30a85335bfec",
+    "sourceFiles": 335,
+    "originalCore": {
+      "pass": 1605,
+      "fail": 1,
+      "assertions": 21687,
+      "failure": "One default5000ms CLI regression timeout, not an assertion failure."
+    },
+    "unchangedSourceSupplement": {
+      "pass": 1,
+      "fail": 0,
+      "assertions": 2,
+      "path": "qualified-1/timeout-supplement.json"
+    },
+    "sourceExecution": {
+      "proposals": 239,
+      "legalSources": 234,
+      "resolverConfigurations": 3,
+      "singleSourceTests": 703,
+      "excludedLegalDecks": [
+        "Angelfire Crusader",
+        "Kranioceros",
+        "Leaping Master",
+        "Towering Thunderfist",
+        "Torch Drake"
+      ]
+    }
+  },
+  "independentRuntime": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/independent-activation-review/manifest.json",
+    "sha256": "ae2124a9fb8bc529231f853c3452023104148232a1450a73f6175dd208dc177f",
+    "tests": 30,
+    "assertions": 219,
+    "capturedFiles": 124,
+    "scope": {
+      "authenticatedSources": true,
+      "constructedHandsAndMana": true,
+      "constructedControlChangesAndEmptyLibraries": true,
+      "ordinaryDealtHistory": false,
+      "completedGame": false,
+      "sqliteOrBrowser": false,
+      "all239ExecutedClaim": false
+    },
+    "limits": [
+      "All source cards used by these tests are authenticated, but selected hands, lands, control transfers and empty libraries are constructed preconditions. Control changes are explicit scenario assumptions, not newly supported control spells or control-effect history.",
+      "No native SQLite, OPFS, save/import/replay or exact receipt-retry execution belongs to this independent30-test run.",
+      "No all239 ordinary-source execution, all234 currently legal-source execution, whole33 expectation closure, full G2 qualification or full-snapshot support claim is derived from compiler admission or these probes.",
+      "New combat/haste/strike/evasion/vigilance/indestructible combinations, source color/protection interactions, hypothetical combined mana+tap source and deferred type-changing self-recipient are outside this independent test set. Other author suites must retain their own evidence joins.",
+      "The current finite effects do not use source colors to deal damage or apply protection. Source CardDefinition colors are retained; abilities themselves have no other characteristics under602.2a. This does not establish generic source-LKI characteristic evaluation.",
+      "Structural activation-frame validation is not a substitute for full accepted-command replay when importing adversarial coherently forged history."
+    ]
+  },
+  "expectationJoin": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/activation-runtime-qualification/expectation-join.json",
+    "sha256": "243d088197677b8c68ea95ac60422b56df96e4478453ab7acde2d85b37cda92f"
+  },
+  "nativeDurability": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/activation-runtime-qualification/qualified-1/native/manifest.json",
+    "sha256": "3421bf47a259dd9ac9f5e725062a4d36750454f6f7e6f870b9fccfcb59f65151",
+    "pass": 12,
+    "fail": 0,
+    "assertions": 345,
+    "manifest": "qualified-1/native/manifest.json",
+    "checkpointRevisions": [150, 151, 152, 153, 155, 161],
+    "resolverModes": 3,
+    "completedGames": 0
+  },
+  "completeCli": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/activation-games-final/complete-game-audit-attempt-1.json",
+    "sha256": "5247d0efe1349f5e01b89aecde8715bd61513f43298a0b620f11faaed93aa061",
+    "cases": [
+      {
+        "mode": "two-seat",
+        "commands": 639,
+        "buildHash": "e73e80265f217dc5a9a568682abd2aa43f1fa7cb04f04f58f2d512ca44616cb5",
+        "paidResolvedAbilities": 24,
+        "resolvedSources": {
+          "Firescreamer": 1,
+          "Char-Rumbler": 1,
+          "Wall of Opposition": 7,
+          "Shivan Dragon": 9,
+          "Pavel Maliki": 6
+        },
+        "replays": [
+          {
+            "mode": "full-scan",
+            "revision": 639,
+            "hash": "a5825f1b05fe2a2f4c66e3b688df8e6756a30fc56a731ada1ecf613ba34474a1",
+            "semanticHash": "82765cb1f20ed5fa911c65e3cd913fed47898d3d228e8f4c85edf3295a206cf2"
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 639,
+            "hash": "44c5c22124285c5026d8f4647c113c7383b685c94c1bd2a779853ca387398452",
+            "semanticHash": "82765cb1f20ed5fa911c65e3cd913fed47898d3d228e8f4c85edf3295a206cf2"
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 639,
+            "hash": "981c5188e1eb1f6ce9f45a27ff9889e0497078850c930ab1692c5ed2d03047a7",
+            "semanticHash": "82765cb1f20ed5fa911c65e3cd913fed47898d3d228e8f4c85edf3295a206cf2"
+          }
+        ],
+        "finalStateHash": "a5825f1b05fe2a2f4c66e3b688df8e6756a30fc56a731ada1ecf613ba34474a1"
+      },
+      {
+        "mode": "four-seat",
+        "commands": 2271,
+        "buildHash": "e73e80265f217dc5a9a568682abd2aa43f1fa7cb04f04f58f2d512ca44616cb5",
+        "paidResolvedAbilities": 71,
+        "resolvedSources": {
+          "Goblin Balloon Brigade": 1,
+          "Fountain of Youth": 13,
+          "Char-Rumbler": 6,
+          "Marble Chalice": 11,
+          "Tuknir Deathlock": 5,
+          "Akroan Jailer": 1,
+          "Serpentine Kavu": 2,
+          "Elite Arrester": 6,
+          "Wall of Faith": 22,
+          "Hermitic Nautilus": 3,
+          "Tyrant's Machine": 1
+        },
+        "replays": [
+          {
+            "mode": "full-scan",
+            "revision": 2271,
+            "hash": "0100e9dbb1ae71332a72be2e9021df3cfc2496b7ec089b087c2da6f93b0d51c1",
+            "semanticHash": "cdacccd1ad269565a2057788221eba742b396c1d398150f04a32707ca11d01be"
+          },
+          {
+            "mode": "prepared-scan",
+            "revision": 2271,
+            "hash": "a552c2a0d4ad72a9164537849fd1258d51dd552135477688ec470ef3ac80aa9d",
+            "semanticHash": "cdacccd1ad269565a2057788221eba742b396c1d398150f04a32707ca11d01be"
+          },
+          {
+            "mode": "prepared-indexed",
+            "revision": 2271,
+            "hash": "a04e91f91c87d65179c9cc144223ab300ffc4b0475f3158fcd8a56ea03c60e74",
+            "semanticHash": "cdacccd1ad269565a2057788221eba742b396c1d398150f04a32707ca11d01be"
+          }
+        ],
+        "finalStateHash": "0100e9dbb1ae71332a72be2e9021df3cfc2496b7ec089b087c2da6f93b0d51c1"
+      }
+    ],
+    "scope": "Actual complete CLI resolver comparisons. Each counted activation joins its immutable source, accepted announcement/payment and later exact noncard ability resolution. Counts do not imply full-card or full-G2 certification; resolver variants and replays are not additional unique games."
+  },
+  "completeBrowser": {
+    "path": ".commander/prototypes/engine-0.18/.commander/browser-proof/2026-09-07T06-51-15-577Z-443b70f9/evidence.json",
+    "sha256": "1ea687eec05227a3f20c8de71be61b73da33afe952279341f1489aa0a138d2df",
+    "cases": [
+      {
+        "mode": "two-seat",
+        "commands": 657,
+        "paidResolvedAbilities": 24,
+        "resolvedSources": {
+          "Firescreamer": 1,
+          "Char-Rumbler": 4,
+          "Shivan Dragon": 9,
+          "Pavel Maliki": 6,
+          "Wall of Opposition": 4
+        },
+        "reloadStages": ["starting-player", "payment"]
+      },
+      {
+        "mode": "four-seat",
+        "commands": 2271,
+        "paidResolvedAbilities": 68,
+        "resolvedSources": {
+          "Goblin Balloon Brigade": 1,
+          "Fountain of Youth": 13,
+          "Marble Chalice": 11,
+          "Tuknir Deathlock": 5,
+          "Char-Rumbler": 3,
+          "Elite Arrester": 7,
+          "Serpentine Kavu": 2,
+          "Wall of Faith": 22,
+          "Hermitic Nautilus": 3,
+          "Tyrant's Machine": 1
+        },
+        "reloadStages": ["starting-player", "payment"]
+      }
+    ]
+  },
+  "stoppedBrowser": {
+    "path": ".commander/prototypes/engine-0.18/.commander/checkpoint-browser-proof/2026-09-07T06-54-04-773Z-a94ef2dd/evidence.json",
+    "sha256": "317a467a2117433a584ae697857dcf70bd35c7dc2f4847ae37beb53e4fb90677",
+    "reloads": 18,
+    "imports": 18,
+    "receiptRetries": 36,
+    "advancingImports": 15,
+    "alreadyFinalImports": 3,
+    "completedGames": 0
+  },
+  "rootBrowserAudit": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/activation-games/root-browser-audit.json",
+    "sha256": "51805f3f5a4d09cb18900404415902811e987cfb55f04c96e6488c8028b96760"
+  },
+  "proofHelperCorrection": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/activation-continuous-proof-fix/manifest.json",
+    "sha256": "12481dab8094ee2945040f98ef606b7d861d42523445b6a3258f9b6e5d119404"
+  },
+  "publicCliCompilation": {
+    "path": ".commander/prototypes/engine-0.18/.draft-artifacts/cli-compilation-reproduction/manifest.json",
+    "sha256": "d12732fa7be9b9b3431cc66b0575eb4871f73c856abf99384a168995a68d66af"
+  },
+  "mainEquivalence": {
+    "path": ".commander/evidence/promoted-equivalence-0.18.json",
+    "sha256": "9ee26d63979d8fa5390f11954fdd0dc17b6ddf73b1aa96c414869732c93d8973"
+  },
+  "mainGate": {
+    "path": ".commander/evidence/main-gate-0.18.json",
+    "sha256": "a7e95d3d463d21cbf3415ae9a6fa48a6e338a36db6957c4f5efd49c683ae1cdd",
+    "status": "passed",
+    "command": "bun run check",
+    "exitCode": 0
+  },
+  "fixedRegression": {
+    "path": "docs/commander/fixed-regression-0.18-evidence.json",
+    "sha256": "8ffb2d85a5784164d891afeaa2151edb41be1e8261e327b2682f4e8a8badf721",
+    "status": "passed",
+    "completed": 64,
+    "replayed": 64,
+    "commands": 89784
+  },
+  "historicalDefect": {
+    "status": "repair-in-next-ABI",
+    "description": "Deathtouch-since-last-SBA marker survives checks too long;0.20 adds correct lifetime. Prior frozen tapes are retained without relabeling."
+  },
+  "scope": "Whole-source binding, selected source execution, independent constructed scenarios, native/OPFS stopped histories and real complete games, with full main gate and fixed64 passed. Counts overlap and are not full-card obligation closure."
+}

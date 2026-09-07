@@ -32,6 +32,17 @@ function eliminate(state: RulesState, losses: { player: string; reason: string }
   }
   const lost = new Set(losses.map((entry) => entry.player));
   removeDepartedTriggers(state, lost);
+  if (state.activatedAbilities) {
+    const removed = new Set(
+      Object.values(state.activatedAbilities)
+        .filter((ability) => lost.has(ability.controller))
+        .map((ability) => ability.id),
+    );
+    state.stack = state.stack.filter(
+      (entry) => entry.kind !== "activated-ability" || !removed.has(entry.abilityId),
+    );
+    for (const id of removed) delete state.activatedAbilities[id];
+  }
   for (const entry of orderedObjects(state)) {
     if (lost.has(entry.owner)) {
       removeFromLists(state, entry.id);
@@ -185,7 +196,8 @@ export function checkpoint(
       (frame) =>
         frame.kind === "resolving-spell" ||
         frame.kind === "resolving-trigger-payment" ||
-        frame.kind === "pending-damage",
+        frame.kind === "pending-damage" ||
+        frame.kind === "activating",
     ),
     "No checkpoint during a suspended resolution",
   );

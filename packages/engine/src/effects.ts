@@ -5,13 +5,13 @@ import type {
   SpellProgram,
 } from "@iwsdk-apps/contracts";
 import { characteristics } from "./characteristics";
-import { card, draw, emit, hit, move, object, permanentBase, player, RulesError } from "./common";
+import { card, emit, hit, move, object, permanentBase, RulesError } from "./common";
 import { createCreatureModifier } from "./continuous";
 import { beginDamageBatch } from "./damage";
-import { checkedDamageNumber } from "./damage-domain";
-import { orderedObjects } from "./object-order";
+import { applyPlayerInstruction, spellInstructionHost } from "./instruction-host";
 import { beginReturnResolution } from "./return-resolution";
 import { counterSpell, isStackSpellDomain, stackSpellTargets } from "./stack-spells";
+import { legalCreatureTargets } from "./targeting";
 import { createTokens } from "./tokens";
 
 /** Complete domains for the supported exact single-target recipes. */
@@ -32,23 +32,8 @@ export function legalSpellTargets(
       cards: [],
       players: state.players.filter((seat) => !seat.lost).map((seat) => seat.id),
     };
-  if (program.target === "creature") {
-    const cards = orderedObjects(state)
-      .filter((entry) => {
-        if (entry.zone !== "battlefield") return false;
-        const current = permanentBase(state, release, entry.id);
-        return (
-          current.types.includes("Creature") &&
-          !characteristics(state, release, entry.id).keywords.includes("shroud") &&
-          !(
-            entry.controller !== actor &&
-            characteristics(state, release, entry.id).keywords.includes("hexproof")
-          )
-        );
-      })
-      .map((entry) => entry.id);
-    return { cards, players: [] };
-  }
+  if (program.target === "creature")
+    return { cards: legalCreatureTargets(state, release, actor), players: [] };
   return { cards: [], players: [] };
 }
 
@@ -66,11 +51,6 @@ export function isLegalSpellTarget(
   return legal.cards.includes(target) || legal.players.includes(target);
 }
 
-function gainLife(state: RulesState, recipient: string, amount: number, source: string): void {
-  player(state, recipient).life = checkedDamageNumber(player(state, recipient).life + amount);
-  emit(state, "LifeGained", { player: recipient, amount, source });
-  hit(state, "rule:119.3");
-}
 function applyRemoval(
   state: RulesState,
   release: ExecutionRegistry,
@@ -134,8 +114,7 @@ function applyEffect(
     throw new RulesError("Invariant", "Damage instructions require resumable resolution");
   const recipient = effect.recipient === "controller" ? object(state, source).controller : target;
   if (recipient === null) throw new RulesError("Invariant", "Player effect has no recipient");
-  if (effect.kind === "draw") draw(state, recipient, effect.amount);
-  else gainLife(state, recipient, effect.amount, source);
+  applyPlayerInstruction(state, spellInstructionHost(state, release, source), recipient, effect);
 }
 
 /** No priority/SBA interruption occurs between instructions of one resolving spell (CR 704.4). */

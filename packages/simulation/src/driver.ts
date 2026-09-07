@@ -7,8 +7,9 @@ import {
   type PlayerObservation,
   type Response,
 } from "@iwsdk-apps/contracts";
+import { activationChoice, priorityActivation } from "./activation-driver";
 
-export const DRIVER_VERSION = "observed-combat/11";
+export const DRIVER_VERSION = "observed-combat/12";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -190,7 +191,9 @@ function priority(observation: PlayerObservation, decision: Decision, seed: numb
       rank(seed, observation.revision, a.id) - rank(seed, observation.revision, b.id),
   );
   const spell = spells[0];
-  return spell ? { kind: "cast", card: spell.id } : { kind: "pass" };
+  return spell
+    ? { kind: "cast", card: spell.id }
+    : (priorityActivation(observation, decision, findPayment) ?? { kind: "pass" });
 }
 
 /** All decisions are ordinary commands. This module cannot inspect RulesState or a library. */
@@ -199,6 +202,9 @@ export const heuristicDriver: Driver = (observation, seed) => {
   if (!decision || decision.actor !== observation.player)
     throw new Error("Driver has no owned decision");
   switch (decision.kind) {
+    case "activation-target":
+    case "activation-payment":
+      return activationChoice(observation, decision, findPayment);
     case "damage-replacement":
       return damageReplacement(observation, decision, seed);
     case "trigger-order":

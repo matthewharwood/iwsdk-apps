@@ -5,6 +5,8 @@ import {
   type Response,
   type RulesState,
 } from "@iwsdk-apps/contracts";
+import { answerActivation, beginActivation } from "./activation";
+import { assertActivationContexts } from "./activation-context";
 import { activateMana, answerTarget, beginCast, payForCast, playLand } from "./casting";
 import { characteristics } from "./characteristics";
 import { answerCommanderZone } from "./checkpoints";
@@ -46,6 +48,9 @@ function priorityAction(
     case "mana":
       activateMana(state, release, actor, response);
       break;
+    case "activate":
+      beginActivation(state, release, actor, response);
+      return;
     case "cast":
       beginCast(state, release, actor, response);
       return;
@@ -77,6 +82,10 @@ function answer(
   response: Response,
 ): void {
   switch (kind) {
+    case "activation-target":
+    case "activation-payment":
+      if (answerActivation(state, release, actor, response)) givePriority(state, release, actor);
+      return;
     case "damage-replacement":
       finishDamageResponse(state, release, actor, response);
       return;
@@ -173,6 +182,7 @@ export function transition(
     assertTriggerContexts(committed, release);
     assertTriggerPayment(committed, release);
     assertDamageContinuation(committed, release);
+    assertActivationContexts(committed, release);
     const state = structuredClone(committed);
     state.revision++;
     state.events = [];
@@ -255,6 +265,16 @@ export function observe(
     decision: state.decision?.actor === actor ? structuredClone(state.decision) : null,
     combat: structuredClone(state.combat),
     stack: structuredClone(state.stack),
+    ...(state.activatedAbilities
+      ? {
+          activatedAbilities: Object.values(state.activatedAbilities)
+            .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+            .map((ability) => ({
+              ...structuredClone(ability),
+              sourceCard: structuredClone(definition(release, ability.source.definition)),
+            })),
+        }
+      : {}),
     abilities: Object.values(state.abilities)
       .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
       .map((ability) => ({

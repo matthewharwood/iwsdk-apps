@@ -7,6 +7,7 @@ import {
   FIXED_TOKEN_SPELLS,
   FIXED_TOKEN_TEMPLATES,
   KEYWORD_REMINDER_REGISTRY,
+  ORDINARY_ACTIVATED_PERMANENTS,
   RECIPE_REGISTRY,
   reviewedTokenTemplate,
   SELF_ENTRY_REGISTRY,
@@ -168,6 +169,7 @@ async function artifactFor(
     processorAbi: source.processorAbi,
     compilerVersion: MATCH_PLAN_VERSION,
     recipeRegistryHash: await semanticHash({
+      ordinaryActivatedAbilities: ORDINARY_ACTIVATED_PERMANENTS,
       damageReplacementPermanents: DAMAGE_REPLACEMENT_PERMANENTS,
       strictProctorTriggers: STRICT_PROCTOR_PERMANENTS,
       conditionalSelfEntryTriggers: CONDITIONAL_SELF_ENTRY_PERMANENTS,

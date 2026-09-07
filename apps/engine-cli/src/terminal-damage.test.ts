@@ -103,7 +103,7 @@ for (const override of [false, true])
       readLine: () => inputs.shift() ?? null,
       write: (line) => lines.push(line),
     });
-    expect(TERMINAL_DRIVER_VERSION).toBe("terminal-observation/8");
+    expect(TERMINAL_DRIVER_VERSION).toBe("terminal-observation/9");
     expect(result).toEqual({ status: "paused", acceptedCommands: 2 });
     expect(host.closed).toBe(true);
     expect(f.state.revision).toBe(before + 2);

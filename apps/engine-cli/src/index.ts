@@ -9,30 +9,6 @@ import {
   readInventory,
   selectRiskSample,
 } from "@iwsdk-apps/catalog";
-import {
-  compileConditionalSelfEntryDraft,
-  compileCounterSpellDraft,
-  compileCreatureReturnDraft,
-  compileDamageReplacementDraft,
-  compileDevelopmentRelease,
-  compileEntryObserverDraft,
-  compileFixedTokenDraft,
-  compileKeywordReminderDraft,
-  compileSelfEntryDraft,
-  compileSpellFamilyDraft,
-  compileStaticBonusDraft,
-  compileStrictProctorDraft,
-  makeConditionalSelfEntryDecks,
-  makeCounterSpellDecks,
-  makeCreatureReturnDecks,
-  makeDamageReplacementDecks,
-  makeDevelopmentDecks,
-  makeEntryObserverDecks,
-  makeFixedTokenDecks,
-  makeKeywordReminderDecks,
-  makeStaticBonusDecks,
-  makeStrictProctorDecks,
-} from "@iwsdk-apps/compiler";
 import { createPreparedMatchArtifact } from "@iwsdk-apps/compiler/prepared";
 import {
   CHANCE_VERSION,
@@ -52,6 +28,7 @@ import { z } from "zod";
 import { runBatch } from "./batch";
 import { reportCohort } from "./cohort";
 import { compareResolvers } from "./compare";
+import { compileArtifacts, selectCompileMode } from "./compile";
 import { reportCoverage } from "./coverage";
 import { selectDriver } from "./drivers";
 import { archiveBuild, EXECUTOR_OPTION } from "./evidence";
@@ -290,153 +267,21 @@ async function runExecutionCommand(command: string | undefined): Promise<boolean
   } else await simulate(command === "play");
   return true;
 }
-// Reproduce historical fixture identity only. These releases are never executed
-// under a newer ABI; exact content hashes prevent accidental historical relabeling.
-async function historicalFixtureRelease(
-  release: ContentRelease,
-  expectedHash: string,
-  processorAbi = "commander-engine/0.9.0",
-): Promise<ContentRelease> {
-  const { hash: _hash, ...current } = release;
-  const body = { ...current, processorAbi };
-  const hash = await semanticHash(body);
-  if (hash !== expectedHash) throw new Error("Historical fixture source changed");
-  return ContentRelease.parse({ ...body, hash });
-}
-async function reviewedFixtureDecks(content: ContentRelease) {
-  const base = await compileDevelopmentRelease(catalogPath, {
-    spellFamilies: true,
-    selfEntryTriggers: true,
-    selfEntrySequences: true,
-    temporaryCreatureSpells: true,
-  });
-  const historical = await historicalFixtureRelease(
-    base.release,
-    "671c50aa072e6004b9fe286d387fc07edc722cf7b4a57c7f5653c8c113b655ba",
-  );
-  const prior24 = await makeDevelopmentDecks(historical, {
-    includeFamilyDecks: true,
-    includeTriggerDecks: true,
-    includeTemporaryDecks: true,
-  });
-  const reminderRelease = await compileKeywordReminderDraft(catalogPath);
-  const historicalReminders = await historicalFixtureRelease(
-    reminderRelease.release,
-    "8abe41532a96354af76d414d6c1c56e74c8142b126bb6cb7b8cac806c7380edd",
-  );
-  const reminders = await makeKeywordReminderDecks(historicalReminders, prior24);
-  const counterRelease = await compileCounterSpellDraft(catalogPath);
-  const historicalCounters = await historicalFixtureRelease(
-    counterRelease.release,
-    "58b8f2dd09d699ef232ba49257e0287eb8ca204902a9addddb499f73e3084739",
-    "commander-engine/0.10.0",
-  );
-  const counters = await makeCounterSpellDecks(historicalCounters, reminders.decks);
-  const returnRelease = await compileCreatureReturnDraft(catalogPath);
-  const historicalReturns = await historicalFixtureRelease(
-    returnRelease.release,
-    "dac4f923e99a94e3e54031e635609dca4c91ad3f26c0bf85c4eb1bc3b35fa900",
-    "commander-engine/0.11.0",
-  );
-  const returns = await makeCreatureReturnDecks(historicalReturns, counters.decks);
-  const tokenRelease = await compileFixedTokenDraft(catalogPath);
-  const historicalTokens = await historicalFixtureRelease(
-    tokenRelease.release,
-    "fd5d52dc3d11284940cae72faace2ca0ead11deaa11508c12ea6b179967912a4",
-    "commander-engine/0.12.0",
-  );
-  const tokens = await makeFixedTokenDecks(historicalTokens, returns.decks);
-  const staticRelease = await compileStaticBonusDraft(catalogPath);
-  const historicalStatics = await historicalFixtureRelease(
-    staticRelease.release,
-    "7f1e1b65f7134dce4add33ded2019720f74b44f0c9c194dbc34e182383914bdf",
-    "commander-engine/0.13.0",
-  );
-  const statics = await makeStaticBonusDecks(historicalStatics, tokens.decks);
-  const observerRelease = await compileEntryObserverDraft(catalogPath);
-  const historicalObservers = await historicalFixtureRelease(
-    observerRelease.release,
-    "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
-    "commander-engine/0.14.0",
-  );
-  const observers = await makeEntryObserverDecks(historicalObservers, statics.decks);
-  const conditionalRelease = await compileConditionalSelfEntryDraft(catalogPath);
-  const historicalConditional = await historicalFixtureRelease(
-    conditionalRelease.release,
-    "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
-    "commander-engine/0.15.0",
-  );
-  const conditional = await makeConditionalSelfEntryDecks(historicalConditional, observers.decks);
-  const proctorRelease = await compileStrictProctorDraft(catalogPath);
-  const historicalProctor = await historicalFixtureRelease(
-    proctorRelease.release,
-    "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
-    "commander-engine/0.16.0",
-  );
-  const proctor = await makeStrictProctorDecks(historicalProctor, conditional.decks);
-  const damage = await makeDamageReplacementDecks(content, proctor.decks);
-  return {
-    ...damage,
-    proctorReport: proctor.report,
-    conditionalReport: conditional.report,
-    observerReport: observers.report,
-    staticReport: statics.report,
-    tokenReport: tokens.report,
-    returnReport: returns.report,
-    counterReport: counters.report,
-    reminderReport: reminders.report,
-  };
-}
 async function compileCatalog(): Promise<void> {
-  const allReviewed = args.includes("--all-reviewed");
-  const triggers = allReviewed || args.includes("--self-entry-triggers");
-  const families = allReviewed || args.includes("--spell-families");
-  const compiled = allReviewed
-    ? await compileDamageReplacementDraft(catalogPath)
-    : triggers
-      ? await compileSelfEntryDraft(catalogPath)
-      : families
-        ? await compileSpellFamilyDraft(catalogPath)
-        : await compileDevelopmentRelease(catalogPath);
-  const reviewed = allReviewed ? await reviewedFixtureDecks(compiled.release) : null;
-  const decks =
-    reviewed?.decks ??
-    (await makeDevelopmentDecks(compiled.release, {
-      includeFamilyDecks: families,
-      includeTriggerDecks: triggers,
-    }));
+  const compiled = await compileArtifacts(catalogPath, selectCompileMode(args));
   const retained = resolve(directory, "compilations", compiled.release.hash);
   await mkdir(retained, { recursive: true });
   await write(resolve(retained, "release.json"), compiled.release);
   await write(resolve(retained, "report.json"), compiled.report);
-  await write(resolve(retained, "decks.json"), decks);
-  if ("expansion" in compiled)
-    await write(
-      resolve(
-        retained,
-        allReviewed
-          ? "damage-replacement-expansion.json"
-          : triggers
-            ? "self-entry-expansion.json"
-            : "spell-family-expansion.json",
-      ),
-      compiled.expansion,
-    );
-  if (reviewed) {
-    await write(resolve(retained, "keyword-reminder-decks.json"), reviewed.reminderReport);
-    await write(resolve(retained, "counter-spell-decks.json"), reviewed.counterReport);
-    await write(resolve(retained, "creature-return-decks.json"), reviewed.returnReport);
-    await write(resolve(retained, "fixed-token-decks.json"), reviewed.tokenReport);
-    await write(resolve(retained, "static-bonus-decks.json"), reviewed.staticReport);
-    await write(resolve(retained, "entry-observer-decks.json"), reviewed.observerReport);
-    await write(resolve(retained, "conditional-self-entry-decks.json"), reviewed.conditionalReport);
-    await write(resolve(retained, "strict-proctor-decks.json"), reviewed.proctorReport);
-    await write(resolve(retained, "damage-replacement-decks.json"), reviewed.report);
-  }
+  await write(resolve(retained, "decks.json"), compiled.decks);
+  if (compiled.expansion)
+    await write(resolve(retained, compiled.expansion.name), compiled.expansion.value);
+  for (const [name, report] of Object.entries(compiled.reports))
+    await write(resolve(retained, name), report);
   await write(releasePath, compiled.release);
   if (releasePath === resolve(directory, "development-release.json"))
     await write(resolve(directory, "development-compilation.json"), compiled.report);
-  await write(decksPath, decks);
+  await write(decksPath, compiled.decks);
   console.log(
     JSON.stringify(
       {
@@ -444,7 +289,7 @@ async function compileCatalog(): Promise<void> {
         definitions: Object.keys(compiled.release.definitions).length,
         auxiliaryTokenTemplates: Object.keys(compiled.release.tokenTemplates ?? {}).length,
         unsupported: compiled.release.unsupportedOracleIds.length,
-        decks: decks.length,
+        decks: compiled.decks.length,
         assurance: compiled.release.assurance,
         retained,
       },

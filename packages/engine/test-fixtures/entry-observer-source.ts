@@ -237,7 +237,9 @@ export function observerSourceResolve(f: ObserverSourceFixture) {
     f.state.stack.some((entry) =>
       top.kind === "spell"
         ? entry.kind === "spell" && entry.objectId === top.objectId
-        : entry.kind === "triggered-ability" && entry.triggerId === top.triggerId,
+        : top.kind === "triggered-ability"
+          ? entry.kind === "triggered-ability" && entry.triggerId === top.triggerId
+          : entry.kind === "activated-ability" && entry.abilityId === top.abilityId,
     );
   for (let n = 0; n < f.state.players.length && same(); n++)
     observerSourceAnswer(f, { kind: "pass" });

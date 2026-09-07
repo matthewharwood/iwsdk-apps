@@ -1,4 +1,5 @@
 import type { ExecutionRegistry, Response, RulesState, Step } from "@iwsdk-apps/contracts";
+import { activationChoices } from "./activation";
 import { castCost, manaSources, priorityCards, resolveTop } from "./casting";
 import { checkpoint } from "./checkpoints";
 import {
@@ -34,7 +35,8 @@ export function givePriority(
       (frame) =>
         frame.kind === "resolving-spell" ||
         frame.kind === "resolving-trigger-payment" ||
-        frame.kind === "pending-damage",
+        frame.kind === "pending-damage" ||
+        frame.kind === "activating",
     ),
     "No priority during a suspended resolution",
   );
@@ -45,8 +47,10 @@ export function givePriority(
   if (player(state, state.priorityPlayer).lost)
     state.priorityPlayer = nextLiving(state, state.priorityPlayer);
   const cards = priorityCards(state, release, state.priorityPlayer);
+  const activations = activationChoices(state, release, state.priorityPlayer);
   request(state, "priority", state.priorityPlayer, {
     cards,
+    ...(activations.length ? { activations } : {}),
     cardCosts: Object.fromEntries(
       cards
         .filter(
