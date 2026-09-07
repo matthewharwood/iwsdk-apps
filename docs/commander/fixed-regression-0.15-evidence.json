@@ -1,0 +1,30 @@
+{
+  "schema": "commander-completed-fixed-regression/1",
+  "engine": "commander-engine/0.15.0",
+  "sourceReleaseHash": "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
+  "buildHash": "a3a323736e51e06f84cd9bc574f2aa869f40d083007042c970a86d085cfbcf12",
+  "assigned": 64,
+  "completed": 64,
+  "replayed": 64,
+  "twoSeat": 16,
+  "fourSeat": 48,
+  "pending": 0,
+  "acceptedCommands": 89784,
+  "report": {
+    "path": ".commander/regressions/regression-0.15-fixed64/report.json",
+    "sha256": "cc90cd26b8d2d70fa906dd1f15ec774d36875ece7178cca861b007a8f5eae589"
+  },
+  "assignments": {
+    "path": ".commander/regressions/regression-0.15-fixed64/assignments.json",
+    "sha256": "4445869446ab66dde8cf4031533298a7f7af987c3ef2e337809d9273ccbcb95c"
+  },
+  "inventory": {
+    "path": ".commander/regressions/regression-0.15-fixed64/archive-inventory.json",
+    "sha256": "c8feac885fb5d7d912045ac3bfb01cddebeb26b1b70c1ff40da872acb512c100"
+  },
+  "telemetryFiles": 64,
+  "telemetryScope": "Measurements collected during this invocation only; process-wide CPU/memory, separate create/game/replay/close phases.",
+  "originalRunDirectory": "/private/tmp/iwsdk-commander-0.15/.draft-runs/regressions/regression-0.15-fixed64",
+  "retainedDirectory": ".commander/regressions/regression-0.15-fixed64",
+  "scope": "Each fixed corpus input actually executed and replayed under 0.15; no historical outcomes reused. Fixed deck compositions do not exercise the two new conditional self-entry creatures. No full-snapshot support claim."
+}

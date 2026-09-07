@@ -31,3 +31,5 @@ The final complete browser games passed at 842 two-seat commands and 1,797 four-
 The full repository gate passed: 1,113 unit tests with 124,536 assertions, 12 browser tests, the emulated Quest development smoke and a freshly generated workspace/application check. The closed evidence archive contains 1,125 files, including failed attempts, authenticated source packs, actual command histories and independent reviews. Its source bindings and replay fixtures do not certify broader rules or full-snapshot support.
 
 Original full G2 qualification, genuine trigger-on-trigger second-wave processing, broader conditions, full-snapshot release handoff, the production Commander session interface and physical headset verification remain unfinished. Strict Proctor requires both the second APNAP placement pass and a durable owned “unless” payment window; its source investigation does not admit or execute that card yet.
+
+The fixed 64-game historical-input regression completed and replayed all 64 assignments (89,784 accepted commands); those older deck compositions do not exercise the new conditional self-entry creatures.

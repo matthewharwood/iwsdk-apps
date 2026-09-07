@@ -900,11 +900,17 @@
   },
   "fixedRegression": {
     "id": "regression-0.15-fixed64",
-    "status": "running-at-checkpoint",
+    "status": "completed-and-replayed",
     "assigned": 64,
-    "resultFilesAtObservation": 56,
+    "completed": 64,
+    "pending": 0,
+    "acceptedCommands": 89784,
     "frozenBuildHash": "a3a323736e51e06f84cd9bc574f2aa869f40d083007042c970a86d085cfbcf12",
-    "scope": "Fresh executions/replays under captured0.15; older deck compositions do not exercise the new conditional sources."
+    "evidence": {
+      "path": "docs/commander/fixed-regression-0.15-evidence.json",
+      "sha256": "e85b4907ba5401fd74a93ca1a36676ec0840ac43985adf34d4de13c1439947c5"
+    },
+    "scope": "Each fixed corpus input actually executed and replayed under 0.15; no historical outcomes reused. Fixed deck compositions do not exercise the two new conditional self-entry creatures. No full-snapshot support claim."
   },
   "remaining": [
     "30,637 paper candidates and broader rule families remain unsupported.",
