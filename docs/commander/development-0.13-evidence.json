@@ -377,11 +377,17 @@
   },
   "fixedRegression": {
     "id": "regression-0.13-fixed64",
-    "status": "running-at-checkpoint",
+    "status": "completed-and-replayed",
     "assigned": 64,
-    "resultFilesAtObservation": 53,
+    "completed": 64,
+    "pending": 0,
+    "acceptedCommands": 89784,
     "frozenBuildHash": "8986ca5bbd7aba503fd4ca6cbb39834d7346fcb466c01564df3e32656e3bc96d",
-    "scope": "Each older corpus input executes/replays under captured0.13; older deck compositions do not exercise static additions."
+    "evidence": {
+      "path": "docs/commander/fixed-regression-0.13-evidence.json",
+      "sha256": "92aabb49132d4ffa1e33364f03c4edd702eb7a964a9d1d4decc5b8ce9beb19b6"
+    },
+    "scope": "Each fixed corpus input actually executed and replayed under 0.13; no historical outcomes reused. Fixed deck compositions do not exercise the 41 new static-bonus permanents. No full-snapshot support claim."
   },
   "remaining": [
     "30,659 paper candidates and broader rule families remain unsupported.",
