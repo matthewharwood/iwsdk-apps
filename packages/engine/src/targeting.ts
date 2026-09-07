@@ -22,6 +22,20 @@ export function legalCreatureTargets(
   state: RulesState,
   registry: ExecutionRegistry,
   actor: string,
+  ownOnly = false,
 ): string[] {
-  return selectedObjects(state, registry, creatureTarget, { actor }).map((entry) => entry.id);
+  return selectedObjects(
+    state,
+    registry,
+    ownOnly
+      ? {
+          op: "and",
+          terms: [
+            creatureTarget,
+            { op: "string-eq", field: "controller", value: { binding: "actor" } },
+          ],
+        }
+      : creatureTarget,
+    { actor },
+  ).map((entry) => entry.id);
 }

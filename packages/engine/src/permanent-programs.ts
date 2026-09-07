@@ -1,4 +1,6 @@
 import {
+  type ActivatedProgram,
+  AttachmentProgram,
   type CardDefinition,
   ConditionalSelfEntryProgram,
   DamageStaticProgram,
@@ -18,6 +20,7 @@ export function isStaticBonusPermanent(card: CardDefinition): boolean {
     card.manaCost !== null &&
     !card.subtypes.includes("Aura") &&
     !card.staticKeywordPrograms &&
+    !card.attachmentProgram &&
     !card.spellProgram &&
     !card.triggerPrograms &&
     !card.damagePrograms &&
@@ -37,6 +40,7 @@ export function isReviewedTriggeredPermanent(card: CardDefinition): boolean {
     card.triggerPrograms.length !== 1 ||
     card.manaCost === null ||
     card.staticKeywordPrograms ||
+    card.attachmentProgram ||
     card.spellProgram ||
     card.staticPrograms ||
     card.damagePrograms ||
@@ -60,6 +64,7 @@ export function isEntryObserverPermanent(card: CardDefinition): boolean {
     card.triggerPrograms?.length !== 1 ||
     card.manaCost === null ||
     card.staticKeywordPrograms ||
+    card.attachmentProgram ||
     card.spellProgram ||
     card.staticPrograms ||
     card.damagePrograms ||
@@ -89,6 +94,7 @@ export function isDamageProgramPermanent(card: CardDefinition): boolean {
     !DamageStaticProgram.safeParse(card.damagePrograms[0]).success ||
     card.manaCost === null ||
     card.staticKeywordPrograms ||
+    card.attachmentProgram ||
     card.spellProgram ||
     card.triggerPrograms ||
     card.staticPrograms ||
@@ -117,6 +123,7 @@ export function isOrdinaryActivatedPermanent(card: CardDefinition): boolean {
     card.manaCost !== null &&
     card.manaAbilities.length === 0 &&
     !card.staticKeywordPrograms &&
+    !card.attachmentProgram &&
     !card.spellProgram &&
     !card.triggerPrograms &&
     !card.staticPrograms &&
@@ -139,6 +146,7 @@ export function isStaticKeywordGrantPermanent(card: CardDefinition): boolean {
     StaticKeywordGrant.safeParse(card.staticKeywordPrograms[0]).success &&
     card.manaCost !== null &&
     card.manaAbilities.length === 0 &&
+    !card.attachmentProgram &&
     !card.spellProgram &&
     !card.triggerPrograms &&
     !card.staticPrograms &&
@@ -153,4 +161,35 @@ export function isStaticKeywordGrantPermanent(card: CardDefinition): boolean {
       ? card.power !== null && card.toughness !== null
       : card.power === null && card.toughness === null)
   );
+}
+
+/** Fixed Aura/Equipment program, with intrinsic source keywords kept independent. */
+export function isAttachmentPermanent(card: CardDefinition): boolean {
+  if (
+    !AttachmentProgram.safeParse(card.attachmentProgram).success ||
+    card.manaCost === null ||
+    card.power !== null ||
+    card.toughness !== null ||
+    card.manaAbilities.length ||
+    card.spellProgram ||
+    card.activatedPrograms ||
+    card.triggerPrograms ||
+    card.staticPrograms ||
+    card.staticKeywordPrograms ||
+    card.damagePrograms
+  )
+    return false;
+  const aura = card.attachmentProgram?.schema === "commander-aura/1";
+  return (
+    card.types.length === 1 &&
+    card.types[0] === (aura ? "Enchantment" : "Artifact") &&
+    card.subtypes.length === 1 &&
+    card.subtypes[0] === (aura ? "Aura" : "Equipment")
+  );
+}
+export function activatedProgram(card: CardDefinition | undefined): ActivatedProgram | undefined {
+  if (!card) return undefined;
+  return card.attachmentProgram?.schema === "commander-equipment/1"
+    ? card.attachmentProgram.equip
+    : card.activatedPrograms?.[0];
 }

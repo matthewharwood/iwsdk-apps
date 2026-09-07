@@ -24,7 +24,7 @@ const Case = z
     checkpoints: z
       .array(z.strictObject({ name: Name, save: RelativeProofPath }))
       .min(1)
-      .max(12),
+      .max(16),
   })
   .refine(
     (row) => new Set(row.checkpoints.map((item) => item.name)).size === row.checkpoints.length,

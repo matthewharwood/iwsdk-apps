@@ -1,4 +1,5 @@
 import type { Cost, ExecutionRegistry, Response, RulesState } from "@iwsdk-apps/contracts";
+import { castTargetKind, isLegalCastTarget, legalCastTargets } from "./cast-targets";
 import {
   card,
   definition,
@@ -12,7 +13,7 @@ import {
   request,
   requireRule,
 } from "./common";
-import { isLegalSpellTarget, legalSpellTargets, resolveSpellProgram } from "./effects";
+import { resolveSpellProgram } from "./effects";
 import { priorityCandidates, selectedObjects } from "./selection";
 
 export { activateMana, manaSources, validSpend } from "./mana";
@@ -48,8 +49,8 @@ export function priorityCards(
   )
     .filter((entry) => {
       const current = definition(release, entry.definition);
-      if (!current.spellProgram?.target) return true;
-      const targets = legalSpellTargets(state, release, actor, current.spellProgram, entry.id);
+      if (!castTargetKind(current)) return true;
+      const targets = legalCastTargets(state, release, actor, current, entry.id);
       return targets.cards.length + targets.players.length > 0;
     })
     .map((entry) => entry.id);
@@ -107,6 +108,7 @@ export function beginCast(
     !isStaticKeywordGrantPermanent(current) &&
     !isDamageProgramPermanent(current) &&
     !isOrdinaryActivatedPermanent(current) &&
+    !isAttachmentPermanent(current) &&
     !isEntryObserverPermanent(current) &&
     (!(current.types.includes("Instant") || current.types.includes("Sorcery")) || !program)
   )
@@ -114,11 +116,10 @@ export function beginCast(
       "UnsupportedMechanic",
       `Spell program is not implemented: ${current.name}`,
     );
-  const targets = program
-    ? legalSpellTargets(state, release, actor, program, response.card)
-    : { cards: [], players: [] };
+  const targetKind = castTargetKind(current);
+  const targets = legalCastTargets(state, release, actor, current, response.card);
   requireRule(
-    !program?.target || targets.cards.length + targets.players.length > 0,
+    !targetKind || targets.cards.length + targets.players.length > 0,
     "This spell requires a legal target.",
   );
   const cost = castCost(state, release, response.card);
@@ -134,13 +135,13 @@ export function beginCast(
     handIndex,
     target: null,
   });
-  if (program) spell.spellState = { target: null };
+  if (program || targetKind) spell.spellState = { target: null };
   emit(state, "SpellAnnounced", { player: actor, object: spell.id, definition: spell.definition });
-  if (program?.target) {
+  if (targetKind) {
     request(state, "target", actor, {
       ...targets,
       count: 1,
-      context: `Choose one ${program.target} for ${current.name}, or reverse the announcement.`,
+      context: `Choose one ${targetKind} for ${current.name}, or reverse the announcement.`,
     });
     return;
   }
@@ -169,13 +170,10 @@ export function answerTarget(
     return true;
   }
   requireRule(response.kind === "target", "Expected one spell target or cancellation");
-  const program = card(state, release, frame.card).spellProgram;
+  const current = card(state, release, frame.card);
+  requireRule(castTargetKind(current) !== null, "This spell does not require a target");
   requireRule(
-    program?.target !== null && program !== undefined,
-    "This spell does not require a target",
-  );
-  requireRule(
-    isLegalSpellTarget(state, release, actor, program, response.target, frame.card),
+    isLegalCastTarget(state, release, actor, current, response.target, frame.card),
     "The chosen target is not legal for this spell.",
   );
   frame.target = response.target;
@@ -210,9 +208,9 @@ export function payForCast(
     return;
   }
   requireRule(response.kind === "payment", "Expected payment or cancellation");
-  const program = card(state, release, frame.card).spellProgram;
+  const current = card(state, release, frame.card);
   requireRule(
-    !program || isLegalSpellTarget(state, release, actor, program, frame.target, frame.card),
+    isLegalCastTarget(state, release, actor, current, frame.target, frame.card),
     "A required legal target has not been chosen.",
   );
   const payment = planManaPayment(
@@ -263,6 +261,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
     !isStaticKeywordGrantPermanent(current) &&
     !isDamageProgramPermanent(current) &&
     !isOrdinaryActivatedPermanent(current) &&
+    !isAttachmentPermanent(current) &&
     !isEntryObserverPermanent(current)
   )
     throw new RulesError(
@@ -270,10 +269,23 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
       `Spell program is not implemented: ${current.name}`,
     );
   const controller = object(state, id).controller;
+  const aura = current.attachmentProgram?.schema === "commander-aura/1";
+  const auraTarget = object(state, id).spellState?.target ?? null;
+  if (aura && !isLegalCastTarget(state, release, controller, current, auraTarget, id)) {
+    move(state, id, "graveyard", "Aura target illegal at resolution");
+    emit(state, "AuraSpellDidNotResolve", {
+      source: id,
+      definition: current.id,
+      target: auraTarget,
+      reason: "all-targets-illegal",
+    });
+    hit(state, "rule:608.3b");
+    return true;
+  }
   const enteredId = enterBattlefield(
     state,
     release,
-    [{ objectId: id, controller }],
+    [{ objectId: id, controller, ...(aura && auraTarget ? { auraTarget } : {}) }],
     "resolve permanent spell",
   )[0];
   if (!enteredId) throw new RulesError("Invariant", "Permanent spell failed to enter");
@@ -286,6 +298,7 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
 
 import { resolveActivatedAbility } from "./activation-resolution";
 import {
+  isAttachmentPermanent,
   isDamageProgramPermanent,
   isEntryObserverPermanent,
   isOrdinaryActivatedPermanent,

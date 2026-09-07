@@ -81,7 +81,7 @@ for (const cancel of [false, true]) {
       readLine: () => inputs.shift() ?? null,
       write: (line) => lines.push(line),
     });
-    expect(TERMINAL_DRIVER_VERSION).toBe("terminal-observation/9");
+    expect(TERMINAL_DRIVER_VERSION).toBe("terminal-observation/10");
     expect(result).toEqual({ status: "paused", acceptedCommands: cancel ? 2 : 4 });
     expect(host.closed).toBe(true);
     expect(f.state.revision).toBe(before + (cancel ? 2 : 4));
@@ -96,6 +96,9 @@ for (const cancel of [false, true]) {
         name: "Nantuko Disciple",
         controller: "A",
         target: null,
+        programSchema: "commander-activated/1",
+        timing: "priority",
+        targetDomain: "creature",
         cost: { mana: { G: 1 }, tapSource: true },
         effects: [{ kind: "modify-creature", powerDelta: 2, toughnessDelta: 2 }],
       },

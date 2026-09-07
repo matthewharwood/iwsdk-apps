@@ -1,4 +1,5 @@
 import {
+  ATTACHMENT_PERMANENTS,
   CONDITIONAL_SELF_ENTRY_PERMANENTS,
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
@@ -173,6 +174,7 @@ async function artifactFor(
     recipeRegistryHash: await semanticHash({
       ordinaryActivatedAbilities: ORDINARY_ACTIVATED_PERMANENTS,
       staticKeywordGrants: STATIC_KEYWORD_GRANTS,
+      attachments: ATTACHMENT_PERMANENTS,
       staticEvasionPermanents: STATIC_EVASION_PERMANENTS,
       damageReplacementPermanents: DAMAGE_REPLACEMENT_PERMANENTS,
       strictProctorTriggers: STRICT_PROCTOR_PERMANENTS,

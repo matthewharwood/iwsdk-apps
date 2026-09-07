@@ -141,6 +141,24 @@ export function removeFromLists(state: RulesState, id: string): void {
       seat[zone] = seat[zone].filter((entry) => entry !== id);
   state.stack = state.stack.filter((entry) => entry.kind !== "spell" || entry.objectId !== id);
 }
+/** End relations on actual endpoint departure, retaining the complete prior link in its event. */
+export function endObjectAttachments(state: RulesState, id: string, cause: string): void {
+  for (const link of Object.values(state.attachments ?? {})) {
+    if (link.source !== id && link.target !== id) continue;
+    delete state.attachments?.[link.source];
+    emit(
+      state,
+      "AttachmentEnded",
+      GameEvent.shape.data.parse({
+        source: link.source,
+        target: link.target,
+        before: link,
+        reason: cause,
+      }),
+    );
+    hit(state, "rule:701.3d");
+  }
+}
 /** A zone transition creates a new game object; physical lineage/commander designation survive. */
 function performMove(
   state: RulesState,
@@ -155,6 +173,7 @@ function performMove(
   );
   const before = object(state, id);
   const lastKnown = { ...before, counters: { ...before.counters } };
+  endObjectAttachments(state, id, cause);
   removeFromLists(state, id);
   delete state.objects[id];
   const generation = before.generation + 1;

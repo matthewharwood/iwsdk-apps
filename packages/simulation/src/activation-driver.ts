@@ -1,4 +1,5 @@
 import {
+  type ActivatedProgram,
   type Cost,
   type Decision,
   emptyMana,
@@ -42,10 +43,10 @@ function harmful(effect: OrdinaryActivatedEffect): boolean {
 }
 function targetsForEffect(
   view: PlayerObservation,
-  effect: OrdinaryActivatedEffect,
+  effect: ActivatedProgram["effects"][0],
   allowed?: readonly string[],
 ): Visible[] {
-  const hurt = harmful(effect);
+  const hurt = effect.kind !== "attach-source" && harmful(effect);
   return creatureTargets(view, allowed)
     .filter(
       (object) =>
@@ -108,6 +109,27 @@ function useful(
   return combatParticipant(view, source);
 }
 
+function equipTargets(
+  view: PlayerObservation,
+  source: Visible,
+  allowed?: readonly string[],
+): Visible[] {
+  // Policy avoids free same-target loops; this is not a core legality restriction.
+  if (view.attachments?.some((link) => link.source === source.id)) return [];
+  const modifier = source.card?.attachmentProgram?.attachedModifier;
+  if (!modifier) return [];
+  return creatureTargets(view, allowed)
+    .filter(
+      (target) =>
+        target.controller === view.player &&
+        (target.characteristics.toughness ?? 0) + modifier.toughnessDelta > target.damage,
+    )
+    .sort(
+      (a, b) =>
+        (b.characteristics.power ?? 0) - (a.characteristics.power ?? 0) || (a.id < b.id ? -1 : 1),
+    );
+}
+
 /** Repeat avoidance is policy only. The engine may legally accept several activations on its stack. */
 export function priorityActivation(
   view: PlayerObservation,
@@ -131,8 +153,14 @@ export function priorityActivation(
   );
   for (const descriptor of descriptors) {
     const source = view.objects.find((object) => object.id === descriptor.source);
-    const program = source?.card?.activatedPrograms?.[descriptor.programIndex];
-    if (!source || !program || !useful(view, source, program.effects[0])) continue;
+    const program =
+      source?.card?.attachmentProgram?.schema === "commander-equipment/1"
+        ? source.card.attachmentProgram.equip
+        : source?.card?.activatedPrograms?.[descriptor.programIndex];
+    if (!source || !program) continue;
+    if (program.schema === "commander-equip/1") {
+      if (equipTargets(view, source).length === 0) continue;
+    } else if (!useful(view, source, program.effects[0])) continue;
     const sources = descriptor.cost.mana
       ? decision.manaSources.filter(
           (entry) => !descriptor.cost.tapSource || entry.object !== descriptor.source,
@@ -169,6 +197,12 @@ export function activationChoice(
   const ability = view.activatedAbilities?.find((entry) => entry.id === context.abilityId);
   if (!ability || ability.controller !== view.player)
     throw new Error("Activation target decision lacks its owned public ability");
-  const target = targetsForEffect(view, ability.program.effects[0], decision.cards)[0];
+  const source = view.objects.find((entry) => entry.id === ability.source.id);
+  const target =
+    ability.program.schema === "commander-equip/1"
+      ? source
+        ? equipTargets(view, source, decision.cards)[0]
+        : undefined
+      : targetsForEffect(view, ability.program.effects[0], decision.cards)[0];
   return target ? { kind: "activation-target", target: target.id } : { kind: "cancel-activation" };
 }

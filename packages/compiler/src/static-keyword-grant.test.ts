@@ -32,10 +32,12 @@ async function fixtures() {
 test("closed source membership adds55 exact grants while preserving all1583 prior definition digests", async () => {
   const { hash, ...body } = staticKeywordFixtureMetadata;
   expect(await semanticHash(body)).toBe(hash);
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1638);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1789);
   const newIds = new Set(STATIC_KEYWORD_GRANTS.map((row) => row.identity));
   const prior = Object.fromEntries(
-    Object.entries(REVIEWED_SOURCE_BINDINGS).filter(([id]) => !newIds.has(id)),
+    Object.entries(REVIEWED_SOURCE_BINDINGS).filter(
+      ([id, row]) => !newIds.has(id) && row.implementationRevision !== "attachment-permanent/1",
+    ),
   );
   expect(Object.keys(prior)).toHaveLength(1583);
   expect(await semanticHash(prior)).toBe(staticKeywordFixtureMetadata.priorBindingsHash);
@@ -103,7 +105,7 @@ for (const capability of STATIC_KEYWORD_GRANT_CORE_CAPABILITIES)
   test(`rehashed prepared capability omission rejects ${capability}`, async () => {
     const { source, chosen } = await fixtures();
     const artifact = await createPreparedMatchArtifact(source, chosen);
-    expect(MATCH_PLAN_VERSION).toBe("development-match-plan/16");
+    expect(MATCH_PLAN_VERSION).toBe("development-match-plan/17");
     expect(artifact.requiredCoreCapabilities).toContain(capability);
     artifact.requiredCoreCapabilities = artifact.requiredCoreCapabilities.filter(
       (x) => x !== capability,
@@ -191,7 +193,7 @@ for (const change of [
   });
 test("wrong ABI and unresolved grant constructors block admission and conservative closure", async () => {
   const { source, chosen } = await fixtures();
-  for (const processorAbi of ["commander-engine/0.19.0", "commander-engine/0.21.0"]) {
+  for (const processorAbi of ["commander-engine/0.20.0", "commander-engine/0.22.0"]) {
     const bad = await rehash({ ...source, processorAbi });
     await expect(createFullExecutionRegistry(bad)).rejects.toThrow("ABI");
     await expect(createPreparedMatchArtifact(bad, chosen)).rejects.toThrow("ABI");

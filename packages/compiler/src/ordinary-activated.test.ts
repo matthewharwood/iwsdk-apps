@@ -88,9 +88,9 @@ async function deck(source: ContentRelease, legacy = false) {
   return DeckRevision.parse({ ...body, hash: await semanticHash(body) });
 }
 
-test("closed1583 source membership contains all239 exact new definitions and separately20 token templates", async () => {
+test("closed current source membership contains all239 exact new definitions and separately20 token templates", async () => {
   const source = await activationFixtureSource();
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1638);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1789);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   expect(Object.keys(source.tokenTemplates ?? {})).toHaveLength(20);
   const full = await createFullExecutionRegistry(source);
@@ -200,7 +200,7 @@ for (const [name, mutate] of Object.entries(changes))
 test("wrong ABI rejects both factories even when reachable roots contain no activated programs", async () => {
   const source = await fixture(),
     legacy = await deck(source, true);
-  for (const processorAbi of ["commander-engine/0.19.0", "commander-engine/0.21.0"]) {
+  for (const processorAbi of ["commander-engine/0.20.0", "commander-engine/0.22.0"]) {
     const altered = await rehash({ ...source, processorAbi });
     await expect(verifySourceRelease(altered)).resolves.toBeDefined();
     await expect(createFullExecutionRegistry(altered)).rejects.toThrow("ABI");

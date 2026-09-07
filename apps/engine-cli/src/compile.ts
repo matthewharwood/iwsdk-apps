@@ -1,4 +1,5 @@
 import {
+  compileAttachmentDraft,
   compileConditionalSelfEntryDraft,
   compileCounterSpellDraft,
   compileCreatureReturnDraft,
@@ -14,6 +15,7 @@ import {
   compileStaticEvasionDraft,
   compileStaticKeywordGrantDraft,
   compileStrictProctorDraft,
+  makeAttachmentDecks,
   makeConditionalSelfEntryDecks,
   makeCounterSpellDecks,
   makeCreatureReturnDecks,
@@ -46,7 +48,7 @@ export async function historicalFixtureRelease(
 async function reviewedFixtureDecks(
   catalogPath: string,
   content: ContentRelease,
-  mode: "ordinary-activated" | "static-evasion" | "static-keyword-grant",
+  mode: "ordinary-activated" | "static-evasion" | "static-keyword-grant" | "attachments",
 ) {
   const base = await compileDevelopmentRelease(catalogPath, {
     spellFamilies: true,
@@ -135,7 +137,7 @@ async function reviewedFixtureDecks(
       : content;
   const ordinary = await makeOrdinaryActivatedDecks(ordinarySource, damage.decks);
   const evasionSource =
-    mode === "static-keyword-grant"
+    mode === "static-keyword-grant" || mode === "attachments"
       ? await historicalFixtureRelease(
           (await compileStaticEvasionDraft(catalogPath)).release,
           "58cccbdc3ce7d5813398d5fd5bb245bf79f9ccdf64540cc22536a3198c039628",
@@ -146,12 +148,25 @@ async function reviewedFixtureDecks(
     mode !== "ordinary-activated"
       ? await makeStaticEvasionDecks(evasionSource, ordinary.decks)
       : null;
+  const grantsSource =
+    mode === "attachments"
+      ? await historicalFixtureRelease(
+          (await compileStaticKeywordGrantDraft(catalogPath)).release,
+          "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
+          "commander-engine/0.20.0",
+        )
+      : content;
+  const grants =
+    mode === "static-keyword-grant" || mode === "attachments"
+      ? await makeStaticKeywordGrantDecks(grantsSource, evasion?.decks ?? [])
+      : null;
   const newest =
-    mode === "static-keyword-grant"
-      ? await makeStaticKeywordGrantDecks(content, evasion?.decks ?? [])
-      : (evasion ?? ordinary);
+    mode === "attachments"
+      ? await makeAttachmentDecks(content, grants?.decks ?? [])
+      : (grants ?? evasion ?? ordinary);
   return {
     ...newest,
+    grantReport: grants?.report,
     evasionReport: evasion?.report,
     ordinaryReport: ordinary.report,
     damageReport: damage.report,
@@ -172,10 +187,11 @@ export type CompilationMode =
   | "self-entry"
   | "ordinary-activated"
   | "static-evasion"
-  | "static-keyword-grant";
+  | "static-keyword-grant"
+  | "attachments";
 export function selectCompileMode(args: readonly string[]): CompilationMode {
-  if (args.includes("--all-reviewed") || args.includes("--static-keyword-grants"))
-    return "static-keyword-grant";
+  if (args.includes("--all-reviewed") || args.includes("--attachments")) return "attachments";
+  if (args.includes("--static-keyword-grants")) return "static-keyword-grant";
   if (args.includes("--static-evasion")) return "static-evasion";
   if (args.includes("--ordinary-activated-abilities")) return "ordinary-activated";
   if (args.includes("--self-entry-triggers")) return "self-entry";
@@ -189,23 +205,29 @@ export function expansionReportName(mode: CompilationMode): string {
     "ordinary-activated": "ordinary-activated-expansion.json",
     "static-evasion": "static-evasion-expansion.json",
     "static-keyword-grant": "static-keyword-grant-expansion.json",
+    attachments: "attachment-expansion.json",
   }[mode];
 }
 export async function compileArtifacts(catalogPath: string, mode: CompilationMode) {
   const result =
-    mode === "static-keyword-grant"
-      ? await compileStaticKeywordGrantDraft(catalogPath)
-      : mode === "static-evasion"
-        ? await compileStaticEvasionDraft(catalogPath)
-        : mode === "ordinary-activated"
-          ? await compileOrdinaryActivatedDraft(catalogPath)
-          : mode === "self-entry"
-            ? await compileSelfEntryDraft(catalogPath)
-            : mode === "spell-families"
-              ? await compileSpellFamilyDraft(catalogPath)
-              : await compileDevelopmentRelease(catalogPath);
+    mode === "attachments"
+      ? await compileAttachmentDraft(catalogPath)
+      : mode === "static-keyword-grant"
+        ? await compileStaticKeywordGrantDraft(catalogPath)
+        : mode === "static-evasion"
+          ? await compileStaticEvasionDraft(catalogPath)
+          : mode === "ordinary-activated"
+            ? await compileOrdinaryActivatedDraft(catalogPath)
+            : mode === "self-entry"
+              ? await compileSelfEntryDraft(catalogPath)
+              : mode === "spell-families"
+                ? await compileSpellFamilyDraft(catalogPath)
+                : await compileDevelopmentRelease(catalogPath);
   const reviewed =
-    mode === "ordinary-activated" || mode === "static-evasion" || mode === "static-keyword-grant"
+    mode === "ordinary-activated" ||
+    mode === "static-evasion" ||
+    mode === "static-keyword-grant" ||
+    mode === "attachments"
       ? await reviewedFixtureDecks(catalogPath, result.release, mode)
       : null;
   const decks =
@@ -229,9 +251,10 @@ export async function compileArtifacts(catalogPath: string, mode: CompilationMod
         ...(mode !== "ordinary-activated"
           ? { "static-evasion-decks.json": reviewed.evasionReport }
           : {}),
-        ...(mode === "static-keyword-grant"
-          ? { "static-keyword-grant-decks.json": reviewed.report }
+        ...(mode === "static-keyword-grant" || mode === "attachments"
+          ? { "static-keyword-grant-decks.json": reviewed.grantReport }
           : {}),
+        ...(mode === "attachments" ? { "attachment-decks.json": reviewed.report } : {}),
       }
     : {};
   const expansion =

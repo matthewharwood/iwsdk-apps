@@ -7,6 +7,7 @@ import {
 } from "@iwsdk-apps/contracts";
 import { answerActivation, beginActivation } from "./activation";
 import { assertActivationContexts } from "./activation-context";
+import { assertAttachmentContexts } from "./attachment-context";
 import { activateMana, answerTarget, beginCast, payForCast, playLand } from "./casting";
 import { characteristics } from "./characteristics";
 import { answerCommanderZone } from "./checkpoints";
@@ -183,6 +184,7 @@ export function transition(
     assertTriggerPayment(committed, release);
     assertDamageContinuation(committed, release);
     assertActivationContexts(committed, release);
+    assertAttachmentContexts(committed, release);
     const state = structuredClone(committed);
     state.revision++;
     state.events = [];
@@ -274,6 +276,9 @@ export function observe(
               sourceCard: structuredClone(definition(release, ability.source.definition)),
             })),
         }
+      : {}),
+    ...(state.attachments
+      ? { attachments: structuredClone(Object.values(state.attachments)) }
       : {}),
     abilities: Object.values(state.abilities)
       .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))

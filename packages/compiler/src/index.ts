@@ -1,3 +1,5 @@
+import { ATTACHMENT_PERMANENTS, ATTACHMENT_VERSION } from "@iwsdk-apps/card-programs";
+
 export { compileConditionalSelfEntryDraft } from "./conditional-self-entry-expansion";
 export { makeCreatureReturnDecks } from "./creature-return-decks";
 export { compileCreatureReturnDraft } from "./creature-return-expansion";
@@ -108,6 +110,11 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  attachmentPermanents: {
+    enabled: boolean;
+    version: string;
+    registry: typeof ATTACHMENT_PERMANENTS;
+  };
   staticKeywordGrants: {
     enabled: boolean;
     version: string;
@@ -166,7 +173,7 @@ export interface CompilationReport {
 function describeCompilerRecipes(
   options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
 ): string {
-  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}${options.conditionalSelfEntryTriggers ? "+conditional-self-entry-artifact/1" : ""}${options.strictProctorTriggers ? "+strict-proctor-trigger/1" : ""}${options.damageReplacementPermanents ? "+damage-replacement-permanent/1" : ""}${options.staticEvasionPermanents ? "+static-evasion-permanent/1" : ""}${options.ordinaryActivatedAbilities ? "+ordinary-activated-permanent/1" : ""}${options.staticKeywordGrants ? "+static-keyword-grant-permanent/1" : ""}`;
+  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}${options.conditionalSelfEntryTriggers ? "+conditional-self-entry-artifact/1" : ""}${options.strictProctorTriggers ? "+strict-proctor-trigger/1" : ""}${options.damageReplacementPermanents ? "+damage-replacement-permanent/1" : ""}${options.staticEvasionPermanents ? "+static-evasion-permanent/1" : ""}${options.ordinaryActivatedAbilities ? "+ordinary-activated-permanent/1" : ""}${options.staticKeywordGrants ? "+static-keyword-grant-permanent/1" : ""}${options.attachmentPermanents ? "+attachment-permanent/1" : ""}`;
 }
 
 async function compilerRevision(
@@ -174,6 +181,7 @@ async function compilerRevision(
 ): Promise<string> {
   const recipeCompilerVersion = describeCompilerRecipes(options);
   const selected = [
+    [options.attachmentPermanents, "attachment-permanent/1"],
     [options.staticKeywordGrants, "static-keyword-grant-permanent/1"],
     [options.staticEvasionPermanents, "static-evasion-permanent/1"],
     [options.ordinaryActivatedAbilities, "ordinary-activated-permanent/1"],
@@ -193,6 +201,7 @@ async function compilerRevision(
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    attachmentPermanents?: boolean;
     staticKeywordGrants?: boolean;
     staticEvasionPermanents?: boolean;
     ordinaryActivatedAbilities?: boolean;
@@ -239,6 +248,11 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    attachmentPermanents: {
+      enabled: options.attachmentPermanents === true,
+      version: ATTACHMENT_VERSION,
+      registry: ATTACHMENT_PERMANENTS,
     },
     staticKeywordGrants: {
       enabled: options.staticKeywordGrants === true,
@@ -726,3 +740,7 @@ export async function makeDevelopmentDecks(
   }
   return decks;
 }
+
+export { compileAttachmentDraft } from "./attachment-expansion";
+
+export { makeAttachmentDecks } from "./development-attachment-decks";

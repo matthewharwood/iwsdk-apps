@@ -12,6 +12,7 @@ import {
 import { characteristics } from "./characteristics";
 import { objectBase } from "./object-definitions";
 import { orderedObjects } from "./object-order";
+import { activatedProgram } from "./permanent-programs";
 
 const fields = {
   isCard: "boolean",
@@ -138,10 +139,10 @@ export function selectObjectCandidates(
         values: {
           isCard: !entry.token,
           hasActivatedProgram:
-            !entry.token && !!release.definitions[entry.definition]?.activatedPrograms,
+            !entry.token && !!activatedProgram(release.definitions[entry.definition]),
           activationTaps:
             !entry.token &&
-            !!release.definitions[entry.definition]?.activatedPrograms?.[0]?.cost.tapSource,
+            !!activatedProgram(release.definitions[entry.definition])?.cost.tapSource,
           hasDamageProgram: !entry.token && !!release.definitions[entry.definition]?.damagePrograms,
           zone: entry.zone,
           owner: entry.owner,

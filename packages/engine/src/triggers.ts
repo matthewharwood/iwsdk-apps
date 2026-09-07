@@ -6,6 +6,7 @@ import {
   TriggeredAbility,
   triggerEffects,
 } from "@iwsdk-apps/contracts";
+import { attachEnteringAura } from "./attachments";
 import {
   definition,
   draw,
@@ -28,14 +29,33 @@ import { beginTriggerPayment } from "./trigger-payment";
 export function enterBattlefield(
   state: RulesState,
   registry: ExecutionRegistry,
-  entries: readonly { objectId: string; controller: string }[],
+  entries: readonly { objectId: string; controller: string; auraTarget?: string }[],
   cause: string,
 ): string[] {
   requireRule(
     new Set(entries.map((entry) => entry.objectId)).size === entries.length,
     "A physical object cannot enter twice in one batch",
   );
+  if (entries.filter((entry) => entry.auraTarget !== undefined).length > 1)
+    throw new RulesError(
+      "UnsupportedMechanic",
+      "Simultaneous Aura attachment timestamp ordering requires an owned procedure",
+    );
   for (const entry of entries) {
+    const entering = object(state, entry.objectId);
+    const aura =
+      !entering.token &&
+      registry.definitions[entering.definition]?.attachmentProgram?.schema === "commander-aura/1";
+    if (aura && entry.auraTarget === undefined)
+      throw new RulesError(
+        "UnsupportedMechanic",
+        "Nonspell Aura entry requires its own legal attachment choice procedure",
+      );
+    requireRule(
+      entry.auraTarget === undefined ||
+        (aura && entering.zone === "stack" && entering.spellState?.target === entry.auraTarget),
+      "Aura entry must retain its chosen spell target",
+    );
     requireRule(
       object(state, entry.objectId).zone !== "battlefield",
       "Entry requires a zone change",
@@ -46,7 +66,11 @@ export function enterBattlefield(
     );
   }
   const entered = entries.flatMap((entry) => {
+    const before = structuredClone(object(state, entry.objectId));
+    const target = entry.auraTarget ? structuredClone(object(state, entry.auraTarget)) : null;
     const result = tryMove(state, entry.objectId, "battlefield", cause, entry.controller);
+    if (target && result.kind === "moved")
+      attachEnteringAura(state, registry, before, result.after.id, target);
     return result.kind === "moved" ? [result.after] : [];
   });
   if (entered.length)

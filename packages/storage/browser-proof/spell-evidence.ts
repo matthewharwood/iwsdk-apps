@@ -1,9 +1,9 @@
 import {
+  ActivatedProgram,
   type ContentRelease,
   type ContinuousEffect,
   type GameEvent,
   GameObject,
-  OrdinaryActivatedProgram,
   type PlayerObservation,
 } from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
@@ -156,7 +156,7 @@ type ModifierOrigin = {
   source: string;
   definition: string;
   controller: string;
-  program: OrdinaryActivatedProgram;
+  program: ActivatedProgram;
   paid: boolean;
 };
 function modifierDefinition(
@@ -208,7 +208,7 @@ function recordModifierOrigin(
     spells.set(event.data.object, event.data.definition);
   if (event.type === "AbilityAnnounced") {
     const source = GameObject.parse(event.data.source);
-    const program = OrdinaryActivatedProgram.parse(event.data.program);
+    const program = ActivatedProgram.parse(event.data.program);
     if (typeof event.data.ability !== "string" || typeof event.data.controller !== "string")
       throw new Error("Modifier ability announcement lost its identity");
     abilities.set(event.data.ability, {

@@ -5,6 +5,8 @@ import {
   type RulesState,
 } from "@iwsdk-apps/contracts";
 import { assertActivatedAbility, assertActivationContexts } from "./activation-context";
+import { assertAttachmentContexts } from "./attachment-context";
+import { castTargetKind } from "./cast-targets";
 import { assertBlockingDecision } from "./combat";
 import { assertRegistryPin, definition, RulesError } from "./common";
 import { assertDamageContinuation } from "./damage-context";
@@ -226,6 +228,7 @@ function assertStackSpellState(
 export function assertInvariants(state: RulesState, release: ExecutionRegistry): void {
   assertRegistryPin(state.manifest, release);
   assertContinuousEffects(state, release);
+  assertAttachmentContexts(state, release);
   const seats = new Set(state.players.map((seat) => seat.id));
   invariant(seats.has(state.startingPlayerChooser), "Starting-player chooser is not a match seat");
   if (state.startingPlayer === null) {
@@ -325,14 +328,18 @@ export function assertInvariants(state: RulesState, release: ExecutionRegistry):
         "Casting continuation lost its announced spell",
       );
       const spell = state.objects[frame.card];
-      if (spell && definition(release, spell.definition).spellProgram)
+      if (
+        spell &&
+        (definition(release, spell.definition).spellProgram ||
+          castTargetKind(definition(release, spell.definition)))
+      )
         invariant(
           spell.spellState?.target === frame.target,
           "Casting target and stack target state disagree",
         );
       if (state.decision.kind === "target")
         invariant(
-          !!definition(release, state.objects[frame.card]?.definition ?? "").spellProgram?.target,
+          castTargetKind(definition(release, state.objects[frame.card]?.definition ?? "")) !== null,
           "Target decision lacks a targeted program",
         );
     }

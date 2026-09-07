@@ -10,7 +10,11 @@ import {
 import { requestActivation } from "./activation";
 import { definition, RulesError } from "./common";
 import { validSpend } from "./mana";
-import { isOrdinaryActivatedPermanent } from "./permanent-programs";
+import {
+  activatedProgram,
+  isAttachmentPermanent,
+  isOrdinaryActivatedPermanent,
+} from "./permanent-programs";
 
 function invariant(condition: unknown, message: string): asserts condition {
   if (!condition) throw new RulesError("Invariant", message);
@@ -63,9 +67,9 @@ export function assertActivatedAbility(
     source = definition(registry, ability.source.definition);
   physicalSource(state, ability.source);
   invariant(
-    isOrdinaryActivatedPermanent(source) &&
+    (isOrdinaryActivatedPermanent(source) || isAttachmentPermanent(source)) &&
       source.sourceVersion === ability.sourceVersion &&
-      same(source.activatedPrograms?.[ability.programIndex], ability.program),
+      same(activatedProgram(source), ability.program),
     "Activation program differs from its pinned complete source",
   );
   invariant(
@@ -92,7 +96,7 @@ export function assertActivatedAbility(
   if (ability.targetEvent) {
     eventHeader(state, ability.targetEvent, "AbilityTargetChosen");
     invariant(
-      ability.program.target === "creature" &&
+      ability.program.target !== null &&
         ability.target !== null &&
         ability.targetEvent.index > ability.announcement.index &&
         same(ability.targetEvent.data, {
@@ -217,7 +221,7 @@ export function assertActivationContexts(state: RulesState, registry: ExecutionR
   );
   invariant(
     frame.stage === "target"
-      ? ability.program.target === "creature" && ability.target === null
+      ? ability.program.target !== null && ability.target === null
       : ability.program.target === null || ability.target !== null,
     "Activation target/payment stage changed",
   );

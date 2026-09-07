@@ -5,6 +5,7 @@ import type {
   RulesState,
 } from "@iwsdk-apps/contracts";
 import { isLegalActivationTarget } from "./activation";
+import { attachFromEquip } from "./attachments";
 import { emit, hit, object, permanentBase, RulesError } from "./common";
 import { createHostCreatureModifier } from "./continuous";
 import { applyPlayerInstruction, type InstructionHost } from "./instruction-host";
@@ -44,7 +45,9 @@ export function resolveActivatedAbility(state: RulesState, registry: ExecutionRe
   }
   const host: InstructionHost = { kind: "activated-ability", ability },
     effect = ability.program.effects[0];
-  if (effect.kind === "draw" || effect.kind === "gain-life") {
+  if (effect.kind === "attach-source") {
+    attachFromEquip(state, registry, ability);
+  } else if (effect.kind === "draw" || effect.kind === "gain-life") {
     applyPlayerInstruction(state, host, ability.controller, effect);
   } else if (effect.kind === "tap") {
     if (ability.target === null)

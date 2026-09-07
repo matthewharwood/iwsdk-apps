@@ -1,5 +1,6 @@
 import type { DerivedCharacteristics, ExecutionRegistry, RulesState } from "@iwsdk-apps/contracts";
 
+import { attachmentModifiers } from "./attachment-modifiers";
 import { objectBase } from "./object-definitions";
 import { staticPowerToughnessBonus } from "./static-bonus";
 import { staticGrantedKeywords } from "./static-keywords";
@@ -28,5 +29,15 @@ export function characteristics(
   const bonus = staticPowerToughnessBonus(state, registry, object);
   if (power !== null) power += bonus.power;
   if (toughness !== null) toughness += bonus.toughness;
+  for (const modifier of attachmentModifiers(state, registry, objectId)) {
+    for (const keyword of modifier.keywords) keywords.add(keyword);
+    if (power !== null) power += modifier.powerDelta;
+    if (toughness !== null) toughness += modifier.toughnessDelta;
+    if (
+      (power !== null && !Number.isSafeInteger(power)) ||
+      (toughness !== null && !Number.isSafeInteger(toughness))
+    )
+      throw new Error("Unsafe attachment characteristic arithmetic");
+  }
   return { power, toughness, keywords: [...keywords] };
 }

@@ -25,6 +25,7 @@ import {
 } from "./common";
 
 import {
+  isAttachmentPermanent,
   isDamageProgramPermanent,
   isEntryObserverPermanent,
   isOrdinaryActivatedPermanent,
@@ -72,6 +73,9 @@ export function admitDeck(
       current.deckLimit === null || count <= current.deckLimit,
       `Deck copy limit exceeded: ${current.name}`,
     );
+    const attachmentPermanent = isAttachmentPermanent(current);
+    if (current.attachmentProgram && !attachmentPermanent)
+      throw new RulesError("UnsupportedMechanic", "Unsupported attachment permanent program");
     const activatedPermanent = isOrdinaryActivatedPermanent(current);
     if (current.activatedPrograms && !activatedPermanent)
       throw new RulesError(
@@ -113,6 +117,7 @@ export function admitDeck(
       !keywordPermanent &&
       !damagePermanent &&
       !activatedPermanent &&
+      !attachmentPermanent &&
       !isEntryObserverPermanent(current)
     )
       throw new RulesError(

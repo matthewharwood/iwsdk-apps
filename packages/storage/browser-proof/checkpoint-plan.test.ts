@@ -61,6 +61,27 @@ test("checkpoint plan is strict, bounded, unambiguous and accepts project-relati
   ])
     expect(CheckpointPlan.safeParse(bad).success).toBe(false);
 });
+test("checkpoint plans retain all13 attachment stages within a16-checkpoint bound", () => {
+  const withCount = (count: number) => ({
+    ...plan,
+    cases: [
+      {
+        name: "full-scan",
+        finalSave: "inputs/final.json",
+        checkpoints: Array.from({ length: count }, (_, index) => ({
+          name: `stage-${index}`,
+          save: `inputs/stage-${index}.json`,
+        })),
+      },
+    ],
+  });
+  for (const count of [1, 13, 16]) {
+    const input = withCount(count);
+    expect(CheckpointPlan.parse(input)).toEqual(input);
+  }
+  for (const count of [0, 17])
+    expect(CheckpointPlan.safeParse(withCount(count)).success).toBe(false);
+});
 test("actual native archives verify checksums and real-engine replay before exact prefix admission", async () => {
   const release = await conditionalSourceRelease();
   const deck = await conditionalSourceDeck("Donatello, Turtle Techie", [

@@ -1,9 +1,11 @@
 import type { ExecutionRegistry, Response, RulesState } from "@iwsdk-apps/contracts";
+import { attachmentSbas, detach } from "./attachments";
 import { characteristics } from "./characteristics";
 import {
   battlefield,
   creatures,
   emit,
+  endObjectAttachments,
   hit,
   move,
   object,
@@ -45,6 +47,7 @@ function eliminate(state: RulesState, losses: { player: string; reason: string }
   }
   for (const entry of orderedObjects(state)) {
     if (lost.has(entry.owner)) {
+      endObjectAttachments(state, entry.id, "owner left game");
       removeFromLists(state, entry.id);
       delete state.objects[entry.id];
     } else if (lost.has(entry.controller)) {
@@ -130,6 +133,21 @@ function creatureDeaths(state: RulesState, release: ExecutionRegistry) {
     return rules.length ? [{ entry, rules }] : [];
   });
 }
+function applyAttachmentSbas(
+  state: RulesState,
+  attachmentActions: ReturnType<typeof attachmentSbas>,
+): void {
+  for (const action of attachmentActions) {
+    if (state.objects[action.source]?.zone !== "battlefield") continue;
+    if (action.kind === "graveyard") {
+      move(state, action.source, "graveyard", "state-based illegal Aura");
+      hit(state, "rule:704.5m");
+    } else {
+      detach(state, action.source, "state-based illegal attachment");
+      hit(state, "rule:704.5n");
+    }
+  }
+}
 function stateBasedActions(
   state: RulesState,
   release: ExecutionRegistry,
@@ -138,6 +156,7 @@ function stateBasedActions(
   for (let iteration = 0; iteration < 1000; iteration++) {
     guardDuplicateLegends(state, release);
     const dead = creatureDeaths(state, release);
+    const attachmentActions = attachmentSbas(state, release);
     // 704.5h/702.2b only consider deathtouch damage since the preceding SBA
     // check. Capture eligibility first, then expire that fact even if protection
     // means this check performs no action. Marked damage remains until cleanup.
@@ -151,7 +170,13 @@ function stateBasedActions(
         const reason = lossReason(state, seat.id);
         return reason ? [{ player: seat.id, reason }] : [];
       });
-    if (dead.length === 0 && losses.length === 0 && ceased.length === 0) break;
+    if (
+      dead.length === 0 &&
+      losses.length === 0 &&
+      ceased.length === 0 &&
+      attachmentActions.length === 0
+    )
+      break;
     const moved: { before: string; after: string }[] = [];
     for (const { entry, rules } of dead) {
       for (const rule of rules) hit(state, rule);
@@ -159,6 +184,7 @@ function stateBasedActions(
       moved.push({ before: entry.id, after: after.id });
       hit(state, `${entry.token ? "token" : "card"}:${entry.definition}:dies`);
     }
+    applyAttachmentSbas(state, attachmentActions);
     if (moved.length) {
       emit(state, "CreaturesDiedBatch", { objects: moved });
     }

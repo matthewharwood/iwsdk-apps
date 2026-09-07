@@ -1,3 +1,19 @@
+import { ATTACHMENT_PERMANENTS, ATTACHMENT_VERSION, bindAttachmentPermanent } from "./attachments";
+
+export {
+  ATTACHMENT_ANNEX_RESEARCH_HASH,
+  ATTACHMENT_ARCHIVE,
+  ATTACHMENT_PERMANENTS,
+  ATTACHMENT_RESEARCH_HASH,
+  ATTACHMENT_RULES,
+  ATTACHMENT_RULES_HASH,
+  ATTACHMENT_SOURCE_BUNDLE,
+  ATTACHMENT_VERSION,
+  type AttachmentSource,
+  bindAttachmentPermanent,
+  reviewedAttachmentDefinition,
+} from "./attachments";
+
 import {
   bindStaticKeywordGrant,
   STATIC_KEYWORD_GRANT_VERSION,
@@ -638,6 +654,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  attachmentPermanents?: boolean;
   staticKeywordGrants?: boolean;
   staticEvasionPermanents?: boolean;
   ordinaryActivatedAbilities?: boolean;
@@ -693,6 +710,13 @@ interface KnownPermanentBinder {
   reasonPrefix: string;
 }
 const knownPermanentBinders: readonly KnownPermanentBinder[] = [
+  {
+    sources: ATTACHMENT_PERMANENTS,
+    option: "attachmentPermanents",
+    bind: bindAttachmentPermanent,
+    version: ATTACHMENT_VERSION,
+    reasonPrefix: "attachment",
+  },
   {
     sources: STATIC_KEYWORD_GRANTS,
     option: "staticKeywordGrants",

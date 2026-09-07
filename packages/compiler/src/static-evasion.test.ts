@@ -36,7 +36,7 @@ test("authenticated combined inventory preserves1437 source tuples and146 whole 
   const { hash, ...body } = evasionFixtureMetadata;
   expect(await semanticHash(body)).toBe(hash);
   expect(evasionFixtureMetadata.originPrimaryCount).toBe(1583);
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1638);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1789);
   expect(evasionFixtureMetadata.originAuxiliaryCount).toBe(20);
   for (const [i, shard] of evasionDefinitionShards.entries())
     expect(await semanticHash(shard)).toBe(
@@ -91,7 +91,7 @@ for (const capability of STATIC_EVASION_CORE_CAPABILITIES)
   test(`rehashed removal of ${capability} cannot authorize a prepared evasion match`, async () => {
     const { source, chosen } = await fixtures();
     const artifact = await createPreparedMatchArtifact(source, chosen);
-    expect(MATCH_PLAN_VERSION).toBe("development-match-plan/16");
+    expect(MATCH_PLAN_VERSION).toBe("development-match-plan/17");
     expect(artifact.requiredCoreCapabilities).toContain(capability);
     artifact.requiredCoreCapabilities = artifact.requiredCoreCapabilities.filter(
       (c) => c !== capability,
@@ -163,8 +163,8 @@ for (const change of mutations)
   });
 test("incompatible ABI and unknown constructor leave execution blocked with conservative closure", async () => {
   const { source, chosen } = await fixtures();
-  expect(ENGINE_VERSION).toBe("commander-engine/0.20.0");
-  for (const processorAbi of ["commander-engine/0.19.0", "commander-engine/0.21.0"]) {
+  expect(ENGINE_VERSION).toBe("commander-engine/0.21.0");
+  for (const processorAbi of ["commander-engine/0.20.0", "commander-engine/0.22.0"]) {
     const bad = await rehash({ ...source, processorAbi });
     await expect(createFullExecutionRegistry(bad)).rejects.toThrow("ABI");
     await expect(createPreparedMatchArtifact(bad, chosen)).rejects.toThrow("ABI");

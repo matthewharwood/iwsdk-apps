@@ -9,7 +9,7 @@ import {
 } from "@iwsdk-apps/contracts";
 import { activationChoice, priorityActivation } from "./activation-driver";
 
-export const DRIVER_VERSION = "observed-combat/13";
+export const DRIVER_VERSION = "observed-combat/14";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -225,14 +225,26 @@ export const heuristicDriver: Driver = (observation, seed) => {
         top?.kind === "spell"
           ? observation.objects.find((object) => object.id === top.objectId)
           : undefined;
-      if (!spell?.card?.spellProgram || spell.controller !== observation.player)
+      if (
+        !spell?.card ||
+        (!spell.card.spellProgram && spell.card.attachmentProgram?.schema !== "commander-aura/1") ||
+        spell.controller !== observation.player
+      )
         throw new Error("Target decision lacks its public announced spell");
-      const harmful = spell.card.spellProgram.effects.some(
-        (effect) =>
-          ["damage", "destroy", "exile", "counter", "return-to-hand"].includes(effect.kind) ||
-          (effect.kind === "modify-creature" &&
-            (effect.powerDelta < 0 || effect.toughnessDelta < 0)),
-      );
+      const attached = spell.card.attachmentProgram?.attachedModifier;
+      const harmful =
+        (attached
+          ? attached.powerDelta < 0 ||
+            attached.toughnessDelta < 0 ||
+            attached.keywords.includes("defender")
+          : false) ||
+        (spell.card.spellProgram?.effects.some(
+          (effect) =>
+            ["damage", "destroy", "exile", "counter", "return-to-hand"].includes(effect.kind) ||
+            (effect.kind === "modify-creature" &&
+              (effect.powerDelta < 0 || effect.toughnessDelta < 0)),
+        ) ??
+          false);
       const players = observation.players.filter((player) => decision.players.includes(player.id));
       players.sort(
         (a, b) =>

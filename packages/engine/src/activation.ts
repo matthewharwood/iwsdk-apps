@@ -1,16 +1,17 @@
 import {
   type ActivatedAbility,
+  type ActivatedProgram,
   type Decision,
   type ExecutionRegistry,
   emptyMana,
   GameEvent,
-  type OrdinaryActivatedProgram,
   type Response,
   type RulesState,
 } from "@iwsdk-apps/contracts";
 import type { Selector } from "@iwsdk-apps/rule-selection";
 import { card, emit, hit, object, player, RulesError, request, requireRule } from "./common";
 import { activateMana, commitManaPayment, manaSources, planManaPayment } from "./mana";
+import { activatedProgram } from "./permanent-programs";
 import { selectedObjects } from "./selection";
 import { legalCreatureTargets } from "./targeting";
 
@@ -51,10 +52,11 @@ export function activationChoices(
   state: RulesState,
   registry: ExecutionRegistry,
   actor: string,
+  announcement = true,
 ): NonNullable<Decision["activations"]> {
   if (
     !Object.values(state.objects).some(
-      (entry) => !entry.token && registry.definitions[entry.definition]?.activatedPrograms,
+      (entry) => !entry.token && activatedProgram(card(state, registry, entry.id)),
     )
   )
     return [];
@@ -62,8 +64,16 @@ export function activationChoices(
     actor,
     lastTurn: player(state, actor).lastTurnStarted,
   }).flatMap((entry) => {
-    const program = card(state, registry, entry.id).activatedPrograms?.[0];
-    if (!program || (program.target && legalCreatureTargets(state, registry, actor).length === 0))
+    const program = activatedProgram(card(state, registry, entry.id));
+    if (
+      !program ||
+      (announcement &&
+        program.timing === "sorcery" &&
+        (state.activePlayer !== actor ||
+          !["main1", "main2"].includes(state.step) ||
+          state.stack.length !== 0)) ||
+      (program.target && activationTargets(state, registry, actor, program).length === 0)
+    )
       return [];
     return [
       {
@@ -101,7 +111,7 @@ export function requestActivation(state: RulesState, registry: ExecutionRegistry
   if (frame.stage === "target") {
     request(state, "activation-target", frame.actor, {
       activation: activationDetails(ability),
-      cards: legalCreatureTargets(state, registry, frame.actor),
+      cards: activationTargets(state, registry, frame.actor, ability.program),
       count: 1,
       context: "Choose the ability's creature target or reverse its announcement.",
     });
@@ -132,7 +142,7 @@ export function beginActivation(
   );
   const source = structuredClone(object(state, response.source)),
     definition = card(state, registry, response.source),
-    program = definition.activatedPrograms?.[0];
+    program = activatedProgram(definition);
   if (!program) throw new RulesError("Invariant", "Activation has no program");
   const id = `${state.manifest.id}:activated:${state.eventSequence}`;
   emit(
@@ -191,16 +201,24 @@ function reverseActivation(state: RulesState, ability: ActivatedAbility): void {
   hit(state, "rule:733.1");
   hit(state, "rule:733.2");
 }
+export function activationTargets(
+  state: RulesState,
+  registry: ExecutionRegistry,
+  actor: string,
+  program: ActivatedProgram,
+): string[] {
+  return legalCreatureTargets(state, registry, actor, program.target === "creature-you-control");
+}
 function targetLegal(
   state: RulesState,
   registry: ExecutionRegistry,
   controller: string,
-  program: OrdinaryActivatedProgram,
+  program: ActivatedProgram,
   target: string | null,
 ): boolean {
   return program.target === null
     ? target === null
-    : target !== null && legalCreatureTargets(state, registry, controller).includes(target);
+    : target !== null && activationTargets(state, registry, controller, program).includes(target);
 }
 
 export { targetLegal as isLegalActivationTarget };
@@ -266,7 +284,9 @@ export function answerActivation(
     "Activation requires its chosen legal target",
   );
   requireRule(
-    activationChoices(state, registry, actor).some((choice) => choice.source === ability.source.id),
+    activationChoices(state, registry, actor, false).some(
+      (choice) => choice.source === ability.source.id,
+    ),
     "The source can no longer pay this activation cost",
   );
   requireRule(

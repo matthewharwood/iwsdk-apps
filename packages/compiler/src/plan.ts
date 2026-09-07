@@ -1,4 +1,5 @@
 import {
+  ATTACHMENT_VERSION,
   CONDITIONAL_SELF_ENTRY_VERSION,
   COUNTER_SPELL_VERSION,
   CREATURE_RETURN_VERSION,
@@ -7,6 +8,7 @@ import {
   FIXED_TOKEN_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
   ORDINARY_ACTIVATED_VERSION,
+  reviewedAttachmentDefinition,
   reviewedConditionalSelfEntryDefinition,
   reviewedCounterSpellDefinition,
   reviewedCreatureReturnSpellDefinition,
@@ -40,8 +42,26 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/16";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.20.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/17";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.21.0";
+export const ATTACHMENT_CORE_CAPABILITIES = [
+  "attachment:exact-source-recipient-incarnations",
+  "attachment:extant-relation-static-layer6",
+  "attachment:extant-relation-static-layer7c",
+  "attachment:targeted-aura-attached-entry",
+  "attachment:equipment-unattached-entry",
+  "attachment:sorcery-owned-equip-announcement",
+  "attachment:explicit-zero-equip-payment",
+  "attachment:equip-target-revalidation",
+  "attachment:surviving-source-incarnation-resolution",
+  "attachment:changed-recipient-timestamp",
+  "attachment:zone-departure-link-cleanup",
+  "attachment:illegal-aura-graveyard-sba",
+  "attachment:illegal-equipment-detach-sba",
+  "attachment:commander-pending-movement-preservation",
+  "attachment:typed-selection-all-resolvers",
+  "attachment:immutable-context-serialization",
+] as const;
 export const STATIC_KEYWORD_GRANT_CORE_CAPABILITIES = [
   "static-keyword:live-battlefield-provider",
   "static-keyword:layer6-additive-union",
@@ -285,6 +305,7 @@ const REVIEWED_BINDINGS_BY_VERSION = new Map(
 );
 
 const dependencyReviewers: Readonly<Record<string, (definition: CardDefinition) => boolean>> = {
+  [ATTACHMENT_VERSION]: reviewedAttachmentDefinition,
   [STATIC_KEYWORD_GRANT_VERSION]: reviewedStaticKeywordGrantDefinition,
   [STATIC_EVASION_VERSION]: reviewedStaticEvasionDefinition,
   [ORDINARY_ACTIVATED_VERSION]: reviewedOrdinaryActivatedDefinition,
@@ -301,6 +322,12 @@ const dependencyReviewers: Readonly<Record<string, (definition: CardDefinition) 
   [SELF_ENTRY_RECIPE_VERSION]: reviewedSelfEntryDefinition,
   [SELF_ENTRY_SEQUENCE_VERSION]: reviewedSelfEntryDefinition,
 };
+function activeAttachmentCapabilities(release: ContentRelease): readonly string[] {
+  return release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+    Object.values(release.definitions).some((d) => d.implementationRevision === ATTACHMENT_VERSION)
+    ? ATTACHMENT_CORE_CAPABILITIES
+    : [];
+}
 function activeStaticKeywordCapabilities(release: ContentRelease): readonly string[] {
   return release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
     Object.values(release.definitions).some(
@@ -387,6 +414,7 @@ export async function buildDevelopmentMatchPlan(
     core: [
       ...DEVELOPMENT_CORE,
       ...activeStaticKeywordCapabilities(release),
+      ...activeAttachmentCapabilities(release),
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === STATIC_EVASION_VERSION,

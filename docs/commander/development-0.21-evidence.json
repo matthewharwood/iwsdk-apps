@@ -1,0 +1,249 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.21.0",
+  "stage": "qualified-prototype-promoted-main-components-passed",
+  "sourceReleaseHash": "c70aa375fb6bf828af53a74dc8046dcf0bae115f444b1fa476b791dba6b8276b",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "primaryDefinitions": 1789,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 80,
+  "preservedPrimaryDefinitions": 1638,
+  "preservedCompleteDeckRevisions": 74,
+  "unsupportedPaperCandidates": 30040,
+  "candidateUniverse": 31829,
+  "fullSnapshotComplete": false,
+  "newBindings": {
+    "all": 151,
+    "auras": 87,
+    "equipment": 64
+  },
+  "archive": {
+    "path": ".commander/prototypes/engine-0.21/archive.json",
+    "sha256": "d3c56e9fbccad190d365e3120575579e5d8c9dcc4762971f35600a4f84abc976"
+  },
+  "archiveIntegrity": {
+    "path": ".commander/prototypes/engine-0.21/manifest-verification.json",
+    "sha256": "ff28c8293e8a8f5e022ef2ef84ecf606f36e5790811f72ed34df816785c47ace"
+  },
+  "sourceCompiler": {
+    "manifest": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-source-checks/manifest.json",
+      "sha256": "e8a7414d071cf4ce5618d18321434ebe5bfacad1e55e1b39b4247e4cd542cd58"
+    },
+    "checks": {
+      "tests": 636,
+      "assertions": 126997,
+      "inputs": 300,
+      "changedInputs": 0,
+      "types": "pass",
+      "biome": "pass",
+      "eslint": "pass"
+    },
+    "specificNewChecks": {
+      "binderTests": 46,
+      "binderAssertions": 13247,
+      "compilerTests": 37,
+      "compilerAssertions": 992,
+      "terminalTests": 6,
+      "terminalAssertions": 81
+    }
+  },
+  "independentSourceReview": {
+    "path": ".commander/prototypes/engine-0.21/.draft-artifacts/independent-attachment-source-review/manifest.json",
+    "sha256": "136d66c940b9a38845845df419607aa3f53a0cc58b357c410e7f0b9c343f6e4d"
+  },
+  "independentCompiledReview": {
+    "path": ".commander/prototypes/engine-0.21/.draft-artifacts/independent-attachment-compiled-review/manifest.json",
+    "sha256": "dad37f5007b948675fd964aca4276f52533c2fca42ede6fb72931b939a913fe8"
+  },
+  "coreExecution": {
+    "manifest": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-runtime-qualified/manifest.json",
+      "sha256": "dcb506be9817cb6fdaba57c7d94a8bdecc4e40271d1d28be451093221b3415c3"
+    },
+    "counts": {
+      "passed": 2983,
+      "failed": 0,
+      "assertions": 41725
+    },
+    "capturedInputs": 294,
+    "changedInputs": [],
+    "newTests": 553,
+    "actualSourceBodies": 151,
+    "sourceSegments": 453,
+    "sourceInteractions": 18,
+    "constructedCoreTests": 82,
+    "scope": "All151 sources in3 real factories with declared selected hands/basic lands. Constructed boundaries are not ordinary dealt games or all-interaction certificates.",
+    "limits": [
+      "Constructed source selected hands/lands are not ordinary dealt games. Synthetic characteristic/control/protection cases remain separate.",
+      "Nonspell Aura entry recipient choice, simultaneous Aura timestamp ownership, protection, reconfigure, copy/type/control/grant removal and general613 layers remain outside the current admitted slice.",
+      "See all91 clause joins for exact unexecuted combat/token/cleanup/ownership and persistence clauses."
+    ],
+    "expectationJoin": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-runtime-qualified/expectation-join.json",
+      "sha256": "e9c9ba211680cbb79f3a78450c844401ef3b6a0c7ac3cf58cf61d1619d2819bd"
+    }
+  },
+  "independentRuntime": {
+    "path": ".commander/prototypes/engine-0.21/.draft-artifacts/independent-attachment-runtime-review/manifest.json",
+    "sha256": "8144ff3b0efce20780c3aa393fb4327e6abf23ee81cb303351709f29f8d06a5f"
+  },
+  "publicCliCompilation": {
+    "path": ".commander/prototypes/engine-0.21/.draft-artifacts/cli-compilation-reproduction/manifest.json",
+    "sha256": "9bbb320d3a799553c8d769b2794a2494edca0263bdad40b99c8ef5084222fe21"
+  },
+  "completeCli": {
+    "commands": [504, 1764],
+    "actualAttachmentDefinitions": 24,
+    "paidAttachmentCasts": 28,
+    "resolvedEquips": 17,
+    "artifactAudit": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-games/root-attachment-audit.json",
+      "sha256": "110e0344da76f8dfb79d6cc2f488394caf57e0da9cf35cc882e77aa3cede2de8"
+    },
+    "buildHash": "788b2af2232252d6ac40760be64b2782315bac9b136c6f09ceec60b975b2b40f",
+    "executableHash": "dbdba53e4ed3b0571b9636cfac6864e07bfd7167e71b9aec8f1712b3a3ff49d4",
+    "sourceInputVerification": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-games/root-audit-source-verification.json",
+      "sha256": "98d37c88babe75091b7cc625f27c4b4a1f1c78194f67f3b4094615d0b6be71b4"
+    }
+  },
+  "completeBrowser": {
+    "commands": [499, 2120],
+    "actualAttachmentDefinitions": 26,
+    "paidAttachmentCasts": 30,
+    "resolvedEquips": 15,
+    "artifactAudit": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-games/root-browser-attachment-audit.json",
+      "sha256": "9aa138457da8c08823d09053f1e424617efbae9db265526e1497a8ab36e906ef"
+    },
+    "proof": {
+      "path": ".commander/prototypes/engine-0.21/.commander/browser-proof/2026-09-07T09-13-27-564Z-aadd1fc0/evidence.json",
+      "sha256": "f05ccbaf11951d3a6b907dcc5c120a4325a8ba23769e19f723f7738a4c19aebd"
+    },
+    "workerHash": "a94c02d8cb86adc0087b570f5fc14549ff70bd9e72300d11add009f80a7b332e"
+  },
+  "nativeDurability": {
+    "manifest": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-native-durability/manifest.json",
+      "sha256": "f8afe135f8ae1ccec2edf4eb195008d3b73a81524c2820a3b5008c2207dba4a3"
+    },
+    "counts": {
+      "passed": 41,
+      "failed": 0,
+      "assertions": 1858
+    },
+    "unchangedInputs": 170,
+    "commandsPerResolver": 246,
+    "checkpointsPerResolver": 13,
+    "independentArtifactReview": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/independent-attachment-native-review/manifest.json",
+      "sha256": "4e9c9f1303846d2326d8a70e2f6e7157c26e985ad414be5bac7b5f499f3e0d39"
+    },
+    "scope": "One ordinary seven-definition deck/seed history under3resolvers; no completegame."
+  },
+  "stoppedBrowser": {
+    "proof": {
+      "path": ".commander/prototypes/engine-0.21/.commander/checkpoint-browser-proof/2026-09-07T09-33-52-536Z-a3378f14/evidence.json",
+      "sha256": "5973d4fd25f1ba7fc4d26990dd8064681b5992fc1f139f00c5b80e3e893b96e4"
+    },
+    "audit": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-games/root-stopped-browser-audit.json",
+      "sha256": "55017dd45432d03bdc994620d42ac17f1880bdad91af899101abc5101b04f6da"
+    },
+    "reloads": 39,
+    "imports": 39,
+    "exactRetries": 78,
+    "advancingImports": 36,
+    "alreadyFinalImports": 3,
+    "newCompletedGames": 0,
+    "workerHash": "a94c02d8cb86adc0087b570f5fc14549ff70bd9e72300d11add009f80a7b332e",
+    "sameWorkerAsCompleteBrowser": true
+  },
+  "proofHarnessCorrections": {
+    "equipUnion": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-proof-helper/manifest.json",
+      "sha256": "ec3c0b2baf8b06ced855490f217e9e10f84d5ded053be8ab965160513ba80d7d"
+    },
+    "independentEquipUnion": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/independent-attachment-proof-helper-review/manifest.json",
+      "sha256": "8e98197125d367c8195fb6934c06877565bc2b681212aa8999a0ddac2fc305e2"
+    },
+    "checkpointCapacity": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-checkpoint-capacity/attempt-1/result.json",
+      "sha256": "ae189e2e473e8b46d776e3437497356572f4df47083b6059f73ef184a65b7e9c"
+    },
+    "independentCapacity": {
+      "path": ".commander/prototypes/engine-0.21/.draft-artifacts/independent-attachment-capacity-review/manifest.json",
+      "sha256": "196d993c3749324cc24a9d3af7d4c333f961be0ec8d35ebe4b67d73b2f5e5355"
+    },
+    "scope": "Equip parser union and maximum16checkpoints; firstattempts preserved. Capacity does not change workerbytes."
+  },
+  "auditByteHashCorrection": {
+    "path": ".commander/prototypes/engine-0.21/.draft-artifacts/attachment-games/byte-hash-correction.json",
+    "sha256": "132b48baf6aed46641eb9eda5e92fd6c6217d583f7a0574884257bb6fee0656a"
+  },
+  "fixed64": {
+    "path": "docs/commander/fixed-regression-0.21-evidence.json",
+    "sha256": "64c9ab77e417cb9a6cb5200698ea9d724111d6d81c65624ff5d5d0352418714c",
+    "completed": 64,
+    "replayed": 64,
+    "commands": 89784,
+    "scope": "Exact historical64 assignments,14old deckcompositions,424sourcepins; zeroattachmentprograms. No newattachmentcoverageclaim."
+  },
+  "mainGate": {
+    "schema": "commander-main-gate/2",
+    "engine": "commander-engine/0.21.0",
+    "status": "passed-components-after-sandbox-port-failure",
+    "originalCommand": "bun run check",
+    "originalExitCode": 1,
+    "originalClosedHandle": 76337,
+    "originalLog": {
+      "path": ".commander/evidence/check-full-0.21-main-attempt-1.log",
+      "sha256": "223a480f19f9b3e9ca7dd050762fd388aeaf989a6c3491f0e1e79db80c57a1b0"
+    },
+    "retainedFailure": "Sandbox EPERM binding127.0.0.1:3135 before browser tests. Original passed boundaries/lint/types/units/build are retained; only remaining components run here.",
+    "remainingClosedHandle": 67090,
+    "remainingExitCode": 0,
+    "remainingSummary": {
+      "path": ".commander/evidence/main-0.21-remaining-gates-attempt-1/summary.json",
+      "sha256": "8b5b8c4b1752a260265615246102a17cfd9dd1393b6263f6916062e16644f0a2"
+    },
+    "componentLogs": [
+      {
+        "path": ".commander/evidence/main-0.21-remaining-gates-attempt-1/browser.log",
+        "sha256": "ea65aa90f8407eff857cacee44e94452942635cdccc6e773c7e8d6cc25712251"
+      },
+      {
+        "path": ".commander/evidence/main-0.21-remaining-gates-attempt-1/quest-dev.log",
+        "sha256": "644d0aa047cf760897d836bd3015d563d43e290c3ce99e140d616e4ceac13ad4"
+      },
+      {
+        "path": ".commander/evidence/main-0.21-remaining-gates-attempt-1/template.log",
+        "sha256": "81e5fa59cceb56a13a321474218040e58b1f4125e75f990c25911c4993f3c6d8"
+      }
+    ],
+    "mainTests": 4018,
+    "mainAssertions": 242598,
+    "generatedWorkspaceTests": 4018,
+    "generatedWorkspaceAssertions": 242598,
+    "browserTests": 12,
+    "productionBuild": true,
+    "emulatedQuestSmoke": true,
+    "standaloneWorkspaceAndGeneratedApplication": true,
+    "postGateUnchangedPromotedFiles": 75,
+    "postGateActiveReleaseAndDeckInputsUnchanged": true,
+    "physicalQuestVerified": false,
+    "scope": "Main boundaries, lint, types, unit tests and build passed in the retained original run. Only the remaining browser, emulated Quest and actual generator gates were resumed with authorized localhost access. The original full command retains exit1. Generated unit tests repeat the same corpus, not additional card scenarios."
+  },
+  "remaining": "Whole-card interactions, full31829snapshot semantics/execution/independentcoverage, G2/G6, remaining acceptance/handoff and physicalQuest are incomplete.",
+  "mainPromotion": {
+    "path": ".commander/prototypes/engine-0.21/promotion.json",
+    "sha256": "b7b46d4a4778e1d8e331c70db405584b1d949e85ede8f1b4c66fbb0b6619f89c"
+  },
+  "mainExecutableEquivalence": {
+    "path": ".commander/evidence/promoted-equivalence-0.21.json",
+    "sha256": "abd21087f25dc789d495c60c758d9b1746f685b5b67c8f9f9250f7360c0b8a83"
+  }
+}

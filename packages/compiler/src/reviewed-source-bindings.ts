@@ -1,9 +1,9 @@
-/** Authenticated pinned membership: all1583 prior0.19 definitions and20 templates remain exact. New55 definitions independently joined to raw sources and authored semantic expectations; membership is not runtime/game certification. */
+/** Authenticated pinned membership: all1638 prior0.20 definitions and20 templates remain exact. New151 attachment definitions independently joined to complete sources and authored expectations; membership is separate from runtime/game qualification. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "dbecdf4f6b9440e17b291af1784b9994a0d78b7eea5fe426251e769443c7ffb4",
-  bindingsHash: "130ec74ddde0e24baff92288fe2bf970f67f6558c038560a328ce638416f3782",
+  releaseHash: "c70aa375fb6bf828af53a74dc8046dcf0bae115f444b1fa476b791dba6b8276b",
+  bindingsHash: "c004c12d2bcc755d550fac93aef2b5a2679bb95dea1f7a1d851534ee75be5df2",
   tokenTemplatesHash: "d5a3e91281f6a497cf026bd8b6a89e8e54dcd673edf1a9a22efdb41938205bcf",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
@@ -8198,5 +8198,760 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "d866a0444a1a31bb3929cb4e63ee0e40935a8ef7b3ee5da7ef1d063cacfcd7a4",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "7b767251c9aa2b1b4a83338615a57d90b82629887ac74c934ea14f13e3130a27",
+  },
+  "629fe1be-272d-465f-b9b1-2ce177410f13": {
+    sourceVersion: "93ed3f10673b9125746ede812726cc385640215978a654f0c351e74d95e6efea",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "324188f65a9633c571064bf9195f97774ffbe85358eb520bd04e9909990bbce7",
+  },
+  "dd70d439-bd60-43d1-ac26-13b744cc4a37": {
+    sourceVersion: "443fd5a5214a6c756657e0911321a6371bc60fbbde53548247b9d66a72d5c538",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "d12167d5244bfc54cbf1a612a064844420052d9549af7bea69aedccc832172b1",
+  },
+  "e3bad2e2-1024-4261-b3d7-82a6998416fd": {
+    sourceVersion: "49d2c31ce1aae2482d8c3c2ff8dc774df7e18af7c62fa9aef38f9bcd78a6d6e2",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "9aeef0e9ea0fa1cb7903f12287dd7dff4354681d73fcffa3bbe5eb8c029ce21e",
+  },
+  "e52eb1a6-fff1-4a47-b434-31a74d76231c": {
+    sourceVersion: "f07d86b1e50c1c945b60c6ca431f1b144698919e49702a7bd93a62c79be9beb0",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "5aaf73e793227b1b884ed72b17d82e1418d4b3b19d660e86c7d90c18f70524a1",
+  },
+  "40eee955-bec6-455a-addf-68cdb84c76b9": {
+    sourceVersion: "2e83a350f9c3934b96f16e9d5b1b030a74f6cfee7b72977d985a0931147a4be3",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "380b6ddb4dbab6e1dcb4a81c12ef9dc536542541bfe370ef6183a6478d527767",
+  },
+  "97e7ada6-dee1-4bb3-a42d-38a61d946bd4": {
+    sourceVersion: "eb744e3dda77ec83ba8632830ecb6452b14be45210df0226f84440beb2fc3a2e",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "730a65c1146c499bef1fbaf2014ec02f1fd6ac99f82c95cb62641da3c109c14f",
+  },
+  "4b65276e-7d03-4700-834c-48178fe98353": {
+    sourceVersion: "813fc6aa54f3811bb01af24cedbc8e25d3a9be6e82fe31d6c06b398d1a79a90f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "f6335f493cd03c7b9e6acccdc76aeb3f0ae022597fe77906d3104cdbd3416e9f",
+  },
+  "b81fed36-07c4-4903-b5b4-24e62d2ce239": {
+    sourceVersion: "f7611f08cb1bbecae3b3e234c311ca424486ec66bad340038d0f54406c87a091",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "358c9275285d7fdebe97d1e1946b6c1c35b1aeeb77d39ee4146a3e87a6626a2c",
+  },
+  "f5f4dd28-f4ae-4d39-b9b8-6ebfd63c93fe": {
+    sourceVersion: "eae2fc5847e60d51b18848d8787ae0eb7a79cec73f362d4518834a4462d3685e",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "88b354430918939ad01cffea70ab2988e8b45294fb57df7a7fa9f63cbdd52c13",
+  },
+  "a06c7c1a-8534-40fb-8bb8-59f8f2530567": {
+    sourceVersion: "c0cc2f2980dcc27334be56c8c81849f5c25521b5b135d7c44a024ca4c29f3587",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "74c53f69b37863e6ee9121fb3dd564017fbcad5ba4a953fcfa2092a3d1ecbe8b",
+  },
+  "00573e77-8ff6-4acb-8683-8827d965288f": {
+    sourceVersion: "c078534d84e1b24c282a0ab2a7dce5635661bcf56feadd3725351e39d68bcec7",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "defd5d3896dfd426ed0cf852ee555ebd59f9597b82df4126da0057d4f6776e0c",
+  },
+  "c8cdc08a-975b-475f-8e30-85d61f6f3a9b": {
+    sourceVersion: "ce4b59fcf5d3433afd177c0c96f20e57fa3d712a2a019a8f83e58da0848b28c8",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "6e6f0b60f86d0e219939f55f6d67a02e0f4b926b6d1d79bfdc9182351f9dc9e8",
+  },
+  "16e555f2-5aa8-4100-a036-eed48db0e84a": {
+    sourceVersion: "681047a9fa058e2729b23b6283b159c0ea8673f9123a4a97fe28b3a9e53a85a5",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "c570cd01fb8524abb9244e10a267a5cd7b2f50d0076fa8ebebadce3951c843fa",
+  },
+  "452e3f5f-ce17-4682-966b-5cc100210aee": {
+    sourceVersion: "403bdf9705e03b12c8fe7856e7026df8d594c722f679b37bf5d5605e8b17a0e3",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "49d14fd38a9131d572f348f818d7635fbc33d8d4d5ce183832d73a73e7e69bed",
+  },
+  "20d30d4d-cf38-41fe-a2ce-8327f7c87c01": {
+    sourceVersion: "8cfed5d47b3eb711ef5f133388c3be8ea6bd32b209bde73177312bdacf0ecb28",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "0391812220a901234909d5695d24bd7e123941ca0cd79201dce8cf00a0b5d1be",
+  },
+  "6f6601bc-cb12-4054-9027-e4a0ebdae1a3": {
+    sourceVersion: "4b8ebce6d77a06299dd5171da15c729b6da3a8e436a72dc45ab4e5fbc4e7b562",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "97ceb5b77c6d0dc921eef97e0ad2419927a993962199e5777a79d3bb185e61be",
+  },
+  "9249adf2-8607-424f-a73b-fcddaf124af9": {
+    sourceVersion: "f0d786ae3b4348c50dec9ec6de2baed39f88c253d52052362e23ab8e186782c7",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "9bce791d26684c4d3d5cf4960f5ad73760d413e257ef52b8e7e5c115779cb249",
+  },
+  "14691783-1246-45ed-a439-c86d7b5eef62": {
+    sourceVersion: "db8056c19e9bff7a166b864cc1d533ea2e33634f7cb5e0e58408f1cdffeb7c18",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "ce7e5d6d9a03f4b1ae4879eb530bcbf8bb2badcb00399544cb71272e96bfb45e",
+  },
+  "f4e4060d-bfff-4991-9ae5-8f848304cd1e": {
+    sourceVersion: "7533d82dd35765efbc9c5d3586fc0e1383da49da4b4715b7412150dc6fefb8c4",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "f21c5cd1b14677f780114fcfa99f34690a1a2b13d0d1ccbdc57b9d4b5df92c04",
+  },
+  "d6b9b88b-e31b-4b88-9d53-3df5687804ba": {
+    sourceVersion: "2136dcae787db15a25a6e67a7534c859ba74dec4ccd3ed0a72e9fd705f0cdead",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1a3d57643875536ee7f8126fbebaee886e4c809687c57c5990f29b1a4188da1a",
+  },
+  "7153bf15-53f8-445e-acbb-35b4f4b3d551": {
+    sourceVersion: "d8d9817ac9007109e703e0008fafb9a40b77a6800d59347088890f4267f5397f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "49249d45a08ce2c89338d0465ba6ee953085363d7d5a6709c0e1c7ca4fe4efc0",
+  },
+  "b270d091-ea4c-4dfd-9c50-48b45bbc396e": {
+    sourceVersion: "3715ed5892d484591af9d27bbf34babea6c5e9fe04ef23327b368af4670d782f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "19baea52c15086c45014db85e15776d97d256ebbe9a30644c9746dd968f12748",
+  },
+  "7d2fcdac-c8d5-43ca-81bc-130744ed8d3d": {
+    sourceVersion: "8998869c9cee60ce650858c2eb8068e42f519726cac36b3a79e0f29a2deb8305",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "27c51790da40169ffa5b3636687ec06d40bab5c4c0f73b7e268511b3321d75d5",
+  },
+  "5c902588-b16e-4679-b89e-7b11c928061f": {
+    sourceVersion: "63dd600d929156694c1d4508637fe5654a59d691ba99f98e3eb96f14bb212cd0",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "dd057b32e271abcb99cd3ae514ba061046b80992e3dadf93fed7cd4a003b17af",
+  },
+  "5a40339d-7821-4f37-a957-1a6ebdd993e0": {
+    sourceVersion: "7f3ba7af816d2cb17b00de056e6d6c997c2e1277bd127d23e4bd00b2950f272f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "97abc498e2353b04d8a441813b67666eb21a147e9a53fac21c74e9269348a9ed",
+  },
+  "d5487098-fd24-49af-9634-4827a5c2eac4": {
+    sourceVersion: "6e73620b7f0a98ad9b434e37fc69edb184901c46151f2e350851f0a44cc74bcd",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "4331f2782f21ed3c9e33167fe29e4ee592a8b4026aa36d976609dde4bfbd98b4",
+  },
+  "5ad3abf3-1ae5-4c4c-9950-ba7bff0d75ad": {
+    sourceVersion: "aa8a69e7c2953f9b89b19ae9c5e4fc002e885ecbb7a7448e0dffc6514d61825f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "7b3746ec1d27b5919f1589a4580faca5e81cef0423edf5b07a90da5ef157334c",
+  },
+  "ecd28e2a-e172-4f4c-8416-b9a0d97ee497": {
+    sourceVersion: "43d2ac5cb93ab25ecbe2cc754f3fa50a87e968e38c1583fe4e3fa0492d2b150b",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "7879194fc278698ba4996dc718cd4c4fa92dd16996b2cb12a04f53ba49439c83",
+  },
+  "8d8682f3-9ef3-4aa7-9ea6-8a2ce09bff6f": {
+    sourceVersion: "35efcb19ac25e91e43475173cb398989c0f8cc75a11d517031795abf795accc9",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b403ec8020375b3262f3a89b756fa6b94a3a78c17df949ef549561cb4f0b4e46",
+  },
+  "8c2d2888-38be-41f9-aaf2-8337e87d2aed": {
+    sourceVersion: "162c166ce85e8776b37043140a9627fda0ff2db8fbdc5bba7d225b681cc296e8",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1d713565dca3e9499b1fd3a7df73a1bf2566c8cb999635053120196d9d9bea08",
+  },
+  "3e211792-2656-4bee-80ac-60eac0c45c2d": {
+    sourceVersion: "f10fdf9498a054106e7b2d4fe72d0bb1366ec4bbc73a5c58bce5171846b2facb",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "833b00871e50138e6aecb0a7a43aa55fc1f21f8e2b329a15d8ab49afcaa7a9dc",
+  },
+  "96e244ef-21b9-4795-a881-c3db23b60cc9": {
+    sourceVersion: "11281d7eae28e2fc6e52ec54f28f80f02a09bd6199928aca2216b21a3dc9fa82",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "8024fb43925a268f09f7e5acffb188131c93116c24c0d6d671c48596f41c8cbb",
+  },
+  "3b7ea3ac-ac0a-40aa-b743-d153e1c47d8c": {
+    sourceVersion: "8ae5b001d4b6fdbdef800ba5be76be55274d6c5818325e488a19151987bf53f3",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b3f380ad8ac3400c0a0839089c9a2d455386f1bf19a7102b3021d802b0ced257",
+  },
+  "b5b4cf54-ed5e-42d0-9d98-5fec76b0b0b8": {
+    sourceVersion: "0eb0a389f11c55888a8c625a1bec9c8fbc675e6f181b598a6684f2d27b23af8e",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b9b600da35eef0a1814504bbe658cc9d3aa17d9d077c2252d38a24522497e592",
+  },
+  "b1804304-fac1-4b19-a48d-6ade9407972a": {
+    sourceVersion: "2d13658be30fce212009603087f393d9e3e6b307dc6df7bfd7fda286cab740e3",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b01446d324afb31d1516974ccac2dddfafc74d2652f243f0b5e42f228cfe2a72",
+  },
+  "52eab77d-9a07-4e14-8872-72681d3b3d0e": {
+    sourceVersion: "665e05554bcb86516c379facbfba35eed75d7c5f654fcf28d4ebeb201a937704",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "409182900fce74d96dd067ff0255ffdef1c62fd12f56061cd27b2cbdc2949a81",
+  },
+  "19959b6d-eb8f-4273-94c8-65210e1998ab": {
+    sourceVersion: "b7995bbb220818f0fdf5073d3645de432dd4d5fc883496a2bfbb241b82f67692",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "74b8c5083e7841567e7645e1d1f9b5f93dd1d909bf1a5945a78607fd50e9f2b2",
+  },
+  "f1a3153c-0200-4ff2-b7d5-48d23920bb3c": {
+    sourceVersion: "7f8402d7535869d718c4aee0de589a81e1f836dd3cc3a6dbcafc768eb0cac2ae",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "6f349c78f48ab5da0724d0c1bfeb87224649a628852b3e9eec69d74e4bf1a0fe",
+  },
+  "292e7135-8804-43f2-a486-51ef97b83f77": {
+    sourceVersion: "bda542e60f102cdb349568624d174f2463e889ab2d9705d5ae73c85926b8017b",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "e6b838d3a2765f55c2ba42a8833adb1385147855798124f8c35f5fa86f8d82dd",
+  },
+  "af740170-af87-487c-abab-a6ccdea82d97": {
+    sourceVersion: "154c84f07bc0e42035b7f20bf02997e464a26c341e9a0baad94191589c39d411",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "574c5e62d74dbe8b9b0533f9fc800031d646258dd89ba0178e22fff9adcf936e",
+  },
+  "ad8edfdf-6915-4fc2-9226-3aae95951935": {
+    sourceVersion: "ab1e912ad5f5e39861e4949d181c1eb5b8c651c7d219514c696b3995ce28ac26",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "abd43266931940d719e19d9f9a3474c16335b0680d0685cbf589408361a37713",
+  },
+  "dab28bc6-3b2a-444f-b596-0a8d95d6d28c": {
+    sourceVersion: "08003dea1399c03f4b86b75e526999817b4b1d14da4d65abe423457bf1d2e578",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "d85624dfc0364a1580323ea99e6f4ee10391647c5b14e37cacb46c7df9583f5f",
+  },
+  "041738f9-7465-4a6c-8046-a897d88cbcdd": {
+    sourceVersion: "f6b894da9c6e4988a378c23052a68f197fbdeb4b0a7cd904b1ede7f8a9503d14",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "a54f65c6f9b4d8d9a2b96e6de1e49e0f37c8e60cc575ef9bcf48259d80c00c8e",
+  },
+  "f7ed3cd6-d138-4c12-93bb-91629492a5fa": {
+    sourceVersion: "75355fbb31a3c59cbec9e12c5ad13b2626bdf87727b4bd862ad4bc6553bd9619",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1a255053197818547627b69c50f9590ba876d2b027609950bfdb16547325b66d",
+  },
+  "274d89b8-1e59-4992-9299-dc793b7f6752": {
+    sourceVersion: "be135763bbd9da427a591174893e24919a751875637ea401779827dece3257c7",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "f93e97464dce2a08246ab53ae08ccbe5dc80638237953c9c5569f5663cdcb681",
+  },
+  "a1a7757f-7e9b-4b5b-b9df-e98d8918caac": {
+    sourceVersion: "ad8e0f4d0c63af25cfc17a59e0d3076ac3fc03774df72a7f2c7307c0ce0a1f7a",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "7ea788f20ff5de13ee5671d27ea0ad2dc39c75ca513088c15f0e284c48bd8a76",
+  },
+  "5b3c069b-5bed-4b70-b04c-b7143a4a6e96": {
+    sourceVersion: "6303849d8da046276e1d8a40e73dbbeb12ae25033046bcdc7760626e9165ae1c",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1885b327ee9b9368f47c575e384b29c1bd898e72ea3d9a75aeee5cbc6b6ff15d",
+  },
+  "a02e1ca7-23c5-41e3-a744-72fc9e9dd8ba": {
+    sourceVersion: "8ed4d11d9c1903f5d0d07a9a85f206871620ceeb0b94aa7149cce199acf5b940",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "27b8da0ec606dc3f6d6de4fc92572e4dd280597e998234f3b17ad38c5d402a40",
+  },
+  "05c62f91-2a5b-4cba-8e66-78fb370ea409": {
+    sourceVersion: "6500fb117c09958e518a2d41818b9eee424f10bc0fbba9cedcfb82d4be7e64ef",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "93698fd9cef460728e087818e11132d75c606fdaea6541e373798a9851295428",
+  },
+  "9811d1fa-1398-49a2-bcbe-0e40d9779ef1": {
+    sourceVersion: "497d42e5c1014dd902b1a9cffc82611cc35fb6a51ea86702c7b216ea6e381cbf",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "a6e2f102be6a0ecd5a402f36a38f0573a53e7727960fa57a517f4042e24efc0d",
+  },
+  "6a4068b0-fb4f-429c-a94e-47849f3eb7ef": {
+    sourceVersion: "fb1e4ada48096c869269f33dfcd18a6822f732bf9d518f3c9a0d9b24af97dffe",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "c263111bea58d482d2e5497210fbec2624fd2a5a120d188286c7fa13c2e56474",
+  },
+  "5dbe4648-f4c9-4d26-98f5-58a7e53b149d": {
+    sourceVersion: "7429c2b544bc2a43be5a817a766a9ced111453ae4e043a17a4da9f7804bfbb41",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "8b03c47876be1c253a72c5c4a07ddb184b987084f2bd0682e0d5d66f57d6df9d",
+  },
+  "1a04c31c-f5e4-43ff-a5b5-207426b8dca6": {
+    sourceVersion: "d828cc6716961b8f3baead76792525c5751a18938cac99de921e6779b0a6a4d7",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b6ccb18deb79255f39438033c957ec02a4cff16111d64a05dcbc2cd538c330c4",
+  },
+  "efefb339-bb7c-4b26-abed-8434f955122b": {
+    sourceVersion: "543045322ea8f6e37eddf7a3afa44b1ed5b078706ea10f357979e778474d3017",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "9129ec5f35402beccea50f36dfcf467349ea39002eec4dd5101db9724ec24dc6",
+  },
+  "97e34c3a-070e-406a-8505-657f4d57def8": {
+    sourceVersion: "3f83e698cd08f95a4ec27b302283bab7278570ba3a35c7ac4a683d177ce8af6f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "5d3393e2851c8ed62e56ed70b2171adaf1942d55c625d27474d362270c2bef8a",
+  },
+  "db85ba13-f00d-4cdd-99e1-22a4d39c8837": {
+    sourceVersion: "c2ddb41b76796a270fb7116db5a2f680cb4bef23a4ab34e1881023cf5233c0b9",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "0c8f2ea9085800af9938dea3b1e858b2533cf6c79c85ec76929c4b3042088417",
+  },
+  "e1abac67-ae07-4bb2-a048-7e41e0fc0371": {
+    sourceVersion: "72c74282c3fa3ae61b86075b618c6348af677757e985b4134d28c5dfd3a3b929",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "8cbdb89c7b10ca2822d129b6d5ac1e482f868b0c8a47e47f9af8f3570762e65b",
+  },
+  "67ca79d7-9064-4605-8625-b1cfe5cb1b45": {
+    sourceVersion: "e875d13403ff4e31490b6d6433961c90809d2e7d769804451ab3a506fc628b96",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "957bc6fa31c00d8a52154b89ad7fdb969d6f23697c4b7b28d05875698257a46c",
+  },
+  "91dab3e2-039e-4db9-94e3-1146bced18ed": {
+    sourceVersion: "26f085a6db532c00540dd44cf70f03a4e516e4c5635facbb2d7726b4da87d5b7",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "149cac8fa411e57f220474838b6ae28e7ca279af66b95ccf3620fd843674f207",
+  },
+  "190cdc23-fa05-475f-b853-471ca0f21b71": {
+    sourceVersion: "a83345371af8b0a3be7d8c80073d017c483959392529dec81e51c08c3208b148",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "51bd811449a98c071094a7760d8976516d307ba4d4c776073dc1f17554dae987",
+  },
+  "843f3373-b8ef-416c-9163-aa1aa6b4a51d": {
+    sourceVersion: "02fd9eb30ececda8de7a423f5d46ab8437a203fa13d6f4cd1e96575826d3cf0a",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b5e47705d3610d0f1deeb04e160f23e9bac08ac108f39e79eb063b9b7362d06f",
+  },
+  "51024f9a-6c6e-4555-a156-92b32255a0c9": {
+    sourceVersion: "24a7eeecda8800b869ec1fd412be2dd9bbdf487b6b42ad234e8fc1eb37a91bf0",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "17f6e1b744feea7a479511e5e81609ebcef904136b903ccc42a44d5c1ebbb2ae",
+  },
+  "e9e0b78e-07d5-4603-8e3b-27274148d1a1": {
+    sourceVersion: "dcbb8310fd4b1f026567845a8e04a9630e27fc13d9c8e0311c29810d9b3f9293",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "0f396dc99ece57eac199bc9c7ede3b94283c74962895b46592616f049aed3853",
+  },
+  "9b44cc9e-6ef0-4fee-b79a-3e34cb0a3407": {
+    sourceVersion: "73eadf0c7474b51fcf071dc739268fe2d6ba12a8fa9d90a030188c0a799db798",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "6db3a6ec98bb2138468c5d24c2651cbd626a0bc3140c6533e1ce0e19ab7aed81",
+  },
+  "3b20e187-c200-40a0-8db2-481f0bf90168": {
+    sourceVersion: "4caf2175c7c4b34552d05d7e050d8930b70bb0bc33e5cd697e09344de313b3a3",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "c3524229f04f5c95f0c747881c256f6ef3fb187abcf4eab5401d0596ff5ed586",
+  },
+  "ab433d41-e801-405c-81f7-06fa6640797d": {
+    sourceVersion: "2238b033ab075560cc397540ff03d9a678d152b1604a8608b85463abde7f2e1d",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "4ee34ad2b42058bec54e555d8126e1813b47687b564b89cfafb031adcfd12fc2",
+  },
+  "9eb58db8-7934-485c-8606-fb1a6cc60d42": {
+    sourceVersion: "850e9d4f1e65a75f4922522f7e56996a2cbdc881e30569039c13c1b411f2a927",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "0c03736e2a466f9cb2ddf4f3daa3291e24abe1ebe9bcdb7ecab019604608744f",
+  },
+  "74fc88d5-19c3-4516-9a06-e9573d659caa": {
+    sourceVersion: "bb3e6e8787845d7ae936163c9e2252c80878b50923d8b3dde0544104d12daa60",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "621e431d48820679bc17e957bec7c74da2657cc70bb28ba4db108bc8a12df345",
+  },
+  "1854a99d-f8c7-45b3-83a2-98ae1c5b5b09": {
+    sourceVersion: "83bb6b48f17de6072e60263ae047c9a6bb384bfd3037414a56ac89851cf1a7c9",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "736b5d583483e8b22e9969310196a88569345a8fb5cfba9e76e220eac4d5798e",
+  },
+  "9357de36-f8be-4f49-b2c8-9fe9eaf82b07": {
+    sourceVersion: "ec8c9684d1c9ea635401ced2a5832e486c0fdab5607072560d7e7cc687c0f001",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "28d67b01f0b46bdc01aa1605ac86516aaa301679332bb29e2cf62ef066b192de",
+  },
+  "f2142c41-ff66-4276-b426-fd945ed9b0f6": {
+    sourceVersion: "63fca0b9ab635c943e453239d523d927902717c58f637ece5c1fa849d43d5c00",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "f54f44f6ec6b85f325674504f1e1296b44ab8997163b56c647f25d98540cec9d",
+  },
+  "9f40ad89-3767-4837-a078-f2dcfaf368df": {
+    sourceVersion: "245a073ecb1e28ed0120de43fd3c454520cc15f7c1b934db7d22f703827e2109",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "db97171ec73379e9c71efa3f3c2f712434b9609c31467d7a3f36ab5e4490f1b6",
+  },
+  "6f67058b-ed14-4e3c-9af3-d61570870e36": {
+    sourceVersion: "4e2a083af4cec93b6931382c8ad99635a0448d9e246c6e7d6775009d3f209327",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b594ea9c2b71894c5e71be1671f4f2c831b9c34a4ede1330c54b467369ba8442",
+  },
+  "cca60afe-b044-4401-8322-170aa015873c": {
+    sourceVersion: "d9e5c23418fe4c87d3f2c638208d1062c18f96de6302f0fd50911ad7b0c5a872",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "73002f580c30da78de2d002e44d96a13aafb349514d4622d823d80b415240cb0",
+  },
+  "f73d89ec-05c9-4998-a24b-bc675b04ec16": {
+    sourceVersion: "aef9a094c1538310d868e328d4a778f6d378e8b95b8ad6fc73542ad467621bf3",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "6a024fa1cd095760773740c733cfb217c58040bc3372e4163d49755227fb14d0",
+  },
+  "24f9c64a-6ce6-41cd-948e-11554d7f17fb": {
+    sourceVersion: "036abefaf77a1e91d591f218b5846eff2430745351bcf6216791ebdf9de31294",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1acbcd6c854fb75126892824230c793953ffd2cbdf45dcb80e451ab4cbbe0228",
+  },
+  "b079f9db-974d-4525-a894-57b754ba9dcc": {
+    sourceVersion: "7a99c9152632d60f8885138284a99d6451ce095216dd1ac25c86cc0a2cf12109",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "a6c59056fbd688e2633860143a5f400bcea7c343dd25f6e2b5dd38b369cd8ae3",
+  },
+  "63604320-68de-415e-b1f9-dd0f85c5d8a3": {
+    sourceVersion: "de69035391de7ede6e6d96dcc65ff669a18cb4ff4ac84ead22eca2507e0ccc4d",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "f004669ff497eaf1725e2086fc98c490deeafe690e9f97e1e63dc6199133e400",
+  },
+  "450e84c7-afbe-4b30-a3e9-1dff968a5200": {
+    sourceVersion: "025983d0d38183bc04a2648b81091f0e15c5e2d2674faa41feab13eb4673789a",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "8c4e14d8f277bc7ec31386c65abe3b9196b4193b077f8de7890b2ff906489a2e",
+  },
+  "5960dd01-6797-4c73-b48a-f637b9c288cc": {
+    sourceVersion: "08b3aed594474570dc744c694f20c785e3dbbc05b92cafb76a296a31872219d4",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "c8fda7113a90dc6af108b7d3eca7c49d12722952bedf88c42e69b8c55a8fd4f8",
+  },
+  "cde26d69-f3e7-4dd0-a53b-cd0ec812d717": {
+    sourceVersion: "5b85feaf6a6010fcb5b40e2d551fb86df8745468f797dbebb2fdc2d3e1f6ee41",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "7e7965deb7b5abdac2db1124bb3cc5ca840bb09bf8323c9d4149610bb050a217",
+  },
+  "ced4538a-4919-4ef8-8bf2-2de9e0388587": {
+    sourceVersion: "0b74555d0ea219f5557c4e39341a87c38cece995e0b6a29d65dbc35bb82ff1f7",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "bbd06838fd5171fbfc35f09f6c229138cc59fb12db0ee736473964261cb25260",
+  },
+  "4fe8316a-9cff-43e9-a1d5-993a0c9daf3a": {
+    sourceVersion: "f3e3d0a5cba017cd1c2455d7594d9fd525c458021afeb953e45481ad047ee71b",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "7aaeef4dcbdeae70ab12cddb9950c7c7f9310aa33093a4f3738868d4ee9e57d0",
+  },
+  "ca204b66-8d0c-431a-8d34-282f7c2d17da": {
+    sourceVersion: "9328aff36830a5b8e99534a68a5ec47cabb94e21f583611da4f4bd651ab73b26",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b72abaa7078d234937e840c8512b23a0160b642b6bd2d3c43f9ccc72a95398f6",
+  },
+  "4a2a7eca-3477-4858-9dab-ba80d4d704cd": {
+    sourceVersion: "f86638f6f4dd348ae3fdd2ce5bc0b119988f44e4ecd334afd739cfaf34b1e26a",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "87944a74ad21f81a25f954734005517a40f3f7a3925f61e4fa46e0e0946f8dd1",
+  },
+  "dba35ac5-7ad3-488a-a006-6b9a1d54eea5": {
+    sourceVersion: "12c623d7f76c306dd649d2571cbb21e6d4008f3e543ecfde908a1a13ea06aa0c",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "54202eace3bf0ca8b2f5c348c2b3328caf902bc9878f6bfd9f44399e26519efa",
+  },
+  "4a9dc9ef-a603-467a-aeed-32cc111394b0": {
+    sourceVersion: "4001d5340e1f033998dad2d4b137f232acaa8f53e13a7900e3c96ae3d8feeca1",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "4a002b45cdf2628307f6c7b95d1234ce6887e91a0b2d859990bcc509c4ab612b",
+  },
+  "ea8c4a7d-f7fb-4620-b3a4-ae8280dd60d9": {
+    sourceVersion: "10d62bb07ef41ce035393e5edbfce6b8c0343e276dd294eb3da9db89f371bcad",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "0264aa5153d95e22a887a2360a033996f67aedf00c087524f846fef2d12201e5",
+  },
+  "e3e5b12c-2103-4b40-83d8-6d5449179b6f": {
+    sourceVersion: "c335bdced4760215187a2a80391a2d89647a14ece1f71f8f9eee797c8958bd55",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "2bb5332138dedd57cbf70da40d7974331f52ef1caf3ef2b56c2cdd50c617dd5e",
+  },
+  "ab4887e6-f71b-462d-9243-9ebe54da98f4": {
+    sourceVersion: "94513c94db675be936eeb6e52bcbbd24e73ce27c1c291fb0c84d344c145b1918",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b71841266003579976be0075a78220188f9a7821a57f7a23aaf425d98b63e8ba",
+  },
+  "7549206e-22a9-4d56-b3bc-f6f2f5e87e8a": {
+    sourceVersion: "87a89d7208d75c68eb7ee05910c1b04d9451c904868cb5cf1294671efbad5361",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "83dfd633f9d11df5397bbc19aab6ecae9ba912e5bec5ad6e42db41aaca04de64",
+  },
+  "5d0e49fa-5dfb-48c2-af97-fdfb788d5f40": {
+    sourceVersion: "6f96101995a4d5e623dfcf7ae80505ece04c035e0048767dd1cfcf59815e516c",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1050555c7cccc5f37c5ec9ec97ff247bfee9b7dd822dd179f426f5d21b213961",
+  },
+  "af942d30-a191-4306-846d-6c26755ca3e6": {
+    sourceVersion: "baa3fc2450dcff6f8acfcfef436f26ade7ba26a18ecb95c5773d0819140c4aa8",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "eadf5f4ff8c816363cfbad0292004e8370a5902d00b220d1d7d45e1aeb2557cb",
+  },
+  "aa5a7940-976d-4d96-9ddf-1c3891885c7e": {
+    sourceVersion: "f94fecad1f6f57703ee838dafc17179aeba54be2f4a3460f21741403e52aed23",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "d77cff1e476d78616a3bc88c0a468b4abe1441d1792ac7e487f2247c43086ba2",
+  },
+  "ab66f8a8-eb3d-4c2d-95e9-26a53c66b237": {
+    sourceVersion: "e3029892c41e21de8ab33103d86a244c053eb5a579e13a777287114be5b3744f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "219ecb3c8ff1b472e354027823e2951ad12cf5c349cfd3e26c4cce9462058bdd",
+  },
+  "aa21315d-4da9-4bbd-9604-c406b83c0db2": {
+    sourceVersion: "798d335e5e160c312fb38c7893d606bab66136bbf67bf1a6779cb01868deaf34",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "975e17c8bfae612a917c95b1e48364f1f4f6c74d7c4541fb47f4e79770a845d3",
+  },
+  "1009d2a2-a145-46e1-ba14-7a42735062fc": {
+    sourceVersion: "9c892630c8bcdc41cf624a8d3123f469148c58e4f92c4cdbe154e497d80c1d10",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "ad7c20ca94257ba831a0b9e4dc3d1148f5a1e70ac76b08069aaf3dae109e356a",
+  },
+  "e03322a0-e477-4223-969e-27f6772e3d6d": {
+    sourceVersion: "2129080ce05bcfc9843327dfdc67b89d7c36f864a781956a3eabe0bd2339dd21",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "218718c99395d629fdfe2969fb74432c71005db9dcffc819b295b04a58a6cfb4",
+  },
+  "3cc02a23-93b7-445a-9c3e-0e4942ef927b": {
+    sourceVersion: "25c9749a8f3841862e522eeb4d11ad9d0ff0e4fac3f555a281d1310763de3e66",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "16c265c3a84f12cb3d21ba92e98ea46d34354bce8f86455191002af012bc8066",
+  },
+  "0f35e73b-6a38-4185-a7d3-d237d67ba1cd": {
+    sourceVersion: "3cd134d3741e81c2bed491af2f38d037a2ffae77e6786aeea18898df05604214",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "2c4ee977ac751bf199862a2d1f25a2c4b40ed5fffcd1d2288ec3baad29676f7c",
+  },
+  "417312f8-16ca-47a7-b991-906788691700": {
+    sourceVersion: "3b28afffb016d6be35afc11c3924a1d5d23781edec9f114b214a51abccc8a708",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "53d74983290ff399e4c08b34f94f6d9e8e4b2623642930054e8fe53e46663b76",
+  },
+  "b254fefb-11d2-4369-ae5c-0c3bd48ae580": {
+    sourceVersion: "78b74e7b88a570a922265036440ee555998e4456d264480f8093a29d27068d89",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1eebdbd2a7c30a62fa2871e041cc41db04cc0949ccbc1c693594839b7567eb22",
+  },
+  "e32c2ed2-be8b-497c-8b94-9c104f203b49": {
+    sourceVersion: "8cf7f7d5adbde653c76e4e743aad354049b00f6852ba4f59250ec30206f8d024",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "3a8d3c3c365fa704cd828d2d6eadff550d10f30cb243c87a9a9d4282c87e8e9d",
+  },
+  "9203bee0-718a-4ede-9556-5521417c4080": {
+    sourceVersion: "6ebc5c7c74373d203398fa6fad75fecc18cc750ff693b71d6d035efcc7523afb",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "0b0d295703716d6f04e996ec8101d79acccdc46285de4ec85c5d85924f619bd8",
+  },
+  "a742308c-4047-487f-b95b-0fa5bec2f09a": {
+    sourceVersion: "9679ef2c2c4bd0fa684e38bf325c50f697a7d43141fc6b289e08bdcb61d00da3",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b8c2581ce26365bbad593a4357fd592810cdba401a75410c2635d2bf6ab599b1",
+  },
+  "605624ee-b7ca-4728-993f-e13b18cc57f3": {
+    sourceVersion: "75d787e44d6b5e507feec608eae0ceac71943c8b40abe5d4412c81ef5b7514f0",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b3de3374281f4b6bd8dd9c4d6ff2e71a77cbdd2474fd250eeb525d2a245521c0",
+  },
+  "705b4da3-d463-4808-b79c-dc0c1830945a": {
+    sourceVersion: "3837a1a3c09e314a9821e08622a7873201f7b1a20a43fbce627d62deb6f9e178",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "3d3b5a75a183ebef2a08108cdd54704411887996b138eaeb8d291ce865fc4e8a",
+  },
+  "3d95e8b1-0ddb-4bd3-b4cc-de55b6f8c403": {
+    sourceVersion: "3615527905fe13e220739ce2f6119fab3f042d976624774bd4b1f4078c33c106",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "65a6db19ccc77080f4524e43826f20cece9cce17f8fd4dfe6854582f10a4952f",
+  },
+  "15d63e5d-dc4d-4e5f-8043-78039a49732b": {
+    sourceVersion: "6e19267d3c97edd9b5a90d03e04bd2795ad6cc92a7276eff8767de385dd5f700",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "5772f6624b68a6a2b0d4756f3804585b4840021ce6f10644e7a6d0bfda861340",
+  },
+  "4b9abe7f-050f-4d0a-bc01-f442164f95de": {
+    sourceVersion: "9fb6939185977627523e4023d839cea4e53e583ac3655258d9f13ce3957f0a39",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "417f432f5b50b4b76126c1dbd284fb2cfa1fffdd04fa4e73c522ef80aa5d3d6f",
+  },
+  "3e150025-51c2-4b92-970c-a89e83210e68": {
+    sourceVersion: "c2454f7ae75d13ee6d81fb88816f38881abec8576ac8dad26b6b31749a9f49fc",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "b30c12d2cc2249138206a89920c1a36e0e09de18f7950bcdb5a64fb5b6694bd4",
+  },
+  "0006faf6-7a61-426c-9034-579f2cfcfa83": {
+    sourceVersion: "f0d7c8d32625f4f1c73db50c2fc7271298d457b893309900f527e9eb43fb6ef9",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "beae6c8d3df1a341b8a67afda9e1eb07fc9a4e1104fe5df721a641652d657bab",
+  },
+  "6d6ba936-4a15-4c40-aaa6-71605fb732d1": {
+    sourceVersion: "5f55ae473be34ada20f5a65f2dcba6a7c01d6e7f7dea874b32dce9152afe9643",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "c00df05f20458988479ddbc9480e1a12a857bcd007b9a0229966db31e352eafc",
+  },
+  "ce5f5ff9-13f7-41eb-ada0-7f73de42acef": {
+    sourceVersion: "62be5eee277792f676d0050777854be74fa99320c73acc12a6f51c9fcd08956f",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "98da6a309956750ea7fb319d3e2617269ab43c74082cb47dee02de2ea8079ff6",
+  },
+  "e842a4e5-ea0b-43ae-9ed8-93e30f4e7b8a": {
+    sourceVersion: "11de382f864114eea6bee6555d5568e0cd7f7e6453426ae88d23e9a6ee341194",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1e89f4a7bc582133c29970a83e45e7c3fe3c166d81b0fb29b2ef6cc2865a2283",
+  },
+  "8abe0577-8fdb-4e4a-a871-01b21732c961": {
+    sourceVersion: "6bbb6d501c245107f9c5c430c86e637c2ede0d2a7c8c46cd3e5bc313008c3edc",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "0fc64ab6601ecfa2ab4132631be1103608ac8f905500b06b73407f0b5e53939c",
+  },
+  "a49a9418-72d1-4ab1-89d9-a1f65ae23d35": {
+    sourceVersion: "e2d567325de39359a5c1aef26dc1462fb356260ab85cba1d97da03e88f7dadf5",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "41f164f67a3f7afbc6e388bfb1cdb00d8e17408acfed3035e435e56289d35627",
+  },
+  "20b60c93-124b-42c8-93fb-63bbd1888658": {
+    sourceVersion: "a6b14b71fb591dae6b204c38f6a8dba146987301ce93f135a93b61297838b784",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "cb26d628669fb100f8a19c470fea06de1118c595b1a93620017837b4148d7563",
+  },
+  "87aa2cbe-841c-40ff-9b1c-b259b4cc631e": {
+    sourceVersion: "108501aa6ffa6a4854c766996c226a9432913ca7dbda18a09dc8c0696236d1bc",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "1168e44a5c0da9a6d5b8ef92ba66ff426de9fd39a653235586f90201f9dc229c",
+  },
+  "d127d1e6-f3a6-4f68-bea5-d7b4123476e5": {
+    sourceVersion: "3e261f08a489da13e6462a7c116c8a4836b9763d3c6022fba13fd2fb48f462c6",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "aa20c296db9b6f5397145d0863ff748fb38e03a3add389d20ef8866de2004ed8",
+  },
+  "04979f18-1ba8-47a3-a078-ab6b84bfac72": {
+    sourceVersion: "f8b6963ef990ccb1632be889ded2260544634677c078c9a945be492136ee7ccf",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "a13a6a83a7a2d701c675ef2d0470df537350a2c146fca049124a6ef6e191d26f",
+  },
+  "a8f259b5-ef01-4f30-baa1-1b2a5419e61e": {
+    sourceVersion: "c85425c33c6474372c5336036da8c9444c0c7ca4bdec5f1f99b06867a0ee3f0c",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "5307109e56ebf9c450a18c06ec483f8cd1fe8b951567e423d613ca86f1bd3363",
+  },
+  "6d1d53e3-60ee-40a1-89a5-0648760cd83f": {
+    sourceVersion: "2e9ae2a44fdcc1239341fc3d18d481e3b16c30163367f21a6e944aaf693346b4",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "9215d5a15a8988a381f7b3ce7094d8593e301faa7c3cb7a812a21bc64947c7de",
+  },
+  "bd4ad383-8c40-4dda-bc9c-ba8a001d6882": {
+    sourceVersion: "602b7d7f8d15c0f55b93985a81af1a00ed5a488e22634cdf613a65bd0212947c",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "50cdff8f3040dfa27243d03d37dcc987b05148b405e84b4f816f4ffc611b380a",
+  },
+  "4992144f-7a36-4f30-9e8a-4355288b50c5": {
+    sourceVersion: "da880f0ac92fb2e1093986015961bd9030109e6749cb40c93b1d54fd5ef6b909",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "6b39b3fa8dd83f0ad2f5767adaac11da5bc1f2040faae14dca3f18ff7e420e13",
+  },
+  "c8b143ad-43ec-4e0d-a440-e348daa31391": {
+    sourceVersion: "c677b1bc4bd176db30e1d0cc724dc97a84f26c62dc1e2e17a87b3276ee46acb6",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "45f63c38f589e9a686d511aad2fe8eee8f84b6945d3ffdc46b1c2954bbe811e2",
+  },
+  "e366afb3-c447-4bde-b358-41c8568142d5": {
+    sourceVersion: "511b9a4aff40acfd98afe75409de8e07e1af21c2fe46547e7ebe0faff05453ca",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "2ce970b2a31ff222aaae91aed3c8456ce56d874b9c8811e3e4d838b33d7dcc94",
+  },
+  "2ef8ebc9-4f95-42f8-86e6-85eff0b8f021": {
+    sourceVersion: "7794e6095280dd25afb02b37c63f319d643c29707221d9193421df11dbec58b9",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "2bdb9c3c851182cc5cb5a6c9cbbaf79a65ae13b7291fe3acd115a74660237654",
+  },
+  "07fdc0b0-7131-411d-b0a8-f667165a64b8": {
+    sourceVersion: "475df9f9e17ebd5307a617c06a6bb466cbb87639ce3f79492e232469521e0cfb",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "3d7cbdc3419996daf6f014f0f63b66edeeaa3577e5f9da5cbb2543ff3e67e969",
+  },
+  "b53ec6e6-fcc9-4471-88c5-7ad0fbd7bbea": {
+    sourceVersion: "81108948c1af3cba114af4e37ea8d666b4bae5aedc4786ceb3f4bd465a4876bf",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "e291a9ce36f862f956b5cec95be33b730ed18b484549b915e52fd78851f56a3a",
+  },
+  "394fae8f-3757-4e08-b97c-5d7c451f4e72": {
+    sourceVersion: "0061752e962cf418e9fe9eaf55ca18138e1fb78324c5f6141bf885136b123883",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "34083756e2e03abed2fda03376f5b555a426fd9b877b8d7b8c542197f697fb0d",
+  },
+  "b3e1674f-dba1-4570-9990-e5dc643e237d": {
+    sourceVersion: "3e4027ae17f8bdf545831e1a19416ea9022ed3f043f1f40312142f7b62d0f59b",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "7d7031e2b7bab86292ebac07ddc1d48dd5d3fe2aaa8ab12bd49ac1470ee8981a",
+  },
+  "4066d4df-d98f-44cd-bf25-ebb5e9d9ddeb": {
+    sourceVersion: "478631531925d42b66fa24d4530b76e43f136dd6c3a668c2e0a4d26cd802c7ba",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "4b00f93d30176c99976e5dd66cc7a861d6783d6d2f717092643ec477dd3dfbde",
+  },
+  "0e969a27-1609-4ab4-b0db-46b1af8066a9": {
+    sourceVersion: "93f0fb360ddb4194a2fffbea89ab72ced3a92d44aa9523d57b69a52b9a83a1e4",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "577ebfc00d7ac1cbac188545124cdad223432e60459eda7d752383faa856b56e",
+  },
+  "090d88a9-7f2d-4bd1-a30a-7c48d05068be": {
+    sourceVersion: "3d08e461ed039f6210ce7e42cb76c420dbfed09b60498611982c6d52c0f8de71",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "f359edd413eca84371ae4d8907899f44710470130a9b39e957cb87ecbcca79fb",
+  },
+  "550abd9b-9aae-4812-9bc0-7f131d6dcde8": {
+    sourceVersion: "b2f327a3d47136abc872544d21542dd4fdd6ed0a2150f5507aadf1436f9dbf1a",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "d7bdddec9b441e4462a11cf740bacd78ebf2595ae49c031a7d949f8dd543f5be",
+  },
+  "fbdd3ba9-d799-476b-87bc-a689d8e3cff9": {
+    sourceVersion: "6710722c71248900e42cf8982c14f3d3b0a2af1ac80af1791c1bf85e24d7dcb1",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "58cd215c7648360ea53163978e8f47eb9967218f6e0df622bd251adab6481b94",
+  },
+  "f038c11e-b070-40fd-9d0f-e031f7bc2bd2": {
+    sourceVersion: "00465c90902ed7e2486dde9d720202c37c3d649cb2b3c71ffd50f02089a60574",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "77d8f8a0b712907f4bd68a1722cb83e3f59265714261517502e8f45e17f5237f",
+  },
+  "be0b86fc-8450-41d4-9836-6de11cecb857": {
+    sourceVersion: "061fae5eb604d5eeecf496c96b8d0f5ec8f65faf7d6e006678b967261ca195a2",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "2df22378631371f4fb911b0459708e54a56b3f4a45b69cd8dbb739e2dcbfbe51",
+  },
+  "70570170-be76-4c56-9151-c4b6e253f462": {
+    sourceVersion: "40efa1e37b28d718f5aded486fb79b25583b2cfbfad0110060cdace4b5f025db",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "6d6091c17091ef20c705b3e1094d3fb4c58aabbca399cf3bb8da573ed470a488",
+  },
+  "11ba27f4-decf-4447-9808-0d58844655cf": {
+    sourceVersion: "1a564daf49491829f5116a640c5b98ea75308d82bf7b7c1f3cb5d8bedfb40882",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "4b4dea5e6dfeb8bc325665592ef1714317e2fb8248592590d434cb664c77f602",
+  },
+  "7c60b7bd-06cc-487f-ba42-b382ac429b12": {
+    sourceVersion: "1464ea144e6fd78e8c73956d9371db7699d8420e17e94426a38cba3ed8e90872",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "3f8dc8d42d7859b3ab38df70aadcbab22e90e6ca25f3bebad64fba15084ef590",
+  },
+  "708df587-3b13-42cb-8341-f476ab4cbe45": {
+    sourceVersion: "6c3969705e83b0f2c617506bda53244296c3d34401d1743a931fb66f5d0dba30",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "cbb1c7c6d9dc857575f915679a5762cb854dc8b15750ea4dc816665646957b6d",
+  },
+  "12a8adc4-927f-4314-b2ef-9c647ace68d5": {
+    sourceVersion: "8fdb75e74d93f870171c5000680b2d21bff10eb171d5d092f75d2ecd83886c47",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "fa6a1e15609583c7eb2d3850442302af175d18ba8eeb0a9dd077ada98ac83957",
+  },
+  "ebe43cc6-42fe-44f6-b198-ef0212bf82cb": {
+    sourceVersion: "3daf0155fefd2ab618ba812accebeef4ea5bebe19c79584969428799c460c408",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "304517ecafd6ce5fa96d6bf67d5a0c65842b45aa39ace335baf0950bb717b840",
+  },
+  "f07a24c0-bf3c-4733-9473-c6be3b16950e": {
+    sourceVersion: "a96d61fae18495ad6a0502bbb37b92ffea539b3d6b82e51a4859e5cbcb26a8df",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "97810b448fbb3c828f45bedb870fb53f1d158817dc90d3c79f6108ffe85003b8",
+  },
+  "b960d17b-3679-4dc5-9a5d-c8e7fd81fa9a": {
+    sourceVersion: "396f3032d892297c3dc876498ed8bb6a189cc97e825e68333713229dffca8583",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "9c795b3a137dc60f27c79cead20f22abc2015237e8b8d2b9889be1bcf95733de",
+  },
+  "06413d87-d119-4c04-93d5-5ced7ad4a858": {
+    sourceVersion: "40bd2a40a0737355bdbfcf98fc1fc0a620617b65e835e12fa897936a58593519",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "6821c212522b42a4ac36da422de2c78f4d4bb9aef5f65ff8ab486c695566b2db",
+  },
+  "c1df6359-edf4-48cf-b8d1-6240ac291cf7": {
+    sourceVersion: "d734aea7c5690357cc59d004a4f556f6c6875f72a0606785a5d7b9f9e8ec58c2",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "bd53977379e365550fbfa7e3e68a60eb84a231af92c41322090fb98aa4eab7e5",
+  },
+  "2f8b07ef-9d00-4eb6-a395-b5033aa3f80e": {
+    sourceVersion: "de70f763238eb1a511e4f377be111c67fbdf0693fb4e8220d24e5d9b5b4d584d",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "c974c048b6ddd9a39c43ecb64204ed569891dfdd8cf70f90e0195ef394283b53",
+  },
+  "cd510cf2-df54-4024-919b-e4377cdb2be1": {
+    sourceVersion: "992e3cdd773917f083ed09ebea3870d4acfbfc0013265662b30edf8c1448749e",
+    implementationRevision: "attachment-permanent/1",
+    definitionHash: "8dd5e6c30ded9668ac6a5c25ce41c60476ba35c60e068a89e7a994395215af4d",
   },
 };

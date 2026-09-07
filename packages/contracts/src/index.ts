@@ -34,7 +34,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.20.0";
+export const ENGINE_VERSION = "commander-engine/0.21.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -190,6 +190,47 @@ export const OrdinaryActivatedProgram = z
       });
   });
 export type OrdinaryActivatedProgram = z.infer<typeof OrdinaryActivatedProgram>;
+/** Fixed live attachment contributions; intrinsic source keywords remain separate. */
+export const AttachedModifier = z.strictObject({
+  powerDelta: z.number().int().min(-100_000).max(100_000),
+  toughnessDelta: z.number().int().min(-100_000).max(100_000),
+  keywords: z
+    .array(Keyword)
+    .max(15)
+    .refine((values) => new Set(values).size === values.length),
+});
+export type AttachedModifier = z.infer<typeof AttachedModifier>;
+export const EquipProgram = z.strictObject({
+  schema: z.literal("commander-equip/1"),
+  id: Id,
+  sourceZone: z.literal("battlefield"),
+  timing: z.literal("sorcery"),
+  cost: z.strictObject({ mana: Cost, tapSource: z.literal(false) }),
+  target: z.literal("creature-you-control"),
+  effects: z.tuple([
+    z.strictObject({ kind: z.literal("attach-source"), recipient: z.literal("target") }),
+  ]),
+});
+export type EquipProgram = z.infer<typeof EquipProgram>;
+export const ActivatedProgram = z.discriminatedUnion("schema", [
+  OrdinaryActivatedProgram,
+  EquipProgram,
+]);
+export type ActivatedProgram = z.infer<typeof ActivatedProgram>;
+export const AttachmentProgram = z.discriminatedUnion("schema", [
+  z.strictObject({
+    schema: z.literal("commander-aura/1"),
+    enchant: z.literal("creature"),
+    attachedModifier: AttachedModifier,
+  }),
+  z.strictObject({
+    schema: z.literal("commander-equipment/1"),
+    attachedModifier: AttachedModifier,
+    equip: EquipProgram,
+  }),
+]);
+export type AttachmentProgram = z.infer<typeof AttachmentProgram>;
+
 export const DerivedCharacteristics = z.strictObject({
   power: z.number().int().nullable(),
   toughness: z.number().int().nullable(),
@@ -337,6 +378,7 @@ export const CardDefinition = z.strictObject({
   triggerPrograms: z.array(TriggeredProgram).min(1).max(1).optional(),
   damagePrograms: z.array(DamageStaticProgram).length(1).optional(),
   activatedPrograms: z.tuple([OrdinaryActivatedProgram]).optional(),
+  attachmentProgram: AttachmentProgram.optional(),
   staticPrograms: z.tuple([StaticCreatureBonus]).optional(),
   staticKeywordPrograms: z.tuple([StaticKeywordGrant]).optional(),
   blockingRestrictions: z.array(BlockingRestriction).min(1).max(3).optional(),
@@ -660,7 +702,7 @@ export const Decision = z.strictObject({
         source: Id,
         programIndex: z.literal(0),
         cost: OrdinaryActivatedProgram.shape.cost,
-        target: z.literal("creature").nullable(),
+        target: z.enum(["creature", "creature-you-control"]).nullable(),
       }),
     )
     .optional(),
@@ -708,13 +750,33 @@ export const ActivatedAbility = z.strictObject({
   sourceVersion: Digest,
   controller: Id,
   programIndex: z.literal(0),
-  program: OrdinaryActivatedProgram,
+  program: ActivatedProgram,
   target: Id.nullable(),
   announcement: GameEvent,
   targetEvent: GameEvent.nullable(),
   payment: ActivationPayment.nullable(),
 });
 export type ActivatedAbility = z.infer<typeof ActivatedAbility>;
+/** Historical origin is retained independently of the current event batch and source controller. */
+export const AttachmentOrigin = z.discriminatedUnion("kind", [
+  z.strictObject({
+    kind: z.literal("aura-spell"),
+    source: GameObject,
+    sourceVersion: Digest,
+    target: GameObject,
+    event: GameEvent,
+  }),
+  z.strictObject({ kind: z.literal("equip"), ability: ActivatedAbility, event: GameEvent }),
+]);
+export type AttachmentOrigin = z.infer<typeof AttachmentOrigin>;
+export const AttachmentLink = z.strictObject({
+  source: Id,
+  target: Id,
+  attachedAtEvent: Natural,
+  origin: AttachmentOrigin,
+});
+export type AttachmentLink = z.infer<typeof AttachmentLink>;
+
 export const ActivatingFrame = z.strictObject({
   kind: z.literal("activating"),
   abilityId: Id,
@@ -890,6 +952,7 @@ export const RulesState = z.strictObject({
   stack: z.array(StackEntry),
   abilities: z.record(Id, TriggeredAbility),
   activatedAbilities: z.record(Id, ActivatedAbility).optional(),
+  attachments: z.record(Id, AttachmentLink).optional(),
   continuousEffects: z.array(ContinuousEffect),
   pendingTriggers: z.array(Id),
   triggerPlacement: TriggerPlacement.nullable(),
@@ -952,6 +1015,7 @@ export type PlayerObservation = {
   stack: StackEntry[];
   abilities: (TriggeredAbility & { sourceCard: CardDefinition })[];
   activatedAbilities?: (ActivatedAbility & { sourceCard: CardDefinition })[];
+  attachments?: AttachmentLink[];
 };
 
 /** Canonical semantic encoding. Undefined/nonfinite/cyclic values must never become silent nulls. */
