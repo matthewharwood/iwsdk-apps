@@ -860,10 +860,10 @@
     "sha256": "d2be8f6f3623a94bb043901be7a94d084af42a5613f9c8e902e765d371879388"
   },
   "observedAssignments": {
-    "initialDeckGameSeedFamilies": 4,
+    "initialDeckGameSeedFamilies": 2,
     "selectedFullExecutionAssignments": 4,
     "acceptedCommands": 5334,
-    "scope": "Two CLI assignments plus two selected browser assignments. Resolver variants, replays/imports and repeated qualifications count zero additional assignments. Stopped130-command history is separate and incomplete."
+    "scope": "Two CLI executions plus two selected browser executions of two initial ordered-deck/game-seed families. Match and seat namespaces differ and affect the driver's identity-based tie breaking; this does not add deck or initial-deal diversity. Resolver variants, replay/import and repeated qualifications add zero executions here. Stopped130-command history is separate and incomplete."
   },
   "attemptNotes": [
     "First checkpoint attempt failed local listener before browser execution. Second failed namespace validation before match creation. Both retained; corrected third passed.",
