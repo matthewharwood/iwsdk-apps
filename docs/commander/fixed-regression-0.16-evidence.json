@@ -1,0 +1,30 @@
+{
+  "schema": "commander-completed-fixed-regression/1",
+  "engine": "commander-engine/0.16.0",
+  "sourceReleaseHash": "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
+  "buildHash": "d6d0fa2c2abd5c1c1d54ce26e152db86c0466e7e88bf47ea3044a5e626a45fbe",
+  "assigned": 64,
+  "completed": 64,
+  "replayed": 64,
+  "twoSeat": 16,
+  "fourSeat": 48,
+  "pending": 0,
+  "acceptedCommands": 89784,
+  "report": {
+    "path": ".commander/regressions/regression-0.16-fixed64/report.json",
+    "sha256": "9517713aa8464ef3ace983184eca4c3518af6c1a91327a34305924f0082690fa"
+  },
+  "assignments": {
+    "path": ".commander/regressions/regression-0.16-fixed64/assignments.json",
+    "sha256": "b20720e387ff13cbcd5acbe2c3d7ee1e10ac1fe0e533edde3b34a7d299f6ee4f"
+  },
+  "inventory": {
+    "path": ".commander/regressions/regression-0.16-fixed64/archive-inventory.json",
+    "sha256": "6718890adb5173e43e9ca0f546a3939e14c360f843dda051640802b9713af8da"
+  },
+  "telemetryFiles": 64,
+  "telemetryScope": "Measurements collected during this invocation only; process-wide CPU/memory, separate create/game/replay/close phases.",
+  "originalRunDirectory": "/private/tmp/iwsdk-commander-0.16/.draft-runs/regressions/regression-0.16-fixed64",
+  "retainedDirectory": ".commander/regressions/regression-0.16-fixed64",
+  "scope": "All64 fixed inputs actually executed and replayed under engine0.16; no historical outcomes reused. Fixed older deck compositions do not exercise Strict Proctor. The frozen build predates the terminal-only presentation correction; engine/compiler/simulation/storage sources are byte-identical to the final CLI build, with an explicit source delta in development0.16 evidence. This report keeps the actual executed build pin and does not certify full-snapshot support."
+}

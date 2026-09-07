@@ -1,8 +1,5 @@
 import { expect, test } from "bun:test";
-import {
-  bindConditionalSelfEntryPermanent,
-  CONDITIONAL_SELF_ENTRY_PERMANENTS,
-} from "@iwsdk-apps/card-programs";
+import { bindStrictProctorPermanent, STRICT_PROCTOR_PERMANENTS } from "@iwsdk-apps/card-programs";
 import { CatalogCardSchema } from "@iwsdk-apps/catalog";
 import {
   CardDefinition,
@@ -11,13 +8,13 @@ import {
   ENGINE_VERSION,
   semanticHash,
 } from "@iwsdk-apps/contracts";
-import sourceRows from "../../card-programs/test-fixtures/conditional-self-entry.json";
+import sourceRows from "../../card-programs/test-fixtures/strict-proctor.json";
 import { admitDeck } from "../../engine/src/index";
-import older from "../test-fixtures/entry-observer-decks.json";
+import older from "../test-fixtures/conditional-self-entry-decks.json";
 import {
   buildDevelopmentMatchPlan,
-  CONDITIONAL_SELF_ENTRY_CORE_CAPABILITIES,
   SELF_ENTRY_CORE_CAPABILITIES,
+  STRICT_PROCTOR_CORE_CAPABILITIES,
 } from "./plan";
 import {
   admitPreparedMatchArtifact,
@@ -34,12 +31,17 @@ async function rehash<T extends { hash: string }>(input: T): Promise<T> {
 async function fixture() {
   const names = new Set([
     "Tobias Andrion",
+    "Jasmine Boreal",
     "Island",
     "Plains",
+    "Forest",
+    "Soul Warden",
+    "Jaddi Offshoot",
+    "Elvish Visionary",
+    "Queen's Commission",
+    "Scholar of Stars",
     "Memnite",
-    "Darksteel Sentinel",
     "Repulse",
-    "Counterspell",
   ]);
   const definitions: Record<string, CardDefinition> = Object.fromEntries(
     Object.values(older.definitions)
@@ -48,12 +50,12 @@ async function fixture() {
   );
   expect(Object.keys(definitions)).toHaveLength(names.size);
   for (const row of sourceRows.records) {
-    const d = bindConditionalSelfEntryPermanent(CatalogCardSchema.parse(row));
+    const d = bindStrictProctorPermanent(CatalogCardSchema.parse(row));
     if (d) definitions[d.id] = d;
   }
   const body = {
     schema: "commander-content/1" as const,
-    id: "authenticated-conditional-self-entry/1",
+    id: "authenticated-strict-proctor/1",
     sourceBundle: sourceRows.sourceBundle,
     rulesHash: sourceRows.rulesHash,
     profile: "tabletop-commander" as const,
@@ -62,7 +64,7 @@ async function fixture() {
     tokenTemplates: structuredClone(older.tokenTemplates),
     unsupportedOracleIds: [],
     eligibleDenominator: Object.keys(definitions).length,
-    compilerVersion: "conditional-self-entry-closure-unit/1",
+    compilerVersion: "strict-proctor-closure-unit/1",
     processorAbi: ENGINE_VERSION,
   };
   return ContentRelease.parse({ ...body, hash: await semanticHash(body) });
@@ -72,58 +74,58 @@ function named(source: ContentRelease, name: string): CardDefinition {
   if (!d) throw new Error(`Missing source: ${name}`);
   return d;
 }
-async function deck(
-  source: ContentRelease,
-  commanderName: "Donatello, Turtle Techie" | "Tobias Andrion",
-) {
+async function deck(source: ContentRelease, commander: "Tobias Andrion" | "Jasmine Boreal") {
   const names = [
-    commanderName,
-    "Scholar of Stars",
-    "Memnite",
-    "Darksteel Sentinel",
-    "Repulse",
-    "Counterspell",
+    commander,
+    "Strict Proctor",
+    "Soul Warden",
+    "Queen's Commission",
+    ...(commander === "Tobias Andrion"
+      ? ["Scholar of Stars", "Memnite", "Repulse"]
+      : ["Jaddi Offshoot", "Elvish Visionary"]),
   ];
-  if (commanderName === "Tobias Andrion") names.push("Donatello, Turtle Techie");
+  const otherBasic = commander === "Tobias Andrion" ? "Island" : "Forest";
   const body = {
-    id: `conditional-closure:${commanderName}`,
-    commander: named(source, commanderName).id,
+    id: `proctor-closure:${commander}`,
+    commander: named(source, commander).id,
     entries: [
       ...names.map((name) => ({ definition: named(source, name).id, count: 1 })),
-      { definition: named(source, "Island").id, count: 100 - names.length },
+      { definition: named(source, "Plains").id, count: 47 },
+      { definition: named(source, otherBasic).id, count: 53 - names.length },
     ].sort((a, b) => a.definition.localeCompare(b.definition)),
   };
   return DeckRevision.parse({ ...body, hash: await semanticHash(body) });
 }
-test("closed1193 registry authenticates both complete conditional source programs", async () => {
+test("closed1193 registry binds the whole Proctor source and no external definition dependency", async () => {
   const source = await fixture();
   expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1193);
   expect(await semanticHash(REVIEWED_SOURCE_BINDINGS)).toBe(REVIEWED_BINDING_SNAPSHOT.bindingsHash);
   const full = await createFullExecutionRegistry(source);
-  expect(Object.keys(full.definitions)).toHaveLength(9);
-  for (const recipe of CONDITIONAL_SELF_ENTRY_PERMANENTS) {
+  expect(Object.keys(full.definitions)).toHaveLength(13);
+  for (const recipe of STRICT_PROCTOR_PERMANENTS) {
     const d = named(source, recipe.name);
+    expect(d.keywords).toContain("flying");
     expect(await semanticHash(d)).toBe(
       REVIEWED_SOURCE_BINDINGS[recipe.identity]?.definitionHash ?? "missing-binding",
     );
     expect(Object.isFrozen(full.definitions[d.id]?.triggerPrograms)).toBe(true);
     const body = {
-      id: `conditional-dependency:${recipe.identity}`,
+      id: `proctor-dependency:${recipe.identity}`,
       commander: d.id,
       entries: [{ definition: d.id, count: 1 }],
     };
-    // Dependency-only root is not claimed as a legal Commander deck.
+    // This checks dependency closure only, not Commander deck eligibility.
     const plan = await buildDevelopmentMatchPlan(source, [
       { ...body, hash: await semanticHash(body) },
     ]);
     expect(plan.closure.retained).toEqual([d.id]);
     expect(plan.closure.blockers).toEqual([]);
     expect(plan.closure.widened).toEqual([]);
-    expect(plan.closure.excluded).toContain(named(source, "Memnite").id);
+    expect(plan.closure.excluded).toContain(named(source, "Soul Warden").id);
   }
 });
-for (const commander of ["Donatello, Turtle Techie", "Tobias Andrion"] as const)
-  test(`${commander}: legal roots retain exact cards, condition capabilities and no unrelated artifacts`, async () => {
+for (const commander of ["Tobias Andrion", "Jasmine Boreal"] as const)
+  test(`${commander}: legal roots retain exact token producer edges and every Proctor capability`, async () => {
     const source = await fixture();
     const d = await deck(source, commander);
     admitDeck(d, await createFullExecutionRegistry(source));
@@ -132,20 +134,23 @@ for (const commander of ["Donatello, Turtle Techie", "Tobias Andrion"] as const)
     expect(Object.keys(prepared.definitions).sort()).toEqual(
       d.entries.map((e) => e.definition).sort(),
     );
-    expect(Object.keys(prepared.tokenTemplates)).toHaveLength(0);
+    const producer = named(source, "Queen's Commission");
+    const templates =
+      producer.spellProgram?.effects.flatMap((e) =>
+        e.kind === "create-token" ? [e.templateId] : [],
+      ) ?? [];
+    expect(templates).toHaveLength(1);
+    expect(Object.keys(prepared.tokenTemplates)).toEqual(templates);
     expect(artifact.compilerVersion).toBe("development-match-plan/12");
-    for (const cap of [
-      ...CONDITIONAL_SELF_ENTRY_CORE_CAPABILITIES,
-      ...SELF_ENTRY_CORE_CAPABILITIES,
-    ]) {
+    for (const cap of [...STRICT_PROCTOR_CORE_CAPABILITIES, ...SELF_ENTRY_CORE_CAPABILITIES]) {
       expect(artifact.requiredCoreCapabilities).toContain(cap);
-      const altered = structuredClone(artifact);
-      altered.requiredCoreCapabilities = altered.requiredCoreCapabilities.filter((c) => c !== cap);
-      altered.closure.retainedCoreCapabilities = altered.closure.retainedCoreCapabilities.filter(
+      const changed = structuredClone(artifact);
+      changed.requiredCoreCapabilities = changed.requiredCoreCapabilities.filter((c) => c !== cap);
+      changed.closure.retainedCoreCapabilities = changed.closure.retainedCoreCapabilities.filter(
         (c) => c !== cap,
       );
       await expect(
-        admitPreparedMatchArtifact(await rehash(altered), source, [d, d]),
+        admitPreparedMatchArtifact(await rehash(changed), source, [d, d]),
       ).rejects.toThrow("does not match");
     }
     for (const field of ["recipeRegistryHash", "analysisHash"] as const)
@@ -156,64 +161,69 @@ for (const commander of ["Donatello, Turtle Techie", "Tobias Andrion"] as const)
         ]),
       ).rejects.toThrow("does not match");
   });
-for (const recipe of CONDITIONAL_SELF_ENTRY_PERMANENTS)
-  test(`${recipe.name}: erasing the condition, body or identity cannot regain legacy admission`, async () => {
-    const source = await fixture();
-    const d = await deck(source, "Donatello, Turtle Techie");
-    const mutations: ((card: CardDefinition) => void)[] = [
-      (card) => {
-        card.triggerPrograms = [
-          {
-            schema: "commander-trigger/1",
-            id: "forged-unconditional",
-            trigger: {
-              kind: "self-enters-battlefield",
-              view: "post-committed-event",
-              placementClass: "ordinary",
-            },
-            choice: { kind: "mandatory" },
-            effect: { kind: "draw", recipient: "trigger-controller", amount: 1 },
-          },
-        ];
-      },
-      (card) => {
-        delete card.triggerPrograms;
-      },
-      (card) => {
-        delete card.triggerPrograms;
-        card.oracleText = "";
-        card.implementationRevision = "commander-development-recipes/1";
-      },
-      (card) => {
-        card.sourceVersion = "0".repeat(64);
-      },
-      (card) => {
-        card.oracleId = "forged-conditional-identity";
-      },
-    ];
-    for (const mutate of mutations) {
-      const altered = structuredClone(source);
-      const card = named(altered, recipe.name);
-      mutate(card);
-      const changed = await rehash(altered);
-      await expect(createFullExecutionRegistry(changed)).rejects.toThrow(
-        /Unauthenticated definition|Definition dictionary identity mismatch/,
-      );
-      await expect(createPreparedMatchArtifact(changed, [d, d])).rejects.toThrow(
-        /Unauthenticated definition|Definition dictionary identity mismatch/,
-      );
-    }
-  });
-test("conditional programs reject old and future execution ABIs but retain source inspection", async () => {
+test("Proctor body, flying, cost and causal constructor cannot be erased or replaced by an ordinary ETB", async () => {
   const source = await fixture();
-  const d = await deck(source, "Donatello, Turtle Techie");
+  const d = await deck(source, "Tobias Andrion");
+  const mutations: ((card: CardDefinition) => void)[] = [
+    (card) => {
+      card.triggerPrograms = [
+        {
+          schema: "commander-trigger/1",
+          id: "forged-ordinary-etb",
+          trigger: {
+            kind: "self-enters-battlefield",
+            view: "post-committed-event",
+            placementClass: "ordinary",
+          },
+          choice: { kind: "mandatory" },
+          effect: { kind: "draw", recipient: "trigger-controller", amount: 1 },
+        },
+      ];
+    },
+    (card) => {
+      delete card.triggerPrograms;
+    },
+    (card) => {
+      delete card.triggerPrograms;
+      card.oracleText = "Flying";
+      card.implementationRevision = "commander-development-recipes/1";
+    },
+    (card) => {
+      card.keywords = [];
+    },
+    (card) => {
+      if (!card.manaCost) throw new Error("Missing printed Proctor mana cost");
+      card.manaCost.generic = 0;
+    },
+    (card) => {
+      card.sourceVersion = "0".repeat(64);
+    },
+    (card) => {
+      card.oracleId = "forged-proctor-identity";
+    },
+  ];
+  for (const mutate of mutations) {
+    const altered = structuredClone(source);
+    mutate(named(altered, "Strict Proctor"));
+    const changed = await rehash(altered);
+    await expect(createFullExecutionRegistry(changed)).rejects.toThrow(
+      /Unauthenticated definition|Definition dictionary identity mismatch/,
+    );
+    await expect(createPreparedMatchArtifact(changed, [d, d])).rejects.toThrow(
+      /Unauthenticated definition|Definition dictionary identity mismatch/,
+    );
+  }
+});
+test("Proctor source inspection survives old/future ABIs but runtime admission does not", async () => {
+  const source = await fixture();
+  const d = await deck(source, "Tobias Andrion");
   for (const processorAbi of ["commander-engine/0.15.0", "commander-engine/0.17.0"]) {
     const altered = await rehash({ ...source, processorAbi });
     expect((await verifySourceRelease(altered)).processorAbi).toBe(processorAbi);
     await expect(createFullExecutionRegistry(altered)).rejects.toThrow("incompatible");
     await expect(createPreparedMatchArtifact(altered, [d, d])).rejects.toThrow("incompatible");
     expect((await buildDevelopmentMatchPlan(altered, [d, d])).closure.blockers).toContain(
-      `unimplemented-definition:${d.commander}`,
+      `unimplemented-definition:${named(source, "Strict Proctor").id}`,
     );
   }
 });

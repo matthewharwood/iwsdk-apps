@@ -8,7 +8,7 @@ import {
   type Response,
 } from "@iwsdk-apps/contracts";
 
-export const DRIVER_VERSION = "observed-combat/9";
+export const DRIVER_VERSION = "observed-combat/10";
 export type Driver = (observation: PlayerObservation, seed: number) => Response | Promise<Response>;
 type Payment = Extract<Response, { kind: "payment" }>;
 type VisibleObject = PlayerObservation["objects"][number];
@@ -218,6 +218,15 @@ export const heuristicDriver: Driver = (observation, seed) => {
       const target = players[0]?.id ?? cards[0]?.id;
       if (!target) throw new Error("Target decision has no legal visible candidate");
       return { kind: "target", target };
+    }
+    case "trigger-payment": {
+      const actor = observation.players.find((player) => player.id === observation.player);
+      if (!actor || !decision.cost) throw new Error("Trigger payment decision lacks cost or actor");
+      const payment = findPayment(decision.cost, actor.mana, decision.manaSources);
+      // This is a policy proposal: the payer may instead decline even with sufficient mana.
+      return payment
+        ? { kind: "trigger-payment", pay: true, sources: payment.sources, spend: payment.spend }
+        : { kind: "trigger-payment", pay: false };
     }
     case "payment": {
       const actor = observation.players.find((player) => player.id === observation.player);

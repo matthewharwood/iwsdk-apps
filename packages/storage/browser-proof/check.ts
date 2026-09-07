@@ -33,6 +33,7 @@ import {
 } from "./spell-evidence";
 import { staticEvidence } from "./static-evidence";
 import { tokenEvidence } from "./token-evidence";
+import { completedTriggerPayment } from "./trigger-payment-evidence";
 
 type Snapshot = {
   revision: number;
@@ -73,6 +74,7 @@ const options = parseArgs({
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
     "require-triggers": { type: "boolean", default: false },
+    "require-trigger-payment": { type: "boolean", default: false },
     "require-conditional-triggers": { type: "boolean", default: false },
     "require-ordered-triggers": { type: "boolean", default: false },
     "require-modifiers": { type: "boolean", default: false },
@@ -93,6 +95,7 @@ function boundedInteger(value: string, minimum: number, maximum: number, name: s
 const deckOffset = boundedInteger(options["deck-offset"], 0, 100_000, "deck-offset");
 const deckStride = boundedInteger(options["deck-stride"], 1, 100_000, "deck-stride");
 const seedAttempts = boundedInteger(options["seed-attempts"], 1, 32, "seed-attempts");
+const requireTriggerPayment = options["require-trigger-payment"];
 const requireConditionalTriggers = options["require-conditional-triggers"];
 const requireOrderedTriggers = options["require-ordered-triggers"];
 const requireTriggers = options["require-triggers"] || requireOrderedTriggers;
@@ -129,6 +132,7 @@ const stageKinds: ProofStage[] = requireSpells
   ? ["starting-player", "target", "payment"]
   : ["starting-player", "payment"];
 if (requireConditionalTriggers) stageKinds.push("pending-conditional");
+if (requireTriggerPayment) stageKinds.push("trigger-payment");
 if (requireOrderedTriggers) stageKinds.push("pending-ordered-trigger");
 else if (requireTriggers) stageKinds.push("pending-trigger");
 if (requireModifiers) stageKinds.push("active-modifier");
@@ -329,6 +333,30 @@ function requireCompleted(run: GameRun) {
   if (run.status !== "completed")
     throw new Error(`Match ${run.matchId} did not complete: ${JSON.stringify(run)}`);
 }
+function assertTriggerPaymentStage(snapshot: Snapshot) {
+  const pending = snapshot.triggers.payments;
+  expect(pending.frames).toHaveLength(1);
+  const frame = pending.frames[0];
+  if (!frame) throw new Error("Missing resolving trigger payment frame");
+  expect(snapshot.decision?.kind).toBe("trigger-payment");
+  expect(snapshot.decision?.actor).toBe(frame.payer);
+  expect(pending.priorityPlayer).toBeNull();
+  expect(pending.stack.at(-1)).toEqual({
+    kind: "triggered-ability",
+    triggerId: frame.resolvingTrigger.id,
+  });
+  expect(snapshot.triggers.abilities[frame.resolvingTrigger.id]).toEqual(frame.resolvingTrigger);
+  expect(pending.decision?.cost).toEqual(frame.cost);
+  expect(frame.payer).toBe(frame.resolvingTrigger.referencedTrigger.captured.controller);
+}
+function assertConditionalStage(snapshot: Snapshot) {
+  expect(snapshot.decision?.kind).toBe("priority");
+  expect(pendingConditionalIds(snapshot).length).toBeGreaterThan(0);
+}
+const additionalStageAssertions: Partial<Record<ProofStage, (snapshot: Snapshot) => void>> = {
+  "trigger-payment": assertTriggerPaymentStage,
+  "pending-conditional": assertConditionalStage,
+};
 type NativeStage = {
   kind: ProofStage;
   run: GameRun;
@@ -361,6 +389,12 @@ function conditionalWorkflowCompleted(stages: NativeStage[], final: Snapshot): b
 function qualifies(stages: NativeStage[], final: Snapshot): boolean {
   return (
     (!requireConditionalTriggers || conditionalWorkflowCompleted(stages, final)) &&
+    (!requireTriggerPayment ||
+      stages.some(
+        (stage) =>
+          stage.kind === "trigger-payment" &&
+          completedTriggerPayment(stage.snapshot.triggers.payments, final.triggers.payments),
+      )) &&
     stages.length === stageKinds.length &&
     stages.every((stage) => stage.run.status === "paused") &&
     (!requireTokens ||
@@ -633,9 +667,9 @@ function assertPausedStage(
     }
     return;
   }
-  if (kind === "pending-conditional") {
-    expect(snapshot.decision?.kind).toBe("priority");
-    expect(pendingConditionalIds(snapshot).length).toBeGreaterThan(0);
+  const additional = additionalStageAssertions[kind];
+  if (additional) {
+    additional(snapshot);
     return;
   }
   if (kind === "pending-trigger" || kind === "pending-ordered-trigger")
@@ -954,7 +988,8 @@ try {
         (requireStatics &&
           ["pending-static", "active-static", "static-departure"].includes(stage.kind)) ||
         (requireObservers && OBSERVER_STAGES.some((s) => s === stage.kind)) ||
-        (requireConditionalTriggers && stage.kind === "pending-conditional")
+        (requireConditionalTriggers && stage.kind === "pending-conditional") ||
+        (requireTriggerPayment && stage.kind === "trigger-payment")
       ) {
         await call(page, { operation: "close" });
         stageImport = await call<Snapshot>(page, {
@@ -1089,6 +1124,10 @@ try {
     commanderReplacementRequired: requireCommanderReplacement,
     tokenLifecycleRequired: requireTokens,
     staticLifecycleRequired: requireStatics,
+    triggerPaymentRequired: requireTriggerPayment,
+    triggerPaymentOutcomes: completedBrowserStates.flatMap(
+      (state) => state.triggers.payments.completed,
+    ),
     conditionalTriggerRequired: requireConditionalTriggers,
     conditionalConditionChecks: completedBrowserStates.flatMap(
       (state) => state.triggers.conditionChecks,

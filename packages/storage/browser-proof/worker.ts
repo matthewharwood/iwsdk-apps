@@ -53,6 +53,7 @@ const Request = z.discriminatedUnion("operation", [
         "target",
         "pending-trigger",
         "pending-conditional",
+        "trigger-payment",
         "pending-ordered-trigger",
         "active-modifier",
         "pending-counter",

@@ -8,6 +8,7 @@ import {
 import type { Coordinator, MatchArchive } from "../src/index";
 import { atObserverStage, OBSERVER_STAGES } from "./entry-observer-evidence";
 import { atStaticStage } from "./static-evidence";
+import { atTriggerPaymentStage, triggerPaymentEvidence } from "./trigger-payment-evidence";
 
 function removals(record: MatchArchive["records"][number], release: ContentRelease) {
   const removalEvents = { destroy: 0, exile: 0 };
@@ -137,6 +138,7 @@ export function triggerEvidence(archive: MatchArchive) {
     resolved,
     outcomes,
     conditionChecks,
+    payments: triggerPaymentEvidence(archive),
     pending: archive.current.stack.flatMap((entry) =>
       entry.kind === "triggered-ability" ? [entry.triggerId] : [],
     ),
@@ -276,6 +278,7 @@ export type ProofStage =
   | "payment"
   | "pending-trigger"
   | "pending-conditional"
+  | "trigger-payment"
   | "pending-ordered-trigger"
   | "active-modifier"
   | "pending-counter"
@@ -350,6 +353,7 @@ export function atProofStage(
           ),
       )
     );
+  if (kind === "trigger-payment") return atTriggerPaymentStage(view);
   if (kind === "pending-conditional")
     return (
       view.decision?.kind === "priority" &&

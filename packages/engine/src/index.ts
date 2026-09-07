@@ -16,6 +16,7 @@ import { assertResolutionContinuation } from "./resolution-context";
 import { answerCommanderReplacement } from "./return-resolution";
 import { bottom, chooseStartingPlayer, mulligan } from "./setup";
 import { assertTriggerContexts } from "./trigger-context";
+import { answerTriggerPayment, assertTriggerPayment } from "./trigger-payment";
 import { answerTriggerOrder } from "./triggers";
 import { answerDiscard, givePriority, passPriority, startTurn } from "./turns";
 
@@ -58,6 +59,9 @@ function answer(
   response: Response,
 ): void {
   switch (kind) {
+    case "trigger-payment":
+      if (answerTriggerPayment(state, release, actor, response)) givePriority(state, release);
+      return;
     case "trigger-order":
       if (answerTriggerOrder(state, actor, response)) givePriority(state, release);
       return;
@@ -146,6 +150,7 @@ export function transition(
     assertRegistryPin(committed.manifest, release);
     assertResolutionContinuation(committed, release);
     assertTriggerContexts(committed, release);
+    assertTriggerPayment(committed, release);
     const state = structuredClone(committed);
     state.revision++;
     state.events = [];

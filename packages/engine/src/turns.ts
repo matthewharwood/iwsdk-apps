@@ -30,7 +30,9 @@ export function givePriority(
   actor: string = state.priorityPlayer ?? requireActivePlayer(state),
 ): void {
   requireRule(
-    !state.frames.some((frame) => frame.kind === "resolving-spell"),
+    !state.frames.some(
+      (frame) => frame.kind === "resolving-spell" || frame.kind === "resolving-trigger-payment",
+    ),
     "No priority during a suspended resolution",
   );
   if (state.outcome.kind !== "ongoing") return;

@@ -8,7 +8,7 @@ import {
 import { heuristicDriver } from "@iwsdk-apps/simulation";
 import type { Coordinator } from "@iwsdk-apps/storage";
 
-export const TERMINAL_DRIVER_VERSION = "terminal-observation/6";
+export const TERMINAL_DRIVER_VERSION = "terminal-observation/7";
 export type TerminalRun = { status: "completed" | "paused"; acceptedCommands: number };
 export type TerminalIO = {
   readLine?: () => string | null | Promise<string | null>;
@@ -85,13 +85,33 @@ function present(observation: PlayerObservation, write: (line: string) => void):
   write(`Decision constraints: ${JSON.stringify(observation.decision)}`);
   write(
     `Triggered abilities: ${JSON.stringify(
-      observation.abilities.map((ability) => ({
-        id: ability.id,
-        source: ability.source.id,
-        name: ability.sourceCard.name,
-        controller: ability.controller,
-        effects: selfEntryEffects(ability.program),
-      })),
+      observation.abilities.map((ability) => {
+        const common = {
+          id: ability.id,
+          source: ability.source.id,
+          name: ability.sourceCard.name,
+          controller: ability.controller,
+        };
+        if (!("referencedTrigger" in ability))
+          return { ...common, effects: selfEntryEffects(ability.program) };
+        const referenced = ability.referencedTrigger.captured;
+        const decision = observation.decision;
+        return {
+          ...common,
+          effects: [ability.program.effect],
+          referencedTrigger: {
+            id: referenced.id,
+            source: referenced.source.id,
+            definition: referenced.source.definition,
+            controller: referenced.controller,
+            program: referenced.program.id,
+          },
+          pendingPayment:
+            decision?.kind === "trigger-payment" && decision.triggers.includes(ability.id)
+              ? { actor: decision.actor, cost: decision.cost }
+              : null,
+        };
+      }),
     )}`,
   );
 }

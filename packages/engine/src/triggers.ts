@@ -19,9 +19,10 @@ import {
   requireRule,
   tryMove,
 } from "./common";
-
 import { checkInterveningIf } from "./conditional-triggers";
+import { captureEntryCausedTriggers } from "./entry-caused-triggers";
 import { captureEntryObservers } from "./entry-observers";
+import { beginTriggerPayment } from "./trigger-payment";
 
 /** Complete the entry batch before inspecting post-event self-entry abilities. */
 export function enterBattlefield(
@@ -74,6 +75,7 @@ export function recordBattlefieldEntryBatch(
     entered.every((entry) => entry.zone === "battlefield" && !player(state, entry.controller).lost),
     "Invalid battlefield entry batch",
   );
+  const pendingBefore = new Set(state.pendingTriggers);
   const eventIndex = state.eventSequence;
   emit(
     state,
@@ -86,7 +88,11 @@ export function recordBattlefieldEntryBatch(
     if (source.token) continue; // These fixed token templates have no triggered programs.
     const card = definition(registry, source.definition);
     for (const program of card.triggerPrograms ?? []) {
-      if (program.schema === "commander-entry-observer/1") continue;
+      if (
+        program.schema === "commander-entry-observer/1" ||
+        program.schema === "commander-entry-caused-trigger/1"
+      )
+        continue;
       if (
         program.schema === "commander-conditional-self-entry/1" &&
         !checkInterveningIf(state, registry, source, program, "capture")
@@ -124,11 +130,27 @@ export function recordBattlefieldEntryBatch(
     }
   }
   captureEntryObservers(state, registry, entered, eventIndex);
+  captureEntryCausedTriggers(
+    state,
+    registry,
+    { kind: "battlefield-entry", eventIndex, enteredObjectIds: [...enteredIds] },
+    state.pendingTriggers.filter((id) => !pendingBefore.has(id)),
+  );
 }
 
+function livingApnap(state: RulesState): string[] {
+  const start = state.players.findIndex((seat) => seat.id === requireActivePlayer(state));
+  return [...state.players.slice(start), ...state.players.slice(0, start)]
+    .filter((seat) => !seat.lost)
+    .map((seat) => seat.id);
+}
 function ownedCohort(state: RulesState, actor: string): string[] {
   return (
-    state.triggerPlacement?.cohort.filter((id) => state.abilities[id]?.controller === actor) ?? []
+    state.triggerPlacement?.cohort.filter(
+      (id) =>
+        state.abilities[id]?.controller === actor &&
+        state.abilities[id]?.program.trigger.placementClass === state.triggerPlacement?.phase,
+    ) ?? []
   );
 }
 function putOnStack(state: RulesState, ids: readonly string[]): void {
@@ -151,38 +173,49 @@ function putOnStack(state: RulesState, ids: readonly string[]): void {
 function finishPlacement(state: RulesState): boolean {
   const placement = state.triggerPlacement;
   if (!placement) return true;
-  while (placement.remainingPlayers.length) {
-    const actor = placement.remainingPlayers[0];
-    if (!actor) throw new RulesError("Invariant", "Missing APNAP controller");
-    const ids = ownedCohort(state, actor);
-    if (ids.length > 1) {
-      request(state, "trigger-order", actor, {
-        triggers: ids,
-        count: ids.length,
-        context: "Order your triggered abilities from bottom to top; the last resolves first.",
-      });
-      return false;
+  while (true) {
+    while (placement.remainingPlayers.length) {
+      const actor = placement.remainingPlayers[0];
+      if (!actor) throw new RulesError("Invariant", "Missing APNAP controller");
+      const ids = ownedCohort(state, actor);
+      if (ids.length > 1) {
+        request(state, "trigger-order", actor, {
+          triggers: ids,
+          count: ids.length,
+          context: "Order your triggered abilities from bottom to top; the last resolves first.",
+        });
+        return false;
+      }
+      putOnStack(state, ids);
+      placement.remainingPlayers.shift();
     }
-    putOnStack(state, ids);
-    placement.remainingPlayers.shift();
+    if (
+      placement.cohort.some(
+        (id) => state.abilities[id]?.program.trigger.placementClass === placement.phase,
+      )
+    )
+      throw new RulesError("Invariant", "Unplaced trigger has no APNAP controller");
+    if (placement.phase === "ordinary") {
+      placement.phase = "triggered-by-trigger";
+      placement.remainingPlayers = livingApnap(state);
+      continue;
+    }
+    if (placement.cohort.length)
+      throw new RulesError("Invariant", "Unplaced trigger has wrong placement class");
+    state.triggerPlacement = null;
+    return true;
   }
-  if (placement.cohort.length)
-    throw new RulesError("Invariant", "Unplaced trigger has no APNAP controller");
-  // The second CR603.3b pass is distinct. This ABI admits no trigger-on-trigger constructors.
-  placement.phase = "triggered-by-trigger";
-  state.triggerPlacement = null;
-  return true;
 }
 
 /** Called only after state-based actions and commander destinations have stabilized. */
 export function placeWaitingTriggers(state: RulesState): { waiting: boolean; changed: boolean } {
   if (state.triggerPlacement) return { waiting: !finishPlacement(state), changed: true };
   if (!state.pendingTriggers.length) return { waiting: false, changed: false };
-  const start = state.players.findIndex((seat) => seat.id === requireActivePlayer(state));
-  const remainingPlayers = [...state.players.slice(start), ...state.players.slice(0, start)]
-    .filter((seat) => !seat.lost)
-    .map((seat) => seat.id);
-  state.triggerPlacement = { phase: "ordinary", cohort: state.pendingTriggers, remainingPlayers };
+  state.triggerPlacement = {
+    phase: "ordinary",
+    cohort: state.pendingTriggers,
+    remainingPlayers: livingApnap(state),
+  };
   state.pendingTriggers = [];
   return { waiting: !finishPlacement(state), changed: true };
 }
@@ -191,7 +224,7 @@ export function answerTriggerOrder(state: RulesState, actor: string, response: R
   requireRule(response.kind === "trigger-order", "Expected a trigger ordering choice");
   const placement = state.triggerPlacement;
   requireRule(
-    placement?.phase === "ordinary" && placement.remainingPlayers[0] === actor,
+    placement?.remainingPlayers[0] === actor,
     "This player does not own the pending trigger-order choice",
   );
   const ids = ownedCohort(state, actor);
@@ -206,13 +239,14 @@ export function answerTriggerOrder(state: RulesState, actor: string, response: R
   return finishPlacement(state);
 }
 
-export function resolveTriggeredAbility(state: RulesState, registry: ExecutionRegistry): void {
+export function resolveTriggeredAbility(state: RulesState, registry: ExecutionRegistry): boolean {
   const top = state.stack.at(-1);
   if (top?.kind !== "triggered-ability")
     throw new RulesError("Invariant", "No triggered ability to resolve");
   const ability = state.abilities[top.triggerId];
   if (!ability || player(state, ability.controller).lost)
     throw new RulesError("Invariant", "A resolving ability lacks a living captured controller");
+  if ("referencedTrigger" in ability) return beginTriggerPayment(state, registry, ability);
   if (
     ability.program.schema === "commander-conditional-self-entry/1" &&
     !checkInterveningIf(state, registry, ability.source, ability.program, "resolution")
@@ -227,7 +261,7 @@ export function resolveTriggeredAbility(state: RulesState, registry: ExecutionRe
       ability: ability.program.id,
       reason: "intervening-if-false",
     });
-    return;
+    return true;
   }
   for (const effect of triggerEffects(ability.program)) {
     if (effect.kind === "draw") draw(state, ability.controller, effect.amount);
@@ -254,6 +288,7 @@ export function resolveTriggeredAbility(state: RulesState, registry: ExecutionRe
   });
   hit(state, "rule:608.2n");
   hit(state, `card:${ability.source.definition}:trigger:${ability.program.id}:resolve`);
+  return true;
 }
 
 export function removeDepartedTriggers(state: RulesState, lost: ReadonlySet<string>): void {

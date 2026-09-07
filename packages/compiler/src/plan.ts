@@ -14,11 +14,13 @@ import {
   reviewedLegacyDefinition,
   reviewedSelfEntryDefinition,
   reviewedStaticBonusDefinition,
+  reviewedStrictProctorDefinition,
   reviewedTemporaryCreatureDefinition,
   reviewedTokenTemplate,
   SELF_ENTRY_RECIPE_VERSION,
   SELF_ENTRY_SEQUENCE_VERSION,
   STATIC_BONUS_VERSION,
+  STRICT_PROCTOR_VERSION,
   TEMPORARY_CREATURE_VERSION,
 } from "@iwsdk-apps/card-programs";
 import {
@@ -30,8 +32,8 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/11";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.15.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/12";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.16.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -69,6 +71,17 @@ export const FIXED_TOKEN_CORE_CAPABILITIES = [
   "token:zone-departure-and-state-based-cease",
   "token:no-reentry-after-departure",
   "token:deterministic-durable-identities",
+] as const;
+export const STRICT_PROCTOR_CORE_CAPABILITIES = [
+  "trigger:typed-immediate-cause",
+  "trigger:entry-caused-meta-capture",
+  "trigger:two-apnap-placement-passes",
+  "trigger:non-target-occurrence-reference-lki",
+  "trigger:counter-noncard-ability",
+  "resolution:owned-optional-trigger-payment",
+  "resolution:standalone-mana-before-optional-payment",
+  "resolution:departed-payer-unpaid",
+  "resolution:durable-trigger-payment-frame",
 ] as const;
 export const CONDITIONAL_SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:intervening-if-capture",
@@ -231,6 +244,8 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
+  if (definition.implementationRevision === STRICT_PROCTOR_VERSION)
+    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedStrictProctorDefinition(definition);
   if (definition.implementationRevision === CONDITIONAL_SELF_ENTRY_VERSION)
     return (
       processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
@@ -314,6 +329,12 @@ export async function buildDevelopmentMatchPlan(
       ...DEVELOPMENT_CORE,
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === STRICT_PROCTOR_VERSION,
+      )
+        ? STRICT_PROCTOR_CORE_CAPABILITIES
+        : []),
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === CONDITIONAL_SELF_ENTRY_VERSION,
       )
         ? CONDITIONAL_SELF_ENTRY_CORE_CAPABILITIES
@@ -381,7 +402,7 @@ export async function buildDevelopmentMatchPlan(
       assumptions: [
         "fixed pinned release",
         "recognized development recipe dependency declarations",
-        "exact fixed-token template edges; static, entry-observer and current-artifact predicates select game objects without external card dependencies; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
+        "exact fixed-token template edges; static, entry-observer and current-artifact predicates select game objects and Strict Proctor references actual ability occurrences without external card dependencies; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
       ],
       proof: "not reachable from deck roots under complete declared development dependencies",
       tests: ["packages/compiler/src/plan.test.ts"],

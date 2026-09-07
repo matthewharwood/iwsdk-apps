@@ -2,6 +2,7 @@ import { z } from "zod";
 import { StaticCreatureBonus } from "./static-bonus";
 import {
   ConditionalSelfEntryProgram,
+  EntryCausedTriggerProgram,
   EntryObserverProgram,
   SelfEntryProgram,
   TriggeredProgram,
@@ -10,10 +11,12 @@ import {
 export { ReviewedCreatureSubtype, StaticCreatureBonus } from "./static-bonus";
 export {
   ConditionalSelfEntryProgram,
+  EntryCausedTriggerProgram,
   EntryObserverEffect,
   EntryObserverProgram,
   EntrySubjectFilter,
   OrderedSelfEntryProgram,
+  OrdinaryTriggeredProgram,
   SelfEntryEffect,
   SelfEntryProgram,
   SingleSelfEntryProgram,
@@ -23,7 +26,7 @@ export {
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.15.0";
+export const ENGINE_VERSION = "commander-engine/0.16.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -376,11 +379,30 @@ export const ConditionalSelfEntryAbility = z.strictObject({
   program: ConditionalSelfEntryProgram,
 });
 export type ConditionalSelfEntryAbility = z.infer<typeof ConditionalSelfEntryAbility>;
-export const TriggeredAbility = z.union([
+export const OrdinaryTriggeredAbility = z.union([
   SelfEntryAbility,
   EntryObserverAbility,
   ConditionalSelfEntryAbility,
 ]);
+export type OrdinaryTriggeredAbility = z.infer<typeof OrdinaryTriggeredAbility>;
+export const BattlefieldEntryCause = z.strictObject({
+  kind: z.literal("battlefield-entry"),
+  eventIndex: Natural,
+  enteredObjectIds: z.array(Id).min(1),
+});
+export type BattlefieldEntryCause = z.infer<typeof BattlefieldEntryCause>;
+/** Non-target, immutable causal context; the referent may cease before this ability resolves. */
+export const EntryCausedTriggerAbility = z.strictObject({
+  ...triggeredAbilityHeader,
+  program: EntryCausedTriggerProgram,
+  immediateCause: z.strictObject({ kind: z.literal("ability-triggered"), triggeringAbilityId: Id }),
+  referencedTrigger: z.strictObject({
+    captured: OrdinaryTriggeredAbility,
+    immediateCause: BattlefieldEntryCause,
+  }),
+});
+export type EntryCausedTriggerAbility = z.infer<typeof EntryCausedTriggerAbility>;
+export const TriggeredAbility = z.union([OrdinaryTriggeredAbility, EntryCausedTriggerAbility]);
 export type TriggeredAbility = z.infer<typeof TriggeredAbility>;
 export const StackEntry = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("spell"), objectId: Id }),
@@ -430,7 +452,18 @@ export type Step = z.infer<typeof Step>;
 export const PaymentSource = z.strictObject({ object: Id, color: ManaColor });
 export const Attack = z.strictObject({ attacker: Id, defender: Id });
 export const Block = z.strictObject({ blocker: Id, attacker: Id });
+export const TriggerPaymentResponse = z.discriminatedUnion("pay", [
+  z.strictObject({ kind: z.literal("trigger-payment"), pay: z.literal(false) }),
+  z.strictObject({
+    kind: z.literal("trigger-payment"),
+    pay: z.literal(true),
+    sources: z.array(PaymentSource).max(100),
+    spend: Mana,
+  }),
+]);
+export type TriggerPaymentResponse = z.infer<typeof TriggerPaymentResponse>;
 export const Response = z.discriminatedUnion("kind", [
+  TriggerPaymentResponse,
   z.strictObject({ kind: z.literal("trigger-order"), triggers: z.array(Id) }),
   z.strictObject({ kind: z.literal("starting-player"), player: Id }),
   z.strictObject({ kind: z.literal("mulligan"), keep: z.boolean() }),
@@ -473,6 +506,7 @@ export const Decision = z.strictObject({
   revision: Natural,
   kind: z.enum([
     "trigger-order",
+    "trigger-payment",
     "starting-player",
     "mulligan",
     "bottom",
@@ -542,7 +576,17 @@ export const ResolvingSpellFrame = z.strictObject({
   }),
 });
 export type ResolvingSpellFrame = z.infer<typeof ResolvingSpellFrame>;
+export const ResolvingTriggerPaymentFrame = z.strictObject({
+  kind: z.literal("resolving-trigger-payment"),
+  resolvingTrigger: EntryCausedTriggerAbility,
+  payer: Id,
+  payerBasis: z.enum(["current-referenced-ability", "last-known-referenced-ability"]),
+  cost: EntryCausedTriggerProgram.shape.effect.shape.cost,
+  continuation: z.literal("complete-proctor-resolution"),
+});
+export type ResolvingTriggerPaymentFrame = z.infer<typeof ResolvingTriggerPaymentFrame>;
 export const Frame = z.discriminatedUnion("kind", [
+  ResolvingTriggerPaymentFrame,
   ResolvingSpellFrame,
   z.strictObject({
     kind: z.literal("casting"),

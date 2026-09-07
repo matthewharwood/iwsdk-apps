@@ -1,6 +1,11 @@
 import { expect, test } from "bun:test";
 import { type CatalogCard, CatalogCardSchema } from "@iwsdk-apps/catalog";
-import { canonicalJson, type Keyword, selfEntryEffects } from "@iwsdk-apps/contracts";
+import {
+  canonicalJson,
+  type Keyword,
+  SelfEntryProgram,
+  selfEntryEffects,
+} from "@iwsdk-apps/contracts";
 import {
   bindDevelopmentCard,
   KEYWORD_REMINDER_RECIPE_VERSION,
@@ -89,7 +94,7 @@ test("known annotation composition accounts for every keyword, mana clause and o
   expect(result.definition.manaAbilities).toEqual(["G"]);
   expect(
     result.definition.triggerPrograms?.[0]
-      ? selfEntryEffects(result.definition.triggerPrograms[0])[0]
+      ? selfEntryEffects(SelfEntryProgram.parse(result.definition.triggerPrograms[0]))[0]
       : undefined,
   ).toMatchObject({ kind: "draw", amount: 1 });
   expect(reviewedKeywordReminderDefinition(result.definition)).toBe(true);

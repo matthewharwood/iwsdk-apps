@@ -40,7 +40,7 @@ beforeAll(async () => {
   expect(staticSourceSnapshot.qualifiedReleaseHash).toBe(
     "7f1e1b65f7134dce4add33ded2019720f74b44f0c9c194dbc34e182383914bdf",
   );
-  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1192);
+  expect(Object.keys(REVIEWED_SOURCE_BINDINGS)).toHaveLength(1193);
   expect(staticSourceSnapshot.fullCommanderScan).toHaveLength(39);
   expect(cases).toHaveLength(38);
   expect(excluded.map((row) => row.name).sort()).toEqual([

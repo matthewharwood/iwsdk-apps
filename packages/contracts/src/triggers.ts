@@ -41,7 +41,7 @@ export const SelfEntryProgram = z.discriminatedUnion("schema", [
   OrderedSelfEntryProgram,
 ]);
 export type SelfEntryProgram = z.infer<typeof SelfEntryProgram>;
-export function selfEntryEffects(program: TriggeredProgram): readonly SelfEntryEffect[] {
+export function selfEntryEffects(program: OrdinaryTriggeredProgram): readonly SelfEntryEffect[] {
   return program.schema === "commander-trigger/1" ? [program.effect] : program.effects;
 }
 
@@ -124,14 +124,49 @@ export const ConditionalSelfEntryProgram = z.strictObject({
   ]),
 });
 export type ConditionalSelfEntryProgram = z.infer<typeof ConditionalSelfEntryProgram>;
+/** An ability-triggered condition matches only the immediate entry event, never ancestry. */
+export const EntryCausedTriggerProgram = z.strictObject({
+  schema: z.literal("commander-entry-caused-trigger/1"),
+  id: z.string().min(1).max(240),
+  trigger: z.strictObject({
+    kind: z.literal("ability-triggered"),
+    immediateCause: z.literal("battlefield-entry"),
+    sourceZone: z.literal("battlefield"),
+    view: z.literal("post-committed-event"),
+    placementClass: z.literal("triggered-by-trigger"),
+  }),
+  effect: z.strictObject({
+    kind: z.literal("counter-referenced-trigger-unless-paid"),
+    reference: z.literal("triggering-ability"),
+    payer: z.literal("referenced-ability-controller"),
+    cost: z.strictObject({
+      generic: z.literal(2),
+      W: z.literal(0),
+      U: z.literal(0),
+      B: z.literal(0),
+      R: z.literal(0),
+      G: z.literal(0),
+      C: z.literal(0),
+    }),
+  }),
+});
+export type EntryCausedTriggerProgram = z.infer<typeof EntryCausedTriggerProgram>;
+export const OrdinaryTriggeredProgram = z.discriminatedUnion("schema", [
+  SingleSelfEntryProgram,
+  OrderedSelfEntryProgram,
+  EntryObserverProgram,
+  ConditionalSelfEntryProgram,
+]);
+export type OrdinaryTriggeredProgram = z.infer<typeof OrdinaryTriggeredProgram>;
 /** New observer programs do not rewrite either historical self-entry representation. */
 export const TriggeredProgram = z.discriminatedUnion("schema", [
   SingleSelfEntryProgram,
   OrderedSelfEntryProgram,
   EntryObserverProgram,
   ConditionalSelfEntryProgram,
+  EntryCausedTriggerProgram,
 ]);
 export type TriggeredProgram = z.infer<typeof TriggeredProgram>;
-export function triggerEffects(program: TriggeredProgram): readonly SelfEntryEffect[] {
+export function triggerEffects(program: OrdinaryTriggeredProgram): readonly SelfEntryEffect[] {
   return program.schema === "commander-trigger/1" ? [program.effect] : program.effects;
 }

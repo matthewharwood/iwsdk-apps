@@ -1,4 +1,24 @@
 import {
+  bindStrictProctorPermanent,
+  STRICT_PROCTOR_PERMANENTS,
+  STRICT_PROCTOR_VERSION,
+} from "./strict-proctor";
+
+export {
+  bindStrictProctorPermanent,
+  reviewedStrictProctorDefinition,
+  STRICT_PROCTOR_ARCHIVE,
+  STRICT_PROCTOR_PERMANENTS,
+  STRICT_PROCTOR_RESEARCH_HASH,
+  STRICT_PROCTOR_RULES,
+  STRICT_PROCTOR_RULES_HASH,
+  STRICT_PROCTOR_SOURCE_BUNDLE,
+  STRICT_PROCTOR_SOURCE_REVIEW_HASH,
+  STRICT_PROCTOR_VERSION,
+  type StrictProctorSource,
+} from "./strict-proctor";
+
+import {
   bindConditionalSelfEntryPermanent,
   CONDITIONAL_SELF_ENTRY_PERMANENTS,
   CONDITIONAL_SELF_ENTRY_VERSION,
@@ -528,6 +548,7 @@ function consistentReminderMetadata(
 interface BindingOptions {
   entryObserverTriggers?: boolean;
   conditionalSelfEntryTriggers?: boolean;
+  strictProctorTriggers?: boolean;
   staticBonusPermanents?: boolean;
   fixedTokenSpells?: boolean;
   creatureReturnSpells?: boolean;
@@ -568,66 +589,70 @@ function bindSpell(
     return familySpell(input, parts);
   return reviewedSpell(input, parts);
 }
+interface KnownPermanentBinder {
+  sources: readonly { identity: string; sourceVersion: string }[];
+  option: keyof BindingOptions;
+  bind: (input: CatalogCard) => CardDefinition | null;
+  version: string;
+  reasonPrefix: string;
+}
+const knownPermanentBinders: readonly KnownPermanentBinder[] = [
+  {
+    sources: STRICT_PROCTOR_PERMANENTS,
+    option: "strictProctorTriggers",
+    bind: bindStrictProctorPermanent,
+    version: STRICT_PROCTOR_VERSION,
+    reasonPrefix: "strict-proctor",
+  },
+  {
+    sources: CONDITIONAL_SELF_ENTRY_PERMANENTS,
+    option: "conditionalSelfEntryTriggers",
+    bind: bindConditionalSelfEntryPermanent,
+    version: CONDITIONAL_SELF_ENTRY_VERSION,
+    reasonPrefix: "conditional-self-entry",
+  },
+  {
+    sources: ENTRY_OBSERVER_PERMANENTS,
+    option: "entryObserverTriggers",
+    bind: bindEntryObserverPermanent,
+    version: ENTRY_OBSERVER_VERSION,
+    reasonPrefix: "entry-observer",
+  },
+  {
+    sources: STATIC_BONUS_PERMANENTS,
+    option: "staticBonusPermanents",
+    bind: bindStaticBonusPermanent,
+    version: STATIC_BONUS_VERSION,
+    reasonPrefix: "static-bonus",
+  },
+];
+function bindKnownPermanent(input: CatalogCard, options: BindingOptions): BindingResult | null {
+  // Known source anchors cannot be relabeled or stripped into a legacy vanilla constructor.
+  const descriptor = knownPermanentBinders.find((row) =>
+    row.sources.some(
+      (source) =>
+        source.identity === input.identity ||
+        source.identity === input.oracle.oracle_id ||
+        source.sourceVersion === input.versionHash,
+    ),
+  );
+  if (!descriptor) return null;
+  const enabled = options[descriptor.option];
+  const definition = enabled ? descriptor.bind(input) : null;
+  return definition
+    ? { kind: "bound", definition, recipes: [descriptor.version] }
+    : {
+        kind: "unsupported",
+        reason: `${descriptor.reasonPrefix}-${enabled ? "source-mismatch" : "requires-explicit-opt-in"}`,
+      };
+}
 /** Binds only explicitly reviewed data recipes. No unknown English clause can become a no-op. */
 export function bindDevelopmentCard(
   input: CatalogCard,
   options: BindingOptions = {},
 ): BindingResult {
-  // Known source anchors cannot be relabeled or stripped into a legacy vanilla constructor.
-  const conditionalSource = CONDITIONAL_SELF_ENTRY_PERMANENTS.some(
-    (row) =>
-      row.identity === input.identity ||
-      row.identity === input.oracle.oracle_id ||
-      row.sourceVersion === input.versionHash,
-  );
-  if (conditionalSource) {
-    const definition = options.conditionalSelfEntryTriggers
-      ? bindConditionalSelfEntryPermanent(input)
-      : null;
-    return definition
-      ? { kind: "bound", definition, recipes: [CONDITIONAL_SELF_ENTRY_VERSION] }
-      : {
-          kind: "unsupported",
-          reason: options.conditionalSelfEntryTriggers
-            ? "conditional-self-entry-source-mismatch"
-            : "conditional-self-entry-requires-explicit-opt-in",
-        };
-  }
-
-  const observerSource = ENTRY_OBSERVER_PERMANENTS.some(
-    (row) =>
-      row.identity === input.identity ||
-      row.identity === input.oracle.oracle_id ||
-      row.sourceVersion === input.versionHash,
-  );
-  if (observerSource) {
-    const definition = options.entryObserverTriggers ? bindEntryObserverPermanent(input) : null;
-    return definition
-      ? { kind: "bound", definition, recipes: [ENTRY_OBSERVER_VERSION] }
-      : {
-          kind: "unsupported",
-          reason: options.entryObserverTriggers
-            ? "entry-observer-source-mismatch"
-            : "entry-observer-requires-explicit-opt-in",
-        };
-  }
-  const staticSource = STATIC_BONUS_PERMANENTS.some(
-    (row) =>
-      row.identity === input.identity ||
-      row.identity === input.oracle.oracle_id ||
-      row.sourceVersion === input.versionHash,
-  );
-  if (staticSource) {
-    const definition = options.staticBonusPermanents ? bindStaticBonusPermanent(input) : null;
-    return definition
-      ? { kind: "bound", definition, recipes: [STATIC_BONUS_VERSION] }
-      : {
-          kind: "unsupported",
-          reason: options.staticBonusPermanents
-            ? "static-bonus-source-mismatch"
-            : "static-bonus-requires-explicit-opt-in",
-        };
-  }
+  const known = bindKnownPermanent(input, options);
+  if (known) return known;
   if (!input.eligibility.some((row) => row.role === "main-deck" && row.status === "candidate"))
     return { kind: "unsupported", reason: "not-observed-main-deck-candidate" };
   const card = input.oracle;

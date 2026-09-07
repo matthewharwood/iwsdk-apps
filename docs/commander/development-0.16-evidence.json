@@ -1,0 +1,396 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.16.0",
+  "sourceReleaseHash": "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
+  "primaryDefinitions": 1193,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 53,
+  "preservedPrimaryDefinitions": 1192,
+  "preservedCompleteDeckRevisions": 51,
+  "unsupportedPaperCandidates": 30636,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": "docs/commander/source-strict-proctor-v0.16.json",
+    "sha256": "526b8d2c8bf5e370a720445790d8543cb69bd0f4453f71e279536272a33f3383"
+  },
+  "sourceResearch": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/strict-proctor-next-review/manifest.json",
+    "sha256": "910bdbd92210a1eb3a5bc1919abff5809921afd341b3d8841afe48acc6b4b9c8"
+  },
+  "independentSourceReview": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/independent-strict-proctor-review/manifest.json",
+    "sha256": "6861868ae652fdf03717bb33096aa42363a4c406d44becd9ce539c1690b18a6c"
+  },
+  "bindingAndDeckExecution": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/strict-proctor-binding-decks/attempt-1/result.json",
+    "sha256": "6632d58f2a3a4dea9cab0ec9dec2bf08d6b274ef1092f7d3ed25ad8cb9b31e63",
+    "tests": 110,
+    "assertions": 22961,
+    "capturedFilesUnchanged": 213
+  },
+  "coreAndSourceExecution": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/proctor-runtime-execution/manifest.json",
+    "sha256": "c590d1c9ed7590a4034d22b84b37eca29a23dec2454b8ad2d84592fdac661f96",
+    "focusedTests": 54,
+    "focusedAssertions": 698,
+    "authenticatedSourceTests": 25,
+    "authenticatedSourceAssertions": 345,
+    "syntheticOperatorTests": 27,
+    "syntheticOperatorAssertions": 333,
+    "contractTests": 2,
+    "contractAssertions": 20,
+    "capturedFilesUnchanged": 109,
+    "broadTests": 719,
+    "broadAssertions": 9877,
+    "scope": "Twenty-five tests execute authenticated source definitions with explicitly selected hands/basic boards and ordinary casts; twenty-seven separately labeled synthetic operator tests and two contract tests complete the54-test capture. No completed games or SQL/OPFS inferred from these tests."
+  },
+  "originalMetaExpectationJoin": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/proctor-runtime-execution/expectation-join.json",
+    "sha256": "9e13e5cef8a9ef19e93d5eccfd6a5fa0b930be64865aad05122186ee4ed018bd"
+  },
+  "independentRuntimeReview": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/independent-proctor-runtime-review/manifest.json",
+    "sha256": "c1705c03e496ebc3f357ce5ad0a5be80546ec90a3f6867bc93d5244ac88f1b16",
+    "tests": 81,
+    "assertions": 1985,
+    "newIndependentTests": 27,
+    "newIndependentAssertions": 1287,
+    "capturedFilesUnchanged": 222,
+    "fixturePrimaryDefinitions": 16,
+    "fixtureAuxiliaryTemplates": 1,
+    "scope": "Exact one-total-available-mana case and real Repulse artifact departure tested. Twelve partial source command segments replayed; constructed initial hands/boards remain labeled. No full G2/native/browser claim."
+  },
+  "compilerExecution": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/proctor-compiler-execution/qualified/result.json",
+    "sha256": "bc2b5817c213f1fcd29bb2e995a0b1e14eebaea4b5fb93c0f84a923ca004d89a",
+    "tests": 151,
+    "assertions": 44979,
+    "capturedFilesUnchanged": 208
+  },
+  "independentCompilerReview": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/independent-strict-proctor-compiler-review/manifest.json",
+    "sha256": "1104c8bf89db07905d1213b6e1f738d38080753fb357bfb2cbdfd85379b51e07",
+    "tests": 51,
+    "assertions": 10601,
+    "rejectionProbes": 82,
+    "capturedFilesUnchanged": 217
+  },
+  "nativeDurability": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/native-proctor-durability/attempt-2/result.json",
+    "sha256": "c2c83d3342648c72fa6042537ce53cbe73156fe61160f766b3c7f3549442d058",
+    "tests": 27,
+    "assertions": 1497,
+    "capturedFilesUnchanged": 102,
+    "resolvers": 3,
+    "commandsPerResolver": 402,
+    "checkpoints": [372, 373, 375, 377, 379, 380, 381, 392, 393, 402],
+    "gameSeed": 5241,
+    "driverSeed": 1,
+    "actualFixtureReleaseHash": "58bb191855d1277aeffd87e028db431578106c265eca4a3fb30673733cd625fb",
+    "actualFixturePrimaryDefinitions": 6,
+    "preparedDefinitions": 5,
+    "auxiliaryTemplates": 1,
+    "completedGames": 0,
+    "scope": "Ordinary legal setup and dealt command histories; privileged offline seed qualification and checkpoint selection are explicit. Owned response policy uses permitted observations. Ten actual checkpoints, twelve injected transaction failures, corrupt imports and current-state tampering; no completed games."
+  },
+  "nativeInventory": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/proctor-native-evidence-inventory.json",
+    "sha256": "3ac55475383596465fecc9786bd2869fb5f92fcaa2f93e06441908b3c9601220"
+  },
+  "independentNativeReview": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/independent-proctor-native-artifact-audit.json",
+    "sha256": "126f4769d56ebb6c2036ddee9ef739b654e6043981ca57b1c67ba50ed7ac8f1d"
+  },
+  "stoppedBrowser": {
+    "path": ".commander/prototypes/engine-0.16/.commander/checkpoint-browser-proof/2026-09-07T02-25-44-665Z-e32e7c54/evidence.json",
+    "sha256": "8f987a52fc129829460444a4fe4d786bc0969e41f1bee3a8d1701d941343398f",
+    "status": "passed",
+    "sourceHash": "2ead20f193b590802e8ce63c9926657d464579ac7c6b4ac1f27bb661ecdf7e27",
+    "workerBundleHash": "4adbdafa4f8d56ca165fe5452f77aabbbc9f8b6d1e0c65d305a9bd0b5cb9bc92",
+    "sourceFilesUnchanged": 106,
+    "inputFilesUnchanged": 32,
+    "resolvers": 3,
+    "reloadCheckpoints": 30,
+    "separateImports": 30,
+    "receiptRetries": 60,
+    "rpcRows": 2202,
+    "newCompletedGames": 0,
+    "advancingImportContinuations": 27,
+    "importsAlreadyAtStoppedFinal": 3,
+    "scope": "Exact existing native prefixes in real Chromium dedicated workers and SQLite OPFS. Both APNAP phases, owned mana and decline, same later absent reference and voluntary payment survive reload/import/retry; all final states remain ongoing."
+  },
+  "independentStoppedBrowserReview": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/independent-proctor-checkpoint-review/manifest.json",
+    "sha256": "c78d8c94cb6a8fca191199a44c0fa407e433ea2b75c1df963c16eec95b12ae9f"
+  },
+  "mainCompile": {
+    "path": ".commander/evidence/compile-0.16-main.log",
+    "sha256": "ceb4a25c315928cfc090775012a401da215afa45ed3e7991d796398834856b1c"
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.16/.draft-runs/resolver-comparisons/9b51064e-7a77-47fd-a64a-fea943043b0b/report.json",
+      "sha256": "afec6cb0e4a330d070690aba545c1b2a89337769d0e0efd1be7892429add9733",
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.16/.draft-runs/resolver-comparisons/9b51064e-7a77-47fd-a64a-fea943043b0b/assignment.json",
+        "sha256": "b401e8bce8ee46de4be0b2f5292907b0139155bdf68e4d822606ef9feea0df82"
+      },
+      "mode": "two-seat",
+      "gameSeed": 16001,
+      "driverSeed": 16018,
+      "commands": 889,
+      "boundaries": 890,
+      "independentResolversAndReplays": 3,
+      "proctorCaptures": 2,
+      "paidCompletions": 2,
+      "declinedCompletions": 0,
+      "actualNoncardCounters": 0
+    },
+    {
+      "path": ".commander/prototypes/engine-0.16/.draft-runs/resolver-comparisons/bf33c86c-0abf-4d3a-a0f1-84ba46651453/report.json",
+      "sha256": "fb3b6cb58010a12526522ed287981dc614b76c7eebde715545316c3f070e8d6d",
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.16/.draft-runs/resolver-comparisons/bf33c86c-0abf-4d3a-a0f1-84ba46651453/assignment.json",
+        "sha256": "a9bc93ed156125627f28000dfec2d59e16e288a49345b5539a8518f7e5c03723"
+      },
+      "mode": "four-seat",
+      "gameSeed": 16201,
+      "driverSeed": 16218,
+      "commands": 3137,
+      "boundaries": 3138,
+      "independentResolversAndReplays": 3,
+      "proctorCaptures": 14,
+      "paidCompletions": 12,
+      "declinedCompletions": 2,
+      "actualNoncardCounters": 2
+    }
+  ],
+  "independentCliComparisonReview": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/independent-proctor-cli-comparisons.json",
+    "sha256": "be4fef672bfdee1d362915c0f9fec4f8b9ed571cd57163779da4a862e6311818"
+  },
+  "frozenBuildHash": "8e788bc06ea0ad34b59887983b5248ef098617c890b24677f28331d989f00721",
+  "frozenExecutableSha256": "81f79e81bc89f4036b81defd82f77064d617282d158c77ccb646cb61d19f8aa6",
+  "terminalIntegration": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/terminal-proctor-integration/manifest.json",
+    "sha256": "d2405c9d683afbe372de62519399166d58f6b2f139f283232c7b60cd114918cf",
+    "tests": 8,
+    "assertions": 799
+  },
+  "earlierBuildSourceDelta": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/final-cli-build-source-delta.json",
+    "sha256": "607322a80a726a298254e3b9339cde511a240af9644cb0c3739e624fb9ee2694"
+  },
+  "browser": {
+    "path": ".commander/prototypes/engine-0.16/.commander/browser-proof/2026-09-07T02-13-34-985Z-87fe5cd6/evidence.json",
+    "sha256": "4f12dc43a172380e4fce0c248efeb9911a0a8861be51253213f7f698cb010928",
+    "status": "passed",
+    "sourceHash": "b931c2774394e6d9b929ba515ab36b84a355fd76cc4d8dd4899a33d5af9a55aa",
+    "workerBundleHash": "4adbdafa4f8d56ca165fe5452f77aabbbc9f8b6d1e0c65d305a9bd0b5cb9bc92",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "driverVersion": "observed-combat/10",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 16001,
+        "driverSeed": 16018,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "36842ddbefd0e9a45c66093e168b042a3addd82b636bdf47261e3392b7539a77"
+          },
+          {
+            "id": "P2",
+            "deckHash": "dfdd9da57f74d359b3b6caf0bb318dc29dfb95380218383014601eff64b2f959"
+          }
+        ],
+        "commands": 886,
+        "boundaries": 887,
+        "finalStateHash": "026d4f6e3573e8f2ca6b541a3e0eeae9338c5dbd971e0c3fdd8ff198a93b3b88",
+        "execution": {
+          "sourceReleaseHash": "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
+          "preparedArtifactHash": "35c3d43829294e16aaa1f8fde08ffeaa6a99a6cfa645d1a9f6a52e15a3085e29",
+          "definitionCount": 84,
+          "tokenTemplateCount": 10,
+          "fullDefinitionCount": 1193,
+          "excludedDefinitionCount": 1109,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 10
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 25,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "trigger-payment",
+            "revision": 600,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "importedCompleteStateHash": "026d4f6e3573e8f2ca6b541a3e0eeae9338c5dbd971e0c3fdd8ff198a93b3b88",
+        "paymentCompletions": 2,
+        "paidCompletions": 2,
+        "noncardCounters": 0
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 16202,
+        "driverSeed": 16219,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "36842ddbefd0e9a45c66093e168b042a3addd82b636bdf47261e3392b7539a77"
+          },
+          {
+            "id": "P2",
+            "deckHash": "dfdd9da57f74d359b3b6caf0bb318dc29dfb95380218383014601eff64b2f959"
+          },
+          {
+            "id": "P3",
+            "deckHash": "19e1c0ab313a2b345b7092d9715645dfa280359805f2928829a2cac968d006ef"
+          },
+          {
+            "id": "P4",
+            "deckHash": "e4bd15b8bf72c9e14e23bfa1e491098adaebd411a85f625834d3e10ab9565f49"
+          }
+        ],
+        "commands": 2534,
+        "boundaries": 2535,
+        "finalStateHash": "c92c24dabe5adbc30ae02464c6c27ab071848d4cb483cb00a0905ef153975741",
+        "execution": {
+          "sourceReleaseHash": "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
+          "preparedArtifactHash": "28f7b2057344ca1901239b3cc34297cbf9578cab40c72ce2c329a7697c86cf4e",
+          "definitionCount": 159,
+          "tokenTemplateCount": 10,
+          "fullDefinitionCount": 1193,
+          "excludedDefinitionCount": 1034,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 10
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 15,
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "trigger-payment",
+            "revision": 1740,
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "importedCompleteStateHash": "c92c24dabe5adbc30ae02464c6c27ab071848d4cb483cb00a0905ef153975741",
+        "paymentCompletions": 37,
+        "paidCompletions": 25,
+        "noncardCounters": 12
+      }
+    ],
+    "reloadCheckpoints": 6,
+    "priorCommandRetryCheckpoints": 4,
+    "separateTriggerPaymentImports": 2,
+    "scope": "Two complete native/browser games, six reload checkpoints, four prior-command retry checkpoints and two separate trigger-payment imports. Revision-zero setup has no prior command to retry. Selected same-ID payment stages600\u2192601 and1740\u21921741. Selected resumed payments were paid; other actual four-seat completions include12 declines and corresponding lower counters."
+  },
+  "independentBrowserReview": {
+    "path": ".commander/prototypes/engine-0.16/.draft-artifacts/independent-proctor-fullbrowser-review/manifest.json",
+    "sha256": "d79fa26ced4a507320bb35d35a7caddff8349f2063ecab9143cf746999f4c8d0",
+    "harnessTests": 7,
+    "harnessAssertions": 70,
+    "harnessCapturedFilesUnchanged": 115
+  },
+  "observedAssignments": {
+    "initialDeckGameSeedFamilies": 3,
+    "selectedFullExecutionAssignments": 4,
+    "acceptedCommands": 7446,
+    "scope": "Two final CLI assignments and two selected final browser assignments. Match/seat namespace changes, resolver variants, replay/import and repeated qualification do not create new initial deck/game-seed families. Earlier CLI/build and preliminary browser executions remain separate; browser4seed16201 finished but missed the required payment workflow. The402-command stopped family is separate and incomplete."
+  },
+  "attemptNotes": [
+    "Initial main gate found five test non-null assertions and a void-return lint defect; corrected without rules changes. Driver test step was then corrected to the actual main1 literal.",
+    "Full typecheck exposed terminal ordinary-effect presentation missing the new meta program. Terminal v7 plus actual-source pay/decline tests added; selected CLI comparisons rerun from the final captured build. Engine/compiler/simulation/storage sources are unchanged between both CLI builds.",
+    "Initial native run had three cohort-versus-pending-queue test expectation failures and one implicit5s timeout. Superseded captured attempt retained. Corrected final attempt2 passed with bounded30s tamper timeout.",
+    "Preliminary browser proof passed under its recorded harness. Final source-stable proof reran after lint corrections. Failed workflow seed selection remains retained."
+  ],
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.16/promotion.json",
+    "sha256": "9d8b5ef6a03d19e62c3784f152e61b977c94247e67a7a69a412f59c1ea28fae5"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.16/archive-inventory.json",
+    "sha256": "44363e590dd86202c3d5bbfb2130ca286e447f5435b0ff2f4dd6099259641bd3"
+  },
+  "exactMainSourceCliEquivalence": {
+    "path": ".commander/evidence/promotion-equality-0.16.json",
+    "sha256": "6780b97e577ac93e9d88224040b9b477d06fd68c711adbd25b6f980f826a73a0"
+  },
+  "exactMainWorkerEquivalence": {
+    "path": ".commander/evidence/browser-worker-byte-equivalence-0.16.json",
+    "sha256": "9326736dbfdaf5fd962b43ee7ab6722f4443d9389e61be6401609ccd8018c34b"
+  },
+  "repositoryGate": {
+    "path": ".commander/evidence/check-full-0.16-main.log",
+    "sha256": "c016ef7d9a5e1e64b351f4534c8ed4dea33cfba6f42ded4a0d0c60931d84a47b",
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "unitTests": 1254,
+    "unitAssertions": 137579,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true
+  },
+  "fixedRegression": {
+    "id": "regression-0.16-fixed64",
+    "status": "completed-and-replayed",
+    "assigned": 64,
+    "completed": 64,
+    "pending": 0,
+    "acceptedCommands": 89784,
+    "frozenBuildHash": "d6d0fa2c2abd5c1c1d54ce26e152db86c0466e7e88bf47ea3044a5e626a45fbe",
+    "evidence": {
+      "path": "docs/commander/fixed-regression-0.16-evidence.json",
+      "sha256": "42fbf6eeead35107f12fc9b5f2153c7cb898096a3ddc17c54920f3c14c9b9a41"
+    },
+    "scope": "All64 fixed inputs actually executed and replayed under engine0.16; no historical outcomes reused. Fixed older deck compositions do not exercise Strict Proctor. The frozen build predates the terminal-only presentation correction; engine/compiler/simulation/storage sources are byte-identical to the final CLI build, with an explicit source delta in development0.16 evidence. This report keeps the actual executed build pin and does not certify full-snapshot support."
+  },
+  "remaining": [
+    "30,636 paper candidates and broader rules remain unsupported.",
+    "Full original G2 qualification remains open, including general event replacements/prevention, layers and classification-only supplemental clauses.",
+    "General trigger bodies/copies/control changes, arbitrary optional costs and complex mana abilities remain unsupported.",
+    "Full-snapshot release and player-visible session contract remain incomplete.",
+    "Production Commander browser/XR consumption and physical headset qualification remain unfinished."
+  ],
+  "consumerGapAudit": {
+    "path": "docs/commander/consumer-gaps-0.12.md",
+    "sha256": "6cfc26300022f0a7b53ec885ab9ed86c4360fcd3013325315d6f22e698751de3"
+  },
+  "observedAt": "2026-09-07T02:52:49.000907+00:00"
+}

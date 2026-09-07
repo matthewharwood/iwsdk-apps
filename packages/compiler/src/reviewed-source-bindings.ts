@@ -1,10 +1,10 @@
 /** Authenticated primary source membership only; never semantic certification.
- * The1190 prior tuples remain exact. Twenty auxiliary token templates are separate from1192 Commander card bindings. */
+ * The1192 prior tuples remain exact. Twenty auxiliary token templates are separate from1193 Commander card bindings. */
 export const REVIEWED_BINDING_SNAPSHOT = {
   sourceBundle: "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
   rulesHash: "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
-  releaseHash: "ee7d9fe069b1c829325ac3a87d8622fab2893c2dc85e7e065537fb2cfb9782a0",
-  bindingsHash: "4d3cb90d848e94dd84f14a76b596625de4fca6b35ec19be7aaa41aa8fa25d364",
+  releaseHash: "13f3654940711c24cd84ff2665d126644687a536749d098f92dea2e52db957e4",
+  bindingsHash: "526539e8c2a52c6df079236dee7f9b67671c1d17a168aaf96b393b45797e5bcc",
   tokenTemplatesHash: "d5a3e91281f6a497cf026bd8b6a89e8e54dcd673edf1a9a22efdb41938205bcf",
 } as const;
 export const REVIEWED_SOURCE_BINDINGS: Readonly<
@@ -4919,6 +4919,11 @@ export const REVIEWED_SOURCE_BINDINGS: Readonly<
     sourceVersion: "435f5160f1384bb469a157ca724cac6c47809dd5e0b0132af24049222a68c6af",
     implementationRevision: "commander-development-recipes/1",
     definitionHash: "72000eca0d5688ddfed88adec13864980e7505a0c55f9d4dc04846ba524f9e08",
+  },
+  "b967870d-9773-4ad5-bf06-c3be5465dab9": {
+    sourceVersion: "41c5279028ebe43468ce43356e2af1b53665fc862d43ce00750ea7fca5378920",
+    implementationRevision: "strict-proctor-trigger/1",
+    definitionHash: "b1d252420d878f3635b740e76dddf14b351682594aee8d211b7e0a21600732b8",
   },
   "ac856e91-1b88-464b-9420-dc311ce814ea": {
     sourceVersion: "6b117771f271a3d14e052a5d05f845e510998b7321670ab48124cb25b767fe61",

@@ -8,6 +8,7 @@ import { assertRegistryPin, definition, RulesError } from "./common";
 import { assertResolutionContinuation } from "./resolution-context";
 import { assertPhysicalInventory, assertToken } from "./token-invariants";
 import { assertTriggerContexts } from "./trigger-context";
+import { assertTriggerPayment } from "./trigger-payment";
 
 function invariant(condition: unknown, message: string): asserts condition {
   if (!condition) throw new RulesError("Invariant", message);
@@ -69,9 +70,10 @@ function assertTriggers(state: RulesState, release: ExecutionRegistry): void {
     "Captured trigger lost its queue or stack location",
   );
   assertTriggerContexts(state, release);
+  assertTriggerPayment(state, release);
   if (state.triggerPlacement) {
     invariant(
-      state.triggerPlacement.phase === "ordinary" && state.decision?.kind === "trigger-order",
+      state.decision?.kind === "trigger-order",
       "Trigger placement lacks its serializable ordering decision",
     );
     const actor = state.triggerPlacement.remainingPlayers[0];
@@ -85,13 +87,18 @@ function assertTriggers(state: RulesState, release: ExecutionRegistry): void {
       actorIndex >= 0 &&
         canonicalJson(state.triggerPlacement.remainingPlayers) ===
           canonicalJson(apnap.slice(actorIndex)) &&
-        state.triggerPlacement.cohort.every((id) =>
-          state.triggerPlacement?.remainingPlayers.includes(state.abilities[id]?.controller ?? ""),
-        ),
+        state.triggerPlacement.cohort.every((id) => {
+          const ability = state.abilities[id];
+          return ability?.program.trigger.placementClass !== state.triggerPlacement?.phase
+            ? state.triggerPlacement?.phase === "ordinary"
+            : state.triggerPlacement?.remainingPlayers.includes(ability?.controller ?? "");
+        }),
       "Trigger placement continuation differs from living APNAP order",
     );
     const owned = state.triggerPlacement.cohort.filter(
-      (id) => state.abilities[id]?.controller === actor,
+      (id) =>
+        state.abilities[id]?.controller === actor &&
+        state.abilities[id]?.program.trigger.placementClass === state.triggerPlacement?.phase,
     );
     invariant(
       state.decision.actor === actor &&
