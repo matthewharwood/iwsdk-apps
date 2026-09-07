@@ -5,7 +5,6 @@ import {
   MatchManifest,
   type Response,
   type RulesState,
-  SelfEntryProgram,
   SpellProgram,
 } from "@iwsdk-apps/contracts";
 import {
@@ -25,7 +24,11 @@ import {
   shuffleLibrary,
 } from "./common";
 
-import { isStaticBonusPermanent } from "./permanent-programs";
+import {
+  isEntryObserverPermanent,
+  isReviewedTriggeredPermanent,
+  isStaticBonusPermanent,
+} from "./permanent-programs";
 
 export function admitDeck(
   deck: DeckRevision,
@@ -51,19 +54,10 @@ export function admitDeck(
   const nameCounts = new Map<string, number>();
   for (const entry of deck.entries) {
     const current = definition(release, entry.definition);
-    if (
-      current.triggerPrograms &&
-      (!current.types.includes("Creature") ||
-        current.types.some((type) => !["Creature", "Artifact", "Enchantment"].includes(type)) ||
-        current.manaCost === null ||
-        current.power === null ||
-        current.toughness === null ||
-        current.triggerPrograms.length !== 1 ||
-        !current.triggerPrograms.every((program) => SelfEntryProgram.safeParse(program).success))
-    )
+    if (current.triggerPrograms && !isReviewedTriggeredPermanent(current))
       throw new RulesError(
         "UnsupportedMechanic",
-        "Only reviewed mandatory creature self-entry programs are admitted",
+        "Only reviewed mandatory self-entry creatures and entry-observer permanents are admitted",
       );
     requireRule(
       current.colorIdentity.every((color) => commander.colorIdentity.includes(color)),
@@ -94,7 +88,8 @@ export function admitDeck(
       !current.types.includes("Land") &&
       !current.types.includes("Creature") &&
       !programmedSpell &&
-      !staticPermanent
+      !staticPermanent &&
+      !isEntryObserverPermanent(current)
     )
       throw new RulesError(
         "UnsupportedMechanic",

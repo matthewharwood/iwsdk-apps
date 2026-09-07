@@ -1,10 +1,12 @@
 import {
   COUNTER_SPELL_VERSION,
   CREATURE_RETURN_VERSION,
+  ENTRY_OBSERVER_VERSION,
   FIXED_TOKEN_VERSION,
   KEYWORD_REMINDER_RECIPE_VERSION,
   reviewedCounterSpellDefinition,
   reviewedCreatureReturnSpellDefinition,
+  reviewedEntryObserverDefinition,
   reviewedFixedTokenDefinition,
   reviewedKeywordReminderDefinition,
   reviewedLegacyDefinition,
@@ -26,8 +28,8 @@ import {
 
 import { REVIEWED_SOURCE_BINDINGS } from "./reviewed-source-bindings";
 
-export const MATCH_PLAN_VERSION = "development-match-plan/9";
-export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.13.0";
+export const MATCH_PLAN_VERSION = "development-match-plan/10";
+export const SELF_ENTRY_PROCESSOR_ABI = "commander-engine/0.14.0";
 export const SELF_ENTRY_CORE_CAPABILITIES = [
   "trigger:capture",
   "trigger:waiting",
@@ -65,6 +67,15 @@ export const FIXED_TOKEN_CORE_CAPABILITIES = [
   "token:zone-departure-and-state-based-cease",
   "token:no-reentry-after-departure",
   "token:deterministic-durable-identities",
+] as const;
+export const ENTRY_OBSERVER_CORE_CAPABILITIES = [
+  "trigger:entry-post-committed-batch",
+  "trigger:entry-subject-occurrences",
+  "trigger:entry-filter-type-subtype",
+  "trigger:entry-self-or-filter",
+  "trigger:entry-captured-controller",
+  "trigger:entry-durable-subject-context",
+  "trigger:legal-land-play-entry",
 ] as const;
 export const STATIC_BONUS_CORE_CAPABILITIES = [
   "core:static-battlefield-source",
@@ -212,6 +223,8 @@ async function recognizedDependencyDeclaration(
       (await semanticHash(definition)) !== pinned.definitionHash)
   )
     return false;
+  if (definition.implementationRevision === ENTRY_OBSERVER_VERSION)
+    return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedEntryObserverDefinition(definition);
   if (definition.implementationRevision === STATIC_BONUS_VERSION)
     return processorAbi === SELF_ENTRY_PROCESSOR_ABI && reviewedStaticBonusDefinition(definition);
   if (definition.implementationRevision === FIXED_TOKEN_VERSION)
@@ -288,6 +301,12 @@ export async function buildDevelopmentMatchPlan(
       ...DEVELOPMENT_CORE,
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
+        (definition) => definition.implementationRevision === ENTRY_OBSERVER_VERSION,
+      )
+        ? ENTRY_OBSERVER_CORE_CAPABILITIES
+        : []),
+      ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
+      Object.values(release.definitions).some(
         (definition) => definition.implementationRevision === STATIC_BONUS_VERSION,
       )
         ? STATIC_BONUS_CORE_CAPABILITIES
@@ -295,8 +314,9 @@ export async function buildDevelopmentMatchPlan(
       ...(release.processorAbi === SELF_ENTRY_PROCESSOR_ABI &&
       Object.values(release.definitions).some(
         (definition) =>
-          definition.implementationRevision === STATIC_BONUS_VERSION &&
-          definition.types.includes("Enchantment"),
+          [STATIC_BONUS_VERSION, ENTRY_OBSERVER_VERSION].includes(
+            definition.implementationRevision,
+          ) && definition.types.includes("Enchantment"),
       )
         ? STATIC_ENCHANTMENT_CORE_CAPABILITIES
         : []),
@@ -342,7 +362,7 @@ export async function buildDevelopmentMatchPlan(
       assumptions: [
         "fixed pinned release",
         "recognized development recipe dependency declarations",
-        "exact fixed-token template edges; static predicates select live objects without external card dependencies; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
+        "exact fixed-token template edges; static and entry-observer predicates select game objects without external card dependencies; no copies or unbounded external definitions; intrinsic keywords use bounded core capabilities",
       ],
       proof: "not reachable from deck roots under complete declared development dependencies",
       tests: ["packages/compiler/src/plan.test.ts"],

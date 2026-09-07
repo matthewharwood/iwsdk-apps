@@ -18,6 +18,7 @@ import {
   StorageError,
 } from "../src/index";
 import { commanderReturnEvidence } from "./commander-return-evidence";
+import { entryObserverEvidence } from "./entry-observer-evidence";
 import { proofDriverForVersion } from "./proof-driver";
 import {
   atProofStage,
@@ -44,6 +45,9 @@ const Request = z.discriminatedUnion("operation", [
     operation: z.literal("run"),
     stopAt: z
       .enum([
+        "observer-order",
+        "observer-stack",
+        "observer-resolved",
         "starting-player",
         "payment",
         "target",
@@ -60,6 +64,7 @@ const Request = z.discriminatedUnion("operation", [
         "static-departure",
       ])
       .nullable(),
+    observerCohort: z.array(z.string().min(1).max(240)).max(1000).optional(),
     maxCommands: z.number().int().positive().max(20_000),
   }),
   z.strictObject({ operation: z.literal("snapshot") }),
@@ -106,6 +111,7 @@ async function snapshot() {
     counters: counterEvidence(archive, session.release),
     tokens: tokenEvidence(archive, session.release, session.coordinator),
     statics: staticEvidence(archive, session.release, session.coordinator),
+    observers: entryObserverEvidence(archive, session.release),
     commanderReturns: commanderReturnEvidence(archive, session.release, session.coordinator),
     execution: executionEvidence(session.release, session.coordinator.executionInfo()),
     setup: setupEvidence(session.coordinator, archive),
@@ -156,6 +162,7 @@ async function handle(input: unknown): Promise<unknown> {
                   session.coordinator.current().events,
                   session.release,
                   session.coordinator.current().continuousEffects,
+                  request.observerCohort,
                 ),
             }
           : {}),

@@ -1,5 +1,7 @@
 export { makeCreatureReturnDecks } from "./creature-return-decks";
 export { compileCreatureReturnDraft } from "./creature-return-expansion";
+export { makeEntryObserverDecks } from "./development-entry-observer-decks";
+export { compileEntryObserverDraft } from "./entry-observer-expansion";
 export { makeFixedTokenDecks } from "./fixed-token-decks";
 export { compileFixedTokenDraft } from "./fixed-token-expansion";
 export { makeStaticBonusDecks } from "./static-bonus-decks";
@@ -22,6 +24,8 @@ import {
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
   CREATURE_RETURN_VERSION,
+  ENTRY_OBSERVER_PERMANENTS,
+  ENTRY_OBSERVER_VERSION,
   FIXED_TOKEN_SPELLS,
   FIXED_TOKEN_TEMPLATES,
   FIXED_TOKEN_VERSION,
@@ -82,6 +86,11 @@ export interface CompilationReport {
   };
   selfEntryTriggers: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_REGISTRY };
   selfEntrySequences: { enabled: boolean; version: string; registry: typeof SELF_ENTRY_SEQUENCES };
+  entryObserverTriggers: {
+    enabled: boolean;
+    version: string;
+    registry: typeof ENTRY_OBSERVER_PERMANENTS;
+  };
   staticBonusPermanents: {
     enabled: boolean;
     version: string;
@@ -110,13 +119,14 @@ export interface CompilationReport {
 function describeCompilerRecipes(
   options: NonNullable<Parameters<typeof bindDevelopmentCard>[1]>,
 ): string {
-  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}`;
+  return `${COMPILER_VERSION}${options.spellFamilies ? "+spell-families/1" : ""}${options.selfEntryTriggers ? "+self-entry/1" : ""}${options.selfEntrySequences ? "+self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? "+temporary-creature-spells/1" : ""}${options.keywordReminders ? "+keyword-reminders/1" : ""}${options.counterSpells ? "+stack-counter-spell/1" : ""}${options.creatureReturnSpells ? "+creature-return-spell/1" : ""}${options.fixedTokenSpells ? "+fixed-token-spells/1" : ""}${options.staticBonusPermanents ? "+static-bonus-permanent/1" : ""}${options.entryObserverTriggers ? "+entry-observer-permanent/1" : ""}`;
 }
 
 /** Compile only the declared development recipes; retain the full unsupported candidate universe. */
 export async function compileDevelopmentRelease(
   dbPath: string,
   options: {
+    entryObserverTriggers?: boolean;
     staticBonusPermanents?: boolean;
     fixedTokenSpells?: boolean;
     creatureReturnSpells?: boolean;
@@ -156,6 +166,11 @@ export async function compileDevelopmentRelease(
       enabled: options.keywordReminders === true,
       version: KEYWORD_REMINDER_RECIPE_VERSION,
       registry: KEYWORD_REMINDER_REGISTRY,
+    },
+    entryObserverTriggers: {
+      enabled: options.entryObserverTriggers === true,
+      version: ENTRY_OBSERVER_VERSION,
+      registry: ENTRY_OBSERVER_PERMANENTS,
     },
     staticBonusPermanents: {
       enabled: options.staticBonusPermanents === true,
@@ -232,15 +247,20 @@ export async function compileDevelopmentRelease(
   )
     throw new Error("Compiler candidate denominator mismatch");
   const recipeCompilerVersion = describeCompilerRecipes(options);
-  const compilerVersion = options.staticBonusPermanents
-    ? `${COMPILER_VERSION}+static-bonus-permanent/1:${await semanticHash(recipeCompilerVersion)}`
-    : options.fixedTokenSpells
-      ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
-      : recipeCompilerVersion;
+  const compilerVersion = options.entryObserverTriggers
+    ? `${COMPILER_VERSION}+entry-observer-permanent/1:${await semanticHash(recipeCompilerVersion)}`
+    : options.staticBonusPermanents
+      ? `${COMPILER_VERSION}+static-bonus-permanent/1:${await semanticHash(recipeCompilerVersion)}`
+      : options.fixedTokenSpells
+        ? `${COMPILER_VERSION}+fixed-token-spells/1:${await semanticHash(recipeCompilerVersion)}`
+        : recipeCompilerVersion;
   const base = {
     schema: "commander-content/1" as const,
     id:
-      options.creatureReturnSpells || options.fixedTokenSpells || options.staticBonusPermanents
+      options.creatureReturnSpells ||
+      options.fixedTokenSpells ||
+      options.staticBonusPermanents ||
+      options.entryObserverTriggers
         ? `development:${inventory.bundleHash.slice(0, 16)}:${await semanticHash({ compilerVersion, recipeVersion: RECIPE_VERSION })}`
         : `development:${inventory.bundleHash.slice(0, 16)}:${RECIPE_VERSION}:${COMPILER_VERSION}${options.spellFamilies ? ":spell-families/1" : ""}${options.selfEntryTriggers ? ":self-entry/1" : ""}${options.selfEntrySequences ? ":self-entry-sequence-four/1" : ""}${options.temporaryCreatureSpells ? ":temporary-creature-spells/1" : ""}${options.keywordReminders ? ":keyword-reminders/1" : ""}${options.counterSpells ? ":stack-counter-spell/1" : ""}${options.creatureReturnSpells ? ":creature-return-spell/1" : ""}`,
     sourceBundle: inventory.bundleHash,

@@ -4,11 +4,7 @@ import {
   SELF_ENTRY_REGISTRY,
 } from "@iwsdk-apps/card-programs";
 import { readCandidateCards } from "@iwsdk-apps/catalog";
-import {
-  type SelfEntryProgram,
-  type SingleSelfEntryProgram,
-  semanticHash,
-} from "@iwsdk-apps/contracts";
+import { SelfEntryProgram, type SingleSelfEntryProgram, semanticHash } from "@iwsdk-apps/contracts";
 import { compileDevelopmentRelease } from "./index";
 
 /** Complete-body constructor outcomes and source references; neither execution nor semantic certification. */
@@ -64,7 +60,8 @@ export async function compileSelfEntryDraft(dbPath: string) {
       status: definition?.triggerPrograms ? ("bound" as const) : ("unsupported" as const),
       reason: unsupported?.reason ?? null,
       definitionId: definition?.triggerPrograms ? definition.id : null,
-      boundPrograms: definition?.triggerPrograms ?? null,
+      boundPrograms:
+        definition?.triggerPrograms?.map((program) => SelfEntryProgram.parse(program)) ?? null,
       externalDefinitionDependencies: definition?.triggerPrograms ? [] : null,
     });
   }

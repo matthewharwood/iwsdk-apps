@@ -3,7 +3,7 @@ import {
   GameEvent,
   type Response,
   type RulesState,
-  selfEntryEffects,
+  triggerEffects,
 } from "@iwsdk-apps/contracts";
 import {
   definition,
@@ -18,6 +18,8 @@ import {
   requireRule,
   tryMove,
 } from "./common";
+
+import { captureEntryObservers } from "./entry-observers";
 
 /** Complete the entry batch before inspecting post-event self-entry abilities. */
 export function enterBattlefield(
@@ -82,6 +84,7 @@ export function recordBattlefieldEntryBatch(
     if (source.token) continue; // These fixed token templates have no triggered programs.
     const card = definition(registry, source.definition);
     for (const program of card.triggerPrograms ?? []) {
+      if (program.schema === "commander-entry-observer/1") continue;
       const id = `${state.manifest.id}:trigger:${eventIndex}:${occurrenceOrdinal}:${program.id}`;
       if (state.abilities[id])
         throw new RulesError("Invariant", "Trigger occurrence captured twice");
@@ -113,6 +116,7 @@ export function recordBattlefieldEntryBatch(
       hit(state, `card:${card.id}:trigger:${program.id}:capture`);
     }
   }
+  captureEntryObservers(state, registry, entered, eventIndex);
 }
 
 function ownedCohort(state: RulesState, actor: string): string[] {
@@ -202,7 +206,7 @@ export function resolveTriggeredAbility(state: RulesState): void {
   const ability = state.abilities[top.triggerId];
   if (!ability || player(state, ability.controller).lost)
     throw new RulesError("Invariant", "A resolving ability lacks a living captured controller");
-  for (const effect of selfEntryEffects(ability.program)) {
+  for (const effect of triggerEffects(ability.program)) {
     if (effect.kind === "draw") draw(state, ability.controller, effect.amount);
     else {
       player(state, ability.controller).life += effect.amount;

@@ -1,6 +1,7 @@
 import {
   COUNTER_SPELLS,
   CREATURE_RETURN_SPELLS,
+  ENTRY_OBSERVER_PERMANENTS,
   FIXED_TOKEN_SPELLS,
   FIXED_TOKEN_TEMPLATES,
   KEYWORD_REMINDER_REGISTRY,
@@ -164,6 +165,7 @@ async function artifactFor(
     processorAbi: source.processorAbi,
     compilerVersion: MATCH_PLAN_VERSION,
     recipeRegistryHash: await semanticHash({
+      entryObserverTriggers: ENTRY_OBSERVER_PERMANENTS,
       staticBonusPermanents: STATIC_BONUS_PERMANENTS,
       fixedTokenSpells: FIXED_TOKEN_SPELLS,
       fixedTokenTemplates: FIXED_TOKEN_TEMPLATES,

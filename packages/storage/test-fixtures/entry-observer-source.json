@@ -1,0 +1,308 @@
+{
+  "schema": "native-entry-observer-sources/1",
+  "sourceReleaseHash": "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "definitions": [
+    {
+      "id": "oracle:0715e860-3b3b-4331-9718-207973e94fee",
+      "oracleId": "0715e860-3b3b-4331-9718-207973e94fee",
+      "sourceVersion": "0fe0e7b2da68aed3c80f5cac13c1ab4fb4eeac9ae7d613fab840a19cb487334a",
+      "name": "Tatyova, Benthic Druid",
+      "typeLine": "Legendary Creature — Merfolk Druid",
+      "types": ["Creature"],
+      "subtypes": ["Merfolk", "Druid"],
+      "supertypes": ["Legendary"],
+      "colors": ["G", "U"],
+      "colorIdentity": ["G", "U"],
+      "manaCost": {
+        "W": 0,
+        "U": 1,
+        "B": 0,
+        "R": 0,
+        "G": 1,
+        "C": 0,
+        "generic": 3
+      },
+      "manaValue": 5,
+      "power": 3,
+      "toughness": 3,
+      "keywords": [],
+      "manaAbilities": [],
+      "oracleText": "Landfall — Whenever a land you control enters, you gain 1 life and draw a card.",
+      "commanderEligible": true,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:109.2",
+        "rule:109.5",
+        "rule:113.6",
+        "rule:113.7a",
+        "rule:113.8",
+        "rule:117.2a",
+        "rule:117.2e",
+        "rule:117.5",
+        "rule:603.1",
+        "rule:603.2",
+        "rule:603.2c",
+        "rule:603.3a",
+        "rule:603.3b",
+        "rule:603.6a",
+        "rule:603.6b",
+        "rule:603.10",
+        "rule:608.2c",
+        "rule:608.2n",
+        "rule:700.7",
+        "rule:704.3",
+        "rule:903.5c",
+        "rule:302.1",
+        "rule:208.1",
+        "rule:119.3",
+        "rule:121.1",
+        "rule:121.2",
+        "rule:121.4",
+        "rule:704.5b",
+        "rule:305.1",
+        "rule:207.2c",
+        "rule:903.3"
+      ],
+      "implementationRevision": "entry-observer-permanent/1",
+      "triggerPrograms": [
+        {
+          "schema": "commander-entry-observer/1",
+          "id": "entry-observer:0715e860-3b3b-4331-9718-207973e94fee:0",
+          "trigger": {
+            "kind": "permanent-enters-battlefield",
+            "view": "post-committed-event",
+            "placementClass": "ordinary",
+            "sourceZone": "battlefield",
+            "occurrence": "each-matching-object",
+            "subject": {
+              "kind": "filter",
+              "filter": {
+                "controller": "source-controller",
+                "excludeSource": false,
+                "token": "any",
+                "types": ["Land"]
+              }
+            }
+          },
+          "choice": {
+            "kind": "mandatory"
+          },
+          "effects": [
+            {
+              "kind": "gain-life",
+              "recipient": "trigger-controller",
+              "amount": 1
+            },
+            {
+              "kind": "draw",
+              "recipient": "trigger-controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+      "oracleId": "20faefbd-059c-4aae-81e3-31683bf9f7bf",
+      "sourceVersion": "0ad28dfd7a67b8fb74d6a525438e64bcc97785759ce7fe746462a784a95f8d70",
+      "name": "Jaddi Offshoot",
+      "typeLine": "Creature — Plant",
+      "types": ["Creature"],
+      "subtypes": ["Plant"],
+      "supertypes": [],
+      "colors": ["G"],
+      "colorIdentity": ["G"],
+      "manaCost": {
+        "W": 0,
+        "U": 0,
+        "B": 0,
+        "R": 0,
+        "G": 1,
+        "C": 0,
+        "generic": 0
+      },
+      "manaValue": 1,
+      "power": 0,
+      "toughness": 3,
+      "keywords": ["defender"],
+      "manaAbilities": [],
+      "oracleText": "Defender\nLandfall — Whenever a land you control enters, you gain 1 life.",
+      "commanderEligible": false,
+      "deckLimit": 1,
+      "obligations": [
+        "rule:109.2",
+        "rule:109.5",
+        "rule:113.6",
+        "rule:113.7a",
+        "rule:113.8",
+        "rule:117.2a",
+        "rule:117.2e",
+        "rule:117.5",
+        "rule:603.1",
+        "rule:603.2",
+        "rule:603.2c",
+        "rule:603.3a",
+        "rule:603.3b",
+        "rule:603.6a",
+        "rule:603.6b",
+        "rule:603.10",
+        "rule:608.2c",
+        "rule:608.2n",
+        "rule:700.7",
+        "rule:704.3",
+        "rule:903.5c",
+        "rule:302.1",
+        "rule:208.1",
+        "rule:702.3",
+        "rule:119.3",
+        "rule:305.1",
+        "rule:207.2c"
+      ],
+      "implementationRevision": "entry-observer-permanent/1",
+      "triggerPrograms": [
+        {
+          "schema": "commander-entry-observer/1",
+          "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+          "trigger": {
+            "kind": "permanent-enters-battlefield",
+            "view": "post-committed-event",
+            "placementClass": "ordinary",
+            "sourceZone": "battlefield",
+            "occurrence": "each-matching-object",
+            "subject": {
+              "kind": "filter",
+              "filter": {
+                "controller": "source-controller",
+                "excludeSource": false,
+                "token": "any",
+                "types": ["Land"]
+              }
+            }
+          },
+          "choice": {
+            "kind": "mandatory"
+          },
+          "effects": [
+            {
+              "kind": "gain-life",
+              "recipient": "trigger-controller",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+      "oracleId": "b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+      "sourceVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+      "name": "Forest",
+      "typeLine": "Basic Land — Forest",
+      "types": ["Land"],
+      "subtypes": ["Forest"],
+      "supertypes": ["Basic"],
+      "colors": [],
+      "colorIdentity": ["G"],
+      "manaCost": null,
+      "manaValue": 0,
+      "power": null,
+      "toughness": null,
+      "keywords": [],
+      "manaAbilities": ["G"],
+      "oracleText": "({T}: Add {G}.)",
+      "commanderEligible": false,
+      "deckLimit": null,
+      "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+      "implementationRevision": "commander-development-recipes/1"
+    },
+    {
+      "id": "oracle:b2c6aa39-2d2a-459c-a555-fb48ba993373",
+      "oracleId": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+      "sourceVersion": "6fba8f4cae5af7838b16a40667d8de8b4830d9631b1c08e424717ef98ff8daaf",
+      "name": "Island",
+      "typeLine": "Basic Land — Island",
+      "types": ["Land"],
+      "subtypes": ["Island"],
+      "supertypes": ["Basic"],
+      "colors": [],
+      "colorIdentity": ["U"],
+      "manaCost": null,
+      "manaValue": 0,
+      "power": null,
+      "toughness": null,
+      "keywords": [],
+      "manaAbilities": ["U"],
+      "oracleText": "({T}: Add {U}.)",
+      "commanderEligible": false,
+      "deckLimit": null,
+      "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+      "implementationRevision": "commander-development-recipes/1"
+    },
+    {
+      "id": "oracle:cfb756dd-6fe1-430a-8f04-8b10cac62a86",
+      "oracleId": "cfb756dd-6fe1-430a-8f04-8b10cac62a86",
+      "sourceVersion": "08d0004d09c76590c25962b6e2f2bd440698092e17c2f438ad9cb1b8dd381241",
+      "name": "Isamaru, Hound of Konda",
+      "typeLine": "Legendary Creature — Dog",
+      "types": ["Creature"],
+      "subtypes": ["Dog"],
+      "supertypes": ["Legendary"],
+      "colors": ["W"],
+      "colorIdentity": ["W"],
+      "manaCost": {
+        "W": 1,
+        "U": 0,
+        "B": 0,
+        "R": 0,
+        "G": 0,
+        "C": 0,
+        "generic": 0
+      },
+      "manaValue": 1,
+      "power": 2,
+      "toughness": 2,
+      "keywords": [],
+      "manaAbilities": [],
+      "oracleText": "",
+      "commanderEligible": true,
+      "deckLimit": 1,
+      "obligations": ["rule:302", "rule:601.2", "rule:903.5", "rule:704.5j", "rule:903.3"],
+      "implementationRevision": "commander-development-recipes/1"
+    },
+    {
+      "id": "oracle:bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+      "oracleId": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+      "sourceVersion": "64b256df7b5163d34368b81909121f02b208b0e27e5358319752f001055f2510",
+      "name": "Plains",
+      "typeLine": "Basic Land — Plains",
+      "types": ["Land"],
+      "subtypes": ["Plains"],
+      "supertypes": ["Basic"],
+      "colors": [],
+      "colorIdentity": ["W"],
+      "manaCost": null,
+      "manaValue": 0,
+      "power": null,
+      "toughness": null,
+      "keywords": [],
+      "manaAbilities": ["W"],
+      "oracleText": "({T}: Add {W}.)",
+      "commanderEligible": false,
+      "deckLimit": null,
+      "obligations": ["rule:305.6", "rule:605.1a", "rule:903.5"],
+      "implementationRevision": "commander-development-recipes/1"
+    }
+  ],
+  "definitionHashes": {
+    "oracle:0715e860-3b3b-4331-9718-207973e94fee": "5cc2265b8dfbc4c645100876d8d2704f961b27a80d4a10b14fba5bbb672322be",
+    "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf": "be82fee3c604a6f753e91bc480923052924f253c2d76662762a8493e2a663cc5",
+    "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6": "bf38708701d4b040a1afca7ef3a0994b3d96911762088ae9504701a9a3945cb9",
+    "oracle:b2c6aa39-2d2a-459c-a555-fb48ba993373": "0f771503a3d19dd1fd5458ade39ef009a9c130ad0e084a01ab4a261aa027261d",
+    "oracle:cfb756dd-6fe1-430a-8f04-8b10cac62a86": "bb31ca69af85940145cec4d150197565f3c9effc4634d72d1bab44047b7ab0e0",
+    "oracle:bc71ebf6-2056-41f7-be35-b2e5c34afa99": "298ea924cdd540f959f65c38cf61b7d70a6d5ec0b95f89d653c6586a5eca170a"
+  },
+  "hash": "d64dc8c99a62cbd18b169d7dad747dd8f43879f02d5abb9d68907831c6a68f94"
+}

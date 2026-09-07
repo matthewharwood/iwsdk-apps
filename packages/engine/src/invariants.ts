@@ -7,6 +7,7 @@ import {
 import { assertRegistryPin, definition, RulesError } from "./common";
 import { assertResolutionContinuation } from "./resolution-context";
 import { assertPhysicalInventory, assertToken } from "./token-invariants";
+import { assertTriggerContexts } from "./trigger-context";
 
 function invariant(condition: unknown, message: string): asserts condition {
   if (!condition) throw new RulesError("Invariant", message);
@@ -67,35 +68,7 @@ function assertTriggers(state: RulesState, release: ExecutionRegistry): void {
       occurrences.every((id) => state.abilities[id]),
     "Captured trigger lost its queue or stack location",
   );
-  for (const [id, ability] of Object.entries(state.abilities)) {
-    invariant(
-      id ===
-        `${state.manifest.id}:trigger:${ability.eventIndex}:${ability.occurrenceOrdinal}:${ability.program.id}` &&
-        ability.source.zone === "battlefield",
-      "Captured trigger event identity or source zone mismatch",
-    );
-    const source = definition(release, ability.source.definition);
-    invariant(
-      id === ability.id &&
-        ability.source.id === `${ability.source.lineage}@${ability.source.generation}`,
-      "Captured trigger or source identity mismatch",
-    );
-    invariant(
-      source.sourceVersion === ability.sourceVersion &&
-        source.triggerPrograms?.some(
-          (program) => canonicalJson(program) === canonicalJson(ability.program),
-        ),
-      "Captured trigger program differs from its pinned source",
-    );
-    invariant(
-      state.players.some((seat) => seat.id === ability.controller && !seat.lost),
-      "Captured trigger belongs to a departed or missing player",
-    );
-    invariant(
-      ability.controller === ability.source.controller,
-      "Captured trigger controller differs from its entry snapshot",
-    );
-  }
+  assertTriggerContexts(state, release);
   if (state.triggerPlacement) {
     invariant(
       state.triggerPlacement.phase === "ordinary" && state.decision?.kind === "trigger-order",

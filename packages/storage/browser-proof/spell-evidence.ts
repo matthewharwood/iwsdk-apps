@@ -6,6 +6,7 @@ import {
   type PlayerObservation,
 } from "@iwsdk-apps/contracts";
 import type { Coordinator, MatchArchive } from "../src/index";
+import { atObserverStage, OBSERVER_STAGES } from "./entry-observer-evidence";
 import { atStaticStage } from "./static-evidence";
 
 function removals(record: MatchArchive["records"][number], release: ContentRelease) {
@@ -250,6 +251,9 @@ export function counterEvidence(archive: MatchArchive, release: ContentRelease) 
   return { occurrences, pending };
 }
 export type ProofStage =
+  | "observer-order"
+  | "observer-stack"
+  | "observer-resolved"
   | "starting-player"
   | "target"
   | "payment"
@@ -270,7 +274,10 @@ export function atProofStage(
   events: readonly GameEvent[] = [],
   release?: ContentRelease,
   continuousEffects: readonly ContinuousEffect[] = [],
+  observerIds: readonly string[] = [],
 ): boolean {
+  if (OBSERVER_STAGES.some((stage) => stage === kind))
+    return atObserverStage(view, kind, events, observerIds);
   if (["pending-static", "active-static", "static-departure"].includes(kind))
     return atStaticStage(view, kind, events, release);
   if (kind === "pending-token")

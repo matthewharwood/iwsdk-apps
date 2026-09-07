@@ -89,10 +89,16 @@ export function playLand(
     isMainWindow(state, actor) && player(state, actor).landsPlayed === 0,
     "No available land play in this window.",
   );
-  const entered = move(state, target.id, "battlefield", "play land");
+  const entered = enterBattlefield(
+    state,
+    release,
+    [{ objectId: target.id, controller: actor }],
+    "play land",
+  )[0];
+  if (!entered) throw new RulesError("Invariant", "Played land did not enter");
   player(state, actor).landsPlayed++;
   state.consecutivePasses = 0;
-  emit(state, "LandPlayed", { player: actor, object: entered.id });
+  emit(state, "LandPlayed", { player: actor, object: entered });
   hit(state, "rule:305.1");
   hit(state, `card:${target.definition}:land`);
 }
@@ -140,6 +146,7 @@ export function beginCast(
   if (
     !current.types.includes("Creature") &&
     !isStaticBonusPermanent(current) &&
+    !isEntryObserverPermanent(current) &&
     (!(current.types.includes("Instant") || current.types.includes("Sorcery")) || !program)
   )
     throw new RulesError(
@@ -313,7 +320,11 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   ) {
     return resolveSpellProgram(state, release, id);
   }
-  if (!current.types.includes("Creature") && !isStaticBonusPermanent(current))
+  if (
+    !current.types.includes("Creature") &&
+    !isStaticBonusPermanent(current) &&
+    !isEntryObserverPermanent(current)
+  )
     throw new RulesError(
       "UnsupportedMechanic",
       `Spell program is not implemented: ${current.name}`,
@@ -333,5 +344,5 @@ export function resolveTop(state: RulesState, release: ExecutionRegistry): boole
   return true;
 }
 
-import { isStaticBonusPermanent } from "./permanent-programs";
+import { isEntryObserverPermanent, isStaticBonusPermanent } from "./permanent-programs";
 import { enterBattlefield, resolveTriggeredAbility } from "./triggers";

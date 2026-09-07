@@ -19,6 +19,7 @@ import { DRIVER_VERSION, type GameRun, runGame } from "../../simulation/src/inde
 import { Coordinator, exportMatch, importMatch, type Repository, replayMatch } from "../src/index";
 import { openNativeRepository } from "../src/native";
 import { commanderReturnEvidence } from "./commander-return-evidence";
+import { entryObserverEvidence, OBSERVER_STAGES, observerCohort } from "./entry-observer-evidence";
 import { COMMANDER_RETURN_PROOF_DRIVER_VERSION, proofDriverForVersion } from "./proof-driver";
 import {
   atProofStage,
@@ -46,6 +47,7 @@ type Snapshot = {
   counters: ReturnType<typeof counterEvidence>;
   tokens: ReturnType<typeof tokenEvidence>;
   statics: ReturnType<typeof staticEvidence>;
+  observers: ReturnType<typeof entryObserverEvidence>;
   commanderReturns: ReturnType<typeof commanderReturnEvidence>;
   execution: ReturnType<typeof executionEvidence>;
   setup: ReturnType<typeof setupEvidence>;
@@ -66,6 +68,7 @@ const options = parseArgs({
     "deck-stride": { type: "string", default: "3" },
     "seed-attempts": { type: "string", default: "8" },
     "require-tokens": { type: "boolean", default: false },
+    "require-observers": { type: "boolean", default: false },
     "require-statics": { type: "boolean", default: false },
     "require-spells": { type: "boolean", default: false },
     "require-removal": { type: "boolean", default: false },
@@ -94,6 +97,7 @@ const requireTriggers = options["require-triggers"] || requireOrderedTriggers;
 const twoSeed = boundedInteger(options["two-seed"], 1, 4294967200, "two-seed");
 const fourSeed = boundedInteger(options["four-seed"], 1, 4294967200, "four-seed");
 const requireTokens = options["require-tokens"];
+const requireObservers = options["require-observers"];
 const requireStatics = options["require-statics"];
 const requireRemoval = options["require-removal"];
 const requireModifiers = options["require-modifiers"];
@@ -129,6 +133,7 @@ if (requireCounters) stageKinds.push("pending-counter");
 if (requireCommanderReplacement) stageKinds.push("commander-replacement");
 if (requireTokens) stageKinds.push("pending-token", "active-token", "token-departure");
 if (requireStatics) stageKinds.push("pending-static", "active-static", "static-departure");
+if (requireObservers) stageKinds.push(...OBSERVER_STAGES);
 const runId = `${new Date().toISOString().replaceAll(/[:.]/g, "-")}-${crypto.randomUUID().slice(0, 8)}`;
 const output = join(root, ".commander/browser-proof", runId);
 await mkdir(output, { recursive: true });
@@ -161,15 +166,11 @@ for (const name of [
     sourceFiles[`packages/${name}/${path}`] = await readFile(join(packageRoot, path), "utf8");
   }
 }
-for (const name of [
-  "check.ts",
-  "worker.ts",
-  "spell-evidence.ts",
-  "commander-return-evidence.ts",
-  "proof-driver.ts",
-  "token-evidence.ts",
-  "static-evidence.ts",
-]) {
+// Capture every executable proof helper so new native imports cannot escape the source pin.
+for await (const name of new Bun.Glob("*.ts").scan({
+  cwd: fileURLToPath(new URL(".", import.meta.url)),
+})) {
+  if (name.endsWith(".test.ts")) continue;
   sourceFiles[`packages/storage/browser-proof/${name}`] = await readFile(
     new URL(name, import.meta.url),
     "utf8",
@@ -315,6 +316,7 @@ async function nativeSnapshot(repo: Repository, coordinator: Coordinator): Promi
     counters: counterEvidence(archive, release),
     tokens: tokenEvidence(archive, release, coordinator),
     statics: staticEvidence(archive, release, coordinator),
+    observers: entryObserverEvidence(archive, release),
     commanderReturns: commanderReturnEvidence(archive, release, coordinator),
     execution: executionEvidence(release, coordinator.executionInfo()),
     setup: setupEvidence(coordinator, archive),
@@ -328,6 +330,7 @@ type NativeStage = {
   kind: ProofStage;
   run: GameRun;
   snapshot: Snapshot;
+  observerCohort: string[];
   reopened?: boolean;
   exactRetry?: boolean;
 };
@@ -346,6 +349,8 @@ function qualifies(stages: NativeStage[], final: Snapshot): boolean {
       (final.tokens.creations.length > 0 &&
         final.tokens.departures.length > 0 &&
         final.tokens.cessations.length > 0)) &&
+    (!requireObservers ||
+      (final.observers.captures.length >= 2 && final.observers.resolved.length >= 2)) &&
     (!requireStatics ||
       (final.statics.entries.length > 0 && final.statics.departures.length > 0)) &&
     (!requireSpells || Object.keys(final.spells.resolved).length > 0) &&
@@ -555,7 +560,30 @@ function assertStaticStage(kind: ProofStage, snapshot: Snapshot): void {
     }
   }
 }
-function assertPausedStage(kind: ProofStage, snapshot: Snapshot): void {
+function assertPausedStage(
+  kind: ProofStage,
+  snapshot: Snapshot,
+  cohort: readonly string[] = [],
+): void {
+  if (OBSERVER_STAGES.some((stage) => stage === kind)) {
+    expect(cohort.length).toBeGreaterThanOrEqual(2);
+    const captures = cohort.map((id) => snapshot.observers.captures.find((c) => c.id === id));
+    expect(captures.every((c) => c !== undefined)).toBe(true);
+    expect(new Set(captures.map((c) => c?.entry.batchId)).size).toBe(1);
+    if (kind === "observer-order") {
+      expect(snapshot.decision?.kind).toBe("trigger-order");
+      for (const id of cohort) expect(snapshot.observers.placement?.cohort ?? []).toContain(id);
+    } else if (kind === "observer-stack") {
+      expect(snapshot.decision?.kind).toBe("priority");
+      for (const id of cohort) expect(snapshot.observers.stack).toContain(id);
+    } else {
+      for (const id of cohort) {
+        expect(snapshot.observers.live.some((a) => a.id === id)).toBe(false);
+        expect(snapshot.observers.resolved.filter((r) => r.id === id)).toHaveLength(1);
+      }
+    }
+    return;
+  }
   if (["pending-static", "active-static", "static-departure"].includes(kind)) {
     assertStaticStage(kind, snapshot);
     return;
@@ -678,6 +706,21 @@ async function reopenNative(
     throw error;
   }
 }
+function captureNativeStage(
+  coordinator: Coordinator,
+  kind: ProofStage,
+  run: GameRun,
+  snapshot: Snapshot,
+  previousCohort: string[],
+): NativeStage {
+  let cohort = previousCohort;
+  if (kind === "observer-order" && run.status === "paused") {
+    const decision = coordinator.current().decision;
+    if (!decision) throw new Error("Missing observer order decision");
+    cohort = observerCohort(coordinator.view(decision.actor));
+  }
+  return { kind, run, snapshot, observerCohort: [...cohort] };
+}
 async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
   for (let attempt = 0; attempt < seedAttempts; attempt++) {
     const { manifest, artifact } = await prepareCase(seatCount, attempt);
@@ -691,6 +734,7 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
     let coordinator: Coordinator | undefined;
     let pendingSave: string | undefined;
     const stages: NativeStage[] = [];
+    let selectedObserverCohort: string[] = [];
     const attemptEvidence: Record<string, unknown> = {
       manifest,
       artifact,
@@ -730,18 +774,20 @@ async function nativeCase(seatCount: 2 | 4): Promise<NativeCase> {
               coordinator?.current().events,
               release,
               coordinator?.current().continuousEffects,
+              selectedObserverCohort,
             ),
           onProgress: (revision) => console.log(`Native ${seatCount}-seat revision:${revision}`),
         });
         const snapshot = await nativeSnapshot(repo, coordinator);
-        const stage: NativeStage = { kind, run, snapshot };
+        const stage = captureNativeStage(coordinator, kind, run, snapshot, selectedObserverCohort);
+        selectedObserverCohort = stage.observerCohort;
         stages.push(stage);
         if (kind === "starting-player") assertUndealt(snapshot, seatCount);
         if (run.status !== "paused") {
           requireCompleted(run); // Actual engine/driver/budget failures are not discarded as seed misses.
           break;
         }
-        assertPausedStage(kind, snapshot);
+        assertPausedStage(kind, snapshot, selectedObserverCohort);
         const recovered = await reopenNative(repo, coordinator, databasePath, snapshot);
         repo = recovered.repo;
         coordinator = recovered.coordinator;
@@ -847,13 +893,15 @@ try {
       const paused = await call<GameRun>(page, {
         operation: "run",
         stopAt: stage.kind,
+        ...(stage.observerCohort ? { observerCohort: stage.observerCohort } : {}),
         maxCommands: 10_000,
       });
       expect(paused.status).toBe("paused");
       const pending = await call<Snapshot>(page, { operation: "snapshot" });
-      assertPausedStage(stage.kind, pending);
+      assertPausedStage(stage.kind, pending, stage.observerCohort);
       expect(pending.tokens).toEqual(stage.snapshot.tokens);
       expect(pending.statics).toEqual(stage.snapshot.statics);
+      expect(pending.observers).toEqual(stage.snapshot.observers);
       expect(pending.continuous).toEqual(stage.snapshot.continuous);
       expect(pending.counters).toEqual(stage.snapshot.counters);
       expect(pending.commanderReturns).toEqual(stage.snapshot.commanderReturns);
@@ -881,7 +929,8 @@ try {
         (requireTokens &&
           ["pending-token", "active-token", "token-departure"].includes(stage.kind)) ||
         (requireStatics &&
-          ["pending-static", "active-static", "static-departure"].includes(stage.kind))
+          ["pending-static", "active-static", "static-departure"].includes(stage.kind)) ||
+        (requireObservers && OBSERVER_STAGES.some((s) => s === stage.kind))
       ) {
         await call(page, { operation: "close" });
         stageImport = await call<Snapshot>(page, {
@@ -902,6 +951,7 @@ try {
       importedExpected = pending;
       browserStages.push({
         kind: stage.kind,
+        observerCohort: stage.observerCohort ?? null,
         paused,
         pending,
         reopened,
@@ -922,6 +972,7 @@ try {
     expect(completed.boundaryHashes).toEqual(baseline.nativeFinal.boundaryHashes);
     expect(completed.tokens).toEqual(baseline.nativeFinal.tokens);
     expect(completed.statics).toEqual(baseline.nativeFinal.statics);
+    expect(completed.observers).toEqual(baseline.nativeFinal.observers);
     expect(completed.spells).toEqual(baseline.nativeFinal.spells);
     expect(completed.triggers).toEqual(baseline.nativeFinal.triggers);
     expect(completed.continuous).toEqual(baseline.nativeFinal.continuous);
@@ -971,6 +1022,7 @@ try {
     expect(importedFinal.setup.firstChoice).toEqual(completed.setup.firstChoice);
     expect(importedFinal.tokens).toEqual(completed.tokens);
     expect(importedFinal.statics).toEqual(completed.statics);
+    expect(importedFinal.observers).toEqual(completed.observers);
     expect(importedFinal.commanderReturns).toEqual(completed.commanderReturns);
     const importedReplacementChoiceRetry = await retryBrowserReplacement(page, importedExpected);
     caseEvidence.browser = {
@@ -1013,6 +1065,9 @@ try {
     commanderReplacementRequired: requireCommanderReplacement,
     tokenLifecycleRequired: requireTokens,
     staticLifecycleRequired: requireStatics,
+    observerLifecycleRequired: requireObservers,
+    observerCaptures: completedBrowserStates.flatMap((state) => state.observers.captures),
+    observerResolutions: completedBrowserStates.flatMap((state) => state.observers.resolved),
     staticEntries: completedBrowserStates.flatMap((state) => state.statics.entries),
     staticDepartures: completedBrowserStates.flatMap((state) => state.statics.departures),
     commanderReplacements: completedBrowserStates.flatMap(

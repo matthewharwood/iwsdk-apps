@@ -1,18 +1,23 @@
 import { z } from "zod";
 import { StaticCreatureBonus } from "./static-bonus";
-import { SelfEntryProgram } from "./triggers";
+import { EntryObserverProgram, SelfEntryProgram, TriggeredProgram } from "./triggers";
 
 export { ReviewedCreatureSubtype, StaticCreatureBonus } from "./static-bonus";
 export {
+  EntryObserverEffect,
+  EntryObserverProgram,
+  EntrySubjectFilter,
   OrderedSelfEntryProgram,
   SelfEntryEffect,
   SelfEntryProgram,
   SingleSelfEntryProgram,
   selfEntryEffects,
+  TriggeredProgram,
+  triggerEffects,
 } from "./triggers";
 
 export const CONTRACT_VERSION = "commander-contract/1";
-export const ENGINE_VERSION = "commander-engine/0.13.0";
+export const ENGINE_VERSION = "commander-engine/0.14.0";
 export const CHANCE_VERSION = "xorshift32-fisher-yates/1";
 export const SERIALIZER_VERSION = "sorted-json/1";
 export const Id = z.string().min(1).max(240);
@@ -251,7 +256,7 @@ export const CardDefinition = z.strictObject({
   obligations: z.array(Id),
   implementationRevision: Id,
   spellProgram: SpellProgram.optional(),
-  triggerPrograms: z.array(SelfEntryProgram).min(1).max(1).optional(),
+  triggerPrograms: z.array(TriggeredProgram).min(1).max(1).optional(),
   staticPrograms: z.tuple([StaticCreatureBonus]).optional(),
 });
 export type CardDefinition = z.infer<typeof CardDefinition>;
@@ -330,15 +335,37 @@ export const GameObject = z.strictObject({
 });
 export type GameObject = z.infer<typeof GameObject>;
 /** Noncard ability context survives changes to or removal of its physical source. */
-export const TriggeredAbility = z.strictObject({
+const triggeredAbilityHeader = {
   id: Id,
   source: GameObject,
   sourceVersion: Digest,
   controller: Id,
-  program: SelfEntryProgram,
   eventIndex: Natural,
   occurrenceOrdinal: Natural,
+};
+export const SelfEntryAbility = z.strictObject({
+  ...triggeredAbilityHeader,
+  program: SelfEntryProgram,
 });
+/** Only the post-entry selector facts used by this closed grammar are captured here. */
+export const EntrySubjectFacts = z.strictObject({ types: z.array(Id), subtypes: z.array(Id) });
+export type EntrySubjectFacts = z.infer<typeof EntrySubjectFacts>;
+export const EntryObserverCapture = z.strictObject({
+  schema: z.literal("entry-observer-capture/1"),
+  batchId: Id,
+  programIndex: Natural.max(0),
+  subject: GameObject,
+  subjectVersion: Digest,
+  facts: EntrySubjectFacts,
+});
+export type EntryObserverCapture = z.infer<typeof EntryObserverCapture>;
+export const EntryObserverAbility = z.strictObject({
+  ...triggeredAbilityHeader,
+  program: EntryObserverProgram,
+  entry: EntryObserverCapture,
+});
+export type EntryObserverAbility = z.infer<typeof EntryObserverAbility>;
+export const TriggeredAbility = z.union([SelfEntryAbility, EntryObserverAbility]);
 export type TriggeredAbility = z.infer<typeof TriggeredAbility>;
 export const StackEntry = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("spell"), objectId: Id }),

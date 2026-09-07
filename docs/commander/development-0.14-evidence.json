@@ -1,0 +1,4072 @@
+{
+  "schema": "commander-development-evidence/1",
+  "engine": "commander-engine/0.14.0",
+  "sourceReleaseHash": "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
+  "primaryDefinitions": 1190,
+  "auxiliaryTokenTemplates": 20,
+  "legalDevelopmentDecks": 49,
+  "preservedPrimaryDefinitions": 1170,
+  "preservedCompleteDeckRevisions": 46,
+  "unsupportedPaperCandidates": 30639,
+  "sourceBundle": "6284360d10b959270061e1e0e165cd24a7b16b877bb8b0c70a848114a24355df",
+  "rulesHash": "4381ad1b39ab2c05f7d03633a20f711ed37277074d3266dcba5f38cbb527423f",
+  "assurance": "development-subset",
+  "fullSnapshotComplete": false,
+  "sourceReport": {
+    "path": "docs/commander/source-entry-observer-v0.14.json",
+    "sha256": "1e2f1d4ed16412a1238064a48edbfad391b7cefad50d003f332ce91b77069173"
+  },
+  "sourceResearch": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/entry-observer-research/manifest.json",
+    "sha256": "d971fd6a914cdf462384235b291efab7f5c2fb654935d435453d93550a6a658c"
+  },
+  "independentSourceReview": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/independent-entry-observer-review/manifest.json",
+    "sha256": "4680994541c72c782cb607c23bfa8f7789aa0df19ae85624b4acf914c6affa7b"
+  },
+  "bindingExecution": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/entry-observer-binding-execution/attempt-1/result.json",
+    "sha256": "2517065ca2a323bf52463099fea718477d46fe20d73a9d29e9c8bcddef5c13d0",
+    "tests": 58,
+    "assertions": 12137
+  },
+  "independentBindingReview": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/independent-entry-observer-binding-review/manifest.json",
+    "sha256": "8d5e131e5bc2548f3d280c79b21fadd52b0c3b2676a4d95203c38da3db72c726",
+    "mutantsRejected": 421
+  },
+  "coreAndSourceExecution": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/entry-observer-source-execution/manifest.json",
+    "sha256": "cc79796713193568fbf38cf21ddd360fad22c2952df9ad853ccf2e8ae3d65901",
+    "focusedTests": 65,
+    "focusedAssertions": 848,
+    "broadTests": 631,
+    "broadAssertions": 8978,
+    "newSourceIdentitiesExecuted": 20,
+    "priorGuIdentitiesLegallyExecuted": 9,
+    "scope": "Legal100-card scenarios with explicitly selected hands/land preconditions; ordinary casting/payment and effects. No random-deal complete games claimed by these scenarios. Merfolk Mistbinder commander-compatibility gap closes under Tatyova."
+  },
+  "independentCompilerCoreReview": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/independent-observer-compiler-core-review/manifest.json",
+    "sha256": "cfbc9c13a4792ae1cbbdf92ab78ec352729f43fca30466965654a83a2100ec5d",
+    "compilerRejectionCases": 54,
+    "coreTests": 35,
+    "coreAssertions": 244,
+    "independentAdditionalTests": 6
+  },
+  "deckExecution": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/entry-observer-deck-execution/attempt-1/result.json",
+    "sha256": "53a39b448bb32aa3e36f2646d9b0dc3ea3579004f5b440d07757bb353319605a",
+    "tests": 7,
+    "assertions": 11570,
+    "scope": "Three new legal profiles preserve46 prior revisions exactly; all20newidentities covered."
+  },
+  "compilerExecution": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/entry-compiler-execution/qualified/result.json",
+    "sha256": "2c11abf0b9d793a122c351f9c0a49384536f475712b342953f773d28d4aafe58",
+    "tests": 126,
+    "assertions": 24534,
+    "capturedFilesUnchanged": 179
+  },
+  "nativeDurability": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/native-entry-observer-durability/attempt-1/result.json",
+    "sha256": "70eaf6e990ab36e7973bf225d5316fc36ff0cfeb35a599f0dbf000d546b73f46",
+    "tests": 23,
+    "assertions": 1075,
+    "resolvers": 3,
+    "checkpoints": [201, 202, 203, 205, 207],
+    "sourcePublicationHash": "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
+    "actualFixtureReleaseHash": "8c45ddacc459c49b70854cdf78f61387efd2e25695b262e26541e92f7a8c84d3",
+    "actualFixturePrimaryDefinitions": 6,
+    "actualFixtureAuxiliaryTemplates": 0,
+    "completedGames": 0,
+    "scope": "One ordinary legal setup from seed14/driver1,207 commands perresolver; ongoing. Allfive checkpoints reopen/import/replay/retry. Alternate order, concurrent commands, transaction rollback and rehashed context tampering covered. Raw histories/report top-level sourceReleaseHash names parent publication; actual execution/manifest use six-definition subset."
+  },
+  "independentNativeReview": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/independent-native-entry-review/result.json",
+    "sha256": "ecc58b1e9ff74b07e2ac6435fd9db39ba8b71eb890267be68f07f785bd1c778e"
+  },
+  "nativeIntegrityJoin": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/independent-observer-browser-review/native-integrity-join.json",
+    "sha256": "648b7fd638b2881dbc4603aa61e770ff617c8cf9b703f035e83ab1e280ea775c"
+  },
+  "originalG2Delta": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/g2-entry-observer-delta/manifest.json",
+    "sha256": "492cb081e1d103267b2fc1056ddf4bc4285ebef177b63aa08107cf6b3e891b37",
+    "scope": "Ordinary entryAPNAP improves bounded coverage; original SRC-TRG-01 meta-trigger second wave and SRC-TRG-02 intervening-if remain unsupported. No whole-G2 qualification."
+  },
+  "mainCompile": {
+    "path": ".commander/evidence/compile-0.14-main.log",
+    "sha256": "0b125fc5d0389f7c9eb819c5c811146e6b10e4b94e546b3b51ad9251b24b4c4f"
+  },
+  "resolverComparisons": [
+    {
+      "path": ".commander/prototypes/engine-0.14/.draft-runs/resolver-comparisons/59ce832f-e67e-4d8e-aa09-a33096aefb27/report.json",
+      "sha256": "fd6f46c91fe1531e97236ab0c6fae2eef982f506bb93a2f6f3397d62e5236f01",
+      "mode": "two-seat",
+      "gameSeed": 14001,
+      "driverSeed": 14018,
+      "classification": "selected-entry-observer-game-assignment",
+      "commands": 672,
+      "boundaries": 673,
+      "independentResolversAndReplays": 3,
+      "observerCaptures": 5,
+      "observerResolutions": 5,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.14/.draft-runs/resolver-comparisons/59ce832f-e67e-4d8e-aa09-a33096aefb27/assignment.json",
+        "sha256": "35122a8af61521c781ef59b6285e1dd2bb38a05ae1a22ef05f5da33452d5513d"
+      }
+    },
+    {
+      "path": ".commander/prototypes/engine-0.14/.draft-runs/resolver-comparisons/608e779c-a118-48b1-a4b4-c7606cdc0af9/report.json",
+      "sha256": "46c30da75e1e8824020085df974ae1e6fd6bf6e758cfee46b93de711e45c4172",
+      "mode": "four-seat",
+      "gameSeed": 14201,
+      "driverSeed": 14218,
+      "classification": "selected-entry-observer-game-assignment",
+      "commands": 1827,
+      "boundaries": 1828,
+      "independentResolversAndReplays": 3,
+      "observerCaptures": 2,
+      "observerResolutions": 2,
+      "assignment": {
+        "path": ".commander/prototypes/engine-0.14/.draft-runs/resolver-comparisons/608e779c-a118-48b1-a4b4-c7606cdc0af9/assignment.json",
+        "sha256": "8dcee0f348cd38bb98e3e60d4f828f21abfdd9971c14213a6ca56772c734d81e"
+      }
+    }
+  ],
+  "independentCliComparisonReview": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/independent-entry-cli-comparisons.json",
+    "sha256": "030872131d12f318b6d6ce7e97c3937a175984fb4b2431ef60c19664f41ee59a"
+  },
+  "frozenBuildHash": "62c47247d8ccace0b5554a90aa1360982de54c5a6d160bb51041eb389a1ecd75",
+  "frozenExecutableSha256": "6c9dc16eca40e89742a744cfb4217a198d2a58a0a16031427b2b5d31bc6627dc",
+  "browser": {
+    "path": ".commander/prototypes/engine-0.14/.commander/browser-proof/2026-09-07T00-56-23-159Z-2165bab4/evidence.json",
+    "sha256": "ce6255ff30bea16fdbe7c384b86172470fe1b4366f5188b98678be2d8e71131d",
+    "status": "passed",
+    "sourceHash": "c3fd52375c4a53daad2dc8a3520a5ec46a6a861f09cb712c97f789e1d0351037",
+    "workerBundleHash": "28ed77205bae6ab1b794c948d63c130876a82964f520d751242de3349a34cb1c",
+    "browserVersion": "149.0.7827.55",
+    "sqliteVersion": "3.53.0-build1",
+    "driverVersion": "observed-combat/9",
+    "sourceFilesChangedDuringRun": [],
+    "browserFailures": [],
+    "cases": [
+      {
+        "mode": "two-seat",
+        "gameSeed": 14002,
+        "driverSeed": 14019,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "19e1c0ab313a2b345b7092d9715645dfa280359805f2928829a2cac968d006ef"
+          },
+          {
+            "id": "P2",
+            "deckHash": "d615153567bd7bd17f2c47e40ec1a2309313967666c4c51e10543a15997eddea"
+          }
+        ],
+        "commands": 878,
+        "boundaries": 879,
+        "finalStateHash": "451330419308d5db46119bd13da91fa624572d5cd58207e66bfeef2926331f5a",
+        "execution": {
+          "sourceReleaseHash": "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
+          "preparedArtifactHash": "c7454bc6737887e000941a150230cc41754e8c5fd0fc1ba1ccbfdd208259f1c4",
+          "definitionCount": 97,
+          "tokenTemplateCount": 7,
+          "fullDefinitionCount": 1190,
+          "excludedDefinitionCount": 1093,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 13
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "observerCohort": [],
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 7,
+            "observerCohort": [],
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "observer-order",
+            "revision": 832,
+            "observerCohort": ["entry-observer:2431:0:1:6:0:0", "entry-observer:2431:0:7:3:0:0"],
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "observer-stack",
+            "revision": 833,
+            "observerCohort": ["entry-observer:2431:0:1:6:0:0", "entry-observer:2431:0:7:3:0:0"],
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "observer-resolved",
+            "revision": 837,
+            "observerCohort": ["entry-observer:2431:0:1:6:0:0", "entry-observer:2431:0:7:3:0:0"],
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "finalImportedCheckpointRevision": 837,
+        "importedCompleteStateHash": "451330419308d5db46119bd13da91fa624572d5cd58207e66bfeef2926331f5a",
+        "observerEvidence": {
+          "captures": [
+            {
+              "id": "entry-observer:277:0:7:3:0:0",
+              "revision": 84,
+              "eventIndex": 278,
+              "sourceDefinition": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:277",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:51@2",
+                  "lineage": "P1:card:51",
+                  "generation": 2,
+                  "definition": "oracle:b2c6aa39-2d2a-459c-a555-fb48ba993373",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 4,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "6fba8f4cae5af7838b16a40667d8de8b4830d9631b1c08e424717ef98ff8daaf",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Island"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:456:0:18:3:0:0",
+              "revision": 144,
+              "eventIndex": 457,
+              "sourceDefinition": "oracle:3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:456",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:16@3",
+                  "lineage": "P1:card:16",
+                  "generation": 3,
+                  "definition": "oracle:381fa2a9-69fc-4558-a0ac-fb99c6f8d77f",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 6,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "1a1fa8fbcbbd21c4f92ad5d47ee2dc028fc7664437f2731d431b60d7af9e14b0",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Human", "Wizard"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:1051:0:7:3:0:0",
+              "revision": 354,
+              "eventIndex": 1052,
+              "sourceDefinition": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:1051",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:74@2",
+                  "lineage": "P1:card:74",
+                  "generation": 2,
+                  "definition": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 14,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Forest"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:1395:0:7:3:0:0",
+              "revision": 474,
+              "eventIndex": 1396,
+              "sourceDefinition": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:1395",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:87@2",
+                  "lineage": "P1:card:87",
+                  "generation": 2,
+                  "definition": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 18,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Forest"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:1543:0:7:3:0:0",
+              "revision": 527,
+              "eventIndex": 1544,
+              "sourceDefinition": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:1543",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:75@2",
+                  "lineage": "P1:card:75",
+                  "generation": 2,
+                  "definition": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 20,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Forest"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2083:0:7:3:0:0",
+              "revision": 714,
+              "eventIndex": 2084,
+              "sourceDefinition": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2083",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:82@2",
+                  "lineage": "P1:card:82",
+                  "generation": 2,
+                  "definition": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 26,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Forest"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2243:0:7:3:0:0",
+              "revision": 769,
+              "eventIndex": 2244,
+              "sourceDefinition": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2243",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:57@2",
+                  "lineage": "P1:card:57",
+                  "generation": 2,
+                  "definition": "oracle:b2c6aa39-2d2a-459c-a555-fb48ba993373",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 28,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "6fba8f4cae5af7838b16a40667d8de8b4830d9631b1c08e424717ef98ff8daaf",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Island"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2270:0:29:3:0:0",
+              "revision": 775,
+              "eventIndex": 2271,
+              "sourceDefinition": "oracle:70af9a03-20d6-44e3-a181-b60e80bff643",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:70af9a03-20d6-44e3-a181-b60e80bff643:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2270",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:1@6",
+                  "lineage": "P1:card:1",
+                  "generation": 6,
+                  "definition": "oracle:0715e860-3b3b-4331-9718-207973e94fee",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 28,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": true,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "0fe0e7b2da68aed3c80f5cac13c1ab4fb4eeac9ae7d613fab840a19cb487334a",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Merfolk", "Druid"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2431:0:1:6:0:0",
+              "revision": 832,
+              "eventIndex": 2432,
+              "sourceDefinition": "oracle:0715e860-3b3b-4331-9718-207973e94fee",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:0715e860-3b3b-4331-9718-207973e94fee:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  },
+                  {
+                    "kind": "draw",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2431",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:68@2",
+                  "lineage": "P1:card:68",
+                  "generation": 2,
+                  "definition": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 30,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Forest"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2431:0:7:3:0:0",
+              "revision": 832,
+              "eventIndex": 2433,
+              "sourceDefinition": "oracle:20faefbd-059c-4aae-81e3-31683bf9f7bf",
+              "controller": "P1",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:20faefbd-059c-4aae-81e3-31683bf9f7bf:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": false,
+                      "token": "any",
+                      "types": ["Land"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2431",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P1:card:68@2",
+                  "lineage": "P1:card:68",
+                  "generation": 2,
+                  "definition": "oracle:b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+                  "owner": "P1",
+                  "controller": "P1",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 30,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "419e9c75aa57d0c76f9a22abe31f1cb36e707f2474e1daf6267a76df73e976de",
+                "facts": {
+                  "types": ["Land"],
+                  "subtypes": ["Forest"]
+                }
+              }
+            }
+          ],
+          "resolved": [
+            {
+              "id": "entry-observer:277:0:7:3:0:0",
+              "revision": 86,
+              "eventIndex": 286,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 285,
+                  "data": {
+                    "ability": "entry-observer:277:0:7:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:7@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:456:0:18:3:0:0",
+              "revision": 146,
+              "eventIndex": 465,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 464,
+                  "data": {
+                    "ability": "entry-observer:456:0:18:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:18@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:1051:0:7:3:0:0",
+              "revision": 356,
+              "eventIndex": 1060,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 1059,
+                  "data": {
+                    "ability": "entry-observer:1051:0:7:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:7@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:1395:0:7:3:0:0",
+              "revision": 476,
+              "eventIndex": 1404,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 1403,
+                  "data": {
+                    "ability": "entry-observer:1395:0:7:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:7@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:1543:0:7:3:0:0",
+              "revision": 529,
+              "eventIndex": 1552,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 1551,
+                  "data": {
+                    "ability": "entry-observer:1543:0:7:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:7@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2083:0:7:3:0:0",
+              "revision": 716,
+              "eventIndex": 2092,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2091,
+                  "data": {
+                    "ability": "entry-observer:2083:0:7:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:7@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2243:0:7:3:0:0",
+              "revision": 771,
+              "eventIndex": 2252,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2251,
+                  "data": {
+                    "ability": "entry-observer:2243:0:7:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:7@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2270:0:29:3:0:0",
+              "revision": 777,
+              "eventIndex": 2279,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2278,
+                  "data": {
+                    "ability": "entry-observer:2270:0:29:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:29@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2431:0:7:3:0:0",
+              "revision": 835,
+              "eventIndex": 2443,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2442,
+                  "data": {
+                    "ability": "entry-observer:2431:0:7:3:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:7@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2431:0:1:6:0:0",
+              "revision": 837,
+              "eventIndex": 2451,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2448,
+                  "data": {
+                    "ability": "entry-observer:2431:0:1:6:0:0",
+                    "amount": 1,
+                    "player": "P1",
+                    "source": "P1:card:1@6"
+                  }
+                },
+                {
+                  "type": "CardDrawn",
+                  "index": 2450,
+                  "data": {
+                    "object": "P1:card:35@1",
+                    "player": "P1"
+                  }
+                }
+              ]
+            }
+          ],
+          "live": [],
+          "pending": [],
+          "stack": [],
+          "placement": null
+        }
+      },
+      {
+        "mode": "four-seat",
+        "gameSeed": 14201,
+        "driverSeed": 14218,
+        "seatDecks": [
+          {
+            "id": "P1",
+            "deckHash": "19e1c0ab313a2b345b7092d9715645dfa280359805f2928829a2cac968d006ef"
+          },
+          {
+            "id": "P2",
+            "deckHash": "d615153567bd7bd17f2c47e40ec1a2309313967666c4c51e10543a15997eddea"
+          },
+          {
+            "id": "P3",
+            "deckHash": "c89f13a11702d9798b366cb5317fbec89ce1c3093adc5ef5311a87e3ba376d63"
+          },
+          {
+            "id": "P4",
+            "deckHash": "9eee1ad3b9e748727a109954d2101e3196f827cb9e96c280a1f85f8b5ea41511"
+          }
+        ],
+        "commands": 2253,
+        "boundaries": 2254,
+        "finalStateHash": "cf181a25bc896d3ac370cdb97d447f6a77b2f27de855220115bca3e0c60a6031",
+        "execution": {
+          "sourceReleaseHash": "19b625376b02555521b2f0cea2a33097299bac813e65b682725982e61bfd948d",
+          "preparedArtifactHash": "a43a2dc2263af332b8951129e8eb0b2c2716ec04ad54a964faa0fa1cd5ebe193",
+          "definitionCount": 161,
+          "tokenTemplateCount": 9,
+          "fullDefinitionCount": 1190,
+          "excludedDefinitionCount": 1029,
+          "fullTokenTemplateCount": 20,
+          "excludedTokenTemplateCount": 11
+        },
+        "stages": [
+          {
+            "kind": "starting-player",
+            "revision": 0,
+            "observerCohort": [],
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": false
+          },
+          {
+            "kind": "payment",
+            "revision": 15,
+            "observerCohort": [],
+            "reopenedEqual": true,
+            "importedEqual": null,
+            "exactRetry": true
+          },
+          {
+            "kind": "observer-order",
+            "revision": 664,
+            "observerCohort": ["entry-observer:1712:1:39:3:0:0", "entry-observer:1712:1:39:3:0:1"],
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "observer-stack",
+            "revision": 665,
+            "observerCohort": ["entry-observer:1712:1:39:3:0:0", "entry-observer:1712:1:39:3:0:1"],
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          },
+          {
+            "kind": "observer-resolved",
+            "revision": 673,
+            "observerCohort": ["entry-observer:1712:1:39:3:0:0", "entry-observer:1712:1:39:3:0:1"],
+            "reopenedEqual": true,
+            "importedEqual": true,
+            "exactRetry": true
+          }
+        ],
+        "finalImportedCheckpointRevision": 673,
+        "importedCompleteStateHash": "cf181a25bc896d3ac370cdb97d447f6a77b2f27de855220115bca3e0c60a6031",
+        "observerEvidence": {
+          "captures": [
+            {
+              "id": "entry-observer:1712:1:39:3:0:0",
+              "revision": 664,
+              "eventIndex": 1713,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:1712",
+                "programIndex": 0,
+                "subject": {
+                  "id": "token:1711:0@0",
+                  "lineage": "token:1711:0",
+                  "generation": 0,
+                  "definition": "token-template:fe0f448172e42ba0738e5d3b1035a53331ce25ea130d604dae539472b9094039",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 16,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false,
+                  "token": {
+                    "creator": "P2",
+                    "creationEvent": 1711,
+                    "ordinal": 0,
+                    "source": {
+                      "id": "P2:card:23@2",
+                      "lineage": "P2:card:23",
+                      "generation": 2,
+                      "definition": "oracle:5b2364d7-a811-4595-a1b4-224c70555ffa",
+                      "owner": "P2",
+                      "controller": "P2",
+                      "zone": "stack"
+                    },
+                    "sourceVersion": "e7d771ed048948d8359e720351181740b5d02ecfa866b133cf43baa217fb3cd0",
+                    "programIndex": 0
+                  }
+                },
+                "subjectVersion": "fe0f448172e42ba0738e5d3b1035a53331ce25ea130d604dae539472b9094039",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Soldier"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:1712:1:39:3:0:1",
+              "revision": 664,
+              "eventIndex": 1714,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:1712",
+                "programIndex": 0,
+                "subject": {
+                  "id": "token:1711:1@0",
+                  "lineage": "token:1711:1",
+                  "generation": 0,
+                  "definition": "token-template:fe0f448172e42ba0738e5d3b1035a53331ce25ea130d604dae539472b9094039",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 16,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false,
+                  "token": {
+                    "creator": "P2",
+                    "creationEvent": 1711,
+                    "ordinal": 1,
+                    "source": {
+                      "id": "P2:card:23@2",
+                      "lineage": "P2:card:23",
+                      "generation": 2,
+                      "definition": "oracle:5b2364d7-a811-4595-a1b4-224c70555ffa",
+                      "owner": "P2",
+                      "controller": "P2",
+                      "zone": "stack"
+                    },
+                    "sourceVersion": "e7d771ed048948d8359e720351181740b5d02ecfa866b133cf43baa217fb3cd0",
+                    "programIndex": 0
+                  }
+                },
+                "subjectVersion": "fe0f448172e42ba0738e5d3b1035a53331ce25ea130d604dae539472b9094039",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Soldier"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:1775:1:39:3:0:0",
+              "revision": 687,
+              "eventIndex": 1776,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:1775",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:10@3",
+                  "lineage": "P2:card:10",
+                  "generation": 3,
+                  "definition": "oracle:2dfafd63-83fb-4783-8e12-30018680a905",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 16,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "1636b175f8391b1899b4f40f25f3484c18574a4e9e1fe62c7ffcf197dcced282",
+                "facts": {
+                  "types": ["Artifact", "Creature"],
+                  "subtypes": ["Sliver"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2236:1:39:3:0:0",
+              "revision": 870,
+              "eventIndex": 2237,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2236",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:93@3",
+                  "lineage": "P2:card:93",
+                  "generation": 3,
+                  "definition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 20,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "af7b0392380aef74f9def2c37d0af1e09bed69e3fe4db4f653cfd36cfd081762",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Human", "Cleric"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2746:1:39:3:0:0",
+              "revision": 1072,
+              "eventIndex": 2747,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2746",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:9@3",
+                  "lineage": "P2:card:9",
+                  "generation": 3,
+                  "definition": "oracle:28a52ba1-95da-44e1-8ac5-0dc23c902394",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 24,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "bf1930cf0273c194ae65bca582519f745d292c638b98ce0216c5553cebcf3396",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Bird"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:2746:1:93:3:0:0",
+              "revision": 1072,
+              "eventIndex": 2748,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:2746",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:9@3",
+                  "lineage": "P2:card:9",
+                  "generation": 3,
+                  "definition": "oracle:28a52ba1-95da-44e1-8ac5-0dc23c902394",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 24,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "bf1930cf0273c194ae65bca582519f745d292c638b98ce0216c5553cebcf3396",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Bird"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:3277:1:39:3:0:0",
+              "revision": 1284,
+              "eventIndex": 3278,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:3277",
+                "programIndex": 0,
+                "subject": {
+                  "id": "token:3276:0@0",
+                  "lineage": "token:3276:0",
+                  "generation": 0,
+                  "definition": "token-template:e3fa7a8cd4ecae75ac1ac24886398241801b89299cb60e5065e5d21823e83060",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 28,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false,
+                  "token": {
+                    "creator": "P2",
+                    "creationEvent": 3276,
+                    "ordinal": 0,
+                    "source": {
+                      "id": "P2:card:17@2",
+                      "lineage": "P2:card:17",
+                      "generation": 2,
+                      "definition": "oracle:424c6f5e-b386-47e9-b3fe-25b263097d40",
+                      "owner": "P2",
+                      "controller": "P2",
+                      "zone": "stack"
+                    },
+                    "sourceVersion": "930fdf7217b790b599d84dbd8f3cd39248356f77237b71c57782bbc0bf489a21",
+                    "programIndex": 0
+                  }
+                },
+                "subjectVersion": "e3fa7a8cd4ecae75ac1ac24886398241801b89299cb60e5065e5d21823e83060",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Saproling"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:3277:1:93:3:0:0",
+              "revision": 1284,
+              "eventIndex": 3279,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:3277",
+                "programIndex": 0,
+                "subject": {
+                  "id": "token:3276:0@0",
+                  "lineage": "token:3276:0",
+                  "generation": 0,
+                  "definition": "token-template:e3fa7a8cd4ecae75ac1ac24886398241801b89299cb60e5065e5d21823e83060",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 28,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false,
+                  "token": {
+                    "creator": "P2",
+                    "creationEvent": 3276,
+                    "ordinal": 0,
+                    "source": {
+                      "id": "P2:card:17@2",
+                      "lineage": "P2:card:17",
+                      "generation": 2,
+                      "definition": "oracle:424c6f5e-b386-47e9-b3fe-25b263097d40",
+                      "owner": "P2",
+                      "controller": "P2",
+                      "zone": "stack"
+                    },
+                    "sourceVersion": "930fdf7217b790b599d84dbd8f3cd39248356f77237b71c57782bbc0bf489a21",
+                    "programIndex": 0
+                  }
+                },
+                "subjectVersion": "e3fa7a8cd4ecae75ac1ac24886398241801b89299cb60e5065e5d21823e83060",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Saproling"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:3329:1:39:3:0:0",
+              "revision": 1303,
+              "eventIndex": 3330,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:3329",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:1@3",
+                  "lineage": "P2:card:1",
+                  "generation": 3,
+                  "definition": "oracle:0594f19c-c4c2-4812-8f4d-5630fc24c47a",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 28,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "6831229998519763ce31423dc5f9f24028a8ec04b2764ae9abcf5e33c10f1032",
+                "facts": {
+                  "types": ["Artifact", "Creature"],
+                  "subtypes": ["Phyrexian", "Construct"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:3329:1:93:3:0:0",
+              "revision": 1303,
+              "eventIndex": 3331,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:3329",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:1@3",
+                  "lineage": "P2:card:1",
+                  "generation": 3,
+                  "definition": "oracle:0594f19c-c4c2-4812-8f4d-5630fc24c47a",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 28,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "6831229998519763ce31423dc5f9f24028a8ec04b2764ae9abcf5e33c10f1032",
+                "facts": {
+                  "types": ["Artifact", "Creature"],
+                  "subtypes": ["Phyrexian", "Construct"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:3887:1:39:3:0:0",
+              "revision": 1520,
+              "eventIndex": 3888,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:3887",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:45@2",
+                  "lineage": "P2:card:45",
+                  "generation": 2,
+                  "definition": "oracle:942407bf-862a-4a0b-b19d-b9f8ee833026",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 32,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": true,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "715ac4501a52d881b939d5793a333b1e407382c7aec56be50a2e2f2b4159d7b5",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Human"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:3887:1:93:3:0:0",
+              "revision": 1520,
+              "eventIndex": 3889,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:3887",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:45@2",
+                  "lineage": "P2:card:45",
+                  "generation": 2,
+                  "definition": "oracle:942407bf-862a-4a0b-b19d-b9f8ee833026",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 32,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": true,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "715ac4501a52d881b939d5793a333b1e407382c7aec56be50a2e2f2b4159d7b5",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Human"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4417:1:39:3:0:0",
+              "revision": 1730,
+              "eventIndex": 4418,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4417",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:30@3",
+                  "lineage": "P2:card:30",
+                  "generation": 3,
+                  "definition": "oracle:69b9fa68-b409-4de1-9a40-5262386a0180",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 36,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "49776a31a1883e1bd5540f20d1349fbe65ddbc2c7eb1c8581428b4d5d8ec1198",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Cat", "Cleric"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4417:1:93:3:0:0",
+              "revision": 1730,
+              "eventIndex": 4419,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4417",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:30@3",
+                  "lineage": "P2:card:30",
+                  "generation": 3,
+                  "definition": "oracle:69b9fa68-b409-4de1-9a40-5262386a0180",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 36,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "49776a31a1883e1bd5540f20d1349fbe65ddbc2c7eb1c8581428b4d5d8ec1198",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Cat", "Cleric"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4459:1:30:3:0:0",
+              "revision": 1745,
+              "eventIndex": 4460,
+              "sourceDefinition": "oracle:69b9fa68-b409-4de1-9a40-5262386a0180",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:69b9fa68-b409-4de1-9a40-5262386a0180:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 2
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4459",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:95@3",
+                  "lineage": "P2:card:95",
+                  "generation": 3,
+                  "definition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 36,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "6d7d904cf5934c572c543bed10704fdb891f51aec606821b36910256326f407d",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Rabbit", "Cleric"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4459:1:39:3:0:0",
+              "revision": 1745,
+              "eventIndex": 4461,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4459",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:95@3",
+                  "lineage": "P2:card:95",
+                  "generation": 3,
+                  "definition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 36,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "6d7d904cf5934c572c543bed10704fdb891f51aec606821b36910256326f407d",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Rabbit", "Cleric"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4459:1:93:3:0:0",
+              "revision": 1745,
+              "eventIndex": 4462,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4459",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:95@3",
+                  "lineage": "P2:card:95",
+                  "generation": 3,
+                  "definition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 36,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "6d7d904cf5934c572c543bed10704fdb891f51aec606821b36910256326f407d",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Rabbit", "Cleric"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4813:1:30:3:0:0",
+              "revision": 1880,
+              "eventIndex": 4814,
+              "sourceDefinition": "oracle:69b9fa68-b409-4de1-9a40-5262386a0180",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:69b9fa68-b409-4de1-9a40-5262386a0180:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 2
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4813",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:21@3",
+                  "lineage": "P2:card:21",
+                  "generation": 3,
+                  "definition": "oracle:50372c54-359c-4ee6-9e21-1e40ba53652d",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "460e45fd2acc4f76cb5030fbd08effa89180f017fda8e8f360833f774cfadecb",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Angel"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4813:1:39:3:0:0",
+              "revision": 1880,
+              "eventIndex": 4815,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4813",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:21@3",
+                  "lineage": "P2:card:21",
+                  "generation": 3,
+                  "definition": "oracle:50372c54-359c-4ee6-9e21-1e40ba53652d",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "460e45fd2acc4f76cb5030fbd08effa89180f017fda8e8f360833f774cfadecb",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Angel"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4813:1:93:3:0:0",
+              "revision": 1880,
+              "eventIndex": 4816,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4813",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:21@3",
+                  "lineage": "P2:card:21",
+                  "generation": 3,
+                  "definition": "oracle:50372c54-359c-4ee6-9e21-1e40ba53652d",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "460e45fd2acc4f76cb5030fbd08effa89180f017fda8e8f360833f774cfadecb",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Angel"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4813:1:95:3:0:0",
+              "revision": 1880,
+              "eventIndex": 4817,
+              "sourceDefinition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:d812fc6d-b96d-4986-b171-9f3feee603dc:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4813",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:21@3",
+                  "lineage": "P2:card:21",
+                  "generation": 3,
+                  "definition": "oracle:50372c54-359c-4ee6-9e21-1e40ba53652d",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "460e45fd2acc4f76cb5030fbd08effa89180f017fda8e8f360833f774cfadecb",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Angel"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4869:1:30:3:0:0",
+              "revision": 1898,
+              "eventIndex": 4870,
+              "sourceDefinition": "oracle:69b9fa68-b409-4de1-9a40-5262386a0180",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:69b9fa68-b409-4de1-9a40-5262386a0180:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 2
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4869",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:33@3",
+                  "lineage": "P2:card:33",
+                  "generation": 3,
+                  "definition": "oracle:6faa29c4-582a-42d5-b80c-4dc0bd738493",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "975cfc98c5c5fcf708e627eedac51ba2e06f721300c084f1b42b216ac3dcbfb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Elf"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4869:1:39:3:0:0",
+              "revision": 1898,
+              "eventIndex": 4871,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4869",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:33@3",
+                  "lineage": "P2:card:33",
+                  "generation": 3,
+                  "definition": "oracle:6faa29c4-582a-42d5-b80c-4dc0bd738493",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "975cfc98c5c5fcf708e627eedac51ba2e06f721300c084f1b42b216ac3dcbfb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Elf"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4869:1:93:3:0:0",
+              "revision": 1898,
+              "eventIndex": 4872,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4869",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:33@3",
+                  "lineage": "P2:card:33",
+                  "generation": 3,
+                  "definition": "oracle:6faa29c4-582a-42d5-b80c-4dc0bd738493",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "975cfc98c5c5fcf708e627eedac51ba2e06f721300c084f1b42b216ac3dcbfb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Elf"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:4869:1:95:3:0:0",
+              "revision": 1898,
+              "eventIndex": 4873,
+              "sourceDefinition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:d812fc6d-b96d-4986-b171-9f3feee603dc:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:4869",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:33@3",
+                  "lineage": "P2:card:33",
+                  "generation": 3,
+                  "definition": "oracle:6faa29c4-582a-42d5-b80c-4dc0bd738493",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 39,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "975cfc98c5c5fcf708e627eedac51ba2e06f721300c084f1b42b216ac3dcbfb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Elf"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5093:1:30:3:0:0",
+              "revision": 1981,
+              "eventIndex": 5094,
+              "sourceDefinition": "oracle:69b9fa68-b409-4de1-9a40-5262386a0180",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:69b9fa68-b409-4de1-9a40-5262386a0180:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 2
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5093",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:32@3",
+                  "lineage": "P2:card:32",
+                  "generation": 3,
+                  "definition": "oracle:6dfcc4bb-7cd5-4b3e-ad79-3c246a3af2a8",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 41,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "a4abfb6bf5e83f93b9a913515e0e1c8df130de223fd9cba5740008d5202b8cb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Beast"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5093:1:39:3:0:0",
+              "revision": 1981,
+              "eventIndex": 5095,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5093",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:32@3",
+                  "lineage": "P2:card:32",
+                  "generation": 3,
+                  "definition": "oracle:6dfcc4bb-7cd5-4b3e-ad79-3c246a3af2a8",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 41,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "a4abfb6bf5e83f93b9a913515e0e1c8df130de223fd9cba5740008d5202b8cb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Beast"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5093:1:93:3:0:0",
+              "revision": 1981,
+              "eventIndex": 5096,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5093",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:32@3",
+                  "lineage": "P2:card:32",
+                  "generation": 3,
+                  "definition": "oracle:6dfcc4bb-7cd5-4b3e-ad79-3c246a3af2a8",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 41,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "a4abfb6bf5e83f93b9a913515e0e1c8df130de223fd9cba5740008d5202b8cb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Beast"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5093:1:95:3:0:0",
+              "revision": 1981,
+              "eventIndex": 5097,
+              "sourceDefinition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:d812fc6d-b96d-4986-b171-9f3feee603dc:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5093",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:32@3",
+                  "lineage": "P2:card:32",
+                  "generation": 3,
+                  "definition": "oracle:6dfcc4bb-7cd5-4b3e-ad79-3c246a3af2a8",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 41,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "a4abfb6bf5e83f93b9a913515e0e1c8df130de223fd9cba5740008d5202b8cb7",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Beast"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5427:1:39:3:0:0",
+              "revision": 2098,
+              "eventIndex": 5428,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5427",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:2@3",
+                  "lineage": "P2:card:2",
+                  "generation": 3,
+                  "definition": "oracle:069f6530-e65c-4d52-85f3-e0a2acd148c5",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 45,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "0393ec424ce79aaa2256b43addd80cba66471330d7a824939d83bc00b7db0254",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Human", "Monk"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5427:1:93:3:0:0",
+              "revision": 2098,
+              "eventIndex": 5429,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5427",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:2@3",
+                  "lineage": "P2:card:2",
+                  "generation": 3,
+                  "definition": "oracle:069f6530-e65c-4d52-85f3-e0a2acd148c5",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 45,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "0393ec424ce79aaa2256b43addd80cba66471330d7a824939d83bc00b7db0254",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Human", "Monk"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5427:1:95:3:0:0",
+              "revision": 2098,
+              "eventIndex": 5430,
+              "sourceDefinition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:d812fc6d-b96d-4986-b171-9f3feee603dc:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5427",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:2@3",
+                  "lineage": "P2:card:2",
+                  "generation": 3,
+                  "definition": "oracle:069f6530-e65c-4d52-85f3-e0a2acd148c5",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 45,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "0393ec424ce79aaa2256b43addd80cba66471330d7a824939d83bc00b7db0254",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Human", "Monk"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5598:1:39:3:0:0",
+              "revision": 2158,
+              "eventIndex": 5599,
+              "sourceDefinition": "oracle:7de464e3-fae3-44cc-8233-776fc727c00a",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:7de464e3-fae3-44cc-8233-776fc727c00a:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5598",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:7@3",
+                  "lineage": "P2:card:7",
+                  "generation": 3,
+                  "definition": "oracle:263b526c-8b81-44ee-a7c4-5c24bf9b42a4",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 47,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "f4c6ee162464ecf2736217b5a17913a100ceb1a1ffdba98c2ca70db724fff9f6",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Insect"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5598:1:93:3:0:0",
+              "revision": 2158,
+              "eventIndex": 5600,
+              "sourceDefinition": "oracle:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:c7107a2d-2dcf-42e9-9ea9-d0fc0d6d2ec6:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5598",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:7@3",
+                  "lineage": "P2:card:7",
+                  "generation": 3,
+                  "definition": "oracle:263b526c-8b81-44ee-a7c4-5c24bf9b42a4",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 47,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "f4c6ee162464ecf2736217b5a17913a100ceb1a1ffdba98c2ca70db724fff9f6",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Insect"]
+                }
+              }
+            },
+            {
+              "id": "entry-observer:5598:1:95:3:0:0",
+              "revision": 2158,
+              "eventIndex": 5601,
+              "sourceDefinition": "oracle:d812fc6d-b96d-4986-b171-9f3feee603dc",
+              "controller": "P2",
+              "program": {
+                "schema": "commander-entry-observer/1",
+                "id": "entry-observer:d812fc6d-b96d-4986-b171-9f3feee603dc:0",
+                "trigger": {
+                  "kind": "permanent-enters-battlefield",
+                  "view": "post-committed-event",
+                  "placementClass": "ordinary",
+                  "sourceZone": "battlefield",
+                  "occurrence": "each-matching-object",
+                  "subject": {
+                    "kind": "filter",
+                    "filter": {
+                      "controller": "source-controller",
+                      "excludeSource": true,
+                      "token": "any",
+                      "types": ["Creature"]
+                    }
+                  }
+                },
+                "choice": {
+                  "kind": "mandatory"
+                },
+                "effects": [
+                  {
+                    "kind": "gain-life",
+                    "recipient": "trigger-controller",
+                    "amount": 1
+                  }
+                ]
+              },
+              "entry": {
+                "schema": "entry-observer-capture/1",
+                "batchId": "entry:5598",
+                "programIndex": 0,
+                "subject": {
+                  "id": "P2:card:7@3",
+                  "lineage": "P2:card:7",
+                  "generation": 3,
+                  "definition": "oracle:263b526c-8b81-44ee-a7c4-5c24bf9b42a4",
+                  "owner": "P2",
+                  "controller": "P2",
+                  "zone": "battlefield",
+                  "tapped": false,
+                  "controlledSinceTurn": 47,
+                  "damage": 0,
+                  "deathtouchDamage": false,
+                  "counters": {},
+                  "commander": false,
+                  "commanderMoveOffered": false
+                },
+                "subjectVersion": "f4c6ee162464ecf2736217b5a17913a100ceb1a1ffdba98c2ca70db724fff9f6",
+                "facts": {
+                  "types": ["Creature"],
+                  "subtypes": ["Insect"]
+                }
+              }
+            }
+          ],
+          "resolved": [
+            {
+              "id": "entry-observer:1712:1:39:3:0:1",
+              "revision": 669,
+              "eventIndex": 1729,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 1728,
+                  "data": {
+                    "ability": "entry-observer:1712:1:39:3:0:1",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:1712:1:39:3:0:0",
+              "revision": 673,
+              "eventIndex": 1739,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 1738,
+                  "data": {
+                    "ability": "entry-observer:1712:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:1775:1:39:3:0:0",
+              "revision": 691,
+              "eventIndex": 1788,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 1787,
+                  "data": {
+                    "ability": "entry-observer:1775:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2236:1:39:3:0:0",
+              "revision": 874,
+              "eventIndex": 2249,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2248,
+                  "data": {
+                    "ability": "entry-observer:2236:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2746:1:93:3:0:0",
+              "revision": 1077,
+              "eventIndex": 2762,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2761,
+                  "data": {
+                    "ability": "entry-observer:2746:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:2746:1:39:3:0:0",
+              "revision": 1081,
+              "eventIndex": 2772,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 2771,
+                  "data": {
+                    "ability": "entry-observer:2746:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:3277:1:93:3:0:0",
+              "revision": 1289,
+              "eventIndex": 3294,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 3293,
+                  "data": {
+                    "ability": "entry-observer:3277:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:3277:1:39:3:0:0",
+              "revision": 1293,
+              "eventIndex": 3304,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 3303,
+                  "data": {
+                    "ability": "entry-observer:3277:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:3329:1:93:3:0:0",
+              "revision": 1308,
+              "eventIndex": 3345,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 3344,
+                  "data": {
+                    "ability": "entry-observer:3329:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:3329:1:39:3:0:0",
+              "revision": 1312,
+              "eventIndex": 3355,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 3354,
+                  "data": {
+                    "ability": "entry-observer:3329:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:3887:1:93:3:0:0",
+              "revision": 1525,
+              "eventIndex": 3903,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 3902,
+                  "data": {
+                    "ability": "entry-observer:3887:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:3887:1:39:3:0:0",
+              "revision": 1529,
+              "eventIndex": 3913,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 3912,
+                  "data": {
+                    "ability": "entry-observer:3887:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4417:1:93:3:0:0",
+              "revision": 1735,
+              "eventIndex": 4433,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4432,
+                  "data": {
+                    "ability": "entry-observer:4417:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4417:1:39:3:0:0",
+              "revision": 1739,
+              "eventIndex": 4443,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4442,
+                  "data": {
+                    "ability": "entry-observer:4417:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4459:1:93:3:0:0",
+              "revision": 1750,
+              "eventIndex": 4477,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4476,
+                  "data": {
+                    "ability": "entry-observer:4459:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4459:1:39:3:0:0",
+              "revision": 1754,
+              "eventIndex": 4487,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4486,
+                  "data": {
+                    "ability": "entry-observer:4459:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4459:1:30:3:0:0",
+              "revision": 1758,
+              "eventIndex": 4497,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4496,
+                  "data": {
+                    "ability": "entry-observer:4459:1:30:3:0:0",
+                    "amount": 2,
+                    "player": "P2",
+                    "source": "P2:card:30@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4813:1:95:3:0:0",
+              "revision": 1884,
+              "eventIndex": 4831,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4830,
+                  "data": {
+                    "ability": "entry-observer:4813:1:95:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:95@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4813:1:93:3:0:0",
+              "revision": 1887,
+              "eventIndex": 4839,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4838,
+                  "data": {
+                    "ability": "entry-observer:4813:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4813:1:39:3:0:0",
+              "revision": 1890,
+              "eventIndex": 4847,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4846,
+                  "data": {
+                    "ability": "entry-observer:4813:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4813:1:30:3:0:0",
+              "revision": 1893,
+              "eventIndex": 4855,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4854,
+                  "data": {
+                    "ability": "entry-observer:4813:1:30:3:0:0",
+                    "amount": 2,
+                    "player": "P2",
+                    "source": "P2:card:30@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4869:1:95:3:0:0",
+              "revision": 1902,
+              "eventIndex": 4887,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4886,
+                  "data": {
+                    "ability": "entry-observer:4869:1:95:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:95@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4869:1:93:3:0:0",
+              "revision": 1905,
+              "eventIndex": 4895,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4894,
+                  "data": {
+                    "ability": "entry-observer:4869:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4869:1:39:3:0:0",
+              "revision": 1908,
+              "eventIndex": 4903,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4902,
+                  "data": {
+                    "ability": "entry-observer:4869:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:4869:1:30:3:0:0",
+              "revision": 1911,
+              "eventIndex": 4911,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 4910,
+                  "data": {
+                    "ability": "entry-observer:4869:1:30:3:0:0",
+                    "amount": 2,
+                    "player": "P2",
+                    "source": "P2:card:30@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5093:1:95:3:0:0",
+              "revision": 1984,
+              "eventIndex": 5109,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5108,
+                  "data": {
+                    "ability": "entry-observer:5093:1:95:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:95@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5093:1:93:3:0:0",
+              "revision": 1986,
+              "eventIndex": 5115,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5114,
+                  "data": {
+                    "ability": "entry-observer:5093:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5093:1:39:3:0:0",
+              "revision": 1988,
+              "eventIndex": 5121,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5120,
+                  "data": {
+                    "ability": "entry-observer:5093:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5093:1:30:3:0:0",
+              "revision": 1990,
+              "eventIndex": 5127,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5126,
+                  "data": {
+                    "ability": "entry-observer:5093:1:30:3:0:0",
+                    "amount": 2,
+                    "player": "P2",
+                    "source": "P2:card:30@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5427:1:95:3:0:0",
+              "revision": 2101,
+              "eventIndex": 5441,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5440,
+                  "data": {
+                    "ability": "entry-observer:5427:1:95:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:95@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5427:1:93:3:0:0",
+              "revision": 2103,
+              "eventIndex": 5447,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5446,
+                  "data": {
+                    "ability": "entry-observer:5427:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5427:1:39:3:0:0",
+              "revision": 2105,
+              "eventIndex": 5453,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5452,
+                  "data": {
+                    "ability": "entry-observer:5427:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5598:1:95:3:0:0",
+              "revision": 2161,
+              "eventIndex": 5612,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5611,
+                  "data": {
+                    "ability": "entry-observer:5598:1:95:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:95@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5598:1:93:3:0:0",
+              "revision": 2163,
+              "eventIndex": 5618,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5617,
+                  "data": {
+                    "ability": "entry-observer:5598:1:93:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:93@3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "entry-observer:5598:1:39:3:0:0",
+              "revision": 2165,
+              "eventIndex": 5624,
+              "effects": [
+                {
+                  "type": "LifeGained",
+                  "index": 5623,
+                  "data": {
+                    "ability": "entry-observer:5598:1:39:3:0:0",
+                    "amount": 1,
+                    "player": "P2",
+                    "source": "P2:card:39@3"
+                  }
+                }
+              ]
+            }
+          ],
+          "live": [],
+          "pending": [],
+          "stack": [],
+          "placement": null
+        }
+      }
+    ],
+    "scope": "Same captured observer IDs at ordering,stack,resolved stages; each realOPFS document/worker reload and separate logical import/exact retry; final imported checkpoint completes identically. Two-seat cohort is Tatyova+Jaddi observing one land; four-seat cohort is one Dazzling Angel observing two distinct subjects in one batch. Selected cohorts do not imply all20cards were exercised in complete games."
+  },
+  "independentBrowserReview": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/independent-observer-browser-review/manifest.json",
+    "sha256": "7f95e1eced39576d0e0c5be85023e4dd3bb477c9ae79190201b15b0d093a87d5"
+  },
+  "observedAssignments": {
+    "initialDeckGameSeedFamilies": 3,
+    "selectedFullExecutionAssignments": 4,
+    "acceptedCommands": 5630,
+    "scope": "Two CLI assignments and two selected browser assignments; source/deck/game/driver/seat tuples define full assignment. Three initial composition/game-seed families. Resolver variants, replay/import and repeated qualifications add zero assignments. Retained unselected two-seat native seed14001 completed723commands without required workflow and is excluded from selected count."
+  },
+  "invocationAttemptNotes": {
+    "path": ".commander/prototypes/engine-0.14/.draft-artifacts/initial-qualification-notes.json",
+    "sha256": "8fe768fca420a24e9704be8dfd499eff8e0e23da2a251c5dfc9d5417a2d77c93",
+    "closure": "Initial CLI invocation ignored --catalog and failed before compile; corrected catalog location passed. First browser attempt failed wrong queue assertion. Second gameplay passed but failed terminal source stability after native-helper-capture fix; unqualified. Third corrected capture is the passing proof."
+  },
+  "promotion": {
+    "path": ".commander/prototypes/engine-0.14/promotion.json",
+    "sha256": "c7fec4109f5e54eeda5e10e27ef1d1ffd631692208a37b2b0312ce7e138f709d"
+  },
+  "archiveInventory": {
+    "path": ".commander/prototypes/engine-0.14/archive-inventory.json",
+    "sha256": "17697dbe3ebd76d035d9e23d4d7eb7ae7a037a2ba321828a08a21a0683c2716b"
+  },
+  "exactMainSourceCliEquivalence": {
+    "path": ".commander/evidence/promotion-equality-0.14.json",
+    "sha256": "178d4f8366466539da130e057393695d5199ca95c69eac141520383d568e7c41"
+  },
+  "exactMainWorkerEquivalence": {
+    "path": ".commander/evidence/browser-worker-byte-equivalence-0.14.json",
+    "sha256": "7f41fa0daf9d965a94eb8b99cd7f51915448cddcde3ae206f95a7372f2edcf9e"
+  },
+  "repositoryGate": {
+    "path": ".commander/evidence/check-full-0.14-main.log",
+    "sha256": "af7d2b87985e1fb6ae5ddfc9112b7fc7f73222b27a9fd4d9da26cad9c24f4550",
+    "command": "bun run check",
+    "status": "passed",
+    "exitCode": 0,
+    "unitTests": 1038,
+    "unitAssertions": 113208,
+    "browserTests": 12,
+    "freshWorkspaceAndGeneratedAppPassed": true,
+    "emulatedQuestSmokePassed": true
+  },
+  "fixedRegression": {
+    "id": "regression-0.14-fixed64",
+    "status": "running-at-checkpoint",
+    "assigned": 64,
+    "resultFilesAtObservation": 44,
+    "frozenBuildHash": "62c47247d8ccace0b5554a90aa1360982de54c5a6d160bb51041eb389a1ecd75",
+    "scope": "Each older corpus input executes/replays under captured0.14; older deck compositions do not exercise newentryobservers."
+  },
+  "remaining": [
+    "30,639 paper candidates and broader rule families remain unsupported.",
+    "Original completeG2 difficult-scenario qualification remains open, including meta-triggers and intervening-if.",
+    "Inspiring Veteran and Kargan Warleader need a compatible implemented RW commander and legal source execution.",
+    "General layers/control/type/ability changes, entry replacements and optional trigger choices remain unsupported.",
+    "Full-snapshot release handoff and player-visible session contract remain incomplete.",
+    "Production Commander browser/XR consumption and physical headset qualification remain unfinished."
+  ],
+  "consumerGapAudit": {
+    "path": "docs/commander/consumer-gaps-0.12.md",
+    "sha256": "6cfc26300022f0a7b53ec885ab9ed86c4360fcd3013325315d6f22e698751de3"
+  },
+  "observedAt": "2026-09-07T01:13:41.243262+00:00"
+}

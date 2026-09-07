@@ -15,6 +15,7 @@ import { orderedObjects } from "./object-order";
 import { assertResolutionContinuation } from "./resolution-context";
 import { answerCommanderReplacement } from "./return-resolution";
 import { bottom, chooseStartingPlayer, mulligan } from "./setup";
+import { assertTriggerContexts } from "./trigger-context";
 import { answerTriggerOrder } from "./triggers";
 import { answerDiscard, givePriority, passPriority, startTurn } from "./turns";
 
@@ -144,6 +145,7 @@ export function transition(
   try {
     assertRegistryPin(committed.manifest, release);
     assertResolutionContinuation(committed, release);
+    assertTriggerContexts(committed, release);
     const state = structuredClone(committed);
     state.revision++;
     state.events = [];

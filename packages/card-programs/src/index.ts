@@ -1,4 +1,23 @@
 import {
+  bindEntryObserverPermanent,
+  ENTRY_OBSERVER_PERMANENTS,
+  ENTRY_OBSERVER_VERSION,
+} from "./entry-observer";
+
+export {
+  bindEntryObserverPermanent,
+  ENTRY_OBSERVER_ARCHIVE,
+  ENTRY_OBSERVER_PERMANENTS,
+  ENTRY_OBSERVER_RESEARCH_HASH,
+  ENTRY_OBSERVER_RULES,
+  ENTRY_OBSERVER_RULES_HASH,
+  ENTRY_OBSERVER_SOURCE_BUNDLE,
+  ENTRY_OBSERVER_VERSION,
+  type EntryObserverPermanentSource,
+  reviewedEntryObserverDefinition,
+} from "./entry-observer";
+
+import {
   bindStaticBonusPermanent,
   STATIC_BONUS_PERMANENTS,
   STATIC_BONUS_VERSION,
@@ -487,6 +506,7 @@ function consistentReminderMetadata(
 }
 
 interface BindingOptions {
+  entryObserverTriggers?: boolean;
   staticBonusPermanents?: boolean;
   fixedTokenSpells?: boolean;
   creatureReturnSpells?: boolean;
@@ -533,6 +553,23 @@ export function bindDevelopmentCard(
   options: BindingOptions = {},
 ): BindingResult {
   // Known source anchors cannot be relabeled or stripped into a legacy vanilla constructor.
+  const observerSource = ENTRY_OBSERVER_PERMANENTS.some(
+    (row) =>
+      row.identity === input.identity ||
+      row.identity === input.oracle.oracle_id ||
+      row.sourceVersion === input.versionHash,
+  );
+  if (observerSource) {
+    const definition = options.entryObserverTriggers ? bindEntryObserverPermanent(input) : null;
+    return definition
+      ? { kind: "bound", definition, recipes: [ENTRY_OBSERVER_VERSION] }
+      : {
+          kind: "unsupported",
+          reason: options.entryObserverTriggers
+            ? "entry-observer-source-mismatch"
+            : "entry-observer-requires-explicit-opt-in",
+        };
+  }
   const staticSource = STATIC_BONUS_PERMANENTS.some(
     (row) =>
       row.identity === input.identity ||
